@@ -1,0 +1,56 @@
+{
+  "name": "remark-wiki-link-plus",
+  "version": "1.0.0",
+  "description": "Parse and render wiki-style links in markdown especially Obsidian style links.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/life-itself/remark-wiki-link-plus.git"
+  },
+  "keywords": [],
+  "author": "Life Itself",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/life-itself/remark-wiki-link-plus/issues"
+  },
+  "homepage": "https://github.com/life-itself/remark-wiki-link-plus#readme",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "browser": "dist/index.umd.js",
+  "scripts": {
+    "build": "rollup -c",
+    "lint": "eslint src/ test/",
+    "prepare": "npm run build",
+    "pretest": "npm run build",
+    "test": "npm run lint && mocha --require @babel/register test/index_test.js"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.4.4",
+    "mdast-util-wiki-link": "^0.0.2",
+    "micromark-extension-wiki-link": "^0.0.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.4.4",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/register": "^7.4.4",
+    "@rollup/plugin-babel": "^5.2.1",
+    "@rollup/plugin-commonjs": "^15.1.0",
+    "eslint": "^7.11.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "mdast-util-from-markdown": "^0.8.4",
+    "mocha": "^6.2.3",
+    "rehype-stringify": "^8.0.0",
+    "remark-parse": "^9.0.0",
+    "remark-rehype": "^8.0.0",
+    "remark-stringify": "^9.0.1",
+    "rollup": "^2.32.0",
+    "unified": "^9.2.0",
+    "unist-util-select": "^3.0.4",
+    "unist-util-visit": "^2.0.3"
+  }
+}
