@@ -13,7 +13,7 @@ describe('remark-wiki-link-plus', () => {
     const processor = unified()
       .use(markdown)
       .use(wikiLinkPlugin, {
-        markdownFolder: 'test/fixtures'
+        permalinks: ['test']
       })
 
     var ast = processor.parse('[[test]]')
@@ -53,7 +53,7 @@ describe('remark-wiki-link-plus', () => {
     const processor = unified()
       .use(markdown)
       .use(wikiLinkPlugin, {
-        markdownFolder: 'test/fixtures'
+        permalinks: ['example/test']
       })
 
     var ast = processor.parse('[[example/test|custom text]]')
@@ -75,7 +75,7 @@ describe('remark-wiki-link-plus', () => {
     const processor = unified()
       .use(markdown)
       .use(wikiLinkPlugin, {
-        markdownFolder: 'test/fixtures'
+        permalinks: ['example/test']
       })
 
     var ast = processor.parse('[[example/test#with heading]]')
@@ -95,7 +95,7 @@ describe('remark-wiki-link-plus', () => {
     const processor = unified()
       .use(markdown)
       .use(wikiLinkPlugin, {
-        markdownFolder: 'test/fixtures'
+        permalinks: ['example/test']
       })
 
     var ast = processor.parse('[[example/test#with heading|custom text]]')
@@ -108,6 +108,24 @@ describe('remark-wiki-link-plus', () => {
       assert.equal(node.data.hProperties.className, 'internal')
       assert.equal(node.data.hProperties.href, '/example/test#with-heading')
       assert.equal(node.data.hChildren[0].value, 'custom text')
+    })
+  })
+
+  it('handles a wiki link heading within the page', () => {
+    const processor = unified()
+      .use(markdown)
+      .use(wikiLinkPlugin)
+
+    var ast = processor.parse('[[#Heading]]')
+    ast = processor.runSync(ast)
+
+    visit(ast, 'wikiLink', node => {
+      assert.equal(node.data.permalink, '#heading')
+      assert.equal(node.data.alias, 'Heading')
+      assert.equal(node.data.hName, 'a')
+      assert.equal(node.data.hProperties.className, 'internal new')
+      assert.equal(node.data.hProperties.href, '#heading')
+      assert.equal(node.data.hChildren[0].value, 'Heading')
     })
   })
 
