@@ -31,11 +31,11 @@ function wikiLinkPlugin (opts = { markdownFolder: '' }) {
     aliasDivider: opts.aliasDivider ? opts.aliasDivider : '|',
     pageResolver: opts.pageResolver ? opts.pageResolver : (name) => {
       let heading = ''
-      if (name.match(/#/)) {
+      if (!name.startsWith('#') && name.match(/#/)) {
         [, heading] = name.split('#')
         name = name.replace(`#${heading}`, '')
       }
-      if (opts.markdownFolder) {
+      if (opts.permalinks || opts.markdownFolder) {
         const url = opts.permalinks.find(p => p === name || (p.split('/').pop() === name && !opts.permalinks.includes(p.split('/').pop())))
         if (url) {
           if (heading) return [`${url}#${heading}`.replace(/ /g, '-').toLowerCase()]
