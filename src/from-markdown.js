@@ -4,7 +4,10 @@ function fromMarkdown (opts = {}) {
   const pageResolver = opts.pageResolver || defaultPageResolver
   const newClassName = opts.newClassName || 'new'
   const wikiLinkClassName = opts.wikiLinkClassName || 'internal'
-  const defaultHrefTemplate = (permalink) => `/${permalink}`
+  const defaultHrefTemplate = (permalink) => {
+    if (permalink.startsWith('#')) return permalink
+    return `/${permalink}`
+  }
   const hrefTemplate = opts.hrefTemplate || defaultHrefTemplate
 
   function enterWikiLink (token) {
@@ -41,9 +44,15 @@ function fromMarkdown (opts = {}) {
   function exitWikiLink (token) {
     const wikiLink = this.exit(token)
 
+    if (opts.markdownFolder && wikiLink.value.includes(opts.markdownFolder)) {
+      const [, value] = wikiLink.value.split(`${opts.markdownFolder}/`)
+      wikiLink.value = value
+    }
+
     const pagePermalinks = pageResolver(wikiLink.value)
     let permalink = pagePermalinks.find((p) => {
       let heading = ''
+
       if (p.match(/#/)) {
         [, heading] = p.split('#')
       }
@@ -54,7 +63,7 @@ function fromMarkdown (opts = {}) {
     if (!exists) {
       permalink = pagePermalinks[0]
     }
-    let displayName = wikiLink.value
+    let displayName = wikiLink.value.startsWith('#') ? wikiLink.value.replace('#', '') : wikiLink.value
     if (wikiLink.data.alias) {
       displayName = wikiLink.data.alias
     }
