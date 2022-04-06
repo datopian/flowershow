@@ -6,7 +6,12 @@
     "type": "git",
     "url": "git+https://github.com/life-itself/remark-wiki-link-plus.git"
   },
-  "keywords": [],
+  "keywords": [
+    "remark",
+    "remark-plugin",
+    "markdown",
+    "gfm"
+  ],
   "author": "Life Itself",
   "license": "MIT",
   "bugs": {
