@@ -28,7 +28,7 @@ npm install remark-wiki-link-plus
 ```javascript
 const unified = require('unified')
 const markdown = require('remark-parse')
-const wikiLinkPlugin = require('remark-wiki-link');
+const wikiLinkPlugin = require('remark-wiki-link-plus');
 
 let processor = unified()
     .use(markdown, { gfm: true })
