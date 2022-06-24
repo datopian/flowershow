@@ -14,7 +14,8 @@ export default function Page({ body, ...rest }) {
 }
 
 export async function getStaticProps({ params }) {
-  const urlPath = params.slug.join("/");
+  // params.slug is undefined for root index page
+  const urlPath = params.slug ? params.slug.join("/") : '';
   const page = allPages.find((p) => p.url === urlPath);
   return { props: page };
 }
