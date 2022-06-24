@@ -23,8 +23,11 @@ const Page = defineDocumentType(() => ({
   computedFields,
 }));
 
+const contentLayerExcludeDefaults = ['node_modules', '.git', '.yarn', '.cache', '.next', '.contentlayer', 'package.json', 'tsconfig.json']
+
 export default makeSource({
   contentDirPath: siteConfig.content,
+  contentDirExclude: contentLayerExcludeDefaults.concat(['.flowershow']),
   documentTypes: [Page],
   mdx: {
     remarkPlugins: [ remarkGfm ],
