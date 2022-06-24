@@ -9,6 +9,7 @@ const siteConfig = {
   authorUrl: 'https://flowershow.app/',
   // Google analytics key e.g. G-XXXX
   analytics: '',
+  // content source directory for markdown files
   content: 'content'
   // optional additional nextSeo content set on each page
   // see https://github.com/garmeeh/next-seo
