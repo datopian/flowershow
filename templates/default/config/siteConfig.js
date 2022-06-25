@@ -10,7 +10,7 @@ const siteConfig = {
   // Google analytics key e.g. G-XXXX
   analytics: '',
   // content source directory for markdown files
-  content: 'content'
+  content: process.env.FLOWERSHOW_CONTENT || 'content',
   // optional additional nextSeo content set on each page
   // see https://github.com/garmeeh/next-seo
 //  nextSeo: {
