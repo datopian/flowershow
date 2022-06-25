@@ -1,4 +1,4 @@
-const siteConfig = {
+const defaultConfig = {
   title: 'Flowershow Default Template',
   tagline: 'A starter template for Next.JS with Tailwind and MDX',
   description: 'Hello ...',
@@ -31,5 +31,9 @@ const siteConfig = {
 //    }
 //  }
 }
+
+import userConfig from './userConfig.js'
+
+const siteConfig = Object.assign({}, defaultConfig, userConfig)
 
 module.exports = siteConfig
