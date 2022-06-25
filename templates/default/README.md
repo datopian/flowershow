@@ -39,7 +39,6 @@ npm run dev
 See `config` directory:
 
 * `config/siteConfig.js` for site wide configuration especially for general theme (e.g. title) and SEO
-* `config/navLinks.js` for configuration of navigation links
 
 ### How to customize the content directory location?
 
