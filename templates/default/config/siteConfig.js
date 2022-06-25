@@ -11,6 +11,10 @@ const siteConfig = {
   analytics: '',
   // content source directory for markdown files
   content: process.env.FLOWERSHOW_CONTENT || 'content',
+  // Theme
+  navLinks: [
+    { href: '/about', name: 'About' },
+  ],
   // optional additional nextSeo content set on each page
   // see https://github.com/garmeeh/next-seo
 //  nextSeo: {
