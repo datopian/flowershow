@@ -27,7 +27,7 @@ const contentLayerExcludeDefaults = ['node_modules', '.git', '.yarn', '.cache', 
 
 export default makeSource({
   contentDirPath: siteConfig.content,
-  contentDirExclude: contentLayerExcludeDefaults.concat(['.flowershow']),
+  contentDirExclude: contentLayerExcludeDefaults.concat(['.flowershow', '.obsidian']),
   documentTypes: [Page],
   mdx: {
     remarkPlugins: [ remarkGfm ],
