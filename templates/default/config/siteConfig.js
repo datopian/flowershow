@@ -1,7 +1,6 @@
 const defaultConfig = {
-  title: 'Flowershow Default Template',
-  tagline: 'A starter template for Next.JS with Tailwind and MDX',
-  description: 'Hello ...',
+  title: 'Flowershow',
+  description: 'Publish your digital garden', 
   author: 'Flowershow',
   // logo image
   authorLogo: '',
