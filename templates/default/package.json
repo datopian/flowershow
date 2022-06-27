@@ -4,7 +4,8 @@
     "dev": "next dev",
     "build": "next build",
     "export": "next export",
-    "start": "next start"
+    "start": "next start",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@headlessui/react": "^1.4.1",
@@ -23,6 +24,7 @@
     "remark-toc": "^8.0.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.22.2",
     "autoprefixer": "^10.4.4",
     "postcss": "^8.4.12",
     "tailwindcss": "^3.0.23"
