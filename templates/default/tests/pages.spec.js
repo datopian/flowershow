@@ -14,14 +14,14 @@ test.describe("Pages", () => {
   });
 
   // Test About page exists and is from markdown
-  test('about.md @ root', async ({ page }) => {
-    const Page = new MarkdownPage(page)
-    await Page.goto("/about");
-    await Page.getData(page);
+  // test('about.md @ root', async ({ page }) => {
+  //   const Page = new MarkdownPage(page)
+  //   await Page.goto("/about");
+  //   await Page.getData(page);
 
-    expect(Page.props.url).toBe('about');
-    expect(Page.props._raw.sourceFilePath).toBe("about.md");
-  })
+  //   expect(Page.props.url).toBe('about');
+  //   expect(Page.props._raw.sourceFilePath).toBe("about.md");
+  // })
 
   // Test for nested index.md routes
   test('Nested index routes [test/index.md]', async ({ page, baseURL }) => {
