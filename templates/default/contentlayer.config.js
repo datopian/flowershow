@@ -4,6 +4,7 @@ import remarkGfm from "remark-gfm";
 
 const sharedFields = {
   title: { type: "string" },
+  layout: { type: "string", default: "docs" }
 };
 
 const computedFields = {
