@@ -2,20 +2,20 @@ import Head from 'next/head'
 
 const components = {
   Head,
+  wrapper: ({ layout, ...rest }) => {
+    const Layout = require(`../layouts/${layout}`).default
+    return <Layout {...rest} />
+  }
 }
 
-export default function MdxPage({ children }) {
-  const { Component, frontMatter: { title } } = children;
+export default function MdxPage({ children, ...rest }) {
+  const { Component, frontMatter } = children;
   return (
-    <article className="prose mx-auto p-6">
-      <header>
-        <div className="mb-6">
-          {title && <h1>{title}</h1>}
-        </div>
-      </header>
-      <section>
-        <Component components={components} />
-      </section>
-    </article>
-  );
+    <Component
+      layout={frontMatter.layout}
+      components={components}
+      frontMatter={frontMatter}
+      {...rest}
+    />
+  )
 }

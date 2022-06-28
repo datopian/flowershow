@@ -24,13 +24,13 @@ test.describe("Pages", () => {
   // })
 
   // Test for nested index.md routes
-  test('Nested index routes [test/index.md]', async ({ page, baseURL }) => {
+  test('Nested index routes [demo/index.md]', async ({ page, baseURL }) => {
     const Page = new MarkdownPage(page);
-    await Page.goto("/test");
+    await Page.goto("/demo");
     await Page.getData(page);
 
-    expect(Page.props.url).toBe("test");
-    expect(Page.props._raw.sourceFilePath).toBe("test/index.md");
+    expect(Page.props.url).toBe("demo");
+    expect(Page.props._raw.sourceFilePath).toBe("demo/index.md");
     
   })
 });
