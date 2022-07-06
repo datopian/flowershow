@@ -13,13 +13,15 @@ In very rough order of likely priority in each section
 * [ ] Basic theme e.g. navbar and footer
 * [ ] Analytics - google - this could be first test for componentization (or maybe just live with default for now)
 * [ ] theme customization
-* [ ] Code highlighting - https://github.com/timlrx/rehype-prism-plus
+* [ ] Code highlighting - e.g. use https://github.com/timlrx/rehype-prism-plus
+  * [ ] Do we use prism or highlight.js. **✅2022-06-29 Answer: prism i think (same speed, more plugins (?))**
 * [ ] Maths syntax (mathjax etc)
 * [ ] Mermaid
 - [ ] Citation / Bibliographic references: use standard `[@jones-2020]` style bibliographic citations in markdown (compatible with Obsidian zotero, R markdown etc) - https://github.com/timlrx/rehype-citation
 * [ ] Desktop and mobile: beautiful, responsive theme out of the box
 * [ ] Full text search: search quickly and easily.
 * [ ] social preview links e.g. twitter link turns into a nice twitter card. Ditto for youtube.
+* [ ] Edit page on github/gitlab
 
 Obsidian feature compatibility
 
@@ -41,6 +43,8 @@ Theme
   - date (published)
   - status: 
   - publish: true/false
+* [ ] Image optimization
+  * Good summary of pros and cons and how to do it https://tailwind-nextjs-starter-blog.vercel.app/blog/guide-to-using-images-in-nextjs
 
 Data stuff
 
