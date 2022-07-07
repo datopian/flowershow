@@ -1,5 +1,40 @@
 # Designs and Plans for Flowershow
 
+Turn your (digital garden / second brain / notebook) into an elegant (and customizable) website in seconds.
+
+Taglines:
+
+- Author in Obsidian, Publish in Flowershow
+- Present your ideas, beautifully
+- Share your digital garden.
+
+# Plan
+
+As of 2022-07-06
+
+* [ ] Landing page for the product **See https://github.com/flowershow/flowershow/issues/4 issue**
+* [ ] Basic working product e.g. command line tool, template etc
+  * [ ] Template webapp **See https://github.com/flowershow/flowershow/issues/1 issue**
+  * [ ] Command line tool
+* [ ] Trial product e.g. on flowershow itself or building Life Itself new community site. Possible candidates
+  * [ ] flowershow site itself **🚧2022-07-06 50% - already in use but more needed e.g. for landing page**
+  * [ ] ecosystem site **🚧2022-07-06 70% - main focus right now**
+  * [ ] web3 (refactor) ??
+* [ ] Promotion
+  * [ ] (? separate) some kind of launch e.g.
+  * [ ] post on obsidian forum
+  * [ ] post on reddit re pkm etc
+  * [ ] post on dev.to (later when more working?)
+
+# Website
+
+Feature List
+
+* [ ] front page
+* [ ] docs section
+* [ ] blog
+* [ ] social links
+
 # Features
 
 In very rough order of likely priority in each section
