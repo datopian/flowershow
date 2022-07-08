@@ -1,4 +1,4 @@
-import { allPages } from "contentlayer/generated";
+import { allDocuments } from "contentlayer/generated";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import MdxPage from "../components/MDX";
 
@@ -22,12 +22,12 @@ export default function Page({ body, ...rest }) {
 export async function getStaticProps({ params }) {
   // params.slug is undefined for root index page
   const urlPath = params.slug ? params.slug.join("/") : '';
-  const page = allPages.find((p) => p.url === urlPath);
+  const page = allDocuments.find((p) => p.url === urlPath);
   return { props: page };
 }
 
 export async function getStaticPaths() {
-  const paths = allPages.map((page) => {
+  const paths = allDocuments.map((page) => {
     const parts = page.url.split("/");
     return { params: { slug: parts } };
   });
