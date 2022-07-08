@@ -1,6 +1,6 @@
 # Designs and Plans for Flowershow
 
-Turn your (digital garden / second brain / notebook) into an elegant (and customizable) website in seconds.
+Turn your digital garden / second brain / obsidian vault into a beautiful (and customizable) website in seconds.
 
 Taglines:
 
@@ -26,6 +26,67 @@ As of 2022-07-06
   * [ ] post on reddit re pkm etc
   * [ ] post on dev.to (later when more working?)
 
+## Launch v0.1 July 2022
+
+Target: 19 July 2022
+
+- Elegant website with signup
+- MVP Product
+  - v0.1
+  - v0.2
+  - v0.3
+
+```mermaid
+graph TD
+
+
+trial1[Trial 1: Ecosystem]
+website[Flowershow Website]
+
+mvp1[MVP 0.1 - MDX, tailwind, contentlayer]
+mvp2[MVP 0.2 - mermaid, obsidian syntax, assets folder]
+mvp3[MVP 0.3 - upgradeability]
+cli[CLI v0.1]
+
+mvp1 --> trial1
+mvp1 --> website
+trial1 --> mvp2
+mvp2 --> mvp3
+mvp3 --> website
+
+classDef done fill:darkgreen,stroke:#333,stroke-width:1px;
+classDef nearlydone fill:#21bf73,stroke:#333,stroke-width:1px;
+classDef inprogress fill:orange,stroke:#333,stroke-width:1px;
+classDef next fill:blue,stroke:#333,stroke-width:1px;
+
+class done,mvp1 done;
+class nearlydone,trial1 nearlydone;
+class inprogress,website,mvp2 inprogress;
+class next,cli next;
+```
+
+
+```mermaid
+graph TD
+
+subgraph Key
+  done[Done]
+  nearlydone[Nearly Done]
+  inprogress[In Progress]
+  next[Next Up]
+end
+
+classDef done fill:darkgreen,stroke:#333,stroke-width:1px;
+classDef nearlydone fill:#21bf73,stroke:#333,stroke-width:1px;
+classDef inprogress fill:orange,stroke:#333,stroke-width:1px;
+classDef next fill:blue,stroke:#333,stroke-width:1px;
+
+class done done;
+class nearlydone nearlydone;
+class inprogress inprogress;
+class next next;
+```
+
 # Website
 
 Feature List
@@ -34,6 +95,7 @@ Feature List
 * [ ] docs section
 * [ ] blog
 * [ ] social links
+* [ ] Made in Flowershow gallery or similar
 
 # Features
 
