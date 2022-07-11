@@ -1,9 +1,7 @@
-import Link from 'next/link'
 import Head from 'next/head'
 import { NextSeo } from 'next-seo'
-
-import Nav from './Nav'
 import siteConfig from '../config/siteConfig'
+import Header from './Nav'
 
 export default function Layout({ children, title='' }) {
   return (
@@ -16,7 +14,7 @@ export default function Layout({ children, title='' }) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Nav />
+      <Header />
       <main>
         {children}
       </main>
