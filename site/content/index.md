@@ -1,3 +1,9 @@
+---
+layout: unstyled.js
+---
+
+<Hero />
+
 # Flowershow
 
 ## Publish your obsidian vault simply and easily for free
