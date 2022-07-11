@@ -8,7 +8,9 @@ The plugin is open-source and can be found on the github repo here - [ https://g
 After installing the plugin, add it as a remark plugin in the contentlayer.config.js file and specify the markdown (content) folder.
 
 ```javascript
-// contentkayer.config.js
+// contentlayer.config.js
+
+import wikiLinkPlugin from 'remark-wiki-link-plus';
 
 export default makeSource({
 	contentDirPath: siteConfig.content,
