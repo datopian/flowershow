@@ -1,17 +1,17 @@
 # Obsidian wiki link syntax
 
-* Internal link => `[[docs]]`  
+* Internal link `[[docs]]`  
 [[docs]]  
 
-* Internal link with custom divider =>  
+* Internal link with custom divider  
 `[[demo/index|Demo page]]`    
 [[demo/index|Demo page]] 
 
-* Internal link with heading =>  
+* Internal link with heading  
 `[[nextjs-plugins#NextJS Plugin Research]]`  
 [[nextjs-plugins#NextJS Plugin Research]] 
 
-* Internal link with heading and custom divider =>  
-`[[meta/index#Features|Features]]`  
-[[meta/index#Features|Features]]
+* Internal link with heading and custom divider  
+`[[tailwind#Tailwind Support|Tailwind Support]]`  
+[[tailwind#Tailwind Support|Tailwind Support]] 
 
