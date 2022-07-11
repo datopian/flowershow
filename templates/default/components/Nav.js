@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { MobileNavigation } from './MobileNavigation'
 import siteConfig from '../config/siteConfig'
-import { Logomark } from './Logo'
 
 function GitHubIcon(props) {
   return (
