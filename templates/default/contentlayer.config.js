@@ -1,7 +1,8 @@
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
 import siteConfig from "./config/siteConfig";
 import remarkGfm from "remark-gfm";
-import wikiLinkPlugin from "remark-wiki-link-plus"
+import rehypePrismPlus from "rehype-prism-plus";
+import wikiLinkPlugin from "remark-wiki-link-plus";
 
 const sharedFields = {
   title: { type: "string" },
@@ -36,6 +37,8 @@ export default makeSource({
       remarkGfm,
       [ wikiLinkPlugin, { markdownFolder: siteConfig.content } ]
     ],
-    rehypePlugins: []
+    rehypePlugins: [
+      [rehypePrismPlus, { ignoreMissing: true }]
+    ]
   }
 });
