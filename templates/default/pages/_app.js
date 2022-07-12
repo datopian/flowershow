@@ -3,6 +3,7 @@ import Script from 'next/script'
 import { useRouter } from 'next/router'
 import { DefaultSeo } from 'next-seo'
 import 'tailwindcss/tailwind.css'
+import '../styles/prism.css';
 
 import siteConfig from '../config/siteConfig.js'
 import Layout from '../components/Layout'
