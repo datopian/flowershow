@@ -3,7 +3,7 @@ const defaultConfig = {
   description: 'Publish your digital garden', 
   author: 'Flowershow',
   // logo image
-  authorLogo: '',
+  authorLogo: '/images/logo.svg',
   // url to author
   authorUrl: 'https://flowershow.app/',
   // Google analytics key e.g. G-XXXX

@@ -30,10 +30,10 @@ export default function Header() {
   return (
     <header
       className={`
-        sticky top-0 z-50 max-w-8xl mx-auto flex flex-wrap items-center justify-between bg-white px-4 py-5 shadow-md shadow-slate-900/5 transition duration-500 dark:shadow-none sm:px-6 lg:px-8
+        sticky top-0 z-50 flex flex-wrap items-center justify-between px-4 py-5 transition duration-500 sm:px-6 lg:px-8
         ${isScrolled
-          ? 'dark:bg-slate-900/95 dark:backdrop-blur dark:[@supports(backdrop-filter:blur(0))]:bg-slate-900/75'
-          : 'dark:bg-transparent'}
+          ? 'bg-slate-900/95 backdrop-blur [@supports(backdrop-filter:blur(0))]:bg-slate-900/75'
+          : 'bg-slate-900'}
       `}
     >
       <div className="mr-6 flex lg:hidden">
@@ -41,7 +41,7 @@ export default function Header() {
       </div>
       <div className="relative flex flex-grow basis-0 items-center">
         <Link href="/" aria-label="Home page">
-          <a className="flex items-center font-extrabold text-white text-2xl">
+          <a className="flex items-center font-extrabold text-2xl text-white">
             <img src="/images/logo.svg" alt="" className="w-9 h-9 mr-1 fill-white" />
             {siteConfig.author}
           </a>
