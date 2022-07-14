@@ -1,0 +1,18 @@
+{
+  "demo": {
+    "testData": [
+      {
+        "title": "First",
+        "value": 1
+      },
+      {
+        "title": "Second",
+        "value": 2
+      },
+      {
+        "title": "Third",
+        "value": 3
+      }
+    ]
+  }
+}

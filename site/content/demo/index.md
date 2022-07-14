@@ -1,5 +1,6 @@
 ---
 layout: unstyled
+title: demo
 ---
 
 `(layout/unstyled.js)`
