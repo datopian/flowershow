@@ -1,11 +1,9 @@
 import Head from 'next/head'
 import DemoComponent from './Demo'
-import { Hero } from './Hero'
 import { Pre } from './Pre'
 
 const components = {
   Head,
-  Hero,
   DemoComponent,
   pre: Pre,
   wrapper: ({ layout, ...rest }) => {

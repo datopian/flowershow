@@ -15,18 +15,20 @@ export default function Layout({ children, title='' }) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Header />
-      <main>
+      <main className="bg-slate-900">
         {children}
       </main>
-      <footer className="flex items-center justify-center w-full h-24 border-t mt-16">
+      <footer className="bg-slate-900 prose prose-invert w-full max-w-none flex items-center justify-center w-full h-24 border-t">
         <p className="flex items-center justify-center">
           Created by
           <a
             href={siteConfig.authorUrl}
             target="_blank"
             rel="noopener noreferrer"
+            className="flex items-center no-underline"
           >
             <img src={siteConfig.authorLogo} alt={siteConfig.author} className="ml-2 h-6 block" />
+            {siteConfig.author}
           </a>
         </p>
       </footer>
