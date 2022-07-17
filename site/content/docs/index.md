@@ -1,227 +1,190 @@
-# Designs and Plans for Flowershow
+---
+title: Documentation
+---
 
-Turn your digital garden / second brain / obsidian vault into a beautiful (and customizable) website in seconds.
+<div className="border-2 border-slate-400 rounded-md px-4 mb-2">
+🚧 Flowershow is under very active development. To learn more about some of the planned features, take a look at our <span>[[roadmap|Roadmap]]</span>.
+</div>
 
-Taglines:
+<div className="border-2 border-slate-400 rounded-md px-4">
+✨ Too see some of the Flowershow features in action, check out our <span>[[demo|Demo Pages]]</span>.
+</div>
 
-- Author in Obsidian, Publish in Flowershow
-- Present your ideas, beautifully
-- Share your digital garden.
+## What is Flowershow?
+Flowershow is an open-source tool for easily converting your markdown files into an elegant website. It's built on standard, modern web stack – React, Next.js and Tailwind and shipped with a basic default theme (used to publish this website) to get you started with just a few clicks. 
 
-# Plan
+Flowershow supports CommonMark and GitHub Flavored Markdown, but also many Obsidian-specific elements, like internal links or footnotes[^1].
+[^1]: Support for some GFM and Obsidian-specific syntax elements is still work in progress. See our [[roadmap]] to learn more.
 
-As of 2022-07-06
+## Sites built with Flowershow
 
-* [ ] Landing page for the product **See https://github.com/flowershow/flowershow/issues/4 issue**
-* [ ] Basic working product e.g. command line tool, template etc
-  * [ ] Template webapp **See https://github.com/flowershow/flowershow/issues/1 issue**
-  * [ ] Command line tool
-* [ ] Trial product e.g. on flowershow itself or building Life Itself new community site. Possible candidates
-  * [ ] flowershow site itself **🚧2022-07-06 50% - already in use but more needed e.g. for landing page**
-  * [ ] ecosystem site **🚧2022-07-06 70% - main focus right now**
-  * [ ] web3 (refactor) ??
-* [ ] Promotion
-  * [ ] (? separate) some kind of launch e.g.
-  * [ ] post on obsidian forum
-  * [ ] post on reddit re pkm etc
-  * [ ] post on dev.to (later when more working?)
+* This website!
+* https://ecosystem.lifeitself.us/
 
-## Launch v0.1 July 2022
+## Quick Start
 
-Target: 19 July 2022
-
-- Elegant website with signup
-- MVP Product
-  - v0.1
-  - v0.2
-  - v0.3
-
-```mermaid
-graph TD
-
-
-trial1[Trial 1: Ecosystem]
-website[Flowershow Website]
-
-mvp1[MVP 0.1 - MDX, tailwind, contentlayer]
-mvp2[MVP 0.2 - mermaid, obsidian syntax, assets folder]
-mvp3[MVP 0.3 - upgradeability]
-cli[CLI v0.1]
-
-mvp1 --> trial1
-mvp1 --> website
-trial1 --> mvp2
-mvp2 --> mvp3
-mvp3 --> website
-
-classDef done fill:darkgreen,stroke:#333,stroke-width:1px;
-classDef nearlydone fill:#21bf73,stroke:#333,stroke-width:1px;
-classDef inprogress fill:orange,stroke:#333,stroke-width:1px;
-classDef next fill:blue,stroke:#333,stroke-width:1px;
-
-class done,mvp1 done;
-class nearlydone,trial1 nearlydone;
-class inprogress,website,mvp2 inprogress;
-class next,cli next;
+<div className="border-2 border-slate-400 rounded-md px-4 pb-2 mb-3">
+❕ **Pre-requisites**
+- [Node.js](https://nodejs.org/en/) installed
+- [Git](https://git-scm.com/) installed
+</div>
+At the moment, there is only one starter template - default template. The fastest way to use it to bootstrap your website is:
+```bash
+npx create-next-app@latest -e https://github.com/flowershow/flowershow/tree/main/templates/default
+# or
+yarn create next-app -e https://github.com/flowershow/flowershow/tree/main/templates/default
 ```
 
+At the moment
 
-```mermaid
-graph TD
+### Publishing your Obsidian vault
 
-subgraph Key
-  done[Done]
-  nearlydone[Nearly Done]
-  inprogress[In Progress]
-  next[Next Up]
-end
 
-classDef done fill:darkgreen,stroke:#333,stroke-width:1px;
-classDef nearlydone fill:#21bf73,stroke:#333,stroke-width:1px;
-classDef inprogress fill:orange,stroke:#333,stroke-width:1px;
-classDef next fill:blue,stroke:#333,stroke-width:1px;
 
-class done done;
-class nearlydone nearlydone;
-class inprogress inprogress;
-class next next;
-```
 
-# Website
+### Publishing standalone markdown files
 
-Feature List
 
-* [ ] front page
-* [ ] docs section
-* [ ] blog
-* [ ] social links
-* [ ] Made in Flowershow gallery or similar
+[3. Configure the app with your content in step 1]
 
-# Features
+4. Deploy: this part is up to you. Our app is nextjs based so use any of these hosting providers: Vercel, Cloudflare, Netlify, … to deploy the site. TODO: link to instructions for one or more of them..
 
-In very rough order of likely priority in each section
+# Obsidian Wiki Links
 
-* [x] Markdown - full markdown plus footnotes
-* [x] MDX support for rich component additions. Built on MDX so you can use everything Next.JS provides out of the box including full React e.g. want a custom front page? No problem!
-  * [ ] Documentation / examples
-- [x] Tailwind: built on tailwind so easy to adjust and customize
-* [ ] SEO support
-* [ ] Basic site config
-* [ ] Basic theme e.g. navbar and footer
-* [ ] Analytics - google - this could be first test for componentization (or maybe just live with default for now)
-* [ ] theme customization
-* [ ] Code highlighting - e.g. use https://github.com/timlrx/rehype-prism-plus
-  * [ ] Do we use prism or highlight.js. **✅2022-06-29 Answer: prism i think (same speed, more plugins (?))**
-* [ ] Maths syntax (mathjax etc)
-* [ ] Mermaid
-- [ ] Citation / Bibliographic references: use standard `[@jones-2020]` style bibliographic citations in markdown (compatible with Obsidian zotero, R markdown etc) - https://github.com/timlrx/rehype-citation
-* [ ] Desktop and mobile: beautiful, responsive theme out of the box
-* [ ] Full text search: search quickly and easily.
-* [ ] social preview links e.g. twitter link turns into a nice twitter card. Ditto for youtube.
-* [ ] Edit page on github/gitlab
+^b9a436
 
-Obsidian feature compatibility
+Wiki links are hyperlinks links which give one click access to other pages on the site. These are usually denoted within double square brackets `[[ ... ]]` and (in obsidian) would generate the reference to that page automatically.
 
-* [ ] support Obsidian wiki-link extensions to markdown
-* [ ] Callouts / admonitions - https://help.obsidian.md/How+to/Use+callouts
-* [ ] Backlinks
-* [ ] Forward links
-* [ ] Network graph
-* [ ] Excalidraw
-- [ ] How do we support obsidian plugins in general
+Four types of links are supported:
 
-Theme
-
-* [ ] Dark/light theme
-* [ ] Wide images
-* [ ] [[#Linkable headings]]
-* [ ] frontmatter support e.g. of standard fields
-  - author
-  - date (published)
-  - status: 
-  - publish: true/false
-* [ ] Image optimization
-  * Good summary of pros and cons and how to do it https://tailwind-nextjs-starter-blog.vercel.app/blog/guide-to-using-images-in-nextjs
-
-Data stuff
-
-* [ ] table preview
-* [ ] graphs
-
-# Content
-
-## Tutorials and Howtos
-
-* [ ] Get started (self-service and deploy)
-* [ ] Custom components in markdown pages
-
-Blogs
-
-* [ ] Why Flowershow
-
-Advanced
-
-* [ ] Markdown extension addition (howto do that)
-* [ ] Content structuring and contentlayer (latter more for devs)
-
+* Internal link `[[docs]]` which renders as [[layout-docs]]  
+* Internal link with custom divider `[[docs/index|Docs page]]` which renders as [[docs/index|Docs page]] 
+* Internal link with heading `[[nextjs-plugins#NextJS Plugin Research]]` which renders as [[nextjs-plugins#NextJS Plugin Research]] 
+* Internal link with heading and custom divider `[[tailwind#Tailwind Support|Tailwind Support]]` which renders as [[tailwind-support#Tailwind Support|Tailwind Support]] 
 
 ## Details
-### Linkable headings
 
-https://tailwindcss.com/docs/responsive-design
+Currently 4 types of wiki links syntax are supported which would parse them as `a` tags with their corresponding href attributes.
 
-- Only shows when you hover the heading
-- Nice symbol
-- Shows to left of text
-- Only shows on desktop
+1. internal links eg. `[[abcd]]`  
 
-![](https://i.imgur.com/6N0yDUS.png)
+	The link would be displayed as `abcd` with the same href attribute.
 
-### Table of contents
+2. internal links with custom text eg. `[[a|b]]`  
 
-Again tailwindcss.com is excellent. For example: https://tailwindcss.com/docs/customizing-colors
+	Here the link text appears as `b`  but links to `a`
 
-Two contents sections:
+3. internal links with header eg. `[[a#bc]]`  
 
-- LHS: full site table of contents
-- RHS: table of contents for this page
+	This will link to page `a` and scroll to the heading `bc` which should be within the page.
 
-![](../assets/Pasted%20image%2020220323185414.png)
+4. internal links with header and custom text eg. `[[a#bc|def]]`  
 
-Code: https://github.com/tailwindlabs/tailwindcss.com/blob/8b9f69a93a5a1b055dc8c1dcfa06f5ca2863b89c/src/layouts/ContentsLayout.js
+	Here the link text appears as `def` but links to the heading `bc` in page `a`
 
+The source of the reference/links are from the markdown pages in your specified content folder.
 
-### Obsidian markdown syntax
+## Frontmatter
 
-What's needed:
+Posts can have frontmatter like:
 
-- [ ] `[[Internal link]]`
-- [ ] `[[Internal link|With custom text]]`
-- [ ] `[[Internal link#heading]]`
-- [ ] `[[Internal link#heading|With custom text]]`
-
-🚩 Not sure these are needed to start with
-
-- [ ] `![[Embed note]]`
-- [ ] `![[Embed note#heading]]`
-
-#### Research
-
-https://obsidian.md/features
-
-GitHub Flavored Markdown (GFM) extensions
-
-```
-- | Markdown **table** |
-- **- [x] Task list**
+```md
+---
+title: Hello World
+author: Rufus Pollock
+---
 ```
 
-Extra Obsidian:
+The title and description are pulled from the MDX file and processed using `gray-matter`. Additionally, links are rendered using a custom component passed to `next-mdx-remote`.
 
+# Tailwind Support
+
+Flowershow comes with built-in [tailwind](https://tailwindcss.com) support on any markdown page for styling your content.
+
+That means you can do things like:
+
+```hmtl
+
+<div className="text-xl text-red-600">
+
+# Hello World
+
+</div
 ```
--   **#Tags**
--   $$**LaTeX** math$$
--   [^**Footnotes**]
--   **[[Internal links]]**
--   **![[Filename]]** to embed notes and other files
+
+>[!Note] className rather than class
+>
+> You may have noticed we used `className` rather than `class` attribute in our html. That's because we are using [[docs/mdx|MDX]] (markdown extended) rather than pure markdown and so we follow react conventions and use `className` 
+
+And it means you have access to the full ecosystem of tailwind features and components.
+
+# How to use components in your markdown
+
+## Steps
+
+1. Create a component (eg. Hero.js) in components folder
+2. Add it to components in `components/MDX'
+```javascript
+import Hero from './Hero.js'
+
+const components = {
+	...
+	Hero,
+	...
+}
+```
+3. Use directly in markdown file as 
+```javascript
+---
+// frontmatter
+layout: ...
+---
+
+<Hero />
+```
+
+## Passing data in mdx
+
+1. Add the data in `pages/[[slug]].js`
+```javascript
+const testData = [
+  { title: "First", value: 1 },
+  { title: "Second", value: 2 },
+  { title: "Third", value: 3 },
+]
+
+export default function Page({ body, ...rest }) {
+  const Component = useMDXComponent(body.code, { testData });
+	...
+}
+```
+2. Use as props value in markdown
+```javascript
+<ExampleComponent data={testData} />
+```
+
+# Developers
+
+## Adding the plugin
+
+The plugin is open-source and can be found on the github repo here - [ https://github.com/flowershow/remark-wiki-link-plus](https://github.com/flowershow/remark-wiki-link-plus)
+
+After installing the plugin, add it as a remark plugin in the contentlayer.config.js file and specify the markdown (content) folder.
+
+```javascript
+// contentlayer.config.js
+
+import wikiLinkPlugin from 'remark-wiki-link-plus';
+
+export default makeSource({
+	contentDirPath: siteConfig.content,
+	documentTypes: [Page],
+	mdx: {
+		remarkPlugins: [
+			remarkGfm,
+			[ wikiLinkPlugin, { markdownFolder: siteConfig.content } ]
+		],
+		rehypePlugins: []
+	}
+});
 ```
