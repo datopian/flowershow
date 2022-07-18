@@ -27,8 +27,6 @@ layout: unstyled.js
 
 <div className="prose prose-invert mx-auto py-20">
 
-# Flowershow
-
 ## Crafted for Obsidian
 
 Works with your existing Obsidian notes out of the box. No need to modify the syntax or change file layout. Flowershow supports internal links, backlinks, math, mermaid, callouts and more.
@@ -48,5 +46,8 @@ Want to spice things up? Flowershow is easy to extend, tweak and customize and i
 We’ve been building content and data driven products for over a decade, and we’re passionate about sharing knowledge and ideas with others.
 We love markdown as much as we love open-source (which is a lot!).
 
+## Why the Name?
+
+Flowershow is about sharing your digital garden -- putting it "on show" to the world. And what do you have in your garden? Flowers! Hence "Flowershow": it shows off your digital garden to the world!
 
 </div>
