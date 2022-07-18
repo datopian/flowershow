@@ -20,41 +20,44 @@ Flowershow will convert internal links to html `a` tags, with their `href` attri
 * Link to a specific block (paragraph) within a given page, e.g. `[[roadmap#Planned features 🚧|Work in progress...]]`
 * Link to a file, e.g. `![[abstract-flowers.png]]`
 
-## Frontmatter (TBD)
+## Frontmatter
 
-Posts can have frontmatter like:
+You can add meta data to your pages, by adding key-value pairs to frontmatter, e.g.:
 
 ```md
 ---
-title: Hello World
-author: Rufus Pollock
+title: Flower Show
+description: A tool for publishing markdown notes.
+mymeta: Some info
 ---
 ```
 
-The title and description are pulled from the MDX file and processed using `gray-matter`. Additionally, links are rendered using a custom component passed to `next-mdx-remote`.
+The `title` and `description` fields are pulled from the MDX file and processed using `gray-matter`. Additionally, links are rendered using a custom component passed to `next-mdx-remote`.
 
-# Tailwind Support (TBD)
+## Tailwind support
 
 Flowershow comes with built-in [tailwind](https://tailwindcss.com) support on any markdown page for styling your content.
 
 That means you can do things like:
 
 ```hmtl
-
-<div className="text-xl text-red-600">
-
-# Hello World
-
-</div
+<div className="text-green-500">
+Hello World!
+</div>
 ```
 
->[!Note] className rather than class
->
-> You may have noticed we used `className` rather than `class` attribute in our html. That's because we are using [[docs/mdx|MDX]] (markdown extended) rather than pure markdown and so we follow react conventions and use `className` 
+Which will be rendered like this:
+<div className="text-green-500">
+Hello World!
+</div>
 
 And it means you have access to the full ecosystem of tailwind features and components.
 
-## How to use components in your markdown (TBD)
+>[!Note] className rather than class
+>
+> You may have noticed we used `className` rather than `class` attribute in our html. That's because we are using [[docs/mdx|MDX]] (markdown extended) rather than pure markdown and so we follow React conventions and use `className` 
+
+## How to use components in your markdown
 
 ## Steps
 
@@ -98,6 +101,3 @@ export default function Page({ body, ...rest }) {
 ```javascript
 <ExampleComponent data={testData} />
 ```
-
-## User configurations (TBD)
-

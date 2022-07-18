@@ -1,128 +1,227 @@
----
-title: Documentation
----
+# Designs and Plans for Flowershow
 
-<div className="border-2 border-slate-400 rounded-md px-4 mb-2">
-🚧 Flowershow is under very active development. To learn more about some of the planned features, take a look at our <span>[[roadmap|Roadmap]]</span>.
-</div>
+Turn your digital garden / second brain / obsidian vault into a beautiful (and customizable) website in seconds.
 
-<div className="border-2 border-slate-400 rounded-md px-4">
-✨ Too see some of the Flowershow features in action, check out our <span>[[demo|Demo Pages]]</span>.
-</div>
+Taglines:
 
-## What is Flowershow?
-Flowershow is an open-source tool for easily converting your markdown files into an elegant website. It's built on standard, modern web stack – **React**, **Next.js** and **Tailwind** and shipped with a basic **default theme** (used to publish this website) to get you started with just a few clicks. 
+- Author in Obsidian, Publish in Flowershow
+- Present your ideas, beautifully
+- Share your digital garden.
 
-Flowershow supports **CommonMark** and **GitHub Flavored Markdown**, but also many **Obsidian-specific syntax elements**, like internal links or footnotes[^1].
-[^1]: Support for some GFM and Obsidian-specific syntax elements is still work in progress. See our [[roadmap]] to learn more.
+# Plan
 
-## Quick Start
+As of 2022-07-06
 
-<div className="border-2 border-slate-400 rounded-md px-4 pb-3 mb-3">
-❕ **Pre-requisites**
-- [Node.js](https://nodejs.org/en/) installed
-- [Git](https://git-scm.com/) installed
-</div>
+* [ ] Landing page for the product **See https://github.com/flowershow/flowershow/issues/4 issue**
+* [ ] Basic working product e.g. command line tool, template etc
+  * [ ] Template webapp **See https://github.com/flowershow/flowershow/issues/1 issue**
+  * [ ] Command line tool
+* [ ] Trial product e.g. on flowershow itself or building Life Itself new community site. Possible candidates
+  * [ ] flowershow site itself **🚧2022-07-06 50% - already in use but more needed e.g. for landing page**
+  * [ ] ecosystem site **🚧2022-07-06 70% - main focus right now**
+  * [ ] web3 (refactor) ??
+* [ ] Promotion
+  * [ ] (? separate) some kind of launch e.g.
+  * [ ] post on obsidian forum
+  * [ ] post on reddit re pkm etc
+  * [ ] post on dev.to (later when more working?)
 
-Currently there is only one starter template - default template[^2]. The fastest way to use it to bootstrap your website is:
-[^2]: We plan to develop a few different starter templates, so that you can pick the one that suits your needs and style most. See our [[roadmap]] to learn more.
+## Launch v0.1 July 2022
 
-```bash
-npx create-next-app@latest -e https://github.com/flowershow/flowershow/tree/main/templates/default
-# or
-yarn create next-app -e https://github.com/flowershow/flowershow/tree/main/templates/default
+Target: 19 July 2022
+
+- Elegant website with signup
+- MVP Product
+  - v0.1
+  - v0.2
+  - v0.3
+
+```mermaid
+graph TD
+
+
+trial1[Trial 1: Ecosystem]
+website[Flowershow Website]
+
+mvp1[MVP 0.1 - MDX, tailwind, contentlayer]
+mvp2[MVP 0.2 - mermaid, obsidian syntax, assets folder]
+mvp3[MVP 0.3 - upgradeability]
+cli[CLI v0.1]
+
+mvp1 --> trial1
+mvp1 --> website
+trial1 --> mvp2
+mvp2 --> mvp3
+mvp3 --> website
+
+classDef done fill:darkgreen,stroke:#333,stroke-width:1px;
+classDef nearlydone fill:#21bf73,stroke:#333,stroke-width:1px;
+classDef inprogress fill:orange,stroke:#333,stroke-width:1px;
+classDef next fill:blue,stroke:#333,stroke-width:1px;
+
+class done,mvp1 done;
+class nearlydone,trial1 nearlydone;
+class inprogress,website,mvp2 inprogress;
+class next,cli next;
 ```
 
----
 
-❕ At the moment, we are in the process of testing Flowershow's core features by using it to create this website's code and content. Thus, for now, Flowershow's github repository is basically a repository of this website. If you go to [the repo](https://github.com/flowershow/flowershow), you'll notice it has the following structure:
+```mermaid
+graph TD
 
-```bash
-.
-├── templates
-│   └── default
-│       ├── content -> ../../site/content # symlink to site/content
-|      ...
-├── site # this website's content and configuration
-│   └── content # folder with our md notes and userConfig.js
-│       ├── userConfig.js
-│       ├── index.md
-│       ├── docs
-|       ├── demo
-│      ...
-├── README.md
-├── LICENSE
-└── .gitignore
+subgraph Key
+  done[Done]
+  nearlydone[Nearly Done]
+  inprogress[In Progress]
+  next[Next Up]
+end
+
+classDef done fill:darkgreen,stroke:#333,stroke-width:1px;
+classDef nearlydone fill:#21bf73,stroke:#333,stroke-width:1px;
+classDef inprogress fill:orange,stroke:#333,stroke-width:1px;
+classDef next fill:blue,stroke:#333,stroke-width:1px;
+
+class done done;
+class nearlydone nearlydone;
+class inprogress inprogress;
+class next next;
 ```
 
-`/site` is where all Flowershow website's data resides. All page's content that you can read on this website lies inside of the `/content` subdirectory. To write this content, most of the time we use Obsidian, so if you also use Obsidian, you can imagine `/content` being your Obsidian vault.
+# Website
 
-Important thing to notice here, is that apart from folders with our markdown notes (eg. `/demo`) there are also two additional files: `userConfig.js` and `index.md`.
+Feature List
 
-- `userConfig.js` is where all the user configuration should be written. 
-- `index.md`, which serves as a front page for our website.
+* [ ] front page
+* [ ] docs section
+* [ ] blog
+* [ ] social links
+* [ ] Made in Flowershow gallery or similar
 
-At the moment both of these files are required by Flowershow and should be placed at the root of your notes folder (i.e. inside your Obsidian vault) [^3].
-[^3]: In the future these files will be added automatically by the CLI tool.
+# Features
 
----
+In very rough order of likely priority in each section
 
-Now, after you've created a next app using Flowershow template, there are two things that will prevent you from running it: an incorrect `content` symlink and missing `userConfig.js` file. Let's fix this!
+* [x] Markdown - full markdown plus footnotes
+* [x] MDX support for rich component additions. Built on MDX so you can use everything Next.JS provides out of the box including full React e.g. want a custom front page? No problem!
+  * [ ] Documentation / examples
+- [x] Tailwind: built on tailwind so easy to adjust and customize
+* [ ] SEO support
+* [ ] Basic site config
+* [ ] Basic theme e.g. navbar and footer
+* [ ] Analytics - google - this could be first test for componentization (or maybe just live with default for now)
+* [ ] theme customization
+* [ ] Code highlighting - e.g. use https://github.com/timlrx/rehype-prism-plus
+  * [ ] Do we use prism or highlight.js. **✅2022-06-29 Answer: prism i think (same speed, more plugins (?))**
+* [ ] Maths syntax (mathjax etc)
+* [ ] Mermaid
+- [ ] Citation / Bibliographic references: use standard `[@jones-2020]` style bibliographic citations in markdown (compatible with Obsidian zotero, R markdown etc) - https://github.com/timlrx/rehype-citation
+* [ ] Desktop and mobile: beautiful, responsive theme out of the box
+* [ ] Full text search: search quickly and easily.
+* [ ] social preview links e.g. twitter link turns into a nice twitter card. Ditto for youtube.
+* [ ] Edit page on github/gitlab
 
-**Updating symlink to content folder**
+Obsidian feature compatibility
 
-If you go to the folder where you've next-created your Flowershow app, you'll notice there is a symlink named `content`, which will point to a non-existing directory `../../site/content` , a folder we're using to store this website's markdown. You simply need to update it to point to the directory with your markdown notes (e.g. your Obsidian vault). You can do it with the following commands:
+* [ ] support Obsidian wiki-link extensions to markdown
+* [ ] Callouts / admonitions - https://help.obsidian.md/How+to/Use+callouts
+* [ ] Backlinks
+* [ ] Forward links
+* [ ] Network graph
+* [ ] Excalidraw
+- [ ] How do we support obsidian plugins in general
 
-```bash
-# go to the folder where you've next-created your app
-cd my-flowershow-app-folder
-# update the incorrect symlink
-ln -sfn ~/Path/to/your/md/notes content
+Theme
+
+* [ ] Dark/light theme
+* [ ] Wide images
+* [ ] [[#Linkable headings]]
+* [ ] frontmatter support e.g. of standard fields
+  - author
+  - date (published)
+  - status: 
+  - publish: true/false
+* [ ] Image optimization
+  * Good summary of pros and cons and how to do it https://tailwind-nextjs-starter-blog.vercel.app/blog/guide-to-using-images-in-nextjs
+
+Data stuff
+
+* [ ] table preview
+* [ ] graphs
+
+# Content
+
+## Tutorials and Howtos
+
+* [ ] Get started (self-service and deploy)
+* [ ] Custom components in markdown pages
+
+Blogs
+
+* [ ] Why Flowershow
+
+Advanced
+
+* [ ] Markdown extension addition (howto do that)
+* [ ] Content structuring and contentlayer (latter more for devs)
+
+
+## Details
+### Linkable headings
+
+https://tailwindcss.com/docs/responsive-design
+
+- Only shows when you hover the heading
+- Nice symbol
+- Shows to left of text
+- Only shows on desktop
+
+![](https://i.imgur.com/6N0yDUS.png)
+
+### Table of contents
+
+Again tailwindcss.com is excellent. For example: https://tailwindcss.com/docs/customizing-colors
+
+Two contents sections:
+
+- LHS: full site table of contents
+- RHS: table of contents for this page
+
+![](../assets/Pasted%20image%2020220323185414.png)
+
+Code: https://github.com/tailwindlabs/tailwindcss.com/blob/8b9f69a93a5a1b055dc8c1dcfa06f5ca2863b89c/src/layouts/ContentsLayout.js
+
+
+### Obsidian markdown syntax
+
+What's needed:
+
+- [ ] `[[Internal link]]`
+- [ ] `[[Internal link|With custom text]]`
+- [ ] `[[Internal link#heading]]`
+- [ ] `[[Internal link#heading|With custom text]]`
+
+🚩 Not sure these are needed to start with
+
+- [ ] `![[Embed note]]`
+- [ ] `![[Embed note#heading]]`
+
+#### Research
+
+https://obsidian.md/features
+
+GitHub Flavored Markdown (GFM) extensions
+
+```
+- | Markdown **table** |
+- **- [x] Task list**
 ```
 
-To check where the `content` link points now:
+Extra Obsidian:
 
-```bash
-readlink -f content
 ```
-
-**Adding `userConfig.js` file**
-
-Now, let's add an empty `userConfig.js` file to the directory with your notes:
-
-```bash
-cd ~/Path/to/your/md/notes
-touch userConfig.js
+-   **#Tags**
+-   $$**LaTeX** math$$
+-   [^**Footnotes**]
+-   **[[Internal links]]**
+-   **![[Filename]]** to embed notes and other files
 ```
-
-At this point, you should be able to run the app. You can check, that it compiles, by running:
-
-```bash
-npm run dev
-# or 
-npm run build
-npm start
-```
-
-However, when you [open the app in your browser](http://localhost:3000/), you'll notice the website is welcoming you with 404 page. This is because you don't have an `index.md` file in the root of your content directory. (All other markdown files will already be available under their corresponding paths.) You can easily fix this by adding a basic `index.md` page to the root of your content folder.
-
-```bash
-cd ~/Path/to/your/md/notes
-touch index.md
-echo "# Welcome to my Flower Show\!" > index.md
-```
-
-Hurray 🎊! You've just created a website out of your markdown notes with a little help from Flowershow 🌷!
-
-## Deploying
-
-This part is up to you. Our app is Next.js based, so youe can use any of these hosting providers: Vercel, Cloudflare, Netlify and others to deploy the site.
-
-Sources you may find useful:
-- [How to deploy a Next.js site with Vercel](https://vercel.com/guides/deploying-nextjs-with-vercel)
-- [How to deploy a Next.js site with Cloudflare](https://developers.cloudflare.com/pages/framework-guides/deploy-a-nextjs-site/)
-- [How to deploy a Next.js site with Netlify](https://www.netlify.com/blog/2020/11/30/how-to-deploy-next.js-sites-to-netlify/)
-
-## Guides
-* To learn more about the basic Flowershow features, visit our [[essentials|Essentials guide]].
-* For more advanced confiurations, check out our [[advanced|Advanced guide]]

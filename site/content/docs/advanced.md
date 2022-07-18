@@ -2,7 +2,7 @@
 title: Advanced configurations
 ---
 
-## Adding a plugin (TBD)
+## Adding a plugin
 
 The plugin is open-source and can be found on the github repo here - [ https://github.com/flowershow/remark-wiki-link-plus](https://github.com/flowershow/remark-wiki-link-plus)
 

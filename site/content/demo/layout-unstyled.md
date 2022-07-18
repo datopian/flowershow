@@ -1,5 +1,5 @@
 ---
-title: I'm rendered using Unstyled layout to dipslay this content!
+title: I'm rendered using Unstyled layout!
 layout: unstyled
 ---
 
@@ -11,7 +11,7 @@ In order to use layout other than the default one (see [[layout-docs|Docs layout
 
 ```md
 ---
-title: I'm rendered using Unstyled layout to dipslay this content!
+title: I'm rendered using Unstyled layout!
 layout: unstyled
 ---
 ```

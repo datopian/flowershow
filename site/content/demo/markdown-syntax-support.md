@@ -117,7 +117,7 @@ We are intensively working to support whole range of Obsidian syntax elements, b
 
 **Renders as:**
 
-> Roses are red,
+> Roses are red  
 > violets are blue.
 
 ## Math 🚧

@@ -8,3 +8,4 @@ layout: docs
 - [[code-highlight|Code highlighting]]
 - [[markdown-syntax-support|Markdown syntax support]]
 - [[tailwind-support|Tailwind support]]
+- [[custom-components|Custom components]]
