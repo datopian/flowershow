@@ -21,10 +21,9 @@ Technical implementation options
 3. ...
 
 
-Questions
+### Option 1
 
-* [ ] Can we use  components e.g. `<MyHeroComponent />` in MDX (how do we import them?) **add to components in `components/MDX`**
-
+Just use HTML
 
 ### Option 2
 

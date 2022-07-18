@@ -12,14 +12,16 @@ Taglines:
 
 As of 2022-07-06
 
-* [ ] Landing page for the product **See https://github.com/flowershow/flowershow/issues/4 issue**
+Key Question 2022-07-11: to what extent do we care about MDX and theming support (power wiki) vs more KISS and focus on obsidian?
+
+* [ ] Landing page for the product **40% 📝https://github.com/flowershow/flowershow/issues/4 ⏭️ finish copy, work out how theme**
+* [ ] Trial product e.g. on flowershow itself or building Life Itself new community site. Possible candidates **[#21](https://github.com/flowershow/flowershow/issues/21)**
+  * [ ] flowershow site itself **🚧2022-07-11 40%**
+  * [x] ecosystem site  **✅2022-07-08 100% complete.**
+  * [ ] Life Itself community site
 * [ ] Basic working product e.g. command line tool, template etc
-  * [ ] Template webapp **See https://github.com/flowershow/flowershow/issues/1 issue**
-  * [ ] Command line tool
-* [ ] Trial product e.g. on flowershow itself or building Life Itself new community site. Possible candidates
-  * [ ] flowershow site itself **🚧2022-07-06 50% - already in use but more needed e.g. for landing page**
-  * [ ] ecosystem site **🚧2022-07-06 70% - main focus right now**
-  * [ ] web3 (refactor) ??
+  * [ ] Template webapp **🚧2022-07-11 70% [#1](https://github.com/flowershow/flowershow/issues/1)**
+  * [ ] Command line tool **DEFERRED on need**
 * [ ] Promotion
   * [ ] (? separate) some kind of launch e.g.
   * [ ] post on obsidian forum
