@@ -1,76 +1,128 @@
 ---
-title: Roadmap
+title: Quick start
 ---
 
-Flowershow is under active development and there is still a lot of good stuff we plan to ship with upcoming releases. Any contributions are more than welcome!
-
 <div className="border-2 border-slate-400 rounded-md px-4 mb-2">
-❕ To learn more about current work status on the features and bugs listed below (and more) check out [GitHub issues](https://github.com/flowershow/flowershow/issues) in Flowershow repo.
+🚧 Flowershow is under very active development. To learn more about some of the planned features, take a look at our <span>[[roadmap|Roadmap]]</span>.
 </div>
 
-## Planned features 🚧
-Here are **some** of the features we are currently working on. If you think we might have missed something important, or you just have an idea for some cool enhancement, let us know by creating [a GitHub issue in our repo](https://github.com/flowershow/flowershow/issues) (if it doesn't already exist). We would love to hear your opinion!
+<div className="border-2 border-slate-400 rounded-md px-4">
+✨ Too see some of the Flowershow features in action, check out our <span>[[demo|Demo Pages]]</span>.
+</div>
 
-**>>>>>>>>>TODO sort these by priority (roughly)**
+## What is Flowershow?
+Flowershow is an open-source tool for easily converting your markdown files into an elegant website. It's built on standard, modern web stack – **React**, **Next.js** and **Tailwind** and shipped with a basic **default theme** (used to publish this website) to get you started with just a few clicks. 
 
-### Text highlighting
-Highlighting text wrapped in double `=`. 
+Flowershow supports **CommonMark** and **GitHub Flavored Markdown**, but also many **Obsidian-specific syntax elements**, like internal links or footnotes[^1].
+[^1]: Support for some GFM and Obsidian-specific syntax elements is still work in progress. See our [[docs/index]] to learn more.
 
-### Multiline blockquotes
-Breaking quotes that span multiple lines. (Currently rendered on a single line.)
+## Quick Start
 
-### Math
-Support for inline and block math formulas.
+<div className="border-2 border-slate-400 rounded-md px-4 pb-3 mb-3">
+❕ **Pre-requisites**
+- [Node.js](https://nodejs.org/en/) installed
+- [Git](https://git-scm.com/) installed
+</div>
 
-### Comments
-Hiding content wrapped in double `%`. (Currently parsed as plain text and displayed.)
+Currently there is only one starter template - default template[^2]. The fastest way to use it to bootstrap your website is:
+[^2]: We plan to develop a few different starter templates, so that you can pick the one that suits your needs and style most. See our [[docs/index]] to learn more.
 
-### Inline Code
-Correct rendering of inline code. (Currently only code blocks are formatted correctly.)
+```bash
+npx create-next-app@latest -e https://github.com/flowershow/flowershow/tree/main/templates/default
+# or
+yarn create next-app -e https://github.com/flowershow/flowershow/tree/main/templates/default
+```
 
-### Callouts
-Support (and different styling) for different callout types.
+---
 
-### Table of contents
-Auto injecting a table of contents on top of pages specified by the user.
+❕ At the moment, we are in the process of testing Flowershow's core features by using it to create this website's code and content. Thus, for now, Flowershow's github repository is basically a repository of this website. If you go to [the repo](https://github.com/flowershow/flowershow), you'll notice it has the following structure:
 
-### File embeds
-Displaing files embedded with `![[filename.png]]` syntax.
+```bash
+.
+├── templates
+│   └── default
+│       ├── content -> ../../site/content # symlink to site/content
+|      ...
+├── site # this website's content and configuration
+│   └── content # folder with our md notes and userConfig.js
+│       ├── userConfig.js
+│       ├── index.md
+│       ├── docs
+|       ├── demo
+│      ...
+├── README.md
+├── LICENSE
+└── .gitignore
+```
 
-### Knowledge graph
-Interactive knowledge graph with clickable nodes.
+`/site` is where all Flowershow website's data resides. All page's content that you can read on this website lies inside of the `/content` subdirectory. To write this content, most of the time we use Obsidian, so if you also use Obsidian, you can imagine `/content` being your Obsidian vault.
 
-### Notes previews
-Wikipedia-like internal links previews on hover.
+Important thing to notice here, is that apart from folders with our markdown notes (eg. `/demo`) there are also two additional files: `userConfig.js` and `index.md`.
 
-### Blog posts section
-Confiurable blog posts section on the frontpage, with previews (cards) of user-selected, featured pages.
+- `userConfig.js` is where all the user configuration should be written. 
+- `index.md`, which serves as a front page for our website.
 
-### Themes
-A set of different starter themes to choose from.
-Support for dark & light mode.
+At the moment both of these files are required by Flowershow and should be placed at the root of your notes folder (i.e. inside your Obsidian vault) [^3].
+[^3]: In the future these files will be added automatically by the CLI tool.
 
-### Forward links
-Optional layout component with a list of forward links used on the page.
+---
 
-### Back links
-Optional layout component with a list of backward links pointing to the page.
+Now, after you've created a next app using Flowershow template, there are two things that will prevent you from running it: an incorrect `content` symlink and missing `userConfig.js` file. Let's fix this!
 
-### Excalidraw support
-Displaying excalidraw sketches embedded in notes.
+**Updating symlink to content folder**
 
-### CLI tool
-Our goal is to make using Flowershow as seamless as possible. To facilitate smooth bootsraping and upgrading your website we plan to create a CLI tool, that will take care of all the intricacies related to the whole process of publishing your notes.
+If you go to the folder where you've next-created your Flowershow app, you'll notice there is a symlink named `content`, which will point to a non-existing directory `../../site/content` , a folder we're using to store this website's markdown. You simply need to update it to point to the directory with your markdown notes (e.g. your Obsidian vault). You can do it with the following commands:
 
-### No-code configuration
-Since Flowershow is built on top of well-known tools - React, Next.js and Tailwind - it should be pretty easy to tinker with for anyone familiar with this stack. However, we believe this time could be spent more efficiently, i.e. on polishing your content. Thus, we want to provide you with just enough configuration options to tailor your website to your style, which you can set up by adjusting just one config file (or using our CLI tool in the future) and leave more sophisticated customizations to all the nerds our there (PS. we love nerds 🤓).
+```bash
+# go to the folder where you've next-created your app
+cd my-flowershow-app-folder
+# update the incorrect symlink
+ln -sfn ~/Path/to/your/md/notes content
+```
 
-## Known bugs 🐛
+To check where the `content` link points now:
 
-### Empty pages cause build error
-For know, you should not have any empty markdown pages in your content directory.
+```bash
+readlink -f content
+```
 
-### Broken internal links to index pages
-Since `index.md` is treated by Obsidian like any other page, when you try to create an internal link to it in Obsidian, it will look like this: `[[some_folder/index]]`. This in turn will be converted to an anchor tag pointing to the non-existing URL, e.g.: `http://localhost:3000/some_folder/index`, whereas it should be: `http://localhost:3000/some_folder`.
-#### Temporary workaround
-Manually remove `/index` part from the link created by obsidian, like so: `[[some_folder/index]]` -> `[[some_folder]]`.
+**Adding `userConfig.js` file**
+
+Now, let's add an empty `userConfig.js` file to the directory with your notes:
+
+```bash
+cd ~/Path/to/your/md/notes
+touch userConfig.js
+```
+
+At this point, you should be able to run the app. You can check, that it compiles, by running:
+
+```bash
+npm run dev
+# or 
+npm run build
+npm start
+```
+
+However, when you [open the app in your browser](http://localhost:3000/), you'll notice the website is welcoming you with 404 page. This is because you don't have an `index.md` file in the root of your content directory. (All other markdown files will already be available under their corresponding paths.) You can easily fix this by adding a basic `index.md` page to the root of your content folder.
+
+```bash
+cd ~/Path/to/your/md/notes
+touch index.md
+echo "# Welcome to my Flower Show\!" > index.md
+```
+
+Hurray 🎊! You've just created a website out of your markdown notes with a little help from Flowershow 🌷!
+
+## Deploying
+
+This part is up to you. Our app is Next.js based, so youe can use any of these hosting providers: Vercel, Cloudflare, Netlify and others to deploy the site.
+
+Sources you may find useful:
+- [How to deploy a Next.js site with Vercel](https://vercel.com/guides/deploying-nextjs-with-vercel)
+- [How to deploy a Next.js site with Cloudflare](https://developers.cloudflare.com/pages/framework-guides/deploy-a-nextjs-site/)
+- [How to deploy a Next.js site with Netlify](https://www.netlify.com/blog/2020/11/30/how-to-deploy-next.js-sites-to-netlify/)
+
+## Guides
+* To learn more about the basic Flowershow features, visit our [[essentials|Essentials guide]].
+* For more advanced confiurations, check out our [[advanced|Advanced guide]]
