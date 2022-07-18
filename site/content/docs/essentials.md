@@ -11,8 +11,8 @@ Flowershow will convert internal links to html `a` tags, with their `href` attri
 ### Internal link types
 **Currently supported by Flowershow:**
 
-* Link to a page, e.g. `[[roadmap]]`, which renders as [[docs/index]]
-* Link to a page with a custom name, e.g.  `[[roadmap|Planned Features]]`, which renders as [[docs/index|Planned Features]] 
+* Link to a page, e.g. `[[roadmap]]`, which renders as [[quick-start]]
+* Link to a page with a custom name, e.g.  `[[roadmap|Planned Features]]`, which renders as [[quick-start|Planned Features]] 
 
 🚧 **We're currently working on support for these types:**
 * Link to a specific heading within a given page `[[roadmap#Planned features 🚧]]`
