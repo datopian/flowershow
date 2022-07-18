@@ -1,227 +1,76 @@
-# Designs and Plans for Flowershow
+---
+title: Roadmap
+---
 
-Turn your digital garden / second brain / obsidian vault into a beautiful (and customizable) website in seconds.
+Flowershow is under active development and there is still a lot of good stuff we plan to ship with upcoming releases. Any contributions are more than welcome!
 
-Taglines:
+<div className="border-2 border-slate-400 rounded-md px-4 mb-2">
+❕ To learn more about current work status on the features and bugs listed below (and more) check out [GitHub issues](https://github.com/flowershow/flowershow/issues) in Flowershow repo.
+</div>
 
-- Author in Obsidian, Publish in Flowershow
-- Present your ideas, beautifully
-- Share your digital garden.
+## Planned features 🚧
+Here are **some** of the features we are currently working on. If you think we might have missed something important, or you just have an idea for some cool enhancement, let us know by creating [a GitHub issue in our repo](https://github.com/flowershow/flowershow/issues) (if it doesn't already exist). We would love to hear your opinion!
 
-# Plan
+**>>>>>>>>>TODO sort these by priority (roughly)**
 
-As of 2022-07-06
+### Text highlighting
+Highlighting text wrapped in double `=`. 
 
-* [ ] Landing page for the product **See https://github.com/flowershow/flowershow/issues/4 issue**
-* [ ] Basic working product e.g. command line tool, template etc
-  * [ ] Template webapp **See https://github.com/flowershow/flowershow/issues/1 issue**
-  * [ ] Command line tool
-* [ ] Trial product e.g. on flowershow itself or building Life Itself new community site. Possible candidates
-  * [ ] flowershow site itself **🚧2022-07-06 50% - already in use but more needed e.g. for landing page**
-  * [ ] ecosystem site **🚧2022-07-06 70% - main focus right now**
-  * [ ] web3 (refactor) ??
-* [ ] Promotion
-  * [ ] (? separate) some kind of launch e.g.
-  * [ ] post on obsidian forum
-  * [ ] post on reddit re pkm etc
-  * [ ] post on dev.to (later when more working?)
+### Multiline blockquotes
+Breaking quotes that span multiple lines. (Currently rendered on a single line.)
 
-## Launch v0.1 July 2022
+### Math
+Support for inline and block math formulas.
 
-Target: 19 July 2022
+### Comments
+Hiding content wrapped in double `%`. (Currently parsed as plain text and displayed.)
 
-- Elegant website with signup
-- MVP Product
-  - v0.1
-  - v0.2
-  - v0.3
+### Inline Code
+Correct rendering of inline code. (Currently only code blocks are formatted correctly.)
 
-```mermaid
-graph TD
-
-
-trial1[Trial 1: Ecosystem]
-website[Flowershow Website]
-
-mvp1[MVP 0.1 - MDX, tailwind, contentlayer]
-mvp2[MVP 0.2 - mermaid, obsidian syntax, assets folder]
-mvp3[MVP 0.3 - upgradeability]
-cli[CLI v0.1]
-
-mvp1 --> trial1
-mvp1 --> website
-trial1 --> mvp2
-mvp2 --> mvp3
-mvp3 --> website
-
-classDef done fill:darkgreen,stroke:#333,stroke-width:1px;
-classDef nearlydone fill:#21bf73,stroke:#333,stroke-width:1px;
-classDef inprogress fill:orange,stroke:#333,stroke-width:1px;
-classDef next fill:blue,stroke:#333,stroke-width:1px;
-
-class done,mvp1 done;
-class nearlydone,trial1 nearlydone;
-class inprogress,website,mvp2 inprogress;
-class next,cli next;
-```
-
-
-```mermaid
-graph TD
-
-subgraph Key
-  done[Done]
-  nearlydone[Nearly Done]
-  inprogress[In Progress]
-  next[Next Up]
-end
-
-classDef done fill:darkgreen,stroke:#333,stroke-width:1px;
-classDef nearlydone fill:#21bf73,stroke:#333,stroke-width:1px;
-classDef inprogress fill:orange,stroke:#333,stroke-width:1px;
-classDef next fill:blue,stroke:#333,stroke-width:1px;
-
-class done done;
-class nearlydone nearlydone;
-class inprogress inprogress;
-class next next;
-```
-
-# Website
-
-Feature List
-
-* [ ] front page
-* [ ] docs section
-* [ ] blog
-* [ ] social links
-* [ ] Made in Flowershow gallery or similar
-
-# Features
-
-In very rough order of likely priority in each section
-
-* [x] Markdown - full markdown plus footnotes
-* [x] MDX support for rich component additions. Built on MDX so you can use everything Next.JS provides out of the box including full React e.g. want a custom front page? No problem!
-  * [ ] Documentation / examples
-- [x] Tailwind: built on tailwind so easy to adjust and customize
-* [ ] SEO support
-* [ ] Basic site config
-* [ ] Basic theme e.g. navbar and footer
-* [ ] Analytics - google - this could be first test for componentization (or maybe just live with default for now)
-* [ ] theme customization
-* [ ] Code highlighting - e.g. use https://github.com/timlrx/rehype-prism-plus
-  * [ ] Do we use prism or highlight.js. **✅2022-06-29 Answer: prism i think (same speed, more plugins (?))**
-* [ ] Maths syntax (mathjax etc)
-* [ ] Mermaid
-- [ ] Citation / Bibliographic references: use standard `[@jones-2020]` style bibliographic citations in markdown (compatible with Obsidian zotero, R markdown etc) - https://github.com/timlrx/rehype-citation
-* [ ] Desktop and mobile: beautiful, responsive theme out of the box
-* [ ] Full text search: search quickly and easily.
-* [ ] social preview links e.g. twitter link turns into a nice twitter card. Ditto for youtube.
-* [ ] Edit page on github/gitlab
-
-Obsidian feature compatibility
-
-* [ ] support Obsidian wiki-link extensions to markdown
-* [ ] Callouts / admonitions - https://help.obsidian.md/How+to/Use+callouts
-* [ ] Backlinks
-* [ ] Forward links
-* [ ] Network graph
-* [ ] Excalidraw
-- [ ] How do we support obsidian plugins in general
-
-Theme
-
-* [ ] Dark/light theme
-* [ ] Wide images
-* [ ] [[#Linkable headings]]
-* [ ] frontmatter support e.g. of standard fields
-  - author
-  - date (published)
-  - status: 
-  - publish: true/false
-* [ ] Image optimization
-  * Good summary of pros and cons and how to do it https://tailwind-nextjs-starter-blog.vercel.app/blog/guide-to-using-images-in-nextjs
-
-Data stuff
-
-* [ ] table preview
-* [ ] graphs
-
-# Content
-
-## Tutorials and Howtos
-
-* [ ] Get started (self-service and deploy)
-* [ ] Custom components in markdown pages
-
-Blogs
-
-* [ ] Why Flowershow
-
-Advanced
-
-* [ ] Markdown extension addition (howto do that)
-* [ ] Content structuring and contentlayer (latter more for devs)
-
-
-## Details
-### Linkable headings
-
-https://tailwindcss.com/docs/responsive-design
-
-- Only shows when you hover the heading
-- Nice symbol
-- Shows to left of text
-- Only shows on desktop
-
-![](https://i.imgur.com/6N0yDUS.png)
+### Callouts
+Support (and different styling) for different callout types.
 
 ### Table of contents
+Auto injecting a table of contents on top of pages specified by the user.
 
-Again tailwindcss.com is excellent. For example: https://tailwindcss.com/docs/customizing-colors
+### File embeds
+Displaing files embedded with `![[filename.png]]` syntax.
 
-Two contents sections:
+### Knowledge graph
+Interactive knowledge graph with clickable nodes.
 
-- LHS: full site table of contents
-- RHS: table of contents for this page
+### Notes previews
+Wikipedia-like internal links previews on hover.
 
-![](../assets/Pasted%20image%2020220323185414.png)
+### Blog posts section
+Confiurable blog posts section on the frontpage, with previews (cards) of user-selected, featured pages.
 
-Code: https://github.com/tailwindlabs/tailwindcss.com/blob/8b9f69a93a5a1b055dc8c1dcfa06f5ca2863b89c/src/layouts/ContentsLayout.js
+### Themes
+A set of different starter themes to choose from.
+Support for dark & light mode.
 
+### Forward links
+Optional layout component with a list of forward links used on the page.
 
-### Obsidian markdown syntax
+### Back links
+Optional layout component with a list of backward links pointing to the page.
 
-What's needed:
+### Excalidraw support
+Displaying excalidraw sketches embedded in notes.
 
-- [ ] `[[Internal link]]`
-- [ ] `[[Internal link|With custom text]]`
-- [ ] `[[Internal link#heading]]`
-- [ ] `[[Internal link#heading|With custom text]]`
+### CLI tool
+Our goal is to make using Flowershow as seamless as possible. To facilitate smooth bootsraping and upgrading your website we plan to create a CLI tool, that will take care of all the intricacies related to the whole process of publishing your notes.
 
-🚩 Not sure these are needed to start with
+### No-code configuration
+Since Flowershow is built on top of well-known tools - React, Next.js and Tailwind - it should be pretty easy to tinker with for anyone familiar with this stack. However, we believe this time could be spent more efficiently, i.e. on polishing your content. Thus, we want to provide you with just enough configuration options to tailor your website to your style, which you can set up by adjusting just one config file (or using our CLI tool in the future) and leave more sophisticated customizations to all the nerds our there (PS. we love nerds 🤓).
 
-- [ ] `![[Embed note]]`
-- [ ] `![[Embed note#heading]]`
+## Known bugs 🐛
 
-#### Research
+### Empty pages cause build error
+For know, you should not have any empty markdown pages in your content directory.
 
-https://obsidian.md/features
-
-GitHub Flavored Markdown (GFM) extensions
-
-```
-- | Markdown **table** |
-- **- [x] Task list**
-```
-
-Extra Obsidian:
-
-```
--   **#Tags**
--   $$**LaTeX** math$$
--   [^**Footnotes**]
--   **[[Internal links]]**
--   **![[Filename]]** to embed notes and other files
-```
+### Broken internal links to index pages
+Since `index.md` is treated by Obsidian like any other page, when you try to create an internal link to it in Obsidian, it will look like this: `[[some_folder/index]]`. This in turn will be converted to an anchor tag pointing to the non-existing URL, e.g.: `http://localhost:3000/some_folder/index`, whereas it should be: `http://localhost:3000/some_folder`.
+#### Temporary workaround
+Manually remove `/index` part from the link created by obsidian, like so: `[[some_folder/index]]` -> `[[some_folder]]`.

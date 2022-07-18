@@ -11,8 +11,8 @@ Flowershow will convert internal links to html `a` tags, with their `href` attri
 ### Internal link types
 **Currently supported by Flowershow:**
 
-* Link to a page, e.g. `[[roadmap]]`, which renders as [[roadmap]]
-* Link to a page with a custom name, e.g.  `[[roadmap|Planned Features]]`, which renders as [[roadmap|Planned Features]] 
+* Link to a page, e.g. `[[roadmap]]`, which renders as [[docs/index]]
+* Link to a page with a custom name, e.g.  `[[roadmap|Planned Features]]`, which renders as [[docs/index|Planned Features]] 
 
 🚧 **We're currently working on support for these types:**
 * Link to a specific heading within a given page `[[roadmap#Planned features 🚧]]`
@@ -59,7 +59,7 @@ And it means you have access to the full ecosystem of tailwind features and comp
 
 ## How to use components in your markdown
 
-## Steps
+### Steps
 
 1. Create a component (eg. Hero.js) in components folder
 2. Add it to components in `components/MDX'
