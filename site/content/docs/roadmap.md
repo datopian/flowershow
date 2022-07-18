@@ -1,4 +1,7 @@
-# Roadmap 
+---
+title: Roadmap
+---
+
 Flowershow is under active development and there is still a lot of good stuff we plan to ship with upcoming releases. Any contributions are more than welcome!
 
 Check out all [GitHub issues](https://github.com/flowershow/flowershow/issues) in Flowershow repo to learn more about current work status on the features and bugs listed below (and more).
@@ -52,8 +55,18 @@ Optional layout component with a list of backward links pointing to the page.
 ### Excalidraw support
 Displaying excalidraw sketches embedded in notes.
 
+### CLI tool
+Our goal is to make using Flowershow as seamless as possible. To facilitate smooth bootsraping and upgrading your website we plan to create a CLI tool, that will take care of all the intricacies related to the whole process of publishing your notes.
+
+### No-code configuration
+Since Flowershow is built on top of well-known tools - React, Next.js and Tailwind - it should be pretty easy to tinker with for anyone familiar with this stack. However, we believe this time could be spent more efficiently, i.e. on polishing your content. Thus, we want to provide you with just enough configuration options to tailor your website to your style, which you can set up by adjusting just one config file (or using our CLI tool in the future) and leave more sophisticated customizations to all the nerds our there (PS. we love nerds 🤓).
+
 ## Known bugs 🐛
 
 ### Empty pages cause build error
-
 For know, you should not have any empty markdown pages in your content directory.
+
+### Broken internal links to index pages
+Since `index.md` is treated by Obsidian like any other page, when you try to create an internal link to it in Obsidian, it will look like this: `[[some_folder/index]]`. This in turn will be converted to an anchor tag pointing to the non-existing URL, e.g.: `http://localhost:3000/some_folder/index`, whereas it should be: `http://localhost:3000/some_folder`.
+#### Temporary workaround
+Manually remove `/index` part from the link created by obsidian, like so: `[[some_folder/index]]` -> `[[some_folder]]`.
