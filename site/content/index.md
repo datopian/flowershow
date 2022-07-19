@@ -7,7 +7,7 @@ layout: unstyled
     <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-y-16 gap-x-8 px-4 lg:max-w-8xl lg:grid-cols-2 lg:px-8 xl:gap-x-16 xl:px-12">
       <div className="relative md:text-center lg:text-left">
         <p className="inline bg-gradient-to-r from-indigo-200 via-sky-400 to-indigo-200 bg-clip-text text-6xl tracking-tight text-transparent">Publish your obsidian notes, beautifully.</p>
-        <p className="mt-4 text-3xl text-white tracking-tight">For free, no coding.</p>
+        <p className="mt-4 text-3xl dark:text-white tracking-tight">For free, no coding.</p>
         <p className="mt-4 text-2xl tracking-tight text-slate-400">Turn your markdown notes into an elegant website and tailor it to your needs. Flowershow is easy to use, fully-featured, obsidian compatible and open-source.</p>
         <div className="mt-8 flex gap-4 md:justify-center lg:justify-start">
           <a href="/" className="rounded-full bg-sky-300 py-2 px-4 text-sm font-semibold text-slate-900 hover:bg-sky-200 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300/50 active:bg-sky-500 no-underline">
@@ -25,7 +25,7 @@ layout: unstyled
   </div>
 </div>
 
-<div className="prose prose-invert mx-auto py-20">
+<div className="prose dark:prose-invert mx-auto py-20">
 
 ## Crafted for Obsidian
 
