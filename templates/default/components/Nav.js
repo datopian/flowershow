@@ -32,16 +32,16 @@ export default function Header() {
       className={`
         sticky top-0 z-50 flex flex-wrap items-center justify-between px-4 py-5 transition duration-500 sm:px-6 lg:px-8
         ${isScrolled
-          ? 'bg-slate-900/95 backdrop-blur [@supports(backdrop-filter:blur(0))]:bg-slate-900/75'
-          : 'bg-slate-900'}
+          ? 'dark:bg-slate-900/95 backdrop-blur [@supports(backdrop-filter:blur(0))]:bg-slate-900/75'
+          : 'dark:bg-slate-900'}
       `}
     >
       <div className="mr-6 flex lg:hidden">
         <MobileNavigation navigation={siteConfig.navLinks} />
       </div>
-      <div className="relative flex flex-grow basis-0 items-center">
+      <div className="relative flex flex-grow basis-auto items-center">
         <Link href="/" aria-label="Home page">
-          <a className="flex items-center font-extrabold text-2xl text-white">
+          <a className="flex items-center font-extrabold text-2xl text-slate-900 dark:text-white">
             <img src="/images/logo.svg" alt="" className="w-9 h-9 mr-1 fill-white" />
             {siteConfig.author}
           </a>
@@ -52,7 +52,7 @@ export default function Header() {
               <a
                 key={item.name}
                 href={item.href}
-                className={`text-slate-500 inline-flex items-center px-1 pt-1 text-sm font-medium
+                className={`text-slate-500 inline-flex items-center mr-6 px-1 pt-1 text-sm font-medium
                   ${item.href === router.pathname ?
                     'text-slate-500' :
                     'hover:text-slate-600'
@@ -69,7 +69,7 @@ export default function Header() {
       <div className="relative flex basis-0 justify-end gap-6 sm:gap-8 md:flex-grow">
         <Link href="https://github.com/flowershow/flowershow">
           <a className="group" aria-label="GitHub">
-            <GitHubIcon className="h-6 w-6 fill-slate-400 group-hover:fill-slate-500 dark:group-hover:fill-slate-300" />
+            <GitHubIcon className="h-6 w-6 dark:fill-slate-400 group-hover:fill-slate-500 dark:group-hover:fill-slate-300" />
           </a>
         </Link>
       </div>

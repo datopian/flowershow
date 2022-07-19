@@ -5,6 +5,7 @@ module.exports = {
     './layouts/**/*.{js,ts,jsx,tsx}',
     './content/**/*.{md,mdx}',
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       maxWidth: {

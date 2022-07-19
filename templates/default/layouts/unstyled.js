@@ -1,3 +1,3 @@
 export default function UnstyledLayout ({ children, frontMatter }) {
-    return children
+    return <div className="dark:text-white">{children}</div>
 }
