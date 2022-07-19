@@ -1,3 +1,4 @@
+# Markdown and Obsidian syntax basics
 # Markdown syntax support
 
 Here are some of the Obidian syntax elements (CommonMark, GFM and others) supported by Flowershow.
@@ -176,3 +177,53 @@ This is some code: `npx do-something`
 **Renders as:**
 
 > [!INFO] > Here's a callout block. > It supports **markdown** and [[docs/index|wikilinks]].
+
+
+## Obsidian internal links
+
+Wiki links are hyperlinks which give one click access to other pages on the site. These are usually denoted with double square brackets `[[some_page]]` and Obsidian would generate the reference to that page automatically.
+
+Flowershow will convert internal links to html `a` tags, with their `href` attributes pointing to the location referenced by original internal links.
+
+### Internal link types
+**Currently supported by Flowershow:**
+
+* Link to a page, e.g. `[[roadmap]]`, which renders as [[docs/index]]
+* Link to a page with a custom name, e.g.  `[[roadmap|Planned Features]]`, which renders as [[docs/index|Planned Features]] 
+
+🚧 **We're currently working on support for these types:**
+* Link to a specific heading within a given page `[[roadmap#Planned features 🚧]]`
+* Link to a specific heading within a given page with a custom name, e.g. `[[roadmap#Planned features 🚧|Work in progress...]]`
+* Link to a specific block (paragraph) within a given page, e.g. `[[roadmap#Planned features 🚧|Work in progress...]]`
+* Link to a file, e.g. `![[abstract-flowers.png]]`
+
+## Code blocks
+
+Markdown code blocks will be parsed as `pre` tags with support for code highlighting in respective languages using rehype-prism-plus plugin. 
+
+- copy/paste button included on hover
+- style used - VS Code Dark+ from https://github.com/PrismJS/prism-themes
+
+**Javascript example:**
+
+```javascript
+const ExampleCode = () => {
+	return (
+		<div> .... </div>
+	)
+}
+```
+
+**Python example:**
+
+```python
+class Example:
+	def code(self,test):
+		return 'Code highlighter'
+```
+
+**Bash example:**
+
+```bash
+git commit && git push
+```
