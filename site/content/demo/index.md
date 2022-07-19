@@ -1,9 +1,11 @@
 ---
-layout: unstyled
+layout: docs
 ---
 
-`(layout/unstyled.js)`
-
-Demo page with an unstyled layout *eg. used for homepage with sections*
-
-<DemoComponent data={testData} />
+# Demos of some of our cool features
+- [[layout-unstyled|Unstyled layout]]
+- [[layout-docs|Docs layout]]
+- [[code-highlight|Code highlighting]]
+- [[markdown-syntax-support|Markdown syntax support]]
+- [[tailwind-support|Tailwind support]]
+- [[custom-components|Custom components]]
