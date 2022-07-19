@@ -1,4 +1,4 @@
-const userConfig = {
+const config = {
   title: 'Flowershow',
   // Google analytics key e.g. G-XXXX
   analytics: 'G-RQWLTRWBS2',
@@ -10,4 +10,4 @@ const userConfig = {
   ],
 }
 
-export default userConfig
+export default config
