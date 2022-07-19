@@ -15,10 +15,10 @@ export default function Layout({ children, title='' }) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Header />
-      <main className="bg-slate-900">
+      <main className="dark:bg-slate-900">
         {children}
       </main>
-      <footer className="bg-slate-900 prose prose-invert w-full max-w-none flex items-center justify-center w-full h-24 border-t">
+      <footer className="dark:bg-slate-900 prose dark:prose-invert w-full max-w-none flex items-center justify-center w-full h-24 border-t">
         <p className="flex items-center justify-center">
           Created by
           <a

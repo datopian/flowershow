@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import Script from 'next/script'
 import { useRouter } from 'next/router'
+import { ThemeProvider } from 'next-themes'
 import { DefaultSeo } from 'next-seo'
 import 'tailwindcss/tailwind.css'
 import '../styles/prism.css';
@@ -26,7 +27,7 @@ function MyApp({ Component, pageProps }) {
   // end Google Analytics
 
   return (
-    <>
+    <ThemeProvider attribute="class" defaultTheme="dark">
       <DefaultSeo
         titleTemplate={'%s | ' + siteConfig.title}
         defaultTitle={siteConfig.title}
@@ -59,7 +60,7 @@ function MyApp({ Component, pageProps }) {
       <Layout title={pageProps.title}>
         <Component {...pageProps} />
       </Layout>
-    </>
+    </ThemeProvider>
   )
 }
 
