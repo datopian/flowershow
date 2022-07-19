@@ -175,4 +175,4 @@ This is some code: `npx do-something`
 
 **Renders as:**
 
-> [!INFO] > Here's a callout block. > It supports **markdown** and [[quick-start|wikilinks]].
+> [!INFO] > Here's a callout block. > It supports **markdown** and [[docs/index|wikilinks]].
