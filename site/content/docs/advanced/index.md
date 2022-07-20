@@ -1,4 +1,6 @@
-# Analytics
+# Advanced Guide
+
+## Analytics
 
 [Google Analytics](https://analytics.google.com/analytics/web/provision/#/provision) ([GA4](https://support.google.com/analytics/answer/10089681?hl=en)) is currently supported.
 

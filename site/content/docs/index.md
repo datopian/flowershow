@@ -1,20 +1,16 @@
 ---
-title: Quick start
+title: QuickStart
 ---
 
 <div className="border-2 border-slate-400 rounded-md px-4 mb-2">
-🚧 Flowershow is under very active development. To learn more about some of the planned features, take a look at our <span>[[roadmap|Roadmap]]</span>.
-</div>
-
-<div className="border-2 border-slate-400 rounded-md px-4">
-✨ Too see some of the Flowershow features in action, check out our <span>[[demo|Demo Pages]]</span>.
+🚧 Flowershow is under very active development. To learn more about some of the planned features, take a look at our <span>[[roadmap]]</span>.
 </div>
 
 ## What is Flowershow?
 Flowershow is an open-source tool for easily converting your markdown files into an elegant website. It's built on standard, modern web stack – **React**, **Next.js** and **Tailwind** and shipped with a basic **default theme** (used to publish this website) to get you started with just a few clicks. 
 
 Flowershow supports **CommonMark** and **GitHub Flavored Markdown**, but also many **Obsidian-specific syntax elements**, like internal links or footnotes[^1].
-[^1]: Support for some GFM and Obsidian-specific syntax elements is still work in progress. See our [[docs/index]] to learn more.
+[^1]: Support for some GFM and Obsidian-specific syntax elements is still work in progress. See our [[roadmap]] to learn more.
 
 ## Quick Start
 
@@ -25,7 +21,7 @@ Flowershow supports **CommonMark** and **GitHub Flavored Markdown**, but also ma
 </div>
 
 Currently there is only one starter template - default template[^2]. The fastest way to use it to bootstrap your website is:
-[^2]: We plan to develop a few different starter templates, so that you can pick the one that suits your needs and style most. See our [[docs/index]] to learn more.
+[^2]: We plan to develop a few different starter templates, so that you can pick the one that suits your needs and style most. See our [[roadmap]] to learn more.
 
 ```bash
 npx create-next-app@latest -e https://github.com/flowershow/flowershow/tree/main/templates/default
@@ -124,5 +120,5 @@ Sources you may find useful:
 - [How to deploy a Next.js site with Netlify](https://www.netlify.com/blog/2020/11/30/how-to-deploy-next.js-sites-to-netlify/)
 
 ## Guides
-* To learn more about the basic Flowershow features, visit our [[essentials|Essentials guide]].
-* For more advanced confiurations, check out our [[advanced|Advanced guide]]
+* To learn more about the basic Flowershow features, visit our [[docs/essentials|Essentials guide]].
+* For more advanced confiurations, check out our [[docs/advanced|Advanced guide]]

@@ -1,6 +1,4 @@
----
-title: Contentlayer configuration
----
+# Contentlayer configuration
 
 ## What is Contentlayer?
 
@@ -54,57 +52,11 @@ const Page = defineDocumentType(() => ({
 // ...
 export default makeSource({
   // ...
-  documentTypes: [Page],
-  mdx: {
-    remarkPlugins: [ 
-      remarkGfm,
-      [ wikiLinkPlugin, { markdownFolder: siteConfig.content } ]
-    ],
-    rehypePlugins: [
-      [rehypePrismPlus, { ignoreMissing: true }]
-    ]
-  }
 });
 
 ```
 
-## Creating custom document types
-
-Most probably you have many different types of notes in your vault - blog posts, daily journals, research notes or maybe even recipes. It would be nice to change the way they are displayed on your website, depending on what type they are.
-
-In order to do this, you can create a custom Contentlayer document type, that will be used to parse files specifiend in the `filePathPattern` field. As an example, you could create a `Journal` document type, like so:
-
-```js
-// ...
-
-const blogFields = {
-  date: { type: "string" },
-  layout: { type: "string", default: "blog" },
-}
-
-const Blog = defineDocumentType(() => ({
-  name: "Blog",
-  // filePathPattern: "**/*.md*",
-  contentType: "mdx",
-  fields: {
-    ...sharedFields,
-    ...blogFields,
-  },
-  computedFields,
-}));
-
-
-export default makeSource({
-  // ...
-  documentTypes: [Blog, Page],
-  // ...
-});
-
-```
-
-## Defining custom frontmatter fields
-
-In the example above, we have also defined a custom frontmatter field - `date` - for our `Blog` document type. This field
+As you can see, the default document type which will be applied to all your markdown files (because of the catch-all `filePathPattern` - `"**/*.md*"`) is the `Page` document type. Both `fields` and `computedFields` properties describe the shape and behavior of your content. They also tell Contentlayer how to parse each value in a page frontmatter, so that you can use it e.g. in your custom layouts. (See our guide about [[layouts]] to learn more).y
 
 ## Adding a remark / rehype plugins
 

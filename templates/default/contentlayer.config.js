@@ -26,28 +26,31 @@ const Page = defineDocumentType(() => ({
   computedFields,
 }));
 
-// const blogFields = {
-//   date: { type: "date" },
-//   layout: { type: "string", default: "blog" },
-// }
+const blogFields = {
+  date: { type: "date" },
+  layout: { type: "string", default: "blog" },
+  authors: {
+    type: "list",
+    of: { type: "string" }
+  },
+}
 
-// const Blog = defineDocumentType(() => ({
-//   name: "Blog",
-//   contentType: "mdx",
-//   fields: {
-//     ...sharedFields,
-//     ...blogFields,
-//   },
-//   computedFields,
-// }));
+const Blog = defineDocumentType(() => ({
+  name: "Blog",
+  contentType: "mdx",
+  fields: {
+    ...sharedFields,
+    ...blogFields,
+  },
+  computedFields,
+}));
 
 const contentLayerExcludeDefaults = ['node_modules', '.git', '.yarn', '.cache', '.next', '.contentlayer', 'package.json', 'tsconfig.json']
 
 export default makeSource({
   contentDirPath: siteConfig.content,
   contentDirExclude: contentLayerExcludeDefaults.concat(['.flowershow', '.obsidian']),
-  // documentTypes: [Blog, Page],
-  documentTypes: [Page],
+  documentTypes: [Blog, Page],
   mdx: {
     remarkPlugins: [ 
       remarkGfm,

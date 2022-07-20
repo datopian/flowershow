@@ -17,6 +17,7 @@ const userConfig = {
   authorUrl: 'https://john.app/',
   // Google analytics key e.g. G-XXXX
   analytics: 'G-XXXX',
+  // links to the pages you want to add to the navbar
   navLinks: [
     { href: '/about', name: 'About' },
   ],
@@ -42,4 +43,3 @@ export default userConfig
 
 ```
 
-## Custom layouts
