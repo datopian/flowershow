@@ -6,7 +6,7 @@ import wikiLinkPlugin from "remark-wiki-link-plus";
 
 const sharedFields = {
   title: { type: "string" },
-  layout: { type: "string", default: "docs" }
+  layout: { type: "string", default: "docs" },
 };
 
 const computedFields = {
@@ -26,12 +26,31 @@ const Page = defineDocumentType(() => ({
   computedFields,
 }));
 
+const blogFields = {
+  date: { type: "date" },
+  layout: { type: "string", default: "blog" },
+  authors: {
+    type: "list",
+    of: { type: "string" }
+  },
+}
+
+const Blog = defineDocumentType(() => ({
+  name: "Blog",
+  contentType: "mdx",
+  fields: {
+    ...sharedFields,
+    ...blogFields,
+  },
+  computedFields,
+}));
+
 const contentLayerExcludeDefaults = ['node_modules', '.git', '.yarn', '.cache', '.next', '.contentlayer', 'package.json', 'tsconfig.json']
 
 export default makeSource({
   contentDirPath: siteConfig.content,
   contentDirExclude: contentLayerExcludeDefaults.concat(['.flowershow', '.obsidian']),
-  documentTypes: [Page],
+  documentTypes: [Blog, Page],
   mdx: {
     remarkPlugins: [ 
       remarkGfm,
