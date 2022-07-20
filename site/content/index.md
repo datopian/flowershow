@@ -10,7 +10,7 @@ layout: unstyled
         <p className="mt-4 text-3xl dark:text-white tracking-tight">For free, no coding.</p>
         <p className="mt-4 text-2xl tracking-tight text-slate-400">Turn your markdown notes into an elegant website and tailor it to your needs. Flowershow is easy to use, fully-featured, obsidian compatible and open-source.</p>
         <div className="mt-8 flex gap-4 md:justify-center lg:justify-start">
-          <a href="/" className="rounded-full bg-sky-300 py-2 px-4 text-sm font-semibold text-slate-900 hover:bg-sky-200 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300/50 active:bg-sky-500 no-underline">
+          <a href="https://flowershow.app/docs" className="rounded-full bg-sky-300 py-2 px-4 text-sm font-semibold text-slate-900 hover:bg-sky-200 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300/50 active:bg-sky-500 no-underline">
             Quick start
           </a>
           <a href="https://github.com/flowershow/flowershow" className="rounded-full bg-slate-800 py-2 px-4 text-sm font-medium text-white hover:bg-slate-700 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50 active:text-slate-400 no-underline">

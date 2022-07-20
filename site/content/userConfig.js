@@ -1,12 +1,10 @@
 const userConfig = {
   title: 'Flowershow',
   navLinks: [
-    { href: '/docs', name: 'Designs and plans for Flowershow' },
-    { href: '/docs/quick-start', name: 'Quick Start' },
+    { href: '/docs', name: 'QuickStart' },
+    { href: '/docs/essentials', name: 'Essentials' },
+    { href: '/docs/advanced', name: 'Advanced' },
     { href: '/docs/roadmap', name: 'Roadmap' },
-    { href: '/docs/essentials', name: 'Essentials guide' },
-    { href: '/docs/advanced', name: 'Advanced guide' },
-    { href: '/demo', name: 'Demos' },
   ],
 }
 
