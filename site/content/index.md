@@ -19,7 +19,7 @@ layout: unstyled
         </div>
       </div>
       <div className="relative lg:static xl:pl-10">
-        <img src="/images/hero.svg" alt="" className="w-11/12" />
+        <img src="/assets/images/hero.svg" alt="" className="w-11/12" />
       </div>
     </div>
   </div>
