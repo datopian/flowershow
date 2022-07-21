@@ -42,7 +42,7 @@ export default function Header() {
       <div className="relative flex flex-grow basis-auto items-center">
         <Link href="/" aria-label="Home page">
           <a className="flex items-center font-extrabold text-2xl text-slate-900 dark:text-white">
-            <img src="/images/logo.svg" alt="" className="w-9 h-9 mr-1 fill-white" />
+            <img src="/assets/images/logo.svg" alt="" className="w-9 h-9 mr-1 fill-white" />
             {siteConfig.author}
           </a>
         </Link>
