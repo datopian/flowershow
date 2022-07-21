@@ -7,3 +7,4 @@ Here are our basics guides, that will help you make the most of your Flowershow 
 4. [[custom-components|Creating custom components]]
 5. Contentlayer configuration (see docs/essentials/contentlayer)
 6. [[layouts|Layouts]]
+7. [[assets|Assets]]
