@@ -1,8 +1,8 @@
 # Basic configurations
 
-Flowershow aims to provide you with just enough configurations to get you started right away. However, you may want to set some custom things like wesite title, navigation links in the navbar or google analytics key.
+Flowershow aims to provide you with just enough configurations to get you started right away. However, you may want to set some custom things like website title, navigation links in the navbar, or google analytics key.
 
-For this purpose, you should create a `confing.js` file in your content direcotry. Now you can overwrite deafult settings (that can be found in `[my-flowershow-project]/config/siteConfig.js`) and extend them.
+For this purpose, you should create a `confing.js` file in your content directory. Now you can overwrite default settings (that can be found in `[my-flowershow-project]/config/siteConfig.js`) and extend them.
 
 ## `config.js`
 

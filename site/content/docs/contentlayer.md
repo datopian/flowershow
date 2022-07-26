@@ -9,14 +9,14 @@ Under the hood, Flowershow uses [Contentlayer](https://www.contentlayer.dev/) to
 ## Contentlayer config file
 
 <div className="border-2 border-slate-400 rounded-md px-4 mb-2">
-❗ Note that in the examples below, we are directly modifing the `contentlayer.config.js` file. This will change in upcoming releases, as we're currently working on separating Flowershow core settings from user configurations to enable smooth upgrades.
+❗ Note that in the examples below, we are directly modifying the `contentlayer.config.js` file. This will change in upcoming releases, as we're currently working on separating Flowershow core settings from user configurations to enable smooth upgrades.
 </div>
 
-In order for Contentlayer to do its job, it needs to know a few things in advance:
+For Contentlayer to do its job, it needs to know a few things in advance:
 - a directory with your markdown files
 - document type definitions that describe structures of JSON files it should create out of these markdown files
 
-These two things (and more), are set up in `contentlayer.config.js` file, which can be found in the top level directory of your Flowershow project. This file looks something like this:
+These two things (and more), are set up in `contentlayer.config.js` file, which can be found in the top-level directory of your Flowershow project. This file looks something like this:
 
 ```js
 // contentlayer.config.js
@@ -60,4 +60,4 @@ As you can see, the default document type which will be applied to all your mark
 
 ## Adding a remark / rehype plugins
 
-In order to add another plugin, you first need to install it and then add it as a remark (or rehype) plugin in the `contentlayer.config.js` file. Some plugins, like `wikiLinkPlugin` above allow for customizations, which are passed as a 
+To add a remark/rehype plugin, you first need to install it and then add it in the `contentlayer.config.js` file.

@@ -1,6 +1,6 @@
 # Markdown and Obsidian syntax basics
 
-Here are some of the Obidian syntax elements (CommonMark, GFM and others) supported by Flowershow.
+Here are some of the Obsidian syntax elements (CommonMark, GFM, and others) supported by Flowershow.
 
 ## Auto-linking
 
@@ -100,9 +100,9 @@ _I'm Italic!_ is done using `*I'm Italic!*`
 
 ## Obsidian internal links
 
-Wiki links are hyperlinks which give one click access to other pages on the site. These are usually denoted with double square brackets `[[some_page]]` and Obsidian would generate the reference to that page automatically.
+Wiki links are hyperlinks that give one-click access to other pages on the site. These are usually denoted with double square brackets `[[some_page]]` and Obsidian would generate the reference to that page automatically.
 
-Flowershow will convert internal links to html `a` tags, with their `href` attributes pointing to the location referenced by original internal links.
+Flowershow will convert internal links to HTML `a` tags, with their `href` attributes pointing to the location referenced by original internal links.
 
 ### Internal link types
 **Currently supported by Flowershow:**
@@ -149,7 +149,7 @@ git commit && git push
 
 ## Frontmatter
 
-You can add meta data to your pages, by adding key-value pairs to frontmatter, e.g.:
+You can add metadata to your pages, by adding key-value pairs to frontmatter, e.g.:
 
 ```md
 ---
@@ -163,7 +163,7 @@ The `title` and `description` fields are pulled from the MDX file and processed 
 
 ---
 
-We are intensively working to support whole range of Obsidian syntax elements, but there is still a lot work ahead. If you would like to [contribute](https://github.com/flowershow/flowershow#contributing), you are more than welcome!
+We are intensively working to support the whole range of Obsidian syntax elements, but there is still a lot work ahead. If you would like to [contribute](https://github.com/flowershow/flowershow#contributing), you are more than welcome!
 
 ## Text highlighting  🚧
 
@@ -190,6 +190,20 @@ We are intensively working to support whole range of Obsidian syntax elements, b
 $$\begin{vmatrix}a & b\\ c & d \end{vmatrix}=ad-bc$$
 ```
 
+## Callouts 🚧
+
+**Example:**
+
+```md
+> [!INFO]
+> Here's a callout block.
+> It supports **markdown** and [[Internal link|wikilinks]].
+```
+
+**Renders as:**
+
+> [!INFO] > Here's a callout block. > It supports **markdown** and [[docs/index|wikilinks]].
+
 ## Comments 🚧
 
 **Example:**
@@ -213,30 +227,4 @@ Here is a block comment:
 It can span
 multiple lines
 %%
-
-## Inline code 🚧
-
-**Example:**
-
-```md
-This is some code: `npx do-something`
-```
-
-**Renders as:**
-
-This is some code: `npx do-something`
-
-## Callouts 🚧
-
-**Example:**
-
-```md
-> [!INFO]
-> Here's a callout block.
-> It supports **markdown** and [[Internal link|wikilinks]].
-```
-
-**Renders as:**
-
-> [!INFO] > Here's a callout block. > It supports **markdown** and [[docs/index|wikilinks]].
 

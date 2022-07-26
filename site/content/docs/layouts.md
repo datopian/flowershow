@@ -1,9 +1,9 @@
 # Layouts
 
-Layouts are simply React components, that wrap around your page's content. By default, all your notes will use the **Docs** layout (`layouts/docs.js`), but if you don't like it or would like to use a different layout but just for some of your notes, you can create your own custom layout.
+Layouts are simply React components, that wrap around your page's content. By default, all your notes will use the **Docs** layout (`layouts/docs.js`), but if you don't like it or you would like to use a different layout for some of your notes, you can create your own custom layout.
 
 ## Changing page layout
-All layouts are located in `/layouts` folder. In order to use layout other than the default one, we need to specify the name of the layout we want to use in the frontmatter. The name of the layout is the same as its file name.
+All layouts are located in `/layouts` folder. In order to use a layout other than the default one, we need to specify the name of the layout we want to use in the frontmatter. The name of the layout is the same as its file name.
 
 For example, a page with the following frontmatter...
 ```md
@@ -15,7 +15,7 @@ layout: unstyled
 
 ...will look like this: [[layout-unstyled|Unstyled layout example page]].
 
-For reference, the page you are reading at the moment is rendered using the default **Docs** layout, even though we haven't explicitly stated `layout: docs` it in the frontmatter.
+For reference, the page you are reading at the moment is rendered using the default **Docs** layout, even though we haven't explicitly stated `layout: docs` in the frontmatter.
 
 It is possible to configure the default layout by tweaking the Configlayer config file. Check advanced/contentlayer page to learn more.
 
@@ -50,11 +50,11 @@ layout: blog
 
 ## Passing metadata to layouts
 
-Most probably you have many different types of notes in your vault - blog posts, daily journals, research notes or maybe even recipes. It would be nice to change the way they are displayed on your website, depending on what type they are.
+Most probably you have many different types of notes in your vault - blog posts, daily journals, research notes, or maybe even recipes. It would be nice to change the way they are displayed on your website, depending on what type they are.
 
-In order to do this, you can create a custom Contentlayer document type, that will be used to parse files specified in the `filePathPattern` field. 
+To do this, you can create a custom Contentlayer document type, that will be used to parse files specified in the `filePathPattern` field. 
 
-Let's continue with our example of a basic `blog.js` layout. At this point it doesn't really do much, apart from changing the text style a bit, and in order to use it we have to add `layout: blog` to a frontmatter of every blog page. This may be just fine if you are creating a layout that will only be used ocasionally, but if for example you have a whole folder of your blog posts, it would be good to apply the same layout to all of them. You might also want to keep some meta data for each blog post, like date or authors, if you're collaborating on your content with somebody and then display this information somewhere on your blog post.
+Let's continue with our example of a basic `blog.js` layout. At this point, it doesn't do much, apart from changing the text style a bit, and to use it we have to add `layout: blog` to the frontmatter of every blog page. This may be just fine if you are creating a layout that will only be used occasionally, but if for example, you have a whole folder of your blog posts, it would be good to apply the same layout to all of them. You might also want to keep some metadata for each blog post, like date or authors, if you're collaborating on your content with somebody and then display this information somewhere on your blog post.
 
 To facilitate this, let's create a custom Contentlayer document type - `Blog`.
 
@@ -126,4 +126,4 @@ export default function BlogLayout ({ children, frontMatter }) {
 After applying some Tailwind classes, an example blog post will look like this:
 [[layout-blog|Example blog page]].
 
-Additional benefit of this apporach, is that if in the future we would like to change the way our blog posts look, we can do this just by changing default layout for this document type from `blog` to the new value, instead of doing this for every single blog post.
+An additional benefit of this approach, is that if in the future we would like to change the way our blog posts look, we can do this just by changing the default layout for this document type from `blog` to the new value, instead of doing this for every single blog post.

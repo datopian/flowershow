@@ -5,7 +5,7 @@
 [Google Analytics](https://analytics.google.com/analytics/web/provision/#/provision) ([GA4](https://support.google.com/analytics/answer/10089681?hl=en)) is currently supported.
 
 <div className="border-2 border-slate-400 rounded-md px-4 mb-2">
-❕In the future, we may support other providers. Please let us know which one is your go-to prvider.
+❕In the future, we may support other providers. Please let us know which one is your go-to provider.
 </div>
 
 ## Google Analytics
