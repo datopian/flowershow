@@ -4,9 +4,8 @@ const config = {
   analytics: 'G-RQWLTRWBS2',
   navLinks: [
     { href: '/docs', name: 'QuickStart' },
-    { href: '/docs/essentials', name: 'Essentials' },
-    { href: '/docs/advanced', name: 'Advanced' },
     { href: '/docs/roadmap', name: 'Roadmap' },
+    { href: '/docs/guides', name: 'Guides' },
   ],
 }
 
