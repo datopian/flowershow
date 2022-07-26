@@ -122,7 +122,7 @@ In very rough order of likely priority in each section
 * [ ] social preview links e.g. twitter link turns into a nice twitter card. Ditto for youtube.
 * [ ] Edit page on github/gitlab
 
-### Obsidian feature compatibility
+**Obsidian feature compatibility**
 
 * [ ] support Obsidian wiki-link extensions to markdown **working links to pages (also with custom names) but still working on links to headings, links to blocks and links to files - 🚧 [issue #47](https://github.com/flowershow/flowershow/issues/47), [issue #62](https://github.com/flowershow/flowershow/issues/62), [issue #63](https://github.com/flowershow/flowershow/issues/63)**
 * [ ] Callouts / admonitions - https://help.obsidian.md/How+to/Use+callouts **🚧 [issue #60](https://github.com/flowershow/flowershow/issues/60)**
@@ -132,7 +132,7 @@ In very rough order of likely priority in each section
 * [ ] Excalidraw **🚧 [issue #10](https://github.com/flowershow/flowershow/issues/10)**
 - [ ] How do we support obsidian plugins in general **🚧 [issue #61](https://github.com/flowershow/flowershow/issues/61)**
 
-### Theme
+**Theme**
 
 * [ ] Dark/light theme **🚧 [issue #56](https://github.com/flowershow/flowershow/issues/56)**
 * [ ] Wide images **❓what do we mean by this**
@@ -145,7 +145,7 @@ In very rough order of likely priority in each section
 * [ ] Image optimization
   * Good summary of pros and cons and how to do it https://tailwind-nextjs-starter-blog.vercel.app/blog/guide-to-using-images-in-nextjs
 
-Data stuff
+**Data stuff**
 
 * [ ] table preview **❓what do we mean by this**
 * [ ] graphs **❓what do we mean by this (network/knowledge graph?)**
@@ -169,7 +169,7 @@ Advanced
 
 # Details
 
-### Linkable headings
+## Linkable headings
 
 https://tailwindcss.com/docs/responsive-design
 
@@ -180,7 +180,7 @@ https://tailwindcss.com/docs/responsive-design
 
 ![](https://i.imgur.com/6N0yDUS.png)
 
-### Table of contents
+## Table of contents
 
 Again tailwindcss.com is excellent. For example: https://tailwindcss.com/docs/customizing-colors
 
@@ -194,7 +194,7 @@ Two contents sections:
 Code: https://github.com/tailwindlabs/tailwindcss.com/blob/8b9f69a93a5a1b055dc8c1dcfa06f5ca2863b89c/src/layouts/ContentsLayout.js
 
 
-### Obsidian markdown syntax
+## Obsidian markdown syntax
 
 What's needed:
 
@@ -208,7 +208,7 @@ What's needed:
 - [ ] `![[Embed note]]`
 - [ ] `![[Embed note#heading]]`
 
-#### Research
+## Research
 
 https://obsidian.md/features
 
