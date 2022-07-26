@@ -1,4 +1,4 @@
-# Thanks for subscribing 🌷🌸🌺
+# Thanks for subscribing 🌷
 
 We are excited that you're interested in Flowershow progress! Soon you will start getting our regular updates on a lot of cool stuff we're working on.
 
