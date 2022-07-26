@@ -17,6 +17,33 @@ layout: unstyled
             View on GitHub
           </a>
         </div>
+        <div className="mt-10 sm:mt-12">
+          <form className="sm:max-w-xl sm:mx-auto lg:mx-0" method="POST" name="get-updates" data-netlify="true" action="/subscribed">
+            <div className="sm:flex">
+              <div className="min-w-0 flex-1">
+                <label htmlFor="email" className="sr-only">
+                  Email address
+                </label>
+                <input
+                  name="email"
+                  type="email"
+                  required="required"
+                  placeholder="Enter your email"
+                  className="block w-full py-2 px-4 rounded-full text-sm text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900"
+                />
+                <input type="hidden" name="form-name" value="get-updates" />
+              </div>
+              <div className="mt-3 sm:mt-0 sm:ml-3">
+                <button type="submit" className="rounded-full bg-sky-300 py-2 px-4 text-sm font-semibold text-slate-900 hover:bg-sky-200 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300/50 active:bg-sky-500 no-underline">
+                Get updates
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <p className="mt-3 text-sm text-gray-300 sm:mt-4">
+          Get short updates as we release new material or review important developments.
+        </p>
       </div>
       <div className="relative lg:static xl:pl-10">
         <img src="/assets/images/hero.svg" alt="" className="w-11/12" />
