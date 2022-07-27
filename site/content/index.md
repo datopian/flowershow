@@ -62,6 +62,7 @@ layout: unstyled
           </h2>
           <p className="mt-1 text-sm text-slate-700 dark:text-slate-400">
             Works with your existing Obsidian notes out of the box. No need to modify the syntax or change file layout. Flowershow supports internal links, backlinks, math, mermaid, callouts and more.
+            <br/>
             Not an obsidian fan? Flowershow will work with any CommonMark or GFM markdown files.
           </p>
         </div>
@@ -114,6 +115,25 @@ layout: unstyled
 
   </div>
 
+<div className="py-10 sm:px-2 lg:relative lg:px-0">
+  <div className="prose dark:prose-invert mx-auto max-w-2xl px-4 lg:max-w-6xl lg:px-8 xl:px-12">
+    <h2 className="text-center">Features</h2>
+
+    Here are some of the cool Flowershow features:
+
+    - CommonMark, GitHub Flavoured Markdown and Obsidian extensions support (e.g. wikilinks) [[syntax|➡ learn more]]
+    - MDX support for custom React components additions [[custom-components|➡ learn more]]
+    - Customizable layouts of your pages [[layouts|➡ learn more]]
+    - Tailwind support for easy styling in-markdown HTML and custom components [[tailwind|➡ learn more]]
+    - Google analytics support [[analytics|➡ learn more]]
+    - Basic site configurations using single JSON file [[basic-config|➡ learn more]]
+
+    👷 There is a lot of stuff we're still working on.
+    <a href="/docs/roadmap">Check our roadmap to learn more!</a>
+
+  </div>
+</div>
+
 
 <div className="py-10 sm:px-2 lg:relative lg:px-0">
   <div className="prose dark:prose-invert mx-auto max-w-2xl px-4 lg:max-w-6xl lg:px-8 xl:px-12">
@@ -121,6 +141,5 @@ layout: unstyled
     Flowershow is about sharing your digital garden -- putting it "on show" to the world. And what do you have in your garden? Flowers! Hence "Flowershow": it shows off your digital garden to the world!
   </div>
 </div>
-
 
 </div>
