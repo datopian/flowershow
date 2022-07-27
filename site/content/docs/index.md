@@ -8,7 +8,7 @@ Flowershow is an open-source tool for easily converting your markdown files into
 Flowershow supports **CommonMark** and **GitHub Flavored Markdown**, but also many **Obsidian-specific syntax elements**, like internal links or footnotes[^1].
 [^1]: Support for some GFM and Obsidian-specific syntax elements is still a work in progress. See our [[roadmap]] to learn more.
 
-## Quick Start
+## Getting started
 
 <div className="border-2 border-slate-400 rounded-md px-4 mb-2">
 🚧 The following steps describe the current, temporary process of testing Flowershow. In the future, many of these tasks will be done by the CLI tool.

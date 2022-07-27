@@ -5,7 +5,7 @@ layout: unstyled
 <div className="overflow-hidden -mb-32 mt-[-4.5rem] pb-32 pt-[4.5rem] lg:mt-[-4.75rem] lg:pt-[4.75rem]">
   <div className="py-16 sm:px-2 lg:relative lg:py-20 lg:px-0">
     <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-y-16 gap-x-8 px-4 lg:max-w-8xl lg:grid-cols-2 lg:px-8 xl:gap-x-16 xl:px-12">
-      <div className="relative md:text-center lg:text-left">
+      <div className="relative mb-10 lg:mb-0 md:text-center lg:text-left">
         <p className="inline bg-gradient-to-r from-indigo-200 via-sky-400 to-indigo-200 bg-clip-text text-6xl tracking-tight text-transparent">Publish your obsidian notes, beautifully.</p>
         <p className="mt-4 text-3xl dark:text-white tracking-tight">For free, no coding.</p>
         <p className="mt-4 text-2xl tracking-tight text-slate-400">Turn your markdown notes into an elegant website and tailor it to your needs. Flowershow is easy to use, fully-featured, obsidian compatible and open-source.</p>
@@ -37,8 +37,9 @@ layout: unstyled
           Get short updates as we release new features.
         </p>
       </div>
-      <div className="relative lg:static xl:pl-10">
-        <img src="/assets/images/hero.svg" alt="" className="w-11/12" />
+      <div className="relative">
+        <img src="/assets/images/obsidian_dark.png" alt="" className="relative -top-14 w-3/4 rounded-lg shadow-xl" />
+        <img src="/assets/images/flowershow_chrome_mac_dark.png" alt="" className=" absolute top-10 left-1/3 w-3/4 rounded-lg shadow-xl" />
       </div>
     </div>
   </div>
