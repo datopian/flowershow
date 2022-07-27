@@ -13,6 +13,8 @@ const defaultConfig = {
   // if you have your notes in another (external) directory,
   // /content dir should be a symlink to that directory
   content: 'content',
+  // site version displayed in the NavBar next to logo
+  version: 'Alpha',
   // Theme
   navLinks: [
     { href: '/about', name: 'About' },
