@@ -9,14 +9,33 @@ layout: unstyled
         <p className="inline bg-gradient-to-r from-indigo-200 via-sky-400 to-indigo-200 bg-clip-text text-6xl tracking-tight text-transparent">Publish your obsidian notes, beautifully.</p>
         <p className="mt-4 text-3xl dark:text-white tracking-tight">For free, no coding.</p>
         <p className="mt-4 text-2xl tracking-tight text-slate-400">Turn your markdown notes into an elegant website and tailor it to your needs. Flowershow is easy to use, fully-featured, obsidian compatible and open-source.</p>
-        <div className="mt-8 flex gap-4 md:justify-center lg:justify-start">
-          <a href="https://flowershow.app/docs" className="rounded-full bg-sky-300 py-2 px-4 text-sm font-semibold text-slate-900 hover:bg-sky-200 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300/50 active:bg-sky-500 no-underline">
-            Quick start
-          </a>
-          <a href="https://github.com/flowershow/flowershow" className="rounded-full bg-slate-800 py-2 px-4 text-sm font-medium text-white hover:bg-slate-700 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50 active:text-slate-400 no-underline">
-            View on GitHub
-          </a>
+        <div className="mt-10 sm:mt-12">
+          <form className="sm:max-w-xl sm:mx-auto lg:mx-0" method="POST" name="get-updates" data-netlify="true" action="/subscribed">
+            <div className="sm:flex">
+              <div className="min-w-0 flex-1">
+                <label htmlFor="email" className="sr-only">
+                  Email address
+                </label>
+                <input
+                  name="email"
+                  type="email"
+                  required="required"
+                  placeholder="Enter your email"
+                  className="block w-full py-2 px-4 rounded-full text-sm bg-slate-800 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900"
+                />
+                <input type="hidden" name="form-name" value="get-updates" />
+              </div>
+              <div className="mt-3 sm:mt-0 sm:ml-3">
+                <button type="submit" className="rounded-full bg-sky-300 py-2 px-4 text-sm font-semibold text-slate-900 hover:bg-sky-200 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300/50 active:bg-sky-500 no-underline">
+                Get updates
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
+        <p className="mt-3 text-sm text-gray-300 sm:mt-4">
+          Get short updates as we release new features.
+        </p>
       </div>
       <div className="relative lg:static xl:pl-10">
         <img src="/assets/images/hero.svg" alt="" className="w-11/12" />
