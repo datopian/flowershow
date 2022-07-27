@@ -8,7 +8,7 @@ layout: unstyled
       <div className="relative mb-10 lg:mb-0 md:text-center lg:text-left">
         <p className="inline bg-gradient-to-r from-indigo-200 via-sky-400 to-indigo-200 bg-clip-text text-6xl tracking-tight text-transparent">Publish your obsidian notes, beautifully.</p>
         <p className="mt-4 text-3xl dark:text-white tracking-tight">For free, no coding.</p>
-        <p className="mt-4 text-2xl tracking-tight text-slate-400">Turn your markdown notes into an elegant website and tailor it to your needs. Flowershow is easy to use, fully-featured, obsidian compatible and open-source.</p>
+        <p className="mt-4 text-xl tracking-tight text-slate-400">Turn your markdown notes into an elegant website and tailor it to your needs. Flowershow is easy to use, fully-featured, obsidian compatible and open-source.</p>
         <div className="mt-10 sm:mt-12">
           <form className="sm:max-w-xl sm:mx-auto lg:mx-0" method="POST" name="get-updates" data-netlify="true" action="/subscribed">
             <div className="sm:flex">
@@ -46,10 +46,12 @@ layout: unstyled
 </div>
 
 
-<div className="py-16 sm:px-2 lg:relative lg:py-20 lg:px-0">
-  <div className="mx-auto max-w-2xl px-4 lg:max-w-8xl lg:px-8 xl:px-12">
-    <div className="my-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-    
+<div className="py-10 sm:px-2 lg:relative lg:px-0">
+  <div className="prose dark:prose-invert mx-auto max-w-2xl px-4 lg:max-w-6xl lg:px-8 xl:px-12">
+    <h2 className="text-center">What is Flowershow?</h2>
+    Flowershow is an open-source tool for easily converting your markdown files into an elegant website. It's built on a standard, modern web stack – React, Next.js, and Tailwind and shipped with a basic default theme to get you started with just a few clicks.
+    <div className="not-prose my-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
+
       <div className="group relative rounded-xl border border-slate-200 dark:border-slate-800">
         <div className="absolute -inset-px rounded-xl border-2 border-transparent opacity-0 [background:linear-gradient(var(--quick-links-hover-bg,theme(colors.sky.50)),var(--quick-links-hover-bg,theme(colors.sky.50)))_padding-box,linear-gradient(to_top,theme(colors.indigo.400),theme(colors.cyan.400),theme(colors.sky.500))_border-box] group-hover:opacity-100 dark:[--quick-links-hover-bg:theme(colors.slate.800)]" />
         <div className="relative overflow-hidden rounded-xl p-6">
@@ -68,6 +70,7 @@ layout: unstyled
       <div className="group relative rounded-xl border border-slate-200 dark:border-slate-800">
         <div className="absolute -inset-px rounded-xl border-2 border-transparent opacity-0 [background:linear-gradient(var(--quick-links-hover-bg,theme(colors.sky.50)),var(--quick-links-hover-bg,theme(colors.sky.50)))_padding-box,linear-gradient(to_top,theme(colors.indigo.400),theme(colors.cyan.400),theme(colors.sky.500))_border-box] group-hover:opacity-100 dark:[--quick-links-hover-bg:theme(colors.slate.800)]" />
         <div className="relative overflow-hidden rounded-xl p-6">
+          <img src="/assets/images/park.png" className="h-12 w-auto" />
           <h2 className="mt-4 font-display text-base text-slate-900 dark:text-white">
             <span className="absolute -inset-px rounded-xl" />
             Elegant & Functional
@@ -81,6 +84,7 @@ layout: unstyled
       <div className="group relative rounded-xl border border-slate-200 dark:border-slate-800">
         <div className="absolute -inset-px rounded-xl border-2 border-transparent opacity-0 [background:linear-gradient(var(--quick-links-hover-bg,theme(colors.sky.50)),var(--quick-links-hover-bg,theme(colors.sky.50)))_padding-box,linear-gradient(to_top,theme(colors.indigo.400),theme(colors.cyan.400),theme(colors.sky.500))_border-box] group-hover:opacity-100 dark:[--quick-links-hover-bg:theme(colors.slate.800)]" />
         <div className="relative overflow-hidden rounded-xl p-6">
+          <img src="/assets/images/farming.png" className="h-12 w-auto" />
           <h2 className="mt-4 font-display text-base text-slate-900 dark:text-white">
             <span className="absolute -inset-px rounded-xl" />
             Customize and extend (if that’s your thing!)
@@ -94,6 +98,7 @@ layout: unstyled
       <div className="group relative rounded-xl border border-slate-200 dark:border-slate-800">
         <div className="absolute -inset-px rounded-xl border-2 border-transparent opacity-0 [background:linear-gradient(var(--quick-links-hover-bg,theme(colors.sky.50)),var(--quick-links-hover-bg,theme(colors.sky.50)))_padding-box,linear-gradient(to_top,theme(colors.indigo.400),theme(colors.cyan.400),theme(colors.sky.500))_border-box] group-hover:opacity-100 dark:[--quick-links-hover-bg:theme(colors.slate.800)]" />
         <div className="relative overflow-hidden rounded-xl p-6">
+          <img src="/assets/images/data.png" className="h-12 w-auto" />
           <h2 className="mt-4 font-display text-base text-slate-900 dark:text-white">
             <span className="absolute -inset-px rounded-xl" />
             Backed by a team of data geeks
@@ -109,8 +114,13 @@ layout: unstyled
 
   </div>
 
-## Why the Name?
 
-Flowershow is about sharing your digital garden -- putting it "on show" to the world. And what do you have in your garden? Flowers! Hence "Flowershow": it shows off your digital garden to the world!
+<div className="py-10 sm:px-2 lg:relative lg:px-0">
+  <div className="prose dark:prose-invert mx-auto max-w-2xl px-4 lg:max-w-6xl lg:px-8 xl:px-12">
+    <h2 className="text-center">Why the name?</h2>
+    Flowershow is about sharing your digital garden -- putting it "on show" to the world. And what do you have in your garden? Flowers! Hence "Flowershow": it shows off your digital garden to the world!
+  </div>
+</div>
+
 
 </div>
