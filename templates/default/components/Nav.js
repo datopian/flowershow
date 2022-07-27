@@ -46,6 +46,11 @@ export default function Header() {
             {siteConfig.author}
           </a>
         </Link>
+        {siteConfig.version &&
+          <div className="mx-4 rounded-full border border-slate-500 py-1 px-3 text-xs text-slate-500">
+            {siteConfig.version}
+          </div>
+        }
         <div className="hidden lg:flex ml-8 mr-6 sm:mr-8 md:mr-0">
           {siteConfig.navLinks.map((item) => (
             <Link key={item.href} href={item.href}>
