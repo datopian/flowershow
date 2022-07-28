@@ -10,7 +10,7 @@ https://flowershow.app/
 
 [1]: If you're not an Obisidan fan, Flowershow can be used with any CommonMark or GFM files.
 
-![obsidian-vs-flowershow](https://github.com/flowershow/flowershow/blob/main/site/content/assets/images/park.png?raw=true)
+![obsidian-vs-flowershow](https://github.com/flowershow/flowershow/blob/main/site/content/assets/images/obsidian_vs_flowershow.png?raw=true)
 
 ## Features
 
