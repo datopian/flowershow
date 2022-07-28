@@ -8,11 +8,12 @@ Flowershow is an open-source tool for easily converting your markdown files into
 - **Easy to tweak and extend** with custom page layouts and custom React components, that can be used within your markdown.
 - **Backed by a team of data geeks**, who love Markdown, and are passionate about sharing knowledge and ideas with others.
 
+[👉 See Flowershow in action!](https://flowershow.app/)
+
 [^1]: If you're not an Obisidan fan, Flowershow can be used with any CommonMark or GFM files.
 
 ![obsidian-vs-flowershow](https://github.com/flowershow/flowershow/blob/50-update-readme/site/content/assets/images/obsidian_vs_flowershow.png?raw=true)
 
-[👉 See Flowershow in action!](https://flowershow.app/)
 
 ## Features
 
@@ -54,11 +55,23 @@ Displaying Excalidraw sketches embedded in your notes.
 ### 🚧 CLI tool
 Our goal is to make using Flowershow as seamless as possible. To facilitate smooth bootsrapping and upgrading your website we're creating a CLI tool, that will take care of all the intricacies related to the whole process of publishing your notes.
 
-👷 There is a lot of other exciting stuff we're working on.
-Check our roadmap to learn more!
+There is a lot of other exciting stuff we're working on.
+Check [our roadmap](https://flowershow.app/docs/roadmap) to learn more!
 
 ## Version
-Alpha, under very active construction 👷‍🏗
+Alpha, under very active construction 👷‍🏗🚧
 
 ## Contributing
-Take a look at the backlog: https://github.com/orgs/flowershow/projects/1
+If you want to contribute, you are more than welcome! You can start by checking our GitHub project and submitted issues.
+
+If you have an idea for improvement, and it doesn't yet have a corresponding issue, simply submit a new one.
+
+If you'd like to work on an existing issue:
+1. Fork the main repository.
+2. Clone the forked repository to your machine.
+3. Create a feature branch (e.g. `50-update-readme`, where `50` is the number of the related issue).
+4. Commit your changes to the feature branch.
+5. Push the feature branch to your forked repository.
+6. Create a Pull Request against the original respository.
+   - add a short description of the changes included in the PR
+7. Address review comments if requested by the reviewers.
