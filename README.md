@@ -14,6 +14,10 @@ Flowershow is an open-source tool for easily converting your markdown files into
 
 ![obsidian-vs-flowershow](https://github.com/flowershow/flowershow/blob/50-update-readme/site/content/assets/images/obsidian_vs_flowershow.png?raw=true)
 
+## Docs
+- [QuickStart](https://flowershow.app/docs)
+- [Guides](https://flowershow.app/docs/guides)
+- [Roadmap](https://flowershow.app/docs/roadmap)
 
 ## Features
 
@@ -22,6 +26,8 @@ Here are some of the cool features that are currently supported by Flowershow, a
 ### ✅/🚧 Markdown
 Flowershow supports **CommonMark** and **GitHub Flavoured Markdown (GFM)** syntax, e.g. code blocks, blockquotes, lists, tasks lists, and tables.
 
+[👉 Learn more](https://flowershow.app/docs/syntax)
+
 ### ✅/🚧  Obsidian extensions to Markdown
 Flowershow has been designed with Obsidian users in mind, and so it aims to support the whole suite of Obsidian syntax extensions, like:
 - internal links ✅,
@@ -29,13 +35,21 @@ Flowershow has been designed with Obsidian users in mind, and so it aims to supp
 - math 🚧,
 - or Mermaid diagrams 🚧,
 
+[👉 Learn more](https://flowershow.app/docs/syntax)
+
 ### ✅ Custom page layouts and components
 You can customize and create new layouts for your pages.
 
+[👉 Learn more](https://flowershow.app/docs/layouts)
+
 Also, thanks to MDX support, you can use custom React components within your markdown notes.
+
+[👉 Learn more](https://flowershow.app/docs/custom-components)
 
 ### ✅ Tailwind support
 Tailwind support makes it easy to style your in-markdown HTML and custom React components.
+
+[👉 Learn more](https://flowershow.app/docs/tailwind)
 
 ### 🚧 Knowledge graph
 Interactive knowledge graph to see how your notes are interconnected.
