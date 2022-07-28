@@ -1,16 +1,18 @@
-# Flowershow
+# Flowershow 🌷
+> Publish your Obsidian notes, beautifully. For free, no coding.
+
 Flowershow is an open-source tool for easily converting your markdown files into an elegant website. It's built on a standard, modern web stack – React, Next.js, and Tailwind and shipped with a basic default theme to get you started with just a few clicks.
 
-https://flowershow.app/
-
 - **Crafted for Obsidian**, Flowershow works with your Obsidian vault out of the box. No need to modify the syntax or change file layout[^1].
-- **Elegant and functional** default theme.
-- **Easy to customize and extend** with custom page layouts and custom React components, that can be used within your markdown.
+- **Elegant and functional** default theme with basic front page and navbar.
+- **Easy to tweak and extend** with custom page layouts and custom React components, that can be used within your markdown.
 - **Backed by a team of data geeks**, who love Markdown, and are passionate about sharing knowledge and ideas with others.
 
-[1]: If you're not an Obisidan fan, Flowershow can be used with any CommonMark or GFM files.
+[^1]: If you're not an Obisidan fan, Flowershow can be used with any CommonMark or GFM files.
 
 ![obsidian-vs-flowershow](https://github.com/flowershow/flowershow/blob/50-update-readme/site/content/assets/images/obsidian_vs_flowershow.png?raw=true)
+
+[👉 See Flowershow in action!](https://flowershow.app/)
 
 ## Features
 
