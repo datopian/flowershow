@@ -127,7 +127,7 @@ Flowershow supports **CommonMark** and **GitHub Flavoured Markdown (GFM)** synta
 
 [[syntax|Learn more ➡]]
 
-### ✅  Obsidian wiki links
+### ✅ Obsidian wiki links
 
 Flowershow has been designed with Obsidian users in mind and so, currently, it supports internal links to other pages. Links to headings, blocks, and transclusions will also be supported in the future.
 
