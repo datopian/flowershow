@@ -3,14 +3,12 @@
 
 Flowershow is an open-source tool for easily converting your markdown files into an elegant website. It's built on a standard, modern web stack – React, Next.js, and Tailwind and shipped with a basic default theme to get you started with just a few clicks.
 
-- **Crafted for Obsidian**, Flowershow works with your Obsidian vault out of the box. No need to modify the syntax or change the file layout[^1].
+- **Crafted for Obsidian**, Flowershow works with your Obsidian vault out of the box. No need to modify the syntax or change the file layout. If you're not an Obisidan fan, Flowershow can be used with any CommonMark or GFM files.
 - **Elegant and functional** default theme with basic front page and navbar.
 - **Easy to tweak and extend** with custom page layouts and custom React components, that can be used within your markdown.
 - **Backed by a team of data geeks**, who love Markdown, and are passionate about sharing knowledge and ideas with others.
 
 [👉 See Flowershow in action!](https://flowershow.app/)
-
-[^1]: If you're not an Obisidan fan, Flowershow can be used with any CommonMark or GFM files.
 
 ![obsidian-vs-flowershow](https://github.com/flowershow/flowershow/blob/50-update-readme/site/content/assets/images/obsidian_vs_flowershow.png?raw=true)
 
@@ -72,13 +70,13 @@ Our goal is to make using Flowershow as seamless as possible. To facilitate smoo
 There is a lot of other exciting stuff we're working on.
 Check [our roadmap](https://flowershow.app/docs/roadmap) to learn more!
 
-## Version
-Alpha, under very active construction 👷‍🏗🚧
+## Status
+Alpha version, under very active construction 👷‍🏗🚧
 
 ## Contributing
 If you want to contribute, you are more than welcome! You can start by checking our [project backlog](https://github.com/orgs/flowershow/projects/1).
 
-If you have an idea for improvement, and it doesn't yet have a corresponding issue, simply submit a new one.
+If you have an idea for improvement, and it doesn't have a corresponding issue yet, simply submit a new one.
 
 If you'd like to work on an existing issue:
 1. Fork the main repository.
