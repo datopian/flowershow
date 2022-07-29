@@ -5,9 +5,11 @@ Flowershow was designed with Obsidian users in mind, and so, it aims to fully su
 ---
 
 ## CommonMark
+
 Here are some of the CommonMark syntax elements supported by Flowershow.
 
 ### ✅ Thematic breaks
+
 Thematic breaks made with three `*`, `-` or `_` will be converted to HTML `<hr />`
 
 **Example:**
@@ -23,6 +25,7 @@ ___
 ___
 
 ### ✅ Headings
+
 Markdown headings will be converted to HTML `<h1>`-`<h6>` tags.
 
 **Example:**
@@ -130,6 +133,7 @@ Here is some code: `print("hello world!")`
 [Link to roadmap](/docs/roadmap)
 
 ### ✅ Images
+
 ![tulip](https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/abstract-flowers-rose-sciberras.jpg)
 
 ### 🚧 Indented code blocks
@@ -140,7 +144,7 @@ Here is some code: `print("hello world!")`
 		indented code block
 ```
 
-**Renders as:**
+**Renders as:**  
 	a simple
 		indented code block
 
@@ -206,7 +210,22 @@ Check out Flowershow at https://flowershow.app!
 
 ---
 
-## Obsidian extensions
+## Other extensions
+
+### ✅ Obisidian internal links (Wiki links)
+
+Wiki links are hyperlinks that give one-click access to other pages on the site. These are usually denoted with double square brackets `[[some_page]]` and Obsidian would generate the reference to that page automatically.
+
+Flowershow will convert internal links to HTML `a` tags, with their `href` attributes pointing to the location referenced by original internal links.
+
+#### Internal link types
+
+* ✅ Link to a page, e.g. `[[roadmap]]`, which renders as [[roadmap]]
+* ✅ Link to a page with a custom name, e.g.  `[[roadmap|Planned Features]]`, which renders as [[roadmap|Planned Features]] 
+* 🚧 Link to a specific heading within a given page `[[roadmap#Planned features 🚧]]`
+* 🚧 Link to a specific heading within a given page with a custom name, e.g. `[[roadmap#Planned features 🚧|Work in progress...]]`
+* 🚧 Link to a specific block (paragraph) within a given page, e.g. `[[roadmap#Planned features 🚧|Work in progress...]]`
+* 🚧 Link to a file, e.g. `![[park.png]]`
 
 ### ✅ Footnotes
 
@@ -236,20 +255,6 @@ mymeta: Some info
 
 The `title` and `description` fields are pulled from the MDX file and processed using `gray-matter`. Additionally, links are rendered using a custom component passed to `next-mdx-remote`.
 
-### ✅/🚧 Internal linking (Wiki links)
-
-Wiki links are hyperlinks that give one-click access to other pages on the site. These are usually denoted with double square brackets `[[some_page]]` and Obsidian would generate the reference to that page automatically.
-
-Flowershow will convert internal links to HTML `a` tags, with their `href` attributes pointing to the location referenced by original internal links.
-
-#### Internal link types
-* ✅ Link to a page, e.g. `[[roadmap]]`, which renders as [[roadmap]]
-* ✅ Link to a page with a custom name, e.g.  `[[roadmap|Planned Features]]`, which renders as [[roadmap|Planned Features]] 
-* 🚧 Link to a specific heading within a given page `[[roadmap#Planned features 🚧]]`
-* 🚧 Link to a specific heading within a given page with a custom name, e.g. `[[roadmap#Planned features 🚧|Work in progress...]]`
-* 🚧 Link to a specific block (paragraph) within a given page, e.g. `[[roadmap#Planned features 🚧|Work in progress...]]`
-* 🚧 Link to a file, e.g. `![[park.png]]`
-
 ### 🚧 Text highlighting
 
 ==I'm Highlighted!== is done using `==I'm Highlighted!==`
@@ -275,32 +280,9 @@ $$\begin{vmatrix}a & b\\ c & d \end{vmatrix}=ad-bc$$
 
 > [!INFO] > Here's a callout block. > It supports **markdown** and [[docs/index|wikilinks]].
 
-### 🚧 Comments
-
-**Example:**
-
-```md
-Here is some inline comments: %%You can't see this text%%
-
-Here is a block comment:
-%%
-It can span
-multiple lines
-%%
-```
-
-**Renders as:**
-
-Here is some inline comments: %%You can't see this text%%
-
-Here is a block comment:
-%%
-It can span
-multiple lines
-%%
-
 ### 🚧 Mermaid diagrams
-Obsidian uses [Mermaid](https://mermaid-js.github.io/mermaid/#/)to render diagrams.
+
+Rendering [Mermaid](https://mermaid-js.github.io/mermaid/#/) diagrams.
 
 **Example:**
 ````md
@@ -325,3 +307,39 @@ sequenceDiagram
 <div className="border-2 border-slate-400 rounded-md px-4 my-4">
 🔍 To learn more about the Obsidian extensions refer to the [Obsidian Help site](https://help.obsidian.md/How+to/Format+your+notes). 
 </div>
+
+### 🚧 Excalidraw sketches support
+
+Displaying embedded [Excalidraw](https://excalidraw.com/) sketches.
+
+**Example:**
+```md
+![[customizability-vs-upgradeability-efficient-frontier-2022-06-26]]
+```
+
+**Renders as:**  
+![[customizability-vs-upgradeability-efficient-frontier-2022-06-26]]
+
+### 🚧 Comments
+
+**Example:**
+
+```md
+Here is some inline comments: %%You can't see this text%%
+
+Here is a block comment:
+%%
+It can span
+multiple lines
+%%
+```
+
+**Renders as:**
+
+Here is some inline comments: %%You can't see this text%%
+
+Here is a block comment:
+%%
+It can span
+multiple lines
+%%
