@@ -125,29 +125,29 @@ Here are some of the cool features that are currently supported by Flowershow, a
 
 Flowershow supports **CommonMark** and **GitHub Flavoured Markdown (GFM)** syntax, e.g. code blocks, blockquotes, lists, tasks lists and tables.
 
-[[syntax|Learn more ➡]]
+[[docs/syntax|Learn more ➡]]
 
 ### ✅ Obsidian wiki links
 
 Flowershow has been designed with Obsidian users in mind and so, currently, it supports internal links to other pages. Links to headings, blocks, and transclusions will also be supported in the future.
 
-[[syntax|Learn more ➡]]
+[[docs/syntax|Learn more ➡]]
 
 ### ✅ Custom page layouts and components
 
 You can customize and create new layouts for your pages.
 
-[[layouts|Learn more ➡]]
+[[docs/layouts|Learn more ➡]]
 
 Also, thanks to MDX support, you can use custom React components within your markdown notes.
 
-[[custom-components|Learn more ➡]].
+[[docs/custom-components|Learn more ➡]].
 
 ### ✅ Tailwind support
 
 Tailwind support makes it easy to style your in-markdown HTML and custom React components.
 
-[[tailwind|Learn more ➡]]
+[[docs/tailwind|Learn more ➡]]
 
 ### 🚧 Knowledge graph
 
