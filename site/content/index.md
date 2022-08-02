@@ -119,16 +119,61 @@ layout: unstyled
   <div className="prose dark:prose-invert mx-auto max-w-2xl px-4 lg:max-w-6xl lg:px-8 xl:px-12">
     <h2 className="text-center">Features</h2>
 
-    Here are some of the cool Flowershow features:
+Here are some of the cool features that are currently supported by Flowershow, and some that we're intensively working on.
 
-    - CommonMark, GitHub Flavoured Markdown and Obsidian extensions support (e.g. wikilinks) [[syntax|➡ learn more]]
-    - MDX support for custom React components additions [[custom-components|➡ learn more]]
-    - Customizable layouts of your pages [[layouts|➡ learn more]]
-    - Tailwind support for easy styling in-markdown HTML and custom components [[tailwind|➡ learn more]]
-    - Google analytics support [[analytics|➡ learn more]]
-    - Basic site configurations using single JSON file [[basic-config|➡ learn more]]
+### ✅ Markdown
 
-    👷 There is a lot of stuff we're still working on.
+Flowershow supports **CommonMark** and **GitHub Flavoured Markdown (GFM)** syntax, e.g. code blocks, blockquotes, lists, tasks lists and tables.
+
+[[docs/syntax|Learn more ➡]]
+
+### ✅ Obsidian wiki links
+
+Flowershow has been designed with Obsidian users in mind and so, currently, it supports internal links to other pages. Links to headings, blocks, and transclusions will also be supported in the future.
+
+[[docs/syntax|Learn more ➡]]
+
+### ✅ Custom page layouts and components
+
+You can customize and create new layouts for your pages.
+
+[[docs/layouts|Learn more ➡]]
+
+Also, thanks to MDX support, you can use custom React components within your markdown notes.
+
+[[docs/custom-components|Learn more ➡]].
+
+### ✅ Tailwind support
+
+Tailwind support makes it easy to style your in-markdown HTML and custom React components.
+
+[[docs/tailwind|Learn more ➡]]
+
+### 🚧 Knowledge graph
+
+Interactive knowledge graph to see how your notes are interconnected.
+
+### 🚧 Notes previews
+
+Wikipedia-like internal links previews on hover.
+
+### 🚧 Themes
+
+A set of different starter themes to choose from and support for dark/light mode.
+
+### 🚧 Forward links and Backlinks
+
+Lists of forward links used on the page and back links to the page from other pages.
+
+### 🚧 Excalidraw, Mermaid an Mathjax support
+
+Displaying Excalidraw sketches, Mermaid diagrams and Mathjax math equations embedded in your notes.
+
+### 🚧 CLI tool
+
+Our goal is to make using Flowershow as seamless as possible. To facilitate smooth bootsrapping and upgrading your website we're creating a CLI tool, that will take care of all the intricacies related to the whole process of publishing your notes.
+
+    👷 There is a lot of other exciting stuff we're working on.
     <a href="/docs/roadmap">Check our roadmap to learn more!</a>
 
   </div>
