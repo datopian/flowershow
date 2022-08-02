@@ -8,9 +8,9 @@ Flowershow is an open-source tool for easily converting your markdown files into
 - **Easy to tweak and extend** with custom page layouts and custom React components, that can be used within your markdown.
 - **Backed by a team of data geeks**, who love Markdown, and are passionate about sharing knowledge and ideas with others.
 
-[👉 See Flowershow in action!](https://flowershow.app/)
+## [👉 See Flowershow in action on Flowershow.app](https://flowershow.app/)
 
-![obsidian-vs-flowershow](https://github.com/flowershow/flowershow/blob/50-update-readme/site/content/assets/images/obsidian_vs_flowershow.png?raw=true)
+![obsidian-vs-flowershow](site/content/assets/images/obsidian_vs_flowershow.png)
 
 ## Docs
 - [QuickStart](https://flowershow.app/docs)
