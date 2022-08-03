@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { MobileNavigation } from './MobileNavigation'
 import siteConfig from '../config/siteConfig'
+import { Search } from './Search'
 
 function GitHubIcon(props) {
   return (
@@ -71,7 +72,8 @@ export default function Header() {
           ))}
         </div>
       </div>
-      <div className="relative flex basis-0 justify-end gap-6 sm:gap-8 md:flex-grow">
+      <div className="relative flex items-center basis-0 justify-end gap-6 sm:gap-8 md:flex-grow">
+        <Search />
         <Link href="https://github.com/flowershow/flowershow">
           <a className="group" aria-label="GitHub">
             <GitHubIcon className="h-6 w-6 dark:fill-slate-400 group-hover:fill-slate-500 dark:group-hover:fill-slate-300" />
