@@ -2,7 +2,7 @@
 title: Roadmap
 ---
 
-Flowershow is under active development and there is still a lot of good stuff we plan to ship with upcoming releases. Any contributions are more than welcome!
+Flowershow is under active development and there is a lot of good stuff we plan to ship with upcoming releases. Any contributions are more than welcome!
 
 <div className="border-2 border-slate-400 rounded-md px-4 mb-2">
 ❕ To learn more about the current work status on the features and bugs listed below (and more) check out [GitHub issues](https://github.com/flowershow/flowershow/issues) in Flowershow repo.
