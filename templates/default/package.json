@@ -24,7 +24,7 @@
     "remark-gfm": "^3.0.0",
     "remark-slug": "^7.0.0",
     "remark-toc": "^8.0.0",
-    "remark-wiki-link-plus": "^1.0.0"
+    "remark-wiki-link-plus": "^1.0.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.22.2",
