@@ -1,6 +1,6 @@
 {
   "name": "remark-wiki-link-plus",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Parse and render wiki-style links in markdown especially Obsidian style links.",
   "repository": {
     "type": "git",
@@ -10,7 +10,8 @@
     "remark",
     "remark-plugin",
     "markdown",
-    "gfm"
+    "gfm",
+    "obsidian"
   ],
   "author": "Life Itself",
   "license": "MIT",
