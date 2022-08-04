@@ -44,10 +44,10 @@ function fromMarkdown (opts = {}) {
   function exitWikiLink (token) {
     const wikiLink = this.exit(token)
 
-    if (opts.markdownFolder && wikiLink.value.includes(opts.markdownFolder)) {
-      const [, value] = wikiLink.value.split(`${opts.markdownFolder}/`)
-      wikiLink.value = value
-    }
+    // if (opts.markdownFolder && wikiLink.value.includes(`${opts.markdownFolder}/`)) {
+    //   const [, ...value] = wikiLink.value.split(`${opts.markdownFolder}/`)
+    //   wikiLink.value = value
+    // }
 
     const pagePermalinks = pageResolver(wikiLink.value)
     let permalink = pagePermalinks.find((p) => {
@@ -62,6 +62,10 @@ function fromMarkdown (opts = {}) {
     const exists = permalink !== undefined
     if (!exists) {
       permalink = pagePermalinks[0]
+    }
+    const regex = /\/?index(?![\w\S])|\/?index(?=#)/g
+    if (permalink.match(regex)) {
+      permalink = permalink.replace(regex, '')
     }
     let displayName = wikiLink.value.startsWith('#') ? wikiLink.value.replace('#', '') : wikiLink.value
     if (wikiLink.data.alias) {
