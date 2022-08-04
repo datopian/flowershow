@@ -50,3 +50,23 @@ let processor = unified()
 ```bash
 npm run test
 ```
+
+# Change Log
+ 
+## [Unreleased]
+ 
+### Added
+
+- Add support for transclusion links / image links `![[[Image.png]]
+ 
+## [1.0.1] - 2022-08-04
+
+### Changed
+
+- permalink for folders with an index file will tranform to folder name onlu. 
+For example, if the wikilink is [[docs/index]] the href will be '/docs'.
+
+### Fixed
+
+- broken links to filenames that matched the markdown folder name.
+  
