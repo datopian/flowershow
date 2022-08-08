@@ -2,7 +2,7 @@ import { NextSeo } from 'next-seo'
 import Head from 'next/head'
 import DemoComponent from './Demo'
 import { Pre } from './Pre'
-import siteConfig from '../config/siteConfig'
+import config from '../content/config'
 
 const components = {
   Head,
@@ -24,7 +24,7 @@ export default function MdxPage({ children, ...rest }) {
         openGraph={{
           title: frontMatter.title,
           description: frontMatter.description,
-          ...siteConfig.nextSeo.openGraph,
+          ...config.nextSeo.openGraph,
         }}
       />
       <Component
