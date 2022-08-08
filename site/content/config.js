@@ -7,6 +7,11 @@ const config = {
     { href: '/docs/roadmap', name: 'Roadmap' },
     { href: '/docs/guides', name: 'Guides' },
   ],
+  socialImageUrl: '',
+  twitter: {
+    handle: '',
+    site: '',
+  }
 }
 
 export default config
