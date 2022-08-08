@@ -6,6 +6,7 @@ import wikiLinkPlugin from "remark-wiki-link-plus";
 
 const sharedFields = {
   title: { type: "string" },
+  description: { type: "string" },
   layout: { type: "string", default: "docs" },
 };
 
