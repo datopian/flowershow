@@ -1,6 +1,6 @@
 # Math
 
-Flowershow supports math syntax where you can use LaTeX notations to denote formulas. It is using the  [MathJax](https://docs.mathjax.org/en/latest/basic/mathjax.html) package and displays them as svg.
+Flowershow supports math syntax where you can use LaTeX notations to denote formulas.
 
 ## How to use
 
@@ -13,7 +13,8 @@ For example if your markdown file has the following
 ```markdown
 $\sqrt{a^2 + b^2}$
 ```
-will be transformed as
+
+will be rendered as
 
 $\sqrt{a^2 + b^2}$
 
@@ -30,7 +31,7 @@ c & d
 $$
 ```
 
-will be tranformed as
+will be rendered as
 
 $$
 \begin{vmatrix}a & b\\
@@ -38,5 +39,8 @@ c & d
 \end{vmatrix}=ad-bc
 $$
 
+## Developers
 
+Math syntax is supported by using the remark and rehype plugins - [remark-math](https://github.com/remarkjs/remark-math/tree/main/packages/remark-math) and [rehype-mathjax](https://github.com/remarkjs/remark-math/tree/main/packages/rehype-mathjax). which transforms to svg code.
 
+More documentation on math syntax usage can be found on [MathJax](https://docs.mathjax.org/en/latest/basic/mathjax.html).
