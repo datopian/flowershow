@@ -3,6 +3,8 @@ import siteConfig from "./config/siteConfig";
 import remarkGfm from "remark-gfm";
 import rehypePrismPlus from "rehype-prism-plus";
 import wikiLinkPlugin from "remark-wiki-link-plus";
+import remarkMath from "remark-math";
+import rehypeMathjax from 'rehype-mathjax';
 
 const sharedFields = {
   title: { type: "string" },
@@ -54,9 +56,11 @@ export default makeSource({
   mdx: {
     remarkPlugins: [ 
       remarkGfm,
+      remarkMath,
       [ wikiLinkPlugin, { markdownFolder: siteConfig.content } ]
     ],
     rehypePlugins: [
+      rehypeMathjax,
       [rehypePrismPlus, { ignoreMissing: true }]
     ]
   }
