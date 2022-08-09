@@ -1,6 +1,5 @@
 ---
 title: Search
-description: Using search on your website
 ---
 
 ## Users
