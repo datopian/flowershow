@@ -47,7 +47,7 @@ layout: unstyled
 
 
 <div className="py-10 sm:px-2 lg:relative lg:px-0">
-  <div className="prose dark:prose-invert mx-auto max-w-2xl px-4 lg:max-w-6xl lg:px-8 xl:px-12">
+  <div className="prose dark:prose-invert mx-auto max-w-2xl px-4 lg:max-w-4xl lg:px-8 xl:px-12">
     <h2 className="text-center">What is Flowershow?</h2>
     Flowershow is an open-source tool for easily converting your markdown files into an elegant website. It's built on a standard, modern web stack – React, Next.js, and Tailwind and shipped with a basic default theme to get you started with just a few clicks.
     <div className="not-prose my-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -61,9 +61,7 @@ layout: unstyled
             Crafted for Obsidian
           </h2>
           <p className="mt-1 text-sm text-slate-700 dark:text-slate-400">
-            Works with your existing Obsidian notes out of the box. No need to modify the syntax or change file layout. Flowershow supports internal links, backlinks, math, mermaid, callouts and more.
-            <br/>
-            Not an obsidian fan? Flowershow will work with any CommonMark or GFM markdown files.
+            Works with your existing Obsidian notes out of the box. No need to modify the syntax or change file layout. Not an obsidian fan? Flowershow will work with any CommonMark or GFM markdown files.
           </p>
         </div>
       </div>
@@ -77,7 +75,7 @@ layout: unstyled
             Elegant & Functional
           </h2>
           <p className="mt-1 text-sm text-slate-700 dark:text-slate-400">
-            Clean and elegant default theme with dark and light mode, hero, navbar, backlinks section and much more.
+            Clean and elegant default theme with dark and light mode, hero, navbar, backlinks section and support for internal links, backlinks, math, mermaid, callouts and more.
           </p>
         </div>
       </div>
@@ -116,7 +114,7 @@ layout: unstyled
   </div>
 
 <div className="py-10 sm:px-2 lg:relative lg:px-0">
-  <div className="prose dark:prose-invert mx-auto max-w-2xl px-4 lg:max-w-6xl lg:px-8 xl:px-12">
+  <div className="prose dark:prose-invert mx-auto max-w-2xl px-4 lg:max-w-4xl lg:px-8 xl:px-12">
     <h2 className="text-center">Features</h2>
 
 Here are some of the cool features that are currently supported by Flowershow, and some that we're intensively working on.
@@ -181,7 +179,7 @@ Our goal is to make using Flowershow as seamless as possible. To facilitate smoo
 
 
 <div className="py-10 sm:px-2 lg:relative lg:px-0">
-  <div className="prose dark:prose-invert mx-auto max-w-2xl px-4 lg:max-w-6xl lg:px-8 xl:px-12">
+  <div className="prose dark:prose-invert mx-auto max-w-2xl px-4 lg:max-w-4xl lg:px-8 xl:px-12">
     <h2 className="text-center">Why the name?</h2>
     Flowershow is about sharing your digital garden -- putting it "on show" to the world. And what do you have in your garden? Flowers! Hence "Flowershow": it shows off your digital garden to the world!
   </div>
