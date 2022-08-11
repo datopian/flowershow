@@ -3,7 +3,7 @@ const config = {
   // Google analytics key e.g. G-XXXX
   analytics: 'G-RQWLTRWBS2',
   navLinks: [
-    { href: '/docs', name: 'QuickStart' },
+    // { href: '/docs', name: 'QuickStart' },
     { href: '/docs/roadmap', name: 'Roadmap' },
     { href: '/docs/guides', name: 'Guides' },
   ],

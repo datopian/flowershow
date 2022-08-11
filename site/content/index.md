@@ -9,32 +9,50 @@ layout: unstyled
         <p className="inline bg-gradient-to-r from-indigo-200 via-sky-400 to-indigo-200 bg-clip-text text-6xl tracking-tight text-transparent">Publish your Obsidian notes, beautifully.</p>
         <p className="mt-4 text-3xl dark:text-white tracking-tight">For free, no coding.</p>
         <p className="mt-4 text-xl tracking-tight text-slate-400">Turn your markdown notes into an elegant website and tailor it to your needs. Flowershow is easy to use, fully-featured, Obsidian compatible and open-source.</p>
-        <div className="mt-10 sm:mt-12">
-          <form className="sm:max-w-xl sm:mx-auto lg:mx-0" method="POST" name="get-updates" data-netlify="true" action="/subscribed">
-            <div className="sm:flex">
-              <div className="min-w-0 flex-1">
-                <label htmlFor="email" className="sr-only">
-                  Email address
-                </label>
-                <input
-                  name="email"
-                  type="email"
-                  required="required"
-                  placeholder="Enter your email"
-                  className="block w-full py-2 px-4 rounded-full text-sm bg-slate-800 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900"
-                />
-                <input type="hidden" name="form-name" value="get-updates" />
-              </div>
-              <div className="mt-3 sm:mt-0 sm:ml-3">
-                <button type="submit" className="rounded-full bg-sky-300 py-2 px-4 text-sm font-semibold text-slate-900 hover:bg-sky-200 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300/50 active:bg-sky-500 no-underline">
-                Get updates
-                </button>
-              </div>
+        <p className="my-10 text-xl tracking-wide">
+          <span>A project of</span>
+          <a href="https://lifeitself.us/" target="_blank" rel="noopener noreferrer">
+            <img src="/assets/images/life-itself-logo.svg" alt="Life Itself" className="mx-2 mb-1 h-6 inline"/>
+            <span>Life Itself</span>
+          </a> 
+          <span> & </span>
+          <a href="https://www.datopian.com/" target="_blank" rel="noopener noreferrer">
+            <img src="/assets/images/datopian_logo.png" alt="Datopian" className="mx-2 mb-1 h-6 inline"/>
+            <span>Datopian</span>
+          </a> 
+        </p>
+        <form method="POST" name="get-updates" data-netlify="true" action="/subscribed">
+          <div className="mt-8 sm:flex gap-4 md:justify-center lg:justify-start">
+            <div className="flex-1">
+              <label htmlFor="email" className="sr-only">
+                Email address
+              </label>
+              <input
+                name="email"
+                type="email"
+                required="required"
+                placeholder="Enter your email"
+                className="block w-full py-2 px-4 rounded-full text-sm bg-slate-800 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900"
+              />
+              <input type="hidden" name="form-name" value="get-updates" />
             </div>
-          </form>
-        </div>
-        <p className="mt-3 text-sm text-gray-300 sm:mt-4">
-          Get short updates as we release new features.
+            <div className="flex-initial flex gap-x-2 mt-3 sm:mt-0">
+              <button type="submit" className="rounded-full bg-sky-300 py-2 px-4 text-sm font-semibold text-slate-900 hover:bg-sky-200 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300/50 active:bg-sky-500">
+                Get updates
+              </button>
+              <a href="https://github.com/flowershow/flowershow" target="_blank">
+                <button type="button" className="rounded-full bg-slate-800 py-2 px-4 text-sm font-medium text-white hover:bg-slate-700 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50 active:text-slate-400">
+                  View on GitHub
+                </button>
+              </a>
+            </div>
+          </div>
+        </form>
+        <p className="mt-3 text-sm text-slate-300 sm:mt-4">
+          <span>Flowershow is changing minute by minute! Leave us your email, if you'd like to get notified about the latest features.  </span>
+          <span className="text-slate-500">
+            <a href="https://lifeitself.us/privacy-policy/" target="_blank" className="underline text-slate-500">How we use your data?</a>
+          </span>
         </p>
       </div>
       <div className="relative">
@@ -100,7 +118,7 @@ layout: unstyled
           <img src="/assets/images/data.png" className="h-12 w-auto" />
           <h2 className="mt-4 font-display text-base text-slate-900 dark:text-white">
             <span className="absolute -inset-px rounded-xl" />
-            Backed by a team of data geeks
+            Backed by an experienced team
           </h2>
           <p className="mt-1 text-sm text-slate-700 dark:text-slate-400">
             We’ve been building content and data driven products for over a decade, and we’re passionate about sharing knowledge and ideas with others.
