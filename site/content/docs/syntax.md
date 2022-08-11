@@ -225,7 +225,7 @@ Flowershow will convert internal links to HTML `a` tags, with their `href` attri
 * 🚧 Link to a specific heading within a given page `[[roadmap#Planned features 🚧]]`
 * 🚧 Link to a specific heading within a given page with a custom name, e.g. `[[roadmap#Planned features 🚧|Work in progress...]]`
 * 🚧 Link to a specific block (paragraph) within a given page, e.g. `[[roadmap#Planned features 🚧|Work in progress...]]`
-* ✅ Link to an image file, e.g. `![[park.png]]` will be rendered as shown below
+* ✅ Link to an image file with supported image formats - png, jpg and jpeg, eg. `![[park.png]]` which renders as:
     ![[park.png]]
 
 ### ✅ Footnotes
