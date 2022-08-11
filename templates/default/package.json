@@ -27,7 +27,7 @@
     "remark-math": "^5.1.1",
     "remark-slug": "^7.0.0",
     "remark-toc": "^8.0.0",
-    "remark-wiki-link-plus": "^1.0.1"
+    "remark-wiki-link-plus": "^1.0.2"
   },
   "devDependencies": {
     "@playwright/test": "^1.22.2",
