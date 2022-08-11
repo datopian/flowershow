@@ -49,7 +49,7 @@ layout: unstyled
           </div>
         </form>
         <p className="mt-3 text-sm text-slate-300 sm:mt-4">
-          <span>Flowershow is changing minute by minute! Leave us your email, if you'd like us to notify you about the latest features.  </span>
+          <span>Flowershow is changing minute by minute! Leave us your email, if you'd like to get notified about the latest features.  </span>
           <span className="text-slate-500">
             <a href="https://lifeitself.us/privacy-policy/" target="_blank" className="underline text-slate-500">How we use your data?</a>
           </span>
