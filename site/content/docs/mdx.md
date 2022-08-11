@@ -92,25 +92,16 @@ Hooray! 🎊
 
 Another powerful thing you can to with `import` statements is loading data from external files.
 
-Let's create another locally defined componet and pass data loaded from a JSON file as its prop.
+Let's render the above componet and pass data loaded from a JSON file as its prop.
 
 import data from '../data/exampleData.json'
 
-export const PrimaryColors = ({ colors }) => {
-  return (
-    <div>
-      <p>The three primary colors are:</p>
-      <ul>
-        { colors.map((c) => <li className=""></li>) }
-      </ul>
-    </div>
-  )
-}
+<MyComponent list={data.colors}/>
 
 The above is just a simple example, but imagine creating a custom `Chart` component for which you could import an external dataset and use it to plot data for your research notes 🔥!
 
 #### Defining components locally
-
+If the component you're creating will be mostly
 
 Example:
 
@@ -166,24 +157,18 @@ You can even run whole programs by enclosing them in JavaScript's [IIFE](https:/
 
 ```md
 {(function () {
+  const myLuckyNumber = 5;
 
-  if (Math.random() > 0.5) {
-    return <span className="text-orange-500">Grater than 0.5</span>
-  }
-
-  return <span className="text-sky-500">Less or equal than 0.5</span>
+  return <span className="text-sky-500">My lucky number is {myLuckyNumber}</span>
 })()}
 ```
 
 Renders as:
 
 {(function () {
+  const myLuckyNumber = 5;
 
-  if (Math.random() > 0.5) {
-    return <span className="text-orange-500">Grater than 0.5</span>
-  }
-
-  return <span className="text-sky-500">Less or equal than 0.5</span>
+  return <span className="text-sky-500">My lucky number is {myLuckyNumber}</span>
 })()}
 
 
