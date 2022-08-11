@@ -1,10 +1,8 @@
 import Head from 'next/head'
-import DemoComponent from './Demo'
 import { Pre } from './Pre'
 
 const components = {
   Head,
-  DemoComponent,
   pre: Pre,
   wrapper: ({ layout, ...rest }) => {
     const Layout = require(`../layouts/${layout}`).default
