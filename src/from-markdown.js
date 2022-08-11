@@ -49,11 +49,13 @@ function fromMarkdown (opts = {}) {
     //   wikiLink.value = value
     // }
 
+    const wikiLinkImage = /\.jpe?g$|\.png$/.test(wikiLink.value)
+
     const pagePermalinks = pageResolver(wikiLink.value)
     let permalink = pagePermalinks.find((p) => {
       let heading = ''
 
-      if (p.match(/#/)) {
+      if (!wikiLinkImage && p.match(/#/)) {
         [, heading] = p.split('#')
       }
       const link = heading ? p.replace(`#${heading}`, '') : p
@@ -64,10 +66,10 @@ function fromMarkdown (opts = {}) {
       permalink = pagePermalinks[0]
     }
     const regex = /\/?index(?![\w\S])|\/?index(?=#)/g
-    if (permalink.match(regex)) {
+    if (!wikiLinkImage && permalink.match(regex)) {
       permalink = permalink.replace(regex, '')
     }
-    let displayName = wikiLink.value.startsWith('#') ? wikiLink.value.replace('#', '') : wikiLink.value
+    let displayName = !wikiLinkImage && wikiLink.value.startsWith('#') ? wikiLink.value.replace('#', '') : wikiLink.value
     if (wikiLink.data.alias) {
       displayName = wikiLink.data.alias
     }
@@ -81,17 +83,22 @@ function fromMarkdown (opts = {}) {
     wikiLink.data.permalink = permalink
     wikiLink.data.exists = exists
 
-    wikiLink.data.hName = 'a'
-    wikiLink.data.hProperties = {
+    wikiLink.data.hName = wikiLinkImage ? 'img' : 'a'
+    wikiLink.data.hProperties = wikiLinkImage ? {
+      className: classNames,
+      src: hrefTemplate(permalink)
+    } : {
       className: classNames,
       href: hrefTemplate(permalink)
     }
-    wikiLink.data.hChildren = [
-      {
-        type: 'text',
-        value: displayName
-      }
-    ]
+    if (!wikiLinkImage) {
+      wikiLink.data.hChildren = [
+        {
+          type: 'text',
+          value: displayName
+        }
+      ]
+    }
   }
 
   return {

@@ -129,6 +129,25 @@ describe('remark-wiki-link-plus', () => {
     })
   })
 
+  it('parses a wiki link that is an image', () => {
+    const processor = unified()
+      .use(markdown)
+      .use(wikiLinkPlugin, {
+        permalinks: ['images/Test image.png']
+      })
+
+    var ast = processor.parse('![[Test image.png]]')
+    ast = processor.runSync(ast)
+
+    visit(ast, 'wikiLink', (node) => {
+      assert.equal(node.data.permalink, 'images/Test image.png')
+      assert.equal(node.data.exists, true)
+      assert.equal(node.data.hName, 'img')
+      assert.equal(node.data.hProperties.className, 'internal')
+      assert.equal(node.data.hProperties.src, '/images/Test image.png')
+    })
+  })
+
   it('stringifies wiki links', () => {
     const processor = unified()
       .use(markdown, { gfm: true, footnotes: true, yaml: true })

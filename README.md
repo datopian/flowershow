@@ -12,6 +12,7 @@ Using obsidian, when we type in wiki link syntax for eg. `[[wiki_link]]` it woul
 - [x] Support `[[Internal link|With custom text]]`
 - [x] Support `[[Internal link#heading]]`
 - [x] Support `[[Internal link#heading|With custom text]]`
+- [x] Support `![[Image.png]]` (png|jpg|jpeg)
 
 Future support:
 - [ ] Support `![[Embed note]]`
@@ -53,11 +54,11 @@ npm run test
 
 # Change Log
  
-## [Unreleased]
+## [1.0.2] - 2022-08-11
  
 ### Added
 
-- Add support for transclusion links / image links `![[[Image.png]]
+- Add support for transclusion links / image links (png|jpg|jpeg) `![[Image.png]]
  
 ## [1.0.1] - 2022-08-04
 
