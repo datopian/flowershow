@@ -1,6 +1,8 @@
 # MDX
 
-All of your markdown files are parsed as MDX files by Flowershow. This means you not only can write your content using Markdown syntax, but also extend it with JSX, JavaScript expressions, and `import` and `export` statements. It's basically Markdown on steroids 😀💪!
+Flowershow parses all of your Markdown files as MDX. This means you not only can write your content with your old friend Markdown, but also extend it with JSX, JavaScript expressions, and `import` and `export` statements. It's basically Markdown on steroids 😀💪!
+
+Let's see what exactly is MDX and what's so cool about it!
 
 ## What is MDX?
 
@@ -12,15 +14,21 @@ It looks like this:
 ```md
 # Hello, world!
 
-<div className="note">
+<div className="border-2 border-yellow-300 rounded-md">
   > Some notable things in a block quote!
 </div>
 ```
 
-In the above example, the heading and the block quote are written in markdown. However, the HTML-like looking `<div>` tag is not HTML. It's **JSX** - a React syntax extension to JavaScript that looks like HTML.
+You may be thinking: "Hold on, but isn't it just some Markdown with an HTML block wrapping around some more Markdown... which is a standard CommonMark syntax?"
+
+The answer to this question is - yes... and no ¯\_(ツ)_/¯.
+
+**Yes**, because it really is a CommonMark syntax, which allows you to add HTML parts and even intertwine them with Markdown like in our example. You may have written something similar without even hearing about MDX and if you're starting your new Flowershow project with your existing Markdown content - don't worry, it will all work! This is because MDX supports CommonMark by default. Additionally Flowershow provides support for GFM (GitHub Flavored Markdown) and even some Obsidian-specifix syntax elements (see our guide on [syntax|Supported syntax] to learn more).
+
+**No**, because Flowershow will parse all your content files as if it was MDX (no matter if you use `.md` or `.mdx` extension). This means that in our example above, the heading and the block quote will be treated as a good old Markdown, however the HTML-like looking `<div>` tag will not be treated as a raw HTML. For compilers used by Flowershow under the hood now it's **JSX** - a React syntax extension to JavaScript that looks like HTML, which will allow you to create and use components in your Markdown files.
 
 <div className="border-2 border-slate-400 rounded-md px-4 mb-2">
-❕Note, that we haven't used an HTML `class` attribute on the `<div>` tag above, but rather React's `className`, since Flowershow internally uses React.
+❕You may have notice, that we haven't used an HTML `class` attribute on the `<div>` tag above, but rather React's `className` attribute. This is because all HTML elements will be parsed as JSX elements, which will then be used by React runtime to render your pages.
 </div>
 
 ## MDX syntax
@@ -28,7 +36,7 @@ In the above example, the heading and the block quote are written in markdown. H
 The following sections are just a short summary of what MDX can do. Read [the official MDX docs](https://mdxjs.com/) to learn more.
 
 <div className="border-2 border-slate-400 rounded-md px-4 mb-2">
-❕In this document we're going to use Markdown and MDX, as well as HTML and JSX interchangeably. The reason for this is the fact that Flowershow parses all Markdown files as MDX files. Don't worry, this doesn't affect the rendering of your pages in anyway, since MDX supports Markdown and HTML will be converted to equivalent JSX component. So, even though you may have only written your content with Markdown and maybe some custom HTML in it - e.g. using Obsidian - now HTML parts will be treated as JSX. To learn more about how to take advantage of it, read the sections below.
+❕In this document we're going to use Markdown and MDX, as well as HTML and JSX interchangeably. The reason for this is the fact that Flowershow, as we've just learned, parses all Markdown files as MDX files. So, from your perspective you may have only used Markdown to write your content so far, but Flowershow will also understand any MDX-specific additions to it if you were to include them. It follows, that what you may consider HTML blocks, in MDX world it's understood as JSX.
 </div>
 
 ### Markdown
