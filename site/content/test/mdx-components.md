@@ -1,16 +1,22 @@
 # Testing MDX components (not React/JSX components)
 
-See [this page](https://mdxjs.com/docs/using-mdx/) for from MDX docs for reference.
+See [this page](https://mdxjs.com/docs/using-mdx/) from MDX docs for reference.
 
 ## Importing MDX components into Markdown
 
 MDX files are compiled to components and can be imported as such!
+(The main content of `.mdx` is exported as the default export.)
 
 ### Simple components
 
-(The main content of `.mdx` is exported as the default export.)
-
 **Example:**
+
+`test.mdx` file:
+
+```md
+*Hi! I'm an MDX component!*
+```
+Import in another MDX file:
 
 ```md
 import ExampleMDXComponent from "../content/components/test.mdx"
@@ -30,6 +36,18 @@ import ExampleMDXComponent from "../content/components/test.mdx"
 
 **Example:**
 
+`test2.mdx` file:
+
+```md
+Hello {props.name.toUpperCase()}
+
+*I'm an MDX component!*
+
+The current year is {props.year}
+```
+
+Import in another MDX file:
+
 ```md
 import ExampleMDXComponent2 from "../content/components/test2.mdx"
 
@@ -48,6 +66,14 @@ import ExampleMDXComponent2 from "../content/components/test2.mdx"
 
 **Example:**
 
+`test3.mdx` file:
+
+```md
+Hello *<Planet />*
+```
+
+Import in another MDX file:
+
 ```md
 import ExampleMDXComponent3 from "../content/components/test3.mdx"
 
@@ -63,6 +89,17 @@ import ExampleMDXComponent3 from "../content/components/test3.mdx"
 ### Components with children
 
 **Example:**
+
+`test4.mdx` file:
+
+```md
+import Test1 from '../content/components/test.mdx'
+
+I'm an MDX component and here is my child component:
+*<Test1 />*
+```
+
+Import in another MDX file:
 
 ```md
 import ExampleMDXComponent4 from "../content/components/test4.mdx"

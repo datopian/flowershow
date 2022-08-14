@@ -7,7 +7,7 @@ Flowershow parses all of your Markdown files as MDX. This means you not only can
 Let's see what exactly is MDX and what's so cool about it!
 
 <Callout>
-  A basic familiarity with JSX (React components) and JavaScript might help you understand this chapter, but you can also learn by example and start by tweaking some of our code. Opening this page in your text editor may also be helpful.
+  A basic familiarity with JSX (React components) and JavaScript might be helpful to understand this chapter, but you can also learn by example and start by tweaking some of our code. Opening this page in your text editor may also help.
 </Callout>
 
 ## What is MDX?
@@ -29,24 +29,22 @@ You may be thinking: *"Hold on, but isn't it just some Markdown with an HTML blo
 
 The answer to this question is - yes... and no ¯\_(ツ)_/¯.
 
-**Yes**, because it really is a CommonMark syntax, which allows you to add HTML parts and even intertwine them with Markdown like in our example. You may have written something similar without even hearing about MDX and if you're starting your new Flowershow project with your existing Markdown content - don't worry, it will all work! This is because MDX supports CommonMark by default. Additionally Flowershow provides support for GFM (GitHub Flavored Markdown) and even some Obsidian-specifix syntax elements. (See our [[syntax|Syntax]] guide to learn more.)
+**Yes**, because it really is a CommonMark syntax, which allows you to add HTML parts and even intertwine them with Markdown like in our example. You may have written something similar without even hearing about MDX and if you're starting your new Flowershow project with your existing Markdown content - it will all work! This is because MDX supports CommonMark by default. Additionally Flowershow provides support for GFM (GitHub Flavored Markdown) and some Obsidian-specifix syntax elements. (See our [[syntax|Syntax]] guide to learn more.)
 
-**No**, because Flowershow will parse all your content files as if it was MDX (no matter if you use `.md` or `.mdx` extension). This means that in our example above, the heading and the block quote will be treated as a good old Markdown, however the HTML-like looking `<div>` tag will not be treated as a raw HTML. For compilers used by Flowershow under the hood now it's **JSX** - a React syntax extension to JavaScript that looks like HTML, which will allow you to create and use components in your Markdown files.
+**No**, because Flowershow will parse all your Markdown files as MDX (no matter if you use `.md` or `.mdx` file extension). This means that in the example above, the heading and the block quote will be treated as Markdown, however the HTML-like looking `<div>` tag will be understood as **JSX** - a React syntax extension to JavaScript that looks like HTML, which allows you to create and use components in your Markdown files.
 
 <Callout>
-  ❕You may have noticed, that we haven't used an HTML `class` attribute on the `<div>` tag above, but rather React's `className` attribute. This is because all HTML elements will be parsed as JSX elements, which will then be used by React runtime to render your pages.
+  ❕You may have noticed, that we haven't used an HTML `class` attribute on the `<div>` tag above, but rather React's `className` attribute. This is because all HTML elements will be parsed as JSX, which will then be used by React's runtime to render your pages.
 </Callout>
 
-## How it works?
-
-In short, packages used by Flowershow under the hood will compile MDX to JavaScript, which will then be used by React.
+How does it work? In short, packages used by Flowershow under the hood compile MDX to JavaScript, which is then be used by React to create your website.
 
 ## MDX supported syntax
 
 The following sections are just a short summary of what MDX can do. Read [the official MDX docs](https://mdxjs.com/) to learn more.
 
 <Callout>
-  ❕In this document we're going to use Markdown and MDX, as well as HTML and JSX interchangeably. The reason for this is the fact that Flowershow, as we've just learned, parses all Markdown files as MDX files. So, from your perspective you may have only used Markdown syntax to write your content, but Flowershow will also understand any MDX-specific additions to it if you were to include them. It follows, that what you may consider HTML blocks, in MDX world it's JSX.
+  ❕In this document we're going to use Markdown and MDX, as well as HTML and JSX interchangeably. The reason for this is the fact that Flowershow, as we've just learned, parses all Markdown files as MDX files. So, from your perspective it may be only Markdown that you're using to write your content. However, Flowershow will also understand any MDX-specific additions to it if you were to include them. It follows, that what you may consider HTML blocks, in MDX world is JSX.
 </Callout>
 
 ### Markdown
@@ -55,7 +53,7 @@ Like we've mentioned, MDX supports CommonMark syntax by default. On top of that 
 
 ### JSX and custom components
 
-JSX allows you to create components, that you can reuse across all of your markdown files. This is especially useful if you find yourself writing a lot of custom HTML in your markdown, and/or you use the same HTML code parts and copy it again and again to different markdown pages. You soon may find it difficult to tell what's this part of HTML container is supposed to do. And what used to be e.g. your blog content ends up as a Markdown-HTML-CSS soup. On top of that, imagine if you wanted to make some changes to all these copies of HTML blocks, that you used in many different pages 🤯.
+JSX allows you to create components, that you can reuse across all of your markdown files. This is especially useful if you find yourself writing a lot of custom HTML in your Markdown, and/or you use the same HTML code parts and copy them again and again to different markdown pages. You soon may find it difficult to tell what's a given part of HTML block is supposed to do. And what used to be e.g. your blog content ends up as a Markdown-HTML-CSS soup. On top of that, imagine if you wanted to make some changes to all these copies of HTML blocks, that you used in many different pages 🤯.
 
 Fortunatelly, thanks to JSX you can extract common HTML parts and enclose them in components, that you can then import and use wherever you want in your Markdown. What you end up with is much cleaner content and a single source of truth for HTML (JSX) parts you used to copy over and over again. JSX components allow you to declutter your Markdown and to separate content writing from its structuring and styling 😌. 
 
@@ -288,8 +286,3 @@ You can also use comments in expressions with JavaScript's multiline comment syn
 ```md
 {/* A comment! */}
 ```
-
-
-
-
-
