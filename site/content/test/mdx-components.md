@@ -19,14 +19,14 @@ MDX files are compiled to components and can be imported as such!
 Import in another MDX file:
 
 ```md
-import ExampleMDXComponent from "../content/components/test.mdx"
+import ExampleMDXComponent from "../components/mdx/test.mdx"
 
 <ExampleMDXComponent />
 ```
 
 **Renders as:**
 
-import ExampleMDXComponent from "../content/components/test.mdx"
+import ExampleMDXComponent from "../components/mdx/test.mdx"
 
 <ExampleMDXComponent />
 
@@ -49,14 +49,14 @@ The current year is {props.year}
 Import in another MDX file:
 
 ```md
-import ExampleMDXComponent2 from "../content/components/test2.mdx"
+import ExampleMDXComponent2 from "../components/mdx/test2.mdx"
 
 <ExampleMDXComponent2 name="Ola" year="2022" />
 ```
 
 **Renders as:**
 
-import ExampleMDXComponent2 from "../content/components/test2.mdx"
+import ExampleMDXComponent2 from "../components/mdx/test2.mdx"
 
 <ExampleMDXComponent2 name="Ola" year="2022" />
 
@@ -75,14 +75,14 @@ Hello *<Planet />*
 Import in another MDX file:
 
 ```md
-import ExampleMDXComponent3 from "../content/components/test3.mdx"
+import ExampleMDXComponent3 from "../components/mdx/test3.mdx"
 
 <ExampleMDXComponent3 components={{Planet: () => <span style={{color: 'tomato'}}>Pluto</span>}} />
 ```
 
 **Renders as:**
 
-import ExampleMDXComponent3 from "../content/components/test3.mdx"
+import ExampleMDXComponent3 from "../components/mdx/test3.mdx"
 
 <ExampleMDXComponent3 components={{Planet: () => <span style={{color: 'tomato'}}>Pluto</span>}} />
 
@@ -93,7 +93,7 @@ import ExampleMDXComponent3 from "../content/components/test3.mdx"
 `test4.mdx` file:
 
 ```md
-import Test1 from '../content/components/test.mdx'
+import Test1 from '../components/mdx/test.mdx'
 
 I'm an MDX component and here is my child component:
 *<Test1 />*
@@ -102,13 +102,13 @@ I'm an MDX component and here is my child component:
 Import in another MDX file:
 
 ```md
-import ExampleMDXComponent4 from "../content/components/test4.mdx"
+import ExampleMDXComponent4 from "../components/mdx/test4.mdx"
 
 <ExampleMDXComponent4 />
 ```
 
 **Renders as:**
 
-import ExampleMDXComponent4 from "../content/components/test4.mdx"
+import ExampleMDXComponent4 from "../components/mdx/test4.mdx"
 
 <ExampleMDXComponent4 />
