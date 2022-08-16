@@ -281,30 +281,6 @@ $$\begin{vmatrix}a & b\\ c & d \end{vmatrix}=ad-bc$$
 
 > [!INFO] > Here's a callout block. > It supports **markdown** and [[docs/index|wikilinks]].
 
-### 🚧 Mermaid diagrams
-
-Rendering [Mermaid](https://mermaid-js.github.io/mermaid/#/) diagrams.
-
-**Example:**
-````md
-```mermaid
-sequenceDiagram
-    Alice->>+John: Hello John, how are you?
-    Alice->>+John: John, can you hear me?
-    John-->>-Alice: Hi Alice, I can hear you!
-    John-->>-Alice: I feel great!
-```
-````
-
-**Renders as:**
-```mermaid
-sequenceDiagram
-    Alice->>+John: Hello John, how are you?
-    Alice->>+John: John, can you hear me?
-    John-->>-Alice: Hi Alice, I can hear you!
-    John-->>-Alice: I feel great!
-```
-
 <div className="border-2 border-slate-400 rounded-md px-4 my-4">
 🔍 To learn more about the Obsidian extensions refer to the [Obsidian Help site](https://help.obsidian.md/How+to/Format+your+notes). 
 </div>
