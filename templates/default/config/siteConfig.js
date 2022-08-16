@@ -1,3 +1,5 @@
+import userConfig from '../content/config.js'
+
 const defaultConfig = {
   title: 'Flowershow',
   description: 'Publish your digital garden', 
@@ -21,22 +23,20 @@ const defaultConfig = {
   ],
   // optional additional nextSeo content set on each page
   // see https://github.com/garmeeh/next-seo
-//  nextSeo: {
-//    openGraph: {
-//      images: [
-//        {
-//          url: 'https://image.url/...',
-//          alt: '',
-//          width: 1200,
-//          height: 627,
-//          type: 'image/png',
-//        }
-//      ]
-//    }
-//  }
+  // nextSeo: {
+  //  openGraph: {
+  //     images: [
+  //       {
+  //         url: 'https://image.url/...',
+  //         alt: '',
+  //         width: 1200,
+  //         height: 627,
+  //         type: 'image/png',
+  //       }
+  //     ]
+  //   }
+  // }
 }
-
-import userConfig from '../content/config.js'
 
 const siteConfig = Object.assign({}, defaultConfig, userConfig)
 
