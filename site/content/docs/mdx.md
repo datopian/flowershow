@@ -2,12 +2,12 @@ import { Callout } from '../components/TempCallout.jsx'
 
 # MDX
 
-Flowershow parses all of your Markdown files as MDX. This means you not only can write your content using good old Markdown, but also extend it with JSX, JavaScript expressions, and `import` and `export` statements. It's basically Markdown on steroids 😀💪!
+Flowershow parses all of your Markdown files as MDX. This means you not only can write your content using good old Markdown, but also enrich it with dynamic visualizations, immersive user interactions and much more thanks to support for JSX, JavaScript expressions, and ESM `import` and `export` statements. It's basically Markdown on steroids 😀💪!
 
 Let's see what exactly is MDX and what's so cool about it!
 
 <Callout>
-  A basic familiarity with JSX (React components) and JavaScript might be helpful to understand this chapter, but you can also learn by example and start by tweaking some of our code. Opening this page in your text editor side by side with the rendered version in your browser may also help.
+  A basic familiarity with JSX (React components) and JavaScript might be helpful to understand this chapter, but you can also learn by example and start by tweaking some of our code. Opening [this page](https://github.com/flowershow/flowershow/blob/main/site/content/docs/mdx.md) in your text editor side by side with the rendered version in your browser may also help.
 </Callout>
 
 ## What is MDX?
@@ -91,7 +91,9 @@ Some more content here...
 
 Looks much better! And it's much easier to update if you're using this button on many different pages.
 
-(We'll learn more about how to create, import, and use your custom components in the sections below.)
+This is just a simple example of a static JSX component. But the true power of JSX comes from being able to create dynamic components - components to which you can pass data (or even other JSX components) and render their contents based on this data. Imagine having a custom chart component, to which you could pass your research data and plot some beautiful visualization 🔥.
+
+You'll learn more how to create such components, import and use them in your markdown in the next sections.
 
 ### ESM `import` and `export` statements
 
@@ -99,7 +101,7 @@ This is where a lot of MDX power comes from: support for ESM (ECMAScript Modules
 
 #### Importing components
 
-To see this in action, let's create a React component in the `/components` folder:
+To see this in action, let's create a React component in the `templates/default/components` folder:
 
 ```js
 // MyComponent.jsx
