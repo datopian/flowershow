@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
+import { Mermaid } from 'mdx-mermaid/Mermaid';
 
-export const Pre = ({ children }) => {
+export const Pre = ({ children, ...props }) => {
   const textInput = useRef(null);
   const [hovered, setHovered] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -19,6 +20,14 @@ export const Pre = ({ children }) => {
       setCopied(false);
     }, 2000);
   };
+
+  if (props.className && props.className === "code-mermaid") {
+    return (
+      <div className="my-10">
+        <Mermaid chart={children} />
+      </div>
+    )
+  }
 
   return (
     <div
