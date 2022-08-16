@@ -6,5 +6,5 @@ test('Basic test', async ({ page }) => {
   // Start from the index page
   await page.goto('/');
   // The page should contain an h1 with the title 'Flowershow Default Template'
-  await expect(page.locator('h1')).toContainText('Flowershow');
+  await expect(page.locator('title')).toContainText('Flowershow');
 })
