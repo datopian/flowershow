@@ -47,6 +47,23 @@ As they eloquently explain:
 >     `svelte-add`'s app initializers are always built on top of the latest version of the official Svelte app templates. Of course it still needs to be maintained as tools change (like Tailwind JIT or the future rewrite of mdsvex), but because it is in a central location and contributed to by many people, problems are found quickly, and fixes are for everyone—not just one specific template.
 > 
 
+### BlitzJS
+
+From https://blitzjs.com/docs/why-blitz
+
+> **Code scaffolding** means initial code is scaffolded into your project for you. From then on, you have full ownership over all the code and can customize it as much you need. **A downside of code scaffolding is that you don't get automatic updates like you do with code generation from a third-party library.** But the huge upside is that you are guaranteed to never be limited by someone else's design choices which you have no way to change. [emphasis added]
+> 
+> Blitz is a huge fan of code scaffolding. We have a whole slew of [`blitz generate`](https://blitzjs.com/docs/cli-generate) commands for scaffolding code into your project. It's still early days for our code scaffolding — we have a lot of powerful features that still need to be added, including the ability to add your own custom scaffold templates.
+
+Then see https://blitzjs.com/docs/why-blitz#5-recipes
+
+> Recipes are one-line commands for scaffolding code into your project from an MDX recipe on npm or a git repository.
+>
+> ...
+>
+> Recipes are super powerful. They can change almost anything in your project, including adding dependencies, changing code, adding code, etc. They are written via MDX and can be composed like React components.
+
+###
 
 ## How to solve
 
