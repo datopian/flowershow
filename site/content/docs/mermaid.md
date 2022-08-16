@@ -18,7 +18,28 @@ MERMAID DIAGRAM CODE GOES HERE
 ```
 ````
 
-Here's an example:
+### Examples
+
+### Simple example
+
+````md
+```mermaid
+graph LR
+
+a --> b
+```
+````
+
+This renders like this:
+
+```mermaid
+graph LR
+
+a --> b
+```
+### Sequence example
+
+Here's a more complex example of a sequence diagram:
 
 ````md
 ```mermaid
@@ -30,7 +51,7 @@ sequenceDiagram
 ```
 ````
 
-This will render as:
+This renders like this:
 
 ```mermaid
 sequenceDiagram
