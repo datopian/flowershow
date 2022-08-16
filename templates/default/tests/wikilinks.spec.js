@@ -5,64 +5,61 @@ test.describe("wiki links", () => {
 
   test("parses a wiki link", async ({ page }) => {
     const Page = new MarkdownPage(page);
-    await Page.goto('/demo/wiki-links');
+    await Page.goto('/docs/syntax');
     await Page.getData(page);
 
-    const wikiLink = await Page.props.body.raw.includes(' [[docs]] ')
-    
+    const wikiLink = await Page.props.body.raw.includes(' [[features]]')
+
     if (wikiLink) {
-        const link = page.locator('a[href="/demo/docs"]')
-        
+        const link = page.locator('a[href="/features"]')
         await expect(link).toBeTruthy()
-        await expect(link).toHaveText('docs')
-        await expect(link).toHaveClass('internal')
+        await expect(link).toHaveText('features')
+        await expect(link).toHaveClass('internal new')
     }
   })
   
   test("parses a wiki link with custom divider", async ({ page }) => {
     const Page = new MarkdownPage(page);
-    await Page.goto('/demo/wiki-links');
+    await Page.goto('/docs/syntax');
     await Page.getData(page);
 
-    const wikiLink = await Page.props.body.raw.includes(' [[demo/index|Demo page]] ')
+    const wikiLink = await Page.props.body.raw.includes('[[docs/index|wikilinks]]')
     
     if (wikiLink) {
-        const link = page.locator('a[href="/demo/index"]')
-        
+        const link = page.locator('a[href="/docs"]')
         await expect(link).toBeTruthy()
-        await expect(link).toHaveText('Demo page')
+        await expect(link).toHaveText('wikilinks')
         await expect(link).toHaveClass('internal')
     }
   })
 
   test("parses a wiki link with header", async ({ page }) => {
     const Page = new MarkdownPage(page);
-    await Page.goto('/demo/wiki-links');
+    await Page.goto('/docs/syntax');
     await Page.getData(page);
 
-    const wikiLink = await Page.props.body.raw.includes(' [[nextjs-plugins#NextJS Plugin Research]] ')
+    const wikiLink = await Page.props.body.raw.includes(' [[roadmap#Planned features 🚧]]')
     
     if (wikiLink) {
-        const link = page.locator('a[href="/notes/nextjs-plugins#nextjs-plugin-research"]')
+        const link = page.locator('a[href="/docs/roadmap#planned-features-🚧"]')
         
         await expect(link).toBeTruthy()
-        await expect(link).toHaveText('nextjs-plugins#NextJS Plugin Research')
+        await expect(link).toHaveText('roadmap#Planned features 🚧')
         await expect(link).toHaveClass('internal')
     }
   })
 
   test("parses a wiki link with header and custom divider", async ({ page }) => {
     const Page = new MarkdownPage(page);
-    await Page.goto('/demo/wiki-links');
+    await Page.goto('/docs/syntax');
     await Page.getData(page);
 
-    const wikiLink = await Page.props.body.raw.includes(' [[tailwind#Tailwind Support|Tailwind Support]] ')
-    
+    const wikiLink = await Page.props.body.raw.includes(' [[roadmap#Features 🚧|Work in progress...]]')
     if (wikiLink) {
-        const link = page.locator('a[href="/docs/tailwind#tailwind-support"]')
+        const link = page.locator('a[href="/docs/roadmap#features-🚧"]')
         
         await expect(link).toBeTruthy()
-        await expect(link).toHaveText('Tailwind Support')
+        await expect(link).toHaveText('Work in progress...')
         await expect(link).toHaveClass('internal')
     }
   })

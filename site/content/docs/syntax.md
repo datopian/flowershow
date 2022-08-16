@@ -220,10 +220,10 @@ Flowershow will convert internal links to HTML `a` tags, with their `href` attri
 
 #### Internal link types
 
-* ✅ Link to a page, e.g. `[[roadmap]]`, which renders as [[roadmap]]
+* ✅ Link to a page, e.g. `[[features]]`, which renders as [[features]]
 * ✅ Link to a page with a custom name, e.g.  `[[roadmap|Planned Features]]`, which renders as [[roadmap|Planned Features]] 
-* 🚧 Link to a specific heading within a given page `[[roadmap#Planned features 🚧]]`
-* 🚧 Link to a specific heading within a given page with a custom name, e.g. `[[roadmap#Planned features 🚧|Work in progress...]]`
+* 🚧 Link to a specific heading within a given page `[[roadmap#Planned features 🚧]]`, which renders as [[roadmap#Planned features 🚧]]
+* 🚧 Link to a specific heading within a given page with a custom name, e.g. `[[roadmap#Features 🚧|Work in progress...]]` which renders as [[roadmap#Features 🚧|Work in progress...]]
 * 🚧 Link to a specific block (paragraph) within a given page, e.g. `[[roadmap#Planned features 🚧|Work in progress...]]`
 * ✅ Link to an image file with supported image formats - png, jpg and jpeg, eg. `![[park.png]]` which renders as:
     ![[park.png]]
