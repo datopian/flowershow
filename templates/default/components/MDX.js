@@ -1,5 +1,7 @@
+import { NextSeo } from 'next-seo'
 import Head from 'next/head'
 import { Pre } from './Pre'
+import config from '../content/config'
 
 const components = {
   Head,
@@ -14,11 +16,22 @@ const components = {
 export default function MdxPage({ children, ...rest }) {
   const { Component, frontMatter } = children;
   return (
-    <Component
-      layout={frontMatter.layout}
-      components={components}
-      frontMatter={frontMatter}
-      {...rest}
-    />
+    <>
+      <NextSeo 
+        title={frontMatter?.title}
+        description={frontMatter?.description}
+        openGraph={{
+          title: frontMatter.title,
+          description: frontMatter.description,
+          ...config.nextSeo.openGraph,
+        }}
+      />
+      <Component
+        layout={frontMatter.layout}
+        components={components}
+        frontMatter={frontMatter}
+        {...rest}
+      />
+    </>
   )
 }
