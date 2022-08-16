@@ -1,11 +1,10 @@
 const config = {
   title: 'Flowershow',
-  // Google analytics key e.g. G-XXXX
+  description: 'Turn your markdown notes into an elegant website and tailor it to your needs. Flowershow is easy to use, fully-featured, Obsidian compatible and open-source.',
   analytics: 'G-RQWLTRWBS2',
   navLinks: [
-    // { href: '/docs', name: 'QuickStart' },
+    { href: '/docs', name: 'Docs' },
     { href: '/docs/roadmap', name: 'Roadmap' },
-    { href: '/docs/guides', name: 'Guides' },
   ],
   nextSeo: {
     openGraph: {
