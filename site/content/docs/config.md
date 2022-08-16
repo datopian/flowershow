@@ -1,12 +1,10 @@
-# Basic configurations
+# Configuration
 
-Flowershow aims to provide you with just enough configurations to get you started right away. However, you may want to set some custom things like website title, navigation links in the navbar, or google analytics key.
+Flowershow supports setting common configuration values using a `confing.js` file in your content directory. With it you can customize some things like website title, navigation links in the navbar, or set your google analytics key.
 
-For this purpose, you should create a `confing.js` file in your content directory. Now you can overwrite default settings (that can be found in `[my-flowershow-project]/config/siteConfig.js`) and extend them.
+## Create `config.js`
 
-## `config.js`
-
-Example of user configurations in `your-content-dir/config.js`:
+Example of configuration in `your-content-dir/config.js`:
 
 ```js
 const userConfig = {
@@ -42,6 +40,4 @@ const userConfig = {
 }
 
 export default userConfig
-
 ```
-

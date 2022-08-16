@@ -9,7 +9,7 @@
 ## Google Analytics
 
 Set your google analytics key in the `config.js` file.
-(See [[basic-config|this chapter]] about basic user configurations.)
+(See [[docs/config|this chapter]] about basic user configurations.)
 
 ```js
 // config.js
