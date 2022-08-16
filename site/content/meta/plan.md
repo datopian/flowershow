@@ -10,23 +10,31 @@ Taglines:
 
 # Plan
 
-As of 2022-07-06
+## 2022-08-16
+
+Phase I is complete
+
+Phase II starts which is rolling this out again to other sites
+
+* [ ] Promotion and engagement on obsidian forums
+
+
+## 2022-07-06
 
 Key Question 2022-07-11: to what extent do we care about MDX and theming support (power wiki) vs more KISS and focus on obsidian?
 
-* [ ] Landing page for the product **40% 📝https://github.com/flowershow/flowershow/issues/4 ⏭️ finish copy, work out how theme**
-* [ ] Trial product e.g. on flowershow itself or building Life Itself new community site **[🚧 issue #21](https://github.com/flowershow/flowershow/issues/21)**
-  * [ ] flowershow site itself **🚧 2022-07-11 40%**
+* [x] Landing page for the product **40% 📝https://github.com/flowershow/flowershow/issues/4 ⏭️ finish copy, work out how theme** **✅2022-08-16**
+* [x] Trial product e.g. on flowershow itself or building Life Itself new community site **[🚧 issue #21](https://github.com/flowershow/flowershow/issues/21)** **✅2022-08-16 we trialled this in early July. Worked though saw some upgradeability stuff especially around components etc**
+  * [x] flowershow site itself **🚧 2022-07-11 40%**
   * [x] ecosystem site  **✅2022-07-08 100% complete.**
-  * [ ] Life Itself community site
-* [ ] Basic working product e.g. command line tool, template etc
-  * [ ] Template webapp **🚧2022-07-11 70% [#1](https://github.com/flowershow/flowershow/issues/1)**
-  * [ ] Command line tool **⏳ [issue #19](https://github.com/flowershow/flowershow/issues/19) DEFERRED on need **
-* [ ] Promotion **🚧 [issue #25](https://github.com/flowershow/flowershow/issues/25)**
-  * [ ] (? separate) some kind of launch e.g. **❓what do we mean by this**
-  * [ ] post on obsidian forum
-  * [ ] post on reddit re pkm etc
-  * [ ] post on dev.to (later when more working?)
+  * [ ] Life Itself community site **❌2022-08-16 not worked on**
+* [ ] Basic working product e.g. command line tool, template etc **❌2022-08-16 deferred but basic site is working**
+  * [x] Template webapp **🚧2022-07-11 70% [#1](https://github.com/flowershow/flowershow/issues/1)** **✅2022-08-16 this was working**
+  * [ ] Command line tool **⏳ [issue #19](https://github.com/flowershow/flowershow/issues/19) DEFERRED on need. not urgent**
+* [ ] Promotion **🚧 [issue #25](https://github.com/flowershow/flowershow/issues/25)** **🚧2022-08-16 about to be done**
+  * [x] post on obsidian forum
+  * [ ] post on reddit re pkm etc **❌2022-08-16 this will be deferred to proper product launch**
+  * [ ] post on dev.to (later when more working?) **❌2022-08-16 deferred until working product**
 
 ## Launch v0.1 July 2022
 
@@ -93,32 +101,32 @@ class next next;
 
 Feature List
 
-* [ ] front page
-* [ ] docs section
-* [ ] blog
+* [x] front page **✅2022-08-16**
+* [x] docs section
+* [ ] blog **❌2022-08-16 not a priority atm**
 * [ ] social links
-* [ ] Made in Flowershow gallery or similar
+* [ ] Made in Flowershow gallery or similar **⌛2022-08-16**
 
 # Features
 
 In very rough order of likely priority in each section
 
-* [x] Markdown - full markdown plus footnotes
-* [x] MDX support for rich component additions. Built on MDX so you can use everything Next.JS provides out of the box including full React e.g. want a custom front page? No problem!
-  * [ ] Documentation / examples
-- [x] Tailwind: built on tailwind so easy to adjust and customize
-* [ ] SEO support **🚧 [issue #57](https://github.com/flowershow/flowershow/issues/57)**
+* [x] Markdown - full markdown plus footnotes **✅2022-07-06**
+* [x] MDX support for rich component additions. Built on MDX so you can use everything Next.JS provides out of the box including full React e.g. want a custom front page? No problem! **✅2022-08-16 - 2022-07-06 was partly but we did not have this fully resolved or documented**
+  * [x] Documentation / examples **✅2022-08-16**
+- [x] Tailwind: built on tailwind so easy to adjust and customize **✅2022-07-06**
+* [x] SEO support **🚧 [issue #57](https://github.com/flowershow/flowershow/issues/57)** **✅2022-08-16**
 * [x] Basic site config **✅ [issue #1](https://github.com/flowershow/flowershow/issues/1) and [issue #7](https://github.com/flowershow/flowershow/issues/7)**
 * [x] Basic theme e.g. navbar and footer  **✅ [issue #23](https://github.com/flowershow/flowershow/issues/23)**
 * [x] Analytics - google - this could be first test for componentization (or maybe just live with default for now) **✅ [issue #1](https://github.com/flowershow/flowershow/issues/1) and [issue #31](https://github.com/flowershow/flowershow/issues/31)**
 * [ ] theme customization
 * [x] Code highlighting - e.g. use https://github.com/timlrx/rehype-prism-plus **✅ [issue #17](https://github.com/flowershow/flowershow/issues/17)**
   * [x] Do we use prism or highlight.js. **✅2022-06-29 Answer: prism i think (same speed, more plugins (?))**
-* [ ] Maths syntax (mathjax etc) **🚧 [issue #64](https://github.com/flowershow/flowershow/issues/64)**
-* [ ] Mermaid **🚧 [issue #12](https://github.com/flowershow/flowershow/issues/12)**
+* [x] Maths syntax (mathjax etc) **🚧 [issue #64](https://github.com/flowershow/flowershow/issues/64)** **✅2022-08-16**
+* [x] Mermaid **🚧 [issue #12](https://github.com/flowershow/flowershow/issues/12)** **✅2022-08-16**
 - [ ] Citation / Bibliographic references: use standard `[@jones-2020]` style bibliographic citations in markdown (compatible with Obsidian zotero, R markdown etc) - https://github.com/timlrx/rehype-citation
-* [ ] Desktop and mobile: beautiful, responsive theme out of the box
-* [ ] Full text search: search quickly and easily.
+* [x] Desktop and mobile: beautiful, responsive theme out of the box **✅2022-08-16**
+* [x] Full text search: search quickly and easily. **✅2022-08-16**
 * [ ] social preview links e.g. twitter link turns into a nice twitter card. Ditto for youtube.
 * [ ] Edit page on github/gitlab
 
