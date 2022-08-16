@@ -10,6 +10,7 @@ import mermaidPlugin from "mdx-mermaid";
 
 const sharedFields = {
   title: { type: "string" },
+  description: { type: "string" },
   layout: { type: "string", default: "docs" },
 };
 
