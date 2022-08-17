@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import { NextSeo } from 'next-seo'
 import siteConfig from '../config/siteConfig'
 import Header from './Nav'
@@ -19,16 +20,30 @@ export default function Layout({ children, title='' }) {
         <main>
           {children}
         </main>
-        <footer className="absolute bottom-0 dark:bg-slate-900 prose dark:prose-invert max-w-none flex items-center justify-center w-full h-24 border-t">
+        <footer className="absolute bottom-0 dark:bg-slate-900 prose dark:prose-invert max-w-none flex flex-col items-center justify-center w-full h-26 py-12">
+          <div className="flex ml-8 mr-6 sm:mr-8 md:mr-0">
+            {siteConfig.navLinks.map((item) => (
+              <Link key={item.href} href={item.href}>
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="inline-flex items-center mr-6 px-1 pt-1 font-regular hover:text-slate-300 no-underline"
+                  aria-current={item.current ? 'page' : undefined}
+                >
+                  {item.name}
+                </a>
+              </Link>
+            ))}
+          </div>
           <p className="flex items-center justify-center">
-            Created by
+            Made with
             <a
               href={siteConfig.authorUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center no-underline"
             >
-              <img src={siteConfig.authorLogo} alt={siteConfig.author} className="ml-2 h-6 block" />
+              <img src={siteConfig.authorLogo} alt={siteConfig.author} className="my-0 h-6 block" />
               {siteConfig.author}
             </a>
           </p>
