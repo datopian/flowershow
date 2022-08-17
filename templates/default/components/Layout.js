@@ -27,7 +27,7 @@ export default function Layout({ children, title='' }) {
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-slate-500 inline-flex items-center mr-6 px-1 pt-1 text-sm font-medium hover:text-slate-600 no-underline"
+                  className="inline-flex items-center mr-6 px-1 pt-1 font-regular hover:text-slate-300 no-underline"
                   aria-current={item.current ? 'page' : undefined}
                 >
                   {item.name}
