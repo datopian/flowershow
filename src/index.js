@@ -1,6 +1,6 @@
 import { syntax } from './syntax'
 import { toMarkdown } from 'mdast-util-wiki-link'
-import { fromMarkdown } from './from-markdown'
+import { fromMarkdown, wikiLinkImageFormats } from './from-markdown'
 import { getFiles } from './getFiles'
 
 let warningIssued
@@ -30,7 +30,7 @@ function wikiLinkPlugin (opts = { markdownFolder: '' }) {
     ...opts,
     aliasDivider: opts.aliasDivider ? opts.aliasDivider : '|',
     pageResolver: opts.pageResolver ? opts.pageResolver : (name) => {
-      const image = /\.jpe?g$|\.png$/.test(name)
+      const image = wikiLinkImageFormats(name)
       let heading = ''
       if (!image && !name.startsWith('#') && name.match(/#/)) {
         [, heading] = name.split('#')

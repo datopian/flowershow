@@ -1,3 +1,13 @@
+function wikiLinkImageFormats (extension) {
+  const imageFormats = [
+    /\.jpe?g$/, /\.a?png$/, /\.webp$/, /\.avif$/, /\.gif$/, /\.svg$/, /\.bmp$/, /\.ico$/
+  ].map(rgx => rgx.test(extension)).filter(Boolean)
+
+  if (!imageFormats.includes(true)) return false
+
+  return imageFormats.includes(true)
+}
+
 function fromMarkdown (opts = {}) {
   const permalinks = opts.permalinks || []
   const defaultPageResolver = (name) => [name.replace(/ /g, '-').toLowerCase()]
@@ -49,7 +59,8 @@ function fromMarkdown (opts = {}) {
     //   wikiLink.value = value
     // }
 
-    const wikiLinkImage = /\.jpe?g$|\.png$/.test(wikiLink.value)
+    // const wikiLinkImage = /\.webp$/.test(wikiLink.value)
+    const wikiLinkImage = wikiLinkImageFormats(wikiLink.value)
 
     const pagePermalinks = pageResolver(wikiLink.value)
     let permalink = pagePermalinks.find((p) => {
@@ -113,4 +124,4 @@ function fromMarkdown (opts = {}) {
   }
 }
 
-export { fromMarkdown }
+export { fromMarkdown, wikiLinkImageFormats }
