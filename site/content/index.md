@@ -124,10 +124,30 @@ layout: unstyled
     </div>
 
   </div>
+  
+
+<div className="py-10 sm:px-2 lg:relative lg:px-0" id="features">
+  <div className="prose dark:prose-invert mx-auto max-w-2xl px-4 lg:max-w-4xl lg:px-8 xl:px-12">
+    <h2 className="text-center">How Flowershow works?</h2>
+    
+#### 1. You have your Markdown notes in a folder
+
+It can be your Obsidian vault!
+
+#### 2. Run `npx flowershow publish` in this folder
+
+After running this command, you'll be shown some basic configuration prompts. At the end you'll get a response: `Live at https://xyz.flowershow.sites/...`
+
+#### 3. See your website online! 🎊
+
+  </div>
+</div>
 
 <div className="py-10 sm:px-2 lg:relative lg:px-0" id="features">
   <div className="prose dark:prose-invert mx-auto max-w-2xl px-4 lg:max-w-4xl lg:px-8 xl:px-12">
     <h2 className="text-center">Features</h2>
+
+
 
 Here are some of the cool features that are currently supported by Flowershow, and some that we're intensively working on.
 
