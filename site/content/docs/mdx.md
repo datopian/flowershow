@@ -103,19 +103,6 @@ This is where a lot of MDX power comes from: support for ESM (ECMAScript Modules
 
 <Callout>
 ❕ You should try to keep your custom components outside of the Flowershow's template folder with components (`/templates/default/components`). You can do this by creating a directory next to the directory with your content (in our example it will be `/site/components`) and create a symlink to it inside `/templates/default/components`. 
-In our example we will have:
-
-```bash
-flowershow
-├── site
-│   ├── components
-│   └── content
-└── templates
-    └── default
-```
-
-Your imports will then be of this form `../components/custom/XYZ.jsx`.
-This is a temporary solution and you won't have to create this symlink manually in the future.
 
 (For testing you could also just add your test components directly to our `templates/default/components`. Just remember to change the paths from this guide to `../components/XYZ.jsx`)
 </Callout>
