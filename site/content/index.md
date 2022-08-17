@@ -9,50 +9,44 @@ layout: unstyled
         <p className="inline bg-gradient-to-r from-indigo-200 via-sky-400 to-indigo-200 bg-clip-text text-6xl tracking-tight text-transparent">Publish your Obsidian notes, beautifully.</p>
         <p className="mt-4 text-3xl dark:text-white tracking-tight">For free, no coding.</p>
         <p className="mt-4 text-xl tracking-tight text-slate-400">Turn your markdown notes into an elegant website and tailor it to your needs. Flowershow is easy to use, fully-featured, Obsidian compatible and open-source.</p>
-        <p className="my-10 text-xl tracking-wide">
+        <div className="mt-8 sm:mx-auto sm:text-center lg:text-left lg:mx-0">
+          <p className="text-base font-medium text-slate-300">Sign up to get notified when it's ready</p>
+          <form method="POST" name="get-updates" data-netlify="true" action="/subscribed" className="mt-3 sm:flex">
+            <label htmlFor="email" className="sr-only">
+              Email address
+            </label>
+            <input
+              name="email"
+              type="email"
+              required="required"
+              placeholder="Enter your email"
+              className="block w-full px-2 py-3 text-base rounded-md bg-slate-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900
+                sm:flex-1
+              "
+            />
+            <input type="hidden" name="form-name" value="get-updates" />
+            <button type="submit"
+              className="mt-3 w-full px-6 py-3 border border-transparent text-base font-medium rounded-md text-slate-900 bg-sky-300
+                hover:bg-sky-200 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300/50 active:bg-sky-500
+                sm:mt-0 sm:ml-3 sm:flex-shrink-0 sm:inline-flex sm:items-center sm:w-auto"
+              >
+              Notify me
+            </button>
+          </form>
+          <p className="mt-3 text-sm text-slate-300 sm:mt-4">
+            <span>We are actively trialling Flowershow before wide release. If you'd like to help us test it or be first on the list to use please sign up.</span>
+          </p>
+        </div>
+        <p className="my-10 text-l tracking-wide">
           <span>A project of</span>
           <a href="https://lifeitself.us/" target="_blank" rel="noopener noreferrer">
             <img src="/assets/images/life-itself-logo.svg" alt="Life Itself" className="mx-2 mb-1 h-6 inline"/>
             <span>Life Itself</span>
           </a> 
-          <span> & </span>
           <a href="https://www.datopian.com/" target="_blank" rel="noopener noreferrer">
             <img src="/assets/images/datopian_logo.png" alt="Datopian" className="mx-2 mb-1 h-6 inline"/>
             <span>Datopian</span>
           </a> 
-        </p>
-        <form method="POST" name="get-updates" data-netlify="true" action="/subscribed">
-          <div className="mt-8 sm:flex gap-4 md:justify-center lg:justify-start">
-            <div className="flex-1">
-              <label htmlFor="email" className="sr-only">
-                Email address
-              </label>
-              <input
-                name="email"
-                type="email"
-                required="required"
-                placeholder="Enter your email"
-                className="block w-full py-2 px-4 rounded-full text-sm bg-slate-800 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900"
-              />
-              <input type="hidden" name="form-name" value="get-updates" />
-            </div>
-            <div className="flex-initial flex gap-x-2 mt-3 sm:mt-0">
-              <button type="submit" className="rounded-full bg-sky-300 py-2 px-4 text-sm font-semibold text-slate-900 hover:bg-sky-200 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300/50 active:bg-sky-500">
-                Get updates
-              </button>
-              <a href="https://github.com/flowershow/flowershow" target="_blank">
-                <button type="button" className="rounded-full bg-slate-800 py-2 px-4 text-sm font-medium text-white hover:bg-slate-700 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50 active:text-slate-400">
-                  View on GitHub
-                </button>
-              </a>
-            </div>
-          </div>
-        </form>
-        <p className="mt-3 text-sm text-slate-300 sm:mt-4">
-          <span>Flowershow is changing minute by minute! Leave us your email, if you'd like to get notified about the latest features.  </span>
-          <span className="text-slate-500">
-            <a href="https://lifeitself.us/privacy-policy/" target="_blank" className="underline text-slate-500">How we use your data?</a>
-          </span>
         </p>
       </div>
       <div className="relative">
@@ -64,7 +58,7 @@ layout: unstyled
 </div>
 
 
-<div className="py-10 sm:px-2 lg:relative lg:px-0">
+<div className="py-10 sm:px-2 lg:relative lg:px-0" id="overview">
   <div className="prose dark:prose-invert mx-auto max-w-2xl px-4 lg:max-w-4xl lg:px-8 xl:px-12">
     <h2 className="text-center">What is Flowershow?</h2>
     Flowershow is an open-source tool for easily converting your markdown files into an elegant website. It's built on a standard, modern web stack – React, Next.js, and Tailwind and shipped with a basic default theme to get you started with just a few clicks.
@@ -131,7 +125,7 @@ layout: unstyled
 
   </div>
 
-<div className="py-10 sm:px-2 lg:relative lg:px-0">
+<div className="py-10 sm:px-2 lg:relative lg:px-0" id="features">
   <div className="prose dark:prose-invert mx-auto max-w-2xl px-4 lg:max-w-4xl lg:px-8 xl:px-12">
     <h2 className="text-center">Features</h2>
 
