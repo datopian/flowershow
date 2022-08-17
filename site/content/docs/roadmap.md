@@ -17,9 +17,6 @@ Highlighting text wrapped in double `=`.
 ### Multiline blockquotes
 Breaking quotes that span multiple lines. (Currently rendered on a single line.)
 
-### Math
-Support for inline and block math formulas.
-
 ### Comments
 Hiding content wrapped in double `%`. (Currently parsed as plain text and displayed.)
 
@@ -64,8 +61,3 @@ Since Flowershow is built on top of well-known tools - React, Next.js, and Tailw
 
 ### Empty pages cause build error
 For now, you should not have any empty markdown pages in your content directory.
-
-### Broken internal links to index pages
-Since `index.md` is treated by Obsidian like any other page, when you try to create an internal link to it in Obsidian, it will look like this: `[[some_folder/index]]`. This in turn will be converted to an anchor tag pointing to the non-existing URL, e.g.: `http://localhost:3000/some_folder/index`, whereas it should be: `http://localhost:3000/some_folder`.
-#### Temporary workaround
-Manually remove `/index` part from the link created by obsidian, like so: `[[some_folder/index]]` -> `[[some_folder]]`.
