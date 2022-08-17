@@ -101,7 +101,13 @@ This is where a lot of MDX power comes from: support for ESM (ECMAScript Modules
 
 #### Importing components
 
-To see this in action, let's create a React component in the `templates/default/components` folder:
+<Callout>
+❕ You should try to keep your custom components outside of the Flowershow's template folder with components (`/templates/default/components`). You can do this by creating a directory next to the directory with your content (in our example it will be `/site/components`) and create a symlink to it inside `/templates/default/components`. 
+
+(For testing you could also just add your test components directly to our `templates/default/components`. Just remember to change the paths from this guide to `../components/XYZ.jsx`)
+</Callout>
+
+To see this in action, let's create a React component in the `/site/components` folder:
 
 ```js
 // MyComponent.jsx
@@ -127,7 +133,7 @@ export const MyComponent = ({ list }) => {
 Now, let's import `MyComponent` into this page's markdown.
 
 ```md
-import { MyComponent } from '../components/MyComponent.jsx'
+import { MyComponent } from '../components/custom/MyComponent.jsx'
 
 <MyComponent list={["cat", "dog", "parrot"]} />
 
@@ -138,7 +144,7 @@ The above MDX code renders as:
 
 ---
 
-import { MyComponent } from '../components/MyComponent.jsx'
+import { MyComponent } from '../components/custom/MyComponent.jsx'
 
 <MyComponent list={["cat", "dog", "parrot"]} />
 
