@@ -1,5 +1,5 @@
 # Thanks for subscribing 🌷
 
-We are excited that you're interested in Flowershow progress! Soon you will start getting our regular updates on a lot of cool stuff we're working on.
+Thank-you for your interest in Flowershow! We will be in touch soon.
 
-If you have some ideas on how to make Flowershow even more awesome, let us know! Or even better -> contribute! Either way, check our [GitHub issues](https://github.com/flowershow/flowershow/issues).
+If you have ideas for what you would like to see in Flowershow or suggestions how to improve it please let us know. The easiest way is via the [discussions forum on Github](https://github.com/flowershow/flowershow/discussions).
