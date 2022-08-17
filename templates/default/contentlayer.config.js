@@ -6,11 +6,11 @@ import wikiLinkPlugin from "remark-wiki-link-plus";
 import remarkMath from "remark-math";
 import rehypeMathjax from 'rehype-mathjax';
 import codeExtra from "remark-code-extra";
-import mermaidPlugin from "mdx-mermaid";
 
 const sharedFields = {
   title: { type: "string" },
   description: { type: "string" },
+  image: { type: "string" },
   layout: { type: "string", default: "docs" },
 };
 
