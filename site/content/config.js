@@ -3,6 +3,8 @@ const config = {
   description: 'Turn your markdown notes into an elegant website and tailor it to your needs. Flowershow is easy to use, fully-featured, Obsidian compatible and open-source.',
   analytics: 'G-RQWLTRWBS2',
   navLinks: [
+    { href: '/#overview', name: 'Overview' },
+    { href: '/#features', name: 'Features' },
     { href: '/docs', name: 'Docs' },
     { href: '/docs/roadmap', name: 'Roadmap' },
   ],
