@@ -1,4 +1,11 @@
+/* mathjax */
 .math-inline {
   display: flex;
   align-items: center;
+}
+
+
+/* smooth scrolling in modern browsers */
+html {
+  scroll-behavior: smooth;
 }
