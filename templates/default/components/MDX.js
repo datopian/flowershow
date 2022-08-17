@@ -23,6 +23,15 @@ export default function MdxPage({ children, ...rest }) {
         openGraph={{
           title: frontMatter.title,
           description: frontMatter.description,
+          images: frontMatter.image
+            ? [
+                {
+                  url: frontMatter.image,
+                  width: 1200,
+                  height: 627,
+                  alt: title
+                }
+              ] : config.nextSeo.openGraph.images,
           ...config.nextSeo.openGraph,
         }}
       />
