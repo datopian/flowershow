@@ -59,10 +59,10 @@ const config = {
       images: [
         {
           url: "https://www.example.ie/og-image.jpg" /*image url path*/,
-          alt: "Og Image Alt" /*alternative name for the image*/,
-          width: 1200 /*min 800 recommended width value*/,
-          height: 627 /*min 600 recommended height value*/,
-          type: "image/png" /*image type png, jpg or jpeg*/
+          alt: "",
+          width: 1200,
+          height: 627,
+          type: "image/jpg"
         }
       ]
     },
@@ -80,6 +80,20 @@ const config = {
 ❕ Note: It is advised to upload an image with the same width and height values as specified above for it to display properly.
 </Callout>
 
+### Set per-page social media meta tag image
+
+If required, each page can have its own custom image when sharing on social media sites and can be setup by adding the path of the url to the image in page's frontmatter. 
+
+The image URL can either be uploaded to your `site/content/assets/` folder or can be any other external path.
+
+Below is an example of how we would add this in frontmatter:
+
+```markdown
+---
+image: /assets/images/your-image-path.jpg
+---
+```
+
 Here is a preview of how it should look when sharing the website link on social sites, for example on Twitter:
 
-<img src="/assets/images/twitter-card.jpg" alt="twitter card" />
+![[twitter-card.jpg]]

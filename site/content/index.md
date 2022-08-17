@@ -151,13 +151,31 @@ You can customize and create new layouts for your pages.
 
 Also, thanks to MDX support, you can use custom React components within your markdown notes.
 
-[[docs/custom-components|Learn more ➡]].
+[[docs/mdx|Learn more ➡]].
 
 ### ✅ Tailwind support
 
 Tailwind support makes it easy to style your in-markdown HTML and custom React components.
 
 [[docs/tailwind|Learn more ➡]]
+
+### ✅ Mermaid
+
+Displaying Mermaid diagrams within in your notes.
+
+[[docs/mermaid|Learn more ➡]]
+
+### ✅ Math
+
+MathJax math exaptions support.
+
+[[docs/math|Learn more ➡]]
+
+### ✅ SEO
+
+Support for for meta tags for SEO and social sharing.
+
+[[docs/seo|Learn more ➡]]
 
 ### 🚧 Knowledge graph
 
@@ -175,9 +193,9 @@ A set of different starter themes to choose from and support for dark/light mode
 
 Lists of forward links used on the page and back links to the page from other pages.
 
-### 🚧 Excalidraw, Mermaid an Mathjax support
+### 🚧 Excalidraw support
 
-Displaying Excalidraw sketches, Mermaid diagrams and Mathjax math equations embedded in your notes.
+Displaying Excalidraw sketches directly in your markdown pages.
 
 ### 🚧 CLI tool
 
