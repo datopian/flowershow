@@ -4,33 +4,23 @@ const { MarkdownPage } = require('./markdown-page')
 test.describe("Pages", () => {
 
   // Test if index page exists and is from markdown
-  test("index.md @ root", async ({ page, baseURL }) => {
-    const Page = new MarkdownPage(page)
-    await Page.goto('/')
-    await Page.getData(page)
-
-    expect(Page.props.url).toBe('');
-    expect(Page.props._raw.sourceFilePath).toBe('index.md')
-  });
-
-  // Test About page exists and is from markdown
-  // test('about.md @ root', async ({ page }) => {
+  // test("index.md @ root", async ({ page, baseURL }) => {
   //   const Page = new MarkdownPage(page)
-  //   await Page.goto("/about");
-  //   await Page.getData(page);
+  //   await Page.goto('/')
+  //   await Page.getData(page)
 
-  //   expect(Page.props.url).toBe('about');
-  //   expect(Page.props._raw.sourceFilePath).toBe("about.md");
-  // })
+  //   expect(Page.props.url).toBe('');
+  //   expect(Page.props._raw.sourceFilePath).toBe('index.md')
+  // });
 
   // Test for nested index.md routes
-  test('Nested index routes [docs/index.md]', async ({ page, baseURL }) => {
-    const Page = new MarkdownPage(page);
-    await Page.goto("/docs");
-    await Page.getData(page);
+  // test('Nested index routes [docs/index.md]', async ({ page, baseURL }) => {
+  //   const Page = new MarkdownPage(page);
+  //   await Page.goto("/docs");
+  //   await Page.getData(page);
 
-    expect(Page.props.url).toBe("docs");
-    expect(Page.props._raw.sourceFilePath).toBe("docs/index.md");
+  //   expect(Page.props.url).toBe("docs");
+  //   expect(Page.props._raw.sourceFilePath).toBe("docs/index.md");
     
-  })
+  // })
 });
