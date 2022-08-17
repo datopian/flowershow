@@ -20,14 +20,14 @@ export default function Layout({ children, title='' }) {
         <main>
           {children}
         </main>
-        <footer className="absolute border-t border-sky-500 bottom-0 dark:bg-slate-900 prose dark:prose-invert max-w-none flex flex-col items-center justify-center w-full  p-12">
+        <footer className="absolute bottom-0 dark:bg-slate-900 prose dark:prose-invert max-w-none flex flex-col items-center justify-center w-full h-26 py-12">
           <div className="flex ml-8 mr-6 sm:mr-8 md:mr-0">
             {siteConfig.navLinks.map((item) => (
               <Link key={item.href} href={item.href}>
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-slate-500 inline-flex items-center mr-6 px-1 pt-1 text-sm font-medium hover:text-slate-600"
+                  className="text-slate-500 inline-flex items-center mr-6 px-1 pt-1 text-sm font-medium hover:text-slate-600 no-underline"
                   aria-current={item.current ? 'page' : undefined}
                 >
                   {item.name}
@@ -43,7 +43,7 @@ export default function Layout({ children, title='' }) {
               rel="noopener noreferrer"
               className="flex items-center no-underline"
             >
-              <img src={siteConfig.authorLogo} alt={siteConfig.author} className="ml-2 my-0 h-6 block" />
+              <img src={siteConfig.authorLogo} alt={siteConfig.author} className="my-0 h-6 block" />
               {siteConfig.author}
             </a>
           </p>
