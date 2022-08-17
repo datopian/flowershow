@@ -7,6 +7,7 @@ const config = {
     { href: '/#features', name: 'Features' },
     { href: '/docs', name: 'Docs' },
     { href: '/docs/roadmap', name: 'Roadmap' },
+    { href: 'https://github.com/flowershow/flowershow/discussions', name: 'Forum' },
   ],
   nextSeo: {
     openGraph: {
