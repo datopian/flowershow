@@ -8,11 +8,11 @@ The theme by default is set to dark mode and can be switched on/off to change mo
 
 ### Dark theme
 
-![[dark-theme.png]]
+![[dark-theme.jpg]]
 
 ### Light theme
 
-![[light-theme.png]]
+![[light-theme.jpg]]
 
 
 ## Developers
