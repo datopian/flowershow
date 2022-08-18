@@ -10,7 +10,7 @@ layout: unstyled
         <p className="mt-4 text-3xl dark:text-white tracking-tight">For free, no coding.</p>
         <p className="mt-4 text-xl tracking-tight text-slate-400">Turn your markdown notes into an elegant website and tailor it to your needs. Flowershow is easy to use, fully-featured, Obsidian compatible and open-source.</p>
         <div className="mt-8 sm:mx-auto sm:text-center lg:text-left lg:mx-0">
-          <p className="text-base font-medium text-slate-300">Sign up to get notified when it's ready</p>
+          <p className="text-base font-medium text-slate-400 dark:text-slate-300">Sign up to get notified when it's ready</p>
           <form method="POST" name="get-updates" data-netlify="true" action="/subscribed" className="mt-3 sm:flex">
             <label htmlFor="email" className="sr-only">
               Email address
@@ -20,7 +20,7 @@ layout: unstyled
               type="email"
               required="required"
               placeholder="Enter your email"
-              className="block w-full px-2 py-3 text-base rounded-md bg-slate-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900
+              className="block w-full px-2 py-3 text-base rounded-md bg-slate-200 dark:bg-slate-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900
                 sm:flex-1
               "
             />
@@ -33,7 +33,7 @@ layout: unstyled
               Notify me
             </button>
           </form>
-          <p className="mt-3 text-sm text-slate-300 sm:mt-4">
+          <p className="mt-3 text-sm text-slate-400 dark:text-slate-300 sm:mt-4">
             <span>We are actively trialling Flowershow before wide release. If you'd like to help us test it or be first on the list to use please sign up.</span>
           </p>
         </div>
@@ -44,7 +44,7 @@ layout: unstyled
             <span>Life Itself</span>
           </a> 
           <a href="https://www.datopian.com/" target="_blank" rel="noopener noreferrer">
-            <img src="/assets/images/datopian_logo.png" alt="Datopian" className="mx-2 mb-1 h-6 inline"/>
+            <img src="/assets/images/datopian_logo.png" alt="Datopian" className="mx-2 mb-1 h-6 inline bg-black rounded-full"/>
             <span>Datopian</span>
           </a> 
         </p>
