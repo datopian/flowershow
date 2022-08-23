@@ -59,7 +59,7 @@ layout: unstyled
 
 
 <div className="py-10 sm:px-2 lg:relative lg:px-0" id="overview">
-  <div className="prose dark:prose-invert mx-auto max-w-2xl px-4 lg:max-w-4xl lg:px-8 xl:px-12">
+  <div className="prose dark:prose-invert mx-auto max-w-6xl px-4 lg:max-w-6xl lg:px-8 xl:px-12">
     <h2 className="text-center">What is Flowershow?</h2>
     Flowershow is an open-source tool for easily converting your markdown files into an elegant website. It's built on a standard, modern web stack – React, Next.js, and Tailwind and shipped with a basic default theme to get you started with just a few clicks.
     <div className="not-prose my-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -126,20 +126,63 @@ layout: unstyled
   </div>
   
 
-<div className="py-10 sm:px-2 lg:relative lg:px-0" id="features">
-  <div className="prose dark:prose-invert mx-auto max-w-2xl px-4 lg:max-w-4xl lg:px-8 xl:px-12">
+<div className="py-10 sm:px-2 lg:relative lg:px-0" id="how">
+  <div className="prose dark:prose-invert mx-auto max-w-6xl px-4 lg:max-w-6xl lg:px-8 xl:px-12">
     <h2 className="text-center">How Flowershow works?</h2>
-    
-#### 1. You have your Markdown notes in a folder
-
-It can be your Obsidian vault!
-
-#### 2. Run `npx flowershow publish` in this folder
-
-After running this command, you'll be shown some basic configuration prompts. At the end you'll get a response: `Live at https://xyz.flowershow.sites/...`
-
-#### 3. See your website online! 🎊
-
+      <div className="relative grid grid-cols-1 gap-12 mt-16 md:grid-cols-2 md:gap-16">
+        <div>
+          <div className="flex items-center space-x-4 sm:space-x-8">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-sky-200 bg-sky-100 text-xl text-sky-600 ring-2 ring-white dark:border-sky-900 dark:bg-[#163C57] dark:text-sky-500 dark:ring-gray-950">
+              1
+            </div>
+            <h3 className="m-0">
+              Create a folder with Markdown files.
+            </h3>
+          </div>
+          <p>
+            It can also be your Obsidian vault.
+          </p>
+        </div>
+        <div>
+          <img src="/assets/images/obsidian_dark.png" alt="" className="rounded-lg shadow-xl" />
+        </div>
+        <img src="/assets/images/arrow_left.png" alt="" className="absolute bottom-0 left-1/3 rotate-[45deg] translate-y-1/2" />
+      </div> 
+      <div className="relative grid grid-cols-1 gap-12 mt-16 md:grid-cols-2 md:gap-16">
+        <div>
+          <img src="/assets/images/obsidian_dark.png" alt="" className="rounded-lg shadow-xl" />
+        </div>
+        <div>
+          <div className="flex items-center space-x-4 sm:space-x-8">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-sky-200 bg-sky-100 text-xl text-sky-600 ring-2 ring-white dark:border-sky-900 dark:bg-[#163C57] dark:text-sky-500 dark:ring-gray-950">
+              2
+            </div>
+            <h3 className="m-0">
+              Run `npx flowershow publish` in this folder...
+            </h3>
+          </div>
+          <p>
+            After running this command, you'll be shown some basic configuration prompts. At the end you'll get a response: `Live at https://xyz.flowershow.sites/...`
+          </p>
+        </div>
+        <img src="/assets/images/arrow_left.png" alt="" className="absolute right-1/3  -rotate-[45deg] bottom-0 translate-y-1/2 -scale-x-100"/>
+      </div>
+      <div className="relative grid grid-cols-1 gap-12 mt-16 md:grid-cols-2 md:gap-16">
+        <div>
+          <div className="flex items-center space-x-4 sm:space-x-8">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-sky-200 bg-sky-100 text-xl text-sky-600 ring-2 ring-white dark:border-sky-900 dark:bg-[#163C57] dark:text-sky-500 dark:ring-gray-950">
+              3
+            </div>
+            <h3 className="m-0">
+              See your website online! 🎊
+            </h3>
+          </div>
+        </div>
+        <div>
+          <img src="/assets/images/obsidian_dark.png" alt="" className="rounded-lg shadow-xl" />
+        </div>
+      </div> 
+    </div>
   </div>
 </div>
 
@@ -235,4 +278,3 @@ Our goal is to make using Flowershow as seamless as possible. To facilitate smoo
   </div>
 </div>
 
-</div>
