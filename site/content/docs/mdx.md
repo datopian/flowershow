@@ -299,3 +299,119 @@ You can also use comments in expressions with JavaScript's multiline comment syn
 ```md
 {/* A comment! */}
 ```
+
+## MDX components
+
+MDX files are compiled to components, so they can be imported and used the same way as React components.
+
+<Callout>
+The main content of `.mdx` is exported as the default export.
+</Callout>
+
+### Simple components
+
+**Example:**
+
+`test.mdx` file:
+
+```md
+*Hi! I'm an MDX component!*
+```
+Import in another MDX file:
+
+```md
+import ExampleMDXComponent from "../components/custom/test.mdx"
+
+<ExampleMDXComponent />
+```
+
+**Renders as:**
+
+import MDXComponent from "../components/custom/test.mdx"
+
+<MDXComponent />
+
+---
+
+### Components with props
+
+**Example:**
+
+`test2.mdx` file:
+
+```md
+Hello {props.name.toUpperCase()}
+
+*I'm an MDX component!*
+
+The current year is {props.year}
+```
+
+Import in another MDX file:
+
+```md
+import MDXComponent2 from "../components/custom/test2.mdx"
+
+<MDXComponent2 name="John" year="2022" />
+```
+
+**Renders as:**
+
+import MDXComponent2 from "../components/custom/test2.mdx"
+
+<MDXComponent2 name="John" year="2022" />
+
+---
+
+#### Special `components` prop
+
+There is a special `components` prop, which allows you to pass other components to your MDX components. This prop takes an object mapping component names to components.
+
+**Example:**
+
+`test3.mdx` file:
+
+```md
+Hello *<Planet />*
+```
+
+Import in another MDX file and pass an object with `Planet` key and function that returns a JSX component as its value:
+
+```md
+import MDXComponent3 from "../components/custom/test3.mdx"
+
+<MDXComponent3 components={{Planet: () => <span style={{color: 'tomato'}}>Pluto</span>}} />
+```
+
+**Renders as:**
+
+import MDXComponent3 from "../components/custom/test3.mdx"
+
+<MDXComponent3 components={{Planet: () => <span style={{color: 'tomato'}}>Pluto</span>}} />
+
+### MDX components with children
+
+**Example:**
+
+`test4.mdx` file:
+
+```md
+import MDXComponent1 from '../components/custom/test.mdx'
+
+I'm an MDX component and here is my child component:
+*<MDXComponent1 />*
+```
+
+Import in another MDX file:
+
+```md
+import MDXComponent4 from "../components/custom/test4.mdx"
+
+<MDXComponent4 />
+```
+
+**Renders as:**
+
+import MDXComponent4 from "../components/custom/test4.mdx"
+
+<MDXComponent4 />
