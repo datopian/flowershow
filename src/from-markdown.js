@@ -3,9 +3,11 @@ function wikiLinkImageFormats (extension) {
     /\.jpe?g$/, /\.a?png$/, /\.webp$/, /\.avif$/, /\.gif$/, /\.svg$/, /\.bmp$/, /\.ico$/
   ].map(rgx => rgx.test(extension)).filter(Boolean)
 
-  if (!imageFormats.includes(true)) return false
+  const strippedExtension = extension.split('.')[1]
 
-  return imageFormats.includes(true)
+  if (!imageFormats.includes(true)) return [false, strippedExtension]
+
+  return [imageFormats.includes(true), strippedExtension]
 }
 
 function fromMarkdown (opts = {}) {
@@ -59,8 +61,8 @@ function fromMarkdown (opts = {}) {
     //   wikiLink.value = value
     // }
 
-    // const wikiLinkImage = /\.webp$/.test(wikiLink.value)
-    const wikiLinkImage = wikiLinkImageFormats(wikiLink.value)
+    // const wikiLinkImage = /\.webp$/.test(wikiLink.value) && wikiLinkImageFormats(wikiLink.value)
+    const wikiLinkImage = token.isType === 'images'
 
     const pagePermalinks = pageResolver(wikiLink.value)
     let permalink = pagePermalinks.find((p) => {
@@ -109,6 +111,13 @@ function fromMarkdown (opts = {}) {
           value: displayName
         }
       ]
+    }
+
+    const isNotImage = wikiLinkImageFormats(wikiLink.value)
+
+    if (wikiLinkImage && !isNotImage[0]) {
+      console.warn(`Document type ${isNotImage[1]} is not support yet for transclusion`)
+      wikiLink.data.hName = ''
     }
   }
 

@@ -35,9 +35,14 @@ function wikiLink (opts = {}) {
     return start
 
     function start (code) {
-      if (code === startMarker.charCodeAt(startMarkerCursor) || code === imageStartMarker.charCodeAt(startMarkerCursor)) {
+      if (code === startMarker.charCodeAt(startMarkerCursor)) {
         effects.enter('wikiLink')
         effects.enter('wikiLinkMarker')
+
+        return consumeStart(code)
+      } else if (code === imageStartMarker.charCodeAt(startMarkerCursor)) {
+        effects.enter('wikiLink', { isType: 'images' })
+        effects.enter('wikiLinkMarker', { isType: 'images' })
 
         return consumeStart(code)
       } else {

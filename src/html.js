@@ -1,3 +1,5 @@
+import { wikiLinkImageFormats } from './from-markdown'
+
 function html (opts = {}) {
   const permalinks = opts.permalinks || []
   const defaultPageResolver = (name) => {
@@ -53,13 +55,26 @@ function html (opts = {}) {
       classNames += ' ' + newClassName
     }
 
-    this.tag(wikilinkImage ? `<img src="${hrefTemplate(permalink)}" alt="${displayName}" class="${classNames}" />`
-      : '<a href="' + hrefTemplate(permalink) +
-        '" class="' + classNames +
-        '">'
-    )
-    !wikilinkImage && this.raw(displayName)
-    !wikilinkImage && this.tag('</a>')
+    const isNotImage = wikiLinkImageFormats(wikiLink.value)
+
+    // this.tag(wikilinkImage ? `<img src="${hrefTemplate(permalink)}" alt="${displayName}" class="${classNames}" />`
+    //   : '<a href="' + hrefTemplate(permalink) +
+    //     '" class="' + classNames +
+    //     '">'
+    // )
+
+    // !wikiLinkImage && this.raw(displayName)
+    // !wikiLinkImage && this.tag('</a>')
+
+    if (wikilinkImage) {
+      if (!isNotImage[0]) this.tag(`<span>Document type ${isNotImage[1]} is not support yet for transclusion</span>`)
+
+      this.tag(`<p src="${hrefTemplate(permalink)}" alt="${displayName}" class="${classNames}" />`)
+    } else {
+      this.tag('<a href="' + hrefTemplate(permalink) + '" class="' + classNames + '">')
+      this.raw(displayName)
+      this.tag('</a>')
+    }
   }
 
   return {

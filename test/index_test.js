@@ -309,4 +309,21 @@ describe('remark-wiki-link-plus', () => {
   it('exports the plugin with named exports', () => {
     assert.equal(wikiLinkPlugin, namedWikiLinkPlugin)
   })
+
+  it('parses a wiki link that is an unsupported image', () => {
+    const processor = unified()
+      .use(markdown)
+      .use(wikiLinkPlugin, {
+        permalinks: ['test.pfg']
+      })
+
+    var ast = processor.parse('![[test.pfg]]')
+    ast = processor.runSync(ast)
+
+    visit(ast, 'wikiLink', (node) => {
+      assert.equal(node.data.exists, true)
+      assert.equal(node.data.hName, '')
+      assert.equal(node.data.hProperties.className, 'internal')
+    })
+  })
 })
