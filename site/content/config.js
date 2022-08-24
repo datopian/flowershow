@@ -1,6 +1,5 @@
 const config = {
   title: 'Flowershow',
-  description: 'Turn your markdown notes into an elegant website and tailor it to your needs. Flowershow is easy to use, fully-featured, Obsidian compatible and open-source.',
   analytics: 'G-RQWLTRWBS2',
   navLinks: [
     { href: '/#overview', name: 'Overview' },
@@ -10,7 +9,11 @@ const config = {
     { href: 'https://github.com/flowershow/flowershow/discussions', name: 'Forum' },
   ],
   nextSeo: {
+    title: 'Flowershow',
+    description: 'Turn your markdown notes into an elegant website and tailor it to your needs. Flowershow is easy to use, fully-featured, Obsidian compatible and open-source.',
+    canonical: 'https://previews-823b8d.netlify.live',
     openGraph: {
+      title: 'Flowershow',
       images: [
         {
           url: 'https://flowershow.app/assets/images/frontpage-screenshot.jpg',
