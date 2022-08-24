@@ -20,22 +20,13 @@ layout: unstyled
               type="email"
               required="required"
               placeholder="Enter your email"
-              className="block w-full px-2 py-3 text-base rounded-md bg-slate-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900
-                sm:flex-1
-              "
-            />
+              className="block w-full px-2 py-3 text-base rounded-md bg-slate-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900 sm:flex-1"/>
             <input type="hidden" name="form-name" value="get-updates" />
-            <button type="submit"
-              className="mt-3 w-full px-6 py-3 border border-transparent text-base font-medium rounded-md text-slate-900 bg-sky-300
-                hover:bg-sky-200 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300/50 active:bg-sky-500
-                sm:mt-0 sm:ml-3 sm:flex-shrink-0 sm:inline-flex sm:items-center sm:w-auto"
-              >
+            <button type="submit" className="mt-3 w-full px-6 py-3 border border-transparent text-base font-medium rounded-md text-slate-900 bg-sky-300 hover:bg-sky-200 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300/50 active:bg-sky-500 sm:mt-0 sm:ml-3 sm:flex-shrink-0 sm:inline-flex sm:items-center sm:w-auto">
               Notify me
             </button>
           </form>
-          <p className="mt-3 text-sm text-slate-300 sm:mt-4">
-            <span>We are actively trialling Flowershow before wide release. If you'd like to help us test it or be first on the list to use please sign up.</span>
-          </p>
+          <p className="mt-3 text-sm text-slate-300 sm:mt-4">We are actively trialling Flowershow before wide release. If you'd like to help us test it or be first on the list to use please sign up.</p>
         </div>
         <p className="my-10 text-l tracking-wide">
           <span>A project of</span>
@@ -61,68 +52,41 @@ layout: unstyled
 <div className="py-10 sm:px-2 lg:relative lg:px-0" id="overview">
   <div className="prose dark:prose-invert mx-auto max-w-6xl px-4 lg:max-w-6xl lg:px-8 xl:px-12">
     <h2 className="text-center">What is Flowershow?</h2>
-    Flowershow is an open-source tool for easily converting your markdown files into an elegant website. It's built on a standard, modern web stack – React, Next.js, and Tailwind and shipped with a basic default theme to get you started with just a few clicks.
+    <p>Flowershow is an open-source tool for easily converting your markdown files into an elegant website. It's built on a standard, modern web stack – React, Next.js, and Tailwind and shipped with a basic default theme to get you started with just a few clicks.</p>
     <div className="not-prose my-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
-
       <div className="group relative rounded-xl border border-slate-200 dark:border-slate-800">
         <div className="absolute -inset-px rounded-xl border-2 border-transparent opacity-0 [background:linear-gradient(var(--quick-links-hover-bg,theme(colors.sky.50)),var(--quick-links-hover-bg,theme(colors.sky.50)))_padding-box,linear-gradient(to_top,theme(colors.indigo.400),theme(colors.cyan.400),theme(colors.sky.500))_border-box] group-hover:opacity-100 dark:[--quick-links-hover-bg:theme(colors.slate.800)]" />
         <div className="relative overflow-hidden rounded-xl p-6">
           <img src="/assets/images/obsidian_icon.png" className="h-12 w-auto" />
-          <h2 className="mt-4 font-display text-base text-slate-900 dark:text-white">
-            <span className="absolute -inset-px rounded-xl" />
-            Crafted for Obsidian
-          </h2>
-          <p className="mt-1 text-sm text-slate-700 dark:text-slate-400">
-            Works with your existing Obsidian notes out of the box. No need to modify the syntax or change file layout. Not an obsidian fan? Flowershow will work with any CommonMark or GFM markdown files.
-          </p>
+          <h2 className="mt-4 font-display text-base text-slate-900 dark:text-white">Crafted for Obsidian</h2>
+          <p className="mt-1 text-sm text-slate-700 dark:text-slate-400">Works with your existing Obsidian notes out of the box. No need to modify the syntax or change file layout. Not an obsidian fan? Flowershow will work with any CommonMark or GFM markdown files.</p>
         </div>
       </div>
-
       <div className="group relative rounded-xl border border-slate-200 dark:border-slate-800">
         <div className="absolute -inset-px rounded-xl border-2 border-transparent opacity-0 [background:linear-gradient(var(--quick-links-hover-bg,theme(colors.sky.50)),var(--quick-links-hover-bg,theme(colors.sky.50)))_padding-box,linear-gradient(to_top,theme(colors.indigo.400),theme(colors.cyan.400),theme(colors.sky.500))_border-box] group-hover:opacity-100 dark:[--quick-links-hover-bg:theme(colors.slate.800)]" />
         <div className="relative overflow-hidden rounded-xl p-6">
           <img src="/assets/images/park.png" className="h-12 w-auto" />
-          <h2 className="mt-4 font-display text-base text-slate-900 dark:text-white">
-            <span className="absolute -inset-px rounded-xl" />
-            Elegant & Functional
-          </h2>
-          <p className="mt-1 text-sm text-slate-700 dark:text-slate-400">
-            Clean and elegant default theme with dark and light mode, hero, navbar, backlinks section and support for internal links, backlinks, math, mermaid, callouts and more.
-          </p>
+          <h2 className="mt-4 font-display text-base text-slate-900 dark:text-white">Elegant & Functional</h2>
+          <p className="mt-1 text-sm text-slate-700 dark:text-slate-400">Clean and elegant default theme with dark and light mode, hero, navbar, backlinks section and support for internal links, backlinks, math, mermaid, callouts and more.</p>
         </div>
       </div>
-
       <div className="group relative rounded-xl border border-slate-200 dark:border-slate-800">
         <div className="absolute -inset-px rounded-xl border-2 border-transparent opacity-0 [background:linear-gradient(var(--quick-links-hover-bg,theme(colors.sky.50)),var(--quick-links-hover-bg,theme(colors.sky.50)))_padding-box,linear-gradient(to_top,theme(colors.indigo.400),theme(colors.cyan.400),theme(colors.sky.500))_border-box] group-hover:opacity-100 dark:[--quick-links-hover-bg:theme(colors.slate.800)]" />
         <div className="relative overflow-hidden rounded-xl p-6">
           <img src="/assets/images/farming.png" className="h-12 w-auto" />
-          <h2 className="mt-4 font-display text-base text-slate-900 dark:text-white">
-            <span className="absolute -inset-px rounded-xl" />
-            Customize and extend (if that’s your thing!)
-          </h2>
-          <p className="mt-1 text-sm text-slate-700 dark:text-slate-400">
-            Want to spice things up? Flowershow is easy to extend, tweak and customize and is built on standard, modern web stack – React, NextJS and Tailwind.
-          </p>
+          <h2 className="mt-4 font-display text-base text-slate-900 dark:text-white">Customize and extend (if that’s your thing!)</h2>
+          <p className="mt-1 text-sm text-slate-700 dark:text-slate-400">Want to spice things up? Flowershow is easy to extend, tweak and customize and is built on standard, modern web stack – React, NextJS and Tailwind.</p>
         </div>
       </div>
-
       <div className="group relative rounded-xl border border-slate-200 dark:border-slate-800">
         <div className="absolute -inset-px rounded-xl border-2 border-transparent opacity-0 [background:linear-gradient(var(--quick-links-hover-bg,theme(colors.sky.50)),var(--quick-links-hover-bg,theme(colors.sky.50)))_padding-box,linear-gradient(to_top,theme(colors.indigo.400),theme(colors.cyan.400),theme(colors.sky.500))_border-box] group-hover:opacity-100 dark:[--quick-links-hover-bg:theme(colors.slate.800)]" />
         <div className="relative overflow-hidden rounded-xl p-6">
           <img src="/assets/images/data.png" className="h-12 w-auto" />
-          <h2 className="mt-4 font-display text-base text-slate-900 dark:text-white">
-            <span className="absolute -inset-px rounded-xl" />
-            Backed by an experienced team
-          </h2>
-          <p className="mt-1 text-sm text-slate-700 dark:text-slate-400">
-            We’ve been building content and data driven products for over a decade, and we’re passionate about sharing knowledge and ideas with others.
-            We love markdown as much as we love open-source (which is a lot!).
-          </p>
+          <h2 className="mt-4 font-display text-base text-slate-900 dark:text-white">Backed by an experienced team</h2>
+          <p className="mt-1 text-sm text-slate-700 dark:text-slate-400">We’ve been building content and data driven products for over a decade, and we’re passionate about sharing knowledge and ideas with others.<br/>We love markdown as much as we love open-source (which is a lot!).</p>
         </div>
-      </div>
-  
+      </div> 
     </div>
-
   </div>
   
 
@@ -158,9 +122,7 @@ layout: unstyled
               Run `npx flowershow publish` in this folder...
             </h3>
           </div>
-          <p>
-            After running this command, you'll be shown some basic configuration prompts. At the end you'll get a response: `Live at https://xyz.flowershow.sites/...`
-          </p>
+          <p>After running this command, you'll be shown some basic configuration prompts. At the end you'll get a response: `Live at https://xyz.flowershow.sites/...`</p>
         </div>
         <div className="lg:hidden">
           <img src="/assets/images/npx.png" alt="" className="m-0 lg:max-h-[20rem]"/>
@@ -173,9 +135,7 @@ layout: unstyled
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-sky-200 bg-sky-100 text-xl text-sky-600 ring-2 ring-white dark:border-sky-900 dark:bg-[#163C57] dark:text-sky-500 dark:ring-gray-950">
               3
             </div>
-            <h3 className="m-0">
-              ... and see your website online! 🎊
-            </h3>
+            <h3 className="m-0">... and see your website online! 🎊</h3>
           </div>
         </div>
         <div>
@@ -189,8 +149,6 @@ layout: unstyled
 <div className="py-10 sm:px-2 lg:relative lg:px-0" id="features">
   <div className="prose dark:prose-invert mx-auto max-w-2xl px-4 lg:max-w-4xl lg:px-8 xl:px-12">
     <h2 className="text-center">Features</h2>
-
-
 
 Here are some of the cool features that are currently supported by Flowershow, and some that we're intensively working on.
 
@@ -274,7 +232,7 @@ Our goal is to make using Flowershow as seamless as possible. To facilitate smoo
 <div className="py-10 sm:px-2 lg:relative lg:px-0">
   <div className="prose dark:prose-invert mx-auto max-w-2xl px-4 lg:max-w-4xl lg:px-8 xl:px-12">
     <h2 className="text-center">Why the name?</h2>
-    Flowershow is about sharing your digital garden -- putting it "on show" to the world. And what do you have in your garden? Flowers! Hence "Flowershow": it shows off your digital garden to the world!
+    <p>Flowershow is about sharing your digital garden -- putting it "on show" to the world. And what do you have in your garden? Flowers! Hence "Flowershow": it shows off your digital garden to the world!</p>
   </div>
 </div>
 
