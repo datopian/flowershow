@@ -1,7 +1,7 @@
 import { NextSeo } from 'next-seo'
 import Head from 'next/head'
 import { Pre } from './Pre'
-import config from '../content/config'
+import siteConfig from '../config/siteConfig'
 
 const components = {
   Head,
@@ -15,24 +15,25 @@ const components = {
 
 export default function MdxPage({ children, ...rest }) {
   const { Component, frontMatter } = children;
+  const seoImageUrl = siteConfig.authorUrl + frontMatter.image
+  
   return (
     <>
       <NextSeo 
-        title={frontMatter?.title}
-        description={frontMatter?.description}
+        title={frontMatter.title}
         openGraph={{
           title: frontMatter.title,
           description: frontMatter.description,
           images: frontMatter.image
             ? [
                 {
-                  url: frontMatter.image,
+                  url: seoImageUrl,
                   width: 1200,
                   height: 627,
-                  alt: title
+                  alt: frontMatter.title
                 }
-              ] : config.nextSeo.openGraph.images,
-          ...config.nextSeo.openGraph,
+              ] 
+            : siteConfig.nextSeo.openGraph.images,
         }}
       />
       <Component
