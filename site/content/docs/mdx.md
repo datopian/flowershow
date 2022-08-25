@@ -146,17 +146,6 @@ Hooray! 🎊
 
 ---
 
-❕ In order to allow for clean upgrades to future Flowershow templates' versions, you should keep your custom components outside the Flowershow's template `components` folder (`/templates/default/components`). The best solution is creating a directory next to the directory with your content and create a symlink to it inside `/templates/default/components`.
-
-```bash
-cd templates/default/components
-ln -s <path-to-your-components-folder> custom
-```
-
-For example, in the repository of this website, we have our content in `/site/content` folder, so we add any custom components to `site/components` folder (not in `templates/default/components`).
-
-`custom` can be any name of your choice. It will then be a part of the import path, e.g. `import { MyComponent } from '../components/custom/MyComponent.jsx'`. 
-
 #### Importing data
 
 Another powerful thing you can do thanks to `import` statements is loading data from external files.
@@ -298,4 +287,159 @@ You can also use comments in expressions with JavaScript's multiline comment syn
 
 ```md
 {/* A comment! */}
+```
+
+## MDX components
+
+If you're not familiar with React or you just need a very basic components that will serve as templates for some parts of Markdown you would normally have to copy over and over again only to make some minor adjustments to them, MDX components may be the way to go. MDX components, in contrast to React components, are written in MDX. And since all MDX files are compiled to components, they can be imported and used the same way as React components.
+
+<Callout>
+The main content of `.mdx` is exported as the default export.
+</Callout>
+
+### Simple components
+
+Here is an example of a simple, static component, written only with Markdown syntax.
+
+**Example:**
+
+`test.mdx` file:
+
+```md
+*Hi! I'm an MDX component!*
+```
+Import in another MDX file:
+
+```md
+import ExampleMDXComponent from "../components/custom/test.mdx"
+
+<ExampleMDXComponent />
+```
+
+**Renders as:**
+
+import MDXComponent from "../components/custom/test.mdx"
+
+<MDXComponent />
+
+---
+
+### Components with props
+
+The above example of an MDX components isn't very useful though, as it doesn't allow you to configure the way it renders in any way. It only contains a piece of Markdown, which will be inserted as is wherever you use it. However, MDX components also allow you to pass data to them and thus control the way they are rendered. This data is available in MDX components as `props`.
+
+**Example:**
+
+`test2.mdx` file:
+
+```md
+Hello {props.name.toUpperCase()}
+
+*I'm an MDX component!*
+
+The current year is {props.year}
+```
+
+Import in another MDX file:
+
+```md
+import MDXComponent2 from "../components/custom/test2.mdx"
+
+<MDXComponent2 name="John" year="2022" />
+```
+
+**Renders as:**
+
+import MDXComponent2 from "../components/custom/test2.mdx"
+
+<MDXComponent2 name="John" year="2022" />
+
+---
+
+#### Special `components` prop
+
+There is a special `components` prop, which allows you to pass other components to your MDX components. This prop takes an object mapping component names to components.
+
+**Example:**
+
+`test3.mdx` file:
+
+```md
+Hello *<Planet />*
+```
+
+Import in another MDX file and pass an object with `Planet` key and function that returns a JSX component as its value:
+
+```md
+import MDXComponent3 from "../components/custom/test3.mdx"
+
+<MDXComponent3 components={{Planet: () => <span style={{color: 'tomato'}}>Pluto</span>}} />
+```
+
+**Renders as:**
+
+import MDXComponent3 from "../components/custom/test3.mdx"
+
+<MDXComponent3 components={{Planet: () => <span style={{color: 'tomato'}}>Pluto</span>}} />
+
+### MDX components with children
+
+You can also import MDX components in other MDX components, like so:
+
+**Example:**
+
+`test4.mdx` file:
+
+```md
+import MDXComponent1 from '../components/custom/test.mdx'
+
+I'm an MDX component and here is my child component:
+*<MDXComponent1 />*
+```
+
+Import in another MDX file:
+
+```md
+import MDXComponent4 from "../components/custom/test4.mdx"
+
+<MDXComponent4 />
+```
+
+**Renders as:**
+
+import MDXComponent4 from "../components/custom/test4.mdx"
+
+<MDXComponent4 />
+
+## Where to store your custom components
+
+In order to allow for clean upgrades to future Flowershow templates' versions, you should keep your custom components outside the Flowershow's template `components` folder, e.g. in the parent directory of your content folder. For example:
+
+```bash
+my-flowershow-website
+├── site
+│   ├── components
+│   └── content
+└── templates
+    └── default
+```
+
+This would already work, however, import paths would look like this:
+
+```md
+import MyComponent from "../../site/components/MyComponent.jsx"
+```
+
+... which is not very clean and can be confusing. In order to make the paths a bit simpler you can create a symlink in the Flowershow's template components folder (`templates/default/components`) to the folder with your custom components (e.g. `site/components`):
+
+```bash
+cd templates/default/components
+ln -s <path-to-your-components-folder> custom
+```
+
+`custom` can be any name of your choice. It will then be a part of the import path, e.g. `import { MyComponent } from '../components/custom/MyComponent.jsx'`. 
+
+Now, your custom components can be imported using this path:
+```md
+import MyComponent from "../components/custom/MyComponent.jsx"
 ```
