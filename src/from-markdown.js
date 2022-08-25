@@ -62,7 +62,7 @@ function fromMarkdown (opts = {}) {
     // }
 
     // const wikiLinkImage = /\.webp$/.test(wikiLink.value) && wikiLinkImageFormats(wikiLink.value)
-    const wikiLinkImage = token.isType === 'images'
+    const wikiLinkImage = token.isType === 'transclusions'
 
     const pagePermalinks = pageResolver(wikiLink.value)
     let permalink = pagePermalinks.find((p) => {

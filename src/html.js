@@ -67,9 +67,9 @@ function html (opts = {}) {
     // !wikiLinkImage && this.tag('</a>')
 
     if (wikilinkImage) {
-      if (!isNotImage[0]) this.tag(`<span>Document type ${isNotImage[1]} is not support yet for transclusion</span>`)
+      if (!isNotImage[0]) this.tag(`<span class=${classNames} no-support>Document type ${isNotImage[1]} is not support yet for transclusion</span>`)
 
-      this.tag(`<p src="${hrefTemplate(permalink)}" alt="${displayName}" class="${classNames}" />`)
+      this.tag(`<img src="${hrefTemplate(permalink)}" alt="${displayName}" class="${classNames}" />`)
     } else {
       this.tag('<a href="' + hrefTemplate(permalink) + '" class="' + classNames + '">')
       this.raw(displayName)

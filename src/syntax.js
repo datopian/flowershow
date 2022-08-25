@@ -41,8 +41,8 @@ function wikiLink (opts = {}) {
 
         return consumeStart(code)
       } else if (code === imageStartMarker.charCodeAt(startMarkerCursor)) {
-        effects.enter('wikiLink', { isType: 'images' })
-        effects.enter('wikiLinkMarker', { isType: 'images' })
+        effects.enter('wikiLink', { isType: 'transclusions' })
+        effects.enter('wikiLinkMarker', { isType: 'transclusions' })
 
         return consumeStart(code)
       } else {
