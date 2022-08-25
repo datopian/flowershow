@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { MobileNavigation } from './MobileNavigation'
 import siteConfig from '../config/siteConfig'
 import { Search } from './Search'
+import { ThemeSelector } from './ThemeSelector'
 
 function GitHubIcon(props) {
   return (
@@ -31,7 +32,7 @@ export default function Header() {
   return (
     <header
       className={`
-        sticky top-0 z-50 flex flex-wrap items-center justify-between px-4 py-5 transition duration-500 sm:px-6 lg:px-8
+        sticky top-0 z-50 flex flex-wrap items-center justify-between px-4 py-5 sm:px-6 lg:px-8
         ${isScrolled
           ? 'dark:bg-slate-900/95 backdrop-blur [@supports(backdrop-filter:blur(0))]:bg-slate-900/75'
           : 'dark:bg-slate-900'}
@@ -74,6 +75,7 @@ export default function Header() {
       </div>
       <div className="relative flex items-center basis-0 justify-end gap-6 sm:gap-8 md:flex-grow">
         <Search />
+        <ThemeSelector />
         <Link href="https://github.com/flowershow/flowershow">
           <a className="group" aria-label="GitHub">
             <GitHubIcon className="h-6 w-6 dark:fill-slate-400 group-hover:fill-slate-500 dark:group-hover:fill-slate-300" />
