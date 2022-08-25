@@ -36,6 +36,12 @@ Finally, we ️thought a wider community could benefit from what we were doing. 
 
 Rufus Pollock is an entrepeneur and technologist who has worked on data platforms and open data for over twenty years with governments, businesses and non-profits all over the world. He is Founder of Open Knowledge Foundation, Founder and President of Datopian and an Ashoka and Shuttleworth Fellow. He studied Mathematics at the University of Cambridge, going on to obtain a PhD in Economics and become a research fellow.
 
+### Ola Rubaj
+
+<img className="h-20 w-20 rounded-full lg:w-24 lg:h-24" src="https://secure.gravatar.com/avatar/d7dc90fd29be2f58ccaee994cf2b841a?s=300" alt="" />
+
+Ola is a front-end developer with a keen eye for details and aesthetics. She strives for excellence and thrives on challenges. She's also an optimist who can turn any adversity into an opportunity. When not coding she spends her free time with her nose in a book or down some rabbit hole learning. She also has a "thing" for flowers.
+
 ## The Bigger Picture
 
 ### We need better collective sensemaking
