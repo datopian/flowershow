@@ -50,8 +50,10 @@ layout: unstyled
         </p>
       </div>
       <div className="relative">
-        <img src="/assets/images/obsidian_dark.png" alt="" className="relative -top-14 w-3/4 rounded-lg shadow-xl" />
-        <img src="/assets/images/flowershow_chrome_mac_dark.png" alt="" className=" absolute top-10 left-1/3 w-3/4 rounded-lg shadow-xl" />
+        <img src="/assets/images/obsidian_dark_new.png" alt="" className="relative -top-14 w-3/4 rounded-lg hidden dark:block" />
+        <img src="/assets/images/flowershow_dark.png" alt="" className=" absolute top-10 left-1/3 w-3/4 rounded-lg hidden dark:block" />
+        <img src="/assets/images/obsidian_light_new.png" alt="" className="relative -top-14 w-3/4 rounded-lg dark:hidden" />
+        <img src="/assets/images/flowershow_light.png" alt="" className=" absolute top-10 left-1/3 w-3/4 rounded-lg dark:hidden" />
       </div>
     </div>
   </div>
