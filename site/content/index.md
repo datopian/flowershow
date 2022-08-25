@@ -95,7 +95,8 @@ layout: unstyled
 <div className="py-10 sm:px-2 lg:relative lg:px-0" id="how">
   <div className="prose dark:prose-invert mx-auto max-w-6xl px-4 lg:max-w-6xl lg:px-8 xl:px-12">
     <h2 className="text-center">How Flowershow works?</h2>
-    <p>🚧 Note: this is an overview of how Flowershow is going to work in the future. The CLI tool is still a work in progress, so the following steps won't work yet.</p>
+    <p className="text-center">🚧 Coming soon! 🚧</p>
+    <p>We are actively trialling Flowershow before wide release. If you'd like to help us test or be first on the list to use it please sign up using the form at the top of this page.</p>
     <div className="relative grid grid-cols-1 gap-6 my-4 lg:my-16 lg:grid-cols-2 lg:gap-16">
       <div>
         <div className="flex items-center space-x-4 sm:space-x-8">
