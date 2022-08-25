@@ -15,12 +15,12 @@ export default function Layout({ children, title='' }) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <div className="relative min-h-screen pb-24 dark:bg-slate-900">
+      <div className="relative min-h-screen pb-52 dark:bg-slate-900">
         <Header />
         <main>
           {children}
         </main>
-        <footer className="absolute bottom-0 dark:bg-slate-900 prose dark:prose-invert max-w-none flex flex-col items-center justify-center w-full h-26 py-12">
+        <footer className="absolute bottom-0 dark:bg-slate-900 prose dark:prose-invert max-w-none flex flex-col items-center justify-center w-full h-auto pt-10 pb-20">
           <div className="flex ml-8 mr-6 sm:mr-8 md:mr-0">
             {siteConfig.navLinks.map((item) => (
               <Link key={item.href} href={item.href}>
