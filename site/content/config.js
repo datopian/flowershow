@@ -9,9 +9,9 @@ const config = {
     { href: 'https://github.com/flowershow/flowershow/discussions', name: 'Forum' },
   ],
   nextSeo: {
-    title: 'Flowershow',
+    titleTemplate: '%s | Flowershow',
     description: 'Turn your markdown notes into an elegant website and tailor it to your needs. Flowershow is easy to use, fully-featured, Obsidian compatible and open-source.',
-    canonical: 'https://previews-823b8d.netlify.live',
+    canonical: 'https://flowershow.app',
     openGraph: {
       title: 'Flowershow',
       images: [
