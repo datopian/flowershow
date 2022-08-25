@@ -94,6 +94,17 @@ image: /assets/images/your-image-path.jpg
 ---
 ```
 
+<Callout>
+❕ You should set your website's url in your config file so that the correct url path for the image is generated.
+</Callout>
+
+```js
+// in config.js
+const config = {
+  authorUrl: "https://your-website.com"
+}
+```
+
 Here is a preview of how it should look when sharing the website link on social sites, for example on Twitter:
 
 ![[twitter-card.jpg]]
