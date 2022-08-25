@@ -24,7 +24,7 @@ We are actively trialling Flowershow before wide release. If you'd like to help 
     type="email"
     required="required"
     placeholder="Enter your email"
-    className="block w-full px-2 py-0 text-base rounded-md bg-slate-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900
+    className="block w-full px-2 py-0 text-base rounded-md bg-slate-200 dark:bg-slate-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900
       sm:flex-1
     "
   />
