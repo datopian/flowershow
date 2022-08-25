@@ -101,12 +101,6 @@ This is where a lot of MDX power comes from: support for ESM (ECMAScript Modules
 
 #### Importing components
 
-<Callout>
-❕ You should try to keep your custom components outside of the Flowershow's template folder with components (`/templates/default/components`). You can do this by creating a directory next to the directory with your content (in our example it will be `/site/components`) and create a symlink to it inside `/templates/default/components`. 
-
-(For testing you could also just add your test components directly to our `templates/default/components`. Just remember to change the paths from this guide to `../components/XYZ.jsx`)
-</Callout>
-
 To see this in action, let's create a React component in the `/site/components` folder:
 
 ```js
@@ -151,6 +145,17 @@ import { MyComponent } from '../components/custom/MyComponent.jsx'
 Hooray! 🎊
 
 ---
+
+❕ In order to allow for clean upgrades to future Flowershow templates' versions, you should keep your custom components outside the Flowershow's template `components` folder (`/templates/default/components`). The best solution is creating a directory next to the directory with your content and create a symlink to it inside `/templates/default/components`.
+
+```bash
+cd templates/default/components
+ln -s <path-to-your-components-folder> custom
+```
+
+For example, in the repository of this website, we have our content in `/site/content` folder, so we add any custom components to `site/components` folder (not in `templates/default/components`).
+
+`custom` can be any name of your choice. It will then be a part of the import path, e.g. `import { MyComponent } from '../components/custom/MyComponent.jsx'`. 
 
 #### Importing data
 
