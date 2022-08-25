@@ -311,6 +311,7 @@ The main content of `.mdx` is exported as the default export.
 ### Simple components
 
 Here is an example of a simple, static component, written only with Markdown syntax.
+
 **Example:**
 
 `test.mdx` file:
