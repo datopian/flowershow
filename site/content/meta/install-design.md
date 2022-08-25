@@ -1,6 +1,65 @@
 # Install and Upgrade - Design
 
-# Mock-out of install / upgrade - 2022-07-16
+# Notes
+
+## Reflections - 2022-08-24
+
+See [[notes/upgrading-template-apps]]
+
+- Installation / initialization
+  - NB: We are going for the all in one so no need for a scaffolder
+- Upgrading: main issue is conflicts
+  - Merges: user and flowershow have changed a file => try and avoid user changing the file
+
+Imagine the perfect world
+
+```
+mkdir my-garden
+cd my-garden
+vi index.md
+# add some content
+
+flowershow init
+```
+
+Recommended layout for your digital garden
+
+```
+components
+content
+```
+
+### Init
+
+* degit seems one of the most efficient ways to get the template down
+* degit does overwrite
+* ? degit won't remove old files
+
+```bash=
+mkdir -p .flowershow/app
+cd .flowershow/app
+npx degit flowershow/flowershow/templates/default
+
+# symlink content directory
+ln -s ../../ content
+ln -s ../../components components/custom
+```
+
+### Run
+
+```
+flowershow run
+```
+
+What it does
+
+```
+cd .flowershow/app
+npm run dev
+open localhost:3000
+```
+
+## Mock-out of install / upgrade - 2022-07-16
 
 In this case upgrading an existing NextJS app to use Flowershow.
 
