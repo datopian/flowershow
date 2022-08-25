@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps }) {
   // end Google Analytics
 
   return (
-    <ThemeProvider attribute="class" defaultTheme="dark">
+    <ThemeProvider disableTransitionOnChange attribute="class" defaultTheme={siteConfig.theme.default}>
       <DefaultSeo defaultTitle={siteConfig.title} {...siteConfig.nextSeo} />
       {/* Global Site Tag (gtag.js) - Google Analytics */}
       {siteConfig.analytics &&
