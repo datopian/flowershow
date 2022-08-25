@@ -302,7 +302,7 @@ You can also use comments in expressions with JavaScript's multiline comment syn
 
 ## MDX components
 
-MDX files are compiled to components, so they can be imported and used the same way as React components.
+If you're not familiar with React or you just need a very basic components that will serve as templates for some parts of Markdown you would normally have to copy over and over again only to make some minor adjustments to them, MDX components may be the way to go. MDX components, in contrast to React components, are written in MDX. And since all MDX files are compiled to components, they can be imported and used the same way as React components.
 
 <Callout>
 The main content of `.mdx` is exported as the default export.
@@ -310,6 +310,7 @@ The main content of `.mdx` is exported as the default export.
 
 ### Simple components
 
+Here is an example of a simple, static component, written only with Markdown syntax.
 **Example:**
 
 `test.mdx` file:
@@ -334,6 +335,8 @@ import MDXComponent from "../components/custom/test.mdx"
 ---
 
 ### Components with props
+
+The above example of an MDX components isn't very useful though, as it doesn't allow you to configure the way it renders in any way. It only contains a piece of Markdown, which will be inserted as is wherever you use it. However, MDX components also allow you to pass data to them and thus control the way they are rendered. This data is available in MDX components as `props`.
 
 **Example:**
 
@@ -390,6 +393,8 @@ import MDXComponent3 from "../components/custom/test3.mdx"
 <MDXComponent3 components={{Planet: () => <span style={{color: 'tomato'}}>Pluto</span>}} />
 
 ### MDX components with children
+
+You can also import MDX components in other MDX components, like so:
 
 **Example:**
 
