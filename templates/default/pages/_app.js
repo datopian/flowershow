@@ -29,7 +29,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <ThemeProvider attribute="class" defaultTheme="dark">
-      <DefaultSeo {...siteConfig.nextSeo} />
+      <DefaultSeo defaultTitle={siteConfig.title} {...siteConfig.nextSeo} />
       {/* Global Site Tag (gtag.js) - Google Analytics */}
       {siteConfig.analytics &&
         <Script
