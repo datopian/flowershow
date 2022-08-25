@@ -146,17 +146,6 @@ Hooray! 🎊
 
 ---
 
-❕ In order to allow for clean upgrades to future Flowershow templates' versions, you should keep your custom components outside the Flowershow's template `components` folder (`/templates/default/components`). The best solution is creating a directory next to the directory with your content and create a symlink to it inside `/templates/default/components`.
-
-```bash
-cd templates/default/components
-ln -s <path-to-your-components-folder> custom
-```
-
-For example, in the repository of this website, we have our content in `/site/content` folder, so we add any custom components to `site/components` folder (not in `templates/default/components`).
-
-`custom` can be any name of your choice. It will then be a part of the import path, e.g. `import { MyComponent } from '../components/custom/MyComponent.jsx'`. 
-
 #### Importing data
 
 Another powerful thing you can do thanks to `import` statements is loading data from external files.
@@ -421,3 +410,36 @@ import MDXComponent4 from "../components/custom/test4.mdx"
 import MDXComponent4 from "../components/custom/test4.mdx"
 
 <MDXComponent4 />
+
+## Where to store your custom components
+
+In order to allow for clean upgrades to future Flowershow templates' versions, you should keep your custom components outside the Flowershow's template `components` folder, e.g. in the parent directory of your content folder. For example:
+
+```bash
+my-flowershow-website
+├── site
+│   ├── components
+│   └── content
+└── templates
+    └── default
+```
+
+This would already work, however, import paths would look like this:
+
+```md
+import MyComponent from "../../site/components/MyComponent.jsx"
+```
+
+... which is not very clean and can be confusing. In order to make the paths a bit simpler you can create a symlink in the Flowershow's template components folder (`templates/default/components`) to the folder with your custom components (e.g. `site/components`):
+
+```bash
+cd templates/default/components
+ln -s <path-to-your-components-folder> custom
+```
+
+`custom` can be any name of your choice. It will then be a part of the import path, e.g. `import { MyComponent } from '../components/custom/MyComponent.jsx'`. 
+
+Now, your custom components can be imported using this path:
+```md
+import MyComponent from "../components/custom/MyComponent.jsx"
+```
