@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps }) {
   // end Google Analytics
 
   return (
-    <ThemeProvider disableTransitionOnChange attribute="class" defaultTheme="dark">
+    <ThemeProvider disableTransitionOnChange attribute="class" defaultTheme={siteConfig.theme.default}>
       <DefaultSeo
         titleTemplate={'%s | ' + siteConfig.title}
         defaultTitle={siteConfig.title}
