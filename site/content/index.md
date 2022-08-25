@@ -20,18 +20,13 @@ layout: unstyled
               type="email"
               required="required"
               placeholder="Enter your email"
-              className="block w-full px-2 py-3 text-base rounded-md bg-slate-200 dark:bg-slate-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900
-                sm:flex-1
-              "
-            />
+              className="block w-full px-2 py-3 text-base rounded-md bg-slate-200 dark:bg-slate-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900 sm:flex-1"/>
             <input type="hidden" name="form-name" value="get-updates" />
             <button type="submit" className="mt-3 w-full px-6 py-3 border border-transparent text-base font-medium rounded-md text-slate-900 bg-sky-300 hover:bg-sky-200 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300/50 active:bg-sky-500 sm:mt-0 sm:ml-3 sm:flex-shrink-0 sm:inline-flex sm:items-center sm:w-auto">
               Notify me
             </button>
           </form>
-          <p className="mt-3 text-sm text-slate-400 dark:text-slate-300 sm:mt-4">
-            <span>We are actively trialling Flowershow before wide release. If you'd like to help us test it or be first on the list to use please sign up.</span>
-          </p>
+          <p className="mt-3 text-sm text-slate-400 dark:text-slate-300 sm:mt-4">We are actively trialling Flowershow before wide release. If you'd like to help us test it or be first on the list to use please sign up.</p>
         </div>
         <p className="my-10 text-l tracking-wide">
           <span>A project of</span>
