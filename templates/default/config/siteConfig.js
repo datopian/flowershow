@@ -18,24 +18,13 @@ const defaultConfig = {
   // site version displayed in the NavBar next to logo
   version: 'Alpha',
   // Theme
+  theme: {
+    default: 'dark',
+    toggleIcon: '/assets/images/theme-button.svg'
+  },
   navLinks: [
     { href: '/about', name: 'About' },
-  ],
-  // optional additional nextSeo content set on each page
-  // see https://github.com/garmeeh/next-seo
-  // nextSeo: {
-  //  openGraph: {
-  //     images: [
-  //       {
-  //         url: 'https://image.url/...',
-  //         alt: '',
-  //         width: 1200,
-  //         height: 627,
-  //         type: 'image/png',
-  //       }
-  //     ]
-  //   }
-  // }
+  ]
 }
 
 const siteConfig = Object.assign({}, defaultConfig, userConfig)
