@@ -33,7 +33,7 @@ export default function Layout({ children, title='' }) {
             ))}
           </div>
           <p className="flex items-center justify-center">
-            Created by
+            Made with
             <a
               href={siteConfig.authorUrl}
               target="_blank"
@@ -46,18 +46,6 @@ export default function Layout({ children, title='' }) {
               {siteConfig.author}
             </a>
           </p> 
-          <p className="flex items-center justify-center">
-            Made with
-            <a
-              href="https://flowershow.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center no-underline"
-            >
-              <img src="https://flowershow.app/assets/images/logo.svg" alt="Flowershow" className="my-0 h-6 block" />
-              Flowershow
-            </a>
-          </p>
         </footer>
       </div>
     </>
