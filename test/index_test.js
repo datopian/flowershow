@@ -326,4 +326,21 @@ describe('remark-wiki-link-plus', () => {
       assert.equal(node.data.hProperties.className, 'internal')
     })
   })
+
+  it('parses a pdf link as a transclusion', () => {
+    const processor = unified()
+      .use(markdown)
+      .use(wikiLinkPlugin, {
+        permalinks: ['test.pdf']
+      })
+
+    var ast = processor.parse('![[test.pdf]]')
+    ast = processor.runSync(ast)
+
+    visit(ast, 'wikiLink', (node) => {
+      assert.equal(node.data.exists, true)
+      assert.equal(node.data.hName, 'embed')
+      assert.equal(node.data.hProperties.className, 'internal')
+    })
+  })
 })

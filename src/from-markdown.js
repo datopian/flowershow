@@ -55,7 +55,6 @@ function fromMarkdown (opts = {}) {
 
   function exitWikiLink (token) {
     const wikiLink = this.exit(token)
-
     // if (opts.markdownFolder && wikiLink.value.includes(`${opts.markdownFolder}/`)) {
     //   const [, ...value] = wikiLink.value.split(`${opts.markdownFolder}/`)
     //   wikiLink.value = value
@@ -115,9 +114,11 @@ function fromMarkdown (opts = {}) {
 
     const isNotImage = wikiLinkImageFormats(wikiLink.value)
 
-    if (wikiLinkImage && !isNotImage[0]) {
+    if (wikiLinkImage && !isNotImage[0] && isNotImage[1] !== 'pdf') {
       console.warn(`Document type ${isNotImage[1]} is not support yet for transclusion`)
       wikiLink.data.hName = ''
+    } else if (isNotImage[1] === 'pdf') {
+      wikiLink.data.hName = 'embed'
     }
   }
 

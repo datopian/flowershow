@@ -66,10 +66,12 @@ function html (opts = {}) {
     // !wikiLinkImage && this.raw(displayName)
     // !wikiLinkImage && this.tag('</a>')
 
-    if (wikilinkImage) {
+    if (wikilinkImage && isNotImage[1] !== 'pdf') {
       if (!isNotImage[0]) this.tag(`<span class=${classNames} no-support>Document type ${isNotImage[1]} is not support yet for transclusion</span>`)
 
       this.tag(`<img src="${hrefTemplate(permalink)}" alt="${displayName}" class="${classNames}" />`)
+    } else if (isNotImage[1] === 'pdf') {
+      this.tag(`<embed width="100%" src="${hrefTemplate(permalink)}" alt="${displayName}" class="${classNames}" type="application/pdf"/>`)
     } else {
       this.tag('<a href="' + hrefTemplate(permalink) + '" class="' + classNames + '">')
       this.raw(displayName)
