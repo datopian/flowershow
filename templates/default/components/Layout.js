@@ -31,6 +31,11 @@ export default function Layout({ children, title='' }) {
                 </a>
               </Link>
             ))}
+            <Link href="/_all">
+              <a className="inline-flex items-center mr-6 px-1 pt-1 font-regular hover:text-slate-300 no-underline">
+                All
+              </a>
+            </Link>
           </div>
           <p className="flex items-center justify-center">
             Made with
