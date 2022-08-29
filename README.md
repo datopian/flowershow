@@ -21,21 +21,25 @@ Flowershow is an open-source tool for easily converting your markdown files into
 
 Here are some of the cool features that are currently supported by Flowershow, and some that are still under development.
 
-### ✅/🚧 Markdown
+### ✅ Markdown
+
 Flowershow supports **CommonMark** and **GitHub Flavoured Markdown (GFM)** syntax, e.g. code blocks, blockquotes, lists, tasks lists, and tables.
 
 [👉 Learn more](https://flowershow.app/docs/syntax)
 
 ### ✅/🚧  Obsidian extensions to Markdown
+
 Flowershow has been designed with Obsidian users in mind, and so it aims to support the whole suite of Obsidian syntax extensions, like:
+
 - internal links ✅,
 - callouts 🚧,
-- math 🚧,
-- or Mermaid diagrams 🚧,
+- math ✅,
+- or Mermaid diagrams ✅
 
 [👉 Learn more](https://flowershow.app/docs/syntax)
 
 ### ✅ Custom page layouts and components
+
 You can customize and create new layouts for your pages.
 
 [👉 Learn more](https://flowershow.app/docs/layouts)
@@ -45,32 +49,40 @@ Also, thanks to MDX support, you can use custom React components within your mar
 [👉 Learn more](https://flowershow.app/docs/custom-components)
 
 ### ✅ Tailwind support
+
 Tailwind support makes it easy to style your in-markdown HTML and custom React components.
 
 [👉 Learn more](https://flowershow.app/docs/tailwind)
 
 ### 🚧 Knowledge graph
+
 Interactive knowledge graph to see how your notes are interconnected.
 
 ### 🚧 Notes previews
+
 Wikipedia-like internal links previews on hover.
 
 ### 🚧 Themes
+
 A set of different starter themes to choose from and support for dark/light mode.
 
 ### 🚧 Forward links and Backlinks
+
 Lists of forward links used on the page and backlinks to the page from other pages.
 
 ### 🚧 Excalidraw
+
 Displaying Excalidraw sketches embedded in your notes.
 
 ### 🚧 CLI tool
+
 Our goal is to make using Flowershow as seamless as possible. To facilitate smooth bootstrapping and upgrading your website we're creating a CLI tool, that will take care of all the intricacies related to the whole process of publishing your notes.
 
 There is a lot of other exciting stuff we're working on.
 Check [our roadmap](https://flowershow.app/docs/roadmap) to learn more!
 
 ## Status
+
 Alpha version, under very active construction 👷‍🏗🚧
 
 ## Contributing
