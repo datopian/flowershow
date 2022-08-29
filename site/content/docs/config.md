@@ -1,6 +1,6 @@
 # Configuration
 
-Flowershow supports setting common configuration values using a `confing.js` file in your content directory. With it you can customize some things like website title, navigation links in the navbar, or set your google analytics key.
+Flowershow supports setting common configuration values using a `config.js` file in your content directory. With it you can customize some things like website title, navigation links in the navbar, or set your google analytics key.
 
 ## Create `config.js`
 
@@ -15,28 +15,10 @@ const userConfig = {
   authorLogo: '/images/logo.svg',
   // url to author website
   authorUrl: 'https://john.app/',
-  // Google analytics key e.g. G-XXXX
-  analytics: 'G-XXXX',
   // links to the pages you want to add to the navbar
   navLinks: [
     { href: '/about', name: 'About' },
   ],
-  // optional additional nextSeo content set on each page
-  // see https://github.com/garmeeh/next-seo
-//  nextSeo: {
-//    openGraph: {
-//      images: [
-//        {
-//          url: 'https://image.url/...',
-//          alt: '',
-//          width: 1200,
-//          height: 627,
-//          type: 'image/png',
-//        }
-//      ]
-//    }
-//  }
-
 }
 
 export default userConfig
