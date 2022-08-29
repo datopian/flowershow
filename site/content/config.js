@@ -8,6 +8,7 @@ const config = {
     { href: '/docs/roadmap', name: 'Roadmap' },
     { href: '/about', name: 'About' },
     { href: 'https://github.com/flowershow/flowershow/discussions', name: 'Forum' },
+    { href: '/_all', name: 'All' },
   ],
   nextSeo: {
     titleTemplate: '%s | Flowershow',
