@@ -18,13 +18,13 @@ export default function Layout({ children, title='' }) {
           {children}
         </main>
         <footer className="absolute bottom-0 dark:bg-slate-900 prose dark:prose-invert max-w-none flex flex-col items-center justify-center w-full h-auto pt-10 pb-20">
-          <div className="flex ml-8 mr-6 sm:mr-8 md:mr-0">
+          <div className="flex w-full flex-wrap justify-center">
             {siteConfig.navLinks.map((item) => (
               <Link key={item.href} href={item.href}>
                 <a
                   key={item.name}
                   href={item.href}
-                  className="inline-flex items-center mr-6 px-1 pt-1 font-regular hover:text-slate-300 no-underline"
+                  className="inline-flex items-center mx-4 px-1 pt-1 font-regular hover:text-slate-300 no-underline"
                   aria-current={item.current ? 'page' : undefined}
                 >
                   {item.name}
