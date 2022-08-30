@@ -1,5 +1,9 @@
 import { Callout } from '../components/TempCallout.jsx'
 
+### Table of contents
+
+---
+
 # MDX
 
 Flowershow parses all of your Markdown files as MDX. This means you not only can write your content using good old Markdown, but also enrich it with dynamic visualizations, immersive user interactions and much more thanks to support for JSX, JavaScript expressions, and ESM `import` and `export` statements. It's basically Markdown on steroids 😀💪!
