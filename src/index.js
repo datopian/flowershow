@@ -30,7 +30,7 @@ function wikiLinkPlugin (opts = { markdownFolder: '' }) {
     ...opts,
     aliasDivider: opts.aliasDivider ? opts.aliasDivider : '|',
     pageResolver: opts.pageResolver ? opts.pageResolver : (name) => {
-      const image = wikiLinkImageFormats(name)
+      const image = wikiLinkImageFormats(name)[0]
       let heading = ''
       if (!image && !name.startsWith('#') && name.match(/#/)) {
         [, heading] = name.split('#')
