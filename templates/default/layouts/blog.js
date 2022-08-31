@@ -1,7 +1,7 @@
 export default function BlogLayout ({ children, frontMatter }) {
     const { date, title, authors } = frontMatter
     return (
-      <article className="text-center font-serif prose prose-invert mx-auto p-6">
+      <article className="blog text-center font-serif prose prose-invert mx-auto p-6">
         <header>
           <div className="mb-6">
             {title && <h1>{title}</h1>}
