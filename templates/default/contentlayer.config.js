@@ -112,21 +112,23 @@ export default makeSource({
     rehypePlugins: [
       rehypeSlug,
       [rehypeAutolinkHeadings, {
+        test(element) {
+          return ['h2', 'h3', 'h4', 'h5', 'h6'].includes(element.tagName)
+            && element.properties?.id !== "table-of-contents"
+        },
         content(node) {
           return [
             h('svg', {
               xmlns: "http://www.w3.org/2000/svg",
-              fill: "none",
-              viewBox: "0 0 24 24",
-              strokeWidth: "1.5",
-              stroke: "#ab2b65",
+              fill: "#ab2b65",
+              viewBox: "0 0 20 20",
               className: "w-5 h-5",
             },
               [
                 h('path', {
-                  strokeLinecap: "round",
-                  strokeLinejoin: "round",
-                  d:"M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5"
+                  fillRule:"evenodd",
+                  clipRule:"evenodd",
+                  d:"M9.493 2.853a.75.75 0 00-1.486-.205L7.545 6H4.198a.75.75 0 000 1.5h3.14l-.69 5H3.302a.75.75 0 000 1.5h3.14l-.435 3.148a.75.75 0 001.486.205L7.955 14h2.986l-.434 3.148a.75.75 0 001.486.205L12.456 14h3.346a.75.75 0 000-1.5h-3.14l.69-5h3.346a.75.75 0 000-1.5h-3.14l.435-3.147a.75.75 0 00-1.486-.205L12.045 6H9.059l.434-3.147zM8.852 7.5l-.69 5h2.986l.69-5H8.852z"
                 })
               ]
              )
