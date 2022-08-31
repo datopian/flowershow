@@ -76,11 +76,11 @@ export default function Header() {
       <div className="relative flex items-center basis-0 justify-end gap-6 sm:gap-8 md:flex-grow">
         <Search />
         <ThemeSelector />
-        <Link href="https://github.com/flowershow/flowershow">
+        {siteConfig.github && <Link href={siteConfig.github}>
           <a className="group" aria-label="GitHub">
             <GitHubIcon className="h-6 w-6 dark:fill-slate-400 group-hover:fill-slate-500 dark:group-hover:fill-slate-300" />
           </a>
-        </Link>
+        </Link>}
       </div>
     </header>
   )
