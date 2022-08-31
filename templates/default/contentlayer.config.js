@@ -1,15 +1,15 @@
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
 import siteConfig from "./config/siteConfig";
-import remarkGfm from "remark-gfm";
-import rehypePrismPlus from "rehype-prism-plus";
-import rehypeSlug from "rehype-slug";
-import rehypeAutolinkHeadings from 'rehype-autolink-headings'
-import wikiLinkPlugin from "remark-wiki-link-plus";
-import remarkMath from "remark-math";
-import remarkToc from "remark-toc";
-import rehypeMathjax from 'rehype-mathjax';
 import codeExtra from "remark-code-extra";
 import {h} from 'hastscript'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypeMathjax from 'rehype-mathjax';
+import rehypePrismPlus from "rehype-prism-plus";
+import rehypeSlug from "rehype-slug";
+import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import remarkToc from "remark-toc";
+import wikiLinkPlugin from "remark-wiki-link-plus";
 
 const sharedFields = {
   title: { type: "string" },
@@ -61,7 +61,7 @@ export default makeSource({
   contentDirExclude: contentLayerExcludeDefaults.concat(['.flowershow', '.obsidian']),
   documentTypes: [Blog, Page],
   mdx: {
-    remarkPlugins: [ 
+    remarkPlugins: [
       remarkGfm,
       remarkMath,
       [wikiLinkPlugin, { markdownFolder: siteConfig.content }],
@@ -103,12 +103,15 @@ export default makeSource({
           }
         }
       }],
-      [remarkToc, { heading: "Table of contents" }]
+      [remarkToc, {
+        heading: "Table of contents",
+        maxDepth: "3",
+        tight: true,
+      }],
     ],
     rehypePlugins: [
       rehypeSlug,
       [rehypeAutolinkHeadings, {
-        properties: { className: "" },
         content(node) {
           return [
             h('svg', {
@@ -116,8 +119,8 @@ export default makeSource({
               fill: "none",
               viewBox: "0 0 24 24",
               strokeWidth: "1.5",
-              stroke: "#f54293",
-              className: "w-6 h-6",
+              stroke: "#ab2b65",
+              className: "w-5 h-5",
             },
               [
                 h('path', {
