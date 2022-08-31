@@ -105,7 +105,7 @@ export default makeSource({
       }],
       [remarkToc, {
         heading: "Table of contents",
-        maxDepth: "3",
+        // maxDepth: "3",
         tight: true,
       }],
     ],
