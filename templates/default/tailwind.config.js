@@ -8,6 +8,7 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      // support wider width for large screens >1440px eg. in hero
       maxWidth: {
         '8xl': '88rem',
       },

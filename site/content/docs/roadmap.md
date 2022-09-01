@@ -8,7 +8,7 @@ Flowershow is under active development and there is a lot of good stuff we plan 
 ❕ To learn more about the current work status on the features and bugs listed below (and more) check out [GitHub issues](https://github.com/flowershow/flowershow/issues) in Flowershow repo.
 </div>
 
-## Planned features 🚧
+## Planned features
 Here are **some** of the features we are currently working on. If you think we might have missed something important, or you just have an idea for some cool enhancement, let us know by creating [a GitHub issue in our repo](https://github.com/flowershow/flowershow/issues) (if it doesn't already exist). We would love to hear your opinion!
 
 ### Text highlighting

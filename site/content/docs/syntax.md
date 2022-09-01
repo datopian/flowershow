@@ -2,8 +2,6 @@
 
 Flowershow was designed with Obsidian users in mind, and so, it aims to fully support Obsidian syntax, including **CommonMark**, **GitHub Flavoured Markdown** and **Obsidian extensions**, like Wiki links.
 
----
-
 ## CommonMark
 
 Here are some of the CommonMark syntax elements supported by Flowershow.
@@ -220,11 +218,11 @@ Flowershow will convert internal links to HTML `a` tags, with their `href` attri
 
 #### Internal link types
 
-* ✅ Link to a page, e.g. `[[features]]`, which renders as [[features]]
-* ✅ Link to a page with a custom name, e.g.  `[[roadmap|Planned Features]]`, which renders as [[roadmap|Planned Features]] 
-* 🚧 Link to a specific heading within a given page `[[roadmap#Planned features 🚧]]`, which renders as [[roadmap#Planned features 🚧]]
-* 🚧 Link to a specific heading within a given page with a custom name, e.g. `[[roadmap#Features 🚧|Work in progress...]]` which renders as [[roadmap#Features 🚧|Work in progress...]]
-* 🚧 Link to a specific block (paragraph) within a given page, e.g. `[[roadmap#Planned features 🚧|Work in progress...]]`
+* ✅ Link to a page, e.g. `[[roadmap]]`, which renders as [[roadmap]]
+* ✅ Link to a page with a custom name, e.g.  `[[roadmap|Our roadmap]]`, which renders as [[roadmap|Our roadmap]] 
+* ✅ Link to a specific heading within a given page `[[roadmap#Planned features]]`, which renders as [[roadmap#Planned features]]
+* ✅ Link to a specific heading within a given page with a custom name, e.g. `[[roadmap#Planned features|🚧 working on...]]` which renders as [[roadmap#Planned features|🚧 working on...]]
+* 🚧 Link to a specific block (paragraph) within a given page, e.g. `[[roadmap#^f93ba0]]`
 * ✅ Link to an image file with supported image formats - png, jpg and jpeg, eg. `![[park.png]]` which renders as:
     ![[park.png]]
 
@@ -241,6 +239,16 @@ Roses are red... [^1]
 Roses are red... [^1]
 
 [^1]: ...violets are blue.
+
+### ✅ Math
+
+**Example:**
+```md
+$$\begin{vmatrix}a & b\\ c & d \end{vmatrix}=ad-bc$$
+```
+
+**Renders as:**
+$$\begin{vmatrix}a & b\\ c & d \end{vmatrix}=ad-bc$$
 
 ### ✅ Frontmatter
 
@@ -259,13 +267,6 @@ The `title` and `description` fields are pulled from the MDX file and processed 
 ### 🚧 Text highlighting
 
 ==I'm Highlighted!== is done using `==I'm Highlighted!==`
-
-### 🚧 Math
-
-**Example:**
-```md
-$$\begin{vmatrix}a & b\\ c & d \end{vmatrix}=ad-bc$$
-```
 
 ### 🚧 Callouts
 

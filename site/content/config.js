@@ -10,6 +10,7 @@ const config = {
     { href: 'https://github.com/flowershow/flowershow/discussions', name: 'Forum' },
     { href: '/_all', name: 'All' },
   ],
+  github: "https://github.com/flowershow/flowershow",
   nextSeo: {
     titleTemplate: '%s | Flowershow',
     description: 'Turn your markdown notes into an elegant website and tailor it to your needs. Flowershow is easy to use, fully-featured, Obsidian compatible and open-source.',
