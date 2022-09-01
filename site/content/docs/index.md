@@ -24,17 +24,14 @@ We are actively trialling Flowershow before wide release. If you'd like to help 
     type="email"
     required="required"
     placeholder="Enter your email"
-    className="block w-full px-2 py-0 text-base rounded-md bg-slate-200 dark:bg-slate-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900
-      sm:flex-1
-    "
+    className="block w-full px-2 py-4 sm:py-0 text-base rounded-md bg-slate-200 dark:bg-slate-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900 sm:flex-1"
   />
   <input type="hidden" name="form-name" value="get-updates" />
   <button type="submit"
-    className="mt-3 w-full px-6 py-0 border border-transparent text-base font-medium rounded-md text-slate-900 bg-sky-300
-      hover:bg-sky-200 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300/50 active:bg-sky-500
-      sm:mt-0 sm:ml-3 sm:flex-shrink-0 sm:inline-flex sm:items-center sm:w-auto"
+    className="mt-3 w-full px-6 py-3 border border-transparent text-base font-medium rounded-md text-slate-900 bg-sky-300
+      hover:bg-sky-200 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300/50 active:bg-sky-500 sm:mt-0 sm:ml-3 sm:flex-shrink-0 sm:inline-flex sm:items-center sm:w-auto [&>p]:m-0"
     >
-    Notify me
+      Notify me
   </button>
 </form>
 
