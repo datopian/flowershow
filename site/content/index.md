@@ -33,7 +33,7 @@ import { WhatIsFlowershow } from "../components/custom/WhatIsFlowershow.jsx"
       <img src="/assets/images/content_folder.png" alt="" className="lg:max-h-[20rem] m-0"/>
       { /* 2. npx flowershow publish */ }
       <div className="relative hidden lg:block">
-        <img src="/assets/images/npx.png" alt="" className="lg:max-h-[20rem] m-0"/>
+        <img src="/assets/images/npm_publish.png" alt="" className="lg:max-h-[20rem] m-0"/>
         <img src="/assets/images/arrow.png" alt="" className="absolute hidden lg:block h-[10rem] -rotate-[35deg] m-0 right-0 -bottom-20"/>
       </div>
       <div>
@@ -47,7 +47,7 @@ import { WhatIsFlowershow } from "../components/custom/WhatIsFlowershow.jsx"
         </div>
         <p>After running this command, you'll be shown some basic configuration prompts. At the end you'll get a response: `Live at https://xyz.flowershow.sites/...`</p>
       </div>
-      <img src="/assets/images/npx.png" alt="" className="lg:hidden lg:max-h-[20rem] m-0"/>
+      <img src="/assets/images/npm_publish.png" alt="" className="lg:hidden lg:max-h-[20rem] m-0"/>
       { /* 3. published result */ }
       <div className="relative">
         <div className="flex items-center space-x-4 sm:space-x-8">
@@ -67,9 +67,9 @@ import { WhatIsFlowershow } from "../components/custom/WhatIsFlowershow.jsx"
 {/* Self publish */}
 
 <div className="py-10 sm:px-2 lg:relative lg:px-0" id="self-publish">
-  <div className="rounded-md border border-slate-800 prose dark:prose-invert mx-auto max-w-6xl p-4 lg:max-w-6xl lg:p-8 xl:p-12">
+  <div className="rounded-md prose dark:prose-invert mx-auto max-w-6xl p-4 lg:max-w-6xl lg:p-8 xl:p-12">
     <h2 className="text-center">
-      Publish on your own
+      Deploy on your own
     </h2>
     <p className="text-center">🚧 Coming soon! 🚧</p>
     <p>We are actively trialling Flowershow before wide release. If you'd like to help us test or be first on the list to use it please sign up using the form at the top of this page.</p>
@@ -77,25 +77,25 @@ import { WhatIsFlowershow } from "../components/custom/WhatIsFlowershow.jsx"
       { /* 1. markdown folder */ }
       <div className="relative">
         <div className="flex items-center space-x-4 sm:space-x-8">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-sky-200 bg-sky-100 text-xl text-sky-600 ring-2 ring-white dark:border-sky-900 dark:bg-[#163C57] dark:text-sky-500 dark:ring-gray-950">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-fuchsia-200 bg-fuchsia-100 text-xl text-fuchsia-600 ring-2 ring-white dark:border-fuchsia-900 dark:bg-[#561b5e] dark:text-fuchsia-400 dark:ring-fuchsia-100">
             1
           </div>
           <h3 className="m-0">
-            You have a GitHub repository with your Markdown files and you want to publish it...
+            You have a folder with your Markdown files and you want to publish it...
           </h3>
-          <p>...using the static site host of your choice (e.g. Netlify, Vercel, or Cloudflare).</p>
         </div>
+        <p>...using hosting platform of your choice (e.g. Netlify, Vercel, or Cloudflare).</p>
         <img src="/assets/images/arrow.png" alt="" className="absolute hidden lg:block h-[10rem] rotate-[35deg] m-0 right-0 -bottom-10"/>
       </div>
       <img src="/assets/images/content_folder.png" alt="" className="lg:max-h-[20rem] m-0"/>
       { /* 2. npx flowershow generate */ }
       <div className="relative hidden lg:block">
-        <img src="/assets/images/npx.png" alt="" className="lg:max-h-[20rem] m-0"/>
+        <img src="/assets/images/npm_create.png" alt="" className="lg:max-h-[20rem] m-0"/>
         <img src="/assets/images/arrow.png" alt="" className="absolute hidden lg:block h-[10rem] -rotate-[35deg] m-0 right-0 -bottom-20"/>
       </div>
       <div>
         <div className="flex items-center space-x-4 sm:space-x-8">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-sky-200 bg-sky-100 text-xl text-sky-600 ring-2 ring-white dark:border-sky-900 dark:bg-[#163C57] dark:text-sky-500 dark:ring-gray-950">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-fuchsia-200 bg-fuchsia-100 text-xl text-fuchsia-600 ring-2 ring-white dark:border-fuchsia-900 dark:bg-[#561b5e] dark:text-fuchsia-400 dark:ring-fuchsia-100">
             2
           </div>
           <h3 className="m-0">
@@ -104,11 +104,11 @@ import { WhatIsFlowershow } from "../components/custom/WhatIsFlowershow.jsx"
         </div>
         <p>After running this command, you'll be shown some basic configuration prompts. At the end Flowershow CLI app will create a `/flowershow` folder with the Flowershow site template.</p>
       </div>
-      <img src="/assets/images/npx.png" alt="" className="lg:hidden lg:max-h-[20rem] m-0"/>
+      <img src="/assets/images/npm_create.png" alt="" className="lg:hidden lg:max-h-[20rem] m-0"/>
       { /* 3. self hosting */ }
       <div className="relative">
         <div className="flex items-center space-x-4 sm:space-x-8">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-sky-200 bg-sky-100 text-xl text-sky-600 ring-2 ring-white dark:border-sky-900 dark:bg-[#163C57] dark:text-sky-500 dark:ring-gray-950">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-fuchsia-200 bg-fuchsia-100 text-xl text-fuchsia-600 ring-2 ring-white dark:border-fuchsia-900 dark:bg-[#561b5e] dark:text-fuchsia-400 dark:ring-fuchsia-100">
             3
           </div>
           <h3 className="m-0">
@@ -117,7 +117,7 @@ import { WhatIsFlowershow } from "../components/custom/WhatIsFlowershow.jsx"
         </div>
         <p>... and publish it wherever you want!</p>
       </div>
-      <img src="/assets/images/result_mac_dark.png" alt="" className="lg:max-h-[20rem] m-0"/>
+      <img src="/assets/images/npm_build.png" alt="" className="lg:max-h-[20rem] m-0"/>
     </div>
   </div>
 </div>
