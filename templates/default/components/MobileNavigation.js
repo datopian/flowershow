@@ -82,9 +82,10 @@ export function MobileNavigation({ navigation }) {
             </button>
             <Link href="/" className="ml-6" aria-label="Home page">
               {/* <Logomark className="h-9 w-9" /> */}
-              <div className="font-extrabold text-white text-2xl ml-6">{siteConfig.author}</div>
+              <div className="font-extrabold text-slate-900 dark:text-white text-2xl ml-6">{siteConfig.author}</div>
             </Link>
           </div>
+          <Search nav />
           <ul
             role="list"
             className="mt-2 space-y-2 border-l-2 border-slate-100 dark:border-slate-800 lg:mt-4 lg:space-y-4 lg:border-slate-200"
@@ -107,7 +108,6 @@ export function MobileNavigation({ navigation }) {
               </li>
             ))}
           </ul>
-          <Search nav />
         </Dialog.Panel>
       </Dialog>
     </>

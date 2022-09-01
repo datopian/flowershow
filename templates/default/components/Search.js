@@ -48,8 +48,8 @@ export function Search(props) {
         type="button"
         className={`
           group flex h-6 w-6 items-center justify-center 
-          ${props.nav ? "sm:hidden justify-start min-w-full flex-none rounded-lg p-4 mt-4 text-sm ring-1 ring-slate-200 dark:bg-slate-800/75 dark:ring-inset dark:ring-white/5"
-            : "hidden sm:flex sm:justify-start md:h-auto md:w-auto md:flex-none xl:rounded-lg xl:py-2.5 xl:pl-4 xl:pr-3.5 md:text-sm xl:ring-1 xl:ring-slate-200 xl:hover:ring-slate-300 dark:xl:bg-slate-800/75 dark:xl:ring-inset dark:xl:ring-white/5 dark:xl:hover:bg-slate-700/40 dark:xl:hover:ring-slate-500 xl:w-96"
+          ${props.nav ? "sm:hidden justify-start min-w-full flex-none rounded-lg px-4 py-5 my-6 text-sm ring-1 ring-slate-200 dark:bg-slate-800/75 dark:ring-inset dark:ring-white/5"
+            : "hidden sm:flex sm:justify-start md:h-auto md:w-auto xl:w-full max-w-[380px] shrink xl:rounded-lg xl:py-2.5 xl:pl-4 xl:pr-3.5 md:text-sm xl:ring-1 xl:ring-slate-200 xl:hover:ring-slate-300 dark:xl:bg-slate-800/75 dark:xl:ring-inset dark:xl:ring-white/5 dark:xl:hover:bg-slate-700/40 dark:xl:hover:ring-slate-500"
           }
         `}
         onClick={onOpen}
@@ -57,7 +57,7 @@ export function Search(props) {
         <SearchIcon className="h-5 w-5 flex-none fill-slate-400 group-hover:fill-slate-500 dark:fill-slate-500 md:group-hover:fill-slate-400" />
         <span className={`
             text-slate-500 dark:text-slate-400
-            ${props.nav ? "w-full not-sr-only"
+            ${props.nav ? "w-full not-sr-only text-left ml-2"
               : "hidden xl:block sr-only md:not-sr-only md:ml-2"
             }
           `}>
