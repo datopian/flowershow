@@ -22,7 +22,7 @@ function SearchIcon(props) {
   )
 }
 
-export function Search() {
+export function Search(props) {
   let [isOpen, setIsOpen] = useState(false)
   let [modifierKey, setModifierKey] = useState()
 
@@ -46,15 +46,29 @@ export function Search() {
     <>
       <button
         type="button"
-        className="group flex h-6 w-6 items-center justify-center sm:justify-start md:h-auto md:w-80 md:flex-none md:rounded-lg md:py-2.5 md:pl-4 md:pr-3.5 md:text-sm md:ring-1 md:ring-slate-200 md:hover:ring-slate-300 dark:md:bg-slate-800/75 dark:md:ring-inset dark:md:ring-white/5 dark:md:hover:bg-slate-700/40 dark:md:hover:ring-slate-500 lg:w-96"
+        className={`
+          group flex h-6 w-6 items-center justify-center 
+          ${props.nav ? "sm:hidden justify-start min-w-full flex-none rounded-lg px-4 py-5 my-6 text-sm ring-1 ring-slate-200 dark:bg-slate-800/75 dark:ring-inset dark:ring-white/5"
+            : "hidden sm:flex sm:justify-start md:h-auto md:w-auto xl:w-full max-w-[380px] shrink xl:rounded-lg xl:py-2.5 xl:pl-4 xl:pr-3.5 md:text-sm xl:ring-1 xl:ring-slate-200 xl:hover:ring-slate-300 dark:xl:bg-slate-800/75 dark:xl:ring-inset dark:xl:ring-white/5 dark:xl:hover:bg-slate-700/40 dark:xl:hover:ring-slate-500"
+          }
+        `}
         onClick={onOpen}
       >
         <SearchIcon className="h-5 w-5 flex-none fill-slate-400 group-hover:fill-slate-500 dark:fill-slate-500 md:group-hover:fill-slate-400" />
-        <span className="sr-only md:not-sr-only md:ml-2 md:text-slate-500 md:dark:text-slate-400">
+        <span className={`
+            text-slate-500 dark:text-slate-400
+            ${props.nav ? "w-full not-sr-only text-left ml-2"
+              : "hidden xl:block sr-only md:not-sr-only md:ml-2"
+            }
+          `}>
           Search docs
         </span>
         {modifierKey && (
-          <kbd className="ml-auto hidden font-medium text-slate-400 dark:text-slate-500 md:block">
+          <kbd className={`
+              ${props.nav ? "hidden"
+                : "ml-auto font-medium text-slate-400 dark:text-slate-500 hidden xl:block"
+              }
+            `}>
             <kbd className="font-sans">{modifierKey}</kbd>
             <kbd className="font-sans">K</kbd>
           </kbd>
