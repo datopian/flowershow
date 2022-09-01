@@ -32,7 +32,7 @@ export default function Header() {
   return (
     <header
       className={`
-        sticky top-0 z-50 flex flex-wrap items-center justify-between px-4 py-5 sm:px-6 lg:px-8
+        sticky top-0 z-50 flex items-center justify-between px-4 py-5 sm:px-6 lg:px-8 max-w-full
         ${isScrolled
           ? 'dark:bg-slate-900/95 backdrop-blur [@supports(backdrop-filter:blur(0))]:dark:bg-slate-900/75'
           : 'dark:bg-slate-900'}
@@ -41,7 +41,7 @@ export default function Header() {
       <div className="mr-2 sm:mr-4 flex lg:hidden">
         <MobileNavigation navigation={siteConfig.navLinks} />
       </div>
-      <div className="flex flex-grow basis-auto items-center">
+      <div className="flex flex-none items-center">
         <Link href="/" aria-label="Home page">
           <a className="flex items-center font-extrabold text-xl sm:text-2xl text-slate-900 dark:text-white">
             <img src="/assets/images/logo.svg" alt="" className="w-9 h-9 mr-1 fill-white" />
@@ -73,11 +73,11 @@ export default function Header() {
           ))}
         </div>
       </div>
-      <div className="relative flex items-center basis-0 justify-end gap-4 xl:gap-8 md:flex-grow">
+      <div className="relative flex items-center basis-auto justify-end gap-6 xl:gap-8 md:shrink w-full">
         <Search />
         <ThemeSelector />
         <Link href="https://github.com/flowershow/flowershow">
-          <a className="group" aria-label="GitHub">
+          <a className="group flex-none" aria-label="GitHub">
             <GitHubIcon className="h-6 w-6 dark:fill-slate-400 group-hover:fill-slate-500 dark:group-hover:fill-slate-300" />
           </a>
         </Link>
