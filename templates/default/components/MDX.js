@@ -1,11 +1,15 @@
+import { Fragment } from 'react'
 import { NextSeo } from 'next-seo'
 import Head from 'next/head'
+import CustomLink from './Link'
 import { Pre } from './Pre'
 import siteConfig from '../config/siteConfig'
 
 const components = {
   Head,
+  a: CustomLink,
   pre: Pre,
+  svg: props => <Fragment {...props} />,
   GlobalTest: ({children}) => <h1 className="bg-red-300">{children}</h1>,
   wrapper: ({ layout, ...rest }) => {
     const Layout = require(`../layouts/${layout}`).default
@@ -36,7 +40,7 @@ export default function MdxPage({ children, ...rest }) {
                   alt: frontMatter.title
                 }
               ] 
-            : siteConfig.nextSeo.openGraph.images,
+            : siteConfig?.nextSeo?.openGraph?.images || [],
         }}
       />
       <Component
