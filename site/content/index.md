@@ -4,43 +4,37 @@ layout: unstyled
 
 import { Hero } from "../components/custom/Hero.jsx"
 import { WhatIsFlowershow } from "../components/custom/WhatIsFlowershow.jsx"
-import { FlowershowPublish } from "../components/custom/FlowershowPublish.jsx"
 
 <Hero />
 <WhatIsFlowershow />
-<FlowershowPublish />
 
+{/* Flowershow publish */}
 
 <div className="py-10 sm:px-2 lg:relative lg:px-0" id="how">
-  <div className="prose dark:prose-invert mx-auto max-w-6xl px-4 lg:max-w-6xl lg:px-8 xl:px-12">
+  <div className="prose dark:prose-invert mx-auto max-w-6xl p-4 lg:max-w-6xl lg:p-8 xl:p-12">
     <h2 className="text-center">
-      Publish on your own
+      How Flowershow works?
     </h2>
-    <p className="text-center">
-      🚧 Coming soon! 🚧
-    </p>
-    <p>
-      We are actively trialling Flowershow before wide release. If you'd like to help us test or be first on the list to use it please sign up using the form at the top of this page.
-    </p>
-    <div className="relative grid grid-cols-1 gap-6 my-4 lg:my-16 lg:grid-cols-2 lg:gap-16">
-      <div>
+    <p className="text-center">🚧 Coming soon! 🚧</p>
+    <p>We are actively trialling Flowershow before wide release. If you'd like to help us test or be first on the list to use it please sign up using the form at the top of this page.</p>
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-12">
+      { /* 1. markdown folder */ }
+      <div className="relative">
         <div className="flex items-center space-x-4 sm:space-x-8">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-sky-200 bg-sky-100 text-xl text-sky-600 ring-2 ring-white dark:border-sky-900 dark:bg-[#163C57] dark:text-sky-500 dark:ring-gray-950">
             1
           </div>
           <h3 className="m-0">
-            You have a folder with your Markdown files and you want to publish it on your favorite cloud provider.
+            You have a folder with your Markdown files and you want to publish it.
           </h3>
         </div>
+        <img src="/assets/images/arrow.png" alt="" className="absolute hidden lg:block h-[10rem] rotate-[35deg] m-0 right-0 -bottom-10"/>
       </div>
-      <div>
-        <img src="/assets/images/content_folder.png" alt="" className="lg:max-h-[20rem] m-0"/>
-      </div>
-      <img src="/assets/images/arrow.png" alt="" className="hidden lg:block h-[10rem] absolute bottom-0 left-[38%] rotate-[45deg] translate-y-1/2" />
-    </div>
-    <div className="relative grid grid-cols-1 gap-6 my-4 lg-my-16 lg:grid-cols-2 lg:gap-16">
-      <div className="hidden lg:block">
-        <img src="/assets/images/npx.png" alt="" className="m-0 lg:max-h-[20rem]"/>
+      <img src="/assets/images/content_folder.png" alt="" className="lg:max-h-[20rem] m-0"/>
+      { /* 2. npx flowershow publish */ }
+      <div className="relative hidden lg:block">
+        <img src="/assets/images/npx.png" alt="" className="lg:max-h-[20rem] m-0"/>
+        <img src="/assets/images/arrow.png" alt="" className="absolute hidden lg:block h-[10rem] -rotate-[35deg] m-0 right-0 -bottom-20"/>
       </div>
       <div>
         <div className="flex items-center space-x-4 sm:space-x-8">
@@ -48,30 +42,82 @@ import { FlowershowPublish } from "../components/custom/FlowershowPublish.jsx"
             2
           </div>
           <h3 className="m-0">
-            Run `npx flowershow generate` in this folder...
+            Run `npx flowershow publish` in this folder...
           </h3>
         </div>
-        <p>
-        After running this command, you'll be shown some basic configuration prompts. At the end Flowershow CLI app will generate your website's files inside `./flowershow` directory.
-        </p>
+        <p>After running this command, you'll be shown some basic configuration prompts. At the end you'll get a response: `Live at https://xyz.flowershow.sites/...`</p>
       </div>
-      <div className="lg:hidden">
-        <img src="/assets/images/npx.png" alt="" className="m-0 lg:max-h-[20rem]"/>
-      </div>
-      <img src="/assets/images/arrow.png" alt="" className="hidden lg:block h-[10rem] absolute left-[38%]  -rotate-[45deg] bottom-0 translate-y-[9rem]"/>
-    </div>
-    <div className="relative grid grid-cols-1 gap-6 my-4 lg:my-16 lg:grid-cols-2 lg:gap-16">
-      <div>
+      <img src="/assets/images/npx.png" alt="" className="lg:hidden lg:max-h-[20rem] m-0"/>
+      { /* 3. published result */ }
+      <div className="relative">
         <div className="flex items-center space-x-4 sm:space-x-8">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-sky-200 bg-sky-100 text-xl text-sky-600 ring-2 ring-white dark:border-sky-900 dark:bg-[#163C57] dark:text-sky-500 dark:ring-gray-950">
             3
           </div>
-          <h3 className="m-0">Now, you can deploy the site to the static site host of your choice 🎊</h3>
+          <h3 className="m-0">
+          ... and see your website online! 🎊
+          </h3>
         </div>
       </div>
-      <div>
-        <img src="/assets/images/result_mac_dark.png" alt="" className="rounded-lg shadow-xl m-0" />
+      <img src="/assets/images/result_mac_dark.png" alt="" className="lg:max-h-[20rem] m-0"/>
+    </div>
+  </div>
+</div>
+
+{/* Self publish */}
+
+<div className="py-10 sm:px-2 lg:relative lg:px-0" id="self-publish">
+  <div className="rounded-md border border-slate-800 prose dark:prose-invert mx-auto max-w-6xl p-4 lg:max-w-6xl lg:p-8 xl:p-12">
+    <h2 className="text-center">
+      Publish on your own
+    </h2>
+    <p className="text-center">🚧 Coming soon! 🚧</p>
+    <p>We are actively trialling Flowershow before wide release. If you'd like to help us test or be first on the list to use it please sign up using the form at the top of this page.</p>
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-12">
+      { /* 1. markdown folder */ }
+      <div className="relative">
+        <div className="flex items-center space-x-4 sm:space-x-8">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-sky-200 bg-sky-100 text-xl text-sky-600 ring-2 ring-white dark:border-sky-900 dark:bg-[#163C57] dark:text-sky-500 dark:ring-gray-950">
+            1
+          </div>
+          <h3 className="m-0">
+            You have a GitHub repository with your Markdown files and you want to publish it...
+          </h3>
+          <p>...using the static site host of your choice (e.g. Netlify, Vercel, or Cloudflare).</p>
+        </div>
+        <img src="/assets/images/arrow.png" alt="" className="absolute hidden lg:block h-[10rem] rotate-[35deg] m-0 right-0 -bottom-10"/>
       </div>
+      <img src="/assets/images/content_folder.png" alt="" className="lg:max-h-[20rem] m-0"/>
+      { /* 2. npx flowershow generate */ }
+      <div className="relative hidden lg:block">
+        <img src="/assets/images/npx.png" alt="" className="lg:max-h-[20rem] m-0"/>
+        <img src="/assets/images/arrow.png" alt="" className="absolute hidden lg:block h-[10rem] -rotate-[35deg] m-0 right-0 -bottom-20"/>
+      </div>
+      <div>
+        <div className="flex items-center space-x-4 sm:space-x-8">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-sky-200 bg-sky-100 text-xl text-sky-600 ring-2 ring-white dark:border-sky-900 dark:bg-[#163C57] dark:text-sky-500 dark:ring-gray-950">
+            2
+          </div>
+          <h3 className="m-0">
+            Run `npx flowershow create` in the root folder of your content's repository...
+          </h3>
+        </div>
+        <p>After running this command, you'll be shown some basic configuration prompts. At the end Flowershow CLI app will create a `/flowershow` folder with the Flowershow site template.</p>
+      </div>
+      <img src="/assets/images/npx.png" alt="" className="lg:hidden lg:max-h-[20rem] m-0"/>
+      { /* 3. self hosting */ }
+      <div className="relative">
+        <div className="flex items-center space-x-4 sm:space-x-8">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-sky-200 bg-sky-100 text-xl text-sky-600 ring-2 ring-white dark:border-sky-900 dark:bg-[#163C57] dark:text-sky-500 dark:ring-gray-950">
+            3
+          </div>
+          <h3 className="m-0">
+            Now you can run `npx flowershow build` to create a folder with all the static files of your website...
+          </h3>
+        </div>
+        <p>... and publish it wherever you want!</p>
+      </div>
+      <img src="/assets/images/result_mac_dark.png" alt="" className="lg:max-h-[20rem] m-0"/>
     </div>
   </div>
 </div>
