@@ -1,9 +1,9 @@
-import { wikiLinkImageFormats } from './from-markdown'
+import { wikiLinkTransclusionFormat } from './from-markdown'
 
 function html (opts = {}) {
   const permalinks = opts.permalinks || []
   const defaultPageResolver = (name) => {
-    const image = /\.jpe?g$|\.png$/.test(name)
+    const image = wikiLinkTransclusionFormat(name)[1]
     return image ? [name] : [name.replace(/ /g, '_').toLowerCase()]
   }
   const pageResolver = opts.pageResolver || defaultPageResolver
@@ -37,7 +37,7 @@ function html (opts = {}) {
 
   function exitWikiLink () {
     const wikiLink = this.getData('wikiLinkStack').pop()
-    const wikilinkImage = /\.jpe?g$|\.png$/.test(wikiLink.target)
+    const wikiLinkTransclusion = wikiLink.isType === 'transclusions'
 
     const pagePermalinks = pageResolver(wikiLink.target)
     let permalink = pagePermalinks.find(p => permalinks.indexOf(p) !== -1)
@@ -46,6 +46,7 @@ function html (opts = {}) {
       permalink = pagePermalinks[0]
     }
     let displayName = wikiLink.target
+
     if (wikiLink.alias) {
       displayName = wikiLink.alias
     }
@@ -55,23 +56,16 @@ function html (opts = {}) {
       classNames += ' ' + newClassName
     }
 
-    const isNotImage = wikiLinkImageFormats(wikiLink.value)
+    const transclusionFormat = wikiLinkTransclusionFormat(wikiLink.value)
 
-    // this.tag(wikilinkImage ? `<img src="${hrefTemplate(permalink)}" alt="${displayName}" class="${classNames}" />`
-    //   : '<a href="' + hrefTemplate(permalink) +
-    //     '" class="' + classNames +
-    //     '">'
-    // )
-
-    // !wikiLinkImage && this.raw(displayName)
-    // !wikiLinkImage && this.tag('</a>')
-
-    if (wikilinkImage && isNotImage[1] !== 'pdf') {
-      if (!isNotImage[0]) this.tag(`<span class=${classNames} no-support>Document type ${isNotImage[1]} is not support yet for transclusion</span>`)
-
-      this.tag(`<img src="${hrefTemplate(permalink)}" alt="${displayName}" class="${classNames}" />`)
-    } else if (isNotImage[1] === 'pdf') {
-      this.tag(`<embed width="100%" src="${hrefTemplate(permalink)}" alt="${displayName}" class="${classNames}" type="application/pdf"/>`)
+    if (wikiLinkTransclusion) {
+      if (!transclusionFormat[0]) {
+        this.raw(displayName)
+      } else if (transclusionFormat[1] === 'pdf') {
+        this.tag(`<embed width="100%" data="${hrefTemplate(permalink)}" class="${classNames}" type="application/pdf"/>`)
+      } else {
+        this.tag(`<img src="${hrefTemplate(permalink)}" alt="${displayName}" class="${classNames}" />`)
+      }
     } else {
       this.tag('<a href="' + hrefTemplate(permalink) + '" class="' + classNames + '">')
       this.raw(displayName)

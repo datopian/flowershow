@@ -1,13 +1,14 @@
-function wikiLinkImageFormats (extension) {
-  const imageFormats = [
-    /\.jpe?g$/, /\.a?png$/, /\.webp$/, /\.avif$/, /\.gif$/, /\.svg$/, /\.bmp$/, /\.ico$/
-  ].map(rgx => rgx.test(extension)).filter(Boolean)
+function wikiLinkTransclusionFormat (extension) {
+  const transclusionFormats = [
+    /\.jpe?g$/, /\.a?png$/, /\.webp$/, /\.avif$/, /\.gif$/, /\.svg$/, /\.bmp$/, /\.ico$/, /\.pdf$/
+  ]
 
-  const strippedExtension = extension.split('.')[1]
+  const supportedFormat = extension.match(transclusionFormats.filter(r => extension.match(r))[0])[0]
+  const strippedExtension = extension.match(/\.[0-9a-z]{1,4}$/gi)
 
-  if (!imageFormats.includes(true)) return [false, strippedExtension]
+  if (!supportedFormat) return [false, strippedExtension && strippedExtension[0].replace('.', '')]
 
-  return [imageFormats.includes(true), strippedExtension]
+  return [true, supportedFormat.replace('.', '')]
 }
 
 function fromMarkdown (opts = {}) {
@@ -26,6 +27,7 @@ function fromMarkdown (opts = {}) {
     this.enter(
       {
         type: 'wikiLink',
+        isType: token.isType ? token.isType : null,
         value: null,
         data: {
           alias: null,
@@ -59,15 +61,13 @@ function fromMarkdown (opts = {}) {
     //   const [, ...value] = wikiLink.value.split(`${opts.markdownFolder}/`)
     //   wikiLink.value = value
     // }
-
-    // const wikiLinkImage = /\.webp$/.test(wikiLink.value) && wikiLinkImageFormats(wikiLink.value)
-    const wikiLinkImage = token.isType === 'transclusions'
+    const wikiLinkTransclusion = wikiLink.isType === 'transclusions'
 
     const pagePermalinks = pageResolver(wikiLink.value)
     let permalink = pagePermalinks.find((p) => {
       let heading = ''
 
-      if (!wikiLinkImage && p.match(/#/)) {
+      if (!wikiLinkTransclusion && p.match(/#/)) {
         [, heading] = p.split('#')
       }
       const link = heading ? p.replace(`#${heading}`, '') : p
@@ -78,11 +78,45 @@ function fromMarkdown (opts = {}) {
       permalink = pagePermalinks[0]
     }
     const regex = /\/?index(?![\w\S])|\/?index(?=#)/g
-    if (!wikiLinkImage && permalink.match(regex)) {
+    if (!wikiLinkTransclusion && permalink.match(regex)) {
       permalink = permalink.replace(regex, '')
     }
-    let displayName = !wikiLinkImage && wikiLink.value.startsWith('#') ? wikiLink.value.replace('#', '') : wikiLink.value
-    if (wikiLink.data.alias) {
+
+    let displayName
+    let transclusionFormat
+
+    if (wikiLinkTransclusion) {
+      transclusionFormat = wikiLinkTransclusionFormat(wikiLink.value)
+      if (!transclusionFormat[0]) {
+        displayName = `Document type ${transclusionFormat[1] ? transclusionFormat[1].toUpperCase() : null} is not yet supported for transclusion`
+        console.warn(displayName)
+        wikiLink.data.hName = 'span'
+        wikiLink.data.hChildren = [
+          {
+            type: 'text',
+            value: displayName
+          }
+        ]
+      } else {
+        const regex = new RegExp(`${transclusionFormat[1]}$`, 'g')
+        displayName = wikiLink.value.replace(regex, '')
+
+        if (transclusionFormat[1] === 'pdf') {
+          wikiLink.data.hName = 'embed'
+        } else {
+          wikiLink.data.hName = 'img'
+        }
+      }
+    } else {
+      if (wikiLink.value.startsWith('#')) {
+        displayName = wikiLink.value.replace('#', '')
+      } else {
+        displayName = wikiLink.value
+      }
+      wikiLink.data.hName = 'a'
+    }
+
+    if (wikiLink.data.alias && !wikiLinkTransclusion) {
       displayName = wikiLink.data.alias
     }
 
@@ -92,33 +126,46 @@ function fromMarkdown (opts = {}) {
     }
 
     wikiLink.data.alias = displayName
-    wikiLink.data.permalink = permalink
+
+    if (wikiLinkTransclusion && transclusionFormat[1] === 'pdf') {
+      wikiLink.data.permalink = permalink + '#view=Fit'
+    } else {
+      wikiLink.data.permalink = permalink
+    }
     wikiLink.data.exists = exists
 
-    wikiLink.data.hName = wikiLinkImage ? 'img' : 'a'
-    wikiLink.data.hProperties = wikiLinkImage ? {
-      className: classNames,
-      src: hrefTemplate(permalink)
-    } : {
-      className: classNames,
-      href: hrefTemplate(permalink)
-    }
-    if (!wikiLinkImage) {
+    if (wikiLinkTransclusion) {
+      if (!transclusionFormat[0]) {
+        wikiLink.data.hProperties = {
+          className: classNames + ' no-support',
+          style: 'color:#fef08a;',
+          src: hrefTemplate(permalink)
+        }
+      } else if (transclusionFormat[1] === 'pdf') {
+        wikiLink.data.hProperties = {
+          className: classNames,
+          width: '100%',
+          style: 'height:100vh;',
+          type: 'application/pdf',
+          src: hrefTemplate(permalink) + '#view=Fit'
+        }
+      } else {
+        wikiLink.data.hProperties = {
+          className: classNames,
+          src: hrefTemplate(permalink)
+        }
+      }
+    } else {
+      wikiLink.data.hProperties = {
+        className: classNames,
+        href: hrefTemplate(permalink)
+      }
       wikiLink.data.hChildren = [
         {
           type: 'text',
           value: displayName
         }
       ]
-    }
-
-    const isNotImage = wikiLinkImageFormats(wikiLink.value)
-
-    if (wikiLinkImage && !isNotImage[0] && isNotImage[1] !== 'pdf') {
-      console.warn(`Document type ${isNotImage[1]} is not support yet for transclusion`)
-      wikiLink.data.hName = ''
-    } else if (isNotImage[1] === 'pdf') {
-      wikiLink.data.hName = 'embed'
     }
   }
 
@@ -134,4 +181,4 @@ function fromMarkdown (opts = {}) {
   }
 }
 
-export { fromMarkdown, wikiLinkImageFormats }
+export { fromMarkdown, wikiLinkTransclusionFormat }
