@@ -140,11 +140,51 @@ describe('remark-wiki-link-plus', () => {
     ast = processor.runSync(ast)
 
     visit(ast, 'wikiLink', (node) => {
+      assert.equal(node.isType, 'transclusions')
       assert.equal(node.data.permalink, 'images/Test image.png')
       assert.equal(node.data.exists, true)
       assert.equal(node.data.hName, 'img')
       assert.equal(node.data.hProperties.className, 'internal')
       assert.equal(node.data.hProperties.src, '/images/Test image.png')
+    })
+  })
+
+  it('parses a wiki link that is a PDF', () => {
+    const processor = unified()
+      .use(markdown)
+      .use(wikiLinkPlugin, {
+        permalinks: ['images/Test.pdf']
+      })
+
+    var ast = processor.parse('![[Test.pdf]]')
+    ast = processor.runSync(ast)
+
+    visit(ast, 'wikiLink', (node) => {
+      assert.equal(node.isType, 'transclusions')
+      assert.equal(node.data.permalink, 'images/Test.pdf#view=Fit')
+      assert.equal(node.data.exists, true)
+      assert.equal(node.data.hName, 'embed')
+      assert.equal(node.data.hProperties.className, 'internal')
+      assert.equal(node.data.hProperties.src, '/images/Test.pdf#view=Fit')
+    })
+  })
+
+  it('displays warning for a wiki link that is not a supported image', () => {
+    const processor = unified()
+      .use(markdown)
+      .use(wikiLinkPlugin, {
+        permalinks: ['images/Test image.pxg']
+      })
+
+    var ast = processor.parse('![[Test image.pxg]]')
+    ast = processor.runSync(ast)
+
+    visit(ast, 'wikiLink', (node) => {
+      assert.equal(node.isType, 'transclusions')
+      assert.equal(node.data.permalink, 'images/Test image.pxg')
+      assert.equal(node.data.exists, true)
+      assert.equal(node.data.hName, 'span')
+      assert.equal(node.data.hChildren[0].value, 'Document type PXG is not yet supported for transclusion')
     })
   })
 
@@ -308,39 +348,5 @@ describe('remark-wiki-link-plus', () => {
 
   it('exports the plugin with named exports', () => {
     assert.equal(wikiLinkPlugin, namedWikiLinkPlugin)
-  })
-
-  it('parses a wiki link that is an unsupported image', () => {
-    const processor = unified()
-      .use(markdown)
-      .use(wikiLinkPlugin, {
-        permalinks: ['test.pfg']
-      })
-
-    var ast = processor.parse('![[test.pfg]]')
-    ast = processor.runSync(ast)
-
-    visit(ast, 'wikiLink', (node) => {
-      assert.equal(node.data.exists, true)
-      assert.equal(node.data.hName, '')
-      assert.equal(node.data.hProperties.className, 'internal')
-    })
-  })
-
-  it('parses a pdf link as a transclusion', () => {
-    const processor = unified()
-      .use(markdown)
-      .use(wikiLinkPlugin, {
-        permalinks: ['test.pdf']
-      })
-
-    var ast = processor.parse('![[test.pdf]]')
-    ast = processor.runSync(ast)
-
-    visit(ast, 'wikiLink', (node) => {
-      assert.equal(node.data.exists, true)
-      assert.equal(node.data.hName, 'embed')
-      assert.equal(node.data.hProperties.className, 'internal')
-    })
   })
 })
