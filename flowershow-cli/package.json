@@ -1,6 +1,6 @@
 {
   "name": "flowershow-cli",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "engines": {
     "node": ">=14.16"
   },
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/flowershow/degit.git",
+    "url": "git+https://github.com/flowershow/flowershow/tree/134-cli/flowershow-cli",
     "directory": "flowershow-cli"
   },
   "author": "Flowershow",
