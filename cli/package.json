@@ -8,7 +8,7 @@
   "keywords": ["markdown", "MDX", "mdx", "publish", "obsidian"],
   "homepage": "https://github.com/flowershow/flowershow",
   "exports": "./index.js",
-  "bin": "./index.js",
+  "bin": "bin/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
