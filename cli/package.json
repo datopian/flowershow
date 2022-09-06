@@ -1,10 +1,12 @@
 {
-  "name": "flowershow-cli",
+  "name": "@flowershow/cli",
   "version": "0.0.1",
   "engines": {
     "node": ">=14.16"
   },
   "description": "CLI tool for creating, publishing and upgrading Flowershow apps",
+  "keywords": [],
+  "homepage": "https://github.com/flowershow/flowershow",
   "exports": "./index.js",
   "bin": {
     "flowershow": "./index.js"
@@ -14,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/flowershow/flowershow/tree/134-cli/flowershow-cli",
+    "url": "git+https://github.com/flowershow/flowershow/tree/134-cli/cli",
     "directory": "flowershow-cli"
   },
   "author": "Flowershow",
