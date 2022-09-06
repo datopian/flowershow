@@ -1,34 +1,34 @@
-import { defineDocumentType, makeSource } from "contentlayer/source-files";
-import siteConfig from "./config/siteConfig";
-import codeExtra from "remark-code-extra";
-import {h} from 'hastscript'
-import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import { defineDocumentType, makeSource } from 'contentlayer/source-files';
+import codeExtra from 'remark-code-extra';
+import { h } from 'hastscript';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeMathjax from 'rehype-mathjax';
-import rehypePrismPlus from "rehype-prism-plus";
-import rehypeSlug from "rehype-slug";
-import remarkGfm from "remark-gfm";
-import remarkMath from "remark-math";
-import remarkToc from "remark-toc";
-import wikiLinkPlugin from "remark-wiki-link-plus";
+import rehypePrismPlus from 'rehype-prism-plus';
+import rehypeSlug from 'rehype-slug';
+import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
+import remarkToc from 'remark-toc';
+import wikiLinkPlugin from 'remark-wiki-link-plus';
+import siteConfig from './config/siteConfig';
 
 const sharedFields = {
-  title: { type: "string" },
-  description: { type: "string" },
-  image: { type: "string" },
-  layout: { type: "string", default: "docs" },
+  title: { type: 'string' },
+  description: { type: 'string' },
+  image: { type: 'string' },
+  layout: { type: 'string', default: 'docs' },
 };
 
 const computedFields = {
   url: {
-    type: "string",
-    resolve: (post) => post._raw.flattenedPath
+    type: 'string',
+    resolve: (post) => post._raw.flattenedPath,
   },
 };
 
 const Page = defineDocumentType(() => ({
-  name: "Page",
-  filePathPattern: "**/*.md*",
-  contentType: "mdx",
+  name: 'Page',
+  filePathPattern: '**/*.md*',
+  contentType: 'mdx',
   fields: {
     ...sharedFields,
   },
@@ -36,17 +36,17 @@ const Page = defineDocumentType(() => ({
 }));
 
 const blogFields = {
-  date: { type: "date" },
-  layout: { type: "string", default: "blog" },
+  date: { type: 'date' },
+  layout: { type: 'string', default: 'blog' },
   authors: {
-    type: "list",
-    of: { type: "string" }
+    type: 'list',
+    of: { type: 'string' },
   },
-}
+};
 
 const Blog = defineDocumentType(() => ({
-  name: "Blog",
-  contentType: "mdx",
+  name: 'Blog',
+  contentType: 'mdx',
   fields: {
     ...sharedFields,
     ...blogFields,
@@ -54,7 +54,7 @@ const Blog = defineDocumentType(() => ({
   computedFields,
 }));
 
-const contentLayerExcludeDefaults = ['node_modules', '.git', '.yarn', '.cache', '.next', '.contentlayer', 'package.json', 'tsconfig.json']
+const contentLayerExcludeDefaults = ['node_modules', '.git', '.yarn', '.cache', '.next', '.contentlayer', 'package.json', 'tsconfig.json'];
 
 export default makeSource({
   contentDirPath: siteConfig.content,
@@ -73,38 +73,37 @@ export default makeSource({
       */
       [codeExtra, {
         transform: (node) => {
-          if (node.type == "code" && node.lang == "mermaid") {
+          if (node.type == 'code' && node.lang == 'mermaid') {
             // reset values else rehype-prism-plus throws error
-            node.type = ""
-            node.lang = ""
+            node.type = '';
+            node.lang = '';
             return ({
               // create new pre tag element here for mermaid
               after: [{
-                type: "element",
-                tagName: "pre",
+                type: 'element',
+                tagName: 'pre',
                 properties: {
-                  className: "code-mermaid"
+                  className: 'code-mermaid',
                 },
                 children: [{
-                  type: "text",
-                  value: node.value
-                }]
+                  type: 'text',
+                  value: node.value,
+                }],
               }],
               // remove the pre tag element created by rehype-prism-plus
               // otherwise both will be displayed
-              transform: n => {
-                const preElem = n.data.hChildren.find(el => el.tagName === "pre")
-                const index = n.data.hChildren.indexOf(preElem)
-                n.data.hChildren.splice(index, 1)
-              }
-            })
-          } else {
-            return null
+              transform: (n) => {
+                const preElem = n.data.hChildren.find((el) => el.tagName === 'pre');
+                const index = n.data.hChildren.indexOf(preElem);
+                n.data.hChildren.splice(index, 1);
+              },
+            });
           }
-        }
+          return null;
+        },
       }],
       [remarkToc, {
-        heading: "Table of contents",
+        heading: 'Table of contents',
         // maxDepth: "3",
         tight: true,
       }],
@@ -114,29 +113,31 @@ export default makeSource({
       [rehypeAutolinkHeadings, {
         test(element) {
           return ['h2', 'h3', 'h4', 'h5', 'h6'].includes(element.tagName)
-            && element.properties?.id !== "table-of-contents"
+            && element.properties?.id !== 'table-of-contents';
         },
         content(node) {
           return [
-            h('svg', {
-              xmlns: "http://www.w3.org/2000/svg",
-              fill: "#ab2b65",
-              viewBox: "0 0 20 20",
-              className: "w-5 h-5",
-            },
+            h(
+              'svg',
+              {
+                xmlns: 'http://www.w3.org/2000/svg',
+                fill: '#ab2b65',
+                viewBox: '0 0 20 20',
+                className: 'w-5 h-5',
+              },
               [
                 h('path', {
-                  fillRule:"evenodd",
-                  clipRule:"evenodd",
-                  d:"M9.493 2.853a.75.75 0 00-1.486-.205L7.545 6H4.198a.75.75 0 000 1.5h3.14l-.69 5H3.302a.75.75 0 000 1.5h3.14l-.435 3.148a.75.75 0 001.486.205L7.955 14h2.986l-.434 3.148a.75.75 0 001.486.205L12.456 14h3.346a.75.75 0 000-1.5h-3.14l.69-5h3.346a.75.75 0 000-1.5h-3.14l.435-3.147a.75.75 0 00-1.486-.205L12.045 6H9.059l.434-3.147zM8.852 7.5l-.69 5h2.986l.69-5H8.852z"
-                })
-              ]
-             )
-          ]
-        }
+                  fillRule: 'evenodd',
+                  clipRule: 'evenodd',
+                  d: 'M9.493 2.853a.75.75 0 00-1.486-.205L7.545 6H4.198a.75.75 0 000 1.5h3.14l-.69 5H3.302a.75.75 0 000 1.5h3.14l-.435 3.148a.75.75 0 001.486.205L7.955 14h2.986l-.434 3.148a.75.75 0 001.486.205L12.456 14h3.346a.75.75 0 000-1.5h-3.14l.69-5h3.346a.75.75 0 000-1.5h-3.14l.435-3.147a.75.75 0 00-1.486-.205L12.045 6H9.059l.434-3.147zM8.852 7.5l-.69 5h2.986l.69-5H8.852z',
+                }),
+              ],
+            ),
+          ];
+        },
       }],
       rehypeMathjax,
-      [rehypePrismPlus, { ignoreMissing: true }]
-    ]
-  }
+      [rehypePrismPlus, { ignoreMissing: true }],
+    ],
+  },
 });

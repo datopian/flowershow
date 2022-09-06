@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { Dialog } from '@headlessui/react'
-import siteConfig from '../config/siteConfig'
-import { Search } from './Search'
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { Dialog } from '@headlessui/react';
+import siteConfig from '../config/siteConfig';
+import { Search } from './Search';
 
 function MenuIcon(props) {
   return (
@@ -17,7 +17,7 @@ function MenuIcon(props) {
     >
       <path d="M4 7h16M4 12h16M4 17h16" />
     </svg>
-  )
+  );
 }
 
 function CloseIcon(props) {
@@ -32,28 +32,28 @@ function CloseIcon(props) {
     >
       <path d="M5 5l14 14M19 5l-14 14" />
     </svg>
-  )
+  );
 }
 
 export function MobileNavigation({ navigation }) {
-  let router = useRouter()
-  let [isOpen, setIsOpen] = useState(false)
+  const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    if (!isOpen) return
+    if (!isOpen) return;
 
     function onRouteChange() {
-      setIsOpen(false)
+      setIsOpen(false);
     }
 
-    router.events.on('routeChangeComplete', onRouteChange)
-    router.events.on('routeChangeError', onRouteChange)
+    router.events.on('routeChangeComplete', onRouteChange);
+    router.events.on('routeChangeError', onRouteChange);
 
     return () => {
-      router.events.off('routeChangeComplete', onRouteChange)
-      router.events.off('routeChangeError', onRouteChange)
-    }
-  }, [router, isOpen])
+      router.events.off('routeChangeComplete', onRouteChange);
+      router.events.off('routeChangeError', onRouteChange);
+    };
+  }, [router, isOpen]);
 
   return (
     <>
@@ -98,10 +98,11 @@ export function MobileNavigation({ navigation }) {
                   <a className={`
                     block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full
                     ${link.href === router.pathname
-                      ? 'font-semibold text-sky-500 before:bg-sky-500'
-                      : 'text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300'
+                    ? 'font-semibold text-sky-500 before:bg-sky-500'
+                    : 'text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300'
                     }
-                  `}>
+                  `}
+                  >
                     {link.name}
                   </a>
                 </Link>
@@ -111,5 +112,5 @@ export function MobileNavigation({ navigation }) {
         </Dialog.Panel>
       </Dialog>
     </>
-  )
+  );
 }

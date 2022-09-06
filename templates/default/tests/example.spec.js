@@ -1,4 +1,4 @@
-const { test, expect } = require('@playwright/test')
+const { test, expect } = require('@playwright/test');
 
 /* First pass on test setup */
 
@@ -7,4 +7,4 @@ test('Basic test', async ({ page }) => {
   await page.goto('/');
   // The page should exist
   expect(page.url());
-})
+});

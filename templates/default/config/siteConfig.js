@@ -1,8 +1,8 @@
-import userConfig from '../content/config.js'
+import userConfig from '../content/config.js';
 
 const defaultConfig = {
   title: 'Flowershow',
-  description: 'Publish your digital garden', 
+  description: 'Publish your digital garden',
   author: 'Flowershow',
   // logo image
   authorLogo: '/assets/images/logo.svg',
@@ -20,13 +20,13 @@ const defaultConfig = {
   // Theme
   theme: {
     default: 'dark',
-    toggleIcon: '/assets/images/theme-button.svg'
+    toggleIcon: '/assets/images/theme-button.svg',
   },
   navLinks: [
     { href: '/about', name: 'About' },
-  ]
-}
+  ],
+};
 
-const siteConfig = Object.assign({}, defaultConfig, userConfig)
+const siteConfig = { ...defaultConfig, ...userConfig };
 
-module.exports = siteConfig
+module.exports = siteConfig;
