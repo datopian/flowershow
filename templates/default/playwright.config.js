@@ -3,7 +3,7 @@
 /** @type {import('@playwright/test').PlaywrightTestConfig} */
 const config = {
   use: {
-    baseURL: "http://localhost:3000/",
+    baseURL: 'http://localhost:3000/',
   },
 };
 
