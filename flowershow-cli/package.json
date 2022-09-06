@@ -1,19 +1,28 @@
 {
   "name": "flowershow-cli",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "engines": {
+    "node": ">=14.16"
+  },
+  "description": "CLI tool for creating, publishing and upgrading Flowershow apps",
+  "exports": "./index.js",
+  "bin": {
+    "flowershow": "./index.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flowershow/degit.git",
+    "directory": "flowershow-cli"
+  },
+  "author": "Flowershow",
+  "license": "MIT",
   "dependencies": {
     "chalk": "^4.1.2",
     "commander": "^9.4.0",
-    "conf": "^10.2.0"
+    "inquirer": "^9.1.1"
   },
-  "bin": {
-    "todos": "./index.js"
-  }
+  "type": "module"
 }
