@@ -33,7 +33,7 @@ import { WhatIsFlowershow } from "../components/custom/WhatIsFlowershow.jsx"
       <img src="/assets/images/content_folder.png" alt="" className="lg:max-h-[20rem] m-0"/>
       { /* 2. npx flowershow publish */ }
       <div className="relative hidden lg:block">
-        <img src="/assets/images/npm_publish.png" alt="" className="lg:max-h-[20rem] m-0"/>
+        <img src="/assets/images/npx_publish.png" alt="" className="lg:max-h-[20rem] m-0"/>
         <img src="/assets/images/arrow.png" alt="" className="absolute hidden lg:block h-[10rem] -rotate-[35deg] m-0 right-0 -bottom-20"/>
       </div>
       <div>
@@ -47,7 +47,7 @@ import { WhatIsFlowershow } from "../components/custom/WhatIsFlowershow.jsx"
         </div>
         <p>After running this command, you'll be shown some basic configuration prompts. At the end you'll get a response: `Live at https://xyz.flowershow.sites/...`</p>
       </div>
-      <img src="/assets/images/npm_publish.png" alt="" className="lg:hidden lg:max-h-[20rem] m-0"/>
+      <img src="/assets/images/npx_publish.png" alt="" className="lg:hidden lg:max-h-[20rem] m-0"/>
       { /* 3. published result */ }
       <div className="relative">
         <div className="flex items-center space-x-4 sm:space-x-8">
@@ -90,7 +90,7 @@ import { WhatIsFlowershow } from "../components/custom/WhatIsFlowershow.jsx"
       <img src="/assets/images/content_folder.png" alt="" className="lg:max-h-[20rem] m-0"/>
       { /* 2. npx flowershow generate */ }
       <div className="relative hidden lg:block">
-        <img src="/assets/images/npm_create.png" alt="" className="lg:max-h-[20rem] m-0"/>
+        <img src="/assets/images/npx_create.png" alt="" className="lg:max-h-[20rem] m-0"/>
         <img src="/assets/images/arrow.png" alt="" className="absolute hidden lg:block h-[10rem] -rotate-[35deg] m-0 right-0 -bottom-20"/>
       </div>
       <div>
@@ -104,7 +104,7 @@ import { WhatIsFlowershow } from "../components/custom/WhatIsFlowershow.jsx"
         </div>
         <p>After running this command, you'll be shown some basic configuration prompts. At the end Flowershow CLI app will create a `/flowershow` folder with the Flowershow site template.</p>
       </div>
-      <img src="/assets/images/npm_create.png" alt="" className="lg:hidden lg:max-h-[20rem] m-0"/>
+      <img src="/assets/images/npx_create.png" alt="" className="lg:hidden lg:max-h-[20rem] m-0"/>
       { /* 3. self hosting */ }
       <div className="relative">
         <div className="flex items-center space-x-4 sm:space-x-8">
@@ -117,7 +117,7 @@ import { WhatIsFlowershow } from "../components/custom/WhatIsFlowershow.jsx"
         </div>
         <p>... and publish it wherever you want!</p>
       </div>
-      <img src="/assets/images/npm_build.png" alt="" className="lg:max-h-[20rem] m-0"/>
+      <img src="/assets/images/npx_build.png" alt="" className="lg:max-h-[20rem] m-0"/>
     </div>
   </div>
 </div>
