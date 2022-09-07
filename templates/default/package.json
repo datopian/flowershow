@@ -1,5 +1,7 @@
 {
+  "name": "default",
   "private": true,
+  "version": "1.0.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -8,7 +10,9 @@
     "test:e2e": "playwright test",
     "lint": "eslint .",
     "lint:fix": "eslint --fix",
-    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
+    "changeset": "changeset",
+    "release": "changeset publish"
   },
   "dependencies": {
     "@docsearch/react": "^3.2.0",
@@ -38,6 +42,8 @@
     "remark-wiki-link-plus": "^1.0.2"
   },
   "devDependencies": {
+    "@changesets/changelog-github": "0.4.6",
+    "@changesets/cli": "2.24.4",
     "@playwright/test": "^1.22.2",
     "autoprefixer": "^10.4.4",
     "eslint": "8.23.0",
