@@ -1,6 +1,6 @@
 {
-  "name": "testinglola",
-  "version": "0.0.9",
+  "name": "@flowershow/cli",
+  "version": "0.0.1",
   "engines": {
     "node": ">=14.16"
   },
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/flowershow/flowershow/tree/134-cli",
+    "url": "git+https://github.com/flowershow/flowershow",
     "directory": "cli"
   },
   "author": "Flowershow",
