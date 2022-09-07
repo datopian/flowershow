@@ -65,6 +65,12 @@ npx @flowershow/cli build
 
 It will create a `.flowershow/.next` folder with your website files ready to be deployed.
 
+You can preview your website locally by running:
+
+```bash
+npx @flowershow/cli preview
+```
+
 ## Deploying
 
 This part is up to you. Flowershow is Next.js based, so you can use any of these hosting providers: Vercel, Cloudflare, Netlify, and others to deploy your website.
