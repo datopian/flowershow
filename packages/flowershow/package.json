@@ -15,7 +15,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/flowershow/flowershow",
-    "directory": "cli"
+    "directory": "packages/flowershow"
   },
   "license": "MIT",
   "bugs": {
