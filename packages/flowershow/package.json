@@ -1,18 +1,31 @@
 {
   "name": "flowershow",
-  "version": "0.0.2",
+  "version": "0.0.3",
+  "engines": {
+    "node": ">=14.16"
+  },
   "author": "Rufus Pollock",
   "description": "Publish your digital garden",
+  "keywords": ["markdown", "MDX", "mdx", "publish", "obsidian"],
+  "exports": "./index.js",
+  "bin": "./index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/flowershow/flowershow.git"
+    "url": "git+https://github.com/flowershow/flowershow",
+    "directory": "cli"
   },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/flowershow/flowershow/issues"
   },
-  "homepage": "https://github.com/flowershow/flowershow#readme"
+  "homepage": "https://github.com/flowershow/flowershow#readme",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^9.4.0",
+    "inquirer": "^9.1.1"
+  },
+  "type": "module"
 }
