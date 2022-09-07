@@ -1,8 +1,8 @@
-import { NextSeo } from "next-seo"
-import { allPages } from "contentlayer/generated"
+import { NextSeo } from 'next-seo';
+import { allPages } from 'contentlayer/generated';
 
 export default function All({ pages }) {
-  const labels = new Set(pages.map((p) => p.wikiPage.charAt(0)))
+  const labels = new Set(pages.map((p) => p.wikiPage.charAt(0)));
   return (
     <>
       <NextSeo title="All pages" />
@@ -14,40 +14,39 @@ export default function All({ pages }) {
             <hr className="m-0 w-full border-black dark:border-gray-700" />
             <ul className="list-disc flex flex-wrap">
               {pages.map(
-                ({ wikiPage, wikiPath }) =>
-                  pageTitle === wikiPage.charAt(0) && (
-                    <li key={wikiPath} className="pr-8 w-fit">
-                      <a href={wikiPath}>{wikiPage}</a>
-                    </li>
-                  )
+                ({ wikiPage, wikiPath }) => pageTitle === wikiPage.charAt(0) && (
+                <li key={wikiPath} className="pr-8 w-fit">
+                  <a href={wikiPath}>{wikiPage}</a>
+                </li>
+                ),
               )}
             </ul>
           </div>
         ))}
       </div>
     </>
-  )
+  );
 }
 
 export async function getStaticProps() {
   const pages = allPages
     .map((page) => {
-      const wikiPath = page._raw.flattenedPath
+      const wikiPath = page._raw.flattenedPath;
       const wikiPage = wikiPath
-        .split("/")
+        .split('/')
         .pop()
-        .replace(/-/g, " ")
+        .replace(/-/g, ' ')
         .replace(
           /^(\w)(.+)/,
-          (match, p1, p2) => p1.toUpperCase() + p2.toLowerCase()
+          (match, p1, p2) => p1.toUpperCase() + p2.toLowerCase(),
         );
 
       return { wikiPage, wikiPath };
     })
-    .filter(page => page.wikiPath !== '') // exclude homepage
-    .sort((a, b) => a.wikiPage.localeCompare(b.wikiPage))
+    .filter((page) => page.wikiPath !== '') // exclude homepage
+    .sort((a, b) => a.wikiPage.localeCompare(b.wikiPage));
 
   return {
-    props: { pages }
-  }
+    props: { pages },
+  };
 }

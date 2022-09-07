@@ -1,7 +1,7 @@
-const { test, expect } = require("@playwright/test")
-const { MarkdownPage } = require('./markdown-page')
+const { test, expect } = require('@playwright/test');
+const { MarkdownPage } = require('./markdown-page');
 
-test.describe("Pages", () => {
+test.describe('Pages', () => {
 
   // Test if index page exists and is from markdown
   // test("index.md @ root", async ({ page, baseURL }) => {
@@ -21,6 +21,6 @@ test.describe("Pages", () => {
 
   //   expect(Page.props.url).toBe("docs");
   //   expect(Page.props._raw.sourceFilePath).toBe("docs/index.md");
-    
+
   // })
 });
