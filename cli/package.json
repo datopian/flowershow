@@ -1,6 +1,6 @@
 {
   "name": "testinglola",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "engines": {
     "node": ">=14.16"
   },
@@ -8,7 +8,7 @@
   "keywords": ["markdown", "MDX", "mdx", "publish", "obsidian"],
   "homepage": "https://github.com/flowershow/flowershow",
   "exports": "./index.js",
-  "bin": "bin/index.js",
+  "bin": "./index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
