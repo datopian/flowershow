@@ -16,7 +16,7 @@ program
 
 program
   .command('publish')
-  .description('publish files or directories')
+  .description('Publish files or directories')
   .argument('[path]', 'path to a file or a directory', '.')
   .option('-g, --glob <pattern>', 'glob pattern')
   .action(publish);
@@ -28,7 +28,7 @@ program
 
 program
   .command('build')
-  .description('Build ')
+  .description('Build Flowershow website')
   .action(build);
 
 program
