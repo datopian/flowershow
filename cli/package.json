@@ -1,0 +1,29 @@
+{
+  "name": "@flowershow/cli",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=14.16"
+  },
+  "description": "CLI tool for creating, publishing and upgrading Flowershow apps",
+  "keywords": ["markdown", "MDX", "mdx", "publish", "obsidian"],
+  "homepage": "https://github.com/flowershow/flowershow",
+  "exports": "./index.js",
+  "bin": "./index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flowershow/flowershow",
+    "directory": "cli"
+  },
+  "author": "Flowershow",
+  "license": "MIT",
+  "bugs": "https://github.com/flowershow/flowershow/issues",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^9.4.0",
+    "inquirer": "^9.1.1"
+  },
+  "type": "module"
+}
