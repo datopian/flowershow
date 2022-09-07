@@ -1,10 +1,10 @@
-import Head from 'next/head'
-import Link from 'next/link'
-import { NextSeo } from 'next-seo'
-import siteConfig from '../config/siteConfig'
-import Header from './Nav'
+import Head from 'next/head';
+import Link from 'next/link';
+import { NextSeo } from 'next-seo';
+import siteConfig from '../config/siteConfig';
+import Header from './Nav';
 
-export default function Layout({ children, title='' }) {
+export default function Layout({ children, title = '' }) {
   return (
     <>
       <Head>
@@ -40,14 +40,13 @@ export default function Layout({ children, title='' }) {
               rel="noopener noreferrer"
               className="flex items-center no-underline"
             >
-              {siteConfig.authorLogo &&
-                 <img src={siteConfig.authorLogo} alt={siteConfig.author} className="my-0 h-6 block" />
-              }
+              {siteConfig.authorLogo
+                 && <img src={siteConfig.authorLogo} alt={siteConfig.author} className="my-0 h-6 block" />}
               {siteConfig.author}
             </a>
-          </p> 
+          </p>
         </footer>
       </div>
     </>
-  )
+  );
 }

@@ -1,27 +1,27 @@
-import { useEffect, useState } from 'react'
-import { useTheme } from 'next-themes'
-import siteConfig from '../config/siteConfig'
+import { useEffect, useState } from 'react';
+import { useTheme } from 'next-themes';
+import siteConfig from '../config/siteConfig';
 
-export function ThemeSelector () {
-	const [ mounted, setMounted ] = useState(false)
-	const { theme, setTheme } = useTheme()
+export function ThemeSelector() {
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
 
-	useEffect(() => setMounted(true), [])
+  useEffect(() => setMounted(true), []);
 
-	/** Avoid Hydration Mismatch 
+  /** Avoid Hydration Mismatch
 	 *  https://github.com/pacocoursey/next-themes#avoid-hydration-mismatch
 	*/
-	if (!mounted) return null
+  if (!mounted) return null;
 
-	return (
-		<button
+  return (
+    <button
       className={`
         min-w-fit transition duration-500
-        ${theme === "dark" ? "grayscale opacity-70": ""}
+        ${theme === 'dark' ? 'grayscale opacity-70' : ''}
       `}
-			onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-		>
+      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+    >
       <img src={siteConfig.theme.toggleIcon} alt="toggle theme" width={24} height={24} className="max-w-24 max-h-24" />
-		</button>
-	)
+    </button>
+  );
 }
