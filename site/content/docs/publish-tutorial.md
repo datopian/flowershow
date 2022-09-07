@@ -51,11 +51,13 @@ my-content
 └── index.md
 ```
 
-You can now customize your website by creating custom layouts, components and more. See [[guides|our guides]] to learn more.
+## (Optional) customize your website
+
+You can now customize your website by wrapping you content in custom layouts, using custom components in you Markdown files, and more. See [[guides|our guides]] to learn how to do it.
 
 ## Build your website
 
-Now you can build your website with the following command:
+If your content is ready, you can now build your website with the following command:
 
 ```bash
 npx @flowershow/cli build
