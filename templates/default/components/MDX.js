@@ -9,11 +9,10 @@ const components = {
   Head,
   a: CustomLink,
   pre: Pre,
-  GlobalTest: ({ children }) => <h1 className="bg-red-300">{children}</h1>,
   wrapper: ({ layout, ...rest }) => {
     const Layout = require(`../layouts/${layout}`).default;
     return <Layout {...rest} />;
-  },
+  }
 };
 
 export default function MdxPage({ children, ...rest }) {
@@ -32,14 +31,14 @@ export default function MdxPage({ children, ...rest }) {
           description: frontMatter.description,
           images: frontMatter.image
             ? [
-              {
-                url: seoImageUrl,
-                width: 1200,
-                height: 627,
-                alt: frontMatter.title,
-              },
-            ]
-            : siteConfig?.nextSeo?.openGraph?.images || [],
+                {
+                  url: seoImageUrl,
+                  width: 1200,
+                  height: 627,
+                  alt: frontMatter.title
+                }
+              ]
+            : siteConfig?.nextSeo?.openGraph?.images || []
         }}
       />
       <Component
