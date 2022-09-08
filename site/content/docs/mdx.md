@@ -156,7 +156,7 @@ Another powerful thing you can do thanks to `import` statements is loading data 
 Let's try to load a list of colors from a JSON file and pass it as a `list` prop value to our component `MyComponent`:
 
 ```md
-import data from '../data/exampleData.json'
+import data from '../../site/data/exampleData.json'
 
 <MyComponent list={data.colors}/>
 ```
@@ -165,7 +165,7 @@ This will render as:
 
 ---
 
-import data from '../data/exampleData.json'
+import data from '../../site/data/exampleData.json'
 
 <MyComponent list={data.colors}/>
 
