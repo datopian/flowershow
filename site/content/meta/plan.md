@@ -10,11 +10,37 @@ Taglines:
 
 # Plan
 
+Workstreams
+
+* Template (app)
+* Publishing
+  * Tooling (CLI etc)
+  * Cloud
+* Website (flowershow.app)
+
+Milestones
+
+* [ ] **Milestone 1**: launch product website for flowershow at flowershow.app
+  * [ ] Build it with flowershow so
+  * [ ] => flowershow template v0.1 with decent set of features.
+* [ ] **Milestone 2**: MVP for self-publishing i.e. can scaffold and build a flowershow-driven site locally with deployment up to user
+
+Backlog
+
+* [ ] **Milestone X**: cloud publishing
+* [ ] **Milestone X**: data literate documents
+* [ ] **Milestone X**: feature X, Y, Z
+* [ ] Milestone X: publishing ecosystem using flowershow
+* [ ] Milestone X: publishing web3 using flowershow
+* [ ] Milestone X: 100 users of flowershow
+
+# Reviews
+
 ## 2022-08-16
 
-Phase I is complete
+Milestone 1 is complete
 
-Phase II starts which is rolling this out again to other sites
+Milestone 2 starts which is rolling this out again to other sites
 
 * [ ] Promotion and engagement on obsidian forums
 
@@ -107,7 +133,7 @@ Feature List
 * [ ] social links
 * [ ] Made in Flowershow gallery or similar **⌛2022-08-16**
 
-# Features
+# Template Features
 
 In very rough order of likely priority in each section
 
@@ -132,7 +158,7 @@ In very rough order of likely priority in each section
 
 **Obsidian feature compatibility**
 
-* [ ] support Obsidian wiki-link extensions to markdown **working links to pages (also with custom names) but still working on links to headings, links to blocks and links to files - 🚧 [issue #47](https://github.com/flowershow/flowershow/issues/47), [issue #62](https://github.com/flowershow/flowershow/issues/62), [issue #63](https://github.com/flowershow/flowershow/issues/63)**
+* [x] support Obsidian wiki-link extensions to markdown **working links to pages (also with custom names) but still working on links to headings, links to blocks and links to files - 🚧 [issue #47](https://github.com/flowershow/flowershow/issues/47), [issue #62](https://github.com/flowershow/flowershow/issues/62), [issue #63](https://github.com/flowershow/flowershow/issues/63)**
 * [ ] Callouts / admonitions - https://help.obsidian.md/How+to/Use+callouts **🚧 [issue #60](https://github.com/flowershow/flowershow/issues/60)**
 * [ ] Backlinks **🚧 [issue #29](https://github.com/flowershow/flowershow/issues/29)**
 * [ ] Forward links **🚧 [issue #28](https://github.com/flowershow/flowershow/issues/28)**
@@ -140,7 +166,7 @@ In very rough order of likely priority in each section
 * [ ] Excalidraw **🚧 [issue #10](https://github.com/flowershow/flowershow/issues/10)**
 - [ ] How do we support obsidian plugins in general **🚧 [issue #61](https://github.com/flowershow/flowershow/issues/61)**
 
-**Theme**
+## Theme**
 
 * [ ] Dark/light theme **🚧 [issue #56](https://github.com/flowershow/flowershow/issues/56)**
 * [ ] Wide images **❓what do we mean by this**
@@ -153,7 +179,7 @@ In very rough order of likely priority in each section
 * [ ] Image optimization
   * Good summary of pros and cons and how to do it https://tailwind-nextjs-starter-blog.vercel.app/blog/guide-to-using-images-in-nextjs
 
-**Data stuff**
+## Data stuff
 
 * [ ] table preview **❓what do we mean by this**
 * [ ] graphs **❓what do we mean by this (network/knowledge graph?)**
@@ -173,66 +199,3 @@ Advanced
 
 * [ ] Markdown extension addition (howto do that)
 * [ ] Content structuring and contentlayer (latter more for devs)
-
-
-# Details
-
-## Linkable headings
-
-https://tailwindcss.com/docs/responsive-design
-
-- Only shows when you hover the heading
-- Nice symbol
-- Shows to left of text
-- Only shows on desktop
-
-![](https://i.imgur.com/6N0yDUS.png)
-
-## Table of contents
-
-Again tailwindcss.com is excellent. For example: https://tailwindcss.com/docs/customizing-colors
-
-Two contents sections:
-
-- LHS: full site table of contents
-- RHS: table of contents for this page
-
-![](../assets/Pasted%20image%2020220323185414.png)
-
-Code: https://github.com/tailwindlabs/tailwindcss.com/blob/8b9f69a93a5a1b055dc8c1dcfa06f5ca2863b89c/src/layouts/ContentsLayout.js
-
-
-## Obsidian markdown syntax
-
-What's needed:
-
-- [x] `[[Internal link]]`
-- [x] `[[Internal link|With custom text]]`
-- [ ] `[[Internal link#heading]]`
-- [ ] `[[Internal link#heading|With custom text]]`
-
-🚩 Not sure these are needed to start with
-
-- [ ] `![[Embed note]]`
-- [ ] `![[Embed note#heading]]`
-
-## Research
-
-https://obsidian.md/features
-
-GitHub Flavored Markdown (GFM) extensions
-
-```
-- | Markdown **table** |
-- **- [x] Task list**
-```
-
-Extra Obsidian:
-
-```
--   **#Tags**
--   $$**LaTeX** math$$
--   [^**Footnotes**]
--   **[[Internal links]]**
--   **![[Filename]]** to embed notes and other files
-```
