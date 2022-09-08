@@ -21,6 +21,7 @@
     "@silvenon/remark-smartypants": "^1.0.0",
     "@tailwindcss/typography": "^0.5.2",
     "contentlayer": "^0.2.6",
+    "date-fns": "^2.29.2",
     "gray-matter": "^4.0.3",
     "hastscript": "^7.0.2",
     "mdx-mermaid": "^2.0.0-rc1",
