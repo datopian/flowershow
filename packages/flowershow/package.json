@@ -1,14 +1,16 @@
 {
   "name": "flowershow",
   "version": "0.0.3",
+  "description": "Publish your digital garden",
+  "bin": {
+    "flowershow": "bin/flowershow.js"
+  },
   "engines": {
     "node": ">=14.16"
   },
   "author": "Rufus Pollock",
-  "description": "Publish your digital garden",
   "keywords": ["markdown", "MDX", "mdx", "publish", "obsidian"],
   "exports": "./index.js",
-  "bin": "./index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

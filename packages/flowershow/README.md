@@ -1,1 +1,5 @@
-../../README.md
+# Flowershow CLI
+
+```bash
+npx flowershow --help
+```
