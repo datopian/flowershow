@@ -5,29 +5,32 @@
   "bin": {
     "flowershow": "bin/flowershow.js"
   },
-  "engines": {
-    "node": ">=14.16"
-  },
-  "author": "Rufus Pollock",
-  "keywords": ["markdown", "MDX", "mdx", "publish", "obsidian"],
-  "exports": "./index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/flowershow/flowershow",
     "directory": "packages/flowershow"
   },
+  "keywords": [
+    "flowershow",
+    "cli"
+  ],
+  "author": "Rufus Pollock",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/flowershow/flowershow/issues"
   },
   "homepage": "https://github.com/flowershow/flowershow#readme",
-  "dependencies": {
-    "chalk": "^4.1.2",
-    "commander": "^9.4.0",
-    "inquirer": "^9.1.1"
+  "publishConfig": {
+    "access": "public"
   },
-  "type": "module"
+  "dependencies": {
+    "chalk": "^5.0.1",
+    "commander": "^9.4.0",
+    "inquirer": "^9.1.1",
+    "minimist": "^1.2.6"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=14.13"
+  }
 }
