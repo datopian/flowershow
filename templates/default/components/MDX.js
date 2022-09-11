@@ -13,7 +13,7 @@ const components = {
   wrapper: ({ layout, ...rest }) => {
     const Layout = require(`../layouts/${layout}`).default;
     return <Layout {...rest} />;
-  },
+  }
 };
 
 export default function MdxPage({ children, ...rest }) {
@@ -22,7 +22,7 @@ export default function MdxPage({ children, ...rest }) {
   const seoImageUrl = frontMatter?.image?.startsWith('http')
     ? frontMatter.image
     : websiteUrl + frontMatter.image;
-
+  
   return (
     <>
       <NextSeo
@@ -32,14 +32,14 @@ export default function MdxPage({ children, ...rest }) {
           description: frontMatter.description,
           images: frontMatter.image
             ? [
-              {
-                url: seoImageUrl,
-                width: 1200,
-                height: 627,
-                alt: frontMatter.title,
-              },
-            ]
-            : siteConfig?.nextSeo?.openGraph?.images || [],
+                {
+                  url: seoImageUrl,
+                  width: 1200,
+                  height: 627,
+                  alt: frontMatter.title
+                }
+              ]
+            : siteConfig?.nextSeo?.openGraph?.images || []
         }}
       />
       <Component
@@ -48,6 +48,7 @@ export default function MdxPage({ children, ...rest }) {
         frontMatter={frontMatter}
         {...rest}
       />
+      
     </>
   );
 }
