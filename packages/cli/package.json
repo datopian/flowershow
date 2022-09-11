@@ -8,7 +8,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/flowershow/flowershow",
-    "directory": "packages/flowershow"
+    "directory": "packages/cli"
   },
   "keywords": [
     "flowershow",
@@ -26,11 +26,10 @@
   "dependencies": {
     "chalk": "^5.0.1",
     "commander": "^9.4.0",
+    "degit": "^2.8.4",
     "inquirer": "^9.1.1",
-    "minimist": "^1.2.6"
+    "ora": "^6.1.2",
+    "validate-npm-package-name": "^4.0.0"
   },
-  "type": "module",
-  "engines": {
-    "node": ">=14.13"
-  }
+  "type": "module"
 }
