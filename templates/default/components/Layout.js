@@ -24,7 +24,7 @@ export default function Layout({ children, title = '' }) {
         <main>
           {children}
           {editUrl && siteConfig.editLinkShow && editLink && (
-            <div className="docs prose dark:prose-invert mx-auto p-6">
+            <div className="mb-10 docs prose dark:prose-invert mx-auto p-6">
               <a
                 className="flex no-underline font-semibold"
                 href={editUrl}
