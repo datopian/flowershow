@@ -57,12 +57,16 @@ export default class Creator {
 
     const emitter = degit(templateRepo);
 
-    emitter.clone(flowershowDir).then(() => {
+    try {
+      emitter.clone(flowershowDir);
       log(`🎊 Flowershow template was successfuly installed in ${chalk.magenta(targetDir)}.`);
-    });
+    } catch {
+      // TODO error message?
+      error(`Can't clone Flowershow template...`)
+    }
 
     // fix symlinks
-
+    // fs.symlink()
 
   }
 }
