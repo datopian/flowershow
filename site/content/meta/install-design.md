@@ -2,6 +2,48 @@
 
 # Notes
 
+## What about package.json conflicts on upgrade - 2022-09-30
+
+How to package.json - because the user might have added packages ...
+
+one way to solve that is to publish flowershow as a package with all dependencies ...
+
+What about conflicts with base packages e.g. we are installing nextjs and the user is too ...)
+
+=> Long story, short: we need to be able to update package.json - learn from pliny/blitzjs
+
+In templates/default
+
+```
+# package.json
+
+dependencies: {
+  "@flowershow/template-default": "0.1.0"
+}
+```
+
+package.json for templates/default "package"
+
+```
+dependencies: {
+  "next": ...
+  
+}
+```
+
+```bash
+templates/default
+  package.json
+  components
+  ...
+templates/fancy
+  package.json
+  components
+packages/template-default
+  package.json
+packages/template-default
+```
+
 ## Reflections - 2022-08-24
 
 See [[notes/upgrading-template-apps]]
@@ -29,6 +71,8 @@ components
 content
 ```
 
+But you can do anything ... (we just have to symlink stuff into the right places)
+
 ### Init
 
 * degit seems one of the most efficient ways to get the template down
@@ -43,6 +87,7 @@ npx degit flowershow/flowershow/templates/default
 # symlink content directory
 ln -s ../../ content
 ln -s ../../components components/custom
+ln -s ../../assets public/assets
 ```
 
 ### Run
@@ -58,6 +103,26 @@ cd .flowershow/app
 npm run dev
 open localhost:3000
 ```
+
+### Upgrade
+
+```
+flowershow upgrade
+```
+
+How it works
+
+```
+npx degit flowershow/flowershow/templates/default --force
+```
+
+### Publish
+
+```
+flowershow publish
+```
+
+
 
 ## Mock-out of install / upgrade - 2022-07-16
 
