@@ -5,7 +5,7 @@ const defaultConfig = {
   description: 'Publish your digital garden',
   repoRoot: "https://github.com/flowershow/flowershow",
   repoEditPath: "/edit/main/site/content/",
-  editPageShow: false,
+  editLinkShow: false,
   author: 'Flowershow',
   // logo image
   authorLogo: '/assets/images/logo.svg',
