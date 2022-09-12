@@ -66,7 +66,7 @@ export default makeSource({
       remarkGfm,
       [smartypants, {quotes: false, dashes: 'oldschool'}],
       remarkMath,
-      [wikiLinkPlugin, { markdownFolder: siteConfig.content }],
+      [wikiLinkPlugin],
       /** Using the code extra plugin from https://github.com/s0/remark-code-extra
        *  to create new mermaid pre tags to use with mdx-mermaid.
        *  rehypePrismPlus plugin modifies the pre tags and due to this mdx-mermaid
