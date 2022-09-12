@@ -9,7 +9,6 @@ const components = {
   Head,
   a: CustomLink,
   pre: Pre,
-  GlobalTest: ({ children }) => <h1 className="bg-red-300">{children}</h1>,
   wrapper: ({ layout, ...rest }) => {
     const Layout = require(`../layouts/${layout}`).default;
     return <Layout {...rest} />;
