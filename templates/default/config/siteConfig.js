@@ -1,11 +1,17 @@
 import userConfig from '../content/config.js';
 
 const defaultConfig = {
-  title: 'Flowershow',
+  navbarTitle: {
+    text: 'Flowershow',
+    logo: '/_flowershow/logo.svg',
+    url: 'https://flowershow.app/',
+    // site version displayed in the NavBar next to logo
+    version: 'Alpha',
+  },
   description: 'Publish your digital garden',
   author: 'Flowershow',
   // logo image
-  authorLogo: '/assets/images/logo.svg',
+  authorLogo: '/_flowershow/logo.svg',
   // url to author
   authorUrl: 'https://flowershow.app/',
   // Google analytics key e.g. G-XXXX
@@ -20,13 +26,22 @@ const defaultConfig = {
   // Theme
   theme: {
     default: 'dark',
-    toggleIcon: '/assets/images/theme-button.svg',
+    toggleIcon: '/_flowershow/theme-button.svg',
   },
   navLinks: [
     { href: '/about', name: 'About' },
   ],
 };
 
-const siteConfig = { ...defaultConfig, ...userConfig };
+const siteConfig = {
+  ...defaultConfig,
+  ...userConfig,
+  // prevent theme object overrides for
+  // values not provided in userConfig
+  theme: {
+    ...defaultConfig.theme,
+    ...userConfig.theme,
+  }
+};
 
 module.exports = siteConfig;
