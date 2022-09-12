@@ -13,6 +13,8 @@ export function ThemeSelector() {
 	*/
   if (!mounted) return null;
 
+  if (!siteConfig.theme.default) return null
+
   return (
     <button
       className={`
