@@ -26,7 +26,7 @@
     "hastscript": "^7.0.2",
     "mdx-mermaid": "^2.0.0-rc1",
     "mermaid": "^9.1.4",
-    "next": "^12.1.0",
+    "next": "^12.3.0",
     "next-contentlayer": "^0.2.6",
     "next-seo": "^4.28.1",
     "next-themes": "^0.2.0",
@@ -39,6 +39,7 @@
     "remark-code-extra": "^1.0.1",
     "remark-gfm": "^3.0.0",
     "remark-math": "^5.1.1",
+    "remark-smartypants": "^2.0.0",
     "remark-toc": "^8.0.1",
     "remark-wiki-link-plus": "^1.0.2"
   },
