@@ -1,3 +1,5 @@
+import siteConfig from '../config/siteConfig';
+
 export default function DocsLayout({ children, frontMatter }) {
   const { title } = frontMatter;
   return (
@@ -5,9 +7,7 @@ export default function DocsLayout({ children, frontMatter }) {
       <header>
         <div className="mb-6">{title && <h1>{title}</h1>}</div>
       </header>
-      <section>
-        {children}
-      </section>
+      <section>{children}</section>
     </article>
   );
 }

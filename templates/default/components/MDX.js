@@ -21,7 +21,7 @@ export default function MdxPage({ children, ...rest }) {
   const seoImageUrl = frontMatter?.image?.startsWith('http')
     ? frontMatter.image
     : websiteUrl + frontMatter.image;
-
+  
   return (
     <>
       <NextSeo
@@ -47,6 +47,7 @@ export default function MdxPage({ children, ...rest }) {
         frontMatter={frontMatter}
         {...rest}
       />
+      
     </>
   );
 }
