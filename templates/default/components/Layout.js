@@ -23,7 +23,7 @@ export default function Layout({ children, title = '' }) {
         <Header />
         <main>
           {children}
-          {editUrl && siteConfig.editLinkShow && editLink && (
+          {(editLink ?? siteConfig.editLinkShow) && (
             <div className="mb-10 docs prose dark:prose-invert mx-auto p-6">
               <a
                 className="flex no-underline font-semibold"
