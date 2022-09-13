@@ -3,6 +3,9 @@ import userConfig from '../content/config.js';
 const defaultConfig = {
   title: 'Flowershow',
   description: 'Publish your digital garden',
+  repoRoot: "https://github.com/flowershow/flowershow",
+  repoEditPath: "/edit/main/site/content/",
+  editLinkShow: false,
   author: 'Flowershow',
   // logo image
   authorLogo: '/assets/images/logo.svg',
