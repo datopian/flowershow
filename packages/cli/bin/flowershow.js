@@ -2,12 +2,10 @@
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 
-import chalk from "chalk";
 import { Command } from "commander";
 
 
 // TODO check current vs required node version (package.json engines)
-// and return a help message instead of throwing an error
 // const requiredNodeVersion = require("../package.json").engines.node;
 
 const program = new Command();

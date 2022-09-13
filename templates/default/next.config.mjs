@@ -5,17 +5,6 @@ export default withContentlayer({
     config.infrastructureLogging = {
       level: 'error',
     };
-    config.module = {
-      rules: [
-        {
-          test: '**/*',
-          exclude: [
-            './content',
-          ],
-        },
-
-      ],
-    };
     return config;
   },
   eslint: {

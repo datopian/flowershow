@@ -67,7 +67,7 @@ export default class Creator {
       exit(1);
     }
 
-    // content folder
+    // symlink content folder
     pauseSpinner();
 
     let { contentPath } = await inquirer.prompt([
@@ -104,7 +104,7 @@ export default class Creator {
       fs.writeFile(`${contentPath}/config.js`, '{}', { flag: 'a' }, err => {});
     }
 
-    // assets folder
+    // symlink assets folder
     pauseSpinner();
 
     const { assetsFolder } = await inquirer.prompt([
