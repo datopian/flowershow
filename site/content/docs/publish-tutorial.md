@@ -13,12 +13,11 @@ title: How to (self) publish your markdown files using Flowershow template
 
 ## Prepare the content
 
-Create a folder with markdown files you'd like to publish or use your exisitng Obsidian vault. This folder should include at least a single `index.md` file, which will be used to create the home page of your website. If it doesn't exist, the Flowershow CLI will create it for you.
+Create a folder with markdown files you'd like to publish or use your exisitng Obsidian vault. This folder should include at least a single `index.md` file, which will be used to generate the home page of your website. If it doesn't exist, Flowershow CLI will create it for you.
 
 To create this folder from scratch, you can do:
 
 ```bash
-cd my-flowershow-site
 mkdir my-content
 cd my-content
 touch index.md
@@ -29,7 +28,7 @@ You can create as many subfolders within your content folder as you want. Its di
 
 Each folder can have it's own `index.md` file, which will be available under it's parent directory path, e.g. `my-content/blog/index.md` will be available under `<base-url-of-your-published-website>/blog`.
 
-In order to embed attachements (e.g. images) in your content, you will also need to create a dedicated folder for them in your content folder. If you're an Obsidian user, you should set this folder as an attachment folder, so that all files are saved to it automatically when you copy them to your files in Obsidian vault.
+In order to add attachements (e.g. images) into your content, you will also need to create a dedicated folder for them in your content folder. If you're an Obsidian user, you should set this folder as an attachment folder, so that all files are saved to it automatically when you copy them to your files in Obsidian vault.
 
 ```bash
 cd my-content
@@ -50,7 +49,7 @@ cd my-site
 npx flowershow install
 ```
 
-After running this command you'll be shown a set of prompts, that will allow you to properly setup the template. At the end you should see the `.flowershow` folder created in the target directory. Also, `config.js` file (and `index.md` file if it didn't exsist) will be created in you content folder, which allows you to make basic configurations of your Flowershow app.
+After running this command you'll be shown a set of prompts, that will allow you to properly setup the template. At the end you should see the `.flowershow` folder created in the target directory. Also, `config.js` file (and `index.md` file if it didn't exsist) will be created in you content folder, which allows you to make basic configurations of your Flowershow app. See [[config|this guide]] to learn more.
 
 ```bash
 my-content
@@ -60,7 +59,7 @@ my-content
 
 ## (Optional) customize your website
 
-You can now customize your website by wrapping you content in custom layouts, using custom components in you Markdown files, and more. See [[guides|our guides]] to learn how to do it.
+You can now customize your website by wrapping your content in custom layouts, using custom components in you Markdown files, importing data from files and more. See [[guides|our guides]] to learn how to do it.
 
 ## Build your website
 
