@@ -264,6 +264,24 @@ mymeta: Some info
 
 The `title` and `description` fields are pulled from the MDX file and processed using `gray-matter`. Additionally, links are rendered using a custom component passed to `next-mdx-remote`.
 
+### ✅ Dashes/Ellipse
+
+Two '-' will convert to ndash. Three '-' will convert to mdash. Three '.' with or without spacing will convert to ellipse.
+
+**Example:**
+```md
+--ndash
+---mdash
+...ellipse
+. . . another ellipse
+```
+
+**Renders as:**
+--ndash
+---mdash
+...ellipse
+. . . another ellipse
+
 ### 🚧 Text highlighting
 
 ==I'm Highlighted!== is done using `==I'm Highlighted!==`
