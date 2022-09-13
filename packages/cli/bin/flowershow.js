@@ -19,13 +19,22 @@ program
 
 // choose template
 program
-  .command('create')
-  .description('create a new project with Flowershow template')
-  .argument('[target-dir]', 'Path to the folder where you want to have Flowershow template installed', '.')
+  .command('install')
+  .description('install Flowershow template in target directory')
+  .argument('[target-dir]', 'Path to the folder where you want Flowershow template to be installed', '.')
   // .option('-t, --template [template-name]', 'Flowershow template name to use', 'default')
   .action(async (targetDir, options) => {
-    const { default: create } = await import ('../lib/create.js');
-    create(targetDir, options);
+    const { default: install } = await import ('../lib/install.js');
+    install(targetDir, options);
+  })
+
+program
+  .command('build')
+  .description('build Flowershow website')
+  .argument('[project-dir]', 'Path to the folder where Flowershow template is installed (root folder of .flowershow)', '.')
+  .action(async (projectPath) => {
+    const { default: build } = await import ('../lib/build.js');
+    build(projectPath);
   })
 
 program
@@ -46,15 +55,6 @@ program
   .action(async () => {
     const { default: publish } = await import ('../lib/publish.js');
     publish();
-  })
-
-// TBD
-program
-  .command('build')
-  .description('build Flowershow website')
-  .action(async () => {
-    const { default: build } = await import ('../lib/build.js');
-    build();
   })
 
 // TBD

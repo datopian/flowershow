@@ -1,12 +1,21 @@
-import chalk from 'chalk';
+import fs from 'fs';
+import path from 'path';
+import { execa } from 'execa';
+
+import { exit, error, log } from './utils/index.js';
 
 
-const log = console.log;
+import { FLOWERSHOW_RELATIVE_PATH } from './const.js';
 
-export default function build () {
-  log(chalk.redBright.bold('Command under construction...\n'));
-  log(chalk.blue(
-    'Check ' +
-      chalk.green.underline('https://flowershow.app') +
-    ' to learn more about Flowershow development stage and subscribe to get notified when it\'s ready!'))
+export default async function build(dir) {
+  const flowershowDir = path.resolve(dir, FLOWERSHOW_RELATIVE_PATH);
+
+  // check if flowershow is installed
+  if (!fs.existsSync(flowershowDir)) {
+    error(`Directory ${flowershowDir} does not exist.`)
+    exit(1);
+  }
+  const subprocess = execa('npm', [ 'run', 'build' ], { cwd: flowershowDir });
+
+  subprocess.stdout.pipe(process.stdout);
 }
