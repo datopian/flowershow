@@ -1,5 +1,5 @@
 ---
-title: How to publish your markdown files with Flowershow
+title: How to (self) publish your markdown files with Flowershow
 ---
 
 <div className="border-2 border-slate-400 rounded-md px-4 mb-2">
@@ -13,7 +13,7 @@ title: How to publish your markdown files with Flowershow
 
 ## Prepare the content
 
-Create a folder with markdown files you'd like to publish or use your exisitng Obsidian vault. This folder should include at least `index.md` file, which will be used to create the home page of your website.
+Create a folder with markdown files you'd like to publish or use your exisitng Obsidian vault. This folder should include at least a single `index.md` file, which will be used to create the home page of your website. If it doesn't exist, the Flowershow CLI will create it for you.
 
 To create this folder from scratch, you can do:
 
@@ -35,11 +35,11 @@ See [GitHub docs](https://docs.github.com/en/get-started/quickstart) to learn mo
 
 ## Install Flowershow template
 
-Once your content folder is ready, you can install the Flowershow app template in it using `@flowershow/cli` tool.
+Once your content folder is ready, you can install the Flowershow app template, you can install the Flowershow template in a directory of your choice.
 
 ```bash
-cd my-content
-npx @flowershow/cli create
+cd my-site
+npx flowershow create 
 ```
 
 🚧 After running this command you'll be shown a set of prompts, that will allow you to properly setup the template with your content folder structure and make basic configurations of your website. At the end you should see the `.flowershow` folder in your content folder, as well as the `config.js` file, which includes basic configurations of your Flowershow app.

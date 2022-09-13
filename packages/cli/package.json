@@ -31,5 +31,8 @@
     "ora": "^6.1.2",
     "validate-npm-package-name": "^4.0.0"
   },
-  "type": "module"
+  "type": "module",
+  "engines": {
+    "node": ">=12.2.0"
+  }
 }

@@ -21,15 +21,11 @@ program
 program
   .command('create')
   .description('create a new project with Flowershow template')
-  .argument('<project-name>', 'Flowershow project name')
-  .argument('<content-path>', 'Path to your content')
-  .option('-a, --assets <assets-folder>', 'Assets folder name', 'assets')
-  // .option('-g, --git [message]', 'Force git initialization with initial commit message')
-  // .option('-n, --no-git', 'Skip git initialization')
-  // .option('-f, --force', 'Overwrite target directory if it exists')
-  .action(async (projectName, contentPath, options) => {
+  .argument('[target-dir]', 'Path to the folder where you want to have Flowershow template installed', '.')
+  // .option('-t, --template [template-name]', 'Flowershow template name to use', 'default')
+  .action(async (targetDir, options) => {
     const { default: create } = await import ('../lib/create.js');
-    create(projectName, contentPath, options);
+    create(targetDir, options);
   })
 
 // program
