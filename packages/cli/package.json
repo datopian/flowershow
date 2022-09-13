@@ -27,6 +27,7 @@
     "chalk": "^5.0.1",
     "commander": "^9.4.0",
     "degit": "^2.8.4",
+    "execa": "^6.1.0",
     "inquirer": "^9.1.1",
     "ora": "^6.1.2",
     "validate-npm-package-name": "^4.0.0"

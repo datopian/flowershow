@@ -9,7 +9,7 @@ export const info = (msg) => {
 }
 
 export const error = (msg) => {
-  console.error(`${chalk.bgRed(' ERROR ')} ${chalk.red(msg)}`)
+  console.error(`\n${chalk.bgRed(' ERROR ')} ${chalk.red(msg)}`)
   if (msg instanceof Error) {
     console.error(msg.stack)
   }
