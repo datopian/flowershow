@@ -10,13 +10,8 @@ import inquirer from 'inquirer';
 
 import { exit, error, log, logWithSpinner, stopSpinner, pauseSpinner, resumeSpinner } from './utils/index.js';
 
-function sleep(ms) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
-}
 
-const FLOWERSHOW_RELATIVE_PATH = '.flowershow';
+import { FLOWERSHOW_RELATIVE_PATH } from './const.js';
 
 export default class Creator {
   constructor(context, template = 'default') {
@@ -132,14 +127,21 @@ export default class Creator {
     fs.unlinkSync(`${flowershowDir}/public/assets`);
     fs.symlinkSync(path.resolve(contentPath, assetsFolder), `${flowershowDir}/public/assets`);
 
-    stopSpinner();
 
     // // install flowershow dependencies
     logWithSpinner({ symbol: '🌸', msg: `Installing Flowershow dependencies...` });
 
-    const { stdout, stderr } = await execa('npm', [ 'install' ], { cwd: flowershowDir });
+    try {
+      const { stdout, stderr } = await execa('npm', [ 'install' ], { cwd: flowershowDir });
+      log(stdout);
+      log(stderr);
+    } catch (err) {
+      error(
+        `Installing dependencies failed: ${err.message}`
+      );
+      exit(err.exitCode);
+    }
 
     stopSpinner();
   }
-
 }

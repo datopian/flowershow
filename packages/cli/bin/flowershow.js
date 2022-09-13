@@ -28,38 +28,42 @@ program
     create(targetDir, options);
   })
 
-// program
-//   .command('preview')
-//   .description('preview your Flowershow site')
-//   .action(async () => {
-//     // const { default: preview } = await import ('../lib/create.js');
-//     // create(projectName, contentPath, options);
-//     const { exec } = require('child_process');
-//     exec(`npm run dev`, async (error, stdout, stderr) => {
-//       if (error !== null) {
-//         console.log(`exec error: ${error}`);
-//         exit(1);
-//       }
-//       console.log(stdout);
-//       console.log(stderr);
-//     });
-//   })
+program
+  .command('preview')
+  .description('preview your Flowershow site')
+  .argument('[project-dir]', 'Path to the folder where Flowershow template is installed (root folder of .flowershow)', '.')
+  .action(async (projectPath) => {
+    const { default: preview } = await import ('../lib/preview.js');
+    preview(projectPath);
+  })
 
-// program
-//   .command('publish')
-//   .description('publish files or directories')
-//   .argument('[path]', 'path to a file or a directory', '.')
-//   .option('-g, --glob <pattern>', 'glob pattern')
-//   .action(publish);
+// TBD
+program
+  .command('publish')
+  .description('publish files or directories')
+  .argument('[path]', 'path to a file or a directory', '.')
+  .option('-g, --glob <pattern>', 'glob pattern')
+  .action(async () => {
+    const { default: publish } = await import ('../lib/publish.js');
+    publish();
+  })
 
-// program
-//   .command('build')
-//   .description('build Flowershow website')
-//   .action(build);
+// TBD
+program
+  .command('build')
+  .description('build Flowershow website')
+  .action(async () => {
+    const { default: build } = await import ('../lib/build.js');
+    build();
+  })
 
-// program
-//   .command('upgrade')
-//   .description('upgrade your Flowershow template to the latest version')
-//   .action(upgrade);
+// TBD
+program
+  .command('upgrade')
+  .description('upgrade your Flowershow template to the latest version')
+  .action(async () => {
+    const { default: upgrade } = await import ('../lib/upgrade.js');
+    upgrade();
+  })
 
 program.parse();
