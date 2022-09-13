@@ -276,7 +276,7 @@ Two '-' will convert to ndash. Three '-' will convert to mdash. Three '.' with o
 . . .another ellipse
 ```
 
-**Renders as:**
+**Renders as:**\
 –ndash\
 —mdash\
 ...ellipse\
