@@ -6,9 +6,8 @@ import Header from './Nav';
 
 export default function Layout({ children, title = '' }) {
   const { editLink, _raw } = children.props;
-   /* Edit links will only appear if enabled in siteConfig. If set to true, all pages will show link by default.
-      Files can include frontmatter, editLink: false, to not show specific page link */
-  const editUrl = siteConfig.repoRoot + siteConfig.repoEditPath + _raw.sourceFilePath;
+   /* if editLink is not set in page frontmatter, link bool value will depend on siteConfig.editLinkShow */
+  const editUrl = siteConfig.repoRoot + siteConfig.repoEditPath + _raw?.sourceFilePath;
   return (
     <>
       <Head>
@@ -19,14 +18,14 @@ export default function Layout({ children, title = '' }) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <div className="relative min-h-screen pb-52 dark:bg-slate-900">
+      <div className="relative min-h-screen pb-60 dark:bg-slate-900">
         <Header />
         <main>
           {children}
           {(editLink ?? siteConfig.editLinkShow) && (
-            <div className="mb-10 docs prose dark:prose-invert mx-auto p-6">
+            <div className="mb-10 prose dark:prose-invert p-6 mx-auto">
               <a
-                className="flex no-underline font-semibold"
+                className="flex no-underline font-semibold justify-center"
                 href={editUrl}
                 target="_blank">
                 Edit this page
