@@ -17,7 +17,7 @@ const sharedFields = {
   description: { type: 'string' },
   image: { type: 'string' },
   layout: { type: 'string', default: 'docs' },
-  editLink: { type: 'boolean', default: siteConfig.editLinkShow},
+  editLink: { type: 'boolean' },
 };
 
 const computedFields = {
