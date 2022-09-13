@@ -69,7 +69,7 @@ export default class Creator {
       exit(1);
     }
 
-    logWithSpinner({ msg: "Configuring Flowershow template..." })
+    // logWithSpinner({ msg: "Configuring Flowershow template..." })
 
     // updating symlinks
     fs.unlinkSync(`${flowershowDir}/content`);
@@ -119,7 +119,7 @@ export default class Creator {
 
     // if there is no index.md file, create one
     if (!fs.existsSync(`${contentDir}/index.md`)) {
-      const homePageContent = '# Hello world!';
+      const homePageContent = '# Welcome to my Flowershow site!';
       fs.writeFile(`${contentDir}/index.md`, homePageContent, { flag: 'a' }, err => {});
     }
 
