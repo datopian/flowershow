@@ -34,7 +34,7 @@ function MyApp({ Component, pageProps }) {
       defaultTheme={siteConfig.theme.default}
       forcedTheme={siteConfig.theme.default ? null : 'light'}
     >
-      <DefaultSeo defaultTitle={siteConfig.title || siteConfig.navbarTitle.text} {...siteConfig.nextSeo} />
+      <DefaultSeo defaultTitle={siteConfig.title} {...siteConfig.nextSeo} />
       {/* Global Site Tag (gtag.js) - Google Analytics */}
       {siteConfig.analytics
         && (

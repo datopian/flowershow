@@ -1,13 +1,7 @@
 import userConfig from '../content/config.js';
 
 const defaultConfig = {
-  navbarTitle: {
-    text: 'Flowershow',
-    logo: '/_flowershow/logo.svg',
-    url: 'https://flowershow.app/',
-    // site version displayed in the NavBar next to logo
-    version: 'Alpha',
-  },
+  title: 'Flowershow',
   description: 'Publish your digital garden',
   author: 'Flowershow',
   // logo image
