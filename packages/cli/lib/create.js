@@ -8,12 +8,11 @@ import Creator from './Creator.js';
 import { error, log, exit } from './utils/index.js';
 
 
-export default async function create(projectName, options) {
+export default async function create(projectName, contentDir, options) {
   const currentDir = process.cwd();
   const inCurrentDir = projectName === '.';
   const name = inCurrentDir ? path.relative('../', currentDir) : projectName;
   const targetDir = path.resolve(currentDir, projectName);
-  console.log({ targetDir });
 
   validateProjectName(name);
 
@@ -34,13 +33,26 @@ export default async function create(projectName, options) {
     fs.mkdirSync(targetDir);
   }
 
-  const creator = new Creator(name, targetDir);
-  await creator.create();
+  // check if content directory exists
+  try {
+    contentDir = path.isAbsolute(contentDir) ? contentDir : path.resolve(currentDir, contentDir);
+    if (!fs.existsSync(contentDir)) {
+      error(`Directory ${contentDir} does not exist.`)
+      exit(1)
+    }
+  } catch (err) {
+    // TODO
+    console.log(err)
+    exit(1);
+  }
+
+
+  const creator = new Creator(name, targetDir, contentDir);
+  await creator.create(options);
 
 }
 
 const validateProjectName = (name) => {
-  console.log(name);
   const result = validate(name);
 
   if (!result.validForNewPackages) {

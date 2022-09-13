@@ -7,20 +7,21 @@ import chalk from 'chalk';
 import degit from 'degit';
 import inquirer from 'inquirer';
 
-import { log } from './utils/index.js';
+import { log, logWithSpinner, stopSpinner, pauseSpinner, resumeSpinner } from './utils/index.js';
 
 
 const FLOWERSHOW_RELATIVE_PATH = '.flowershow';
 
 export default class Creator {
-  constructor(name, targetDir, template = 'default') {
+  constructor(name, context, contentDir, template = 'default') {
     this.name = name;
-    this.targetDir = targetDir;
+    this.context = context;
     this.template = template;
+    this.contentDir = contentDir;
   }
 
   get flowershowDir() {
-    return path.resolve(this.targetDir, FLOWERSHOW_RELATIVE_PATH);
+    return path.resolve(this.context, FLOWERSHOW_RELATIVE_PATH);
   }
 
   get templateRepo() {
@@ -28,45 +29,103 @@ export default class Creator {
     return `${flowershowRepo}/templates/${this.template}`
   }
 
-  async create() {
-    const { flowershowDir, targetDir, templateRepo } = this;
+  async create(options) {
+    const { context, flowershowDir, contentDir, templateRepo } = this;
+    const { assets: assetsFolder } = options;
 
     if (fs.existsSync(flowershowDir)) {
         const { action } = await inquirer.prompt([
-        {
+          {
             name: 'action',
             type: 'list',
-          message: `Flowershow template is already installed in directory ${chalk.magenta(targetDir)}. What do you want to do?:`,
+            message: `Flowershow template is already installed in directory ${chalk.magenta(context)}. What do you want to do?:`,
             choices: [
-            { name: 'Overwrite', value: 'overwrite' },
-            // { name: 'Merge', value: 'merge' },
-            { name: 'Cancel', value: false }
+              { name: 'Overwrite', value: 'overwrite' },
+              // { name: 'Merge', value: 'merge' },
+              { name: 'Cancel', value: false }
             ]
-        }
+          }
         ])
 
         if (!action) {
-        return
+          return
         } else {
-        // TODO overwrite
-        return
+          // TODO overwrite
+          return
         }
     }
 
-    log(`🌷 Installing Flowershow template in ${chalk.magenta(targetDir)}.`);
+    log(`🌷 Installing Flowershow template in ${chalk.magenta(context)}...`);
 
-    const emitter = degit(templateRepo);
+    // clone flowershow template
+    logWithSpinner({ msg: `Cloning Flowershow template to ${chalk.magenta(context)}...` });
 
     try {
-      emitter.clone(flowershowDir);
-      log(`🎊 Flowershow template was successfuly installed in ${chalk.magenta(targetDir)}.`);
+      const emitter = degit(templateRepo);
+      await emitter.clone(flowershowDir);
     } catch {
       // TODO error message?
-      error(`Can't clone Flowershow template...`)
+      error(`Can't clone Flowershow template.`)
+      exit(1);
     }
 
-    // fix symlinks
-    // fs.symlink()
+    logWithSpinner({ msg: "Configuring Flowershow template..." })
 
+    // updating symlinks
+    fs.unlinkSync(`${flowershowDir}/content`);
+    fs.symlinkSync(contentDir, `${flowershowDir}/content`);
+
+    const assetsDir = path.resolve(contentDir, assetsFolder);
+
+    if (!fs.existsSync(assetsDir)) {
+      pauseSpinner();
+      const { action } = await inquirer.prompt([
+      {
+          name: 'action',
+          type: 'list',
+        message: `Directory ${assetsDir} does not exist. What do you want to do?:`,
+          choices: [
+            { name: 'Create', value: 'create' },
+            { name: 'Cancel', value: false }
+          ]
+      }
+      ])
+
+      resumeSpinner();
+
+      if (!action) {
+        return
+      } else {
+          fs.mkdirSync(assetsDir);
+      }
+    }
+
+    fs.unlinkSync(`${flowershowDir}/public/assets`);
+    fs.symlinkSync(assetsDir, `${flowershowDir}/public/assets`);
+
+    // install flowershow dependencies
+    logWithSpinner({ msg: `Installing Flowershow dependencies...` });
+
+    const { exec } = require('child_process');
+    exec(`cd ${flowershowDir} && npm install`, async (error, stdout, stderr) => {
+      if (error !== null) {
+        console.log(`exec error: ${error}`);
+        exit(1);
+      }
+      console.log(stdout);
+      console.log(stderr);
+      stopSpinner();
+    });
+
+    // if there is no index.md file, create one
+    if (!fs.existsSync(`${contentDir}/index.md`)) {
+      const homePageContent = '# Hello world!';
+      fs.writeFile(`${contentDir}/index.md`, homePageContent, { flag: 'a' }, err => {});
+    }
+
+    // if there is no config.js file, create one
+    if (!fs.existsSync(`${contentDir}/config.js`)) {
+      fs.writeFile(`${contentDir}/config.js`, '{}', { flag: 'a' }, err => {});
+    }
   }
 }

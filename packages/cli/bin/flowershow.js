@@ -19,15 +19,35 @@ program
 
 // choose template
 program
-  .command('create <project-name>')
+  .command('create')
   .description('create a new project with Flowershow template')
+  .argument('<project-name>', 'Flowershow project name')
+  .argument('<content-path>', 'Path to your content')
+  .option('-a, --assets <assets-folder>', 'Assets folder name', 'assets')
   // .option('-g, --git [message]', 'Force git initialization with initial commit message')
   // .option('-n, --no-git', 'Skip git initialization')
   // .option('-f, --force', 'Overwrite target directory if it exists')
-  .action(async (options) => {
+  .action(async (projectName, contentPath, options) => {
     const { default: create } = await import ('../lib/create.js');
-    create(options);
+    create(projectName, contentPath, options);
   })
+
+// program
+//   .command('preview')
+//   .description('preview your Flowershow site')
+//   .action(async () => {
+//     // const { default: preview } = await import ('../lib/create.js');
+//     // create(projectName, contentPath, options);
+//     const { exec } = require('child_process');
+//     exec(`npm run dev`, async (error, stdout, stderr) => {
+//       if (error !== null) {
+//         console.log(`exec error: ${error}`);
+//         exit(1);
+//       }
+//       console.log(stdout);
+//       console.log(stderr);
+//     });
+//   })
 
 // program
 //   .command('publish')

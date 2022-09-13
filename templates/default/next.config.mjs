@@ -1,9 +1,20 @@
-import { withContentlayer } from "next-contentlayer";
+import { withContentlayer } from 'next-contentlayer';
 
 export default withContentlayer({
   webpack: (config) => {
     config.infrastructureLogging = {
-      level: "error",
+      level: 'error',
+    };
+    config.module = {
+      rules: [
+        {
+          test: '**/*',
+          exclude: [
+            './content',
+          ],
+        },
+
+      ],
     };
     return config;
   },
