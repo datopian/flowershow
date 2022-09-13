@@ -273,14 +273,14 @@ Two '-' will convert to ndash. Three '-' will convert to mdash. Three '.' with o
 --ndash
 ---mdash
 ...ellipse
-. . . another ellipse
+. . .another ellipse
 ```
 
 **Renders as:**
---ndash
----mdash
+–ndash
+—mdash
 ...ellipse
-. . . another ellipse
+...another ellipse
 
 ### 🚧 Text highlighting
 
