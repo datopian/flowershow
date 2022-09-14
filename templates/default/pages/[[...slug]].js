@@ -16,13 +16,13 @@ export default function Page({ body, ...rest }) {
 export async function getStaticProps({ params }) {
   // params.slug is undefined for root index page
   const urlPath = params.slug ? params.slug.join('/') : '';
-  const page = allDocuments.find((p) => p.url === urlPath);
+  const page = allDocuments.find((p) => p.url_path === urlPath);
   return { props: page };
 }
 
 export async function getStaticPaths() {
   const paths = allDocuments.map((page) => {
-    const parts = page.url.split('/');
+    const parts = page.url_path.split('/');
     return { params: { slug: parts } };
   });
 

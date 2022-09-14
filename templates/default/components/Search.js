@@ -42,6 +42,8 @@ export function Search(props) {
     );
   }, []);
 
+  if (!docSearchConfig.appId && !docSearchConfig.apiKey && !docSearchConfig.indexName) return null
+
   return (
     <>
       <button
