@@ -17,29 +17,22 @@ function GitHubIcon(props) {
 function NavbarTitle() {
   // include option to define different text from title (if needed) in config
   const title = siteConfig.navbarTitle?.text || siteConfig.title
-  /**
-   * Navbar logo will not show if:
-   *  - the authorLogo is not defined, or
-   *  - explicitly set to false in config's navbarTitle logo property.
-   * In all other cases the logo is shown by default.
-   */
-  const logo = (siteConfig.navbarTitle?.logo === false ? false : siteConfig.authorLogo) && siteConfig.authorLogo
 
   return (
     <>
       <Link href="/" aria-label="Home page">
         <a className="flex items-center font-extrabold text-xl sm:text-2xl text-slate-900 dark:text-white">
-          {logo && <img src={logo} alt={title} className="w-9 h-9 mr-1 fill-white" />}
+          {siteConfig.navbarTitle?.logo && <img src={siteConfig.navbarTitle.logo} alt={title} className="w-9 h-9 mr-1 fill-white" />}
           {title}
+          {siteConfig.navbarTitle?.version &&
+            (
+              <div className="mx-2 rounded-full border border-slate-500 py-1 px-3 text-xs text-slate-500">
+                {siteConfig.navbarTitle?.version}
+              </div>
+            )
+          }
         </a>
       </Link>
-      {siteConfig.navbarTitle?.version &&
-        (
-          <div className="mx-4 rounded-full border border-slate-500 py-1 px-3 text-xs text-slate-500">
-            {siteConfig.version}
-          </div>
-        )
-      }
     </>
   )
 }
