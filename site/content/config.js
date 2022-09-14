@@ -1,12 +1,17 @@
 const config = {
   title: 'Flowershow',
+  description: 'Publish your digital garden',
   author: 'Flowershow',
   authorLogo: '/assets/images/logo.svg',
+  authorUrl: 'https://flowershow.app/',
   navbarTitle: {
     logo: '/assets/images/logo.svg',
     text: 'Flowershow',
     version: 'Alpha'
   },
+  repoRoot: "https://github.com/flowershow/flowershow",
+  repoEditPath: "/edit/main/site/content/",
+  editLinkShow: false,
   analytics: 'G-RQWLTRWBS2',
   navLinks: [
     { href: '/#overview', name: 'Overview' },
