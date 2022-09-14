@@ -2,15 +2,13 @@ import userConfig from '../content/config.js';
 
 const defaultConfig = {
   title: 'Flowershow',
-  description: 'Publish your digital garden',
-  repoRoot: "https://github.com/flowershow/flowershow",
-  repoEditPath: "/edit/main/site/content/",
+  description: ''
+  repoRoot: '',
+  repoEditPath: '',
   editLinkShow: false,
-  author: 'Flowershow',
-  // logo image
-  authorLogo: '/_flowershow/logo.svg',
-  // url to author
-  authorUrl: 'https://flowershow.app/',
+  author: '',
+  authorLogo: '',
+  authorUrl: '',
   // Google analytics key e.g. G-XXXX
   analytics: '',
   // content source directory for markdown files
@@ -18,15 +16,13 @@ const defaultConfig = {
   // if you have your notes in another (external) directory,
   // /content dir should be a symlink to that directory
   content: 'content',
-  // site version displayed in the NavBar next to logo
-  version: 'Alpha',
   // Theme
   theme: {
     default: 'dark',
     toggleIcon: '/_flowershow/theme-button.svg',
   },
   navLinks: [
-    { href: '/about', name: 'About' },
+    // { href: '/about', name: 'About' },
   ],
 };
 
