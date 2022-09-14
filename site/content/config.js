@@ -1,5 +1,12 @@
 const config = {
-  navbarTitle: { version: true },
+  title: 'Flowershow',
+  author: 'Flowershow',
+  authorLogo: '/assets/images/logo.svg',
+  navbarTitle: {
+    logo: '/assets/images/logo.svg',
+    text: 'Flowershow',
+    version: 'Alpha'
+  },
   analytics: 'G-RQWLTRWBS2',
   navLinks: [
     { href: '/#overview', name: 'Overview' },
