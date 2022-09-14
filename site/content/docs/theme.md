@@ -40,6 +40,20 @@ const config = {
 ```
 Note that in dark mode the color of the icon is set to grayscale and once toggled to light mode  it would then render it's original color.
 
+### Disabling the Dark/Light theme
+
+To disable any theme options and not have a theme toggle, set the theme.default option to a blank string value as can be seen below. Doing this will force a light theme on the site.
+
+```js
+// config.js
+
+const config = {
+  theme: {
+    default: ''
+  }
+}
+```
+
 ### Dark theme
 
 ![[dark-theme.jpg]]
