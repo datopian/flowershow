@@ -21,7 +21,7 @@ const sharedFields = {
 };
 
 const computedFields = {
-  url: {
+  url_path: {
     type: 'string',
     resolve: (post) => post._raw.flattenedPath,
   },

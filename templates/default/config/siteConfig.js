@@ -8,7 +8,7 @@ const defaultConfig = {
   editLinkShow: false,
   author: 'Flowershow',
   // logo image
-  authorLogo: '/assets/images/logo.svg',
+  authorLogo: '/_flowershow/logo.svg',
   // url to author
   authorUrl: 'https://flowershow.app/',
   // Google analytics key e.g. G-XXXX
@@ -23,13 +23,22 @@ const defaultConfig = {
   // Theme
   theme: {
     default: 'dark',
-    toggleIcon: '/assets/images/theme-button.svg',
+    toggleIcon: '/_flowershow/theme-button.svg',
   },
   navLinks: [
     { href: '/about', name: 'About' },
   ],
 };
 
-const siteConfig = { ...defaultConfig, ...userConfig };
+const siteConfig = {
+  ...defaultConfig,
+  ...userConfig,
+  // prevent theme object overrides for
+  // values not provided in userConfig
+  theme: {
+    ...defaultConfig.theme,
+    ...userConfig.theme,
+  }
+};
 
 module.exports = siteConfig;
