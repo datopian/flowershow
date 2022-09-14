@@ -23,3 +23,21 @@ const userConfig = {
 
 export default userConfig
 ```
+
+## Navbar Title and Logo
+
+The Title and Logo in the navbar can be set by adding a **navbarTitle** attribute in your config. If you don't want a logo to be displayed in the navbar of your site, then don't include the logo field.
+
+The **navbarTitle** supports adding the following two fields:
+
+* text (your navbar title)
+* logo (path to your logo img file)
+
+```js
+const userConfig = {
+  navBarTitle: {
+    text: 'Your custom title here',
+    logo: '/assets/your-logo.svg'
+  }
+}
+```
