@@ -2,7 +2,7 @@ import userConfig from '../content/config.js';
 
 const defaultConfig = {
   title: 'Flowershow',
-  description: ''
+  description: '',
   repoRoot: '',
   repoEditPath: '',
   editLinkShow: false,
