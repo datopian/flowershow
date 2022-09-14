@@ -1,5 +1,5 @@
 const config = {
-  title: 'Flowershow',
+  navbarTitle: { version: true },
   analytics: 'G-RQWLTRWBS2',
   navLinks: [
     { href: '/#overview', name: 'Overview' },
