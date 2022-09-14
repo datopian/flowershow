@@ -2,6 +2,8 @@
 title: How to (self) publish your markdown files using Flowershow template
 ---
 
+## Table of contents
+
 <div className="border-2 border-slate-400 rounded-md px-4 mb-2">
 🚧 The CLI tool used in the following tutorial is still under development. Go to the home page and subscribe to get notified when it's ready!
 </div>
@@ -57,7 +59,7 @@ my-content
 └── index.md
 ```
 
-## (Optional) customize your website
+### (Optional) customize your website
 
 You can now customize your website by wrapping your content in custom layouts, using custom components in you Markdown files, importing data from files and more. See [[guides|our guides]] to learn how to do it.
 
@@ -78,7 +80,7 @@ You can preview your website locally by running:
 npx flowershow preview
 ```
 
-## Deploying
+## Deploy
 
 This part is up to you. Flowershow is Next.js based, so you can use any of these hosting providers: Vercel, Cloudflare, Netlify, and others to deploy your website.
 
