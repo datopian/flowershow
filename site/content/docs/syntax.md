@@ -132,6 +132,13 @@ Here is some code: `print("hello world!")`
 
 ### ✅ Images
 
+**Example:**
+```md
+![tulip](https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/abstract-flowers-rose-sciberras.jpg)
+```
+
+**Renders as:**
+
 ![tulip](https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/abstract-flowers-rose-sciberras.jpg)
 
 ### 🚧 Indented code blocks
@@ -281,6 +288,15 @@ Two '-' will convert to ndash. Three '-' will convert to mdash. Three '.' with o
 —mdash\
 ...ellipse\
 ...another ellipse
+
+### 🚧 PDF embedding
+**Example:**
+```md
+![[sample.pdf]]
+```
+
+**Renders as:**  
+![[sample.pdf]]
 
 ### 🚧 Text highlighting
 
