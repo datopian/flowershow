@@ -5,6 +5,7 @@ import { MobileNavigation } from './MobileNavigation';
 import siteConfig from '../config/siteConfig';
 import { Search } from './Search';
 import { ThemeSelector } from './ThemeSelector';
+import Dropdown from './Dropdown';
 
 function GitHubIcon(props) {
   return (
@@ -17,26 +18,30 @@ function GitHubIcon(props) {
 function NavbarTitle() {
   const chunk = (
     <>
-      {siteConfig.navbarTitle?.logo && <img src={siteConfig.navbarTitle.logo} alt={siteConfig.navbarTitle.text} className="w-9 h-9 mr-1 fill-white" />}
+      {siteConfig.navbarTitle?.logo && (
+        <img
+          src={siteConfig.navbarTitle.logo}
+          alt={siteConfig.navbarTitle.text}
+          className="w-9 h-9 mr-1 fill-white"
+        />
+      )}
       {siteConfig.navbarTitle?.text}
-      {siteConfig.navbarTitle?.version &&
-        (
-          <div className="mx-2 rounded-full border border-slate-500 py-1 px-3 text-xs text-slate-500">
-            {siteConfig.navbarTitle?.version}
-          </div>
-        )
-      }
+      {siteConfig.navbarTitle?.version && (
+        <div className="mx-2 rounded-full border border-slate-500 py-1 px-3 text-xs text-slate-500">
+          {siteConfig.navbarTitle?.version}
+        </div>
+      )}
     </>
-  )
+  );
 
   return (
     <Link href="/" aria-label="Home page">
       <a className="flex items-center font-extrabold text-xl sm:text-2xl text-slate-900 dark:text-white">
         {siteConfig.navbarTitle && chunk}
         {!siteConfig.navbarTitle && siteConfig.title}
-      </a> 
+      </a>
     </Link>
-  )
+  );
 }
 
 export default function Header() {
@@ -58,11 +63,12 @@ export default function Header() {
     <header
       className={`
         sticky top-0 z-50 flex items-center justify-between px-4 py-5 sm:px-6 lg:px-8 max-w-full
-        ${isScrolled
-        ? 'dark:bg-slate-900/95 backdrop-blur [@supports(backdrop-filter:blur(0))]:dark:bg-slate-900/75'
-        : 'dark:bg-slate-900'}
-      `}
-    >
+        ${
+          isScrolled
+            ? 'dark:bg-slate-900/95 backdrop-blur [@supports(backdrop-filter:blur(0))]:dark:bg-slate-900/75'
+            : 'dark:bg-slate-900'
+        }
+      `}>
       <div className="mr-2 sm:mr-4 flex lg:hidden">
         <MobileNavigation navigation={siteConfig.navLinks} />
       </div>
@@ -70,21 +76,7 @@ export default function Header() {
         <NavbarTitle />
         <div className="hidden lg:flex ml-8 mr-6 sm:mr-8 md:mr-0">
           {siteConfig.navLinks.map((item) => (
-            <Link key={item.href} href={item.href}>
-              <a
-                key={item.name}
-                href={item.href}
-                className={`text-slate-500 inline-flex items-center mr-6 px-1 pt-1 text-sm font-medium
-                  ${item.href === router.pathname
-                  ? 'text-slate-500'
-                  : 'hover:text-slate-600'
-                  }
-                `}
-                aria-current={item.current ? 'page' : undefined}
-              >
-                {item.name}
-              </a>
-            </Link>
+            <Dropdown item={item} key={item.name} router={router} />
           ))}
         </div>
       </div>
@@ -92,11 +84,11 @@ export default function Header() {
         <Search />
         <ThemeSelector />
         {siteConfig.github && (
-        <Link href={siteConfig.github}>
-          <a className="group" aria-label="GitHub">
-            <GitHubIcon className="h-6 w-6 dark:fill-slate-400 group-hover:fill-slate-500 dark:group-hover:fill-slate-300" />
-          </a>
-        </Link>
+          <Link href={siteConfig.github}>
+            <a className="group" aria-label="GitHub">
+              <GitHubIcon className="h-6 w-6 dark:fill-slate-400 group-hover:fill-slate-500 dark:group-hover:fill-slate-300" />
+            </a>
+          </Link>
         )}
       </div>
     </header>
