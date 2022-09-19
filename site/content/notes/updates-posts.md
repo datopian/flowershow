@@ -10,17 +10,16 @@ First version of the [[publish-tutorial|CLI tool]], that helps you install the F
 ### Dark / light theme
 [[/docs/theme|Dark/Light]] theme now supported -- plus ability to "pin" the theme.
 ![[Pasted image 20220914185045.png]]
-### Table of contents
+### In-markdown table of contents
 In-markdown [[table-of-contents|table of contents]] automatically injected under "Table of contents" headings.
 ![[Pasted image 20220914193200.png]]
 
 ### Headings wrapped in anchor tags
 Headings wrapped in anchor tags with clickable icon shown on hover.
 ![[Pasted image 20220914193235.png]]
-![[Pasted image 20220914193258.png]]
+
 ### Image embedding
 [[syntax#✅ Obisidian internal links Wiki links|Image embedding]] using transclusion syntax.
-![[Pasted image 20220919111342.png]]
 
 ### Full-text search
 Support for full-text search with Algolia.

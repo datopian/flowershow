@@ -4,7 +4,7 @@ title: Search Feature
 
 ## Users
 
-<img src="/assets/images/search-component.jpg" alt="search component" className="border rounded" />
+![[search-component.jpg]]
 
 Flowershow supports search functionality on the website to deliver realtime results for content available on all your pages. Clicking the result will lead the user to the relevant page.
 
