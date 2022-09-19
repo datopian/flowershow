@@ -12,7 +12,7 @@ const userConfig = {
   navLinks: [
     { href: '/about', name: 'About' },
     //dropdown menu should not have an href and should contain 'subItems' array 
-    {name: 'DropdownExample', subItems: [{href: '/goToLink1', name: 'Link1'}, {href: 'goToLink2', name: 'Link2}]
+    {name: 'DropdownExample', subItems: [{href: '/goToLink1', name: 'Link1'}, {href: 'goToLink2', name: 'Link2}]}
   ],
 }
 
