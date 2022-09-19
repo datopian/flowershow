@@ -49,3 +49,8 @@ NB: Flowershow is already fully functional and in use on several sites -- includ
 8. [[assets|Assets]]
 9. [[analytics|Analytics]]
 10. [[seo|SEO configuration]]
+11. [[theme|Dark-light theme]]
+12. [[search|Full-text search]]
+
+## Tutorials
+1. [[publish-tutorial| How to (self) publish your markdown files with Flowershow]]
