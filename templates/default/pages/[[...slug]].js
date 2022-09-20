@@ -3,14 +3,9 @@ import { useMDXComponent } from 'next-contentlayer/hooks';
 import MdxPage from '../components/MDX';
 
 export default function Page({ body, ...rest }) {
-  const Component = useMDXComponent(body.code);
-  const children = {
-    Component,
-    frontMatter: {
-      ...rest,
-    },
-  };
-  return <MdxPage children={children} />;
+  const mdxComponent = useMDXComponent(body.code);
+  const frontMatter = { ...rest };
+  return <MdxPage mdxComponent={mdxComponent} frontMatter={frontMatter} />;
 }
 
 export async function getStaticProps({ params }) {
