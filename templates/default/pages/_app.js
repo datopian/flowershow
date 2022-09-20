@@ -13,10 +13,10 @@ import Layout from '../components/Layout';
 import * as gtag from '../lib/gtag';
 
 function MyApp({ Component, pageProps }) {
-  // Google Analytics
-  if (siteConfig.analytics) {
-    const router = useRouter();
-    useEffect(() => {
+  const router = useRouter();
+
+  useEffect(() => {
+    if (siteConfig.analytics) {
       const handleRouteChange = (url) => {
         gtag.pageview(url);
       };
@@ -24,9 +24,8 @@ function MyApp({ Component, pageProps }) {
       return () => {
         router.events.off('routeChangeComplete', handleRouteChange);
       };
-    }, [router.events]);
-  }
-  // end Google Analytics
+    }
+  }, [router.events]);
 
   return (
     <ThemeProvider
