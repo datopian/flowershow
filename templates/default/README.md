@@ -4,52 +4,22 @@ Flowershow default app template. Uses Next.JS with Tailwind and MDX.
 
 Includes instructions on how to rapidly customize the site.
 
-Preview online at https://nextjs-tailwind-mdx-tau.vercel.app
+## Testing
 
-## Features
+We use playwright for functional testing focused on the rendering of the markdown.
 
-Pre-configured with the following;
+To test:
 
-* Tailwind for easy styling. Booted off NextJS default tailwindcss example (https://github.com/vercel/next.js/tree/canary/packages/create-next-app)
-* Markdown / MDX rendering support. All markdown/MDX in `/content/` gets auto-rendered into the site.
-* Configurable e.g. site title etc (secret config in environment variables). See `Configuration` below.
-* Simple theming via `components/Layout.js`. Used to provide a standard them for all pages. Customizable NavBar and Footer with configurable nav links.
-* Analytics: Google analytics support following https://github.com/vercel/next.js/tree/canary/examples/with-google-analytics
-* SEO: basic SEO out of the box (via https://github.com/garmeeh/next-seo)
 
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
-
-```bash
-npx create-next-app --example https://github.com/flowershow/flowershow/tree/main/templates/default
-# or
-yarn create-next-app --example https://github.com/flowershow/flowershow/tree/main/templates/default
 ```
+./testsetup.sh
+npm run build
+# now run the server in the background
+npm run start
 
-Then run the app:
+# now run tests
+playwright test
 
-```bash
-cd myapp
-npm run dev
+# now teardown
+./testteardown.sh
 ```
-
-## Configuration
-
-See `config` directory:
-
-* `config/siteConfig.js` for site wide configuration especially for general theme (e.g. title) and SEO
-
-### How to customize the content directory location?
-
-Open up `pages/[...slug].js` and change the `CONTENT_PATH` variable.
-
-### Theming
-
-We suggest the following:
-
-* Replace the favicon in `public/favicon.ico` or use the svg favicon ...
-* Add a logo: add image to `public` e.g. then open `components/layout.js` and replace footer logo link
-
-Tweaking the theme in general: open up `components/Layout.js` and tweak away.
-
