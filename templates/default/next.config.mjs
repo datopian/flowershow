@@ -7,7 +7,7 @@ export default withContentlayer({
     };
     return config;
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+  // eslint: {
+  //   ignoreDuringBuilds: true,
+  // },
 });
