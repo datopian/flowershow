@@ -15,8 +15,8 @@ const components = {
   }
 };
 
-export default function MdxPage({ children, ...rest }) {
-  const { Component, frontMatter } = children;
+export default function MdxPage({ mdxComponent, frontMatter, ...rest }) {
+  const Component = mdxComponent;
   const websiteUrl = siteConfig.authorUrl.replace(/\/+$/, '');
   const seoImageUrl = frontMatter?.image?.startsWith('http')
     ? frontMatter.image
