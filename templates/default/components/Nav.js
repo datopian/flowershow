@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { MobileNavigation } from './MobileNavigation';
 import siteConfig from '../config/siteConfig';
 import { Search } from './Search';
 import { ThemeSelector } from './ThemeSelector';
-import Dropdown from './Dropdown';
+import NavItem from './NavItem';
 
 function GitHubIcon(props) {
   return (
@@ -45,7 +44,6 @@ function NavbarTitle() {
 }
 
 export default function Header() {
-  const router = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -76,7 +74,7 @@ export default function Header() {
         <NavbarTitle />
         <div className="hidden lg:flex ml-8 mr-6 sm:mr-8 md:mr-0">
           {siteConfig.navLinks.map((item) => (
-            <Dropdown item={item} key={item.name} router={router} />
+            <NavItem item={item} key={item.name} />
           ))}
         </div>
       </div>
