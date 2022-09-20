@@ -9,5 +9,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "rules": {}
+  "rules": {
+    "react/no-unescaped-entities": "off"
+  }
 }
