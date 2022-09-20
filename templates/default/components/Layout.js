@@ -6,7 +6,7 @@ import Header from './Nav';
 
 export default function Layout({ children, title = '' }) {
   const { editLink, _raw } = children.props;
-   /* if editLink is not set in page frontmatter, link bool value will depend on siteConfig.editLinkShow */
+  /* if editLink is not set in page frontmatter, link bool value will depend on siteConfig.editLinkShow */
   const editUrl = siteConfig.repoRoot + siteConfig.repoEditPath + _raw?.sourceFilePath;
   return (
     <>
@@ -50,17 +50,20 @@ export default function Layout({ children, title = '' }) {
         </main>
         <footer className="absolute bottom-0 dark:bg-slate-900 prose dark:prose-invert max-w-none flex flex-col items-center justify-center w-full h-auto pt-10 pb-20">
           <div className="flex w-full flex-wrap justify-center">
-            {siteConfig.navLinks.map((item) => (
-              <Link key={item.href} href={item.href}>
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="inline-flex items-center mx-4 px-1 pt-1 font-regular hover:text-slate-300 no-underline"
-                  aria-current={item.current ? 'page' : undefined}>
-                  {item.name}
-                </a>
-              </Link>
-            ))}
+            {siteConfig.navLinks.map(
+              (item) =>
+                !item.hasOwnProperty('subItems') && (
+                  <Link key={item.href} href={item.href}>
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className="inline-flex items-center mx-4 px-1 pt-1 font-regular hover:text-slate-300 no-underline"
+                      aria-current={item.current ? 'page' : undefined}>
+                      {item.name}
+                    </a>
+                  </Link>
+                )
+            )}
           </div>
           <p className="flex items-center justify-center">
             Created by
@@ -85,9 +88,12 @@ export default function Layout({ children, title = '' }) {
               href="https://flowershow.app/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center no-underline"
-            >
-              <img src="https://flowershow.app/assets/images/logo.svg" alt="Flowershow" className="my-0 h-6 block" />
+              className="flex items-center no-underline">
+              <img
+                src="https://flowershow.app/assets/images/logo.svg"
+                alt="Flowershow"
+                className="my-0 h-6 block"
+              />
               Flowershow
             </a>
           </p>
