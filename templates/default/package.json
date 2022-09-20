@@ -11,9 +11,14 @@
     "lint": "next lint",
     "lint:errors": "next lint --quiet",
     "lint:fix": "next lint --fix",
-    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
     "changeset": "changeset",
     "release": "changeset publish"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,css,md,json}": ["eslint"]
   },
   "dependencies": {
     "@docsearch/react": "^3.2.0",
