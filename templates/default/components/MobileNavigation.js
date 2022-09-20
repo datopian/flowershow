@@ -1,10 +1,9 @@
 import { useEffect, useState, Fragment } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Dialog } from '@headlessui/react';
+import { Dialog, Menu, Transition } from '@headlessui/react';
 import siteConfig from '../config/siteConfig';
 import { Search } from './Search';
-import { Menu, Transition } from '@headlessui/react';
 import { BaseLink } from './BaseLink';
 
 function MenuIcon(props) {
