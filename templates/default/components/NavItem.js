@@ -18,8 +18,6 @@ function NavItem({ item }) {
     timeoutId = setTimeout(() => setshowDropdown(false), timeoutDuration);
   };
 
-  const show = showDropdown;
-
   return (
     <Menu as="div" className="relative">
       <Menu.Button
@@ -45,7 +43,7 @@ function NavItem({ item }) {
       {item.hasOwnProperty('subItems') && (
         <Transition
           as={Fragment}
-          show={show}
+          show={showDropdown}
           enter="transition ease-out duration-200"
           enterFrom="transform opacity-0 scale-5"
           enterTo="transform opacity-100 scale-100"
