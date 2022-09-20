@@ -3,7 +3,7 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["airbnb"],
+  "extends": ["next", "prettier"],
   "overrides": [],
   "parserOptions": {
     "ecmaVersion": "latest",
