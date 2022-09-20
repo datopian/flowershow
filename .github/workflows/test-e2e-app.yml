@@ -20,6 +20,7 @@ jobs:
       - name: Run App in background
         working-directory: templates/default
         run: |
+          ./testsetup.sh
           npm install
           npm run build
           npm start &
