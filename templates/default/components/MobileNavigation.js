@@ -1,11 +1,11 @@
-import { useEffect, useState, Fragment, forwardRef } from 'react';
+import { useEffect, useState, Fragment } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Dialog } from '@headlessui/react';
 import siteConfig from '../config/siteConfig';
 import { Search } from './Search';
 import { Menu, Transition } from '@headlessui/react';
-import { MyLink } from './MyLink';
+import { BaseLink } from './BaseLink';
 
 function MenuIcon(props) {
   return (
@@ -93,21 +93,15 @@ export function MobileNavigation({ navigation }) {
                       <Link href={link.href}>
                         <a
                           className={`
-                      block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full
-                      ${
-                        link.href === router.pathname
-                          ? 'font-semibold text-sky-500 before:bg-sky-500'
-                          : 'text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300'
-                      }
-                    `}>
+                      block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300`}>
                           {link.name}
                         </a>
                       </Link>
                     </li>
                   ) : (
                     <li key={link.name}>
-                      <a
-                        className={`flex w-full pl-3.5 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300 fill-slate-500 hover:fill-slate-600`}>
+                      <div
+                        className={`flex w-full pl-3.5 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300 dark:hover:fill-slate-300 fill-slate-500 hover:fill-slate-600`}>
                         {link.name}
                         <svg
                           height="20"
@@ -116,14 +110,14 @@ export function MobileNavigation({ navigation }) {
                           xmlns="http://www.w3.org/2000/svg">
                           <path d="M7 10l5 5 5-5z" />
                         </svg>
-                      </a>
+                      </div>
                     </li>
                   )}
                 </Menu.Button>
                 {link.hasOwnProperty('subItems') && (
                   <Transition
                     as={Fragment}
-                    enter="transition ease-out duration-1000"
+                    enter="transition ease-out duration-200"
                     enterFrom="transform opacity-0 scale-5"
                     enterTo="transform opacity-100 scale-100"
                     leave="transition ease-in duration-75"
@@ -132,11 +126,11 @@ export function MobileNavigation({ navigation }) {
                     <Menu.Items className={`flex flex-col ml-3`}>
                       {link.subItems.map((subItem) => (
                         <Menu.Item key={subItem.name}>
-                          <MyLink
+                          <BaseLink
                             href={subItem.href}
-                            className={`text-slate-500 inline-flex items-center mt-2 px-1 pt-1 text-sm font-medium hover:text-slate-600`}>
+                            className={`text-slate-500 inline-flex items-center mt-2 px-1 pt-1 text-sm font-medium hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300`}>
                             {subItem.name}
-                          </MyLink>
+                          </BaseLink>
                         </Menu.Item>
                       ))}
                     </Menu.Items>
