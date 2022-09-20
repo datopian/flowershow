@@ -27,7 +27,9 @@ export default function Layout({ children, title = '' }) {
               <a
                 className="flex no-underline font-semibold justify-center"
                 href={editUrl}
-                target="_blank">
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Edit this page
                 <span className="mx-1">
                   <svg
