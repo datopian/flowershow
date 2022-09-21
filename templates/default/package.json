@@ -8,17 +8,11 @@
     "export": "next export",
     "start": "next start",
     "test:e2e": "playwright test",
+    "format": "prettier --write '**/*.{js,jsx,json,html,md,mdx}'",
     "lint": "next lint",
-    "lint:errors": "next lint --quiet",
     "lint:fix": "next lint --fix",
     "changeset": "changeset",
     "release": "changeset publish"
-  },
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx,css,md,json}": ["eslint"]
   },
   "dependencies": {
     "@docsearch/react": "^3.2.0",
