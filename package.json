@@ -9,7 +9,8 @@
     "url": "https://github.com/flowershow/flowershow/issues"
   },
   "homepage": "https://flowershow.app/",
-  "gitHooks": {
+  "scripts": {
+    "prepare": "husky install",
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
@@ -19,6 +20,7 @@
     "eslint": "^8.23.1",
     "eslint-config-next": "^12.3.1",
     "eslint-config-prettier": "^8.5.0",
+    "husky": "^8.0.1",
     "lint-staged": "^13.0.3"
   }
 }
