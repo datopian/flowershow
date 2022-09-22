@@ -8,19 +8,5 @@
   "bugs": {
     "url": "https://github.com/flowershow/flowershow/issues"
   },
-  "homepage": "https://flowershow.app/",
-  "scripts": {
-    "prepare": "husky install",
-    "pre-commit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.{js,jsx,md,mdx}": "eslint --fix"
-  },
-  "devDependencies": {
-    "eslint": "^8.23.1",
-    "eslint-config-next": "^12.3.1",
-    "eslint-config-prettier": "^8.5.0",
-    "husky": "^8.0.1",
-    "lint-staged": "^13.0.3"
-  }
+  "homepage": "https://flowershow.app/"
 }
