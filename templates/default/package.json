@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "export": "next export",
-    "prepare": "cd ../.. && husky install templates/default/.husky",
+    "prepare": "cd ../.. && husky install ./templates/default/.husky",
     "start": "next start",
     "test:e2e": "playwright test",
     "format": "prettier --write '**/*.{js,jsx,json,html,md,mdx}'",
@@ -17,12 +17,8 @@
     "release": "changeset publish"
   },
   "lint-staged": {
-    "*.{js,jsx}": [
-      "eslint --fix"
-    ],
-    "*.{js,jsx,json,md,mdx,html}": [
-      "prettier --write"
-    ]
+    "*.{js,jsx}": ["eslint --fix"],
+    "*.{js,jsx,json,md,mdx,html}": ["prettier --write"]
   },
   "dependencies": {
     "@docsearch/react": "^3.2.0",
