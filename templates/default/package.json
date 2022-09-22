@@ -6,13 +6,20 @@
     "dev": "next dev",
     "build": "next build",
     "export": "next export",
+    "prepare": "cd ../.. && husky install templates/default/.husky",
     "start": "next start",
     "test:e2e": "playwright test",
     "format": "prettier --write '**/*.{js,jsx,json,html,md,mdx}'",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
+    "lint:pre-commit": "lint-staged",
     "changeset": "changeset",
     "release": "changeset publish"
+  },
+  "scripts": {},
+  "lint-staged": {
+    "*.{js,jsx}": ["eslint --quiet --fix"],
+    "*.{js,jsx,json,md,mdx,html}": ["prettier --write"]
   },
   "dependencies": {
     "@docsearch/react": "^3.2.0",
@@ -50,7 +57,10 @@
     "autoprefixer": "^10.4.4",
     "eslint": "^8.23.1",
     "eslint-config-next": "^12.3.1",
-    "eslint-config-prettier": "8.5.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "postcss": "^8.4.12",
     "prettier": "2.7.1",
     "tailwindcss": "^3.1.8"
