@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-cd templates/default
-npm run lint:pre-commit
+cd ./templates/default && npx lint-staged
