@@ -4,7 +4,6 @@ import siteConfig from '../config/siteConfig';
 import Header from './Nav';
 
 export default function Layout({ children }) {
-  const test = true;
   const { editLink, _raw } = children.props;
   /* if editLink is not set in page frontmatter, link bool value will depend on siteConfig.editLinkShow */
   const editUrl = siteConfig.repoRoot + siteConfig.repoEditPath + _raw?.sourceFilePath;
@@ -53,7 +52,7 @@ export default function Layout({ children }) {
           <div className="flex w-full flex-wrap justify-center">
             {siteConfig.navLinks.map(
               (item) =>
-                !item.hasOwnProperty('subItems') && (
+                !Object.prototype.hasOwnProperty.call(item, 'subItems') && (
                   <Link key={item.href} href={item.href}>
                     <a
                       key={item.name}
