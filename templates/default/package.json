@@ -16,10 +16,13 @@
     "changeset": "changeset",
     "release": "changeset publish"
   },
-  "scripts": {},
   "lint-staged": {
-    "*.{js,jsx}": ["eslint --quiet --fix"],
-    "*.{js,jsx,json,md,mdx,html}": ["prettier --write"]
+    "*.{js,jsx}": [
+      "eslint --fix"
+    ],
+    "*.{js,jsx,json,md,mdx,html}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@docsearch/react": "^3.2.0",
