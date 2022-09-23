@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 const { expect } = require('@playwright/test');
 
 exports.MarkdownPage = class PlaywrightPage {
@@ -21,7 +22,8 @@ exports.MarkdownPage = class PlaywrightPage {
 
     this.props = pageProps;
 
-    expect(this.props).toHaveProperty(['_raw'] && ['url']);
+    expect(this.props).toHaveProperty(['_raw'] && ['url_path']);
+    // eslint-disable-next-line no-underscore-dangle
     expect(this.props._raw.contentType).toBe('markdown');
 
     await res.dispose();
