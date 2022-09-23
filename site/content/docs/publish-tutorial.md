@@ -26,7 +26,7 @@ touch index.md
 echo 'Hello, world!' > index.md
 ```
 
-You can create as many subfolders within your content folder as you want. Its directory tree will be reflected in url paths on your website, e.g.: `my-content/blog/hello.md` file content will be available under `<base-url-of-your-published-website>/blog/hello`. 
+You can create as many subfolders within your content folder as you want. Its directory tree will be reflected in url paths on your website, e.g.: `my-content/blog/hello.md` file content will be available under `<base-url-of-your-published-website>/blog/hello`.
 
 Each folder can have it's own `index.md` file, which will be available under it's parent directory path, e.g. `my-content/blog/index.md` will be available under `<base-url-of-your-published-website>/blog`.
 
@@ -85,11 +85,7 @@ npx flowershow preview
 This part is up to you. Flowershow is Next.js based, so you can use any of these hosting providers: Vercel, Cloudflare, Netlify, and others to deploy your website.
 
 Sources you may find useful:
+
 - [How to deploy a Next.js site with Vercel](https://vercel.com/guides/deploying-nextjs-with-vercel)
 - [How to deploy a Next.js site with Cloudflare](https://developers.cloudflare.com/pages/framework-guides/deploy-a-nextjs-site/)
 - [How to deploy a Next.js site with Netlify](https://www.netlify.com/blog/2020/11/30/how-to-deploy-next.js-sites-to-netlify/)
-
-
-
-
-

@@ -3,9 +3,11 @@
 Layouts are simply React components, that wrap around your page's content. By default, all your notes will use the **Docs** layout (`layouts/docs.js`), but if you don't like it or you would like to use a different layout for some of your notes, you can create your own custom layout.
 
 ## Changing page layout
+
 All layouts are located in `/layouts` folder. In order to use a layout other than the default one, we need to specify the name of the layout we want to use in the frontmatter. The name of the layout is the same as its file name.
 
 For example, a page with the following frontmatter...
+
 ```md
 ---
 title: I'm rendered using Unstyled layout!
@@ -27,18 +29,16 @@ It is possible to configure the default layout by tweaking the Configlayer confi
 As an example, let's create a layout for our blog posts.
 
 First, we need to create a new component file in `/layouts` folder, called `blog.js`
+
 ```js
 // layouts/blog.js
-export default function BlogLayout ({ children }) {
-	return (
-		<article className="text-center font-serif prose prose-invert mx-auto p-6">
-			<section>
-				{children}
-			</section>
-		</article>
-    );
+export default function BlogLayout({ children }) {
+  return (
+    <article className="text-center font-serif prose prose-invert mx-auto p-6">
+      <section>{children}</section>
+    </article>
+  );
 }
-
 ```
 
 At this moment, we can already use this layout for one of our pages, by updating its frontmatter, like so:
@@ -52,7 +52,7 @@ layout: blog
 
 Most probably you have many different types of notes in your vault - blog posts, daily journals, research notes, or maybe even recipes. It would be nice to change the way they are displayed on your website, depending on what type they are.
 
-To do this, you can create a custom Contentlayer document type, that will be used to parse files specified in the `filePathPattern` field. 
+To do this, you can create a custom Contentlayer document type, that will be used to parse files specified in the `filePathPattern` field.
 
 Let's continue with our example of a basic `blog.js` layout. At this point, it doesn't do much, apart from changing the text style a bit, and to use it we have to add `layout: blog` to the frontmatter of every blog page. This may be just fine if you are creating a layout that will only be used occasionally, but if for example, you have a whole folder of your blog posts, it would be good to apply the same layout to all of them. You might also want to keep some metadata for each blog post, like date or authors, if you're collaborating on your content with somebody and then display this information somewhere on your blog post.
 
@@ -64,11 +64,11 @@ To facilitate this, let's create a custom Contentlayer document type - `Blog`.
 const blogFields = {
   date: { type: "string" },
   authors: {
-	  type: "list",
-	  of: { type: "string" }
-	},
+    type: "list",
+    of: { type: "string" },
+  },
   layout: { type: "string", default: "blog" },
-}
+};
 
 const Blog = defineDocumentType(() => ({
   name: "Blog",
@@ -81,13 +81,11 @@ const Blog = defineDocumentType(() => ({
   computedFields,
 }));
 
-
 export default makeSource({
   // ...
   documentTypes: [Blog, Page],
   // ...
 });
-
 ```
 
 As you can see, we have defined some custom fields for our `Blog` type - `date` and `authors`. This field will be accessible in the layout used for pages of this document type, so now, you can add them to the frontmatter of your blog posts, like so:

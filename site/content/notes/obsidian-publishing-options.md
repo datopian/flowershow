@@ -1,7 +1,7 @@
 # Obsidian Publishing Options
 
 > [!WARNING]
-> 
+>
 > This content has moved to https://flowershow.app/notes/obsidian-publishing-options
 
 A list of existing obsidian publishing options including official obsidian publish and obsidian publish alternatives.
@@ -10,16 +10,16 @@ Plus some commentary on why flowershow could be useful addition to these and to 
 
 Metadata
 
-* description
-* screenshot
-* metadata
-  * 🔗 primary url
-  * 📣 announce date and url
-  * ⭐ stars (plus github url)
-  * 💤 is it actively developed
-  * 💰 cost and/or license (if missing assume free and open source)
-  * 💻 tech approach summary e.g. is it js, what framework, script to static then publish
-* comments
+- description
+- screenshot
+- metadata
+  - 🔗 primary url
+  - 📣 announce date and url
+  - ⭐ stars (plus github url)
+  - 💤 is it actively developed
+  - 💰 cost and/or license (if missing assume free and open source)
+  - 💻 tech approach summary e.g. is it js, what framework, script to static then publish
+- comments
 
 # Summary
 
@@ -40,9 +40,9 @@ What are common features (we can compare across)
 
 Attributes to sort by
 
-* Date created
-* Active-ness
-* Cost/open-source
+- Date created
+- Active-ness
+- Cost/open-source
 
 # Options
 
@@ -50,9 +50,9 @@ Attributes to sort by
 
 The official obsidian publish plugin.
 
-* 🔗 https://help.obsidian.md/Obsidian+Publish/Introduction+to+Obsidian+Publish
-* 💤 Active
-* 💰 $20/month
+- 🔗 https://help.obsidian.md/Obsidian+Publish/Introduction+to+Obsidian+Publish
+- 💤 Active
+- 💰 $20/month
 
 ![[Pasted image 20220815165038.png]]
 
@@ -79,11 +79,11 @@ The official obsidian publish plugin.
 
 A no-brainer solution to turning your Obsidian PKM into a Zola site.
 
-* 🔗 https://peteryuen.netlify.app/
-* 📣 Jan 2022 - https://www.reddit.com/r/ObsidianMD/comments/s2vecw/a_quick_way_to_share_your_obsidian_pkm/?utm_source=share&utm_medium=web2x&context=3
-* ⭐ 241 https://github.com/ppeetteerrs/obsidian-zola
-* 💤 Still developed
-* 💻 Python + some static CSS and JS
+- 🔗 https://peteryuen.netlify.app/
+- 📣 Jan 2022 - https://www.reddit.com/r/ObsidianMD/comments/s2vecw/a_quick_way_to_share_your_obsidian_pkm/?utm_source=share&utm_medium=web2x&context=3
+- ⭐ 241 https://github.com/ppeetteerrs/obsidian-zola
+- 💤 Still developed
+- 💻 Python + some static CSS and JS
 
 ![[Pasted image 20220815154515.png]]
 ![[Pasted image 20220815174022.png]]
@@ -104,11 +104,11 @@ A no-brainer solution to turning your Obsidian PKM into a Zola site.
 
 A web-based markdown viewer optimized for Obsidian
 
-* 🔗 https://perlite.secure77.de/
-* 📣 Jul 2021 - https://forum.obsidian.md/t/perlite-publish-your-notes-to-your-own-web-server/21712
-* ⭐ 219 https://github.com/secure-77/Perlite
-* 💤 Active (commits in last month)
-* 💻 PHP
+- 🔗 https://perlite.secure77.de/
+- 📣 Jul 2021 - https://forum.obsidian.md/t/perlite-publish-your-notes-to-your-own-web-server/21712
+- ⭐ 219 https://github.com/secure-77/Perlite
+- 💤 Active (commits in last month)
+- 💻 PHP
 
 ![[Pasted image 20220815170303.png]]
 
@@ -127,11 +127,11 @@ A web-based markdown viewer optimized for Obsidian
 
 An Obsidian-Publish alternative that's free. Static export via python script.
 
-* 🔗 https://yoursamlan.github.io/pubsidian/
-* 📣 Jul 2021 - https://forum.obsidian.md/t/pubsidian-free-and-elegant-obsidian-publish-alternative/21825
-* ⭐ 162 https://github.com/yoursamlan/pubsidian
-* 💤 Active
-* 💻 static export via python script with vanilla JS (+D3.js)
+- 🔗 https://yoursamlan.github.io/pubsidian/
+- 📣 Jul 2021 - https://forum.obsidian.md/t/pubsidian-free-and-elegant-obsidian-publish-alternative/21825
+- ⭐ 162 https://github.com/yoursamlan/pubsidian
+- 💤 Active
+- 💻 static export via python script with vanilla JS (+D3.js)
 
 ![[Pasted image 20220815154225.png]]
 
@@ -139,7 +139,7 @@ An Obsidian-Publish alternative that's free. Static export via python script.
 
 ### Pros
 
-- has a simple GUI program (for Windows) that you can run inside the folder you want to publish; you can  set the name and assets folder; it will convert your content dir to static siteoutput dir (HTML, JS) and drag and drop your output directory in netlify
+- has a simple GUI program (for Windows) that you can run inside the folder you want to publish; you can set the name and assets folder; it will convert your content dir to static siteoutput dir (HTML, JS) and drag and drop your output directory in netlify
 - search: full-text but also filename, tags
 - button "Share now" to share current page
 - flexibility to choose the notes to list in pubsidian
@@ -155,11 +155,11 @@ An Obsidian-Publish alternative that's free. Static export via python script.
 
 Free Obisidian Publish alternative, for publishing your digital garden.
 
-* 🔗 https://mindstone.tuancao.me/
-* 📣 Apr 2020 - https://forum.obsidian.md/t/a-free-open-source-obsidian-publish-alternative/36178
-* ⭐ 130 https://github.com/TuanManhCao/digital-garden
-* 💤 Semi-active (last commit 4m ago, build broken)
-* 💻 Next, React, D3
+- 🔗 https://mindstone.tuancao.me/
+- 📣 Apr 2020 - https://forum.obsidian.md/t/a-free-open-source-obsidian-publish-alternative/36178
+- ⭐ 130 https://github.com/TuanManhCao/digital-garden
+- 💤 Semi-active (last commit 4m ago, build broken)
+- 💻 Next, React, D3
 
 ![[Pasted image 20220814215626.png]]
 
@@ -177,6 +177,7 @@ Free Obisidian Publish alternative, for publishing your digital garden.
 - graph view doesn't work very well (reportedly)
 
 ### Planned features
+
 - Obsidian, Notion, VSCode Plugin (maybe)
 - previews
 - [Andy's sliding windows](https://notes.andymatuschak.org/Evergreen_notes)
@@ -185,11 +186,12 @@ Free Obisidian Publish alternative, for publishing your digital garden.
 
 An obsidian plugin that builds your digital garden and publishes to netlify
 
-* 🔗 https://notes.ole.dev/set-up-your-digital-garden/
-* ⭐ 123 - https://github.com/oleeskild/obsidian-digital-garden
-* 📣 Dec 2021 (based on github commits)
-* 💤 Yes (commits in last month) 
-- 💻 JS (obsidian plugin)
+- 🔗 https://notes.ole.dev/set-up-your-digital-garden/
+- ⭐ 123 - https://github.com/oleeskild/obsidian-digital-garden
+- 📣 Dec 2021 (based on github commits)
+- 💤 Yes (commits in last month)
+
+* 💻 JS (obsidian plugin)
 
 ![[Pasted image 20220815153959.png]]
 
@@ -216,12 +218,11 @@ An obsidian plugin that builds your digital garden and publishes to netlify
 
 A Digital Garden Theme for Gatsby. Gatsby Garden lets you create a static HTML version of your markdown notes
 
-* 🔗 https://notes.binnyva.com/
-* ⭐ 90 - https://github.com/binnyva/gatsby-garden/
-* 📣 Aug 2021 - https://forum.obsidian.md/t/gatsby-garden/22054
-* 💤 Semi (last commit 4m ago. Original work ~2y ago)
-* 💻 JS static renderer (via gatbsy).
-
+- 🔗 https://notes.binnyva.com/
+- ⭐ 90 - https://github.com/binnyva/gatsby-garden/
+- 📣 Aug 2021 - https://forum.obsidian.md/t/gatsby-garden/22054
+- 💤 Semi (last commit 4m ago. Original work ~2y ago)
+- 💻 JS static renderer (via gatbsy).
 
 ![[Pasted image 20220815160741.png]]
 
@@ -234,18 +235,18 @@ A Digital Garden Theme for Gatsby. Gatsby Garden lets you create a static HTML v
   ![[Pasted image 20220815161044.png]]
 
 ### Cons
+
 - customization: just some basic config options (site metadata, navbar) in a `js` config file; if you want to change the look or behavior you need to make changes directly to to source code (fork & tweak)
 
 ## Quartz
 
 🌱 host your own second brain and digital garden for free
 
-* 🔗 https://quartz.jzhao.xyz/
-* ⭐ 848 https://github.com/jackyzha0/quartz
-* 📣 Jul 2022 - https://www.reddit.com/r/ObsidianMD/comments/onflb9/quartz_create_and_publish_your_obsidian_vault_for/
-* 💤 Yes (v active)
-* 💻  Static script using Hugo SSG to render
-
+- 🔗 https://quartz.jzhao.xyz/
+- ⭐ 848 https://github.com/jackyzha0/quartz
+- 📣 Jul 2022 - https://www.reddit.com/r/ObsidianMD/comments/onflb9/quartz_create_and_publish_your_obsidian_vault_for/
+- 💤 Yes (v active)
+- 💻 Static script using Hugo SSG to render
 
 ![[Pasted image 20220815162141.png]]
 
@@ -264,11 +265,11 @@ A Digital Garden Theme for Gatsby. Gatsby Garden lets you create a static HTML v
 
 ## Markbase
 
-* 🔗 https://www.markbase.xyz/
-* ⭐ 13 -  https://github.com/markbaseteam/obsidian-markbase
-* 📣 2022-06-26 - https://forum.obsidian.md/t/building-markbase-1-a-non-technical-obsidian-publish-alternative/39485
-* 💤 Active
-* 💻 Obisidan-plugin pushing to a bespoke backend (?)
+- 🔗 https://www.markbase.xyz/
+- ⭐ 13 - https://github.com/markbaseteam/obsidian-markbase
+- 📣 2022-06-26 - https://forum.obsidian.md/t/building-markbase-1-a-non-technical-obsidian-publish-alternative/39485
+- 💤 Active
+- 💻 Obisidan-plugin pushing to a bespoke backend (?)
 
 ![[Pasted image 20220815164318.png]]
 
@@ -286,12 +287,11 @@ A Digital Garden Theme for Gatsby. Gatsby Garden lets you create a static HTML v
 
 An open-source Obsidian Publish alternative. Obsidian is good for taking note / writing documentation but not good enough for reading. Since Obsidian Publish is too expensive for me, I start making a free alternative.
 
-* 📣 Feb 2021 - https://forum.obsidian.md/t/i-made-a-open-source-obsidian-publish-alternative/12407
-* ⭐ 176 - https://github.com/obsidian-userland/publish
-* 💤 Inactive (the author [switched to logseq](https://github.com/obsidian-userland/publish/issues/1))
+- 📣 Feb 2021 - https://forum.obsidian.md/t/i-made-a-open-source-obsidian-publish-alternative/12407
+- ⭐ 176 - https://github.com/obsidian-userland/publish
+- 💤 Inactive (the author [switched to logseq](https://github.com/obsidian-userland/publish/issues/1))
 
 ![[Pasted image 20220815170052.png]]
-
 
 ## Obsidian Mkdocs
 
@@ -299,11 +299,11 @@ Publish your obsidian vault through a python script.
 
 Mkdocs Obsidian is an association between a python script and a Material mkdocs template to get a personal wiki site based on your Obsidian Vault.
 
-* 📣 Dec 21 - https://forum.obsidian.md/t/obsidian-mkdocs-publisher-a-free-publish-alternative/29540
-* ⭐️ 47 - https://github.com/ObsidianPublisher/obsidian-mkdocs-publisher-python
-* 💤 active as of Aug 2022 based on comments on forum thread and updates
+- 📣 Dec 21 - https://forum.obsidian.md/t/obsidian-mkdocs-publisher-a-free-publish-alternative/29540
+- ⭐️ 47 - https://github.com/ObsidianPublisher/obsidian-mkdocs-publisher-python
+- 💤 active as of Aug 2022 based on comments on forum thread and updates
 
 ### Comments
 
-* Main site page 404s: https://mara-li.github.io/mkdocs_obsidian_template/
-* Has worked to make an obsidian plugin that somehow connects to github actions to do publishing (?)
+- Main site page 404s: https://mara-li.github.io/mkdocs_obsidian_template/
+- Has worked to make an obsidian plugin that somehow connects to github actions to do publishing (?)

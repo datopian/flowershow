@@ -1,13 +1,13 @@
-import Head from 'next/head';
-import Link from 'next/link';
-import { NextSeo } from 'next-seo';
-import siteConfig from '../config/siteConfig';
-import Header from './Nav';
+import Head from "next/head";
+import Link from "next/link";
 
-export default function Layout({ children, title = '' }) {
+import { siteConfig } from "../config/siteConfig";
+import { Nav } from "./Nav";
+
+export function Layout({ children }) {
   const { editLink, _raw } = children.props;
   /* if editLink is not set in page frontmatter, link bool value will depend on siteConfig.editLinkShow */
-  const editUrl = siteConfig.repoRoot + siteConfig.repoEditPath + _raw?.sourceFilePath;
+  const editUrl = `${siteConfig.repoRoot}${siteConfig.repoEditPath}${_raw?.sourceFilePath}`;
   return (
     <>
       <Head>
@@ -19,7 +19,7 @@ export default function Layout({ children, title = '' }) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <div className="relative min-h-screen pb-60 dark:bg-slate-900">
-        <Header />
+        <Nav />
         <main>
           {children}
           {(editLink ?? siteConfig.editLinkShow) && (
@@ -27,7 +27,8 @@ export default function Layout({ children, title = '' }) {
               <a
                 className="flex no-underline font-semibold justify-center"
                 href={editUrl}
-                target="_blank">
+                target="_blank"
+                rel="noopener noreferrer">
                 Edit this page
                 <span className="mx-1">
                   <svg
@@ -52,13 +53,13 @@ export default function Layout({ children, title = '' }) {
           <div className="flex w-full flex-wrap justify-center">
             {siteConfig.navLinks.map(
               (item) =>
-                !item.hasOwnProperty('subItems') && (
+                !Object.prototype.hasOwnProperty.call(item, "subItems") && (
                   <Link key={item.href} href={item.href}>
                     <a
                       key={item.name}
                       href={item.href}
                       className="inline-flex items-center mx-4 px-1 pt-1 font-regular hover:text-slate-300 no-underline"
-                      aria-current={item.current ? 'page' : undefined}>
+                      aria-current={item.current ? "page" : undefined}>
                       {item.name}
                     </a>
                   </Link>

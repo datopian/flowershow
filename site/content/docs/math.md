@@ -6,7 +6,7 @@ Flowershow supports math syntax where you can use LaTeX notations to denote form
 
 ### Inline math
 
-* Use between `$`
+- Use between `$`
 
 For example if your markdown file has the following
 
@@ -19,7 +19,8 @@ will be rendered as
 $\sqrt{a^2 + b^2}$
 
 ### Block math
-* Use between double `$$`
+
+- Use between double `$$`
 
 For example if your markdown has the following
 

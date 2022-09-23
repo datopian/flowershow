@@ -1,5 +1,4 @@
-import siteConfig from '../config/siteConfig';
-
+/* eslint import/no-default-export: off */
 export default function DocsLayout({ children, frontMatter }) {
   const { title } = frontMatter;
   return (

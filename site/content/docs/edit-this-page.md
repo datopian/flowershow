@@ -10,7 +10,7 @@ In order to make it work, you'll first need to set these two properties in your 
 ```js
 {
   repoRoot: "https://github.com/flowershow/flowershow", //example
-  repoEditPath: "/edit/main/site/content/", //example 
+  repoEditPath: "/edit/main/site/content/", //example
 }
 ```
 
