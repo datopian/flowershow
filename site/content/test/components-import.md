@@ -2,8 +2,7 @@
 title: Testing component import
 ---
 
-### Importing a Button component, which uses Next's `Link`:
-
+### Example with a Button component, which includes a Next's `Link`:
 ```md
 import { Button } from "components/custom/Button.jsx"
 
@@ -11,7 +10,6 @@ import { Button } from "components/custom/Button.jsx"
 ```
 
 Throws an error:
-
 ```
 Unhandled Runtime Error
 ReferenceError: process is not defined
