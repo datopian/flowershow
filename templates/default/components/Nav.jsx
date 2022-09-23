@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
 import Link from "next/link";
-import { MobileNavigation } from "./MobileNavigation";
+import { useEffect, useState } from "react";
+
 import { siteConfig } from "../config/siteConfig";
+import { MobileNavigation } from "./MobileNavigation";
+import { NavItem } from "./NavItem";
 import { Search } from "./Search";
 import { ThemeSelector } from "./ThemeSelector";
-import { NavItem } from "./NavItem";
 
 function GitHubIcon(props) {
   return (

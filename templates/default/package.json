@@ -55,6 +55,7 @@
     "@changesets/changelog-github": "0.4.6",
     "@changesets/cli": "2.24.4",
     "@playwright/test": "^1.22.2",
+    "@trivago/prettier-plugin-sort-imports": "^3.3.0",
     "autoprefixer": "^10.4.4",
     "eslint": "^8.23.1",
     "eslint-config-airbnb": "^19.0.4",
