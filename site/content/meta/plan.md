@@ -10,29 +10,55 @@ Taglines:
 
 # Plan
 
-Workstreams
+## Vision(s)
 
-* Template (app)
+Two slightly competing visions
+
+- It publishes markdown
+  - More product-y
+- NextJS template: site templating system
+  - More framework-y
+
+## Workstreams
+
+```mermaid
+graph TD
+
+template[Template App]
+publishing[Publishing System]
+comms[Comms]
+```
+
+* Template (app): core flowershow template app that provides all the render functionality 
 * Publishing
   * Tooling (CLI etc)
   * Cloud
-* Website (flowershow.app)
+* Comms: communication and community
+  * Website (flowershow.app)
 
 Milestones
 
-* [ ] **Milestone 1**: launch product website for flowershow at flowershow.app
-  * [ ] Build it with flowershow so
-  * [ ] => flowershow template v0.1 with decent set of features.
-* [ ] **Milestone 2**: MVP for self-publishing i.e. can scaffold and build a flowershow-driven site locally with deployment up to user
+* [x] **Milestone v0.1**: launch product website for flowershow at flowershow.app built with flowershow template v0.1
+  * [x] Build it with flowershow which =>
+  * [x] flowershow template v0.1 with decent set of features.
+* [ ] **Milestone v0.2**: MVP for self-publishing i.e. can scaffold and build a flowershow-driven site locally with deployment up to user
 
 Backlog
 
-* [ ] **Milestone X**: cloud publishing
-* [ ] **Milestone X**: data literate documents
-* [ ] **Milestone X**: feature X, Y, Z
-* [ ] Milestone X: publishing ecosystem using flowershow
-* [ ] Milestone X: publishing web3 using flowershow
-* [ ] Milestone X: 100 users of flowershow
+* [ ] Publishing
+  * [ ] **Milestone X**: cloud publishing
+* [ ] App
+  * [ ] **Milestone X**: data literate documents
+  * [ ] **Milestone X**: feature X, Y, Z  e.g. youtube previews, etc
+  * [ ] proper database of docs with network graph
+* [ ] Try-outs
+  * [ ] Milestone X: publishing flowershow.app with flowershow publisher
+  * [ ] Milestone X: publishing ecosystem site using flowershow
+  * [ ] Milestone X: publish datopian.com with flowershow
+  * [ ] Milestone X: publish life itself site with flowershow
+  * [ ] Milestone X: publishing web3 using flowershow
+* [ ] Comms
+  * [ ] Milestone X: 100 users of flowershow
 
 # Reviews
 
@@ -66,11 +92,7 @@ Key Question 2022-07-11: to what extent do we care about MDX and theming support
 
 Target: 19 July 2022
 
-- Elegant website with signup
-- MVP Product
-  - v0.1
-  - v0.2
-  - v0.3
+Goal:  Elegant website with signup
 
 ```mermaid
 graph TD

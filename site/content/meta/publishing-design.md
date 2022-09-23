@@ -89,3 +89,61 @@ Cloud => install our plugin (e.g. in obsidian) / use our service (point our serv
 ### 4. Share
 
 Share the result with others: "here's my site ..."
+
+# Notes
+
+## 2022-09-14
+
+Choices about how to deploy
+
+```mermaid
+graph TD
+
+a[I want to self-publish]
+b[I want to cloud publish]
+```
+
+
+Option 1: "NextJS template option"
+
+Best:
+
+- if you are happy with git, nextjs etc
+- if you want to customize "under the hood" a lot
+
+```
+# first time only
+npx flowershow install
+# add flowershow permanently to my git repo including symlinks
+git add .flowershow/*
+
+# configure nextjs build on vercel, netlify, github actions, (❌ cloudflare because issues with symlink and root folders)
+```
+
+
+Option 2: "Flowershow as a build tool"
+
+Best
+
+- Want simplicity
+- Ease of upgrading
+- if you arent' familiar with git, nextjs etc
+
+Self-publishing
+
+```
+# future: this could be wrapped into build (ie. install if not present already)
+npx flowershow install
+npx flowershow build ...
+
+# now instructions to user on how to publish their files
+```
+
+Cloud publishing
+
+```
+npx flowershow publish
+
+# output
+https://xyz-happy-days.sites.flowershow.app
+```
