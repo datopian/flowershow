@@ -12,6 +12,8 @@ jobs:
         node-version: [16.5.x]
 
     steps:
+      - name: Go to template folder
+        run: cd templates/default
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v2
         with:
