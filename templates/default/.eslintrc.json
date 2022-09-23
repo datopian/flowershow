@@ -10,7 +10,7 @@
     "next",
     "next/core-web-vitals"
   ],
-  "overrides": [],
+  "overrides": [{ "files": ["*.js", "*.jsx"] }],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
