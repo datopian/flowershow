@@ -1,5 +1,5 @@
-import { useState, useRef } from "react";
 import { Mermaid } from "mdx-mermaid/Mermaid";
+import { useRef, useState } from "react";
 
 export function Pre({ children, ...props }) {
   const textInput = useRef(null);

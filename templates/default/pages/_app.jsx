@@ -1,17 +1,17 @@
 /* eslint import/no-default-export: off */
-import { useEffect } from "react";
-import Script from "next/script";
-import { useRouter } from "next/router";
-import { ThemeProvider } from "next-themes";
 import { DefaultSeo } from "next-seo";
+import { ThemeProvider } from "next-themes";
+import { useRouter } from "next/router";
+import Script from "next/script";
+import { useEffect } from "react";
 import "tailwindcss/tailwind.css";
+
+import { Layout } from "../components/Layout";
+import { siteConfig } from "../config/siteConfig";
+import * as gtag from "../lib/gtag";
+import "../styles/docsearch.css";
 import "../styles/global.css";
 import "../styles/prism.css";
-import "../styles/docsearch.css";
-
-import { siteConfig } from "../config/siteConfig";
-import { Layout } from "../components/Layout";
-import * as gtag from "../lib/gtag";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();

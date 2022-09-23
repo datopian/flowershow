@@ -6,5 +6,8 @@
   "singleQuote": false,
   "trailingComma": "es5",
   "bracketSpacing": true,
-  "useTabs": false
+  "useTabs": false,
+  "importOrder": ["^components/(.*)$", "^[./]"],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
 }

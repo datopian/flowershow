@@ -1,6 +1,7 @@
-import { useState, Fragment, useRef } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import Link from "next/link";
+import { Fragment, useRef, useState } from "react";
+
 import { BaseLink } from "./BaseLink";
 
 export function NavItem({ item }) {

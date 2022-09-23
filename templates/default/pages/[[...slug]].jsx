@@ -1,6 +1,7 @@
 /* eslint import/no-default-export: off */
 import { allDocuments } from "contentlayer/generated";
 import { useMDXComponent } from "next-contentlayer/hooks";
+
 import { MdxPage } from "../components/MDX";
 
 export default function Page({ body, ...rest }) {
