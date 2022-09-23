@@ -1,5 +1,4 @@
-const styles = {}
-
+/* eslint jsx-a11y/label-has-associated-control: off */
 export function Hero() {
   return (
     <div className="overflow-hidden -mb-32 mt-[-4.5rem] pb-32 pt-[4.5rem] lg:mt-[-4.75rem] lg:pt-[4.75rem]">
@@ -13,7 +12,9 @@ export function Hero() {
               For free, no coding.
             </p>
             <p className="mt-4 text-xl tracking-tight text-slate-400">
-              Turn your markdown notes into an elegant website and tailor it to your needs. Flowershow is easy to use, fully-featured, Obsidian compatible and open-source.
+              Turn your markdown notes into an elegant website and tailor it to
+              your needs. Flowershow is easy to use, fully-featured, Obsidian
+              compatible and open-source.
             </p>
             <div className="mt-8 sm:mx-auto sm:text-center lg:text-left lg:mx-0">
               <p className="text-base font-medium text-slate-400 dark:text-slate-300">
@@ -24,12 +25,8 @@ export function Hero() {
                 name="get-updates"
                 data-netlify="true"
                 action="/subscribed"
-                className="mt-3 sm:flex"
-              >
-                <label
-                  htmlFor="email"
-                  className="sr-only"
-                >
+                className="mt-3 sm:flex">
+                <label htmlFor="email" className="sr-only">
                   Email address
                 </label>
                 <input
@@ -39,48 +36,69 @@ export function Hero() {
                   placeholder="Enter your email"
                   className="block w-full px-2 py-3 text-base rounded-md bg-slate-200 dark:bg-slate-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900 sm:flex-1"
                 />
-                <input
-                  type="hidden"
-                  name="form-name"
-                  value="get-updates"
-                />
+                <input type="hidden" name="form-name" value="get-updates" />
                 <button
                   type="submit"
-                  className="mt-3 w-full px-6 py-3 border border-transparent text-base font-medium rounded-md text-slate-900 bg-sky-300 hover:bg-sky-200 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300/50 active:bg-sky-500 sm:mt-0 sm:ml-3 sm:flex-shrink-0 sm:inline-flex sm:items-center sm:w-auto"
-                >
+                  className="mt-3 w-full px-6 py-3 border border-transparent text-base font-medium rounded-md text-slate-900 bg-sky-300 hover:bg-sky-200 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300/50 active:bg-sky-500 sm:mt-0 sm:ml-3 sm:flex-shrink-0 sm:inline-flex sm:items-center sm:w-auto">
                   Notify me
                 </button>
               </form>
               <p className="mt-3 text-sm text-slate-400 dark:text-slate-300 sm:mt-4">
-                We are actively trialling Flowershow before wide release. If you'd like to help us test it or be first on the list to use please sign up.
+                We are actively trialling Flowershow before wide release. If
+                you'd like to help us test it or be first on the list to use
+                please sign up.
               </p>
             </div>
             <p className="my-10 text-l tracking-wide">
-              <span>
-                A project of
-              </span>
-              <a href="https://lifeitself.us/" target="_blank" rel="noopener noreferrer">
-                <img src="/assets/images/life-itself-logo.svg" alt="Life Itself" className="mx-2 mb-1 h-6 inline"/>
-                <span>
-                  Life Itself
-                </span>
+              <span>A project of</span>
+              <a
+                href="https://lifeitself.us/"
+                target="_blank"
+                rel="noopener noreferrer">
+                <img
+                  src="/assets/images/life-itself-logo.svg"
+                  alt="Life Itself"
+                  className="mx-2 mb-1 h-6 inline"
+                />
+                <span>Life Itself</span>
               </a>
-              <a href="https://www.datopian.com/" target="_blank" rel="noopener noreferrer">
-                <img src="/assets/images/datopian_logo.png" alt="Datopian" className="mx-2 mb-1 h-6 inline bg-black rounded-full"/>
-                <span>
-                  Datopian
-                </span>
+              <a
+                href="https://www.datopian.com/"
+                target="_blank"
+                rel="noopener noreferrer">
+                <img
+                  src="/assets/images/datopian_logo.png"
+                  alt="Datopian"
+                  className="mx-2 mb-1 h-6 inline bg-black rounded-full"
+                />
+                <span>Datopian</span>
               </a>
             </p>
           </div>
           <div className="relative">
-            <img src="/assets/images/obsidian_dark_new.png" alt="" className="relative -top-14 w-3/4 rounded-lg hidden dark:block" />
-            <img src="/assets/images/flowershow_dark.png" alt="" className=" absolute top-10 left-1/3 w-3/4 rounded-lg hidden dark:block" />
-            <img src="/assets/images/obsidian_light_new.png" alt="" className="relative -top-14 w-3/4 rounded-lg dark:hidden" />
-            <img src="/assets/images/flowershow_light.png" alt="" className=" absolute top-10 left-1/3 w-3/4 rounded-lg dark:hidden" />
+            <img
+              src="/assets/images/obsidian_dark_new.png"
+              alt=""
+              className="relative -top-14 w-3/4 rounded-lg hidden dark:block"
+            />
+            <img
+              src="/assets/images/flowershow_dark.png"
+              alt=""
+              className=" absolute top-10 left-1/3 w-3/4 rounded-lg hidden dark:block"
+            />
+            <img
+              src="/assets/images/obsidian_light_new.png"
+              alt=""
+              className="relative -top-14 w-3/4 rounded-lg dark:hidden"
+            />
+            <img
+              src="/assets/images/flowershow_light.png"
+              alt=""
+              className=" absolute top-10 left-1/3 w-3/4 rounded-lg dark:hidden"
+            />
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

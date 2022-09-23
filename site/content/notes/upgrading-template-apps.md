@@ -33,26 +33,25 @@ Same problem arises for svelte-kit. There is a project addressing this: https://
 As they eloquently explain:
 
 > This is a community project to easily add integrations and other functionality to Svelte apps. Its goal is to solve the problems with downloading templates to start your app from:
-> 
-> -   You have to want _all_ the functionality a template includes—no more, no less.
->     
->     `svelte-add` has app initializers that let you select the exact integrations wanted: `npm init @svelte-add/kit@latest`
->     
-> -   You have to fall back on following a third party tutorial that could be outdated or take a lot of work to add things missing from that template.
->     
->     `svelte-add`'s "tutorials" are one step: `npx --yes svelte-add@latest graphql-server`
->     
-> -   You have to rely on the maintainer keeping the template updated as the tools it uses change and the official Svelte app template it was built on changes.
->     
->     `svelte-add`'s app initializers are always built on top of the latest version of the official Svelte app templates. Of course it still needs to be maintained as tools change (like Tailwind JIT or the future rewrite of mdsvex), but because it is in a central location and contributed to by many people, problems are found quickly, and fixes are for everyone—not just one specific template.
-> 
+>
+> - You have to want *all* the functionality a template includes—no more, no less.
+>
+>   `svelte-add` has app initializers that let you select the exact integrations wanted: `npm init @svelte-add/kit@latest`
+>
+> - You have to fall back on following a third party tutorial that could be outdated or take a lot of work to add things missing from that template.
+>
+>   `svelte-add`'s "tutorials" are one step: `npx --yes svelte-add@latest graphql-server`
+>
+> - You have to rely on the maintainer keeping the template updated as the tools it uses change and the official Svelte app template it was built on changes.
+>
+>   `svelte-add`'s app initializers are always built on top of the latest version of the official Svelte app templates. Of course it still needs to be maintained as tools change (like Tailwind JIT or the future rewrite of mdsvex), but because it is in a central location and contributed to by many people, problems are found quickly, and fixes are for everyone—not just one specific template.
 
 ### BlitzJS
 
 From https://blitzjs.com/docs/why-blitz
 
 > **Code scaffolding** means initial code is scaffolded into your project for you. From then on, you have full ownership over all the code and can customize it as much you need. **A downside of code scaffolding is that you don't get automatic updates like you do with code generation from a third-party library.** But the huge upside is that you are guaranteed to never be limited by someone else's design choices which you have no way to change. [emphasis added]
-> 
+>
 > Blitz is a huge fan of code scaffolding. We have a whole slew of [`blitz generate`](https://blitzjs.com/docs/cli-generate) commands for scaffolding code into your project. It's still early days for our code scaffolding — we have a lot of powerful features that still need to be added, including the ability to add your own custom scaffold templates.
 
 Then see https://blitzjs.com/docs/why-blitz#5-recipes

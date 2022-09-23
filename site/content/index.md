@@ -8,7 +8,7 @@ import { WhatIsFlowershow } from "../components/custom/WhatIsFlowershow.jsx"
 <Hero />
 <WhatIsFlowershow />
 
-{/* Flowershow publish */}
+{/** Flowershow publish **/}
 
 <div className="py-10 sm:px-2 lg:relative lg:px-0" id="how">
   <div className="prose dark:prose-invert mx-auto max-w-6xl p-4 lg:max-w-6xl lg:p-8 xl:p-12">
@@ -64,7 +64,7 @@ import { WhatIsFlowershow } from "../components/custom/WhatIsFlowershow.jsx"
   </div>
 </div>
 
-{/* Self publish */}
+{/** Self publish **/}
 
 <div className="py-10 sm:px-2 lg:relative lg:px-0" id="self-publish">
   <div className="rounded-md prose dark:prose-invert mx-auto max-w-6xl p-4 lg:max-w-6xl lg:p-8 xl:p-12">
@@ -122,7 +122,7 @@ import { WhatIsFlowershow } from "../components/custom/WhatIsFlowershow.jsx"
   </div>
 </div>
 
-{/* Features (tb replaced with something nicer)*/}
+{/** Features (tb replaced with something nicer) **/}
 
 <div className="py-10 sm:px-2 lg:relative lg:px-0" id="features">
   <div className="prose dark:prose-invert mx-auto max-w-2xl px-4 lg:max-w-4xl lg:px-8 xl:px-12">
@@ -206,7 +206,7 @@ Our goal is to make using Flowershow as seamless as possible. To facilitate smoo
   </div>
 </div>
 
-{/* Why the name? */}
+{/** Why the name? **/}
 
 <div className="py-10 sm:px-2 lg:relative lg:px-0">
   <div className="prose dark:prose-invert mx-auto max-w-2xl px-4 lg:max-w-4xl lg:px-8 xl:px-12">

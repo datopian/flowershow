@@ -10,7 +10,6 @@ We use playwright for functional testing focused on the rendering of the markdow
 
 To test:
 
-
 ```
 ./testsetup.sh
 npm run build

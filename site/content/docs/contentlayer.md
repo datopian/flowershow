@@ -4,7 +4,7 @@
 
 Under the hood, Flowershow uses [Contentlayer](https://www.contentlayer.dev/) to parse your markdown notes and transform them into data. This data will then be used by React and Next.js to generate HTML for your Flowershow website.
 
->Contentlayer is a content SDK that validates and transforms your content into type-safe JSON data you can easily import into your application.
+> Contentlayer is a content SDK that validates and transforms your content into type-safe JSON data you can easily import into your application.
 
 ## Contentlayer config file
 
@@ -13,6 +13,7 @@ Under the hood, Flowershow uses [Contentlayer](https://www.contentlayer.dev/) to
 </div>
 
 For Contentlayer to do its job, it needs to know a few things in advance:
+
 - a directory with your markdown files
 - document type definitions that describe structures of JSON files it should create out of these markdown files
 
@@ -34,7 +35,7 @@ const sharedFields = {
 const computedFields = {
   url: {
     type: "string",
-    resolve: (post) => post._raw.flattenedPath
+    resolve: (post) => post._raw.flattenedPath,
   },
 };
 
@@ -43,7 +44,8 @@ const Page = defineDocumentType(() => ({
   name: "Page", // type name
   filePathPattern: "**/*.md*", // files that will be converted to this type's shape
   contentType: "mdx",
-  fields: { // 
+  fields: {
+    //
     ...sharedFields,
   },
   computedFields,
@@ -53,7 +55,6 @@ const Page = defineDocumentType(() => ({
 export default makeSource({
   // ...
 });
-
 ```
 
 As you can see, the default document type which will be applied to all your markdown files (because of the catch-all `filePathPattern` - `"**/*.md*"`) is the `Page` document type. Both `fields` and `computedFields` properties describe the shape and behavior of your content. They also tell Contentlayer how to parse each value in a page frontmatter, so that you can use it e.g. in your custom layouts. (See our guide about [[layouts]] to learn more).y
