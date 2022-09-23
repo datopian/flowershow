@@ -5,11 +5,11 @@ on: [push]
 jobs:
   build:
     timeout-minutes: 10
-    runs-on: ubuntu-latest
 
     strategy:
       matrix:
         node: [ 14, 16, 18 ]
+        os: [ ubuntu-latest, windows-latest ]
 
     name: Node ${{ matrix.node }} test
 
