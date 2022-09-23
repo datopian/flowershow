@@ -2,8 +2,7 @@
 title: SEO Configuration
 description: How to set up SEO in flowershow
 ---
-
-import { Callout } from '../components/TempCallout.jsx'
+import { Callout } from 'components/TempCallout.jsx'
 
 ## What is SEO and meta tags
 
