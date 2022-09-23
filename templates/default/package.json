@@ -59,5 +59,8 @@
     "postcss": "^8.4.12",
     "prettier": "2.7.1",
     "tailwindcss": "^3.1.8"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }
