@@ -3,7 +3,8 @@ code[class*="language-"] {
   color: #d4d4d4;
   font-size: 13px;
   text-shadow: none;
-  font-family: Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace;
+  font-family: Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono",
+    "Courier New", monospace;
   direction: ltr;
   text-align: left;
   white-space: pre;
@@ -24,11 +25,10 @@ code[class*="language-"]::selection,
 pre[class*="language-"] *::selection,
 code[class*="language-"] *::selection {
   text-shadow: none;
-  background: #264F78;
+  background: #264f78;
 }
 
 @media print {
-
   pre[class*="language-"],
   code[class*="language-"] {
     text-shadow: none;
@@ -37,14 +37,14 @@ code[class*="language-"] *::selection {
 
 pre[class*="language-"] {
   padding: 1em;
-  margin: .5em 0;
+  margin: 0.5em 0;
   overflow: auto;
   background: #1e1e1e;
 }
 
-:not(pre)>code[class*="language-"] {
-  padding: .1em .3em;
-  border-radius: .3em;
+:not(pre) > code[class*="language-"] {
+  padding: 0.1em 0.3em;
+  border-radius: 0.3em;
   color: #db4c69;
   background: #1e1e1e;
 }
@@ -53,11 +53,11 @@ pre[class*="language-"] {
 * Tokens
 */
 .namespace {
-  opacity: .7;
+  opacity: 0.7;
 }
 
 .token.doctype .token.doctype-tag {
-  color: #569CD6;
+  color: #569cd6;
 }
 
 .token.doctype .token.name {
@@ -105,7 +105,7 @@ pre[class*="language-"] {
 }
 
 .token.operator.arrow {
-  color: #569CD6;
+  color: #569cd6;
 }
 
 .token.atrule {
@@ -129,7 +129,7 @@ pre[class*="language-"] {
 }
 
 .token.keyword {
-  color: #569CD6;
+  color: #569cd6;
 }
 
 .token.keyword.module,
@@ -267,7 +267,7 @@ code[class*="language-html"] {
 /*********************************************************
 * Line highlighting
 */
-pre[class*="language-"]>code[class*="language-"] {
+pre[class*="language-"] > code[class*="language-"] {
   position: relative;
   z-index: 1;
 }

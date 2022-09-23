@@ -1,9 +1,10 @@
-import { useState, Fragment, useRef } from 'react';
-import { Menu, Transition } from '@headlessui/react';
-import Link from 'next/link';
-import { BaseLink } from './BaseLink';
+import { Menu, Transition } from "@headlessui/react";
+import Link from "next/link";
+import { Fragment, useRef, useState } from "react";
 
-function NavItem({ item }) {
+import { BaseLink } from "./BaseLink";
+
+export function NavItem({ item }) {
   const dropdownRef = useRef(null);
   const [showDropdown, setshowDropdown] = useState(false);
 
@@ -24,23 +25,22 @@ function NavItem({ item }) {
         onClick={() => setshowDropdown(!showDropdown)}
         onMouseEnter={openDropdown}
         onMouseLeave={closeDropdown}>
-        {item.hasOwnProperty('href') ? (
+        {Object.prototype.hasOwnProperty.call(item, "href") ? (
           <Link href={item.href}>
             <a
               href={item.href}
-              className={`text-slate-500 inline-flex items-center mr-2 px-1 pt-1 text-sm font-medium hover:text-slate-600`}>
+              className="text-slate-500 inline-flex items-center mr-2 px-1 pt-1 text-sm font-medium hover:text-slate-600">
               {item.name}
             </a>
           </Link>
         ) : (
-          <div
-            className={`text-slate-500 inline-flex items-center mr-2 px-1 pt-1 text-sm font-medium hover:text-slate-600 fill-slate-500 hover:fill-slate-600`}>
+          <div className="text-slate-500 inline-flex items-center mr-2 px-1 pt-1 text-sm font-medium hover:text-slate-600 fill-slate-500 hover:fill-slate-600">
             {item.name}
           </div>
         )}
       </Menu.Button>
 
-      {item.hasOwnProperty('subItems') && (
+      {Object.prototype.hasOwnProperty.call(item, "subItems") && (
         <Transition
           as={Fragment}
           show={showDropdown}
@@ -51,15 +51,17 @@ function NavItem({ item }) {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-5">
           <Menu.Items
-            className={`absolute top-5 flex flex-col dark:bg-slate-900/95 backdrop-blur`}
+            className="absolute top-5 flex flex-col dark:bg-slate-900/95 backdrop-blur"
             ref={dropdownRef}
             onMouseEnter={openDropdown}
             onMouseLeave={closeDropdown}>
             {item.subItems.map((subItem) => (
-              <Menu.Item key={subItem.name} onClick={() => setshowDropdown(false)}>
+              <Menu.Item
+                key={subItem.name}
+                onClick={() => setshowDropdown(false)}>
                 <BaseLink
                   href={subItem.href}
-                  className={`text-slate-500 inline-flex items-center mt-2 px-1 pt-1 text-sm font-medium hover:text-slate-600`}>
+                  className="text-slate-500 inline-flex items-center mt-2 px-1 pt-1 text-sm font-medium hover:text-slate-600">
                   {subItem.name}
                 </BaseLink>
               </Menu.Item>
@@ -70,5 +72,3 @@ function NavItem({ item }) {
     </Menu>
   );
 }
-
-export default NavItem;
