@@ -1,5 +1,1 @@
-const userConfig = {
-}
-
-export default userConfig
-
+export const config = {};
