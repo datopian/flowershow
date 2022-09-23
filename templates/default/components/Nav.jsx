@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { MobileNavigation } from './MobileNavigation';
-import siteConfig from '../config/siteConfig';
-import { Search } from './Search';
-import { ThemeSelector } from './ThemeSelector';
-import NavItem from './NavItem';
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { MobileNavigation } from "./MobileNavigation";
+import { siteConfig } from "../config/siteConfig";
+import { Search } from "./Search";
+import { ThemeSelector } from "./ThemeSelector";
+import { NavItem } from "./NavItem";
 
 function GitHubIcon(props) {
   return (
@@ -43,7 +43,7 @@ function NavbarTitle() {
   );
 }
 
-export default function Header() {
+export function Nav() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -51,9 +51,9 @@ export default function Header() {
       setIsScrolled(window.scrollY > 0);
     }
     onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
-      window.removeEventListener('scroll', onScroll, { passive: true });
+      window.removeEventListener("scroll", onScroll, { passive: true });
     };
   }, []);
 
@@ -63,8 +63,8 @@ export default function Header() {
         sticky top-0 z-50 flex items-center justify-between px-4 py-5 sm:px-6 lg:px-8 max-w-full
         ${
           isScrolled
-            ? 'dark:bg-slate-900/95 backdrop-blur [@supports(backdrop-filter:blur(0))]:dark:bg-slate-900/75'
-            : 'dark:bg-slate-900'
+            ? "dark:bg-slate-900/95 backdrop-blur [@supports(backdrop-filter:blur(0))]:dark:bg-slate-900/75"
+            : "dark:bg-slate-900"
         }
       `}>
       <div className="mr-2 sm:mr-4 flex lg:hidden">

@@ -1,9 +1,9 @@
-import { Fragment } from 'react';
-import { NextSeo } from 'next-seo';
-import Head from 'next/head';
-import CustomLink from './Link';
-import { Pre } from './Pre';
-import siteConfig from '../config/siteConfig';
+import { Fragment } from "react";
+import { NextSeo } from "next-seo";
+import Head from "next/head";
+import { CustomLink } from "./Link";
+import { Pre } from "./Pre";
+import { siteConfig } from "../config/siteConfig";
 
 const components = {
   Head,
@@ -12,16 +12,16 @@ const components = {
   wrapper: ({ layout, ...rest }) => {
     const Layout = require(`../layouts/${layout}`).default;
     return <Layout {...rest} />;
-  }
+  },
 };
 
-export default function MdxPage({ mdxComponent, frontMatter, ...rest }) {
+export function MdxPage({ mdxComponent, frontMatter, ...rest }) {
   const Component = mdxComponent;
-  const websiteUrl = siteConfig.authorUrl.replace(/\/+$/, '');
-  const seoImageUrl = frontMatter?.image?.startsWith('http')
+  const websiteUrl = siteConfig.authorUrl.replace(/\/+$/, "");
+  const seoImageUrl = frontMatter?.image?.startsWith("http")
     ? frontMatter.image
     : websiteUrl + frontMatter.image;
-  
+
   return (
     <>
       <NextSeo
@@ -35,10 +35,10 @@ export default function MdxPage({ mdxComponent, frontMatter, ...rest }) {
                   url: seoImageUrl,
                   width: 1200,
                   height: 627,
-                  alt: frontMatter.title
-                }
+                  alt: frontMatter.title,
+                },
               ]
-            : siteConfig?.nextSeo?.openGraph?.images || []
+            : siteConfig?.nextSeo?.openGraph?.images || [],
         }}
       />
       <Component
@@ -47,7 +47,6 @@ export default function MdxPage({ mdxComponent, frontMatter, ...rest }) {
         frontMatter={frontMatter}
         {...rest}
       />
-      
     </>
   );
 }
