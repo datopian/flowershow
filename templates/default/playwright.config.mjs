@@ -53,12 +53,12 @@ const config = {
         ...devices['Desktop Chrome'],
       },
     },
-    // {
-    //   name: 'Desktop Firefox',
-    //   use: {
-    //     ...devices['Desktop Firefox'],
-    //   },
-    // },
+    {
+      name: 'Desktop Firefox',
+      use: {
+        ...devices['Desktop Firefox'],
+      },
+    },
     // {
     //   name: 'Desktop Safari',
     //   use: {
