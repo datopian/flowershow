@@ -37,6 +37,7 @@ graph LR
 
 a --> b
 ```
+
 ### Sequence example
 
 Here's a more complex example of a sequence diagram:

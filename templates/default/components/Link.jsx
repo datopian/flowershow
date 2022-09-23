@@ -1,8 +1,8 @@
-import Link from 'next/link';
+import Link from "next/link";
 
-function CustomLink({ href, ...rest }) {
-  const isInternalLink = href && href.startsWith('/');
-  const isAnchorLink = href && href.startsWith('#');
+export function CustomLink({ href, ...rest }) {
+  const isInternalLink = href && href.startsWith("/");
+  const isAnchorLink = href && href.startsWith("#");
 
   if (isInternalLink) {
     return (
@@ -18,5 +18,3 @@ function CustomLink({ href, ...rest }) {
 
   return <a target="_blank" rel="noopener noreferrer" href={href} {...rest} />;
 }
-
-export default CustomLink;

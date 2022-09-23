@@ -6,11 +6,11 @@ Inspiration is vuepress home page where you can configure hero section and a bit
 
 ## Tasks
 
-* [ ] What is the MVP for a decent looking front page
-* [ ] What are options for implementation
-* [ ] How to have tailwind scan markdown?
-  * Change `content` property in `tailwind.config.js`.
-  * But how do we set this from our overall siteConfig? Again we have problem we can't import info
+- [ ] What is the MVP for a decent looking front page
+- [ ] What are options for implementation
+- [ ] How to have tailwind scan markdown?
+  - Change `content` property in `tailwind.config.js`.
+  - But how do we set this from our overall siteConfig? Again we have problem we can't import info
 
 ## Notes
 
@@ -19,7 +19,6 @@ Technical implementation options
 1. Don't use markdown, do it the standard html route ...
 2. Use markdown and have an "agreement" about how to interpret
 3. ...
-
 
 ### Option 1
 
@@ -38,7 +37,6 @@ Just use HTML
 Turns into (without different coloring in title)
 
 ![](https://i.imgur.com/KsyEDxJ.png)
-
 
 ### Option 3
 

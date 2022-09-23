@@ -27,7 +27,7 @@ package.json for templates/default "package"
 ```
 dependencies: {
   "next": ...
-  
+
 }
 ```
 
@@ -75,9 +75,9 @@ But you can do anything ... (we just have to symlink stuff into the right places
 
 ### Init
 
-* degit seems one of the most efficient ways to get the template down
-* degit does overwrite
-* ? degit won't remove old files
+- degit seems one of the most efficient ways to get the template down
+- degit does overwrite
+- ? degit won't remove old files
 
 ```bash=
 mkdir -p .flowershow/app
@@ -121,8 +121,6 @@ npx degit flowershow/flowershow/templates/default --force
 ```
 flowershow publish
 ```
-
-
 
 ## Mock-out of install / upgrade - 2022-07-16
 

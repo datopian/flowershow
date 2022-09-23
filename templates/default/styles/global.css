@@ -4,7 +4,6 @@
   align-items: center;
 }
 
-
 /* smooth scrolling in modern browsers */
 html {
   scroll-behavior: smooth;
@@ -29,7 +28,7 @@ html {
   transform: translateY(-50%);
   margin: auto 0;
   border-radius: 5px;
-  background: #1E293B;
+  background: #1e293b;
   opacity: 0;
   transition: opacity 0.2s;
 }
@@ -37,7 +36,7 @@ html {
 .light .docs :is(h1, h2, h3, h4, h5, h6) > a {
   /* border: 1px solid #ab2b65; */
   /* background: none; */
-  background: #E2E8F0;
+  background: #e2e8f0;
 }
 
 .docs :is(h1, h2, h3, h4, h5, h6):hover > a {

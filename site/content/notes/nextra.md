@@ -13,17 +13,17 @@ Nextra works by acting like a NextJS plugin:
 
 ```jsx
 // next.config.js
-const withNextra = require('nextra')({
-  theme: 'nextra-theme-docs',
-  themeConfig: './theme.config.js',
+const withNextra = require("nextra")({
+  theme: "nextra-theme-docs",
+  themeConfig: "./theme.config.js",
   // optional: add `unstable_staticImage: true` to enable Nextra's auto image import
-})
-module.exports = withNextra()
+});
+module.exports = withNextra();
 ```
 
 This is similar to [[meta/nextein]] and different from a template or scaffolding solution where you get a pre-built NextJS app you can then configure and put your content in.
 
-The pros of this approach are that upgrading is a clean separation of the 
+The pros of this approach are that upgrading is a clean separation of the
 
 The cons are:
 
@@ -34,14 +34,14 @@ The cons are:
 
 ## Config
 
-Configuration is provided in `theme.config.js` - see https://nextra.vercel.app/get-started: 
+Configuration is provided in `theme.config.js` - see https://nextra.vercel.app/get-started:
 
 ```jsx
 // theme.config.js
 export default {
-  projectLink: 'https://github.com/shuding/nextra', // GitHub link in the navbar
-  docsRepositoryBase: 'https://github.com/shuding/nextra/blob/master', // base URL for the docs repository
-  titleSuffix: ' – Nextra',
+  projectLink: "https://github.com/shuding/nextra", // GitHub link in the navbar
+  docsRepositoryBase: "https://github.com/shuding/nextra/blob/master", // base URL for the docs repository
+  titleSuffix: " – Nextra",
   nextLinks: true,
   prevLinks: true,
   search: true,
@@ -63,7 +63,7 @@ export default {
       <meta name="og:title" content="Nextra: the next docs builder" />
     </>
   ),
-}
+};
 ```
 
 How are they able to load this file (dynamically)? Two parts: first I think you have to have this file. Second, the way Nextra works (i think) is they are doing code generation internally. Thus for each page they generate a new NextJS page and there they can string interpolate the path to load the config from. See https://github.com/shuding/nextra/blob/e162f839a4967ce66345a57e9b43c30651fffb93/packages/nextra/src/loader.ts#L168-L191

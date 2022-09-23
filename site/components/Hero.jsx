@@ -1,3 +1,5 @@
+const styles = {}
+
 export function Hero() {
   return (
     <div className="overflow-hidden -mb-32 mt-[-4.5rem] pb-32 pt-[4.5rem] lg:mt-[-4.75rem] lg:pt-[4.75rem]">

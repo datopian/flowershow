@@ -8,7 +8,6 @@ Flowershow parses all of your Markdown files as MDX. This means you not only can
 
 Let's see what exactly is MDX and what's so cool about it!
 
-
 <Callout>
   A basic familiarity with JSX (React components) and JavaScript might be helpful to understand this chapter, but you can also learn by example and start by tweaking some of our code. Opening [this page](https://github.com/flowershow/flowershow/blob/main/site/content/docs/mdx.md) in your text editor side by side with the rendered version in your browser may also help.
 </Callout>
@@ -17,9 +16,10 @@ Let's see what exactly is MDX and what's so cool about it!
 
 From the official [MDX docs](https://mdxjs.com/docs/what-is-mdx/):
 
-> MDX can be explained as a format that combines markdown with JSX. 
+> MDX can be explained as a format that combines markdown with JSX.
 
 It looks like this:
+
 ```md
 # Hello, world!
 
@@ -28,9 +28,9 @@ It looks like this:
 </div>
 ```
 
-You may be thinking: *"Hold on, but isn't it just some Markdown with an HTML block wrapping around some more Markdown... which is a standard CommonMark syntax?"*
+You may be thinking: _"Hold on, but isn't it just some Markdown with an HTML block wrapping around some more Markdown... which is a standard CommonMark syntax?"_
 
-The answer to this question is - yes... and no ¯\_(ツ)_/¯.
+The answer to this question is - yes... and no ¯\_(ツ)\_/¯.
 
 **Yes**, because it really is a CommonMark syntax, which allows you to add HTML parts and even intertwine them with Markdown like in our example. You may have written something similar without even hearing about MDX and if you're starting your new Flowershow project with your existing Markdown content - it will all work! This is because MDX supports CommonMark by default. Additionally, Flowershow provides support for GFM (GitHub Flavored Markdown) and some Obsidian-specific syntax elements. (See our [[syntax|Syntax]] guide to learn more.)
 
@@ -58,7 +58,7 @@ As we've mentioned, MDX supports CommonMark syntax by default. On top of that Fl
 
 JSX allows you to create components, that you can reuse across all of your markdown files. This is especially useful if you find yourself writing a lot of custom HTML in your Markdown, and/or you use the same HTML code parts and copy them again and again to different markdown pages. You soon may find it difficult to tell what a given part of HTML block is supposed to do. And what used to be e.g. your blog content ends up as a Markdown-HTML-CSS soup. On top of that, imagine if you wanted to make some changes to all these copies of HTML blocks, that you used many different pages 🤯.
 
-Fortunately, thanks to JSX you can extract common HTML parts and enclose them in components, which you can then import and use wherever you want in your Markdown. What you end up with is much cleaner content and a single source of truth for HTML (JSX) parts you used to copy over and over again. JSX components allow you to declutter your Markdown and to separate content writing from its structuring and styling 😌. 
+Fortunately, thanks to JSX you can extract common HTML parts and enclose them in components, which you can then import and use wherever you want in your Markdown. What you end up with is much cleaner content and a single source of truth for HTML (JSX) parts you used to copy over and over again. JSX components allow you to declutter your Markdown and to separate content writing from its structuring and styling 😌.
 
 For example, by creating a component out of a part of HTML code you repeat all over again, you could turn this...
 
@@ -80,7 +80,6 @@ Some more content here...
 ```
 
 ...into to this:
-
 
 ```md
 # Some page heading
@@ -115,12 +114,14 @@ export const MyComponent = ({ list }) => {
       <div>
         <p>And here is a list of some things passed to me through props:</p>
         <ul>
-          { list.map((x, i) => <li key={i.toString()}>{x}</li>) }
+          {list.map((x, i) => (
+            <li key={i.toString()}>{x}</li>
+          ))}
         </ul>
       </div>
     </div>
-  )
-}
+  );
+};
 ```
 
 <div className="border-2 border-slate-400 rounded-md px-4 mb-4">
@@ -174,22 +175,23 @@ import data from '../../site/data/exampleData.json'
 The above is just a simple example, but imagine creating a custom `Chart` component for which you could import an external dataset and use it to plot data for your research notes 🔥!
 
 #### Defining components locally
+
 If the component you're creating will be used only on one of your pages, but either it will be repeated multiple times or it's a complex one and you want to keep it at the very top/bottom of your page so that it doesn't clutter your content, you could define a component locally. To do this you can use ESM `export` statement.
 
 For example, instead of creating the above component `MyComponent` in a separate `.jsx` file, let's do the following:
 
 ```md
 export const MyComponent2 = ({ list }) => {
-	return (
-		<div>
-		  <p>I'm a custom component!</p>
-      <ul>
-        { list.map((x) => <li>{x}</li>) }
-      </ul>
-		</div>
-	)
+return (
+
+<div>
+<p>I'm a custom component!</p>
+<ul>
+{ list.map((x) => <li>{x}</li>) }
+</ul>
+</div>
+)
 }
-  
 
 Some content...
 
@@ -200,18 +202,19 @@ Some more content...
 
 This will render as:
 
---- 
+---
+
 export const MyComponent2 = ({ list }) => {
-	return (
-		<div>
-		  <p>I'm a custom component!</p>
-      <ul>
-        { list.map((x) => <li>{x}</li>) }
-      </ul>
-		</div>
-	)
+return (
+
+<div>
+<p>I'm a custom component!</p>
+<ul>
+{ list.map((x) => <li>{x}</li>) }
+</ul>
+</div>
+)
 }
-  
 
 Some content...
 
@@ -244,9 +247,11 @@ export const myFavFlowersList = ['tulip', 'water lily', 'iris']
 ---
 
 ## Expressions
+
 MDX also allows you to evaluate JavaScript expressions inside curly braces:
 
 Example:
+
 ```md
 Some content...
 
@@ -254,10 +259,10 @@ It's { (new Date()).getDate() } day of month.
 
 Some more content...
 ```
+
 Renders as:
 
 ---
-
 
 Some content...
 
@@ -271,25 +276,24 @@ You can even run whole programs by enclosing them in JavaScript's [IIFE](https:/
 
 ```md
 {(function () {
-  const myLuckyNumber = 5;
+const myLuckyNumber = 5;
 
-  return <span className="text-sky-500">My lucky number is {myLuckyNumber}</span>
+return <span className="text-sky-500">My lucky number is {myLuckyNumber}</span>
 })()}
 ```
 
 Renders as:
 
 {(function () {
-  const myLuckyNumber = 5;
+const myLuckyNumber = 5;
 
-  return <span className="text-sky-500">My lucky number is {myLuckyNumber}</span>
+return <span className="text-sky-500">My lucky number is {myLuckyNumber}</span>
 })()}
-
 
 You can also use comments in expressions with JavaScript's multiline comment syntax, like so:
 
 ```md
-{/* A comment! */}
+{/_ A comment! _/}
 ```
 
 ## MDX components
@@ -309,8 +313,9 @@ Here is an example of a simple, static component, written only with Markdown syn
 `test.mdx` file:
 
 ```md
-*Hi! I'm an MDX component!*
+_Hi! I'm an MDX component!_
 ```
+
 Import in another MDX file:
 
 ```md
@@ -338,7 +343,7 @@ The above example of an MDX components isn't very useful though, as it doesn't a
 ```md
 Hello {props.name.toUpperCase()}
 
-*I'm an MDX component!*
+_I'm an MDX component!_
 
 The current year is {props.year}
 ```
@@ -368,7 +373,7 @@ There is a special `components` prop, which allows you to pass other components 
 `test3.mdx` file:
 
 ```md
-Hello *<Planet />*
+Hello _<Planet />_
 ```
 
 Import in another MDX file and pass an object with `Planet` key and function that returns a JSX component as its value:
@@ -397,7 +402,7 @@ You can also import MDX components in other MDX components, like so:
 import MDXComponent1 from '../components/custom/test.mdx'
 
 I'm an MDX component and here is my child component:
-*<MDXComponent1 />*
+_<MDXComponent1 />_
 ```
 
 Import in another MDX file:
@@ -440,9 +445,10 @@ cd templates/default/components
 ln -s <path-to-your-components-folder> custom
 ```
 
-`custom` can be any name of your choice. It will then be a part of the import path, e.g. `import { MyComponent } from '../components/custom/MyComponent.jsx'`. 
+`custom` can be any name of your choice. It will then be a part of the import path, e.g. `import { MyComponent } from '../components/custom/MyComponent.jsx'`.
 
 Now, your custom components can be imported using this path:
+
 ```md
 import MyComponent from "../components/custom/MyComponent.jsx"
 ```

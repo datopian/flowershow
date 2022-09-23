@@ -6,32 +6,32 @@ Designing the Flowershow publishing experience.
 
 ### General Approach
 
-* You have your content [in obsidian]
-* You install X where X can be obsidian plugin, Flowershow app template, Flowershow command line tool
-* Publish
-* View and share
+- You have your content [in obsidian]
+- You install X where X can be obsidian plugin, Flowershow app template, Flowershow command line tool
+- Publish
+- View and share
 
 ### Obsidian plugin
 
-* You have your content [in obsidian]
-* You install flowershow plugin
-* You configure the plugin with flowershow token
-  * Do any other configuration
-* Publish button (and do this each time you want to republish)
-* Get a link: https://xyz.flowershow.sites
-* Wait for (re)build
-* Share the link with your colleagues
-* Profit!
+- You have your content [in obsidian]
+- You install flowershow plugin
+- You configure the plugin with flowershow token
+  - Do any other configuration
+- Publish button (and do this each time you want to republish)
+- Get a link: https://xyz.flowershow.sites
+- Wait for (re)build
+- Share the link with your colleagues
+- Profit!
 
 ### Self-publishing via github
 
 (? with Semi-wizard for github action setup)
 
-* you have content in github
-* enable github pages
-* install this github action
-* run it
-* Hey presto
+- you have content in github
+- enable github pages
+- install this github action
+- run it
+- Hey presto
 
 [Note: if people will to install the flowershow template then they could use netlify / vercel etc]
 
@@ -47,10 +47,10 @@ Original example below. See [[docs/guide-setup]] for full gory details atm.
 
 ### Command line or app + cloud ⏫
 
-* Have your content on disk
-* Download `flowershow` app/cli (`npm install flowershow` or even `npx flowershow publish` or download it)
-* In your directory run `flowershow publish [filename]`
-* Get a response like: live at https://xyz.flowershow.sites/
+- Have your content on disk
+- Download `flowershow` app/cli (`npm install flowershow` or even `npx flowershow publish` or download it)
+- In your directory run `flowershow publish [filename]`
+- Get a response like: live at https://xyz.flowershow.sites/
 
 ## Original Example
 

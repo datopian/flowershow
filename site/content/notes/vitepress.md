@@ -7,13 +7,13 @@ Vitepress is the successor to [[notes/vuepress]] released in beta in early 2022.
 A linked discussion gives a good summary of why vuepress is getting deprecated in favour of vitepress https://github.com/vuejs/vitepress/discussions/548
 
 > I initially gave VitePress a different name because I wanted to be able to explore a different architecture without worrying about backwards compat. After shipping the vuejs.org with VitePress, I believe VitePress is flexible enough to be a full replacement of current VuePress while offering better DX and better performance.
-> 
+>
 > The two projects are similar in that both are Vue-powered SSGs and share the same set of markdown extensions, but are also fundamentally different. VitePress tries to stay as minimal as possible and delegate customization to either Vue (via custom themes) or Vite (VitePress supports all Vite config options and plugins). There is no VitePress-specific plugin system. For a normal user that is using the default theme and doesn't need heavy customization, it can serve almost as a drop-in placement with minor changes. But it will be very different if you are building a completely custom site.
-> 
+>
 > The VuePress team worked on VuePress 2, which also uses Vue 3 and supports Vite. However, I see two problems with this:
-> 
-> -   It still carries the baggage of VuePress' current plugin system, which seems unnecessary when you can use Vite plugins.
-> -   The complexity of supporting both webpack and vite isn't desirable in the long run.
+>
+> - It still carries the baggage of VuePress' current plugin system, which seems unnecessary when you can use Vite plugins.
+> - The complexity of supporting both webpack and vite isn't desirable in the long run.
 
 # Design
 
