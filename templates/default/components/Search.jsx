@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
-import Link from 'next/link';
-import Router from 'next/router';
-import { DocSearchModal, useDocSearchKeyboardEvents } from '@docsearch/react';
+import { DocSearchModal, useDocSearchKeyboardEvents } from "@docsearch/react";
+import Link from "next/link";
+import Router from "next/router";
+import { useCallback, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 const docSearchConfig = {
   appId: process.env.NEXT_PUBLIC_DOCSEARCH_APP_ID,
@@ -25,6 +25,7 @@ function SearchIcon(props) {
 export function Search(props) {
   const [isOpen, setIsOpen] = useState(false);
   const [modifierKey, setModifierKey] = useState();
+  const { nav } = props;
 
   const onOpen = useCallback(() => {
     setIsOpen(true);
@@ -38,11 +39,16 @@ export function Search(props) {
 
   useEffect(() => {
     setModifierKey(
-      /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform) ? '⌘' : 'Ctrl ',
+      /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform) ? "⌘" : "Ctrl "
     );
   }, []);
 
-  if (!docSearchConfig.appId && !docSearchConfig.apiKey && !docSearchConfig.indexName) return null
+  if (
+    !docSearchConfig.appId &&
+    !docSearchConfig.apiKey &&
+    !docSearchConfig.indexName
+  )
+    return null;
 
   return (
     <>
@@ -50,36 +56,41 @@ export function Search(props) {
         type="button"
         className={`
           group flex h-6 w-6 items-center justify-center 
-          ${props.nav ? 'sm:hidden justify-start min-w-full flex-none rounded-lg px-4 py-5 my-6 text-sm ring-1 ring-slate-200 dark:bg-slate-800/75 dark:ring-inset dark:ring-white/5'
-          : 'hidden sm:flex sm:justify-start md:h-auto md:w-auto xl:w-full max-w-[380px] shrink xl:rounded-lg xl:py-2.5 xl:pl-4 xl:pr-3.5 md:text-sm xl:ring-1 xl:ring-slate-200 xl:hover:ring-slate-300 dark:xl:bg-slate-800/75 dark:xl:ring-inset dark:xl:ring-white/5 dark:xl:hover:bg-slate-700/40 dark:xl:hover:ring-slate-500'
+          ${
+            nav
+              ? "sm:hidden justify-start min-w-full flex-none rounded-lg px-4 py-5 my-6 text-sm ring-1 ring-slate-200 dark:bg-slate-800/75 dark:ring-inset dark:ring-white/5"
+              : "hidden sm:flex sm:justify-start md:h-auto md:w-auto xl:w-full max-w-[380px] shrink xl:rounded-lg xl:py-2.5 xl:pl-4 xl:pr-3.5 md:text-sm xl:ring-1 xl:ring-slate-200 xl:hover:ring-slate-300 dark:xl:bg-slate-800/75 dark:xl:ring-inset dark:xl:ring-white/5 dark:xl:hover:bg-slate-700/40 dark:xl:hover:ring-slate-500"
           }
         `}
-        onClick={onOpen}
-      >
+        onClick={onOpen}>
         <SearchIcon className="h-5 w-5 flex-none fill-slate-400 group-hover:fill-slate-500 dark:fill-slate-500 md:group-hover:fill-slate-400" />
-        <span className={`
+        <span
+          className={`
             text-slate-500 dark:text-slate-400
-            ${props.nav ? 'w-full not-sr-only text-left ml-2'
-          : 'hidden xl:block sr-only md:not-sr-only md:ml-2'
+            ${
+              nav
+                ? "w-full not-sr-only text-left ml-2"
+                : "hidden xl:block sr-only md:not-sr-only md:ml-2"
             }
-          `}
-        >
+          `}>
           Search docs
         </span>
         {modifierKey && (
-          <kbd className={`
-              ${props.nav ? 'hidden'
-            : 'ml-auto font-medium text-slate-400 dark:text-slate-500 hidden xl:block'
+          <kbd
+            className={`
+              ${
+                nav
+                  ? "hidden"
+                  : "ml-auto font-medium text-slate-400 dark:text-slate-500 hidden xl:block"
               }
-            `}
-          >
+            `}>
             <kbd className="font-sans">{modifierKey}</kbd>
             <kbd className="font-sans">K</kbd>
           </kbd>
         )}
       </button>
-      {isOpen
-        && createPortal(
+      {isOpen &&
+        createPortal(
           <DocSearchModal
             {...docSearchConfig}
             initialScrollY={window.scrollY}
@@ -91,7 +102,7 @@ export function Search(props) {
               },
             }}
           />,
-          document.body,
+          document.body
         )}
     </>
   );

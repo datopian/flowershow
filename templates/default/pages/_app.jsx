@@ -1,50 +1,48 @@
-import { useEffect } from 'react';
-import Script from 'next/script';
-import { useRouter } from 'next/router';
-import { ThemeProvider } from 'next-themes';
-import { DefaultSeo } from 'next-seo';
-import 'tailwindcss/tailwind.css';
-import '../styles/global.css';
-import '../styles/prism.css';
-import '../styles/docsearch.css';
+/* eslint import/no-default-export: off */
+import { DefaultSeo } from "next-seo";
+import { ThemeProvider } from "next-themes";
+import { useRouter } from "next/router";
+import Script from "next/script";
+import { useEffect } from "react";
+import "tailwindcss/tailwind.css";
 
-import siteConfig from '../config/siteConfig.js';
-import Layout from '../components/Layout';
-import * as gtag from '../lib/gtag';
+import { Layout } from "../components/Layout";
+import { siteConfig } from "../config/siteConfig";
+import * as gtag from "../lib/gtag";
+import "../styles/docsearch.css";
+import "../styles/global.css";
+import "../styles/prism.css";
 
 function MyApp({ Component, pageProps }) {
-  // Google Analytics
-  if (siteConfig.analytics) {
-    const router = useRouter();
-    useEffect(() => {
+  const router = useRouter();
+
+  useEffect(() => {
+    if (siteConfig.analytics) {
       const handleRouteChange = (url) => {
         gtag.pageview(url);
       };
-      router.events.on('routeChangeComplete', handleRouteChange);
+      router.events.on("routeChangeComplete", handleRouteChange);
       return () => {
-        router.events.off('routeChangeComplete', handleRouteChange);
+        router.events.off("routeChangeComplete", handleRouteChange);
       };
-    }, [router.events]);
-  }
-  // end Google Analytics
+    }
+  }, [router.events]);
 
   return (
     <ThemeProvider
-      disableTransitionOnChange attribute="class"
+      disableTransitionOnChange
+      attribute="class"
       defaultTheme={siteConfig.theme.default}
-      forcedTheme={siteConfig.theme.default ? null : 'light'}
-    >
+      forcedTheme={siteConfig.theme.default ? null : "light"}>
       <DefaultSeo defaultTitle={siteConfig.title} {...siteConfig.nextSeo} />
       {/* Global Site Tag (gtag.js) - Google Analytics */}
-      {siteConfig.analytics
-        && (
+      {siteConfig.analytics && (
         <Script
           strategy="afterInteractive"
           src={`https://www.googletagmanager.com/gtag/js?id=${siteConfig.analytics}`}
         />
-        )}
-      {siteConfig.analytics
-        && (
+      )}
+      {siteConfig.analytics && (
         <Script
           id="gtag-init"
           strategy="afterInteractive"
@@ -59,7 +57,7 @@ function MyApp({ Component, pageProps }) {
             `,
           }}
         />
-        )}
+      )}
       <Layout title={pageProps.title}>
         <Component {...pageProps} />
       </Layout>
