@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 const { MarkdownPage } = require('./markdown-page');
 
-test.describe('wiki links', () => {
+test.describe.parallel('wiki links', () => {
   test.beforeEach(async ({ page }) => {
     const Page = new MarkdownPage(page);
     await Page.goto('/test/fixtures/markdownFeatures');
