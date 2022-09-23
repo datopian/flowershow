@@ -1,10 +1,11 @@
-import { useEffect, useState, Fragment } from "react";
+import { Dialog, Menu, Transition } from "@headlessui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Dialog, Menu, Transition } from "@headlessui/react";
+import { Fragment, useEffect, useState } from "react";
+
 import { siteConfig } from "../config/siteConfig";
-import { Search } from "./Search";
 import { BaseLink } from "./BaseLink";
+import { Search } from "./Search";
 
 function MenuIcon(props) {
   return (

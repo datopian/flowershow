@@ -1,6 +1,6 @@
 /* eslint import/no-default-export: off */
-import { NextSeo } from "next-seo";
 import { allPages } from "contentlayer/generated";
+import { NextSeo } from "next-seo";
 
 export default function All({ pages }) {
   const labels = new Set(pages.map((p) => p.wikiPage.charAt(0)));

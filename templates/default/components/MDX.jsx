@@ -1,9 +1,10 @@
-import { Fragment } from "react";
 import { NextSeo } from "next-seo";
 import Head from "next/head";
+import { Fragment } from "react";
+
+import { siteConfig } from "../config/siteConfig";
 import { CustomLink } from "./Link";
 import { Pre } from "./Pre";
-import { siteConfig } from "../config/siteConfig";
 
 const components = {
   Head,

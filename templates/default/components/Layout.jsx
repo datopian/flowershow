@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+
 import { siteConfig } from "../config/siteConfig";
 import { Nav } from "./Nav";
 

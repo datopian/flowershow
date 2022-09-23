@@ -1,17 +1,17 @@
 /* eslint import/no-unresolved: off */
-/* eslint import/no-default-export: off */
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
-import codeExtra from "remark-code-extra";
 import { h } from "hastscript";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeMathjax from "rehype-mathjax";
 import rehypePrismPlus from "rehype-prism-plus";
 import rehypeSlug from "rehype-slug";
+import codeExtra from "remark-code-extra";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
+import smartypants from "remark-smartypants";
 import remarkToc from "remark-toc";
 import wikiLinkPlugin from "remark-wiki-link-plus";
-import smartypants from "remark-smartypants";
+
 import { siteConfig } from "./config/siteConfig";
 
 const sharedFields = {
@@ -70,6 +70,7 @@ const contentLayerExcludeDefaults = [
   "tsconfig.json",
 ];
 
+/* eslint import/no-default-export: off */
 export default makeSource({
   contentDirPath: siteConfig.content,
   contentDirExclude: contentLayerExcludeDefaults.concat([
