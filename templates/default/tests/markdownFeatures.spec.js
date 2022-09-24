@@ -5,49 +5,49 @@ test.describe.parallel('wiki links', () => {
   test.beforeEach(async ({ page }) => {
     const Page = new MarkdownPage(page);
     await Page.goto('/test/fixtures/markdownFeatures');
-    await Page.getData(page);
+    await Page.getData();
   });
 
   test('parses a wiki link', async ({ page }) => {
     const link = page.locator('#wikiLink > p > a');
     await expect(link).toHaveClass('internal');
     await link.click();
-    await expect(page).toHaveURL('/docs/roadmap');
+    await expect(page).toHaveURL('/test/fixtures/fixturepage');
   });
 
   test('parses a wiki link with custom divider', async ({ page }) => {
     const link = page.locator('#wikiLink-custom > p > a');
     await expect(link).toHaveClass('internal');
     await link.click();
-    await expect(page).toHaveURL('/docs/roadmap');
+    await expect(page).toHaveURL('/test/fixtures/fixturepage');
   });
 
   test('parses a wiki link with header', async ({ page }) => {
     const link = page.locator('#wikiLink-heading > p > a');
     await expect(link).toHaveClass('internal');
     await link.click();
-    await expect(page).toHaveURL('/docs/roadmap#planned-features');
+    await expect(page).toHaveURL('/test/fixtures/fixturepage#planned-features');
   });
 
   test('parses a wiki link with header and custom divider', async ({ page }) => {
     const link = page.locator('#wikiLink-heading-custom > p > a');
     await expect(link).toHaveClass('internal');
     await link.click();
-    await expect(page).toHaveURL('/docs/roadmap#planned-features');
+    await expect(page).toHaveURL('/test/fixtures/fixturepage#planned-features');
   });
 
   test('link to image file', async ({ page }) => {
     const link = page.locator('#wikiLink-image > p > img');
     await expect(link).toHaveClass('internal');
-    await expect(link).toHaveAttribute('src', '/assets/images/park.png');
+    await expect(link).toHaveAttribute('src', '/assets/images/testimages/parktest.png');
   });
 });
 
-test.describe('dashes & ellipse', () => {
+test.describe.parallel('dashes & ellipse', () => {
   test.beforeEach(async ({ page }) => {
     const Page = new MarkdownPage(page);
     await Page.goto('/test/fixtures/markdownFeatures');
-    await Page.getData(page);
+    await Page.getData();
   });
 
   test('nDash', async ({ page }) => {
@@ -63,11 +63,11 @@ test.describe('dashes & ellipse', () => {
   });
 });
 
-test.describe('commonMark', () => {
+test.describe.parallel('commonMark', () => {
   test.beforeEach(async ({ page }) => {
     const Page = new MarkdownPage(page);
     await Page.goto('/test/fixtures/markdownFeatures');
-    await Page.getData(page);
+    await Page.getData();
   });
 
   test('thematic break', async ({ page }) => {
@@ -110,11 +110,11 @@ test.describe('commonMark', () => {
   });
 });
 
-test.describe('GFM', () => {
+test.describe.parallel('GFM', () => {
   test.beforeEach(async ({ page }) => {
     const Page = new MarkdownPage(page);
     await Page.goto('/test/fixtures/markdownFeatures');
-    await Page.getData(page);
+    await Page.getData();
   });
 
   test('tables', async ({ page }) => {

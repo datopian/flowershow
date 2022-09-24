@@ -15,23 +15,23 @@ title: Testing markdown features
 </div>
 
 <div id="wikiLink">
-[[roadmap]]
+[[fixturepage]]
 </div>
 
 <div id="wikiLink-custom">
-[[roadmap|Our roadmap]]
+[[fixturepage|Fixture Page]]
 </div>
 
 <div id="wikiLink-heading">
-[[roadmap#Planned features]]
+[[fixturepage#Planned features]]
 </div>
 
 <div id="wikiLink-heading-custom">
-[[roadmap#Planned features|🚧 working on...]]
+[[fixturepage#Planned features|🚧 working on...]]
 </div>
 
 <div id="wikiLink-image">
-![[park.png]]
+![[parktest.png]]
 </div>
 
 <div id="break">

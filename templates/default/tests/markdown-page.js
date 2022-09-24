@@ -13,8 +13,8 @@ exports.MarkdownPage = class PlaywrightPage {
     await this.page.goto(url);
   }
 
-  async getData(page) {
-    const res = await page.evaluateHandle(() => document.body.querySelector('#__NEXT_DATA__'));
+  async getData() {
+    const res = await this.page.evaluateHandle(() => document.body.querySelector('#__NEXT_DATA__'));
 
     const {
       props: { pageProps },
