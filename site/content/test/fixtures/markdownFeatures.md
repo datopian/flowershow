@@ -69,7 +69,7 @@ _I'm Italic!_
 </div>
 
 <div id="links">
-[Link to roadmap](/docs/roadmap)
+[Link to fixture page](/test/fixtures/fixturepage)
 </div>
 
 <div id="images">
