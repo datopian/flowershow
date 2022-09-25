@@ -2,8 +2,8 @@
 layout: unstyled
 ---
 
-import { Hero } from "../components/custom/Hero.jsx"
-import { WhatIsFlowershow } from "../components/custom/WhatIsFlowershow.jsx"
+import { Hero } from "components/custom/Hero.jsx"
+import { WhatIsFlowershow } from "components/custom/WhatIsFlowershow.jsx"
 
 <Hero />
 <WhatIsFlowershow />
