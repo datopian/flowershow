@@ -79,6 +79,7 @@ export default makeSource({
   ]),
   documentTypes: [Blog, Page],
   mdx: {
+    cwd: process.cwd(),
     remarkPlugins: [
       remarkGfm,
       [smartypants, { quotes: false, dashes: "oldschool" }],
