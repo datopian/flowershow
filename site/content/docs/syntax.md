@@ -11,25 +11,33 @@ Here are some of the CommonMark syntax elements supported by Flowershow.
 Thematic breaks made with three `*`, `-` or `_` will be converted to HTML `<hr />`
 
 **Example:**
+
 ```md
-***
 ---
-___
+---
+
+---
 ```
 
 **Renders as:**
-***
+
 ---
-___
+
+---
+
+---
 
 ### ✅ Headings
 
 Markdown headings will be converted to HTML `<h1>`-`<h6>` tags.
 
 **Example:**
+
 ```md
 # Heading 1
+
 ...
+
 ###### Heading 6
 ```
 
@@ -39,7 +47,7 @@ All the headings on this page 🙂.
 ### ✅ Emphasis
 
 **I'm Bold!** is done using `**I'm Bold!**`  
-__I'm Bold!__ is done using `__I'm Bold!__`
+**I'm Bold!** is done using `__I'm Bold!__`
 
 *I'm Italic!* is done using `*I'm Italic!*`  
 *I'm Italic!* is done using `_I'm Italic!_`
@@ -52,10 +60,8 @@ Code blocks created with backtics will be parsed as `pre` tags with support for 
 
 ```javascript
 const ExampleCode = () => {
-	return (
-		<div> .... </div>
-	)
-}
+  return <div> .... </div>;
+};
 ```
 
 **Python example:**
@@ -94,8 +100,8 @@ git commit && git push
 
 1. one
 2. two
-	- one
-	- two
+   - one
+   - two
 ```
 
 **Renders as:**
@@ -105,12 +111,13 @@ git commit && git push
 
 1. one
 2. two
-	- one
-	- two
+   - one
+   - two
 
 ### ✅ Inline code
 
 **Example:**
+
 ```md
 Here is some code: `print("hello world!")`
 ```
@@ -122,6 +129,7 @@ Here is some code: `print("hello world!")`
 ### ✅ Links
 
 **Example:**
+
 ```md
 [Link to roadmap](/docs/roadmap)
 ```
@@ -133,6 +141,7 @@ Here is some code: `print("hello world!")`
 ### ✅ Images
 
 **Example:**
+
 ```md
 ![tulip](https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/abstract-flowers-rose-sciberras.jpg)
 ```
@@ -144,14 +153,15 @@ Here is some code: `print("hello world!")`
 ### 🚧 Indented code blocks
 
 **Example:**
+
 ```md
-	a simple
-		indented code block
+    a simple
+    	indented code block
 ```
 
 **Renders as:**  
-	a simple
-		indented code block
+ a simple
+indented code block
 
 <div className="border-2 border-slate-400 rounded-md px-4 my-4">
 🔍 To learn more about the Markdown syntax refer to the [CommonMark specification](https://spec.commonmark.org/0.30/). 
@@ -167,31 +177,31 @@ Here is some code: `print("hello world!")`
 
 ```md
 | Left | Center | Right |
-| :--- |  :---: |  ---: |
-| 1    | 2      | 3     |
+| :--- | :----: | ----: |
+| 1    |   2    |     3 |
 ```
 
 **Renders as:**
 
 | Left | Center | Right |
-| :--- |  :---: |  ---: |
-| 1    | 2      | 3     |
+| :--- | :----: | ----: |
+| 1    |   2    |     3 |
 
 ### ✅ Task lists
 
 **Example:**
 
 ```md
-* [x] one thing to do
-* [ ] a second thing to do
-	* [ ] another thing to do!
+- [x] one thing to do
+- [ ] a second thing to do
+  - [ ] another thing to do!
 ```
 
 **Renders as:**
 
-* [x] one thing to do
-* [ ] a second thing to do
-	* [ ] another thing to do!
+- [x] one thing to do
+- [ ] a second thing to do
+  - [ ] another thing to do!
 
 ### ✅ Strikethrough
 
@@ -225,13 +235,13 @@ Flowershow will convert internal links to HTML `a` tags, with their `href` attri
 
 #### Internal link types
 
-* ✅ Link to a page, e.g. `[[roadmap]]`, which renders as [[roadmap]]
-* ✅ Link to a page with a custom name, e.g.  `[[roadmap|Our roadmap]]`, which renders as [[roadmap|Our roadmap]] 
-* ✅ Link to a specific heading within a given page `[[roadmap#Planned features]]`, which renders as [[roadmap#Planned features]]
-* ✅ Link to a specific heading within a given page with a custom name, e.g. `[[roadmap#Planned features|🚧 working on...]]` which renders as [[roadmap#Planned features|🚧 working on...]]
-* 🚧 Link to a specific block (paragraph) within a given page, e.g. `[[roadmap#^f93ba0]]`
-* ✅ Link to an image file with supported image formats - png, jpg and jpeg, eg. `![[park.png]]` which renders as:
-    ![[park.png]]
+- ✅ Link to a page, e.g. `[[roadmap]]`, which renders as [[roadmap]]
+- ✅ Link to a page with a custom name, e.g. `[[roadmap|Our roadmap]]`, which renders as [[roadmap|Our roadmap]]
+- ✅ Link to a specific heading within a given page `[[roadmap#Planned features]]`, which renders as [[roadmap#Planned features]]
+- ✅ Link to a specific heading within a given page with a custom name, e.g. `[[roadmap#Planned features|🚧 working on...]]` which renders as [[roadmap#Planned features|🚧 working on...]]
+- 🚧 Link to a specific block (paragraph) within a given page, e.g. `[[roadmap#^f93ba0]]`
+- ✅ Link to an image file with supported image formats - png, jpg and jpeg, eg. `![[park.png]]` which renders as:
+  ![[park.png]]
 
 ### ✅ Footnotes
 
@@ -250,6 +260,7 @@ Roses are red... [^1]
 ### ✅ Math
 
 **Example:**
+
 ```md
 $$\begin{vmatrix}a & b\\ c & d \end{vmatrix}=ad-bc$$
 ```
@@ -276,6 +287,7 @@ The `title` and `description` fields are pulled from the MDX file and processed 
 Two '-' will convert to ndash. Three '-' will convert to mdash. Three '.' with or without spacing will convert to ellipse.
 
 **Example:**
+
 ```md
 --ndash
 ---mdash
@@ -290,7 +302,9 @@ Two '-' will convert to ndash. Three '-' will convert to mdash. Three '.' with o
 ...another ellipse
 
 ### 🚧 PDF embedding
+
 **Example:**
+
 ```md
 ![[sample.pdf]]
 ```
@@ -325,6 +339,7 @@ Two '-' will convert to ndash. Three '-' will convert to mdash. Three '.' with o
 Displaying embedded [Excalidraw](https://excalidraw.com/) sketches.
 
 **Example:**
+
 ```md
 ![[customizability-vs-upgradeability-efficient-frontier-2022-06-26]]
 ```

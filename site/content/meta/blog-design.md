@@ -12,4 +12,3 @@ When creating a website I often want a section of news or blog posts so that peo
 - Features:
   - chronicle listing in backwards order
   - Pagination?
-

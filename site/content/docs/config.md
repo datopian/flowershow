@@ -8,20 +8,18 @@ Example of configuration in `your-content-dir/config.js`:
 
 ```js
 const userConfig = {
-  title: 'My Awesome Blog',
-  description: 'This is my awesome blog built with Flowershow', 
-  author: 'John',
+  title: "My Awesome Blog",
+  description: "This is my awesome blog built with Flowershow",
+  author: "John",
   // logo image
-  authorLogo: '/images/logo.svg',
+  authorLogo: "/images/logo.svg",
   // url to author website
-  authorUrl: 'https://john.app/',
+  authorUrl: "https://john.app/",
   // links to the pages you want to add to the navbar
-  navLinks: [
-    { href: '/about', name: 'About' },
-  ],
-}
+  navLinks: [{ href: "/about", name: "About" }],
+};
 
-export default userConfig
+export default userConfig;
 ```
 
 ## Navbar Title and Logo
@@ -30,14 +28,14 @@ The Title and Logo in the navbar can be set by adding a **navbarTitle** attribut
 
 The **navbarTitle** supports adding the following two fields:
 
-* text (your navbar title)
-* logo (path to your logo img file)
+- text (your navbar title)
+- logo (path to your logo img file)
 
 ```js
 const userConfig = {
   navBarTitle: {
-    text: 'Your custom title here',
-    logo: '/assets/your-logo.svg'
-  }
-}
+    text: "Your custom title here",
+    logo: "/assets/your-logo.svg",
+  },
+};
 ```

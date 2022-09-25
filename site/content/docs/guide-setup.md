@@ -47,7 +47,7 @@ yarn create next-app -e https://github.com/flowershow/flowershow/tree/main/templ
 
 An Important thing to notice here, is that apart from folders with our markdown notes (eg. `/demo`) there are also two additional files: `userConfig.js` and `index.md`.
 
-- `userConfig.js` is where all the user configuration should be written. 
+- `userConfig.js` is where all the user configuration should be written.
 - `index.md`, which serves as a front page for our website.
 
 At the moment both of these files are required by Flowershow and should be placed at the root of your notes folder (i.e. inside your Obsidian vault) [^3].
@@ -87,7 +87,7 @@ At this point, you should be able to run the app. You can check that it compiles
 
 ```bash
 npm run dev
-# or 
+# or
 npm run build
 npm start
 ```
@@ -107,6 +107,7 @@ Hurray 🎊! You've just created a website of your markdown notes with a little 
 This part is up to you. Our app is Next.js based, so you can use any of these hosting providers: Vercel, Cloudflare, Netlify, and others to deploy the site.
 
 Sources you may find useful:
+
 - [How to deploy a Next.js site with Vercel](https://vercel.com/guides/deploying-nextjs-with-vercel)
 - [How to deploy a Next.js site with Cloudflare](https://developers.cloudflare.com/pages/framework-guides/deploy-a-nextjs-site/)
 - [How to deploy a Next.js site with Netlify](https://www.netlify.com/blog/2020/11/30/how-to-deploy-next.js-sites-to-netlify/)

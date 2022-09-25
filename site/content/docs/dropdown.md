@@ -11,7 +11,7 @@ const userConfig = {
   // links to the pages you want to add to the navbar
   navLinks: [
     { href: '/about', name: 'About' },
-    //dropdown menu should not have an href and should contain 'subItems' array 
+    //dropdown menu should not have an href and should contain 'subItems' array
     {name: 'DropdownExample', subItems: [{href: '/goToLink1', name: 'Link1'}, {href: 'goToLink2', name: 'Link2}]}
   ],
 }

@@ -12,11 +12,13 @@ mkdir assets
 ```
 
 2. Go to the `public` folder of the Flowershow app you've created with `create-next-app`:
+
 ```bash
 cd my-flowershow-app/public
 ```
 
 3. Create a symlink to the `assets` folder you've created in step 1:
+
 ```bash
 ln -s your-content-dir/assets assets
 ```

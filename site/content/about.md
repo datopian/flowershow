@@ -8,13 +8,13 @@ Publishing a digital garden isn't easy. As [Quartz](https://quartz.jzhao.xyz/not
 
 > There are an overwhelming number of tutorials, resources, and guides for tools like [Notion](https://www.notion.so/), [Roam](https://roamresearch.com/), and [Obsidian](https://obsidian.md/), yet none of them have super easy to use *free* tools to publish that garden to the world.
 
-In our case to easy and free we'd add *elegant* and *customizable*.
+In our case to easy and free we'd add _elegant_ and _customizable_.
 
 More generally, publishing markdown isn't easy. And it should be, really easy, as easy as publishing a Facebook post, or posting a tweet.
 
 The goal of Flowershow is to make it easy, fast and fun to publish your digital garden -- and do it beautifully.
 
-## Backstory 
+## Backstory
 
 We've been building content and data driven websites for over a decade.
 
@@ -56,19 +56,19 @@ One part of better sensemaking is (technical) tools for sensemaking.[^1]
 
 [^1]: Other parts include our inner capacities for sensemaking e.g. critical thinking, open-mindedness, curiosity, questioning etc. However, these are out of scope here!
 
-* These range from tools for acquiring raw data, to tools for managing that data, to tools for analysing data and producing information, knowledge and insight
-* One important area are tools for organizing our (unstructured) information and knowledge -- and sharing and collaborating on that with others
-* Wikis and digital gardens are one major way of doing that
+- These range from tools for acquiring raw data, to tools for managing that data, to tools for analysing data and producing information, knowledge and insight
+- One important area are tools for organizing our (unstructured) information and knowledge -- and sharing and collaborating on that with others
+- Wikis and digital gardens are one major way of doing that
 
 ### The markdown revolution
 
 The markdown revolution is bringing new energy and potential to "old" ideas such as wikis, zettelkastens etc.
 
-* Markdown "plus" and its toolchain are becoming a powerful and flexible "digital notepaper" on which rich digital notebooks can be written
-* History of computing shows the strength of simple, composable tools even if crude over sophisticated, complex ones especially over the long-term
-* Markdown will still be there in 10 or 20 years
-* Markdown is a great (best) basis for rich digital notes
-* More importantly, combined with something like git (and a link database) it is now a great basis for a digital *notebook* (aka wiki)
+- Markdown "plus" and its toolchain are becoming a powerful and flexible "digital notepaper" on which rich digital notebooks can be written
+- History of computing shows the strength of simple, composable tools even if crude over sophisticated, complex ones especially over the long-term
+- Markdown will still be there in 10 or 20 years
+- Markdown is a great (best) basis for rich digital notes
+- More importantly, combined with something like git (and a link database) it is now a great basis for a digital _notebook_ (aka wiki)
 
 ### Though much still missing for markdown to fulfil on its potential
 
@@ -78,8 +78,8 @@ There is still a lot to be done in the markdown ecosystem to fulfil on this pote
 
 Publishing is one important, initial area
 
-* Intelligence is collective: we need to interact on and build on each others insights and ideas
-* That involves sharing content within a group or publicly.
-* It is best if that is part of an *open* ecosystem (not e.g. facebook or even twitter)
-* The simplest way to do that is some kind of publishing.
-* Publishing markdown is still painful. It should be as easy as publishing a facebook post.
+- Intelligence is collective: we need to interact on and build on each others insights and ideas
+- That involves sharing content within a group or publicly.
+- It is best if that is part of an _open_ ecosystem (not e.g. facebook or even twitter)
+- The simplest way to do that is some kind of publishing.
+- Publishing markdown is still painful. It should be as easy as publishing a facebook post.

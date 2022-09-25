@@ -2,6 +2,7 @@
 title: SEO Configuration
 description: How to set up SEO in flowershow
 ---
+
 import { Callout } from '../components/TempCallout.jsx'
 
 ## What is SEO and meta tags
@@ -82,7 +83,7 @@ const config = {
 
 ### Set per-page social media meta tag image
 
-If required, each page can have its own custom image when sharing on social media sites and can be setup by adding the path of the url to the image in page's frontmatter. 
+If required, each page can have its own custom image when sharing on social media sites and can be setup by adding the path of the url to the image in page's frontmatter.
 
 The image URL can either be uploaded to your `site/content/assets/` folder or can be any other external path.
 
@@ -101,8 +102,8 @@ image: /assets/images/your-image-path.jpg
 ```js
 // in config.js
 const config = {
-  authorUrl: "https://your-website.com"
-}
+  authorUrl: "https://your-website.com",
+};
 ```
 
 Here is a preview of how it should look when sharing the website link on social sites, for example on Twitter:

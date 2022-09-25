@@ -4,7 +4,7 @@ title: Get Started with Flowershow
 
 ## What is Flowershow?
 
-Flowershow is an open-source tool for easily converting your markdown files into an elegant website. It's built on a standard, modern web stack – **React**, **Next.js**, and **Tailwind** and shipped with a basic **default theme** to get you started with just a few clicks. 
+Flowershow is an open-source tool for easily converting your markdown files into an elegant website. It's built on a standard, modern web stack – **React**, **Next.js**, and **Tailwind** and shipped with a basic **default theme** to get you started with just a few clicks.
 
 Flowershow supports **CommonMark** and **GitHub Flavored Markdown**, but also many **Obsidian-specific syntax elements**, like internal links or footnotes[^1].
 [^1]: Support for some GFM and Obsidian-specific syntax elements is still a work in progress. See our [[roadmap]] to learn more.
@@ -53,4 +53,5 @@ NB: Flowershow is already fully functional and in use on several sites -- includ
 12. [[search|Full-text search]]
 
 ## Tutorials
+
 1. [[publish-tutorial| How to (self) publish your markdown files with Flowershow]]
