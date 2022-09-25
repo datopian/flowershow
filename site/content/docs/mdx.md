@@ -1,4 +1,4 @@
-import { Callout } from '../components/TempCallout.jsx'
+import { Callout } from 'components/TempCallout.jsx'
 
 # MDX
 
@@ -131,7 +131,7 @@ export const MyComponent = ({ list }) => {
 Now, let's import `MyComponent` into this page's markdown.
 
 ```md
-import { MyComponent } from '../components/custom/MyComponent.jsx'
+import { MyComponent } from 'components/custom/MyComponent.jsx'
 
 <MyComponent list={["cat", "dog", "parrot"]} />
 
@@ -142,7 +142,7 @@ The above MDX code renders as:
 
 ---
 
-import { MyComponent } from '../components/custom/MyComponent.jsx'
+import { MyComponent } from 'components/custom/MyComponent.jsx'
 
 <MyComponent list={["cat", "dog", "parrot"]} />
 
@@ -319,14 +319,14 @@ _Hi! I'm an MDX component!_
 Import in another MDX file:
 
 ```md
-import ExampleMDXComponent from "../components/custom/test.mdx"
+import ExampleMDXComponent from "components/custom/test.mdx"
 
 <ExampleMDXComponent />
 ```
 
 **Renders as:**
 
-import MDXComponent from "../components/custom/test.mdx"
+import MDXComponent from "components/custom/test.mdx"
 
 <MDXComponent />
 
@@ -351,14 +351,14 @@ The current year is {props.year}
 Import in another MDX file:
 
 ```md
-import MDXComponent2 from "../components/custom/test2.mdx"
+import MDXComponent2 from "components/custom/test2.mdx"
 
 <MDXComponent2 name="John" year="2022" />
 ```
 
 **Renders as:**
 
-import MDXComponent2 from "../components/custom/test2.mdx"
+import MDXComponent2 from "components/custom/test2.mdx"
 
 <MDXComponent2 name="John" year="2022" />
 
@@ -379,14 +379,14 @@ Hello _<Planet />_
 Import in another MDX file and pass an object with `Planet` key and function that returns a JSX component as its value:
 
 ```md
-import MDXComponent3 from "../components/custom/test3.mdx"
+import MDXComponent3 from "components/custom/test3.mdx"
 
 <MDXComponent3 components={{Planet: () => <span style={{color: 'tomato'}}>Pluto</span>}} />
 ```
 
 **Renders as:**
 
-import MDXComponent3 from "../components/custom/test3.mdx"
+import MDXComponent3 from "components/custom/test3.mdx"
 
 <MDXComponent3 components={{Planet: () => <span style={{color: 'tomato'}}>Pluto</span>}} />
 
@@ -399,7 +399,7 @@ You can also import MDX components in other MDX components, like so:
 `test4.mdx` file:
 
 ```md
-import MDXComponent1 from '../components/custom/test.mdx'
+import MDXComponent1 from 'components/custom/test.mdx'
 
 I'm an MDX component and here is my child component:
 _<MDXComponent1 />_
@@ -408,14 +408,14 @@ _<MDXComponent1 />_
 Import in another MDX file:
 
 ```md
-import MDXComponent4 from "../components/custom/test4.mdx"
+import MDXComponent4 from "components/custom/test4.mdx"
 
 <MDXComponent4 />
 ```
 
 **Renders as:**
 
-import MDXComponent4 from "../components/custom/test4.mdx"
+import MDXComponent4 from "components/custom/test4.mdx"
 
 <MDXComponent4 />
 
@@ -435,7 +435,7 @@ my-flowershow-website
 This would already work, however, import paths would look like this:
 
 ```md
-import MyComponent from "../../site/components/MyComponent.jsx"
+import MyComponent from "../site/components/MyComponent.jsx"
 ```
 
 ... which is not very clean and can be confusing. In order to make the paths a bit simpler you can create a symlink in the Flowershow's template components folder (`templates/default/components`) to the folder with your custom components (e.g. `site/components`):
@@ -445,10 +445,10 @@ cd templates/default/components
 ln -s <path-to-your-components-folder> custom
 ```
 
-`custom` can be any name of your choice. It will then be a part of the import path, e.g. `import { MyComponent } from '../components/custom/MyComponent.jsx'`.
+`custom` can be any name of your choice. It will then be a part of the import path, e.g. `import { MyComponent } from 'components/custom/MyComponent.jsx'`. 
 
 Now, your custom components can be imported using this path:
 
 ```md
-import MyComponent from "../components/custom/MyComponent.jsx"
+import MyComponent from "components/custom/MyComponent.jsx"
 ```
