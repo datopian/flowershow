@@ -9,7 +9,8 @@ jobs:
 
     strategy:
       matrix:
-        node: [ 16, 18 ]
+        version: [ 16, 18 ]
+        os: [ ubuntu-latest, windows-latest ]
 
     name: Node ${{ matrix.node }} test
 
