@@ -25,12 +25,10 @@ jobs:
       - name: Install Playwright
         working-directory: templates/default
         run: npx playwright install --with-deps
+      - name: Prepare content
+        working-directory: templates/default
+        run: |
+          ./testsetup.sh
       - name: Run your tests
         working-directory: templates/default
         run: npx playwright test
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: playwright-report
-          path: playwright-report
