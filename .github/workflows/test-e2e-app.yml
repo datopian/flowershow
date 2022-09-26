@@ -12,14 +12,15 @@ jobs:
         version: [ 16, 18 ]
         os: [ ubuntu-latest, windows-latest ]
 
-    name: Node ${{ matrix.node }} test
+    name: Node ${{ matrix.version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v3
       - name: Setup node
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node }}
+          node-version: ${{ matrix.version }}
       - name: Install dependencies
         working-directory: templates/default
         run: npm ci
