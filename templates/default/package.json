@@ -11,7 +11,7 @@
     "format": "prettier --write .",
     "prepare": "cd ../.. && husky install templates/default/.husky",
     "contentlayer": "contentlayer build",
-    "test:e2e": "playwright test",
+    "test:e2e": "./testsetup.sh && playwright test && ./testteardown.sh",
     "changeset": "changeset",
     "release": "changeset publish"
   },
