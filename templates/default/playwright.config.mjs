@@ -18,7 +18,7 @@ const config = {
   // Test directory
   testDir: path.join(__dirname, 'tests'),
   // If a test fails, retry it additional 2 times
-  retries: 2,
+  // retries: 2,
   // Artifacts folder where screenshots, videos, and traces are stored.
   outputDir: 'test-results/',
 
@@ -53,25 +53,25 @@ const config = {
         ...devices['Desktop Chrome'],
       },
     },
-    {
-      name: 'Desktop Firefox',
-      use: {
-        ...devices['Desktop Firefox'],
-      },
-    },
+    // {
+    //   name: 'Desktop Firefox',
+    //   use: {
+    //     ...devices['Desktop Firefox'],
+    //   },
+    // },
     // {
     //   name: 'Desktop Safari',
     //   use: {
     //     ...devices['Desktop Safari'],
     //   },
     // },
-    // Test against mobile viewports.
-    {
-      name: 'Mobile Chrome',
-      use: {
-        ...devices['Pixel 5'],
-      },
-    },
+    // // Test against mobile viewports.
+    // {
+    //   name: 'Mobile Chrome',
+    //   use: {
+    //     ...devices['Pixel 5'],
+    //   },
+    // },
     // {
     //   name: 'Mobile Safari',
     //   use: devices['iPhone 12'],
