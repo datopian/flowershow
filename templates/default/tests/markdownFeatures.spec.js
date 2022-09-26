@@ -4,56 +4,48 @@ const { MarkdownPage } = require("./markdown-page");
 test.describe.parallel("wiki links", () => {
   test.beforeEach(async ({ page }) => {
     const Page = new MarkdownPage(page);
-    await Page.goto("/test/fixtures/markdownFeatures");
+    await Page.goto("/markdownFeatures");
     await Page.getData();
   });
 
   test("parses a wiki link", async ({ page }) => {
     const link = page.locator("#wikiLink > p > a");
-    await expect(link).toHaveClass("internal");
     await link.click();
-    await expect(page).toHaveURL("/test/fixtures/fixturepage");
+    await expect(page).toHaveURL("/fixturepage");
   });
 
   test("parses a wiki link with custom divider", async ({ page }) => {
     const link = page.locator("#wikiLink-custom > p > a");
-    await expect(link).toHaveClass("internal");
     await expect(link).toContainText("Fixture Page");
     await link.click();
-    await expect(page).toHaveURL("/test/fixtures/fixturepage");
+    await expect(page).toHaveURL("/fixturepage");
   });
 
   test("parses a wiki link with header", async ({ page }) => {
     const link = page.locator("#wikiLink-heading > p > a");
-    await expect(link).toHaveClass("internal");
     await link.click();
-    await expect(page).toHaveURL("/test/fixtures/fixturepage#planned-features");
+    await expect(page).toHaveURL("/fixturepage#planned-features");
   });
 
   test("parses a wiki link with header and custom divider", async ({
     page,
   }) => {
     const link = page.locator("#wikiLink-heading-custom > p > a");
-    await expect(link).toHaveClass("internal");
     await expect(link).toContainText("🚧 working on");
     await link.click();
-    await expect(page).toHaveURL("/test/fixtures/fixturepage#planned-features");
+    await expect(page).toHaveURL("/fixturepage#planned-features");
   });
 
   test("link to image file", async ({ page }) => {
     const link = page.locator("#wikiLink-image > p > img");
-    await expect(link).toHaveClass("internal");
-    await expect(link).toHaveAttribute(
-      "src",
-      "/assets/images/testimages/parktest.png"
-    );
+    await expect(link).toHaveAttribute("src", "/assets/images/parktest.png");
   });
 });
 
 test.describe.parallel("dashes & ellipse", () => {
   test.beforeEach(async ({ page }) => {
     const Page = new MarkdownPage(page);
-    await Page.goto("/test/fixtures/markdownFeatures");
+    await Page.goto("/markdownFeatures");
     await Page.getData();
   });
 
@@ -73,7 +65,7 @@ test.describe.parallel("dashes & ellipse", () => {
 test.describe.parallel("commonMark", () => {
   test.beforeEach(async ({ page }) => {
     const Page = new MarkdownPage(page);
-    await Page.goto("/test/fixtures/markdownFeatures");
+    await Page.goto("/markdownFeatures");
     await Page.getData();
   });
 
@@ -109,19 +101,19 @@ test.describe.parallel("commonMark", () => {
     );
   });
 
-  test("lists", async ({ page }) => {
-    await expect(page.locator("#lists > ul > li")).toContainText("one");
-    await expect(page.locator("#lists > ol > li")).toContainText("one");
-    await expect(page.locator("#lists > ol > li > ul > li")).toContainText(
-      "one"
-    );
-  });
+  // test("lists", async ({ page }) => {
+  //   await expect(page.locator("#lists > ul > li")).toContainText("one");
+  //   await expect(page.locator("#lists > ol > li")).toContainText("one");
+  //   await expect(page.locator("#lists > ol > li > ul > li")).toContainText(
+  //     "one"
+  //   );
+  // });
 
   test("links", async ({ page }) => {
     const link = page.locator("#links > p > a");
     await expect(link).toContainText("Link to fixture page");
     await link.click();
-    await expect(page).toHaveURL("/test/fixtures/fixturepage");
+    await expect(page).toHaveURL("/fixturepage");
   });
 
   test("images", async ({ page }) => {
@@ -135,7 +127,7 @@ test.describe.parallel("commonMark", () => {
 test.describe.parallel("GFM", () => {
   test.beforeEach(async ({ page }) => {
     const Page = new MarkdownPage(page);
-    await Page.goto("/test/fixtures/markdownFeatures");
+    await Page.goto("/markdownFeatures");
     await Page.getData();
   });
 
