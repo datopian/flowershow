@@ -9,30 +9,26 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.5.x]
+        node: [ 16, 18 ]
+
+    name: Node ${{ matrix.node }} test
 
     steps:
-      - uses: actions/checkout@v1
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
-      - name: Install App
+          node-version: ${{ matrix.node }}
+      - name: Install dependencies
         working-directory: templates/default
-        run: |
-          npm install
-          npx playwright install --with-deps
-      - name: Run App in background
+        run: npm ci
+      - name: Install Playwright
+        working-directory: templates/default
+        run: npx playwright install --with-deps
+      - name: Prepare content
         working-directory: templates/default
         run: |
           ./testsetup.sh
-          npm run build
-          npm start &
-        env:
-          PORT: 3000
-      # - name: Run tests
-      #   working-directory: templates/default
-      #   run: |
-      #     npm run test:e2e
-      #   env:
-      #     CI: true
+      - name: Run your tests
+        working-directory: templates/default
+        run: npx playwright test
