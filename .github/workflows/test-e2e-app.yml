@@ -30,9 +30,9 @@ jobs:
           npm start &
         env:
           PORT: 3000
-      - name: Run tests
-        working-directory: templates/default
-        run: |
-          npm run test:e2e
-        env:
-          CI: true
+      # - name: Run tests
+      #   working-directory: templates/default
+      #   run: |
+      #     npm run test:e2e
+      #   env:
+      #     CI: true
