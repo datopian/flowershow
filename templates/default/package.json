@@ -10,6 +10,7 @@
     "lint": "eslint --fix .",
     "format": "prettier --write .",
     "prepare": "cd ../.. && husky install templates/default/.husky",
+    "contentlayer": "contentlayer build",
     "test:e2e": "playwright test",
     "changeset": "changeset",
     "release": "changeset publish"
@@ -28,7 +29,7 @@
     "@heroicons/react": "^1.0.4",
     "@silvenon/remark-smartypants": "^1.0.0",
     "@tailwindcss/typography": "^0.5.2",
-    "contentlayer": "^0.2.6",
+    "contentlayer": "^0.2.8",
     "date-fns": "^2.29.2",
     "gray-matter": "^4.0.3",
     "hastscript": "^7.0.2",

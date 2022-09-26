@@ -1,5 +1,9 @@
 ---
+created: 2022-06-26
 title: Setup Guide (Alpha Users)
+date: 2022-07-18
+author: [rufuspollock, olayway]
+type: blog
 ---
 
 <div className="border-2 border-slate-400 rounded-md px-4 mb-2">
