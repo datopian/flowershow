@@ -69,7 +69,7 @@ export function Hero() {
                 <img
                   src="/assets/images/datopian_logo.png"
                   alt="Datopian"
-                  className="mx-2 mb-1 h-6 inline bg-black rounded-full"
+                  className="mb-1 h-6 inline bg-black rounded-full"
                 />
                 <span>Datopian</span>
               </a>
