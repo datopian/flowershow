@@ -2,7 +2,6 @@
 title: SEO Configuration
 description: How to set up SEO in flowershow
 ---
-import { Callout } from 'components/TempCallout.jsx'
 
 ## What is SEO and meta tags
 
@@ -30,9 +29,8 @@ const config = {
 }
 ```
 
-<Callout>
-❕Flowershow uses the NextSEO plugin under the hood, so you can also add other metadata to your pages. See their [documentation](https://github.com/garmeeh/next-seo) to learn more.
-</Callout>
+> [!note]
+> Flowershow uses the NextSEO plugin under the hood, so you can also add other metadata to your pages. See their [documentation](https://github.com/garmeeh/next-seo) to learn more.
 
 ### Set per-page meta-tags
 
@@ -76,9 +74,9 @@ const config = {
 }
 ```
 
-<Callout>
-❕ Note: It is advised to upload an image with the same width and height values as specified above for it to display properly.
-</Callout>
+> [!note]
+> It is advised to upload an image with the same width and height values as specified above for it to display properly.
+
 
 ### Set per-page social media meta tag image
 
@@ -94,9 +92,8 @@ image: /assets/images/your-image-path.jpg
 ---
 ```
 
-<Callout>
-❕ You should set your website's url in your config file so that the correct url path for the image is generated.
-</Callout>
+> [!info]
+> You should set your website's url in your config file so that the correct url path for the image is generated.
 
 ```js
 // in config.js
