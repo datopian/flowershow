@@ -5,6 +5,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeMathjax from "rehype-mathjax";
 import rehypePrismPlus from "rehype-prism-plus";
 import rehypeSlug from "rehype-slug";
+import callouts from "remark-callouts";
 import codeExtra from "remark-code-extra";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
@@ -84,6 +85,7 @@ export default makeSource({
       remarkGfm,
       [smartypants, { quotes: false, dashes: "oldschool" }],
       remarkMath,
+      callouts,
       [wikiLinkPlugin, { markdownFolder: siteConfig.content }],
       /** Using the code extra plugin from https://github.com/s0/remark-code-extra
        *  to create new mermaid pre tags to use with mdx-mermaid.
@@ -148,7 +150,8 @@ export default makeSource({
           test(element) {
             return (
               ["h2", "h3", "h4", "h5", "h6"].includes(element.tagName) &&
-              element.properties?.id !== "table-of-contents"
+              element.properties?.id !== "table-of-contents" &&
+              element.properties?.className !== "blockquote-heading"
             );
           },
           content() {
