@@ -45,6 +45,7 @@
     "rehype-mathjax": "^4.0.2",
     "rehype-prism-plus": "^1.4.2",
     "rehype-slug": "^5.0.1",
+    "remark-callouts": "^1.0.1",
     "remark-code-extra": "^1.0.1",
     "remark-gfm": "^3.0.0",
     "remark-math": "^5.1.1",
