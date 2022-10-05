@@ -1,5 +1,3 @@
-import { Callout } from 'components/TempCallout.jsx'
-
 # MDX
 
 ## Table of contents
@@ -8,9 +6,8 @@ Flowershow parses all of your Markdown files as MDX. This means you not only can
 
 Let's see what exactly is MDX and what's so cool about it!
 
-<Callout>
-  A basic familiarity with JSX (React components) and JavaScript might be helpful to understand this chapter, but you can also learn by example and start by tweaking some of our code. Opening [this page](https://github.com/flowershow/flowershow/blob/main/site/content/docs/mdx.md) in your text editor side by side with the rendered version in your browser may also help.
-</Callout>
+> A basic familiarity with JSX (React components) and JavaScript might be helpful to understand this chapter, but you can also learn by example and start by tweaking some of our code. Opening [this page](https://github.com/flowershow/flowershow/blob/main/site/content/docs/mdx.md) in your text editor side by side with the rendered version in your browser may also help.
+
 
 ## What is MDX?
 
@@ -36,9 +33,8 @@ The answer to this question is - yes... and no ¯\_(ツ)\_/¯.
 
 **No**, because Flowershow will parse all your Markdown files as MDX (no matter if you use `.md` or `.mdx` file extension). This means that in the example above, the heading and the block quote will be treated as Markdown, however, the HTML-like looking `<div>` tag will be understood as **JSX** - a React syntax extension to JavaScript that looks like HTML, which allows you to create and use components in your Markdown files.
 
-<Callout>
-  ❕You may have noticed, that we haven't used an HTML `class` attribute on the `<div>` tag above, but rather React's `className` attribute. This is because all HTML elements will be parsed as JSX, which will then be used by React's runtime to render your pages.
-</Callout>
+> [!note]
+> You may have noticed, that we haven't used an HTML `class` attribute on the `<div>` tag above, but rather React's `className` attribute. This is because all HTML elements will be parsed as JSX, which will then be used by React's runtime to render your pages.
 
 How does it work? In short, packages used by Flowershow under the hood compile MDX to JavaScript, which is then used by React to create your website.
 
@@ -46,9 +42,7 @@ How does it work? In short, packages used by Flowershow under the hood compile M
 
 The following sections are just short summaries of what MDX can do. Read [the official MDX docs](https://mdxjs.com/) to learn more.
 
-<Callout>
-  ❕In this document we're going to use Markdown and MDX, as well as HTML and JSX interchangeably. The reason for this is the fact that Flowershow, as we've just learned, parses all Markdown files as MDX files. So, from your perspective, it may be only Markdown that you're using to write your content. However, Flowershow will also understand any MDX-specific additions to it if you were to include them. It follows, that what you may consider HTML blocks, in MDX world is JSX.
-</Callout>
+> ❕In this document we're going to use Markdown and MDX, as well as HTML and JSX interchangeably. The reason for this is the fact that Flowershow, as we've just learned, parses all Markdown files as MDX files. So, from your perspective, it may be only Markdown that you're using to write your content. However, Flowershow will also understand any MDX-specific additions to it if you were to include them. It follows, that what you may consider HTML blocks, in MDX world is JSX.
 
 ### Markdown
 
@@ -124,9 +118,8 @@ export const MyComponent = ({ list }) => {
 };
 ```
 
-<div className="border-2 border-slate-400 rounded-md px-4 mb-4">
-❕ Note, that you should use a `.jsx` extension for any components you want to import into markdown files to make it work.
-</div>
+> [!note]
+> You should use a `.jsx` extension for any components you want to import into markdown files to make it work.
 
 Now, let's import `MyComponent` into this page's markdown.
 
@@ -300,9 +293,7 @@ You can also use comments in expressions with JavaScript's multiline comment syn
 
 If you're not familiar with React or you just need a very basic components that will serve as templates for some parts of Markdown you would normally have to copy over and over again only to make some minor adjustments to them, MDX components may be the way to go. MDX components, in contrast to React components, are written in MDX. And since all MDX files are compiled to components, they can be imported and used the same way as React components.
 
-<Callout>
-The main content of `.mdx` is exported as the default export.
-</Callout>
+> The main content of `.mdx` is exported as the default export.
 
 ### Simple components
 

@@ -96,9 +96,9 @@ test.describe.parallel("commonMark", () => {
   });
 
   test("blockquote", async ({ page }) => {
-    await expect(page.locator("#blockquote > blockquote > p")).toContainText(
-      "I am a block quote."
-    );
+    await expect(
+      page.locator("#blockquote > div > blockquote > p")
+    ).toContainText("I am a block quote.");
   });
 
   // test("lists", async ({ page }) => {
