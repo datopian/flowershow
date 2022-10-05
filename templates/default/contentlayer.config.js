@@ -6,6 +6,7 @@ import rehypeMathjax from "rehype-mathjax";
 import rehypePrismPlus from "rehype-prism-plus";
 import rehypeSlug from "rehype-slug";
 import codeExtra from "remark-code-extra";
+import remarkEmbed from "remark-embed-plus";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import smartypants from "remark-smartypants";
@@ -81,6 +82,7 @@ export default makeSource({
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [
+      remarkEmbed,
       remarkGfm,
       [smartypants, { quotes: false, dashes: "oldschool" }],
       remarkMath,

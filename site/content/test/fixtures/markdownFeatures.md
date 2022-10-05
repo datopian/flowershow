@@ -1,5 +1,6 @@
 ---
 title: Testing markdown features
+type: Page
 ---
 
 <div id="endash">
@@ -92,3 +93,14 @@ _I'm Italic!_
 <div id="autolinks">
 https://flowershow.app
 </div>
+
+<p>I am a paragraph</p>
+
+
+Below should be iframe
+
+https://www.youtube.com/watch?v=y2eQoYqCyHI
+
+Above should be iframe
+
+
