@@ -77,6 +77,7 @@ export default makeSource({
   contentDirExclude: contentLayerExcludeDefaults.concat([
     ".flowershow",
     ".obsidian",
+    ...siteConfig.contentExclude,
   ]),
   documentTypes: [Blog, Page],
   mdx: {
