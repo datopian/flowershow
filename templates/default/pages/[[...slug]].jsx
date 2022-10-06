@@ -7,6 +7,7 @@ import { MdxPage } from "../components/MDX";
 export default function Page({ body, ...rest }) {
   const mdxComponent = useMDXComponent(body.code);
   const frontMatter = { ...rest };
+
   return <MdxPage mdxComponent={mdxComponent} frontMatter={frontMatter} />;
 }
 
@@ -20,6 +21,9 @@ export async function getStaticProps({ params }) {
 export async function getStaticPaths() {
   const paths = allDocuments.map((page) => {
     const parts = page.url_path.split("/");
+    if (page.isDraft) {
+      return { params: { slug: undefined } };
+    }
     return { params: { slug: parts } };
   });
 
