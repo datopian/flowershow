@@ -33,6 +33,6 @@ export const siteConfig = {
   // values not provided in userConfig
   theme: {
     ...defaultConfig.theme,
-    ...config.theme,
+    ...config?.theme,
   },
 };
