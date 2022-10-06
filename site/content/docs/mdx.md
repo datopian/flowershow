@@ -2,14 +2,13 @@
 
 ## Table of contents
 
+## What is MDX?
+
 Flowershow parses all of your Markdown files as MDX. This means you not only can write your content using good old Markdown, but also enrich it with dynamic visualizations, immersive user interactions and much more thanks to support for JSX, JavaScript expressions, and ESM `import` and `export` statements. It's basically Markdown on steroids 😀💪!
 
 Let's see what exactly is MDX and what's so cool about it!
 
 > A basic familiarity with JSX (React components) and JavaScript might be helpful to understand this chapter, but you can also learn by example and start by tweaking some of our code. Opening [this page](https://github.com/flowershow/flowershow/blob/main/site/content/docs/mdx.md) in your text editor side by side with the rendered version in your browser may also help.
-
-
-## What is MDX?
 
 From the official [MDX docs](https://mdxjs.com/docs/what-is-mdx/):
 
