@@ -323,7 +323,7 @@ Flowershow supports 12 different Obsidian callout types (with aliases) like note
 🔍 To learn more about the Obsidian extensions refer to the [Obsidian Help site](https://help.obsidian.md/How+to/Format+your+notes). 
 </div>
 
-### 🚧 PDF embedding
+### ✅ PDF embedding
 
 **Example:**
 
