@@ -176,6 +176,12 @@ Support for for meta tags for SEO and social sharing.
 
 [[docs/seo|Learn more ➡]]
 
+### ✅ CLI tool
+
+Our goal is to make using Flowershow as seamless as possible. To facilitate smooth bootsrapping and upgrading your website we're creating a CLI tool, that will take care of all the intricacies related to the whole process of publishing your notes.
+
+[[publish-tutorial|Learn more ➡]]
+
 ### 🚧 Knowledge graph
 
 Interactive knowledge graph to see how your notes are interconnected.
@@ -195,10 +201,6 @@ Lists of forward links used on the page and back links to the page from other pa
 ### 🚧 Excalidraw support
 
 Displaying Excalidraw sketches directly in your markdown pages.
-
-### 🚧 CLI tool
-
-Our goal is to make using Flowershow as seamless as possible. To facilitate smooth bootsrapping and upgrading your website we're creating a CLI tool, that will take care of all the intricacies related to the whole process of publishing your notes.
 
     👷 There is a lot of other exciting stuff we're working on.
     <a href="/docs/roadmap">Check our roadmap to learn more!</a>

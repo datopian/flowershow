@@ -301,6 +301,28 @@ Two '-' will convert to ndash. Three '-' will convert to mdash. Three '.' with o
 ...ellipse\
 ...another ellipse
 
+### ✅ Callouts
+
+Flowershow supports 12 different Obsidian callout types (with aliases) like note, abstract, todo, or tip. See this [Obsidian docs page](https://help.obsidian.md/How+to/Use+callouts) to learn more about different callout types.
+
+**Example:**
+
+```md
+> [!info]
+> Here's a callout block.
+> It supports **markdown** and [[Internal link|wikilinks]].
+```
+
+**Renders as:**
+
+> [!info] This is cool!
+> Here's a callout block.
+> It supports **markdown** and [[docs/index|wikilinks]].
+
+<div className="border-2 border-slate-400 rounded-md px-4 my-4">
+🔍 To learn more about the Obsidian extensions refer to the [Obsidian Help site](https://help.obsidian.md/How+to/Format+your+notes). 
+</div>
+
 ### 🚧 PDF embedding
 
 **Example:**
@@ -315,24 +337,6 @@ Two '-' will convert to ndash. Three '-' will convert to mdash. Three '.' with o
 ### 🚧 Text highlighting
 
 ==I'm Highlighted!== is done using `==I'm Highlighted!==`
-
-### 🚧 Callouts
-
-**Example:**
-
-```md
-> [!INFO]
-> Here's a callout block.
-> It supports **markdown** and [[Internal link|wikilinks]].
-```
-
-**Renders as:**
-
-> [!INFO] > Here's a callout block. > It supports **markdown** and [[docs/index|wikilinks]].
-
-<div className="border-2 border-slate-400 rounded-md px-4 my-4">
-🔍 To learn more about the Obsidian extensions refer to the [Obsidian Help site](https://help.obsidian.md/How+to/Format+your+notes). 
-</div>
 
 ### 🚧 Excalidraw sketches support
 
