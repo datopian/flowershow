@@ -66,21 +66,21 @@ _I'm Italic!_
 - one
 
 1. one
-	- one
+
+- one
 </div>
 
 <div id="links">
-[Link to fixture page](/test/fixtures/fixturepage)
+[Link to fixture page](/fixturepage)
 </div>
 
 <div id="images">
 ![tulip](https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/abstract-flowers-rose-sciberras.jpg)
 </div>
 
-
 | Left | Center | Right |
-| :--- |  :---: |  ---: |
-| 1    | 2      | 3     |
+| :--- | :----: | ----: |
+| 1    |   2    |     3 |
 
 <div id="task-list">
 * [x] one thing to do
@@ -96,11 +96,8 @@ https://flowershow.app
 
 <p>I am a paragraph</p>
 
-
 Below should be iframe
 
 https://www.youtube.com/watch?v=y2eQoYqCyHI
 
 Above should be iframe
-
-
