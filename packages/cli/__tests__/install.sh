@@ -1,6 +1,6 @@
 #!/usr/bin/expect
 
-spawn npx lowersh install
+spawn npx flowershow install
 expect -re "Create Flowershow project in current directory?"
 
 send -- "\r"
