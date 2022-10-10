@@ -80,6 +80,7 @@ export default makeSource({
     ".obsidian",
     ...siteConfig.contentExclude,
   ]),
+  contentDirInclude: [...siteConfig.contentInclude],
   documentTypes: [Blog, Page],
   mdx: {
     cwd: process.cwd(),
