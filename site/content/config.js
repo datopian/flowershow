@@ -13,6 +13,7 @@ export const config = {
   repoEditPath: "/edit/main/site/content/",
   editLinkShow: false,
   contentExclude: [],
+  contentInclude: [],
   analytics: "G-RQWLTRWBS2",
   navLinks: [
     { href: "/#overview", name: "Overview" },
