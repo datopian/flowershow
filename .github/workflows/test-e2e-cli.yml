@@ -1,0 +1,21 @@
+name: E2E CLI
+
+on: [push]
+
+jobs:
+  build:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node: [ 16, 18 ]
+
+    name: Node ${{ matrix.node }} test
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Flowershow template
+        working-directory:
+          packages/cli/__tests__
+        run: ./test.sh
