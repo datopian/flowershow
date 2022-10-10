@@ -16,6 +16,8 @@ const defaultConfig = {
   // if you have your notes in another (external) directory,
   // /content dir should be a symlink to that directory
   content: "content",
+  contentExclude: [],
+  contentInclude: [],
   // Theme
   theme: {
     default: "dark",
@@ -29,6 +31,8 @@ const defaultConfig = {
 export const siteConfig = {
   ...defaultConfig,
   ...config,
+  contentExclude: [...defaultConfig.contentExclude, ...config.contentExclude],
+  contentInclude: [...defaultConfig.contentInclude, ...config.contentInclude],
   // prevent theme object overrides for
   // values not provided in userConfig
   theme: {
