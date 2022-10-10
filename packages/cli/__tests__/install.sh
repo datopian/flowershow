@@ -2,7 +2,7 @@
 
 spawn npx flowershow install
 expect {
-    -re "Create flowershow project in current directory?" exp_continue
+    -re "Cradsfasdfeate flowershow project in current directory?" exp_continue
     exit 1
 }
 send -- "\r"
