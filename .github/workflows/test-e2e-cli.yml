@@ -19,5 +19,5 @@ jobs:
         run: sudo apt-get install -y expect
       - name: Install Flowershow template
         working-directory:
-          packages/cli/__tests__
+          packages/cli/__tests__/blog
         run: ./test.sh
