@@ -20,7 +20,9 @@ jobs:
       - name: Install Flowershow template
         # working-directory:
           # packages/cli/__tests__/blog
-        run: packages/cli/__tests__/install.sh
+        run: |
+          set -e
+          packages/cli/__tests__/install.sh
       # - name: Build Flowershow site
       #   working-directory:
       #     packages/cli/__tests__/blog
