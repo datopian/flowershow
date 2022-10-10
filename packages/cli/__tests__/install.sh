@@ -1,6 +1,6 @@
 #!/usr/bin/expect
 
-spawn npx flowershow install
+spawn npx lowershow install
 send -- "\r"
 send -- "content\r"
 send -- "assets"
