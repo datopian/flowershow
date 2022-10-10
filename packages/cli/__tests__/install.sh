@@ -1,6 +1,6 @@
 #!/usr/bin/expect
 
-spawn npx lowershow install
+spawn npx lowersh install
 send -- "\r"
 send -- "content\r"
 send -- "assets"
