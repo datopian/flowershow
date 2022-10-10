@@ -16,6 +16,8 @@ const defaultConfig = {
   // if you have your notes in another (external) directory,
   // /content dir should be a symlink to that directory
   content: "content",
+  contentExclude: [],
+  contentInclude: [],
   // Theme
   theme: {
     default: "dark",
