@@ -21,9 +21,9 @@ jobs:
         working-directory:
           packages/cli/__tests__/blog
         run: ./install.sh
-      - name: Build Flowershow site
-        working-directory:
-          packages/cli/__tests__/blog
-        run: npx flowershow build
-      - name: Deploy Flowershow site
-        run: ./deploy.sh ${{ secrets.GITHUB_TOKEN }}
+      # - name: Build Flowershow site
+      #   working-directory:
+      #     packages/cli/__tests__/blog
+      #   run: npx flowershow build
+      # - name: Deploy Flowershow site
+      #   run: ./deploy.sh ${{ secrets.GITHUB_TOKEN }}
