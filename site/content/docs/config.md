@@ -17,6 +17,10 @@ const userConfig = {
   authorUrl: "https://john.app/",
   // links to the pages you want to add to the navbar
   navLinks: [{ href: "/about", name: "About" }],
+  // add any folders/files to be excluded from being published, all other files in content folder will be published
+  contentExclude: ['docs/testpage.md'],
+  // if any folders/files included, then nothing else will be published by default
+  contentInclude: [],
 };
 
 export default userConfig;

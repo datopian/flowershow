@@ -21,6 +21,7 @@ const sharedFields = {
   image: { type: "string" },
   layout: { type: "string", default: "docs" },
   editLink: { type: "boolean" },
+  isDraft: { type: "boolean" },
 };
 
 const computedFields = {
@@ -77,7 +78,9 @@ export default makeSource({
   contentDirExclude: contentLayerExcludeDefaults.concat([
     ".flowershow",
     ".obsidian",
+    ...siteConfig.contentExclude,
   ]),
+  contentDirInclude: siteConfig.contentInclude,
   documentTypes: [Blog, Page],
   mdx: {
     cwd: process.cwd(),
