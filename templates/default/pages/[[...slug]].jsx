@@ -18,10 +18,12 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-  const paths = allDocuments.map((page) => {
-    const parts = page.url_path.split("/");
-    return { params: { slug: parts } };
-  });
+  const paths = allDocuments
+    .filter((page) => !page?.isDraft)
+    .map((page) => {
+      const parts = page.url_path.split("/");
+      return { params: { slug: parts } };
+    });
 
   return {
     paths,
