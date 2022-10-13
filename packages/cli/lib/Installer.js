@@ -8,7 +8,7 @@ import degit from 'degit';
 import { execa } from 'execa';
 import inquirer from 'inquirer';
 
-import { exit, error, log, logWithSpinner, stopSpinner, pauseSpinner, resumeSpinner } from './utils/index.js';
+import { exit, error, log, success, logWithSpinner, stopSpinner, pauseSpinner, resumeSpinner } from './utils/index.js';
 
 
 import { FLOWERSHOW_RELATIVE_PATH } from './const.js';
@@ -136,6 +136,7 @@ export default class Creator {
       log(stdout);
       log(stderr);
       stopSpinner();
+      success("Successfuly installed Flowershow template!")
     } catch (err) {
       error(
         `Installing dependencies failed: ${err.message}`
