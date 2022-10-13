@@ -26,6 +26,7 @@ export const config = {
     { href: "/_all", name: "All" },
   ],
   github: "https://github.com/flowershow/flowershow",
+  discord: "https://discord.com/channels/1029670148824641576/1029670149470556172",
   nextSeo: {
     titleTemplate: "%s | Flowershow",
     description:
