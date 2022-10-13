@@ -128,20 +128,19 @@ export default class Creator {
     fs.symlinkSync(path.resolve(contentPath, assetsFolder), `${flowershowDir}/public/assets`);
 
 
-    // // install flowershow dependencies
+    // install flowershow dependencies
     logWithSpinner({ symbol: '🌸', msg: `Installing Flowershow dependencies...` });
 
     try {
       const { stdout, stderr } = await execa('npm', [ 'install' ], { cwd: flowershowDir });
       log(stdout);
       log(stderr);
+      stopSpinner();
     } catch (err) {
       error(
         `Installing dependencies failed: ${err.message}`
       );
       exit(err.exitCode);
     }
-
-    stopSpinner();
   }
 }
