@@ -132,7 +132,8 @@ export default class Creator {
     logWithSpinner({ symbol: '🌸', msg: `Installing Flowershow dependencies...` });
 
     try {
-      const { stdout, stderr } = await execa('npm', [ 'install' ], { cwd: flowershowDir });
+      await execa('npm', [ 'set-script', 'prepare', '' ], { cwd: flowershowDir });
+      const { stdout, stderr } = await execa('npm', [ 'install'], { cwd: flowershowDir });
       log(stdout);
       log(stderr);
       stopSpinner();

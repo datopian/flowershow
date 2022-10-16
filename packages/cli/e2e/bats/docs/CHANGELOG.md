@@ -1,0 +1,469 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog][kac] and this project adheres to
+[Semantic Versioning][semver].
+
+[kac]: https://keepachangelog.com/en/1.0.0/
+[semver]: https://semver.org/
+
+## [Unreleased]
+
+### Fixed
+
+* `shfmt` all files and enforce via CI (#651)
+* avoid kernel warning flood/hang with CTRL+C on Bash 5.2 RC (#656)
+* Fix infinite wait with (invalid) `-j<n>` (without space) (#657)
+
+## [1.8.0] - 2022-09-15
+
+### Added
+
+* using external formatters via `--formatter <absolute path>` (also works for
+  `--report-formatter`) (#602)
+* running only tests that failed in the last run via `--filter-status failed` (#483)
+* variable `BATS_TEST_RETRIES` that specifies how often a test should be
+  reattempted before it is considered failed (#618)
+* Docker tags `latest-no-faccessat2` and `<bats-version\>-no-faccessat2` for
+  avoiding `bash: bats: No such file or directory` on `docker<20.10` (or
+  `runc<v1.0.0-rc93`) (#622)
+* `BATS_TEST_TIMEOUT` variable to force a timeout on test (including `setup()`) (#491)
+* also print (nonempty) `$stderr` (from `run --separate-stderr`) with
+  `--print-output-on-failure` (#631)
+* `# bats test_tags=<tag list>`/`# bats file_tags=<tag list>` and
+  `--filter-tags <tag list>` for tagging tests for execution filters (#642)
+* warning BW03: inform about `setup_suite` in wrong file (`.bats` instead of `setup_suite.bash`) (#652)
+
+#### Documentation
+
+* update gotcha about negated statements: Recommend using `run !` on Bats
+  versions >=1.5.0 (#593)
+* add documentation for `bats_require_minimum_version` (#595)
+* improve documentation about `setup_suite` (#652)
+
+### Fixed
+
+* added missing shebang  (#597)
+* remaining instances of `run -<N>` being incorrectly documented as `run =<N>` (#599)
+* allow `--gather-test-outputs-in <directory>` to work with existing, empty
+  directories (#603)
+  * also add `--clean-and-gather-test-outputs-in <directory>` for improved UX
+* double slashes in paths derived from TMPDIR on MacOS (#607)
+* fix `load` in `teardown` marking failed tests as not run (#612)
+* fix unset variable errors (with set -u) and add regression test (#621)
+* `teardown_file` errors don't swallow `setup_file` errors anymore, the behavior
+  is more like `teardown`'s now (only `return`/last command can trigger `teardown`
+   errors) (#623)
+* upgraded from deprecated CI envs for MacOS (10 -> 11,12) and Ubuntu
+  (18.04 -> 22.04) (#630)
+* add `/usr/lib/bats` as default value for `BATS_LIB_PATH` (#628)
+* fix unset variable in `bats-formatter-junit` when `setup_file` fails (#632)
+* unify error behavior of `teardown`/`teardown_file`/`teardown_suite` functions:
+  only fail via return code, not via ERREXIT (#633)
+* fix unbound variable errors with `set -u` on `setup_suite` failures (#643)
+* fix `load` not being available in `setup_suite` (#644)
+* fix RPM spec, add regression test (#648)
+* fix handling of `IFS` by `run` (#650)
+* only print `setup_suite`'s stderr on errors (#649)
+
+#### Documentation
+
+* fix typos, spelling and links (#596, #604, #619, #627)
+* fix redirection order of an example in the tutorial (#617)
+
+## [1.7.0] - 2022-05-14
+
+### Added
+
+* Pretty formatter print filename when entering file (#561)
+* BATS_TEST_NAME_PREFIX allows prefixing test names on stdout and in reports (#561)
+* setup_suite and teardown_suite (#571, #585)
+* out-of-band warning infrastructure, with following warnings:
+  * BW01: run command not found (exit code 127)  (#586)
+  * BW02: run uses flags without proper `bats_require_minimum_version` guard (#587)
+* `bats_require_minimum_version` to guard code that would not run on older
+  versions (#587)
+
+#### Documentation
+
+* document `$BATS_VERSION` (#557)
+* document new warning infrastructure (#589, #587, #586)
+
+### Fixed
+
+* unbound variable errors in formatters when using `SHELLOPTS=nounset` (`-u`) (#558)
+* don't require `flock` *and* `shlock` for parallel mode test (#554)
+* print name of failing test when using TAP13 with timing information (#559, #555)
+* removed broken symlink, added regression test (#560)
+* don't show empty lines as `#` with pretty formatter  (#561)
+* prevent `teardown`, `teardown_file`, and `teardown_suite` from overriding bats'
+  exit code by setting `$status` (e.g. via calling `run`) (#581, #575)
+  * **CRITICAL**: this can return exit code 0 despite failed tests, thus preventing
+    your CI from reporting test failures! The regression happened in version 1.6.0.
+* `run --keep-empty-lines` now reports 0 lines on empty `$output` (#583)
+
+#### Documentation
+
+* remove 2018 in title, update copyright dates in README.md (#567)
+* fix broken links (#568)
+* corrected invalid documentation of `run -N` (had `=N` instead) (#579)
+  * **CRITICAL**: using the incorrect form can lead to silent errors. See
+    [issue #578](https://github.com/bats-core/bats-core/issues/578) for more
+    details and how to find out if your tests are affected.
+
+## [1.6.1] - 2022-05-14
+
+### Fixed
+
+* prevent `teardown`, `teardown_file`, and `teardown_suite` from overriding bats'
+  exit code by setting `$status` (e.g. via calling `run`) (#581, #575)
+  * **CRITICAL**: this can return exit code 0 despite failed tests, thus preventing
+    your CI from reporting test failures! The regression happened in version 1.6.0.
+
+#### Documentation
+
+* corrected invalid documentation of `run -N` (had `=N` instead) (#579)
+  * **CRITICAL**: using the incorrect form can lead to silent errors. See
+    [issue #578](https://github.com/bats-core/bats-core/issues/578) for more
+    details and how to find out if your tests are affected.
+
+## [1.6.0] - 2022-02-24
+
+### Added
+
+* new flag `--code-quote-style` (and `$BATS_CODE_QUOTE_STYLE`) to customize
+quotes around code blocks in error output (#506)
+* an example/regression test for running background tasks without blocking the
+  test run (#525, #535)
+* `bats_load_library` for loading libraries from the search path
+  `$BATS_LIB_PATH` (#548)
+
+### Fixed
+
+* improved error trace for some broken cases (#279)
+* removed leftover debug file `/tmp/latch` in selftest suite
+  (single use latch) (#516)
+* fix recurring errors on CTRL+C tests with NPM on Windows in selftest suite (#516)
+* fixed leaking of local variables from debug trap (#520)
+* don't mark FD3 output from `teardown_file` as `<failure>` in junit output (#532)
+* fix unbound variable error with Bash pre 4.4 (#550)
+
+#### Documentation
+
+* remove links to defunct freenode IRC channel (#515)
+* improved grammar (#534)
+* fixed link to TAP spec (#537)
+
+## [1.5.0] - 2021-10-22
+
+### Added
+
+* new command line flags (#488)
+  * `--verbose-run`: Make `run` print `$output` by default
+  * `-x`, `--trace`: Print test commands as they are executed (like `set -x`)`
+  * `--show-output-of-passing-tests`: Print output of passing tests
+  * `--print-output-on-failure`: Automatically print the value of  `$output` on
+    failed tests
+  * `--gather-test-outputs-in <directory>`: Gather the output of failing **and**
+    passing tests as files in directory
+* Experimental: add return code checks to `run` via `!`/`-<N>` (#367, #507)
+* `install.sh` and `uninstall.sh` take an optional second parameter for the lib
+  folder name to allow for multilib install, e.g. into lib64 (#452)
+* add `run` flag `--keep-empty-lines` to retain empty lines in `${lines[@]}` (#224,
+  a894fbfa)
+* add `run` flag `--separate-stderr` which also fills `$stderr` and
+  `$stderr_lines` (#47, 5c9b173d, #507)
+
+### Fixed
+
+* don't glob `run`'s `$output` when splitting into `${lines[@]}`
+  (#151, #152, #158, #156, #281, #289)
+* remove empty line after test with pretty formatter on some terminals (#481)
+* don't run setup_file/teardown_file on files without tests, e.g. due to
+  filtering (#484)
+* print final line without newline on Bash 3.2 for midtest (ERREXIT) failures
+  too (#495, #145)
+* abort with error on missing flock/shlock when running in parallel mode  (#496)
+* improved `set -u` test and fixed some unset variable accesses (#498, #501)
+* shorten suite/file/test temporary folder paths to leave enough space even on
+  restricted systems (#503)
+
+#### Documentation
+
+* minor edits (#478)
+
+## [1.4.1] - 2021-07-24
+
+### Added
+
+* Docker image architectures amd64, 386, arm64, arm/v7, arm/v6, ppc64le, s390x (#438)
+
+### Fixed
+
+* automatic push to Dockerhub (#438)
+
+## [1.4.0] - 2021-07-23
+
+### Added
+
+* added BATS_TEST_TMPDIR, BATS_FILE_TMPDIR, BATS_SUITE_TMPDIR (#413)
+* added checks and improved documentation for `$BATS_TMPDIR` (#410)
+* the docker container now uses [tini](https://github.com/krallin/tini) as the
+  container entrypoint to improve signal forwarding (#407)
+* script to uninstall bats from a given prefix (#400)
+* replace preprocessed file path (e.g. `/tmp/bats-run-22908-NP0f9h/bats.23102.src`)
+  with original filename in stdout/err (but not FD3!) (#429)
+* print aborted command on SIGINT/CTRL+C (#368)
+* print error message when BATS_RUN_TMPDIR could not be created (#422)
+
+#### Documentation
+
+* added tutorial for new users (#397)
+* fixed example invocation of docker container (#440)
+* minor edits (#431, #439, #445, #463, #464, #465)
+
+### Fixed
+
+* fix `bats_tap_stream_unknown: command not found` with pretty formatter, when
+  writing non compliant extended output (#412)
+* avoid collisions on `$BATS_RUN_TMPDIR` with `--no-tempdir-cleanup` and docker
+  by using `mktemp` additionally to PID (#409)
+* pretty printer now puts text that is printed to FD 3 below the test name (#426)
+* `rm semaphores/slot-: No such file or directory` in parallel mode on MacOS
+  (#434, #433)
+* fix YAML blocks in TAP13 formatter using `...` instead of `---` to start
+  a block (#442)
+* fixed some typos in comments (#441, #447)
+* ensure `/code` exists in docker container, to make examples work again  (#440)
+* also display error messages from free code (#429)
+* npm installed version on Windows: fix broken internal LIBEXEC paths (#459)
+
+## [1.3.0] - 2021-03-08
+
+### Added
+
+* custom test-file extension via `BATS_FILE_EXTENSION` when searching for test
+  files in a directory (#376)
+* TAP13 formatter, including millisecond timing (#337)
+* automatic release to NPM via GitHub Actions (#406)
+
+#### Documentation
+
+* added documentation about overusing `run` (#343)
+* improved documentation of `load` (#332)
+
+### Changed
+
+* recursive suite mode will follow symlinks now (#370)
+* split options for (file-) `--report-formatter` and (stdout) `--formatter` (#345)
+  * **WARNING**: This changes the meaning of `--formatter junit`.
+    stdout will now show unified xml instead of TAP. From now on, please use
+    `--report-formatter junit` to obtain the `.xml` report file!
+* removed `--parallel-preserve-environment` flag, as this is the default
+  behavior (#324)
+* moved CI from Travis/AppVeyor to GitHub Actions (#405)
+* preprocessed files are no longer removed if `--no-tempdir-cleanup` is
+  specified (#395)
+
+#### Documentation
+
+* moved documentation to [readthedocs](https://bats-core.readthedocs.io/en/latest/)
+
+### Fixed
+
+#### Correctness
+
+* fix internal failures due to unbound variables when test files use `set -u` (#392)
+* fix internal failures due to changes to `$PATH` in test files (#387)
+* fix test duration always being 0 on busybox installs (#363)
+* fix hangs on CTRL+C (#354)
+* make `BATS_TEST_NUMBER` count per file again (#326)
+* include `lib/` in npm package (#352)
+
+#### Performance
+
+* don't fork bomb in parallel mode (#339)
+* preprocess each file only once (#335)
+* avoid running duplicate files n^2 times (#338)
+
+#### Documentation
+
+* fix documentation for `--formatter junit` (#334)
+* fix documentation for `setup_file` variables (#333)
+* fix link to examples page (#331)
+* fix link to "File Descriptor 3" section (#301)
+
+## [1.2.1] - 2020-07-06
+
+### Added
+
+* JUnit output and extensible formatter rewrite (#246)
+* `load` function now reads from absolute and relative paths, and $PATH (#282)
+* Beginner-friendly examples in /docs/examples (#243)
+* @peshay's `bats-file` fork contributed to `bats-core/bats-file` (#276)
+
+### Changed
+
+* Duplicate test names now error (previous behaviour was to issue a warning) (#286)
+* Changed default formatter in Docker to pretty by adding `ncurses` to
+  Dockerfile, override with `--tap` (#239)
+* Replace "readlink -f" dependency with Bash solution (#217)
+
+## [1.2.0] - 2020-04-25
+
+Support parallel suite execution and filtering by test name.
+
+### Added
+
+* docs/CHANGELOG.md and docs/releasing.md (#122)
+* The `-f, --filter` flag to run only the tests matching a regular expression  (#126)
+* Optimize stack trace capture (#138)
+* `--jobs n` flag to support parallel execution of tests with GNU parallel (#172)
+
+### Changed
+
+* AppVeyor builds are now semver-compliant (#123)
+* Add Bash 5 as test target (#181)
+* Always use upper case signal names to avoid locale dependent err… (#215)
+* Fix for tests reading from stdin (#227)
+* Fix wrong line numbers of errors in bash < 4.4 (#229)
+* Remove preprocessed source after test run (#232)
+
+## [1.1.0] - 2018-07-08
+
+This is the first release with new features relative to the original Bats 0.4.0.
+
+### Added
+
+* The `-r, --recursive` flag to scan directory arguments recursively for
+  `*.bats` files (#109)
+* The `contrib/rpm/bats.spec` file to build RPMs (#111)
+
+### Changed
+
+* Travis exercises latest versions of Bash from 3.2 through 4.4 (#116, #117)
+* Error output highlights invalid command line options (#45, #46, #118)
+* Replaced `echo` with `printf` (#120)
+
+### Fixed
+
+* Fixed `BATS_ERROR_STATUS` getting lost when `bats_error_trap` fired multiple
+  times under Bash 4.2.x (#110)
+* Updated `bin/bats` symlink resolution, handling the case on CentOS where
+  `/bin` is a symlink to `/usr/bin` (#113, #115)
+
+## [1.0.2] - 2018-06-18
+
+* Fixed sstephenson/bats#240, whereby `skip` messages containing parentheses
+  were truncated (#48)
+* Doc improvements:
+  * Docker usage (#94)
+  * Better README badges (#101)
+  * Better installation instructions (#102, #104)
+* Packaging/installation improvements:
+  * package.json update (#100)
+  * Moved `libexec/` files to `libexec/bats-core/`, improved `install.sh` (#105)
+
+## [1.0.1] - 2018-06-09
+
+* Fixed a `BATS_CWD` bug introduced in #91 whereby it was set to the parent of
+  `PWD`, when it should've been set to `PWD` itself (#98). This caused file
+  names in stack traces to contain the basename of `PWD` as a prefix, when the
+  names should've been purely relative to `PWD`.
+* Ensure the last line of test output prints when it doesn't end with a newline
+  (#99). This was a quasi-bug introduced by replacing `sed` with `while` in #88.
+
+## [1.0.0] - 2018-06-08
+
+`1.0.0` generally preserves compatibility with `0.4.0`, but with some Bash
+compatibility improvements and a massive performance boost. In other words:
+
+* all existing tests should remain compatible
+* tests that might've failed or exhibited unexpected behavior on earlier
+  versions of Bash should now also pass or behave as expected
+
+Changes:
+
+* Added support for Docker.
+* Added support for test scripts that have the [unofficial strict
+  mode](http://redsymbol.net/articles/unofficial-bash-strict-mode/) enabled.
+* Improved stability on Windows and macOS platforms.
+* Massive performance improvements, especially on Windows (#8)
+* Workarounds for inconsistent behavior between Bash versions (#82)
+* Workaround for preserving stack info after calling an exported function under
+  Bash < 4.4 (#87)
+* Fixed TAP compliance for skipped tests
+* Added support for tabs in test names.
+* `bin/bats` and `install.sh` now work reliably on Windows (#91)
+
+## [0.4.0] - 2014-08-13
+
+* Improved the display of failing test cases. Bats now shows the source code of
+  failing test lines, along with full stack traces including function names,
+  filenames, and line numbers.
+* Improved the display of the pretty-printed test summary line to include the
+  number of skipped tests, if any.
+* Improved the speed of the preprocessor, dramatically shortening test and suite
+  startup times.
+* Added support for absolute pathnames to the `load` helper.
+* Added support for single-line `@test` definitions.
+* Added bats(1) and bats(7) manual pages.
+* Modified the `bats` command to default to TAP output when the `$CI` variable
+  is set, to better support environments such as Travis CI.
+
+## [0.3.1] - 2013-10-28
+
+* Fixed an incompatibility with the pretty formatter in certain environments
+  such as tmux.
+* Fixed a bug where the pretty formatter would crash if the first line of a test
+  file's output was invalid TAP.
+
+## [0.3.0] - 2013-10-21
+
+* Improved formatting for tests run from a terminal. Failing tests are now
+  colored in red, and the total number of failing tests is displayed at the end
+  of the test run. When Bats is not connected to a terminal (e.g. in CI runs),
+  or when invoked with the `--tap` flag, output is displayed in standard TAP
+  format.
+* Added the ability to skip tests using the `skip` command.
+* Added a message to failing test case output indicating the file and line
+  number of the statement that caused the test to fail.
+* Added "ad-hoc" test suite support. You can now invoke `bats` with multiple
+  filename or directory arguments to run all the specified tests in aggregate.
+* Added support for test files with Windows line endings.
+* Fixed regular expression warnings from certain versions of Bash.
+* Fixed a bug running tests containing lines that begin with `-e`.
+
+## [0.2.0] - 2012-11-16
+
+* Added test suite support. The `bats` command accepts a directory name
+  containing multiple test files to be run in aggregate.
+* Added the ability to count the number of test cases in a file or suite by
+  passing the `-c` flag to `bats`.
+* Preprocessed sources are cached between test case runs in the same file for
+  better performance.
+
+## [0.1.0] - 2011-12-30
+
+* Initial public release.
+
+[Unreleased]: https://github.com/bats-core/bats-core/compare/v1.7.0...HEAD
+[1.7.0]: https://github.com/bats-core/bats-core/compare/v1.6.1...v1.7.0
+[1.6.1]: https://github.com/bats-core/bats-core/compare/v1.6.0...v1.6.1
+[1.6.0]: https://github.com/bats-core/bats-core/compare/v1.5.0...v1.6.0
+[1.5.0]: https://github.com/bats-core/bats-core/compare/v1.4.1...v1.5.0
+[1.4.1]: https://github.com/bats-core/bats-core/compare/v1.4.0...v1.4.1
+[1.4.0]: https://github.com/bats-core/bats-core/compare/v1.3.0...v1.4.0
+[1.3.0]: https://github.com/bats-core/bats-core/compare/v1.2.1...v1.3.0
+[1.2.1]: https://github.com/bats-core/bats-core/compare/v1.2.0...v1.2.1
+[1.2.0]: https://github.com/bats-core/bats-core/compare/v1.1.0...v1.2.0
+[1.1.0]: https://github.com/bats-core/bats-core/compare/v1.0.2...v1.1.0
+[1.0.2]: https://github.com/bats-core/bats-core/compare/v1.0.1...v1.0.2
+[1.0.1]: https://github.com/bats-core/bats-core/compare/v1.0.0...v1.0.1
+[1.0.0]: https://github.com/bats-core/bats-core/compare/v0.4.0...v1.0.0
+[0.4.0]: https://github.com/bats-core/bats-core/compare/v0.3.1...v0.4.0
+[0.3.1]: https://github.com/bats-core/bats-core/compare/v0.3.0...v0.3.1
+[0.3.0]: https://github.com/bats-core/bats-core/compare/v0.2.0...v0.3.0
+[0.2.0]: https://github.com/bats-core/bats-core/compare/v0.1.0...v0.2.0
+[0.1.0]: https://github.com/bats-core/bats-core/commits/v0.1.0

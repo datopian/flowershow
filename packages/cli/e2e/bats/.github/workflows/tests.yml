@@ -1,0 +1,219 @@
+name: Tests
+
+# Controls when the action will run. 
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  changelog:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Check that PR is mentioned in Changelog
+        run: |
+          if ! ./.github/workflows/check_pr_label.sh "${{github.event.pull_request.number}}" "no changelog"; then
+            grep "#${{github.event.pull_request.number}}" docs/CHANGELOG.md
+          fi
+    if: ${{github.event.pull_request}}
+
+  shfmt:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          curl https://github.com/mvdan/sh/releases/download/v3.5.1/shfmt_v3.5.1_linux_amd64 -o shfmt
+          chmod a+x shfmt
+      - run: ./shfmt --diff .
+
+  shellcheck:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run shellcheck
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install shellcheck
+          ./shellcheck.sh
+
+  linux:
+    strategy:
+      matrix:
+        os: ['ubuntu-20.04', 'ubuntu-22.04']
+        env_vars:
+          - ''
+          # allow for some parallelity without GNU parallel, since it is not installed by default
+          - 'BATS_NO_PARALLELIZE_ACROSS_FILES=1 BATS_NUMBER_OF_PARALLEL_JOBS=2'
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run test on OS ${{ matrix.os }}
+        shell: 'script -q -e -c "bash {0}"' # work around tty issues
+        env:
+          TERM: linux # fix tput for tty issue work around
+        run: |
+          bash --version
+          bash -c "time ${{ matrix.env_vars }} bin/bats  --print-output-on-failure --formatter tap test"
+
+  unset_variables:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Check unset variables
+        shell: 'script -q -e -c "bash {0}"' # work around tty issues
+        env:
+          TERM: linux # fix tput for tty issue work around
+          BASH_ENV: ${GITHUB_WORKSPACE}/.github/workflows/set_nounset.bash
+        run: bin/bats test --print-output-on-failure
+
+  npm_on_linux:
+    strategy:
+      matrix:
+        os: ['ubuntu-20.04', 'ubuntu-22.04']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - name: Run test on OS ${{ matrix.os }}
+        shell: 'script -q -e -c "bash {0}"' # work around tty issues
+        env:
+          TERM: linux # fix tput for tty issue work around
+        run: |
+          npm pack ./
+          sudo npm install -g ./bats-*.tgz
+          bats test  
+
+  windows:
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          bash --version
+          bash -c "time bin/bats  --print-output-on-failure --formatter tap test"
+
+  npm_on_windows:
+    strategy:
+      matrix:
+        os: ['windows-2019']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - run: npm pack ./
+      - run: npm install -g (get-item .\bats-*.tgz).FullName
+      - run: bats  -T --print-output-on-failure test        
+
+  macos:
+    strategy:
+      matrix:
+        os: ['macos-11', 'macos-12']
+        env_vars:
+          - ''
+          # allow for some parallelity without GNU parallel, since it is not installed by default
+          - 'BATS_NO_PARALLELIZE_ACROSS_FILES=1 BATS_NUMBER_OF_PARALLEL_JOBS=2'
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install unbuffer via expect
+        run: brew install expect
+      - name: Run test on OS ${{ matrix.os }}
+        shell: 'unbuffer bash {0}' # work around tty issues
+        env:
+          TERM: linux # fix tput for tty issue work around
+        run: |
+          bash --version
+          bash -c "time ${{ matrix.env_vars }} bin/bats  --print-output-on-failure --formatter tap test"
+
+  npm_on_macos:
+    strategy:
+      matrix:
+        os: ['macos-11', 'macos-12']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - name: Install unbuffer via expect
+        run: brew install expect
+      - name: Run test on OS ${{ matrix.os }}
+        shell: 'unbuffer bash {0}' # work around tty issues
+        env:
+          TERM: linux # fix tput for tty issue work around
+        run: |
+          npm pack ./
+          # somehow there is already an installed bats version around
+          npm install --force -g ./bats-*.tgz
+          bats  --print-output-on-failure test  
+
+  bash-version:
+    strategy:
+      matrix:
+        version: ['3.2', '4.0', '4.1', '4.2', '4.3', '4.4', '4', '5.0', '5.1', '5', 'rc']
+        env_vars:
+            - ''
+            # also test running (recursively!) in parallel
+            - '-e BATS_NUMBER_OF_PARALLEL_JOBS=2'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run test on bash version ${{ matrix.version }}
+        shell: 'script -q -e -c "bash {0}"' # work around tty issues
+        run: |
+          set -e
+          docker build --build-arg bashver="${{ matrix.version }}" --tag "bats/bats:bash-${{ matrix.version }}" .
+          docker run -it "bash:${{ matrix.version }}" --version
+          time docker run -it ${{ matrix.env_vars }} "bats/bats:bash-${{ matrix.version }}"  --print-output-on-failure --tap /opt/bats/test
+  
+  alpine:
+    runs-on: ubuntu-latest
+    container: alpine:latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: apk add bash ncurses util-linux
+      - name: Run test on bash version ${{ matrix.version }}
+        shell: 'script -q -e -c "bash {0}"' # work around tty issues
+        env:
+          TERM: linux # fix tput for tty issue work around
+        run:
+          time ./bin/bats  --print-output-on-failure test/
+
+  freebsd:
+    runs-on: macos-12
+    strategy:
+      matrix:
+        packages:
+          - flock
+          - ""
+    steps:
+      - uses: actions/checkout@v2
+      - uses: vmactions/freebsd-vm@v0
+        with:
+          prepare: pkg install -y bash parallel ${{ matrix.packages }}
+          run: |
+            time ./bin/bats --print-output-on-failure test/
+
+  find_broken_symlinks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      # list symlinks that are broken and force non-zero exit if there are any
+      - run: "! find . -xtype l | grep ."
+    
+  rpm:
+    runs-on: ubuntu-latest
+    container: almalinux:8
+    steps:
+      - uses: actions/checkout@v2
+      - run: dnf install -y rpm-build rpmdevtools
+      - name: Build and install RPM and dependencies
+        run: |
+          rpmdev-setuptree
+          version=$(rpmspec -q --qf '%{version}' contrib/rpm/bats.spec)
+          tar --transform "s,^,bats-core-${version}/," -cf /github/home/rpmbuild/SOURCES/v${version}.tar.gz ./
+          rpmbuild -v -bb ./contrib/rpm/bats.spec
+          ls -al /github/home/rpmbuild/RPMS/noarch/
+          dnf install -y /github/home/rpmbuild/RPMS/noarch/bats-*.rpm
+          dnf -y install procps-ng # avoid timeout failure
+      - name: Run tests
+        shell: 'script -q -e -c "bash {0}"' # work around tty issues
+        env:
+          TERM: linux # fix tput for tty issue work around
+        run: bats --print-output-on-failure --filter-tags !dep:install_sh test/

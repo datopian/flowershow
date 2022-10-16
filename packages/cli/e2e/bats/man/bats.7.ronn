@@ -1,0 +1,269 @@
+bats(7) -- Bats test file format
+================================
+
+
+DESCRIPTION
+-----------
+
+A Bats test file is a Bash script with special syntax for defining
+test cases. Under the hood, each test case is just a function with a
+description.
+
+    #!/usr/bin/env bats
+
+    @test "addition using bc" {
+      result="$(echo 2+2 | bc)"
+      [ "$result" -eq 4 ]
+    }
+
+    @test "addition using dc" {
+      result="$(echo 2 2+p | dc)"
+      [ "$result" -eq 4 ]
+    }
+
+
+Each Bats test file is evaluated n+1 times, where _n_ is the number of
+test cases in the file. The first run counts the number of test cases,
+then iterates over the test cases and executes each one in its own
+process.
+
+
+THE RUN HELPER
+--------------
+
+Usage: run [OPTIONS] [--] <command...>
+Options:
+       !        check for non zero exit code
+       -<N>     check that exit code is <N>
+       --separate-stderr
+                split stderr and stdout
+       --keep-empty-lines
+                retain empty lines in `${lines[@]}`/`${stderr_lines[@]}`
+
+Many Bats tests need to run a command and then make assertions about
+its exit status and output. Bats includes a `run` helper that invokes
+its arguments as a command, saves the exit status and output into
+special global variables, and (optionally) checks exit status against
+a given expected value. If successful, `run` returns with a `0` status
+code so you can continue to make assertions in your test case.
+
+For example, let's say you're testing that the `foo` command, when
+passed a nonexistent filename, exits with a `1` status code and prints
+an error message.
+
+    @test "invoking foo with a nonexistent file prints an error" {
+      run -1 foo nonexistent_filename
+      [ "$output" = "foo: no such file 'nonexistent_filename'" ]
+    }
+
+The `-1` as first argument tells `run` to expect 1 as an exit
+status, and to fail if the command exits with any other value.
+On failure, both actual and expected values will be displayed,
+along with the invoked command and its output:
+
+    (in test file test.bats, line 2)
+     `run -1 foo nonexistent_filename' failed, expected exit code 1, got 127
+
+This error indicates a possible problem with the installation or
+configuration of `foo`; note that a simple `[ $status != 0 ]`
+test would not have caught this kind of failure.
+
+The `$status` variable contains the status code of the command, and
+the `$output` variable contains the combined contents of the command's
+standard output and standard error streams.
+
+A third special variable, the `$lines` array, is available for easily
+accessing individual lines of output. For example, if you want to test
+that invoking `foo` without any arguments prints usage information on
+the first line:
+
+    @test "invoking foo without arguments prints usage" {
+      run -1 foo
+      [ "${lines[0]}" = "usage: foo <filename>" ]
+    }
+
+By default `run` leaves out empty lines in `${lines[@]}`. Use `run --keep-empty-lines` to retain them.
+
+Additionally, you can use `--separate-stderr` to split stdout and stderr
+into `$output`/`$stderr` and `${lines[@]}`/`${stderr_lines[@]}`.
+
+All additional parameters to run should come before the command.
+If you want to run a command that starts with `-`, prefix it with `--` to
+prevent `run` from parsing it as an option.
+
+THE LOAD COMMAND
+----------------
+
+You may want to share common code across multiple test files. Bats
+includes a convenient `load` command for sourcing a Bash source file
+relative to the location of the current test file. For example, if you
+have a Bats test in `test/foo.bats`, the command
+
+    load test_helper
+
+will source the script `test/test_helper.bash` in your test file. This
+can be useful for sharing functions to set up your environment or load
+fixtures.
+
+THE BATS_LOAD_LIBRARY COMMAND
+-----------------------------
+
+Some libraries are installed on the system, e.g. by `npm` or `brew`.
+These should not be `load`ed, as their path depends on the installation method.
+Instead, one should use `bats_load_library` together with setting
+`BATS_LIB_PATH`, a `PATH`-like colon-delimited variable.
+
+`bats_load_library` has two modes of resolving requests:
+
+1. by relative path from the `BATS_LIB_PATH` to a file in the library
+2. by library name, expecting libraries to have a `load.bash` entrypoint
+
+For example if your `BATS_LIB_PATH` is set to
+`~/.bats/libs:/usr/lib/bats`, then `bats_load_library test_helper`
+would look for existing files with the following paths:
+
+- `~/.bats/libs/test_helper`
+- `~/.bats/libs/test_helper/load.bash`
+- `/usr/lib/bats/test_helper`
+- `/usr/lib/bats/test_helper/load.bash`
+
+The first existing file in this list will be sourced.
+
+If you want to load only part of a library or the entry point is not named `load.bash`,
+you have to include it in the argument:
+`bats_load_library library_name/file_to_load` will try
+
+- `~/.bats/libs/library_name/file_to_load`
+- `~/.bats/libs/library_name/file_to_load/load.bash`
+- `/usr/lib/bats/library_name/file_to_load`
+- `/usr/lib/bats/library_name/file_to_load/load.bash`
+
+Apart from the changed lookup rules, `bats_load_library` behaves like `load`.
+
+**Note**: As seen above `load.bash` is the entry point for libraries and
+meant to load more files from its directory or other libraries.
+
+**Note**: Obviously, the actual `BATS_LIB_PATH` is highly dependent on the environment.
+To maintain a uniform location across systems, (distribution) package maintainers
+are encouraged to use `/usr/lib/bats/` as the install path for libraries where possible.
+However, if the package manager has another preferred location, like `npm` or `brew`,
+you should use this instead.
+
+THE SKIP COMMAND
+----------------
+
+Tests can be skipped by using the `skip` command at the point in a
+test you wish to skip.
+
+    @test "A test I don't want to execute for now" {
+      skip
+      run -0 foo
+    }
+
+Optionally, you may include a reason for skipping:
+
+    @test "A test I don't want to execute for now" {
+      skip "This command will return zero soon, but not now"
+      run -0 foo
+    }
+
+Or you can skip conditionally:
+
+    @test "A test which should run" {
+      if [ foo != bar ]; then
+        skip "foo isn't bar"
+      fi
+
+      run -0 foo
+    }
+
+
+THE BATS_REQUIRE_MINIMUM_VERSION COMMAND
+----------------------------------------
+
+Code for newer versions of Bats can be incompatible with older versions.
+In the best case this will lead to an error message and a failed test suite.
+In the worst case, the tests will pass erroneously, potentially masking a failure.
+
+Use `bats_require_minimum_version <Bats version number>` to avoid this.
+It communicates in a concise manner, that you intend the following code to be run
+under the given Bats version or higher.
+
+Additionally, this function will communicate the current Bats version floor to
+subsequent code, allowing e.g. Bats' internal warning to give more informed warnings.
+
+**Note**: By default, calling `bats_require_minimum_version` with versions before
+Bats 1.7.0 will fail regardless of the required version as the function is not
+available. However, you can use the
+bats-backports plugin (https://github.com/bats-core/bats-backports) to make
+your code usable with older versions, e.g. during migration while your CI system
+is not yet upgraded.
+
+SETUP AND TEARDOWN FUNCTIONS
+----------------------------
+
+You can define special `setup` and `teardown` functions which run
+before and after each test case, respectively. Use these to load
+fixtures, set up your environment, and clean up when you're done.
+
+
+CODE OUTSIDE OF TEST CASES
+--------------------------
+
+You can include code in your test file outside of `@test` functions.
+For example, this may be useful if you want to check for dependencies
+and fail immediately if they're not present. However, any output that
+you print in code outside of `@test`, `setup` or `teardown` functions
+must be redirected to `stderr` (`>&2`). Otherwise, the output may
+cause Bats to fail by polluting the TAP stream on `stdout`.
+
+
+SPECIAL VARIABLES
+-----------------
+
+There are several global variables you can use to introspect on Bats
+tests:
+
+* `$BATS_TEST_FILENAME` is the fully expanded path to the Bats test
+file.
+* `$BATS_TEST_DIRNAME` is the directory in which the Bats test file is
+located.
+* `$BATS_TEST_NAMES` is an array of function names for each test case.
+* `$BATS_TEST_NAME` is the name of the function containing the current
+test case.
+* `BATS_TEST_NAME_PREFIX` will be prepended to the description of each test
+on stdout and in reports.
+* `$BATS_TEST_DESCRIPTION` is the description of the current test
+case.
+* `BATS_TEST_RETRIES` is the maximum number of additional attempts that will be
+  made on a failed test before it is finally considered failed.
+  The default of 0 means the test must pass on the first attempt.
+* `BATS_TEST_TIMEOUT` is the number of seconds after which a test (including setup)
+  will be aborted and marked as failed. Updates to this value in `setup()` or `@test`
+  cannot change the running timeout countdown, so the latest useful update location is `setup_file()`.
+* `$BATS_TEST_NUMBER` is the (1-based) index of the current test case
+in the test file.
+* `$BATS_SUITE_TEST_NUMBER` is the (1-based) index of the current test
+  case in the test suite (over all files).
+* `$BATS_TMPDIR` is the base temporary directory used by bats to create its
+  temporary files / directories.
+  (default: `$TMPDIR`. If `$TMPDIR` is not set, `/tmp` is used.)
+* `$BATS_RUN_TMPDIR` is the location to the temporary directory used by
+  bats to store all its internal temporary files during the tests.
+  (default: `$BATS_TMPDIR/bats-run-$BATS_ROOT_PID-XXXXXX`)
+* `$BATS_FILE_EXTENSION` (default: `bats`) specifies the extension of
+test files that should be found when running a suite (via
+`bats [-r] suite_folder/`)
+* `$BATS_SUITE_TMPDIR` is a temporary directory common to all tests of a suite.
+  Could be used to create files required by multiple tests.
+* `$BATS_FILE_TMPDIR` is a temporary directory common to all tests of a test file.
+  Could be used to create files required by multiple tests in the same test file.
+* `$BATS_TEST_TMPDIR` is a temporary directory unique for each test.
+  Could be used to create files required only for specific tests.
+* `$BATS_VERSION` is the version of Bats running the test.
+
+
+SEE ALSO
+--------
+
+`bash`(1), `bats`(1)
