@@ -18,6 +18,5 @@ jobs:
       - name: Install expect
         run: sudo apt-get install -y expect
       - name: Run tests
-        working-directory:
-          packages/cli/e2e
+        working-directory: packages/cli/e2e
         run: ./bats/bin/bats test.bats
