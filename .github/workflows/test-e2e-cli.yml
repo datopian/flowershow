@@ -15,6 +15,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        submodules: 'true'
       - name: Install expect
         run: sudo apt-get install -y expect
       - name: Run tests
