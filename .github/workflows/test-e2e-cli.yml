@@ -17,15 +17,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Install expect
         run: sudo apt-get install -y expect
-      - name: Install Flowershow template
+      - name: Run tests
         working-directory:
-          packages/cli/__tests__/blog
-        run: |
-          set -e
-          ../install.sh
-      - name: Build Flowershow site
-        working-directory:
-          packages/cli/__tests__/blog
-        run: npx flowershow build
-      # - name: Deploy Flowershow site
-      #   run: ./deploy.sh ${{ secrets.GITHUB_TOKEN }}
+          packages/cli/e2e
+        run: ./bats/bin/bats test.bats
