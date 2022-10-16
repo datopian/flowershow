@@ -19,6 +19,8 @@ jobs:
           submodules: 'recursive'
       - name: Install expect
         run: sudo apt-get install -y expect
+      - name: Install Flowershow CLI
+        run: npm install --prefix packages/cli
       - name: Run tests
         working-directory: packages/cli/e2e
         run: ./bats/bin/bats test.bats
