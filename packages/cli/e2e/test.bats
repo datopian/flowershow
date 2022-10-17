@@ -64,6 +64,7 @@ teardown() {
     # read NETLIFY_TOKEN from .env if it hasn't been set otherwise
     if [ -z $NETLIFY_TOKEN ]
     then
+        assert [ -e $BATS_TEST_DIRNAME/.env ]
         export $(grep -v '^#' $BATS_TEST_DIRNAME/.env | xargs)
     fi
 
