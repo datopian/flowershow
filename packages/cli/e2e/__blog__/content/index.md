@@ -1,1 +1,3 @@
 ## Hello world!
+
+![[park.png]]
