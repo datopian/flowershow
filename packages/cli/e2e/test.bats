@@ -6,9 +6,8 @@ setup() {
     load 'test_helper/bats-support/load'
     load 'test_helper/bats-assert/load'
 
-    # create a directory with an example blog, different for every test
+    # create a directory with an example blog
     E2E_TEMP_DIR=$(mktemp -d)
-
     mkdir -p "$E2E_TEMP_DIR/content/assets"
     echo "# Hello world" > "$E2E_TEMP_DIR/content/index.md"
     cd $E2E_TEMP_DIR || exit
@@ -17,48 +16,45 @@ setup() {
     PATH="$BATS_TEST_DIRNAME/scripts:$BATS_TEST_DIRNAME/../bin:$PATH"
 }
 
-# teardown() {
-#     rm -rf $E2E_TEMP_DIR
-# }
+teardown() {
+    rm -rf $E2E_TEMP_DIR
+}
 
+@test "Install Flowershow template and preview site" {
+    run install.sh $E2E_TEMP_DIR
+    assert_success
+    assert_output --partial "Successfuly installed"
+    assert [ -d $E2E_TEMP_DIR/.flowershow/node_modules ]
 
-# @test "Install Flowershow template and preview site" {
-#     run install.sh $E2E_TEMP_DIR
-#     assert_success
-#     assert_output --partial "Successfuly installed"
-#     run [ -d $E2E_TEMP_DIR/.flowershow/node_modules ]
-#     assert_success
+    run flowershow preview $E2E_TEMP_DIR & sleep 20
+    assert_success
+    run curl "http://localhost:3000"
+    fuser -k "3000/tcp"
+    assert_output --partial "Hello world"
+}
 
-#     run flowershow preview $E2E_TEMP_DIR & sleep 20
-#     assert_success
-#     run curl "http://localhost:3000"
-#     fuser -k "3000/tcp"
-#     assert_output --partial "Hello world"
-# }
+@test "Install Flowershow template, build and start site" {
+    run install.sh $E2E_TEMP_DIR
+    assert_success
+    assert_output --partial "Successfuly installed"
+    assert [ -d $E2E_TEMP_DIR/.flowershow/node_modules ]
 
-# @test "Install Flowershow template, build and start site" {
-#     run install.sh $E2E_TEMP_DIR
-#     assert_success
-#     assert_output --partial "Successfuly installed"
-#     run [ -d $E2E_TEMP_DIR/.flowershow/node_modules ]
-#     assert_success
+    run flowershow build $E2E_TEMP_DIR
+    assert_success
+    run [ -d $E2E_TEMP_DIR/.flowershow/.next ]
+    assert_success
 
-#     run flowershow build $E2E_TEMP_DIR
-#     assert_success
-#     run [ -d $E2E_TEMP_DIR/.flowershow/.next ]
-#     assert_success
-
-#     # start next project and send to background
-#     run npm start --prefix $E2E_TEMP_DIR/.flowershow &
-#     assert_success
-#     # wait for the server to start
-#     sleep 20
-#     run curl "http://localhost:3000"
-#     # kill the process before testing the output
-#     # placing it after assert_output in case of test failure will leave the server process running
-#     fuser -k "3000/tcp"
-#     assert_output --partial "Hello world"
-# }
+    # start next project and send to background
+    run npm start --prefix $E2E_TEMP_DIR/.flowershow &
+    assert_success
+    # wait for the server to start
+    sleep 20
+    run curl "http://localhost:3000"
+    # kill the process before testing the output
+    # placing it after assert_output in case of test failure will leave the server process running
+    fuser -k "3000/tcp"
+    assert_output --partial "Hello world"
+}
 
 flowershow_export() {
     npm run export --prefix .flowershow
@@ -72,7 +68,6 @@ flowershow_export() {
 
     echo $E2E_TEMP_DIR
     run install.sh
-    assert_success
     assert_output --partial "Successfuly installed"
     run [ -d .flowershow/node_modules ]
     assert_success
@@ -85,11 +80,27 @@ flowershow_export() {
     # TODO add flowreshow export command?
     run flowershow_export
     assert_success
-    run [ -d .flowershow/out ]
-    assert_success
-    run zip out.zip .flowershow/out
+    assert [ -d .flowershow/out ]
+    cd .flowershow
+    run zip -r out.zip out
     assert_success
 
-    run deploy_netlify.sh
-    assert_output "Success"
+    run curl -H "Content-Type: application/zip" \
+     -H "Authorization: Bearer $NETLIFY_TOKEN" \
+     --data-binary "@out.zip" \
+     "https://api.netlify.com/api/v1/sites"
+
+    SITE_URL=$(echo $output | grep -oP '"url":"\K[^"]*')
+    SITE_ID=$(echo $output | grep -oP '"id":"\K[^"]*')
+    assert [ -n $SITE_URL ]
+
+    # test deployed site
+    sleep 30
+    run curl -L $SITE_URL
+    assert_output --partial "Hello world"
+
+    # delete deployed site
+    run curl -i -X DELETE -H "Authorization: Bearer $NETLIFY_TOKEN" \
+     "https://api.netlify.com/api/v1/sites/$SITE_ID"
+    assert_output --regexp 'HTTP.*[200|204]'
 }
