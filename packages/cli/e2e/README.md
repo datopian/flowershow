@@ -1,6 +1,12 @@
-# Running tests
+# Testing Flowershow CLI
 
 ## E2E
+
+### Requirements
+
+You need to have [expect](https://linux.die.net/man/1/expect) installed on your system.
+
+### Running tests
 
 ``` sh
 npm run test
@@ -14,7 +20,8 @@ You can also run bats directly using `/bats` submodule to run tests with differe
 
 Run bats with `--help` to see available options.
 
-### Tests tagged `netlify`
+
+#### Tests tagged `netlify`
 
 Tests with `netlify` tag require Netlify personal access token to be set in `NETLIFY_TOKEN` environment variable. You can add it in `e2e/.env` file. (See `e2e/.env.example` for reference.)
 

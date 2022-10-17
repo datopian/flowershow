@@ -1,6 +1,10 @@
 #!/usr/bin/env bats
 
 # TODO check if we can run these tests in parallel
+# TODO split to separate files so that we can have different setup and teardowns
+# e.g. killing local server could then be moved to teardown
+# and removing the deployed site, as atm there can be the case in which netlify test fails
+# somewhere between deploy and delete, which will cause the delete part to never run
 
 setup() {
     set -e
