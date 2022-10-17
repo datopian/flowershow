@@ -1,5 +1,7 @@
 #!/usr/bin/env bats
 
+# TODO check if we can run these tests in parallel
+
 setup() {
     set -e
 
@@ -65,10 +67,12 @@ flowershow_export() {
 
 # bats test_tags=netlify
 @test "Install Flowershow template, build and deploy on Netlify" {
-    # read environment variables
-    run [ -e $BATS_TEST_DIRNAME/.env ]
-    assert_success
-    export $(grep -v '^#' $BATS_TEST_DIRNAME/.env | xargs)
+    # read NETLIFY_TOKEN from .env if it hasn't been set otherwise
+    if [ -z $NETLIFY_TOKEN ]
+    then
+        assert [ -e $BATS_TEST_DIRNAME/.env ]
+        export $(grep -v '^#' $BATS_TEST_DIRNAME/.env | xargs)
+    fi
 
     run install.sh
     assert_output --partial "Successfuly installed"

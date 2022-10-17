@@ -16,7 +16,7 @@ Run bats with `--help` to see available options.
 
 ### Tests tagged `netlify`
 
-Tests with `netlify` tag require Netlify personal access token to be set in `NETLIFY_TOKEN` environment variable. You should add it in `e2e/.env` file. (See `e2e/.env.example` for reference.)
+Tests with `netlify` tag require Netlify personal access token to be set in `NETLIFY_TOKEN` environment variable. You can add it in `e2e/.env` file. (See `e2e/.env.example` for reference.)
 
 If you don't want to run these tests, you can exclude them bu running bats manually with this command:
 
