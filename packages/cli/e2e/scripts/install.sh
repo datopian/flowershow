@@ -5,9 +5,9 @@
 set TEST_DIR [lindex $argv 0]
 
 # bats test file adds /packages/cli/bin to PATH
-# f you want to run this file manually, you need to add this directory to PATH yourself
+# if you want to run this file manually, you need to manually add /packages/cli/bin directory to PATH yourself
 # e.g. PATH=~/flowershow/packages/cli/bin:$PATH
-spawn flowershow install "$TEST_DIR"
+spawn flowershow.js install "$TEST_DIR"
 
 expect {
     -re "Flowershow template is already installed in directory" { send -- "\r" }

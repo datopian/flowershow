@@ -6,6 +6,9 @@ setup() {
     load 'test_helper/bats-support/load'
     load 'test_helper/bats-assert/load'
 
+    # install CLI
+    npm install --prefix $BATS_TEST_DIRNAME/..
+
     # create a directory with an example blog
     E2E_TEMP_DIR=$(mktemp -d)
     mkdir -p "$E2E_TEMP_DIR/content/assets"
@@ -26,7 +29,7 @@ teardown() {
     assert_output --partial "Successfuly installed"
     assert [ -d .flowershow/node_modules ]
 
-    run flowershow preview & sleep 20
+    run flowershow.js preview & sleep 20
     assert_success
     run curl "http://localhost:3000"
     fuser -k "3000/tcp"
@@ -39,7 +42,7 @@ teardown() {
     assert_output --partial "Successfuly installed"
     assert [ -d .flowershow/node_modules ]
 
-    run flowershow build
+    run flowershow.js build
     assert_success
     run [ -d .flowershow/.next ]
     assert_success
@@ -72,7 +75,7 @@ flowershow_export() {
     run [ -d .flowershow/node_modules ]
     assert_success
 
-    run flowershow build
+    run flowershow.js build
     assert_success
     run [ -d .flowershow/.next ]
     assert_success
