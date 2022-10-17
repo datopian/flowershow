@@ -1,8 +1,13 @@
 #!/usr/bin/expect -f
 
+# get test directory that contains a content folder from bats test file
+# if you want to run this file manually, you need to pass the path to your test directory as it's argument
 set TEST_DIR [lindex $argv 0]
 
-spawn "$TEST_DIR/../bin/flowershow.js" install "$TEST_DIR/__blog__" 
+# bats test file adds /packages/cli/bin to PATH
+# f you want to run this file manually, you need to add this directory to PATH yourself
+# e.g. PATH=~/flowershow/packages/cli/bin:$PATH
+spawn flowershow install "$TEST_DIR"
 
 expect {
     -re "Flowershow template is already installed in directory" { send -- "\r" }
@@ -17,4 +22,7 @@ expect {
     timeout { send_error "Failed to get prompt for assets folder\n"; exit 1 }
 }
 
+# wait 120 seconds (arbitrary value) for the installation to complete and it's process to return EOF
+# without it expect will finish execution efter the last expect statement and will clean up
+# after itself killing its subprocesses, in this case the CLI process which is in the middle of installation
 expect -timeout 120 eof
