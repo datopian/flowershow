@@ -21,12 +21,12 @@ teardown() {
 }
 
 @test "Install Flowershow template and preview site" {
-    run install.sh $E2E_TEMP_DIR
+    run install.sh
     assert_success
     assert_output --partial "Successfuly installed"
-    assert [ -d $E2E_TEMP_DIR/.flowershow/node_modules ]
+    assert [ -d .flowershow/node_modules ]
 
-    run flowershow preview $E2E_TEMP_DIR & sleep 20
+    run flowershow preview & sleep 20
     assert_success
     run curl "http://localhost:3000"
     fuser -k "3000/tcp"
@@ -34,18 +34,18 @@ teardown() {
 }
 
 @test "Install Flowershow template, build and start site" {
-    run install.sh $E2E_TEMP_DIR
+    run install.sh
     assert_success
     assert_output --partial "Successfuly installed"
-    assert [ -d $E2E_TEMP_DIR/.flowershow/node_modules ]
+    assert [ -d .flowershow/node_modules ]
 
-    run flowershow build $E2E_TEMP_DIR
+    run flowershow build
     assert_success
-    run [ -d $E2E_TEMP_DIR/.flowershow/.next ]
+    run [ -d .flowershow/.next ]
     assert_success
 
     # start next project and send to background
-    run npm start --prefix $E2E_TEMP_DIR/.flowershow &
+    run npm start --prefix .flowershow &
     assert_success
     # wait for the server to start
     sleep 20
@@ -60,13 +60,13 @@ flowershow_export() {
     npm run export --prefix .flowershow
 }
 
+# bats test_tags=netlify
 @test "Install Flowershow template, build and deploy on Netlify" {
     # read environment variables
     run [ -e $BATS_TEST_DIRNAME/.env ]
     assert_success
     export $(grep -v '^#' $BATS_TEST_DIRNAME/.env | xargs)
 
-    echo $E2E_TEMP_DIR
     run install.sh
     assert_output --partial "Successfuly installed"
     run [ -d .flowershow/node_modules ]
