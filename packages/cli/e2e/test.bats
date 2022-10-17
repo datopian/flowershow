@@ -31,6 +31,9 @@ teardown() {
     run flowershow.js preview & sleep 20
     assert_success
     run curl "http://localhost:3000"
+    # kill the process before testing the output
+    # placing it after assert_output in case of test failure will leave the server process running
+    # TODO move it to teardown? e.g. start server on random server (in case the user is using 3000) and then kill it
     fuser -k "3000/tcp"
     assert_output --partial "Hello world"
 }
@@ -52,8 +55,6 @@ teardown() {
     # wait for the server to start
     sleep 20
     run curl "http://localhost:3000"
-    # kill the process before testing the output
-    # placing it after assert_output in case of test failure will leave the server process running
     fuser -k "3000/tcp"
     assert_output --partial "Hello world"
 }
