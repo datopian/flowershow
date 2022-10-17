@@ -22,53 +22,48 @@ teardown() {
     rm -rf $E2E_TEMP_DIR
 }
 
-@test "Install Flowershow template and preview site" {
-    run install.sh
-    assert_success
-    assert_output --partial "Successfuly installed"
-    assert [ -d .flowershow/node_modules ]
+# @test "Install Flowershow template and preview site" {
+#     run install.sh
+#     assert_success
+#     assert_output --partial "Successfuly installed"
+#     assert [ -d .flowershow/node_modules ]
 
-    run flowershow.js preview & sleep 20
-    assert_success
-    run curl "http://localhost:3000"
-    # kill the process before testing the output
-    # placing it after assert_output in case of test failure will leave the server process running
-    # TODO move it to teardown? e.g. start server on random server (in case the user is using 3000) and then kill it
-    fuser -k "3000/tcp"
-    assert_output --partial "Hello world"
-}
+#     run flowershow.js preview & sleep 20
+#     assert_success
+#     run curl "http://localhost:3000"
+#     # kill the process before testing the output
+#     # placing it after assert_output in case of test failure will leave the server process running
+#     # TODO move it to teardown? e.g. start server on random server (in case the user is using 3000) and then kill it
+#     fuser -k "3000/tcp"
+#     assert_output --partial "Hello world"
+# }
 
-@test "Install Flowershow template, build and start site" {
-    run install.sh
-    assert_success
-    assert_output --partial "Successfuly installed"
-    assert [ -d .flowershow/node_modules ]
+# @test "Install Flowershow template, build and start site" {
+#     run install.sh
+#     assert_success
+#     assert_output --partial "Successfuly installed"
+#     assert [ -d .flowershow/node_modules ]
 
-    run flowershow.js build
-    assert_success
-    run [ -d .flowershow/.next ]
-    assert_success
+#     run flowershow.js build
+#     assert_success
+#     run [ -d .flowershow/.next ]
+#     assert_success
 
-    # start next project and send to background
-    run npm start --prefix .flowershow &
-    assert_success
-    # wait for the server to start
-    sleep 20
-    run curl "http://localhost:3000"
-    fuser -k "3000/tcp"
-    assert_output --partial "Hello world"
-}
-
-# flowershow_export() {
-#     npm run export --prefix .flowershow
+#     # start next project and send to background
+#     run npm start --prefix .flowershow &
+#     assert_success
+#     # wait for the server to start
+#     sleep 20
+#     run curl "http://localhost:3000"
+#     fuser -k "3000/tcp"
+#     assert_output --partial "Hello world"
 # }
 
 # bats test_tags=netlify
 @test "Install Flowershow template, build and deploy on Netlify" {
     # read NETLIFY_TOKEN from .env if it hasn't been set otherwise
-    if [[ -z $NETLIFY_TOKEN ]]
+    if [ -z $NETLIFY_TOKEN ]
     then
-        assert [ -e $BATS_TEST_DIRNAME/.env ]
         export $(grep -v '^#' $BATS_TEST_DIRNAME/.env | xargs)
     fi
 
