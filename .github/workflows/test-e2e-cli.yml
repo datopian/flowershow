@@ -22,5 +22,5 @@ jobs:
       - name: Install Flowershow CLI
         run: npm install --prefix packages/cli
       - name: Run tests
-        working-directory: packages/cli/e2e
-        run: ./bats/bin/bats test.bats
+        working-directory: packages/cli
+        run: npm run test
