@@ -66,7 +66,7 @@ teardown() {
 # bats test_tags=netlify
 @test "Install Flowershow template, build and deploy on Netlify" {
     # read NETLIFY_TOKEN from .env if it hasn't been set otherwise
-    if [ -z $NETLIFY_TOKEN ]
+    if [[ -z $NETLIFY_TOKEN ]]
     then
         assert [ -e $BATS_TEST_DIRNAME/.env ]
         export $(grep -v '^#' $BATS_TEST_DIRNAME/.env | xargs)
