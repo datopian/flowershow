@@ -8,9 +8,6 @@ setup() {
     load 'test_helper/bats-support/load'
     load 'test_helper/bats-assert/load'
 
-    # install CLI
-    npm install --prefix $BATS_TEST_DIRNAME/..
-
     # create a directory with an example blog
     E2E_TEMP_DIR=$(mktemp -d)
     mkdir -p "$E2E_TEMP_DIR/content/assets"
