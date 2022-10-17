@@ -59,9 +59,9 @@ teardown() {
     assert_output --partial "Hello world"
 }
 
-flowershow_export() {
-    npm run export --prefix .flowershow
-}
+# flowershow_export() {
+#     npm run export --prefix .flowershow
+# }
 
 # bats test_tags=netlify
 @test "Install Flowershow template, build and deploy on Netlify" {
@@ -82,8 +82,9 @@ flowershow_export() {
     run [ -d .flowershow/.next ]
     assert_success
 
-    # TODO add flowreshow export command?
-    run flowershow_export
+    # TODO build-static is an alias for npm run export
+    # this should probably automatically build the site as well
+    run flowershow.js build-static
     assert_success
     assert [ -d .flowershow/out ]
     cd .flowershow

@@ -35,6 +35,16 @@ program
     build(projectPath);
   })
 
+
+program
+  .command('build-static')
+  .description('build static Flowershow website')
+  .argument('[project-dir]', 'Path to the folder where Flowershow template is installed (root folder of .flowershow)', '.')
+  .action(async (projectPath) => {
+    const { default: buildStatic } = await import ('../lib/buildStatic.js');
+    buildStatic(projectPath);
+  })
+
 program
   .command('preview')
   .description('preview your Flowershow site')
