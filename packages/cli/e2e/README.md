@@ -9,6 +9,7 @@ You need to have [expect](https://linux.die.net/man/1/expect) installed on your 
 ### Running tests
 
 ``` sh
+git submodule update --init
 npm run test
 ```
 
