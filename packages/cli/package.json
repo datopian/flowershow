@@ -15,7 +15,7 @@
     "cli"
   ],
   "scripts": {
-    "test": "./e2e/test.bats --verbose-run"
+    "test": "./e2e/bats/bin/bats ./e2e/test.bats --verbose-run"
   },
   "author": "Rufus Pollock",
   "license": "MIT",
