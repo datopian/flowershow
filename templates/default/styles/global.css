@@ -6,7 +6,7 @@
 
 /* smooth scrolling in modern browsers */
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: smooth !important;
 }
 
 /* hide anchor link with # icon  */
@@ -17,6 +17,7 @@ html {
 .docs :is(h1, h2, h3, h4, h5, h6) {
   margin-left: -2rem !important;
   padding-left: 2rem !important;
+  scroll-margin-top: 4.5rem;
   position: relative;
 }
 
