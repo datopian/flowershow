@@ -15,22 +15,22 @@ const userConfig = {
   authorLogo: "/images/logo.svg",
   // url to author website
   authorUrl: "https://john.app/",
-  // links to the pages you want to add to the navbar
+  // links to the pages you want to link to in the navbar
   navLinks: [{ href: "/about", name: "About" }],
-  // add any folders/files to be excluded from being published, all other files in content folder will be published
+  // any folders/files that you want to exclude from being published; all other files in your content folder will be published
   contentExclude: ['docs/testpage.md'],
-  // if any folders/files included, then nothing else will be published by default
-  contentInclude: [],
+  // publish only these folders/files in your content folder (you can combine contentInclude and contentExclude)
+  contentInclude: ['docs'],
 };
 
 export default userConfig;
 ```
 
-## Dropdown
+## Navbar
 
-Flowershow supports adding dropdown menus in your navbar
+### Dropdown
 
-### Adding Dropdown
+Flowershow supports adding dropdown menus in your navbar.
 
 Example of configuration in `your-content-dir/config.js`:
 
@@ -47,9 +47,9 @@ const userConfig = {
 export default userConfig
 ```
 
-## Navbar Title and Logo
+### Title and Logo
 
-The Title and Logo in the navbar can be set by adding a **navbarTitle** attribute in your config. If you don't want a logo to be displayed in the navbar of your site, then don't include the logo field.
+The Title and the logo in the navbar can be set by adding a **navbarTitle** attribute in your config. If you don't want a logo to be displayed in the navbar of your site, then don't include the logo field.
 
 The **navbarTitle** supports adding the following two fields:
 
