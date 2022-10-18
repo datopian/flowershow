@@ -82,8 +82,8 @@ teardown() {
     run [ -d .flowershow/.next ]
     assert_success
 
-    # TODO build-static is an alias for npm run export
-    # this should probably automatically build the site as well
+    # TODO build-static is an alias for npm run export;
+    # this should probably automatically build the site as well if it hasn't been yet
     run flowershow.js build-static
     assert_success
     assert [ -d .flowershow/out ]
@@ -106,6 +106,8 @@ teardown() {
     assert_output --partial "Hello world"
 
     # delete deployed site
+    # TODO move it to teardown of a separete test file, so that the deployed site
+    # is deleted no matter if the above assertion passes or fails
     run curl -i -X DELETE -H "Authorization: Bearer $NETLIFY_TOKEN" \
      "https://api.netlify.com/api/v1/sites/$SITE_ID"
     assert_output --regexp 'HTTP.*[200|204]'
