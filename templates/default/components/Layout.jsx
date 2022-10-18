@@ -1,13 +1,76 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useCallback, useEffect, useState } from "react";
 
 import { siteConfig } from "../config/siteConfig";
 import { Nav } from "./Nav";
 
-export function Layout({ children }) {
+function useTableOfContents(tableOfContents) {
+  const [currentSection, setCurrentSection] = useState(tableOfContents[0]?.id);
+
+  const getHeadings = useCallback((toc) => {
+    return toc
+      .flatMap((node) => [node.id, ...node.children.map((child) => child.id)])
+      .map((id) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+
+        const style = window.getComputedStyle(el);
+        const scrollMt = parseFloat(style.scrollMarginTop);
+
+        const top = window.scrollY + el.getBoundingClientRect().top - scrollMt;
+        return { id, top };
+      });
+  }, []);
+
+  useEffect(() => {
+    if (tableOfContents.length === 0) return;
+    const headings = getHeadings(tableOfContents);
+    function onScroll() {
+      const top = window.scrollY + 4.5;
+      let current = headings[0].id;
+      // for (const heading of headings) {
+      headings.map((heading) => {
+        if (top >= heading.top) {
+          current = heading.id;
+        }
+        return current;
+      });
+      // }
+      setCurrentSection(current);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => {
+      window.removeEventListener("scroll", onScroll, { passive: true });
+    };
+  }, [getHeadings, tableOfContents]);
+
+  return currentSection;
+}
+
+export function Layout({ children, tableOfContents }) {
   const { editLink, _raw } = children.props;
   /* if editLink is not set in page frontmatter, link bool value will depend on siteConfig.editLinkShow */
   const editUrl = `${siteConfig.repoRoot}${siteConfig.repoEditPath}${_raw?.sourceFilePath}`;
+
+  const showToc = Array.isArray(siteConfig.tableOfContents)
+    ? siteConfig.tableOfContents.includes(_raw?.sourceFileDir) ||
+      siteConfig.tableOfContents.includes(_raw?.flattenedPath)
+    : _raw?.flattenedPath;
+
+  const currentSection = useTableOfContents(tableOfContents);
+
+  function isActive(section) {
+    if (section.id === currentSection) {
+      return true;
+    }
+    if (!section.children) {
+      return false;
+    }
+    return section.children.findIndex(isActive) > -1;
+  }
+
   return (
     <>
       <Head>
@@ -18,38 +81,40 @@ export function Layout({ children }) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <div className="relative min-h-screen pb-60 dark:bg-slate-900">
+      <div className="min-h-screen dark:bg-slate-900">
         <Nav />
-        <main>
-          {children}
-          {(editLink ?? siteConfig.editLinkShow) && (
-            <div className="mb-10 prose dark:prose-invert p-6 mx-auto">
-              <a
-                className="flex no-underline font-semibold justify-center"
-                href={editUrl}
-                target="_blank"
-                rel="noopener noreferrer">
-                Edit this page
-                <span className="mx-1">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="2">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    />
-                  </svg>
-                </span>
-              </a>
-            </div>
-          )}
-        </main>
-        <footer className="absolute bottom-0 dark:bg-slate-900 prose dark:prose-invert max-w-none flex flex-col items-center justify-center w-full h-auto pt-10 pb-20">
+        <div className="relative mx-auto">
+          <main className="flex-auto">
+            {children}
+            {(editLink ?? siteConfig.editLinkShow) && (
+              <div className="mb-10 prose dark:prose-invert p-6 mx-auto">
+                <a
+                  className="flex no-underline font-semibold justify-center"
+                  href={editUrl}
+                  target="_blank"
+                  rel="noopener noreferrer">
+                  Edit this page
+                  <span className="mx-1">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="2">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
+                  </span>
+                </a>
+              </div>
+            )}
+          </main>
+        </div>
+        <footer className="dark:bg-slate-900 prose dark:prose-invert max-w-none flex flex-col items-center justify-center w-full h-auto pt-10 pb-20">
           <div className="flex w-full flex-wrap justify-center">
             {siteConfig.navLinks.map(
               (item) =>
@@ -100,6 +165,52 @@ export function Layout({ children }) {
           </p>
         </footer>
       </div>
+      {/** TABLE OF CONTENTS */}
+      {siteConfig.tableOfContents && tableOfContents.length > 0 && showToc && (
+        <div className="hidden xl:fixed xl:right-0 xl:top-[4.5rem] xl:block xl:w-1/5 xl:h-[calc(100vh-4.5rem)] xl:flex-none xl:overflow-y-auto xl:py-16 xl:pr-6 xl:mb-16">
+          <nav aria-labelledby="on-this-page-title" className="w-56">
+            <h2 className="font-display text-md font-medium text-slate-900 dark:text-white">
+              On this page
+            </h2>
+            <ol className="mt-4 space-y-3 text-sm">
+              {tableOfContents.map((section) => (
+                <li key={section.id}>
+                  <h3>
+                    <Link href={`#${section.id}`}>
+                      <a
+                        className={
+                          isActive(section)
+                            ? "text-sky-500"
+                            : "font-normal text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300"
+                        }>
+                        {section.title}
+                      </a>
+                    </Link>
+                  </h3>
+                  {section.children.length > 0 && (
+                    <ol className="mt-2 space-y-3 pl-5 text-slate-500 dark:text-slate-400">
+                      {section.children.map((subSection) => (
+                        <li key={subSection.id}>
+                          <Link href={`#${subSection.id}`}>
+                            <a
+                              className={
+                                isActive(subSection)
+                                  ? "text-sky-500"
+                                  : "hover:text-slate-600 dark:hover:text-slate-300"
+                              }>
+                              {subSection.title}
+                            </a>
+                          </Link>
+                        </li>
+                      ))}
+                    </ol>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </nav>
+        </div>
+      )}
     </>
   );
 }
