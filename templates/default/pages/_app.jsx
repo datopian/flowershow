@@ -3,7 +3,7 @@ import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "next-themes";
 import { useRouter } from "next/router";
 import Script from "next/script";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "tailwindcss/tailwind.css";
 
 import { Layout } from "../components/Layout";
@@ -12,6 +12,34 @@ import * as gtag from "../lib/gtag";
 import "../styles/docsearch.css";
 import "../styles/global.css";
 import "../styles/prism.css";
+
+// ToC: get the html nodelist for headings
+function collectHeadings(nodes) {
+  const sections = [];
+
+  Array.from(nodes).map((node) => {
+    // create toc with h2 and h3 elements
+    if (node.tagName === "H2" || node.tagName === "H3") {
+      const { id, innerText: title } = node;
+      if (id && title) {
+        if (node.tagName === "H3") {
+          if (sections[sections.length - 1]) {
+            return sections[sections.length - 1].children.push({
+              id,
+              title,
+            });
+          }
+        } else {
+          return sections.push({ id, title, children: [] });
+        }
+      }
+    }
+
+    return sections.push(...collectHeadings(node.children ?? []));
+  });
+
+  return sections;
+}
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -27,6 +55,14 @@ function MyApp({ Component, pageProps }) {
       };
     }
   }, [router.events]);
+
+  const [tableOfContents, setTableOfContents] = useState([]);
+
+  useEffect(() => {
+    const headingNodes = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+    const toc = collectHeadings(headingNodes);
+    setTableOfContents(toc ?? []);
+  }, [router.asPath]); // update table of contents on route change with next/link
 
   return (
     <ThemeProvider
@@ -58,7 +94,7 @@ function MyApp({ Component, pageProps }) {
           }}
         />
       )}
-      <Layout title={pageProps.title}>
+      <Layout title={pageProps.title} tableOfContents={tableOfContents}>
         <Component {...pageProps} />
       </Layout>
     </ThemeProvider>
