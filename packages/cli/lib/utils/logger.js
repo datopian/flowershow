@@ -14,3 +14,7 @@ export const error = (msg) => {
     console.error(msg.stack)
   }
 }
+
+export const success = (msg) => {
+  console.log(`${chalk.blue('🎊')} ${msg}`);
+}

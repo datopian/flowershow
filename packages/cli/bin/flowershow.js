@@ -1,4 +1,4 @@
-#! /usr/bin/env node
+#!/usr/bin/env node
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 
@@ -33,6 +33,16 @@ program
   .action(async (projectPath) => {
     const { default: build } = await import ('../lib/build.js');
     build(projectPath);
+  })
+
+
+program
+  .command('build-static')
+  .description('build static Flowershow website')
+  .argument('[project-dir]', 'Path to the folder where Flowershow template is installed (root folder of .flowershow)', '.')
+  .action(async (projectPath) => {
+    const { default: buildStatic } = await import ('../lib/buildStatic.js');
+    buildStatic(projectPath);
   })
 
 program
