@@ -18,7 +18,7 @@ expect {
     timeout { send_error "Failed to get prompt for content folder \n"; exit 1 }
 }
 expect {
-    -re "Name of your assets" { send -- "assets\r" }
+    -re "Select a folder with your assets" { send -- "\r" }
     timeout { send_error "Failed to get prompt for assets folder\n"; exit 1 }
 }
 
