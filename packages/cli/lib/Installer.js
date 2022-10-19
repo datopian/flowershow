@@ -109,11 +109,11 @@ export default class Creator {
       exit(1);
     }
 
-    // update content and public symlinks
+    // update content and assets symlinks
     fs.unlinkSync(`${flowershowDir}/content`);
     fs.symlinkSync(contentDir, `${flowershowDir}/content`);
     fs.unlinkSync(`${flowershowDir}/public/assets`);
-    fs.symlinkSync(path.resolve(contentPath, assetsFolder), `${flowershowDir}/public/assets`);
+    fs.symlinkSync(path.resolve(contentDir, assetsFolder), `${flowershowDir}/public/${assetsFolder}`);
 
 
     // // if there is no index.md file, create one
