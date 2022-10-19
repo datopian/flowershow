@@ -10,17 +10,14 @@ import inquirer from 'inquirer';
 
 import { exit, error, log, success, logWithSpinner, stopSpinner, pauseSpinner, resumeSpinner } from './utils/index.js';
 
+import { FLOWERSHOW_FOLDER_NAME } from './const.js';
 
-import { FLOWERSHOW_RELATIVE_PATH } from './const.js';
 
 export default class Creator {
-  constructor(context, template = 'default') {
+  constructor(context, targetDir, template = 'default') {
     this.context = context;
+    this.targetDir = targetDir;
     this.template = template; // tb configurable via command option in the future
-  }
-
-  get flowershowDir() {
-    return path.resolve(this.context, FLOWERSHOW_RELATIVE_PATH);
   }
 
   get templateRepo() {
@@ -29,46 +26,29 @@ export default class Creator {
   }
 
   async install(options) {
-    const { context, flowershowDir, templateRepo } = this;
+    const { context, targetDir, templateRepo } = this;
+    const flowershowDir = path.resolve(targetDir, FLOWERSHOW_FOLDER_NAME)
 
-    logWithSpinner({ symbol: '🌷', msg: `Installing Flowershow template in ${chalk.magenta(flowershowDir)}...` });
-
+    let existsAction;
     if (fs.existsSync(flowershowDir)) {
-      pauseSpinner();
-
-      const { action } = await inquirer.prompt([
+      let { action } = await inquirer.prompt([
         {
           name: 'action',
           type: 'list',
-          message: `Flowershow template is already installed in directory ${chalk.magenta(context)}. What do you want to do?:`,
+          message: `Flowershow template is already installed in directory ${chalk.magenta(targetDir)}. What do you want to do?:`,
           choices: [
             { name: 'Overwrite', value: 'overwrite' },
             // { name: 'Merge', value: 'merge' },
-            { name: 'Cancel', value: false }
+            { name: 'Cancel', value: null }
           ]
         }
       ])
 
       if (!action) {
-        return
-      } else {
-        fs.rmSync(flowershowDir, { recursive: true, force: true });
+        exit(0)
       }
-      resumeSpinner();
+      existsAction = action;
     }
-
-    // clone flowershow template
-    try {
-      const emitter = degit(templateRepo);
-      await emitter.clone(flowershowDir);
-    } catch {
-      // TODO better error message
-      error(`Failed to clone Flowershow template.`)
-      exit(1);
-    }
-
-    // symlink content folder
-    pauseSpinner();
 
     let { contentPath } = await inquirer.prompt([
       {
@@ -76,21 +56,64 @@ export default class Creator {
         type: 'input',
         message: 'Path to the folder with your content files',
         validate(input) {
-          const contentPathAbsolute = path.resolve(context, input);
-          if (!fs.existsSync(contentPathAbsolute)) {
-            error(`Directory ${contentPathAbsolute} does not exist.`);
+          const contentDir = path.resolve(context, input);
+          if (!fs.existsSync(contentDir)) {
+            error(`Directory ${contentDir} does not exist.`);
             exit(1);
           }
-          resumeSpinner();
           return true;
         }
       }
     ])
 
-    contentPath = path.resolve(context, contentPath);
 
+    const contentDir = path.resolve(context, contentPath);
+    const assetFolderChoices = fs.readdirSync(contentDir, { withFileTypes: true })
+                                 .filter(d => d.isDirectory())
+                                 .map(d => ({ name: d.name, value: d.name }))
+
+    if (!assetFolderChoices.length) {
+      error(`There are no subfolders in ${contentDir}.`);
+      exit(1);
+    }
+
+    const { assetsFolder } = await inquirer.prompt([
+      {
+        name: 'assetsFolder',
+        type: 'list',
+        message: 'Select a folder with your assets (attachments)',
+        choices: [
+          ...assetFolderChoices,
+          { name: 'Cancel', value: null }
+        ]
+      }
+    ])
+
+
+    if (!assetsFolder) {
+      exit(0)
+    }
+
+    // install flowershow template
+    logWithSpinner({ symbol: '🌷', msg: `Installing Flowershow template in ${chalk.magenta(flowershowDir)}...` });
+
+    if (existsAction === 'overwrite') {
+      fs.rmSync(flowershowDir, { recursive: true, force: true });
+    }
+
+    try {
+      const emitter = degit(templateRepo);
+      await emitter.clone(flowershowDir);
+    } catch {
+      error(`Failed to install Flowershow template in ${flowershowDir}.`)
+      exit(1);
+    }
+
+    // update content and public symlinks
     fs.unlinkSync(`${flowershowDir}/content`);
-    fs.symlinkSync(contentPath, `${flowershowDir}/content`);
+    fs.symlinkSync(contentDir, `${flowershowDir}/content`);
+    fs.unlinkSync(`${flowershowDir}/public/assets`);
+    fs.symlinkSync(path.resolve(contentPath, assetsFolder), `${flowershowDir}/public/assets`);
 
 
     // // if there is no index.md file, create one
@@ -103,30 +126,6 @@ export default class Creator {
     if (!fs.existsSync(`${contentPath}/config.js`)) {
       fs.writeFile(`${contentPath}/config.js`, '{}', { flag: 'a' }, err => {});
     }
-
-    // symlink assets folder
-    pauseSpinner();
-
-    const { assetsFolder } = await inquirer.prompt([
-      {
-        name: 'assetsFolder',
-        type: 'input',
-        message: 'Name of your assets (attachements) folder',
-        validate(input) {
-          const assetsPathAbsolute = path.resolve(contentPath, input);
-          if (!fs.existsSync(assetsPathAbsolute)) {
-            error(`Directory ${assetsPathAbsolute} does not exist.`);
-            exit(1);
-          }
-          resumeSpinner();
-          return true;
-        }
-      }
-    ])
-
-    fs.unlinkSync(`${flowershowDir}/public/assets`);
-    fs.symlinkSync(path.resolve(contentPath, assetsFolder), `${flowershowDir}/public/assets`);
-
 
     // install flowershow dependencies
     logWithSpinner({ symbol: '🌸', msg: `Installing Flowershow dependencies...` });

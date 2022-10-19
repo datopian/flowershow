@@ -1,1 +1,1 @@
-export const FLOWERSHOW_RELATIVE_PATH = '.flowershow';
+export const FLOWERSHOW_FOLDER_NAME = '.flowershow';
