@@ -14,6 +14,9 @@
     "flowershow",
     "cli"
   ],
+  "scripts": {
+    "test": "./e2e/bats/bin/bats ./e2e/test.bats --verbose-run"
+  },
   "author": "Rufus Pollock",
   "license": "MIT",
   "bugs": {
@@ -34,6 +37,6 @@
   },
   "type": "module",
   "engines": {
-    "node": ">=12.2.0"
+    "node": ">=12.2.0 || >=14.13.0"
   }
 }
