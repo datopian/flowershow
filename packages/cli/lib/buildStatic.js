@@ -3,13 +3,11 @@ import path from 'path';
 import { execa } from 'execa';
 
 import { exit, error, log } from './utils/index.js';
-import build from './build.js';
 import { FLOWERSHOW_FOLDER_NAME } from './const.js';
+
 
 export default async function buildStatic(dir) {
   const flowershowDir = path.resolve(dir, FLOWERSHOW_FOLDER_NAME);
-
-  build(dir);
 
   const subprocess = execa('npm', [ 'run', 'export' ], { cwd: flowershowDir });
 
