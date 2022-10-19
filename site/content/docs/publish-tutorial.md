@@ -6,10 +6,8 @@ title: How to (self) publish your digital garden with Flowershow
 
 ## Prepare the content
 
-<div className="border-2 border-slate-400 rounded-md px-4 pb-3 mb-3">
-❕ **Pre-requisites**
-- [Node.js](https://nodejs.org/en/) installed
-</div>
+> [!note] Pre-requisites
+> [Node.js](https://nodejs.org/en/) installed
 
 First, you'll need a folder with some markdown files you'd like to publish. You can use an existing one, e.g. your Obsidian vault. This folder should include at least a single `index.md` file at the root level, which will be used to generate the home page of your website. If it doesn't exist, Flowershow CLI will create it for you.
 
@@ -21,11 +19,11 @@ cd my-digital-garden
 echo 'Hello, world!' > index.md
 ```
 
-You can create as many subfolders within your content folder as you want. Its directory tree will be reflected in url paths on the published website, e.g.: `my-content/blog/hello.md` file content will be available under `<base-url-of-your-published-website>/blog/hello`.
+You can create as many subfolders within your content folder as you want. Its directory tree will be reflected in url paths on the published website, e.g.: `my-digital-garden/blog/hello.md` file content will be available under `<base-url-of-your-published-website>/blog/hello`.
 
 Each folder can have it's own `index.md` file, which will be available under it's parent directory path, e.g. `my-content/blog/index.md` will be available under `<base-url-of-your-published-website>/blog`.
 
-In order to embed attachements (e.g. images or pdfs) in your markdown files, you will also need to create a dedicated folder for them in your digital garden folder.
+In order to embed files (e.g. images or pdfs) in your markdown files, you will also need to create a dedicated folder for them in your digital garden directory.
 
 > [!tip] Obsidian vault setup
 > If you're an Obsidian user, you can set this folder as an attachments folder, by right-clicking on it in the sidebar on the left hand side. This way all embedded files will be saved to this folder automatically when you copy them to your notes.
@@ -52,16 +50,16 @@ Let's imagine you now have the following folder structure:
 > └── ...
 > ```
 
-If you want to install the Flowershow template in `some-parents-dir` you can either:
+If you want to install Flowershow in `some-parents-dir` you can either:
 
-1) go that directory and run `npx flowershow install`
+1) go to that directory and run `npx flowershow install`
 
 ```sh
 cd some-parent-dir
 npx flowershow install
 ```
 
-You'll be asked to confirm if you want to install the template in the current directory.
+You'll be asked to confirm if you want to install it in the current directory.
 
 ```
 ? Create Flowershow project in current directory? Yes
@@ -76,15 +74,20 @@ npx flowershow install some-parent-dir
 After running install command you'll be shown a set of prompts, that will allow you to properly setup Flowershow with your digital garden.
 
 ```
-? Path to the folder with your content files:
+? Path to the folder with your content files
 my-digital-garden
-? Name of your assets (attachments) folder?
-assets
-🌷 Installing Flowershow template in /home/me/my-blog/.flowershow
+
+? Select a folder with your assets (attachments) (Use arrow keys)
+❯ assets 
+  ──────────────
+  I don't need assets folder 
+  Cancel 
+
+🌷 Installing Flowershow template in /home/me/some-parent-dir/.flowershow
 ⏳ Installing Flowershow dependencies...
 ```
 
-At the end you should see the `.flowershow` folder created in the target directory. In our example the folder structure will look like this:
+At the end you should see `.flowershow` folder created in the target directory. In our example the folder structure will look like this:
 
 > ```sh
 > some-parent-dir
@@ -98,7 +101,7 @@ At the end you should see the `.flowershow` folder created in the target directo
 
 Note that `config.js` and `index.md` files will be created automatically if they didn't exsist in your digital garden folder yet. The config file will allow you to do some basic configurations of your Flowershow app. See [[config|this guide]] to learn more.
 
-### (Optional) customize your website
+## (Optional) customize your website
 
 You can now customize your website by wrapping your content in custom layouts, using custom components in you Markdown files, importing data from files and more. See [[guides|our guides]] to learn how to do it.
 
@@ -116,6 +119,8 @@ npx flowershow preview
 npx flowershow preview some-parent-dir
 ```
 
+You will now be able to see your website on http://localhost:3000/ - it will reload every time you make some changes to your content.
+
 If your ready to publish your site, you can now build it with the following command:
 
 ```bash
@@ -123,9 +128,16 @@ npx flowershow build
 # or npx flowershow build some-parent-dir
 ```
 
-It will create a `.flowershow/.next` folder with your website files ready to be deployed.
+It will create a `.flowershow/.next` folder with your website files ready to be deployed to any hosting provider that supports Node.js.
 
-If you want to 
+If you want to deploy it to a static website hosting provider, you need to run the following command instead:
+
+```bash
+npx flowershow build-static
+# or npx flowershow build-static some-parent-dir
+```
+
+It will create a `.flowershow/out` folder with static files.
 
 ## Deploy
 
