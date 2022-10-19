@@ -8,7 +8,7 @@ import degit from 'degit';
 import { execa } from 'execa';
 import inquirer from 'inquirer';
 
-import { exit, error, log, logWithSpinner, stopSpinner, pauseSpinner, resumeSpinner } from './utils/index.js';
+import { exit, error, log, success, logWithSpinner, stopSpinner, pauseSpinner, resumeSpinner } from './utils/index.js';
 
 
 import { FLOWERSHOW_RELATIVE_PATH } from './const.js';
@@ -128,20 +128,21 @@ export default class Creator {
     fs.symlinkSync(path.resolve(contentPath, assetsFolder), `${flowershowDir}/public/assets`);
 
 
-    // // install flowershow dependencies
+    // install flowershow dependencies
     logWithSpinner({ symbol: '🌸', msg: `Installing Flowershow dependencies...` });
 
     try {
-      const { stdout, stderr } = await execa('npm', [ 'install' ], { cwd: flowershowDir });
+      await execa('npm', [ 'set-script', 'prepare', '' ], { cwd: flowershowDir });
+      const { stdout, stderr } = await execa('npm', [ 'install'], { cwd: flowershowDir });
       log(stdout);
       log(stderr);
+      stopSpinner();
+      success("Successfuly installed Flowershow template!")
     } catch (err) {
       error(
         `Installing dependencies failed: ${err.message}`
       );
       exit(err.exitCode);
     }
-
-    stopSpinner();
   }
 }
