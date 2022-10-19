@@ -84,6 +84,8 @@ export default class Creator {
         message: 'Select a folder with your assets (attachments)',
         choices: [
           ...assetFolderChoices,
+          new inquirer.Separator(),
+          { name: "I don't need assets folder", value: 'none' },
           { name: 'Cancel', value: null }
         ]
       }
@@ -112,9 +114,11 @@ export default class Creator {
     // update content and assets symlinks
     fs.unlinkSync(`${flowershowDir}/content`);
     fs.symlinkSync(contentDir, `${flowershowDir}/content`);
-    fs.unlinkSync(`${flowershowDir}/public/assets`);
-    fs.symlinkSync(path.resolve(contentDir, assetsFolder), `${flowershowDir}/public/${assetsFolder}`);
 
+    fs.unlinkSync(`${flowershowDir}/public/assets`);
+    if (assetsFolder !== 'none') {
+      fs.symlinkSync(path.resolve(contentDir, assetsFolder), `${flowershowDir}/public/${assetsFolder}`);
+    }
 
     // // if there is no index.md file, create one
     if (!fs.existsSync(`${contentPath}/index.md`)) {
