@@ -38,9 +38,9 @@ mkdir my-digital-garden/assets #this can be any other name
 
 ## Install Flowershow template
 
-In order to build your beautiful personal website out of your digital garden, you first need to install the Flowershow template somewhere on your computer. This template will be linked to your digital garden after the installation process.
+In order to build your beautiful personal website out of your digital garden, you first need to install Flowershow template. This template will be linked to your digital garden after the installation process.
 
-Let's imagine you now have the following folder structure:
+So, let's imagine you have the following folder structure:
 
 > ```sh
 > some-parent-dir
@@ -119,7 +119,7 @@ npx flowershow preview
 npx flowershow preview some-parent-dir
 ```
 
-You will now be able to see your website on http://localhost:3000/ - it will reload every time you make some changes to your content.
+After running this command, you will now be able to see your website on http://localhost:3000/ - it will reload every time you make some changes to your content.
 
 If your ready to publish your site, you can now build it with the following command:
 
