@@ -72,25 +72,41 @@ export default class Creator {
                                  .filter(d => d.isDirectory())
                                  .map(d => ({ name: d.name, value: d.name }))
 
+    let assetsFolder = 'none';
+
     if (!assetFolderChoices.length) {
-      error(`There are no subfolders in ${contentDir}.`);
-      exit(1);
+      const { foldersAction } = await inquirer.prompt([
+        {
+          name: 'foldersAction',
+          type: 'list',
+          message: 'There are no subfolders in your content folder, that could be used as assets folder',
+          choices: [
+            { name: "I don't need assets folder", value: 'none' },
+            { name: 'Cancel', value: null }
+          ]
+        }
+      ])
+
+      assetsFolder = foldersAction;
+
+    } else {
+
+      const { assets } = await inquirer.prompt([
+        {
+          name: 'assets',
+          type: 'list',
+          message: 'Select a folder with your assets (attachments)',
+          choices: [
+            ...assetFolderChoices,
+            new inquirer.Separator(),
+            { name: "I don't need assets folder", value: 'none' },
+            { name: 'Cancel', value: null }
+          ]
+        }
+      ])
+
+      assetsFolder = assets;
     }
-
-    const { assetsFolder } = await inquirer.prompt([
-      {
-        name: 'assetsFolder',
-        type: 'list',
-        message: 'Select a folder with your assets (attachments)',
-        choices: [
-          ...assetFolderChoices,
-          new inquirer.Separator(),
-          { name: "I don't need assets folder", value: 'none' },
-          { name: 'Cancel', value: null }
-        ]
-      }
-    ])
-
 
     if (!assetsFolder) {
       exit(0)
