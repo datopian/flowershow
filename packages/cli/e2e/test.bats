@@ -77,13 +77,6 @@ teardown() {
     run [ -d .flowershow/node_modules ]
     assert_success
 
-    run flowershow.js build
-    assert_success
-    run [ -d .flowershow/.next ]
-    assert_success
-
-    # TODO build-static is an alias for npm run export;
-    # this should probably automatically build the site as well if it hasn't been yet
     run flowershow.js build-static
     assert_success
     assert [ -d .flowershow/out ]

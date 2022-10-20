@@ -7,28 +7,30 @@ import Installer from './Installer.js';
 import { error, log, exit } from './utils/index.js';
 
 
-export default async function install(targetDir, options) {
+export default async function install(dir, options) {
   const currentDir = process.cwd();
-  const inCurrentDir = targetDir === '.';
-  const targetDirAbsolute = path.resolve(currentDir, targetDir);
+  const inCurrentDir = dir === '.';
 
-  if (fs.existsSync(targetDirAbsolute)) {
-    if (inCurrentDir) {
-      const { ok } = await inquirer.prompt([
-        {
-          name: "ok",
-          type: "confirm",
-          message: "Create Flowershow project in current directory?"
-        }
-      ])
-      if (!ok) {
-        return
+  if (inCurrentDir) {
+    const { ok } = await inquirer.prompt([
+      {
+        name: "ok",
+        type: "confirm",
+        message: "Create Flowershow project in current directory?"
       }
+    ])
+    if (!ok) {
+      return
     }
-  } else {
-    fs.mkdirSync(targetDirAbsolute);
   }
 
-  const installer = new Installer(targetDirAbsolute);
+  const targetDir = path.resolve(dir);
+
+  if (!fs.existsSync(targetDir)) {
+    error(`Directory ${targetDir} does not exist.`);
+    exit(1);
+  }
+
+  const installer = new Installer(currentDir, targetDir);
   await installer.install(options);
 }
