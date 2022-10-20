@@ -14,7 +14,7 @@ expect {
 }
 expect {
     # TODO this seems to expect content folder name rather than path
-    -re "Path to the folder with your content files" { send -- "content\r" }
+    -re "Path to the folder with your markdown files" { send -- "content\r" }
     timeout { send_error "Failed to get prompt for content folder \n"; exit 1 }
 }
 expect {

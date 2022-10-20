@@ -54,7 +54,7 @@ export default class Creator {
       {
         name: 'contentPath',
         type: 'input',
-        message: 'Path to the folder with your content files',
+        message: 'Path to the folder with your markdown files',
         validate(input) {
           const contentDir = path.resolve(context, input);
           if (!fs.existsSync(contentDir)) {
@@ -156,7 +156,7 @@ export default class Creator {
       log(stdout);
       log(stderr);
       stopSpinner();
-      success("Successfuly installed Flowershow template!")
+      success("Successfuly installed Flowershow!")
     } catch (err) {
       error(
         `Installing dependencies failed: ${err.message}`
