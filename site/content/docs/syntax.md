@@ -2,11 +2,13 @@
 
 Flowershow was designed with Obsidian users in mind, and so, it aims to fully support Obsidian syntax, including **CommonMark**, **GitHub Flavoured Markdown** and **Obsidian extensions**, like Wiki links.
 
+## Table of contents
+
 ## CommonMark
 
 Here are some of the CommonMark syntax elements supported by Flowershow.
 
-### ✅ Thematic breaks
+### Thematic breaks
 
 Thematic breaks made with three `*`, `-` or `_` will be converted to HTML `<hr />`
 
@@ -27,7 +29,7 @@ Thematic breaks made with three `*`, `-` or `_` will be converted to HTML `<hr /
 
 ---
 
-### ✅ Headings
+### Headings
 
 Markdown headings will be converted to HTML `<h1>`-`<h6>` tags.
 
@@ -44,7 +46,7 @@ Markdown headings will be converted to HTML `<h1>`-`<h6>` tags.
 **Renders as:**
 All the headings on this page 🙂.
 
-### ✅ Emphasis
+### Emphasis
 
 **I'm Bold!** is done using `**I'm Bold!**`  
 **I'm Bold!** is done using `__I'm Bold!__`
@@ -52,7 +54,7 @@ All the headings on this page 🙂.
 *I'm Italic!* is done using `*I'm Italic!*`  
 *I'm Italic!* is done using `_I'm Italic!_`
 
-### ✅ Fenced code blocks with code highlighting
+### Fenced code blocks with code highlighting
 
 Code blocks created with backtics will be parsed as `pre` tags with support for code highlighting in respective languages and copy/paste button included on hover.
 
@@ -78,7 +80,7 @@ class Example:
 git commit && git push
 ```
 
-### ✅ Blockquotes
+### Blockquotes
 
 **Example:**
 
@@ -90,7 +92,7 @@ git commit && git push
 
 > Roses are red, violets are blue.
 
-### ✅ Lists
+### Lists
 
 **Example:**
 
@@ -114,7 +116,7 @@ git commit && git push
    - one
    - two
 
-### ✅ Inline code
+### Inline code
 
 **Example:**
 
@@ -126,7 +128,7 @@ Here is some code: `print("hello world!")`
 
 Here is some code: `print("hello world!")`
 
-### ✅ Links
+### Links
 
 **Example:**
 
@@ -138,7 +140,7 @@ Here is some code: `print("hello world!")`
 
 [Link to roadmap](/docs/roadmap)
 
-### ✅ Images
+### Images
 
 **Example:**
 
@@ -171,7 +173,7 @@ indented code block
 
 ## GitHub Flavored Markdown (GFM) extensions
 
-### ✅ Tables
+### Tables
 
 **Example:**
 
@@ -187,7 +189,7 @@ indented code block
 | :--- | :----: | ----: |
 | 1    |   2    |     3 |
 
-### ✅ Task lists
+### Task lists
 
 **Example:**
 
@@ -203,11 +205,11 @@ indented code block
 - [ ] a second thing to do
   - [ ] another thing to do!
 
-### ✅ Strikethrough
+### Strikethrough
 
 ~~I'm CrossedOut!~~ is done using `~~I'm CrossedOut!~~`
 
-### ✅ Autolinks
+### Autolinks
 
 **Example:**
 
@@ -227,23 +229,23 @@ Check out Flowershow at https://flowershow.app!
 
 ## Other extensions
 
-### ✅ Obisidian internal links (Wiki links)
+### Obisidian internal links (Wiki links)
 
 Wiki links are hyperlinks that give one-click access to other pages on the site. These are usually denoted with double square brackets `[[some_page]]` and Obsidian would generate the reference to that page automatically.
 
 Flowershow will convert internal links to HTML `a` tags, with their `href` attributes pointing to the location referenced by original internal links.
 
-#### Internal link types
+**Internal link types**
 
-- ✅ Link to a page, e.g. `[[roadmap]]`, which renders as [[roadmap]]
-- ✅ Link to a page with a custom name, e.g. `[[roadmap|Our roadmap]]`, which renders as [[roadmap|Our roadmap]]
-- ✅ Link to a specific heading within a given page `[[roadmap#Planned features]]`, which renders as [[roadmap#Planned features]]
-- ✅ Link to a specific heading within a given page with a custom name, e.g. `[[roadmap#Planned features|🚧 working on...]]` which renders as [[roadmap#Planned features|🚧 working on...]]
+- Link to a page, e.g. `[[roadmap]]`, which renders as [[roadmap]]
+- Link to a page with a custom name, e.g. `[[roadmap|Our roadmap]]`, which renders as [[roadmap|Our roadmap]]
+- Link to a specific heading within a given page `[[roadmap#Planned features]]`, which renders as [[roadmap#Planned features]]
+- Link to a specific heading within a given page with a custom name, e.g. `[[roadmap#Planned features|🚧 working on...]]` which renders as [[roadmap#Planned features|🚧 working on...]]
 - 🚧 Link to a specific block (paragraph) within a given page, e.g. `[[roadmap#^f93ba0]]`
-- ✅ Link to an image file with supported image formats - png, jpg and jpeg, eg. `![[park.png]]` which renders as:
+- Link to an image file with supported image formats - png, jpg and jpeg, eg. `![[park.png]]` which renders as:
   ![[park.png]]
 
-### ✅ Footnotes
+### Footnotes
 
 **Example:**
 
@@ -257,7 +259,7 @@ Roses are red... [^1]
 
 [^1]: ...violets are blue.
 
-### ✅ Math
+### Math
 
 **Example:**
 
@@ -268,7 +270,7 @@ $$\begin{vmatrix}a & b\\ c & d \end{vmatrix}=ad-bc$$
 **Renders as:**
 $$\begin{vmatrix}a & b\\ c & d \end{vmatrix}=ad-bc$$
 
-### ✅ Frontmatter
+### Frontmatter
 
 You can add metadata to your pages, by adding key-value pairs to frontmatter, e.g.:
 
@@ -282,7 +284,7 @@ mymeta: Some info
 
 The `title` and `description` fields are pulled from the MDX file and processed using `gray-matter`. Additionally, links are rendered using a custom component passed to `next-mdx-remote`.
 
-### ✅ Dashes/Ellipse
+### Dashes/Ellipse
 
 Two '-' will convert to ndash. Three '-' will convert to mdash. Three '.' with or without spacing will convert to ellipse.
 
@@ -301,7 +303,7 @@ Two '-' will convert to ndash. Three '-' will convert to mdash. Three '.' with o
 ...ellipse\
 ...another ellipse
 
-### ✅ Callouts
+### Callouts
 
 Flowershow supports 12 different Obsidian callout types (with aliases) like note, abstract, todo, or tip. See this [Obsidian docs page](https://help.obsidian.md/How+to/Use+callouts) to learn more about different callout types.
 
@@ -323,7 +325,7 @@ Flowershow supports 12 different Obsidian callout types (with aliases) like note
 🔍 To learn more about the Obsidian extensions refer to the [Obsidian Help site](https://help.obsidian.md/How+to/Format+your+notes). 
 </div>
 
-### ✅ PDF embedding
+### PDF embedding
 
 **Example:**
 
