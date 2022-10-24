@@ -72,7 +72,6 @@ import { WhatIsFlowershow } from "components/custom/WhatIsFlowershow.jsx"
   </div>
 </div>
 
-
 {/** Flowershow publish **/}
 
 <div className="py-10 sm:px-2 lg:relative lg:px-0" id="how">

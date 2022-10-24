@@ -435,7 +435,7 @@ cd templates/default/components
 ln -s <path-to-your-components-folder> custom
 ```
 
-`custom` can be any name of your choice. It will then be a part of the import path, e.g. `import { MyComponent } from 'components/custom/MyComponent.jsx'`. 
+`custom` can be any name of your choice. It will then be a part of the import path, e.g. `import { MyComponent } from 'components/custom/MyComponent.jsx'`.
 
 Now, your custom components can be imported using this path:
 

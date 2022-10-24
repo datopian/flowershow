@@ -29,6 +29,7 @@ In order to embed files (e.g. images or pdfs) in your markdown files, you will a
 > If you're an Obsidian user, you can set this folder as an attachments folder, by right-clicking on it in the sidebar on the left hand side. This way all embedded files will be saved to this folder automatically when you copy them to your notes.
 
 You can create this folder by running:
+
 ```bash
 mkdir my-digital-garden/assets #this can be any other name
 ```
@@ -52,7 +53,7 @@ So, let's imagine you have the following folder structure:
 
 If you want to install Flowershow in `some-parents-dir` you can either:
 
-1) go to that directory and run `npx flowershow install`
+1. go to that directory and run `npx flowershow install`
 
 ```sh
 cd some-parent-dir
@@ -65,7 +66,7 @@ You'll be asked to confirm if you want to install it in the current directory.
 ? Create Flowershow project in current directory? Yes
 ```
 
-2) ...or you can pass this directory as an argument to the install command.
+2. ...or you can pass this directory as an argument to the install command.
 
 ```sh
 npx flowershow install some-parent-dir
@@ -78,10 +79,10 @@ After running install command you'll be shown a set of prompts, that will allow 
 my-digital-garden
 
 ? Select a folder with your assets (attachments) (Use arrow keys)
-❯ assets 
+❯ assets
   ──────────────
-  I don't need assets folder 
-  Cancel 
+  I don't need assets folder
+  Cancel
 
 🌷 Installing Flowershow template in /home/me/some-parent-dir/.flowershow
 ⏳ Installing Flowershow dependencies...
@@ -144,6 +145,7 @@ It will create a `.flowershow/out` folder with static files.
 This part is up to you. Flowershow is Next.js based, so you can use any of these hosting providers: Vercel, Cloudflare, Netlify, and others to deploy your website.
 
 Sources you may find useful:
+
 - [How to deploy a Next.js site with Vercel](https://vercel.com/guides/deploying-nextjs-with-vercel)
 - [How to deploy a Next.js site with Cloudflare](https://developers.cloudflare.com/pages/framework-guides/deploy-a-nextjs-site/)
 - [How to deploy a Next.js site with Netlify](https://www.netlify.com/blog/2020/11/30/how-to-deploy-next.js-sites-to-netlify/)

@@ -103,7 +103,6 @@ a[I want to self-publish]
 b[I want to cloud publish]
 ```
 
-
 Option 1: "NextJS template option"
 
 Best:
@@ -119,7 +118,6 @@ git add .flowershow/*
 
 # configure nextjs build on vercel, netlify, github actions, (❌ cloudflare because issues with symlink and root folders)
 ```
-
 
 Option 2: "Flowershow as a build tool"
 

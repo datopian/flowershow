@@ -77,7 +77,6 @@ const config = {
 > [!note]
 > It is advised to upload an image with the same width and height values as specified above for it to display properly.
 
-
 ### Set per-page social media meta tag image
 
 If required, each page can have its own custom image when sharing on social media sites and can be setup by adding the path of the url to the image in page's frontmatter.

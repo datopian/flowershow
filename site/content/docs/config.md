@@ -18,9 +18,9 @@ const userConfig = {
   // links to the pages you want to link to in the navbar
   navLinks: [{ href: "/about", name: "About" }],
   // any folders/files that you want to exclude from being published; all other files in your content folder will be published
-  contentExclude: ['docs/testpage.md'],
+  contentExclude: ["docs/testpage.md"],
   // publish only these folders/files in your content folder (you can combine contentInclude and contentExclude)
-  contentInclude: ['docs'],
+  contentInclude: ["docs"],
 };
 
 export default userConfig;
