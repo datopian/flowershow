@@ -23,6 +23,8 @@ const sharedFields = {
   layout: { type: "string", default: "docs" },
   editLink: { type: "boolean" },
   isDraft: { type: "boolean" },
+  // TODO document usage of data field
+  data: { type: "list", of: { type: "string" }, default: [] },
 };
 
 const computedFields = {

@@ -1,4 +1,5 @@
-/.contentlayer
+.contentlayer
 .next
+out
 .changeset
 **/*/.obsidian

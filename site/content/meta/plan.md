@@ -29,7 +29,7 @@ publishing[Publishing System]
 comms[Comms]
 ```
 
-- Template (app): core flowershow template app that provides all the render functionality 
+- Template (app): core flowershow template app that provides all the render functionality
 - Publishing
   - Tooling (CLI etc)
   - Cloud
@@ -49,7 +49,7 @@ Backlog
   - [ ] **Milestone X**: cloud publishing
 - [ ] App
   - [ ] **Milestone X**: data literate documents
-  - [ ] **Milestone X**: feature X, Y, Z  e.g. youtube previews, etc
+  - [ ] **Milestone X**: feature X, Y, Z e.g. youtube previews, etc
   - [ ] proper database of docs with network graph
 - [ ] Try-outs
   - [ ] Milestone X: publishing flowershow.app with flowershow publisher
@@ -91,7 +91,7 @@ Key Question 2022-07-11: to what extent do we care about MDX and theming support
 
 Target: 19 July 2022
 
-Goal:  Elegant website with signup
+Goal: Elegant website with signup
 
 ```mermaid
 graph TD

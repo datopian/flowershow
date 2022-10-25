@@ -22,6 +22,8 @@
   "rules": {
     "consistent-return": "warn",
     "global-require": "warn",
+    "no-await-in-loop": "warn",
+    "no-restricted-syntax": "warn",
     "no-unused-vars": "error",
     "prettier/prettier": "error",
     "import/no-default-export": "error",
