@@ -38,6 +38,8 @@ The table of contents will only include headings placed below the `Table of cont
 
 Flowershow supports adding a Table of Contents (ToC) sidebar (RHS) to your pages which can be easily setup in your config file.
 
+![[rhs-toc.jpg]]
+
 ### ToC on all pages
 To enable ToC on all the markdown pages (except homepage), simply set the table of contents variable to true in your config file as seen below:
 
@@ -49,16 +51,12 @@ const config = {
 }
 ```
 
-### ToC for custom pages/folders
+### Disable/Enable ToC for page
 
-Sometimes there is a need for table of contents only on specific pages, for example docs or blog pages. Flowershow also supports enabling ToC only for these specific defined page/pages by passing that directory or path from your content folder in an array as seen below.
+You can also add/remove table of contents for specific pages by setting  `toc` to **true** or **false** in the page's frontmatter like below.
 
-```js
-// config.js
-
-const config = {
-  tableOfContents: ["docs", "blog", "about"]
-}
+```md
+---
+toc: true
+---
 ```
-
-The above will render the ToC only for docs, blog and about page.
