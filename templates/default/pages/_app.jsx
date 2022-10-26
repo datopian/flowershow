@@ -17,25 +17,19 @@ import "../styles/prism.css";
 function collectHeadings(nodes) {
   const sections = [];
 
-  Array.from(nodes).map((node) => {
-    // create toc with h2 and h3 elements
-    if (node.tagName === "H2" || node.tagName === "H3") {
-      const { id, innerText: title } = node;
-      if (id && title) {
-        if (node.tagName === "H3") {
-          if (sections[sections.length - 1]) {
-            return sections[sections.length - 1].children.push({
-              id,
-              title,
-            });
-          }
-        } else {
-          return sections.push({ id, title, children: [] });
-        }
-      }
+  Array.from(nodes).forEach((node) => {
+    const { id, innerText: title, tagName: level } = node;
+    if (!(id && title)) {
+      return;
+    }
+    if (level === "H3") {
+      const parentSection = sections[sections.length - 1];
+      if (parentSection) parentSection.children.push({ id, title });
+    } else if (level === "H2") {
+      sections.push({ id, title, children: [] });
     }
 
-    return sections.push(...collectHeadings(node.children ?? []));
+    sections.push(...collectHeadings(node.children ?? []));
   });
 
   return sections;
@@ -59,7 +53,7 @@ function MyApp({ Component, pageProps }) {
   const [tableOfContents, setTableOfContents] = useState([]);
 
   useEffect(() => {
-    const headingNodes = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+    const headingNodes = document.querySelectorAll("h2,h3");
     const toc = collectHeadings(headingNodes);
     setTableOfContents(toc ?? []);
   }, [router.asPath]); // update table of contents on route change with next/link
