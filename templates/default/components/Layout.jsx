@@ -29,14 +29,12 @@ function useTableOfContents(tableOfContents) {
     function onScroll() {
       const top = window.scrollY + 4.5;
       let current = headings[0].id;
-      // for (const heading of headings) {
       headings.map((heading) => {
         if (top >= heading.top) {
           current = heading.id;
         }
         return current;
       });
-      // }
       setCurrentSection(current);
     }
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -50,14 +48,9 @@ function useTableOfContents(tableOfContents) {
 }
 
 export function Layout({ children, tableOfContents }) {
-  const { editLink, _raw } = children.props;
+  const { editLink, toc, _raw } = children.props;
   /* if editLink is not set in page frontmatter, link bool value will depend on siteConfig.editLinkShow */
   const editUrl = `${siteConfig.repoRoot}${siteConfig.repoEditPath}${_raw?.sourceFilePath}`;
-
-  const showToc = Array.isArray(siteConfig.tableOfContents)
-    ? siteConfig.tableOfContents.includes(_raw?.sourceFileDir) ||
-      siteConfig.tableOfContents.includes(_raw?.flattenedPath)
-    : _raw?.flattenedPath;
 
   const currentSection = useTableOfContents(tableOfContents);
 
@@ -166,7 +159,7 @@ export function Layout({ children, tableOfContents }) {
         </footer>
       </div>
       {/** TABLE OF CONTENTS */}
-      {siteConfig.tableOfContents && tableOfContents.length > 0 && showToc && (
+      {tableOfContents.length > 0 && (toc ?? siteConfig.tableOfContents) && (
         <div className="hidden xl:fixed xl:right-0 xl:top-[4.5rem] xl:block xl:w-1/5 xl:h-[calc(100vh-4.5rem)] xl:flex-none xl:overflow-y-auto xl:py-16 xl:pr-6 xl:mb-16">
           <nav aria-labelledby="on-this-page-title" className="w-56">
             <h2 className="font-display text-md font-medium text-slate-900 dark:text-white">
