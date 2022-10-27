@@ -29,7 +29,7 @@ function useTableOfContents(tableOfContents) {
     function onScroll() {
       const top = window.scrollY + 4.5;
       let current = headings[0].id;
-      headings.map((heading) => {
+      headings.forEach((heading) => {
         if (top >= heading.top) {
           current = heading.id;
         }
