@@ -41,7 +41,7 @@ Flowershow supports adding a Table of Contents (ToC) sidebar (RHS) to your pages
 ![[rhs-toc.jpg]]
 
 ### ToC on all pages
-To enable ToC on all the markdown pages (except homepage), simply set the table of contents variable to true in your config file as seen below:
+To enable ToC on all the markdown pages, simply set a `tableOfContents` variable to true in your config file as shown below:
 
 ```js
 // config.js
