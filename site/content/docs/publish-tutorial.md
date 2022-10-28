@@ -47,13 +47,13 @@ In order to build your beautiful personal website out of your digital garden, yo
 
 So, let's imagine you have the following folder structure:
 
-> ```sh
-> some-parent-dir
-> ├── my-digital-garden
-> │   ├── assets
-> │   └── index.md
-> └── ...
-> ```
+```sh
+some-parent-dir
+├── my-digital-garden
+│   ├── assets
+│   └── index.md
+└── ...
+```
 
 If you want to install Flowershow in `some-parents-dir` you can either:
 
@@ -94,15 +94,15 @@ my-digital-garden
 
 At the end you should see `.flowershow` folder created in the target directory. In our example the folder structure will look like this:
 
-> ```sh
-> some-parent-dir
-> ├── my-digital-garden
-> │   ├── assets
-> │   ├── config.js
-> │   └── index.md
-> ├── .flowershow
-> └── ...
-> ```
+```sh
+some-parent-dir
+├── my-digital-garden
+│   ├── assets
+│   ├── config.js
+│   └── index.md
+├── .flowershow
+└── ...
+```
 
 Note that `config.js` and `index.md` files will be created automatically if they didn't exsist in your digital garden folder yet. The config file will allow you to do some basic configurations of your Flowershow app. See [[config|this guide]] to learn more.
 
