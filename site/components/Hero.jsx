@@ -54,8 +54,9 @@ export function Hero() {
                 </button>
               </form>
               <p className="mt-3 text-sm text-slate-400 dark:text-slate-300 sm:mt-4">
-                We are actively trialling and developing Flowershow. If
-                you'd like to get notified about our progress and important updates, please sign up.
+                We are actively trialling and developing Flowershow. If you'd
+                like to get notified about our progress and important updates,
+                please sign up.
               </p>
             </div>
             <p className="my-10 text-l tracking-wide">
