@@ -2,8 +2,6 @@
 title: How to (self) publish your digital garden with Flowershow
 ---
 
-## Table of contents
-
 ## Prepare the content
 
 > [!warning] OS

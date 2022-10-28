@@ -28,7 +28,7 @@ Hiding content wrapped in double `%`. (Currently parsed as plain text and displ
 
 Support (and different styling) for different callout types.
 
-### Table of contents
+### ToC
 
 Auto injecting a table of contents on top of pages specified by the user.
 
