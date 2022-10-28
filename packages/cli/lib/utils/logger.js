@@ -18,3 +18,7 @@ export const error = (msg) => {
 export const success = (msg) => {
   console.log(`${chalk.blue('🎊')} ${msg}`);
 }
+
+export const warn = (msg) => {
+  console.log(`${chalk.red('⚠')} ${msg}`);
+}

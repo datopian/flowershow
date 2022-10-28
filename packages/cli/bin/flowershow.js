@@ -1,12 +1,18 @@
 #!/usr/bin/env node
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
+import { warn, log } from '../lib/utils/index.js';
 
-import { Command } from "commander";
+import os from 'os';
 
+if (os.platform() === 'win32') {
+  warn("This may not work as expected. You're trying to run Flowreshow CLI on Windows, which is not supported yet...");
+}
 
 // TODO check current vs required node version (package.json engines)
 // const requiredNodeVersion = require("../package.json").engines.node;
+
+import { Command } from "commander";
 
 const program = new Command();
 
