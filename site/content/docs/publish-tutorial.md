@@ -57,11 +57,11 @@ So, let's imagine you have the following folder structure:
 
 If you want to install Flowershow in `some-parents-dir` you can either:
 
-1. go to that directory and run `npx flowershow install`
+1. go to that directory and run `npx flowershow@latest install`
 
 ```sh
 cd some-parent-dir
-npx flowershow install
+npx flowershow@latest install
 ```
 
 You'll be asked to confirm if you want to install it in the current directory.
@@ -73,7 +73,7 @@ You'll be asked to confirm if you want to install it in the current directory.
 2. ...or you can pass this directory as an argument to the install command.
 
 ```sh
-npx flowershow install some-parent-dir
+npx flowershow@latest install some-parent-dir
 ```
 
 After running install command you'll be shown a set of prompts, that will allow you to properly setup Flowershow with your digital garden.
