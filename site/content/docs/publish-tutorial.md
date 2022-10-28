@@ -6,6 +6,10 @@ title: How to (self) publish your digital garden with Flowershow
 
 ## Prepare the content
 
+> [!warning] OS
+> Flowershow CLI is not yet supported on Windows.
+> See [this issue](https://github.com/flowershow/flowershow/issues/234) to learn about the progress on it so far.
+
 > [!note] Pre-requisites
 > [Node.js](https://nodejs.org/en/) installed
 
