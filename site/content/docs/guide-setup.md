@@ -1,10 +1,12 @@
 ---
-created: 2022-06-26
+type: Blog
 title: Setup Guide (Alpha Users)
-date: 2022-07-18
-author: [rufuspollock, olayway]
-type: blog
+authors: [rufuspollock, olayway]
+created: 2022-06-26
+last-updated: 2022-07-18
 ---
+
+⚠ Old tutorial for alpha users, do not use
 
 <div className="border-2 border-slate-400 rounded-md px-4 mb-2">
 🚧 The following steps describe the current, temporary process of testing Flowershow. In the future, many of these tasks will be done by the CLI tool.

@@ -1,6 +1,6 @@
 ---
 title: I'm an example blog post
-date: 2022-07-19
+created: 2022-07-19
 authors: [John Doe]
 type: Blog
 ---
