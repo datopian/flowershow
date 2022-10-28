@@ -9,33 +9,9 @@ Flowershow is an open-source tool for easily converting your markdown files into
 Flowershow supports **CommonMark** and **GitHub Flavored Markdown**, but also many **Obsidian-specific syntax elements**, like internal links or footnotes[^1].
 [^1]: Support for some GFM and Obsidian-specific syntax elements is still a work in progress. See our [[roadmap]] to learn more.
 
-## Getting Started
+## Tutorials
 
-🚧 Coming soon! 🚧
-
-We are actively trialling Flowershow before wide release. If you'd like to help us test or be first on the list to use it please sign up:
-
-<form method="POST" name="get-updates" data-netlify="true" action="/subscribed" className="mt-3 sm:flex">
-  <label htmlFor="email" className="sr-only">
-    Email address
-  </label>
-  <input
-    name="email"
-    type="email"
-    required="required"
-    placeholder="Enter your email"
-    className="block w-full px-2 py-4 sm:py-0 text-base rounded-md bg-slate-200 dark:bg-slate-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900 sm:flex-1"
-  />
-  <input type="hidden" name="form-name" value="get-updates" />
-  <button type="submit"
-    className="mt-3 w-full px-6 py-3 border border-transparent text-base font-medium rounded-md text-slate-900 bg-sky-300
-      hover:bg-sky-200 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300/50 active:bg-sky-500 sm:mt-0 sm:ml-3 sm:flex-shrink-0 sm:inline-flex sm:items-center sm:w-auto [&>p]:m-0"
-    >
-      Notify me
-  </button>
-</form>
-
-NB: Flowershow is already fully functional and in use on several sites -- including this one!
+1. [[publish-tutorial| How to (self) publish your markdown files with Flowershow]]
 
 ## Guides
 
@@ -52,6 +28,3 @@ NB: Flowershow is already fully functional and in use on several sites -- includ
 11. [[theme|Dark-light theme]]
 12. [[search|Full-text search]]
 
-## Tutorials
-
-1. [[publish-tutorial| How to (self) publish your markdown files with Flowershow]]
