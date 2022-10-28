@@ -12,6 +12,7 @@ export const config = {
   repoRoot: "https://github.com/flowershow/flowershow",
   repoEditPath: "/edit/main/site/content/",
   editLinkShow: false,
+  tableOfContents: true,
   analytics: "G-RQWLTRWBS2",
   navLinks: [
     { href: "/#overview", name: "Overview" },
