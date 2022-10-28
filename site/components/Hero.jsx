@@ -46,7 +46,7 @@ export function Hero() {
                   placeholder="Your email"
                   className="block w-full mt-3 sm:flex-auto sm:w-64 sm:mt-0 sm:ml-3 px-2 py-3 text-base rounded-md bg-slate-200 dark:bg-slate-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900"
                 />
-                {/* <input type="hidden" name="form-name" value="get-updates" /> */}
+                <input type="hidden" name="form-name" value="get-updates" />
                 <button
                   type="submit"
                   className="flex-none mt-3 px-6 py-3 border border-transparent text-base font-medium rounded-md text-slate-900 bg-sky-300 hover:bg-sky-200 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300/50 active:bg-sky-500 sm:mt-0 sm:ml-3">
