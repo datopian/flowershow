@@ -26,7 +26,7 @@ export function Hero() {
                 data-netlify="true"
                 action="/subscribed"
                 className="mt-3 sm:flex">
-                <label htmlFor="email" className="sr-only">
+                <label htmlFor="name" className="sr-only">
                   Name
                 </label>
                 <input
