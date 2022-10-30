@@ -1,25 +1,21 @@
 ---
-type: Blog
-title: Setup Guide (Alpha Users)
+title: Flowershow Setup Guide v0.0.1 for Alpha Users (June 2022)
 authors: [rufuspollock, olayway]
 created: 2022-06-26
 last-updated: 2022-07-18
 ---
 
-⚠ Old tutorial for alpha users, do not use
+> [!warning]
+> Please see the [[docs/publish-tutorial|new publishing tutorial]]. This is an old tutorial for alpha users that is now out of date. 
 
-<div className="border-2 border-slate-400 rounded-md px-4 mb-2">
-🚧 The following steps describe the current, temporary process of testing Flowershow. In the future, many of these tasks will be done by the CLI tool.
-</div>
+> [!note]
+> 🚧 The following steps describe the current, temporary process of using Flowershow (as of June 2022). In the future, many of these tasks will be done by the CLI tool.
 
-<div className="border-2 border-slate-400 rounded-md px-4 pb-3 mb-3">
-❕ **Pre-requisites**
-- [Node.js](https://nodejs.org/en/) installed
-- [Git](https://git-scm.com/) installed
-</div>
+> [!info] Pre-requisites
+> - [Node.js](https://nodejs.org/en/) installed
+> - [Git](https://git-scm.com/) installed
 
-Currently, there is only one starter template - the default template[^2]. The fastest way to use it to bootstrap your website is:
-[^2]: We plan to develop a few different starter templates so that you can pick the one that suits your needs and style most. See our [[roadmap]] to learn more.
+Currently, there is only one starter template - the default template. The fastest way to use it to bootstrap your website is:
 
 ```bash
 npx create-next-app@latest -e https://github.com/flowershow/flowershow/tree/main/templates/default

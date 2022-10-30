@@ -1,5 +1,5 @@
 ---
-title: How to (self) publish your digital garden with Flowershow
+title: Self publish your digital garden with Flowershow
 ---
 
 ## Prepare the content
