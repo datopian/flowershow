@@ -1,4 +1,4 @@
-import { config } from "../content/config";
+import config from "../content/config";
 
 const defaultConfig = {
   title: "Flowershow",
