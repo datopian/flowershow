@@ -7,7 +7,7 @@ Flowershow supports setting common configuration values using a `config.js` file
 Example of configuration in `your-content-dir/config.js`:
 
 ```js
-const userConfig = {
+const config = {
   title: "My Awesome Blog",
   description: "This is my awesome blog built with Flowershow",
   author: "John",
@@ -23,7 +23,7 @@ const userConfig = {
   contentInclude: ["docs"],
 };
 
-export default userConfig;
+export default config;
 ```
 
 ## Navbar

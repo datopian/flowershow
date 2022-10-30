@@ -1,4 +1,4 @@
-export const config = {
+const config = {
   title: "Flowershow",
   description: "Publish your digital garden",
   author: "Flowershow",
@@ -52,3 +52,5 @@ export const config = {
     },
   },
 };
+
+export default config;
