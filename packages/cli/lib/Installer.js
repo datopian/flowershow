@@ -8,12 +8,12 @@ import degit from 'degit';
 import { execa } from 'execa';
 import inquirer from 'inquirer';
 
-import { exit, error, log, success, logWithSpinner, stopSpinner, pauseSpinner, resumeSpinner } from './utils/index.js';
+import { exit, error, log, info, success, logWithSpinner, stopSpinner, pauseSpinner, resumeSpinner } from './utils/index.js';
 
 import { FLOWERSHOW_FOLDER_NAME } from './const.js';
 
 
-export default class Creator {
+export default class Installer {
   constructor(context, targetDir, template = 'default') {
     this.context = context;
     this.targetDir = targetDir;
@@ -112,8 +112,21 @@ export default class Creator {
       exit(0)
     }
 
-    // install flowershow template
-    logWithSpinner({ symbol: '🌷', msg: `Installing Flowershow template in ${chalk.magenta(flowershowDir)}...` });
+    // // if there is no index.md file, create one
+    if (!fs.existsSync(`${contentPath}/index.md`)) {
+      info(`No index.md file found in ${contentDir}. Flowershow will create one for you.`)
+      const homePageContent = '# Welcome to my Flowershow site!';
+      fs.writeFile(`${contentPath}/index.md`, homePageContent, { flag: 'a' }, err => {});
+    }
+
+    // // if there is no config.js file, create one
+    if (!fs.existsSync(`${contentPath}/config.js`)) {
+      info(`No config.js file found in ${contentDir}. Flowershow will create one for you.`)
+      fs.writeFile(`${contentPath}/config.js`, '{}', { flag: 'a' }, err => {});
+    }
+
+    // create flowershow template
+    logWithSpinner({ symbol: '🌷', msg: `Creating Flowershow template in ${chalk.magenta(flowershowDir)}` });
 
     if (existsAction === 'overwrite') {
       fs.rmSync(flowershowDir, { recursive: true, force: true });
@@ -123,34 +136,26 @@ export default class Creator {
       const emitter = degit(templateRepo);
       await emitter.clone(flowershowDir);
     } catch {
-      error(`Failed to install Flowershow template in ${flowershowDir}.`)
+      error(`Failed to create Flowershow template in ${flowershowDir}.`)
       exit(1);
     }
 
     // update content and assets symlinks
     fs.unlinkSync(`${flowershowDir}/content`);
-    fs.symlinkSync(contentDir, `${flowershowDir}/content`);
+    const contentSymlinkPath = path.relative(`${flowershowDir}`, contentDir);
+    fs.symlinkSync(contentSymlinkPath, `${flowershowDir}/content`);
 
     fs.unlinkSync(`${flowershowDir}/public/assets`);
     if (assetsFolder !== 'none') {
-      fs.symlinkSync(path.resolve(contentDir, assetsFolder), `${flowershowDir}/public/${assetsFolder}`);
-    }
-
-    // // if there is no index.md file, create one
-    if (!fs.existsSync(`${contentPath}/index.md`)) {
-      const homePageContent = '# Welcome to my Flowershow site!';
-      fs.writeFile(`${contentPath}/index.md`, homePageContent, { flag: 'a' }, err => {});
-    }
-
-    // // if there is no config.js file, create one
-    if (!fs.existsSync(`${contentPath}/config.js`)) {
-      fs.writeFile(`${contentPath}/config.js`, '{}', { flag: 'a' }, err => {});
+      const assetsSymlinkPath = path.relative(`${flowershowDir}/public`, `${contentDir}/${assetsFolder}`);
+      fs.symlinkSync(assetsSymlinkPath, `${flowershowDir}/public/${assetsFolder}`);
     }
 
     // install flowershow dependencies
-    logWithSpinner({ symbol: '🌸', msg: `Installing Flowershow dependencies...` });
+    logWithSpinner({ symbol: '🌸', msg: `Installing Flowershow dependencies` });
 
     try {
+      // TODO temporary solution; after monorepo setup this line will be removed
       await execa('npm', [ 'set-script', 'prepare', '' ], { cwd: flowershowDir });
       const { stdout, stderr } = await execa('npm', [ 'install'], { cwd: flowershowDir });
       log(stdout);
@@ -159,7 +164,7 @@ export default class Creator {
       success("Successfuly installed Flowershow!")
     } catch (err) {
       error(
-        `Installing dependencies failed: ${err.message}`
+        `Failed to install Flowershow dependencies: ${err.message}`
       );
       exit(err.exitCode);
     }
