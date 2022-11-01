@@ -37,8 +37,8 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "mkdir -p coverage/packages/cli",
-          "packages/cli/src/e2e/bats/bin/bats packages/cli/src/e2e/test.bats -o coverage/packages/cli --verbose-run"
+          "mkdir -p coverage/packages/cli-e2e",
+          "packages/cli/src/e2e/bats/bin/bats packages/cli/src/e2e/test.bats -o coverage/packages/cli-e2e --verbose-run"
         ]
       },
       "inputs": [
