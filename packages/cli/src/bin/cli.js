@@ -17,8 +17,8 @@ import { Command } from "commander";
 const program = new Command();
 
 program
-  .description('(Package under development)\nCLI tool for creating, publishing and upgrading Flowershow apps')
-  .version(require("../package.json").version)
+  .description('CLI tool for creating, publishing and upgrading Flowershow apps')
+  .version(require("../../package.json").version)
   .usage('<command> [options]')
 
 // choose template

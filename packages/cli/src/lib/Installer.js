@@ -21,7 +21,7 @@ export default class Creator {
   }
 
   get templateRepo() {
-    const flowershowRepo = require('../package.json').repository.url.replace("git+", "");
+    const flowershowRepo = require('../../package.json').repository.url.replace("git+", "");
     return `${flowershowRepo}/templates/${this.template}`
   }
 
