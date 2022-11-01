@@ -1,23 +1,28 @@
 {
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "@nrwl/nx-cloud",
-      "options": {
-        "cacheableOperations": [
-          "test",
-          "build",
-          "export",
-          "lint",
-          "format"
-        ],
-        "accessToken": "Mzc4ZDcxNTItN2I3NC00ZjE5LWJkZTItZDVmZWYzNGUzNDg3fHJlYWQtd3JpdGU="
-      }
-    }
+  "npmScope": "flowershow",
+  "affected": {
+    "defaultBase": "main"
+  },
+  "workspaceLayout": {
+    "libsDir": "packages"
+  },
+  "implicitDependencies": {},
+  "namedInputs": {
+    "default": [
+      "{projectRoot}/**/*"
+    ],
+    "production": [
+      "!{projectRoot}/**/*.spec.js"
+    ]
   },
   "targetDefaults": {
     "build": {
       "dependsOn": [
         "^build"
+      ],
+      "inputs": [
+        "production",
+        "^production"
       ],
       "outputs": [
         "{projectRoot}/.next"
@@ -30,7 +35,51 @@
       "outputs": [
         "{projectRoot}/out"
       ]
+    },
+    "e2e": {
+      "dependsOn": [
+        "build",
+        "^build"
+      ],
+      "inputs": [
+        "default",
+        "^production",
+        "{workspaceRoot}/playwright.config.*js"
+      ]
+    },
+    "test": {
+      "inputs": [
+        "default",
+        "^production",
+        "{workspaceRoot}/jest.preset.js"
+      ]
+    },
+    "lint": {
+      "inputs": [
+        "default",
+        "{workspaceRoot}/.eslintrc.json"
+      ]
+    },
+    "lint:fix": {
+      "inputs": [
+        "default",
+        "{workspaceRoot}/.eslintrc.json"
+      ]
     }
   },
-  "defaultBase": "main"
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "cacheableOperations": [
+          "build",
+          "export",
+          "lint",
+          "test",
+          "e2e"
+        ],
+        "accessToken": "NTIyNWIwMjktMTA2NS00ODRjLTg3YTktZTU0NjVmZGI4MDlifHJlYWQtd3JpdGU="
+      }
+    }
+  }
 }
