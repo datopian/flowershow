@@ -25,20 +25,14 @@
         "passWithNoTests": true
       }
     },
-    "build": {
-      "executor": "@nrwl/js:tsc",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+    "e2e": {
+      "executor": "nx:run-commands",
       "options": {
-        "outputPath": "dist/packages/cli",
-        "tsConfig": "packages/cli/tsconfig.lib.json",
-        "packageJson": "packages/cli/package.json",
-        "main": "packages/cli/src/index.js",
-        "assets": [
-          "packages/cli/*.md"
-        ]
-      }
+        "command": "./e2e/bats/bin/bats ./e2e/test.bats --verbose-run"
+      },
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ]
     }
   },
   "tags": []
