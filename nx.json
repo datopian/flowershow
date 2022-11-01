@@ -19,6 +19,14 @@
     ]
   },
   "targetDefaults": {
+    "install": {
+      "inputs": [
+        "{projectRoot}/package.json"
+      ],
+      "outputs": [
+        "{projectRoot}/node_modules"
+      ]
+    },
     "build": {
       "dependsOn": [
         "^build"
@@ -75,6 +83,7 @@
       "runner": "@nrwl/nx-cloud",
       "options": {
         "cacheableOperations": [
+          "install",
           "build",
           "export",
           "lint",

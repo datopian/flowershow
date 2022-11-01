@@ -3,7 +3,7 @@
   "version": "0.0.7",
   "description": "Publish your digital garden",
   "bin": {
-    "flowershow": "src/bin/flowershow.js"
+    "flowershow": "src/bin/cli.js"
   },
   "repository": {
     "type": "git",
