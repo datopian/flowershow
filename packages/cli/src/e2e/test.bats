@@ -32,7 +32,7 @@ teardown() {
     assert_output --partial "Successfuly installed"
     assert [ -d .flowershow/node_modules ]
 
-    run flowershow.js preview & sleep 20
+    run cli.js preview & sleep 20
     assert_success
     run curl "http://localhost:3000"
     # kill the process before testing the output
@@ -48,7 +48,7 @@ teardown() {
     assert_output --partial "Successfuly installed"
     assert [ -d .flowershow/node_modules ]
 
-    run flowershow.js build
+    run cli.js build
     assert_success
     run [ -d .flowershow/.next ]
     assert_success
@@ -77,7 +77,7 @@ teardown() {
     run [ -d .flowershow/node_modules ]
     assert_success
 
-    run flowershow.js build-static
+    run cli.js build-static
     assert_success
     assert [ -d .flowershow/out ]
     cd .flowershow
