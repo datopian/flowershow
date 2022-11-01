@@ -36,13 +36,16 @@
     "e2e": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "packages/cli/src/e2e/bats/bin/bats packages/cli/src/e2e/test.bats --verbose-run"
+        "commands": [
+          "mkdir -p coverage/packages/cli",
+          "packages/cli/src/e2e/bats/bin/bats packages/cli/src/e2e/test.bats -o coverage/packages/cli --verbose-run"
+        ]
       },
       "inputs": [
-        "production", {"env": "NETLIFY_TOKEN"}
+        "production", "{projectRoot}/src/e2e/.env", {"env": "NETLIFY_TOKEN"}
       ],
       "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
+        "coverage/packages/cli"
       ],
       "dependsOn": [
         { "projects": "self", "target": "install" }
