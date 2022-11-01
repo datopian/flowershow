@@ -6,11 +6,11 @@
 
 You need to have [expect](https://linux.die.net/man/1/expect) installed on your system.
 
-### Running tests
+### Running E2E tests
 
 ``` sh
 git submodule update --init
-npm run test
+nx e2e cli
 ```
 
 You can also run bats directly using `/bats` submodule to run tests with different command options, e.g.:
