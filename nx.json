@@ -70,12 +70,6 @@
         "default",
         "{workspaceRoot}/.eslintrc.json"
       ]
-    },
-    "lint:fix": {
-      "inputs": [
-        "default",
-        "{workspaceRoot}/.eslintrc.json"
-      ]
     }
   },
   "tasksRunnerOptions": {

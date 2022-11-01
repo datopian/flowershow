@@ -139,11 +139,13 @@ export default class Creator {
     // // if there is no index.md file, create one
     if (!fs.existsSync(`${contentPath}/index.md`)) {
       const homePageContent = '# Welcome to my Flowershow site!';
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
       fs.writeFile(`${contentPath}/index.md`, homePageContent, { flag: 'a' }, err => {});
     }
 
     // // if there is no config.js file, create one
     if (!fs.existsSync(`${contentPath}/config.js`)) {
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
       fs.writeFile(`${contentPath}/config.js`, '{}', { flag: 'a' }, err => {});
     }
 
@@ -151,6 +153,7 @@ export default class Creator {
     logWithSpinner({ symbol: '🌸', msg: `Installing Flowershow dependencies...` });
 
     try {
+      // TODO this can be removed after monorepo has been set up correctly
       await execa('npm', [ 'set-script', 'prepare', '' ], { cwd: flowershowDir });
       const { stdout, stderr } = await execa('npm', [ 'install'], { cwd: flowershowDir });
       log(stdout);
