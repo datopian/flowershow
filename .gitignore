@@ -28,6 +28,7 @@ node_modules/
 # misc
 /.angular/cache
 /.sass-cache
+/.eslintcache
 /connect.lock
 /coverage
 /libpeerconnection.log
