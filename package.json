@@ -1,0 +1,8 @@
+{
+  "name": "flowershow",
+  "version": "1.0.0",
+  "devDependencies": {
+    "nx": "15.0.4",
+    "@nrwl/nx-cloud": "latest"
+  }
+}
