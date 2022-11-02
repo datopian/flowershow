@@ -85,7 +85,8 @@ export function Layout({ children, tableOfContents }) {
                   className="flex no-underline font-semibold justify-center"
                   href={editUrl}
                   target="_blank"
-                  rel="noopener noreferrer">
+                  rel="noopener noreferrer"
+                >
                   Edit this page
                   <span className="mx-1">
                     <svg
@@ -94,7 +95,8 @@ export function Layout({ children, tableOfContents }) {
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
-                      strokeWidth="2">
+                      strokeWidth="2"
+                    >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -117,7 +119,8 @@ export function Layout({ children, tableOfContents }) {
                       key={item.name}
                       href={item.href}
                       className="inline-flex items-center mx-4 px-1 pt-1 font-regular hover:text-slate-300 no-underline"
-                      aria-current={item.current ? "page" : undefined}>
+                      aria-current={item.current ? "page" : undefined}
+                    >
                       {item.name}
                     </a>
                   </Link>
@@ -130,7 +133,8 @@ export function Layout({ children, tableOfContents }) {
               href={siteConfig.authorUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center no-underline">
+              className="flex items-center no-underline"
+            >
               {siteConfig.authorLogo && (
                 <img
                   src={siteConfig.authorLogo}
@@ -147,7 +151,8 @@ export function Layout({ children, tableOfContents }) {
               href="https://flowershow.app/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center no-underline">
+              className="flex items-center no-underline"
+            >
               <img
                 src="https://flowershow.app/assets/images/logo.svg"
                 alt="Flowershow"
@@ -175,7 +180,8 @@ export function Layout({ children, tableOfContents }) {
                           isActive(section)
                             ? "text-sky-500"
                             : "font-normal text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300"
-                        }>
+                        }
+                      >
                         {section.title}
                       </a>
                     </Link>
@@ -190,7 +196,8 @@ export function Layout({ children, tableOfContents }) {
                                 isActive(subSection)
                                   ? "text-sky-500"
                                   : "hover:text-slate-600 dark:hover:text-slate-300"
-                              }>
+                              }
+                            >
                               {subSection.title}
                             </a>
                           </Link>

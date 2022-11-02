@@ -34,7 +34,8 @@ export function Pre({ children, ...props }) {
       ref={textInput}
       onMouseEnter={onEnter}
       onMouseLeave={onExit}
-      className="relative">
+      className="relative"
+    >
       {hovered && (
         <button
           aria-label="Copy code"
@@ -44,12 +45,14 @@ export function Pre({ children, ...props }) {
               ? "border-green-400 focus:border-green-400 focus:outline-none"
               : "border-slate-300"
           }`}
-          onClick={onCopy}>
+          onClick={onCopy}
+        >
           <svg
             aria-hidden="true"
             viewBox="-2 -2 20 20"
             fill="currentColor"
-            className={copied ? "text-green-400" : "text-slate-300"}>
+            className={copied ? "text-green-400" : "text-slate-300"}
+          >
             {copied ? (
               <path
                 fillRule="evenodd"

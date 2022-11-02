@@ -23,7 +23,8 @@ export function ThemeSelector() {
         min-w-fit transition duration-500
         ${theme === "dark" ? "grayscale opacity-70" : ""}
       `}
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+    >
       <img
         src={siteConfig.theme.toggleIcon}
         alt="toggle theme"

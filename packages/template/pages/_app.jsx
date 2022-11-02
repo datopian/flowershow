@@ -63,7 +63,8 @@ function MyApp({ Component, pageProps }) {
       disableTransitionOnChange
       attribute="class"
       defaultTheme={siteConfig.theme.default}
-      forcedTheme={siteConfig.theme.default ? null : "light"}>
+      forcedTheme={siteConfig.theme.default ? null : "light"}
+    >
       <DefaultSeo defaultTitle={siteConfig.title} {...siteConfig.nextSeo} />
       {/* Global Site Tag (gtag.js) - Google Analytics */}
       {siteConfig.analytics && (

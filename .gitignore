@@ -43,3 +43,6 @@ Thumbs.db
 
 # Secrets
 *.env
+
+# Next.js
+.next

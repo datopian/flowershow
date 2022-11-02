@@ -8,9 +8,7 @@
   },
   "implicitDependencies": {},
   "namedInputs": {
-    "default": [
-      "{projectRoot}/**/*"
-    ],
+    "default": ["{projectRoot}/**/*"],
     "production": [
       "!{projectRoot}/.eslintrc.json",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
@@ -20,38 +18,20 @@
   },
   "targetDefaults": {
     "install": {
-      "inputs": [
-        "{projectRoot}/package.json"
-      ],
-      "outputs": [
-        "{projectRoot}/node_modules"
-      ]
+      "inputs": ["{projectRoot}/package.json"],
+      "outputs": ["{projectRoot}/node_modules"]
     },
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "inputs": [
-        "production",
-        "^production"
-      ],
-      "outputs": [
-        "{projectRoot}/.next"
-      ]
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"],
+      "outputs": ["{projectRoot}/.next"]
     },
     "export": {
-      "dependsOn": [
-        "^export"
-      ],
-      "outputs": [
-        "{projectRoot}/out"
-      ]
+      "dependsOn": ["^export"],
+      "outputs": ["{projectRoot}/out"]
     },
     "e2e": {
-      "dependsOn": [
-        "build",
-        "^build"
-      ],
+      "dependsOn": ["build", "^build"],
       "inputs": [
         "default",
         "^production",
@@ -59,17 +39,10 @@
       ]
     },
     "test": {
-      "inputs": [
-        "default",
-        "^production",
-        "{workspaceRoot}/jest.preset.js"
-      ]
+      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
     },
     "lint": {
-      "inputs": [
-        "default",
-        "{workspaceRoot}/.eslintrc.json"
-      ]
+      "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
     }
   },
   "tasksRunnerOptions": {
@@ -87,5 +60,19 @@
         "accessToken": "YmQ0MTU5NDAtYTcyZi00YjQ1LTk2MzEtZTAzNzE1NTAzMTM2fHJlYWQ="
       }
     }
-  }
+  },
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "babel": true
+      }
+    },
+    "@nrwl/next": {
+      "application": {
+        "style": "scss",
+        "linter": "eslint"
+      }
+    }
+  },
+  "defaultProject": "template"
 }
