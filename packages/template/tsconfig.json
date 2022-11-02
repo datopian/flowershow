@@ -15,7 +15,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "incremental": true,
-    "types": ["jest", "node"]
+    "types": ["jest", "node"],
+    "target": "es6",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "skipLibCheck": true,
+    "module": "esnext",
+    "moduleResolution": "node"
   },
   "include": [
     "**/*.ts",
