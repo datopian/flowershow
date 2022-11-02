@@ -6,9 +6,6 @@ import { MdxPage } from "../components/MDX";
 import { getPageData } from "../lib/getPageData";
 
 export default function Page({ body, data, ...rest }) {
-  if (body.code.includes("<")) {
-    console.log(body.code);
-  }
   const mdxComponent = useMDXComponent(body.code, data);
   const frontMatter = { ...rest };
   return <MdxPage mdxComponent={mdxComponent} frontMatter={frontMatter} />;
