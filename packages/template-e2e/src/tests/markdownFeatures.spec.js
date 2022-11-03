@@ -1,5 +1,5 @@
 const { test, expect } = require("@playwright/test");
-const { MarkdownPage } = require("./markdown-page");
+const { MarkdownPage } = require("../support/markdown-page");
 
 test.describe.parallel("wiki links", () => {
   test.beforeEach(async ({ page }) => {

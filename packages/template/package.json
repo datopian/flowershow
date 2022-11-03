@@ -5,8 +5,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "export": "next build && next export",
-    "test:e2e": "./testsetup.sh && playwright test && ./testteardown.sh"
+    "export": "next build && next export"
   },
   "dependencies": {
     "@docsearch/react": "^3.2.0",

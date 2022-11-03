@@ -1,27 +1,27 @@
 {
   "name": "template-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/template-e2e/src",
-  "projectType": "application",
+  "sourceRoot": "packages/template-e2e/src",
+  "projectType": "library",
   "targets": {
     "e2e": {
-      "executor": "@nrwl/cypress:cypress",
+      "executor": "nx:run-commands",
       "options": {
-        "cypressConfig": "apps/template-e2e/cypress.config.ts",
-        "devServerTarget": "template:serve:development",
-        "testingType": "e2e"
+        "commands": [
+          "src/support/testsetup.sh ../template src/fixtures/content",
+          "playwright test",
+          "src/support/testteardown.sh"
+        ],
+        "parallel": false,
+        "cwd": "packages/template-e2e"
       },
-      "configurations": {
-        "production": {
-          "devServerTarget": "template:serve:production"
-        }
-      }
+      "dependsOn": []
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/template-e2e/**/*.js"]
+        "lintFilePatterns": ["packages/template-e2e/**/*.js"]
       }
     }
   },

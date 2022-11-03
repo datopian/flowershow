@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 const { expect } = require("@playwright/test");
 
 exports.MarkdownPage = class PlaywrightPage {
