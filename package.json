@@ -2,9 +2,7 @@
   "name": "flowershow",
   "version": "1.0.0",
   "scripts": {
-    "prepare": "husky install",
-    "changeset": "changeset",
-    "release": "changeset publish"
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.+(js|jsx)": [

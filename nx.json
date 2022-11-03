@@ -32,11 +32,7 @@
     },
     "e2e": {
       "dependsOn": ["build", "^build"],
-      "inputs": [
-        "default",
-        "^production",
-        "{workspaceRoot}/playwright.config.*js"
-      ]
+      "inputs": ["default", "^production"]
     },
     "test": {
       "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
@@ -49,14 +45,7 @@
     "default": {
       "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": [
-          "install",
-          "build",
-          "export",
-          "lint",
-          "test",
-          "e2e"
-        ],
+        "cacheableOperations": ["install", "build", "export", "lint", "test"],
         "accessToken": "YmQ0MTU5NDAtYTcyZi00YjQ1LTk2MzEtZTAzNzE1NTAzMTM2fHJlYWQ="
       }
     }
