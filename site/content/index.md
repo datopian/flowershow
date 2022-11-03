@@ -133,19 +133,19 @@ import { WhatIsFlowershow } from "components/custom/WhatIsFlowershow.jsx"
 
 Here are some of the cool features that are currently supported by Flowershow, and some that we're intensively working on.
 
-### ✅ Markdown
+### Markdown
 
 Flowershow supports **CommonMark** and **GitHub Flavoured Markdown (GFM)** syntax, e.g. code blocks, blockquotes, lists, tasks lists and tables.
 
 [[docs/syntax|Learn more ➡]]
 
-### ✅ Obsidian wiki links
+### Obsidian wiki links
 
 Flowershow has been designed with Obsidian users in mind and so, currently, it supports internal links to other pages. Links to headings, blocks, and transclusions will also be supported in the future.
 
 [[docs/syntax|Learn more ➡]]
 
-### ✅ Custom page layouts and components
+### Custom page layouts and components
 
 You can customize and create new layouts for your pages.
 
@@ -155,55 +155,35 @@ Also, thanks to MDX support, you can use custom React components within your mar
 
 [[docs/mdx|Learn more ➡]].
 
-### ✅ Tailwind support
+### Tailwind support
 
 Tailwind support makes it easy to style your in-markdown HTML and custom React components.
 
 [[docs/tailwind|Learn more ➡]]
 
-### ✅ Mermaid
+### Mermaid
 
 Displaying Mermaid diagrams within in your notes.
 
 [[docs/mermaid|Learn more ➡]]
 
-### ✅ Math
+### Math
 
 MathJax math exaptions support.
 
 [[docs/math|Learn more ➡]]
 
-### ✅ SEO
+### SEO
 
 Support for for meta tags for SEO and social sharing.
 
 [[docs/seo|Learn more ➡]]
 
-### ✅ CLI tool
+### CLI tool
 
 Our goal is to make using Flowershow as seamless as possible. To facilitate smooth bootsrapping and upgrading your website we're creating a CLI tool, that will take care of all the intricacies related to the whole process of publishing your notes.
 
 [[publish-tutorial|Learn more ➡]]
-
-### 🚧 Knowledge graph
-
-Interactive knowledge graph to see how your notes are interconnected.
-
-### 🚧 Notes previews
-
-Wikipedia-like internal links previews on hover.
-
-### 🚧 Themes
-
-A set of different starter themes to choose from and support for dark/light mode.
-
-### 🚧 Forward links and Backlinks
-
-Lists of forward links used on the page and back links to the page from other pages.
-
-### 🚧 Excalidraw support
-
-Displaying Excalidraw sketches directly in your markdown pages.
 
     👷 There is a lot of other exciting stuff we're working on.
     <a href="/docs/roadmap">Check our roadmap to learn more!</a>
