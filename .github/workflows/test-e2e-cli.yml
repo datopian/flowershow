@@ -14,8 +14,9 @@ jobs:
     name: Node ${{ matrix.node }} test
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
         with:
+          fetch-depth: 0
           submodules: 'recursive'
       - uses: nrwl/nx-set-shas@v3
       - run: npm ci
