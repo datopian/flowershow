@@ -2,16 +2,18 @@
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { withNx } = require("@nrwl/next/plugins/with-nx");
+const { withContentlayer } = require("next-contentlayer");
 
-/**
- * @type {import('@nrwl/next/plugins/with-nx').WithNxOptions}
- **/
-const nextConfig = {
+module.exports = withNx(withContentlayer({
   nx: {
     // Set this to true if you would like to to use SVGR
     // See: https://github.com/gregberge/svgr
     svgr: false,
   },
-};
-
-module.exports = withNx(nextConfig);
+  webpack: (config) => {
+    config.infrastructureLogging = {
+      level: "error",
+    };
+    return config;
+  },
+}));
