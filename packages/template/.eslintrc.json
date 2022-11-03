@@ -5,21 +5,17 @@
     "next/core-web-vitals",
     "../../.eslintrc.json"
   ],
-  "ignorePatterns": ["!**/*", ".next/**/*"],
+  "ignorePatterns": [".obsidian/**/*", ".next/**/*", "out/**/*"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
-        "@next/next/no-html-link-for-pages": ["error", "packages/template/pages"]
+        "@next/next/no-html-link-for-pages": [
+          "error",
+          "packages/template/pages"
+        ],
+        "react/no-unescaped-entities": "warn"
       }
-    },
-    {
-      "files": ["*.ts", "*.tsx"],
-      "rules": {}
-    },
-    {
-      "files": ["*.js", "*.jsx"],
-      "rules": {}
     }
   ],
   "rules": {
