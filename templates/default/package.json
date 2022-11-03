@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "npm run search",
     "start": "next start",
     "export": "next build && next export",
     "lint": "eslint --fix \"**/*.{js,jsx}\"",
@@ -13,7 +14,8 @@
     "contentlayer": "contentlayer build",
     "test:e2e": "./testsetup.sh && playwright test && ./testteardown.sh",
     "changeset": "changeset",
-    "release": "changeset publish"
+    "release": "changeset publish",
+    "search": "cross-env NODE_OPTIONS='--experimental-json-modules' node -r esbuild-register ./scripts/search.mjs"
   },
   "lint-staged": {
     "*.+(js|jsx)": [
@@ -33,6 +35,7 @@
     "date-fns": "^2.29.2",
     "gray-matter": "^4.0.3",
     "hastscript": "^7.0.2",
+    "kbar": "^0.1.0-beta.36",
     "mdx-mermaid": "^2.0.0-rc1",
     "mermaid": "^9.1.4",
     "next": "^12.3.1",
@@ -60,6 +63,8 @@
     "@playwright/test": "^1.22.2",
     "@trivago/prettier-plugin-sort-imports": "^3.3.0",
     "autoprefixer": "^10.4.4",
+    "cross-env": "^7.0.3",
+    "esbuild-register": "^3.3.3",
     "eslint": "^8.23.1",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-next": "^12.3.1",
