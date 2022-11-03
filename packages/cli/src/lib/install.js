@@ -1,10 +1,9 @@
 import fs from 'fs';
 import path from 'path';
-import chalk from 'chalk';
 import inquirer from 'inquirer';
 
 import Installer from './Installer.js';
-import { error, log, exit } from './utils/index.js';
+import { error, exit } from './utils/index.js';
 
 
 export default async function install(dir, options) {

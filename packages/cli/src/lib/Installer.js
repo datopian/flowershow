@@ -8,7 +8,7 @@ import degit from 'degit';
 import { execa } from 'execa';
 import inquirer from 'inquirer';
 
-import { exit, error, log, success, logWithSpinner, stopSpinner, pauseSpinner, resumeSpinner } from './utils/index.js';
+import { exit, error, log, success, logWithSpinner, stopSpinner } from './utils/index.js';
 
 import { FLOWERSHOW_FOLDER_NAME } from './const.js';
 
@@ -25,7 +25,7 @@ export default class Creator {
     return `${flowershowRepo}/templates/${this.template}`
   }
 
-  async install(options) {
+  async install() {
     const { context, targetDir, templateRepo } = this;
     const flowershowDir = path.resolve(targetDir, FLOWERSHOW_FOLDER_NAME)
 
@@ -139,13 +139,13 @@ export default class Creator {
     // // if there is no index.md file, create one
     if (!fs.existsSync(`${contentPath}/index.md`)) {
       const homePageContent = '# Welcome to my Flowershow site!';
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      /* eslint-disable-next-line */
       fs.writeFile(`${contentPath}/index.md`, homePageContent, { flag: 'a' }, err => {});
     }
 
     // // if there is no config.js file, create one
     if (!fs.existsSync(`${contentPath}/config.js`)) {
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      /* eslint-disable-next-line */
       fs.writeFile(`${contentPath}/config.js`, '{}', { flag: 'a' }, err => {});
     }
 

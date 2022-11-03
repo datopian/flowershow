@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
-import { warn, log } from '../lib/utils/index.js';
+import { warn } from '../lib/utils/index.js';
 
 import os from 'os';
 

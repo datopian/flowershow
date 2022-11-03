@@ -48,8 +48,6 @@
         "coverage/packages/cli"
       ],
       "dependsOn": [
-        "default",
-        "^default",
         { "projects": "self", "target": "install" }
       ]
     }

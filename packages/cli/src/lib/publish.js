@@ -3,7 +3,7 @@ import chalk from 'chalk';
 
 const log = console.log;
 
-export default function publish (path, { glob }) {
+export default function publish () {
   log(chalk.redBright.bold('Command under construction...\n'));
   log(chalk.blue(
     'Check ' +
