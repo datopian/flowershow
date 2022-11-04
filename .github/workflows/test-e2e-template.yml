@@ -20,5 +20,6 @@ jobs:
           submodules: 'recursive'
       - uses: nrwl/nx-set-shas@v3
       - run: npm ci
+      - run: npx playwright install --with-deps
       - name: Run tests
         run: npx nx e2e template-e2e
