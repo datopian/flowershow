@@ -9,19 +9,13 @@
       "options": {
         "cache": true,
         "fix": true,
-        "lintFilePatterns": [
-          "packages/cli/**/*.js"
-        ]
+        "lintFilePatterns": ["packages/cli/**/*.js"]
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "jestConfig": "packages/cli/jest.config.js",
         "passWithNoTests": true
@@ -42,14 +36,12 @@
         ]
       },
       "inputs": [
-        "production", "{projectRoot}/src/e2e/.env", {"env": "NETLIFY_TOKEN"}
+        "production",
+        "{projectRoot}/src/e2e/.env",
+        { "env": "NETLIFY_TOKEN" }
       ],
-      "outputs": [
-        "coverage/packages/cli"
-      ],
-      "dependsOn": [
-        { "projects": "self", "target": "install" }
-      ]
+      "outputs": ["coverage/packages/cli"],
+      "dependsOn": [{ "projects": "self", "target": "install" }]
     }
   },
   "tags": []

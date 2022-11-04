@@ -1,25 +1,24 @@
-import fs from 'fs';
-import path from 'path';
-import inquirer from 'inquirer';
+import fs from "fs";
+import path from "path";
+import inquirer from "inquirer";
 
-import Installer from './Installer.js';
-import { error, exit } from './utils/index.js';
-
+import Installer from "./Installer.js";
+import { error, exit } from "./utils/index.js";
 
 export default async function install(dir, options) {
   const currentDir = process.cwd();
-  const inCurrentDir = dir === '.';
+  const inCurrentDir = dir === ".";
 
   if (inCurrentDir) {
     const { ok } = await inquirer.prompt([
       {
         name: "ok",
         type: "confirm",
-        message: "Create Flowershow project in current directory?"
-      }
-    ])
+        message: "Create Flowershow project in current directory?",
+      },
+    ]);
     if (!ok) {
-      return
+      return;
     }
   }
 

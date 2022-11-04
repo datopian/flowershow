@@ -1,54 +1,54 @@
-import ora from 'ora';
-import chalk from 'chalk';
+import ora from "ora";
+import chalk from "chalk";
 
-const spinner = ora({ color: 'magenta' });
+const spinner = ora({ color: "magenta" });
 let lastMsg = null;
-let isPaused = false
+let isPaused = false;
 
 export const logWithSpinner = ({ msg, symbol }) => {
   if (!symbol) {
-    symbol = chalk.green('✔')
+    symbol = chalk.green("✔");
   }
   if (lastMsg) {
     spinner.stopAndPersist({
       symbol: lastMsg.symbol,
-      text: lastMsg.text
-    })
+      text: lastMsg.text,
+    });
   }
-  spinner.text = ' ' + msg
+  spinner.text = " " + msg;
   lastMsg = {
-    symbol: symbol + ' ',
-    text: msg
-  }
-  spinner.start()
-}
+    symbol: symbol + " ",
+    text: msg,
+  };
+  spinner.start();
+};
 
 export const stopSpinner = () => {
   if (!spinner.isSpinning) {
-    return
+    return;
   }
 
   if (lastMsg) {
     spinner.stopAndPersist({
       symbol: lastMsg.symbol,
-      text: lastMsg.text
-    })
+      text: lastMsg.text,
+    });
   } else {
-    spinner.stop()
+    spinner.stop();
   }
-  lastMsg = null
-}
+  lastMsg = null;
+};
 
 export const pauseSpinner = () => {
   if (spinner.isSpinning) {
-    spinner.stop()
-    isPaused = true
+    spinner.stop();
+    isPaused = true;
   }
-}
+};
 
 export const resumeSpinner = () => {
   if (isPaused) {
-    spinner.start()
-    isPaused = false
+    spinner.start();
+    isPaused = false;
   }
-}
+};

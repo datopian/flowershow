@@ -8,14 +8,14 @@ You need to have [expect](https://linux.die.net/man/1/expect) installed on your 
 
 ### Running E2E tests
 
-``` sh
+```sh
 git submodule update --init
 nx e2e cli
 ```
 
 You can also run bats directly using `/bats` submodule to run tests with different command options, e.g.:
 
-``` sh
+```sh
 ./e2e/bats/bin/bats e2e/test.bats --verbose-run --show-output-of-passing-tests
 ```
 
@@ -27,6 +27,6 @@ Tests with `netlify` tag require Netlify personal access token to be set in `NET
 
 If you don't want to run these tests, you can exclude them by running bats manually with the following command:
 
-``` sh
+```sh
 ./e2e/bats/bin/bats e2e/test.bats --filter-tags \!netlify
 ```
