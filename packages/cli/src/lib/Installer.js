@@ -157,23 +157,21 @@ export default class Creator {
     // // if there is no index.md file, create one
     if (!fs.existsSync(`${contentPath}/index.md`)) {
       const homePageContent = "# Welcome to my Flowershow site!";
-      /* eslint-disable-next-line */
       fs.writeFile(
         `${contentPath}/index.md`,
         homePageContent,
         { flag: "a" },
-        (err) => {}
+        (err) => {} // eslint-disable-line no-unused-vars
       );
     }
 
     // // if there is no config.js file, create one
     if (!fs.existsSync(`${contentPath}/config.js`)) {
-      /* eslint-disable-next-line */
       fs.writeFile(
         `${contentPath}/config.js`,
         "{}",
         { flag: "a" },
-        (err) => {}
+        (err) => {} // eslint-disable-line no-unused-vars
       );
     }
 

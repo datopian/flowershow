@@ -30,7 +30,9 @@
       "files": ["*.js", "*.jsx"],
       "extends": ["plugin:@nrwl/nx/javascript"],
       "rules": {
-        "no-unused-vars": "error"
+        "no-unused-vars": "error",
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-empty-function": "off"
       }
     },
     {
