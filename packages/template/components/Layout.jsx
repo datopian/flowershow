@@ -13,14 +13,15 @@ function useTableOfContents(tableOfContents) {
       .flatMap((node) => [node.id, ...node.children.map((child) => child.id)])
       .map((id) => {
         const el = document.getElementById(id);
-        if (!el) return;
+        if (!el) return null;
 
         const style = window.getComputedStyle(el);
         const scrollMt = parseFloat(style.scrollMarginTop);
 
         const top = window.scrollY + el.getBoundingClientRect().top - scrollMt;
         return { id, top };
-      });
+      })
+      .filter((el) => !!el);
   }, []);
 
   useEffect(() => {
