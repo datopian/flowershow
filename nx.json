@@ -9,6 +9,7 @@
   "implicitDependencies": {},
   "namedInputs": {
     "sharedGlobals": [],
+    "siteContent": ["{workspaceRoot}/site"],
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "production": [
       "default",
@@ -20,17 +21,15 @@
   },
   "targetDefaults": {
     "install": {
-      "inputs": ["{projectRoot}/package.json"],
+      "inputs": [
+        "{projectRoot}/package.json",
+        "{projectRoot}/package-lock.json"
+      ],
       "outputs": ["{projectRoot}/node_modules"]
     },
     "build": {
       "dependsOn": ["^build"],
-      "inputs": ["production", "^production"],
-      "outputs": ["{projectRoot}/.next"]
-    },
-    "export": {
-      "dependsOn": ["^export"],
-      "outputs": ["{projectRoot}/out"]
+      "inputs": ["production", "^production"]
     },
     "e2e": {
       "dependsOn": ["build", "^build"],

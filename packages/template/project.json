@@ -7,50 +7,39 @@
     "install": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "npm install --prefix packages/template"
+        "command": "npm install",
+        "cwd": "packages/template"
       }
     },
     "build": {
-      "executor": "@nrwl/next:build",
+      "executor": "nx:run-commands",
       "outputs": ["{options.outputPath}"],
-      "dependsOn": [{ "projects": "self", "target": "install" }],
-      "defaultConfiguration": "production",
+      "inputs": ["production", "^production", "siteContent"],
       "options": {
-        "root": "packages/template",
-        "outputPath": "dist/packages/template"
+        "command": "npm run build",
+        "cwd": "packages/template",
+        "outputPath": "packages/template/.next"
       },
-      "configurations": {
-        "development": {
-          "outputPath": "packages/template"
-        },
-        "production": {}
-      }
-    },
-    "serve": {
-      "executor": "@nrwl/next:server",
-      "defaultConfiguration": "development",
-      "dependsOn": [{ "projects": "self", "target": "install" }],
-      "options": {
-        "buildTarget": "template:build",
-        "dev": true
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "template:build:development",
-          "dev": true
-        },
-        "production": {
-          "buildTarget": "template:build:production",
-          "dev": false
-        }
-      }
+      "dependsOn": [{ "projects": "self", "target": "install" }]
     },
     "export": {
-      "executor": "@nrwl/next:export",
-      "dependsOn": [{ "projects": "self", "target": "install" }],
+      "executor": "nx:run-commands",
+      "outputs": ["{options.outputPath}"],
+      "inputs": ["production", "^production", "siteContent"],
       "options": {
-        "buildTarget": "template:build:production"
-      }
+        "command": "npm run export",
+        "cwd": "packages/template",
+        "outputPath": "packages/template/out"
+      },
+      "dependsOn": [{ "projects": "self", "target": "install" }]
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm run dev",
+        "cwd": "packages/template"
+      },
+      "dependsOn": [{ "projects": "self", "target": "install" }]
     },
     "test": {
       "executor": "@nrwl/jest:jest",
