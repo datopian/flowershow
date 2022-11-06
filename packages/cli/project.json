@@ -34,7 +34,7 @@
         ]
       },
       "inputs": [
-        "production",
+        "default",
         "^production",
         "{projectRoot}/src/e2e/.env",
         { "env": "NETLIFY_TOKEN" }
