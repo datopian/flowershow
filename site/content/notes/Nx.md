@@ -111,7 +111,7 @@ See the [workspace structure example](https://nx.dev/more-concepts/grouping-libr
 
 ## Tasks
 
-- **Target -** the name of an action taken on a project (e.g., `build`)
+- **Target -** the name of an action that can be taken on a project (e.g., `build`)
 - **Task -** an invocation of a target on a specific project (e.g., `header:build`)
 
 ### Defining tasks
