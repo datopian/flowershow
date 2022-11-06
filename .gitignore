@@ -4,6 +4,9 @@
 /dist
 /tmp
 /out-tsc
+.contentlayer
+.next
+out
 
 # dependencies
 node_modules/
