@@ -7,7 +7,6 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "cache": true,
         "fix": true,
         "lintFilePatterns": ["packages/cli/**/*.js"]
       },
@@ -37,12 +36,14 @@
       },
       "inputs": [
         "production",
+        "^production",
         "{projectRoot}/src/e2e/.env",
         { "env": "NETLIFY_TOKEN" }
       ],
-      "outputs": ["coverage/packages/cli"],
+      "outputs": ["coverage/packages/cli-e2e"],
       "dependsOn": [{ "projects": "self", "target": "install" }]
     }
   },
-  "tags": []
+  "tags": [],
+  "implicitDependencies": ["template"]
 }
