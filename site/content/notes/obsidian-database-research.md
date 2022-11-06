@@ -4,7 +4,9 @@ title: Obsidian Database Research
 
 Research on the details of the internal Obsidian "database" i.e. its cache of files and their metadata, links etc which in turn power functionality like network graph, page links, plugins etc.
 
-Links to Flowershow's need to have its own metadata database to power things like a network graph, links etc (tracking issue: https://github.com/flowershow/flowershow/issues/5)
+Relates to Flowershow's need to have its own metadata database to power things like a network graph, links etc (tracking issue: https://github.com/flowershow/flowershow/issues/5)
+
+Note:  Obsidian is closed source so we don't know the internal code implementation. However, we have some insight into the cache itself both by inspecting it on disk and by examining the API exposed to plugins.
 
 # Motivating questions
 
