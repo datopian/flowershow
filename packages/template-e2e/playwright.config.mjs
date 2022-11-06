@@ -1,6 +1,6 @@
-import { devices } from '@playwright/test';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { devices } from "@playwright/test";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -8,7 +8,6 @@ const __dirname = path.dirname(__filename);
 // Use process.env.PORT by default and fallback to port 3000
 // const PORT = process.env.PORT || 3000;
 const PORT = 3000;
-
 
 // Set webServer.url and use.baseURL with the location of the WebServer respecting the correct set port
 const baseURL = `http://localhost:${PORT}`;
@@ -18,11 +17,11 @@ const config = {
   // Timeout per test
   timeout: 30 * 1000,
   // Test directory
-  testDir: path.join(__dirname, 'src/tests'),
+  testDir: path.join(__dirname, "src/tests"),
   // If a test fails, retry it additional 2 times
   // retries: 2,
   // Artifacts folder where screenshots, videos, and traces are stored.
-  outputDir: 'test-results/',
+  outputDir: "test-results/",
 
   // Run your local dev server before starting the tests:
   // https://playwright.dev/docs/test-advanced#launching-a-development-web-server-during-the-tests
@@ -40,7 +39,7 @@ const config = {
 
     // Retry a test if its failing with enabled tracing. This allows you to analyse the DOM, console logs, network traffic etc.
     // More information: https://playwright.dev/docs/trace-viewer
-    trace: 'retry-with-trace',
+    trace: "retry-with-trace",
 
     // All available context options: https://playwright.dev/docs/api/class-browser#browser-new-context
     // contextOptions: {
@@ -50,9 +49,9 @@ const config = {
 
   projects: [
     {
-      name: 'Desktop Chrome',
+      name: "Desktop Chrome",
       use: {
-        ...devices['Desktop Chrome'],
+        ...devices["Desktop Chrome"],
       },
     },
     // {
