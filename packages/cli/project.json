@@ -9,8 +9,7 @@
       "options": {
         "fix": true,
         "lintFilePatterns": ["packages/cli/**/*.js"]
-      },
-      "outputs": ["{options.outputFile}"]
+      }
     },
     "test": {
       "executor": "@nrwl/jest:jest",

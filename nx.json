@@ -8,8 +8,10 @@
   },
   "implicitDependencies": {},
   "namedInputs": {
-    "default": ["{projectRoot}/**/*"],
+    "sharedGlobals": [],
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "production": [
+      "default",
       "!{projectRoot}/.eslintrc.json",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
       "!{projectRoot}/tsconfig.spec.json",
