@@ -25,4 +25,4 @@ jobs:
       - name: Run tests
         env:
           NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
-        run: npx nx affected --target=e2e --base=main --head=HEAD --parallel=2
+        run: npx nx affected --target=e2e --parallel=2
