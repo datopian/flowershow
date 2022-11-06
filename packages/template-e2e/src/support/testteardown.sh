@@ -1,3 +1,3 @@
 #!/usr/bin/sh
 
-fuser -k 3000/tcp
+fuser -k 3030/tcp

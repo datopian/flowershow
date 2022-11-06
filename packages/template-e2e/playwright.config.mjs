@@ -7,7 +7,7 @@ const __dirname = path.dirname(__filename);
 
 // Use process.env.PORT by default and fallback to port 3000
 // const PORT = process.env.PORT || 3000;
-const PORT = 3000;
+const PORT = 3030;
 
 // Set webServer.url and use.baseURL with the location of the WebServer respecting the correct set port
 const baseURL = `http://localhost:${PORT}`;

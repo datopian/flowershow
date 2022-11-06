@@ -15,4 +15,4 @@ ln -vfns $TEMP_CONTENT_DIR/assets $TEMP_TEMPLATE_DIR/public/assets
 
 cd $TEMP_TEMPLATE_DIR
 npm install
-npm run dev &
+npm run dev -- -p 3030 &
