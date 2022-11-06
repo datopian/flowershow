@@ -1,4 +1,4 @@
-[Nx goals](https://nx.dev/getting-started/intro#nx-has-two-goals)
+# Nx
 
 ## Applications and libraries
 
@@ -15,11 +15,11 @@ import { Button } from "@flowershow/ui";
 ```
 
 - library is not jus a code put into a separate folder
-  - each library has a "public API" exposed by its `index.ts` file
+  - each library should have a "public API" exposed by its `index.ts` file
   - it forces developers into an "API thinking" (what should be exposed and what should be kept private)
 - library doesn't have to be general purpose (consumed by multiple projects)
   - it can be created just for better code organization
-  - easo of re-use can be positive side effect though
+  - ease of re-use can be a positive side effect though
 - library doesn't have to be publishable
 - library doesn't have to be buildable
   - an app can consume it and build it itself directly
@@ -57,7 +57,9 @@ https://nx.dev/more-concepts/library-types
 
 - splitting code into libraries can make commands run faster
   - faster `nx affected`
+    - e.g. if you split your one big library into a few smaller ones and run `nx affected` on a given target, it may be the case that this target doesn't have to be re-run on all the smaller libraries, because the changes you made only affect some part of the original mega-library
   - faster Nx computation caching
+    - i.e. faster commands's re-runs, faster saving to cache and fetching cached results
 - it can also makes nx dependencies graph more valuable
 - you can enforce constraints on how different types of libraries depend on each other using tags
 
@@ -68,12 +70,26 @@ Rule of thumb: if the code is closely related to some already exisitng library -
 - related code should be close together
 - better DX as you don't need to jump around multiple different folders
 - every new library adds some folders and config files, which do not directly contibute to business value
-- enforcing constraints may not be beneficial for rapidly evolving code like ours as it can get in the way of experimentation and exploration
+- enforcing constraints may not be beneficial for rapidly evolving code (like ours) as it can get in the way of experimentation and exploration
 - if may be a good idea to develop a single library for a while so that the architecture starts to emerge naturally and refactor into smaller libraries when the pace of change has slowed down
+
+### Creating libraries
+
+Nx makes it easy to add new libraries (or apps) to the monorepo, by using their code generators. Code generators automate repeatable tasks like scaffolding of similar projects and provide a standard for creating them.
+
+For example, to create a new publishable, js node library:
+
+```sh
+nx g @nrwl/node:lib --js --publishable --importPath @flowershow/ui
+```
+
+https://nx.dev/plugin-features/use-code-generators
+
+You can also create your own generators for more custom solutions.
 
 ### Managing libraries
 
-Moved/rename:
+Move/rename:
 
 ```sh
 nx g move --project booking-some-library shared/some-library
@@ -84,8 +100,6 @@ Remove:
 ```sh
 nx g remove booking-some-library
 ```
-
-### Should I create an app or a lib?
 
 ## Workspace
 
@@ -109,7 +123,7 @@ Example in `project.json`
 ```json
 {
   "targets": {
-    "build": {
+https://nx.dev/plugin-features/use-code-generators    "build": {
       "executor": "nx:run-commands",
       "options": {
         "command": "webpack -c webpack.conf.js"
@@ -209,25 +223,3 @@ nx graph
 - plugin generators - come from Nx plugins installed in the workspace
 - local generators - custom generators created for the workspace
 - update generators - are invoked by Nx plugins when you update Nx to keep your config files in sync with the latest versions of third party tools
-
-## @nrwl/next
-
-https://nx.dev/packages/next
-
-- plugin that contains executors and generators for managing Next.js applications and libraries
-
-## Distributed task execution
-
-TBD
-
-https://nx.dev/core-features/distribute-task-execution
-
-## Updating Nx and it's dependencies
-
-TBD
-
-https://nx.dev/core-features/automate-updating-dependencies
-
-## Nx vs Turborepo
-
-https://nx.dev/more-concepts/turbo-and-nx
