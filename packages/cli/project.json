@@ -44,5 +44,5 @@
     }
   },
   "tags": [],
-  "implicitDependencies": ["template"]
+  "implicitDependencies": ["template", "bats", "bats-assert"]
 }
