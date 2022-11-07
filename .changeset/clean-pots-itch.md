@@ -1,5 +1,5 @@
 ---
-"default": minor
+"@flowershow/template": minor
 ---
 
 Added:
