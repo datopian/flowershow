@@ -20,10 +20,9 @@ import {
 import { FLOWERSHOW_FOLDER_NAME } from "./const.js";
 
 export default class Creator {
-  constructor(context, targetDir, template = "default") {
+  constructor(context, targetDir) {
     this.context = context;
     this.targetDir = targetDir;
-    this.template = template; // tb configurable via command option in the future
   }
 
   get templateRepo() {
@@ -31,7 +30,7 @@ export default class Creator {
       "git+",
       ""
     );
-    return `${flowershowRepo}/templates/${this.template}`;
+    return `${flowershowRepo}/packages/template`;
   }
 
   async install() {
