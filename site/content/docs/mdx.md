@@ -462,36 +462,13 @@ data:
 
 For both `tutorials` and `someOtherData`, there need to be a corresponding getter function created in your content's folder `getters` subfolder, e.g. `my-content-folder/getters/tutorials.js` and `my-content-folder/getters/someOtherData.js`.
 
-Now you can use `tutorials` and `someOtherData` variables anywhere on this page, e.g. pass as props to your custom components.
-
-> Note, that getter files should use default exports to export getter functions.
-
-### Example using content files as a dataset
-
-Some markdown page, which requires tutorials to render them in a custom list component.
+Now you can use `tutorials` and `someOtherData` variables anywhere on this page, e.g. pass as props to your custom components:
 
 ```md
----
-title: My tutorials
-data:
-  - tutorials
----
+<MyPlot items={someOtherData} />
 ```
 
-Corresponding getter in `content/getters/tutorials.js`:
-
-```js
-import { allTutorials } from 'contentlayer/generated';
-
-export default function getTutorials() {
-  return allTutorials.filter(
-    (tutorial) => !(tutorial.curation_status.includes('N'))
-  );
-}
-```
-
-> [!note] `contentlayer/generated`
-> Note, in order to access your content files, you need to import them from `contentlayer/generated`.
+> Note, that getter files should use default exports to export getter functions.
 
 ### Example fetching data from external API
 
@@ -515,9 +492,41 @@ export default async function getTodos() {
 }
 ```
 
-Usage in some markdown page:
+Usage in the markdown page:
 
 ```md
 <MyTodoList todos={test} />
 ```
 
+### Example using content files as a dataset
+
+Some markdown page, which shows all tutorials in a custom list component.
+
+```md
+---
+title: All my tutorials
+data:
+  - tutorials
+---
+```
+
+Corresponding getter in `content/getters/tutorials.js`:
+
+```js
+import { allDocuments } from 'contentlayer/generated';
+
+export default function getTutorials() {
+  return allDocuments.filter(
+    (doc) => !(doc.sourceFileDir == 'tutorials')
+  );
+}
+```
+
+Usage in the markdown page:
+
+```md
+<MyTutorialsList items={tutorials} />
+```
+
+> [!note] `contentlayer/generated`
+> Note, in order to access your content files, you need to import them from `contentlayer/generated`.
