@@ -11,6 +11,8 @@ jobs:
       matrix:
         node: [16, 18]
 
+    name: Node ${{ matrix.node }} E2E
+
     steps:
       - uses: actions/checkout@v2
         with:
@@ -31,4 +33,4 @@ jobs:
       - name: Run tests
         env:
           NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
-        run: npx nx run-many --target=e2e --parallel=2
+        run: npx nx run-many --target=e2e
