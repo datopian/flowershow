@@ -1,4 +1,6 @@
-# MDX
+---
+title: MDX
+---
 
 ## What is MDX?
 
@@ -200,7 +202,7 @@ return (
 <div>
 <p>I'm a custom component!</p>
 <ul>
-{ list.map((x) => <li>{x}</li>) }
+{ list.map((x,i) => <li key={i}>{x}</li>) }
 </ul>
 </div>
 )
@@ -440,3 +442,82 @@ Now, your custom components can be imported using this path:
 ```md
 import MyComponent from "components/custom/MyComponent.jsx"
 ```
+
+## Use `data` field type for custom data getters
+
+In the sections above we were giving an example of creating a custom `Chart` component for which you could import a dataset from a static JSON file. But what if you want to fetch this data from an external API? Or you want to use your markdown files as a dataset?
+
+In order to do that, you can use a special `data` frontmatter field to define names of your custom getter funstions, which will be called before your page is rendered. This page will then be able to access the values returned from these getters under variables of the same names.
+
+For exapmle:
+
+```md
+---
+title: All my tutorials, plotted!
+data:
+  -- tutorials
+  -- someOtherData
+---
+```
+
+For both `tutorials` and `someOtherData`, there need to be a corresponding getter function created in your content's folder `getters` subfolder, e.g. `my-content-folder/getters/tutorials.js` and `my-content-folder/getters/someOtherData.js`.
+
+Now you can use `tutorials` and `someOtherData` variables anywhere on this page, e.g. pass as props to your custom components.
+
+> Note, that getter files should use default exports to export getter functions.
+
+### Example using content files as a dataset
+
+Some markdown page, which requires tutorials to render them in a custom list component.
+
+```md
+---
+title: My tutorials
+data:
+  - tutorials
+---
+```
+
+Corresponding getter in `content/getters/tutorials.js`:
+
+```js
+import { allTutorials } from 'contentlayer/generated';
+
+export default function getTutorials() {
+  return allTutorials.filter(
+    (tutorial) => !(tutorial.curation_status.includes('N'))
+  );
+}
+```
+
+> [!note] `contentlayer/generated`
+> Note, in order to access your content files, you need to import them from `contentlayer/generated`.
+
+### Example fetching data from external API
+
+Getters declarations in frontmatter:
+
+```md
+---
+title: All my todos
+data:
+  -- todos
+---
+```
+
+Corresponding getter:
+
+```js
+export default async function getTodos() {
+  const response = await fetch('https://jsonplaceholder.typicode.com/users/1/todos');
+  const result = await response.json();
+  return result
+}
+```
+
+Usage in some markdown page:
+
+```md
+<MyTodoList todos={test} />
+```
+
