@@ -1,8 +1,46 @@
 # Developer docs
 
+## Package manager
+
+To ensure correct dependencies installation across the projects (and for other benefits like much faster installs), please use `pnpm` package manager.
+
+You can install it using npm:
+
+```
+npm i -g pnpm
+```
+
+Then you can run `pnpm install` (or `pnpm i`) anywhere in this repository to install all the dependencies for all the projects within the workspace.
+
+To install offline from the local pnpm store:
+
+```
+pnpm i --offline
+```
+
+To install a dependency of the workspace:
+
+```
+pnpm add <pkg>
+```
+
+To install a dev dependency of the workspace:
+
+```
+pnpm add -D <pkg>
+```
+
+You to restrict commands to specific subsets of packages by using `--filter` (or `-F`) flag:
+
+```
+pnpm --filter cli install
+```
+
+See [the offical pnpm docs](https://pnpm.io/) to learn more.
+
 ## Nx
 
-> This monorepo is set up with Nx build system. See their [official documentation](https://nx.dev/getting-started) to learn more.
+This monorepo is set up with Nx build system. See their [official documentation](https://nx.dev/getting-started) to learn more.
 
 ### Tasks
 
@@ -127,7 +165,7 @@ npx changeset
 
 The description of the changes related to the changelog you're adding should be written with end users and other developers in mind. Please make sure to add the most accurate but also concise information.
 
-> To learn about semantic versioning standards see [this semver doc page](https://semver.org/).
+To learn about semantic versioning standards see [this semver doc page](https://semver.org/).
 
 ### Versioning and publishing
 
