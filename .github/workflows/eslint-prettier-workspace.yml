@@ -11,6 +11,8 @@ jobs:
       matrix:
         node: [16]
 
+    name: Lint & format check
+
     steps:
       - uses: actions/checkout@v2
         with:
