@@ -4,7 +4,7 @@ export async function getPageData(dataProperties) {
     try {
       const dataGetter = (await import(`../content/getters/${dataProperty}.js`))
         .default;
-      data[dataProperty] = dataGetter();
+      data[dataProperty] = await dataGetter();
     } catch {
       console.error(
         `Getter "${dataProperty}" does not exist in "<your-content-folder>/getters"`
