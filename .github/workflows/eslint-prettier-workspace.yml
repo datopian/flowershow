@@ -1,15 +1,18 @@
 name: Eslint and prettier
 
-on: [push]
+on:
+  push:
 
 jobs:
   main:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
+      - uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 7
       - uses: nrwl/nx-set-shas@v3
       - run: pnpm install
       - run: npx nx workspace-lint
