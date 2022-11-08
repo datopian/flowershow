@@ -1,15 +1,30 @@
 name: Eslint and prettier
 
-on: [push]
+on:
+  push:
 
 jobs:
   main:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node: [16]
+
+    name: Lint & format check
+
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
+      - uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 7
+      - name: Use Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+          cache: 'pnpm'
       - uses: nrwl/nx-set-shas@v3
       - run: pnpm install
       - run: npx nx workspace-lint
