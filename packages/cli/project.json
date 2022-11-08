@@ -1,0 +1,41 @@
+{
+  "name": "cli",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/cli/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "fix": true,
+        "lintFilePatterns": ["packages/cli/**/*.js"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/cli/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "e2e": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "mkdir -p coverage/packages/cli-e2e",
+          "packages/cli/src/e2e/bats/bin/bats packages/cli/src/e2e/test.bats -o coverage/packages/cli-e2e --verbose-run"
+        ]
+      },
+      "inputs": [
+        "default",
+        "^production",
+        "{projectRoot}/src/e2e/.env",
+        { "env": "NETLIFY_TOKEN" }
+      ],
+      "outputs": ["coverage/packages/cli-e2e"]
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["template"]
+}
