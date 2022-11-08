@@ -1,9 +1,9 @@
 {
-  "name": "flowershow",
+  "name": "@flowershow/cli",
   "version": "0.0.7",
   "description": "Publish your digital garden",
   "bin": {
-    "flowershow": "bin/flowershow.js"
+    "flowershow": "src/bin/cli.js"
   },
   "repository": {
     "type": "git",
@@ -14,9 +14,6 @@
     "flowershow",
     "cli"
   ],
-  "scripts": {
-    "test": "./e2e/bats/bin/bats ./e2e/test.bats --verbose-run"
-  },
   "author": "Rufus Pollock",
   "license": "MIT",
   "bugs": {
@@ -32,8 +29,7 @@
     "degit": "^2.8.4",
     "execa": "^6.1.0",
     "inquirer": "^9.1.1",
-    "ora": "^6.1.2",
-    "validate-npm-package-name": "^4.0.0"
+    "ora": "^6.1.2"
   },
   "type": "module",
   "engines": {
