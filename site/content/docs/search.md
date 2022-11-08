@@ -10,21 +10,44 @@ It is available in the navbar or can also be accessed by pressing the Ctrl+K (âŒ
 
 ## Adding the search component
 
-You can either add a local search component or by using the external algolia search provider. These can be setup in your `config.js` file.
+There are two kinds of providers to choose from when setting up the search component on your flowershow site. These are 'kbar' and 'algolia' which can be configured in your `config.js` file.
 
-### Local search
+The difference between the two is that algolia search allows for a full-text search with external indexing whereas in kbar you don't need an external provider but you can only do keyword searches.
 
-To add the local search feature, just setup the search config in your `config.js` file to the following.
+### Kbar
+
+To add the keyword-only search feature, just setup the search config in your `config.js` file to the following.
+
+```js
+const config = {
+  search: {
+    provider: "kbar",
+  },
+};
+```
+
+**Additional config:**
+
+Using the kbar provider you can also add additional names to the search list with custom search keywords which links to any one of your site's pages.
+
+For example, with the following configuration "Blog" is added to the search list, and writing the word "content" in the search field would show it in search results. Clicking it will lead to your blog page, if exists.
 
 ```js
 const config = {
   search: {
     provider: "kbar",
     kbarConfig: {
-      searchDocumentsPath: 'search.json',
-    }
-  }
-}
+      defaultActions: [
+        {
+          id: "blog",
+          name: "Blog",
+          keywords: "content",
+          perform: () => (window.location.pathname = "blog"),
+        },
+      ],
+    },
+  },
+};
 ```
 
 ### Algolia search
@@ -32,7 +55,7 @@ const config = {
 [Algolia](https://www.algolia.com/) is a powerful search and discovery provider that generates realtime results on your website and can be easily integrated with flowershow.
 
 > [!note]
-> Before adding this feature,  you will need to register an account with them by following their instructions at [Algolia Docsearch](https://docsearch.algolia.com/) and requesting access to their api.
+> Before adding this feature, you will need to register an account with them by following their instructions at [Algolia Docsearch](https://docsearch.algolia.com/) and requesting access to their api.
 
 There are some required config values that should be included for the search to function accordingly. These are:
 
@@ -51,8 +74,8 @@ const config = {
     algoliaConfig: {
       appId: "",
       apiKey: "",
-      indexName: ""
-    }
-  }
-}
+      indexName: "",
+    },
+  },
+};
 ```

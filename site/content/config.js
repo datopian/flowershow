@@ -30,9 +30,6 @@ const config = {
   discord: "https://discord.gg/cPxejPzpwt",
   search: {
     provider: "kbar",
-    kbarConfig: {
-      searchDocumentsPath: "search.json", // path to load documents to search
-    },
   },
   nextSeo: {
     titleTemplate: "%s | Flowershow",

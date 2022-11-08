@@ -21,6 +21,11 @@ const formatDate = (date, locale = "en-US") => {
   return now;
 };
 
+const nameFromUrl = (url) => {
+  const name = url.split("/").slice(-1)[0].replace("-", " ");
+  return name.charAt(0).toUpperCase() + name.slice(1);
+};
+
 export function Portal({ searchDocumentsPath }) {
   const [searchActions, setSearchActions] = useState([]);
 
@@ -28,19 +33,16 @@ export function Portal({ searchDocumentsPath }) {
     const mapPosts = (posts) => {
       const actions = [];
       for (const post of posts) {
-        const nameFromUrl = !post.title
-          ? post.url_path.split("/").slice(-1)[0].replace("-", " ")
-          : undefined;
-        actions.push({
-          id: post.url_path,
-          name:
-            post.title ??
-            nameFromUrl.charAt(0).toUpperCase() + nameFromUrl.slice(1),
-          keywords: post?.description || "",
-          section: "Content",
-          subtitle: post.date && formatDate(post.date, "en-US"),
-          perform: () => Router.push(`/${post.url_path}`),
-        });
+        // excluding home path as this is defined in starting actions
+        post.url_path &&
+          actions.push({
+            id: post.url_path,
+            name: post.title ?? nameFromUrl(post.url_path),
+            keywords: post.description ?? "",
+            section: post.sourceDir ?? "Page",
+            subtitle: post.date && formatDate(post.date, "en-US"),
+            perform: () => Router.push(`/${post.url_path}`),
+          });
       }
       return actions;
     };
@@ -68,7 +70,8 @@ export function Portal({ searchDocumentsPath }) {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke="currentColor">
+                  stroke="currentColor"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -104,12 +107,14 @@ function RenderItem(props) {
         <div
           className={`block cursor-pointer px-4 py-2 text-gray-600 dark:text-gray-200 ${
             active ? "bg-primary-600" : "bg-transparent"
-          }`}>
+          }`}
+        >
           {item?.subtitle && (
             <div
               className={`${
                 active ? "text-gray-200" : "text-gray-400 dark:text-gray-500"
-              } text-xs`}>
+              } text-xs`}
+            >
               {item.subtitle}
             </div>
           )}

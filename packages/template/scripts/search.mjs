@@ -9,6 +9,13 @@ const omit = (obj = {}, keys = []) => {
   return result
 }
 
-const coreContent = allDocuments.map(doc => omit(doc, ['body', '_raw', '_id'])).filter(doc => !doc.isDraft)
+const coreContent = allDocuments.map(doc => omit({ 
+  ...doc,
+  sourceDir: doc._raw.sourceFileDir === "."
+    ? null
+    : doc._raw.sourceFileDir 
+  }, 
+  ['body', '_raw', '_id']
+)).filter(doc => !doc.isDraft)
 
 writeFileSync("public/search.json", JSON.stringify(coreContent))
