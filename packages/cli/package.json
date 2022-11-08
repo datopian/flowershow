@@ -1,5 +1,5 @@
 {
-  "name": "@flowershow/cli",
+  "name": "flowershow",
   "version": "0.0.7",
   "description": "Publish your digital garden",
   "bin": {
