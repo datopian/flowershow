@@ -1,0 +1,30 @@
+{
+  "name": "template-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/template-e2e/src",
+  "projectType": "library",
+  "targets": {
+    "e2e": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "src/support/testsetup.sh ../template src/fixtures/content",
+          "playwright test",
+          "src/support/testteardown.sh"
+        ],
+        "parallel": false,
+        "cwd": "packages/template-e2e"
+      },
+      "dependsOn": []
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/template-e2e/**/*.js"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["template"]
+}

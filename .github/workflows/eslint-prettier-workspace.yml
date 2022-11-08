@@ -1,0 +1,16 @@
+name: Eslint and prettier
+
+on: [push]
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: nrwl/nx-set-shas@v3
+      - run: pnpm install
+      - run: npx nx workspace-lint
+      - run: npx nx format:check
