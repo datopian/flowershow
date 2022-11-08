@@ -11,8 +11,6 @@ jobs:
       matrix:
         node: [16, 18]
 
-    name: Node ${{ matrix.node }} test
-
     steps:
       - uses: actions/checkout@v2
         with:
@@ -21,6 +19,11 @@ jobs:
       - uses: pnpm/action-setup@v2.2.4
         with:
           version: 7
+      - name: Use Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+          cache: 'pnpm'
       - uses: nrwl/nx-set-shas@v3
       - run: pnpm install
       - run: sudo apt-get install -y expect
