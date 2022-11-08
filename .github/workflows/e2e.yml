@@ -11,13 +11,21 @@ jobs:
       matrix:
         node: [16, 18]
 
-    name: Node ${{ matrix.node }} test
+    name: Node ${{ matrix.node }} E2E
 
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
           submodules: "recursive"
+      - uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 7
+      - name: Use Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+          cache: 'pnpm'
       - uses: nrwl/nx-set-shas@v3
       - run: pnpm install
       - run: sudo apt-get install -y expect
@@ -25,4 +33,4 @@ jobs:
       - name: Run tests
         env:
           NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
-        run: npx nx affected --target=e2e --parallel=2
+        run: npx nx run-many --target=e2e
