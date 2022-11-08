@@ -24,9 +24,10 @@
       "options": {
         "commands": [
           "mkdir -p coverage/packages/cli-e2e",
-          "packages/cli/src/e2e/bats/bin/bats packages/cli/src/e2e/test.bats -o coverage/packages/cli-e2e --verbose-run"
+          "packages/cli/src/e2e/bats/bin/bats packages/cli/src/e2e/test.bats -p --report-formatter pretty -o coverage/packages/cli-e2e --verbose-run"
         ]
       },
+      "parallel": false,
       "inputs": [
         "default",
         "^production",
