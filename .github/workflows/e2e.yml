@@ -1,0 +1,28 @@
+name: E2E
+
+on: [push]
+
+jobs:
+  main:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node: [16, 18]
+
+    name: Node ${{ matrix.node }} test
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          submodules: "recursive"
+      - uses: nrwl/nx-set-shas@v3
+      - run: pnpm install
+      - run: sudo apt-get install -y expect
+      - run: npx playwright install --with-deps
+      - name: Run tests
+        env:
+          NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
+        run: npx nx affected --target=e2e --parallel=2
