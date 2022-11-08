@@ -1,0 +1,60 @@
+{
+  "name": "flowershow",
+  "version": "1.0.0",
+  "scripts": {
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.+(js|jsx)": [
+      "eslint --fix"
+    ],
+    "*.+(js|jsx|json|css|md|mdx)": [
+      "prettier --write"
+    ]
+  },
+  "devDependencies": {
+    "@changesets/changelog-github": "^0.4.7",
+    "@changesets/cli": "^2.25.2",
+    "@nrwl/eslint-plugin-nx": "15.0.5",
+    "@nrwl/jest": "15.0.5",
+    "@nrwl/linter": "15.0.5",
+    "@nrwl/next": "15.0.5",
+    "@nrwl/node": "15.0.5",
+    "@nrwl/nx-cloud": "15.0.2",
+    "@nrwl/react": "15.0.5",
+    "@nrwl/web": "15.0.5",
+    "@playwright/test": "^1.27.1",
+    "@testing-library/react": "13.4.0",
+    "@types/jest": "28.1.1",
+    "@types/node": "18.7.18",
+    "@types/react": "18.0.20",
+    "@types/react-dom": "18.0.6",
+    "@typescript-eslint/eslint-plugin": "^5.36.1",
+    "@typescript-eslint/parser": "^5.36.1",
+    "babel-jest": "28.1.1",
+    "eslint": "~8.15.0",
+    "eslint-config-next": "13.0.0",
+    "eslint-config-prettier": "8.1.0",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-jsx-a11y": "6.6.1",
+    "eslint-plugin-playwright": "^0.11.2",
+    "eslint-plugin-react": "7.31.8",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "husky": "^8.0.1",
+    "jest": "28.1.1",
+    "jest-environment-jsdom": "28.1.1",
+    "lint-staged": "^13.0.3",
+    "nx": "15.0.5",
+    "prettier": "^2.7.1",
+    "react-test-renderer": "18.2.0",
+    "sass": "1.55.0",
+    "ts-jest": "28.0.5",
+    "ts-node": "10.9.1"
+  },
+  "dependencies": {
+    "core-js": "^3.6.5",
+    "regenerator-runtime": "0.13.7",
+    "tslib": "^2.3.0"
+  },
+  "packageManager": "pnpm"
+}

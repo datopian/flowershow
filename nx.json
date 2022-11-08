@@ -1,0 +1,60 @@
+{
+  "npmScope": "flowershow",
+  "affected": {
+    "defaultBase": "main"
+  },
+  "workspaceLayout": {
+    "libsDir": "packages"
+  },
+  "implicitDependencies": {},
+  "namedInputs": {
+    "sharedGlobals": [],
+    "siteContent": ["{workspaceRoot}/site"],
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "production": [
+      "default",
+      "!{projectRoot}/.eslintrc.json",
+      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+      "!{projectRoot}/tsconfig.spec.json",
+      "!{projectRoot}/jest.config.[jt]s"
+    ]
+  },
+  "targetDefaults": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    },
+    "e2e": {
+      "inputs": ["default", "^production"]
+    },
+    "test": {
+      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
+    },
+    "lint": {
+      "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
+    }
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "cacheableOperations": ["build", "export", "lint", "test", "e2e"],
+        "accessToken": "YmQ0MTU5NDAtYTcyZi00YjQ1LTk2MzEtZTAzNzE1NTAzMTM2fHJlYWQ="
+      }
+    }
+  },
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "babel": true
+      }
+    },
+    "@nrwl/next": {
+      "application": {
+        "style": "scss",
+        "linter": "eslint"
+      }
+    }
+  },
+  "defaultProject": "template"
+}
