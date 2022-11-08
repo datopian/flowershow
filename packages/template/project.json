@@ -4,13 +4,6 @@
   "sourceRoot": "packages/template",
   "projectType": "library",
   "targets": {
-    "install": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "npm install",
-        "cwd": "packages/template"
-      }
-    },
     "build": {
       "executor": "nx:run-commands",
       "outputs": ["{options.outputPath}"],
@@ -19,8 +12,7 @@
         "command": "npm run build",
         "cwd": "packages/template",
         "outputPath": "packages/template/.next"
-      },
-      "dependsOn": [{ "projects": "self", "target": "install" }]
+      }
     },
     "export": {
       "executor": "nx:run-commands",
@@ -30,16 +22,14 @@
         "command": "npm run export",
         "cwd": "packages/template",
         "outputPath": "packages/template/out"
-      },
-      "dependsOn": [{ "projects": "self", "target": "install" }]
+      }
     },
     "serve": {
       "executor": "nx:run-commands",
       "options": {
         "command": "npm run dev",
         "cwd": "packages/template"
-      },
-      "dependsOn": [{ "projects": "self", "target": "install" }]
+      }
     },
     "test": {
       "executor": "@nrwl/jest:jest",

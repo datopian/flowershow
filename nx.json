@@ -20,19 +20,11 @@
     ]
   },
   "targetDefaults": {
-    "install": {
-      "inputs": [
-        "{projectRoot}/package.json",
-        "{projectRoot}/package-lock.json"
-      ],
-      "outputs": ["{projectRoot}/node_modules"]
-    },
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
     },
     "e2e": {
-      "dependsOn": ["build", "^build"],
       "inputs": ["default", "^production"]
     },
     "test": {
@@ -46,14 +38,7 @@
     "default": {
       "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": [
-          "install",
-          "build",
-          "export",
-          "lint",
-          "test",
-          "e2e"
-        ],
+        "cacheableOperations": ["build", "export", "lint", "test", "e2e"],
         "accessToken": "YmQ0MTU5NDAtYTcyZi00YjQ1LTk2MzEtZTAzNzE1NTAzMTM2fHJlYWQ="
       }
     }

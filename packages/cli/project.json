@@ -19,12 +19,6 @@
         "passWithNoTests": true
       }
     },
-    "install": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "npm install --prefix packages/cli"
-      }
-    },
     "e2e": {
       "executor": "nx:run-commands",
       "options": {
@@ -39,8 +33,7 @@
         "{projectRoot}/src/e2e/.env",
         { "env": "NETLIFY_TOKEN" }
       ],
-      "outputs": ["coverage/packages/cli-e2e"],
-      "dependsOn": [{ "projects": "self", "target": "install" }]
+      "outputs": ["coverage/packages/cli-e2e"]
     }
   },
   "tags": [],
