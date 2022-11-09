@@ -110,6 +110,8 @@ To check code formatting in all projects:
 
 ```sh
 npx nx format:check --all
+# or
+# npx nx format
 ```
 
 To fix code formatting in selected projects:
