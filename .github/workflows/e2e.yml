@@ -33,5 +33,5 @@ jobs:
       - name: Run tests
         env:
           NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
-          TERM: xterm
+          TERM: xterm # fix for tput tty issue
         run: npx nx run-many --target=e2e
