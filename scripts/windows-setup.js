@@ -13,4 +13,11 @@ if (os.platform() === "win32") {
     "../../../site/content/assets",
     "./packages/template/public/assets"
   );
+
+  fs.rmSync("./packages/template/components/custom");
+  fs.symlinkSync(
+    "../../../site/components",
+    "./packages/template/components/custom"
+  );
 }
+x;
