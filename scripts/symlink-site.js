@@ -9,17 +9,14 @@ const contentSymlink = "./packages/template/content";
 const assetsSymlink = "./packages/template/public/assets";
 const componentsSymlink = "./packages/template/components/custom";
 
-if (fs.lstatSync(contentSymlink).isFile()) {
-  fs.rmSync(contentSymlink);
+if (!fs.existsSync(contentSymlink)) {
   fs.symlinkSync("../../site/content", contentSymlink);
 }
 
-if (fs.lstatSync(assetsSymlink).isFile()) {
-  fs.rmSync(assetsSymlink);
+if (!fs.existsSync(assetsSymlink)) {
   fs.symlinkSync("../../../site/content/assets", assetsSymlink);
 }
 
-if (fs.lstatSync(componentsSymlink).isFile()) {
-  fs.rmSync(componentsSymlink);
+if (!fs.existsSync(componentsSymlink)) {
   fs.symlinkSync("../../../site/components", componentsSymlink);
 }
