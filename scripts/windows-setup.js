@@ -20,4 +20,3 @@ if (os.platform() === "win32") {
     "./packages/template/components/custom"
   );
 }
-x;
