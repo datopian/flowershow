@@ -1,4 +1,5 @@
 # Flowershow 🌷
+
 > Publish your Obsidian notes, beautifully. For free, no coding.
 
 Flowershow is an open-source tool for easily converting your markdown files into an elegant website. It's built on a standard, modern web stack – React, Next.js, and Tailwind and shipped with a basic default theme to get you started with just a few clicks.
@@ -13,6 +14,7 @@ Flowershow is an open-source tool for easily converting your markdown files into
 ![obsidian-vs-flowershow](site/content/assets/images/obsidian_vs_flowershow.png)
 
 ## Docs
+
 - [QuickStart](https://flowershow.app/docs)
 - [Guides](https://flowershow.app/docs/guides)
 - [Roadmap](https://flowershow.app/docs/roadmap)
@@ -27,7 +29,7 @@ Flowershow supports **CommonMark** and **GitHub Flavoured Markdown (GFM)** synta
 
 [👉 Learn more](https://flowershow.app/docs/syntax)
 
-### ✅/🚧  Obsidian extensions to Markdown
+### ✅/🚧 Obsidian extensions to Markdown
 
 Flowershow has been designed with Obsidian users in mind, and so it aims to support the whole suite of Obsidian syntax extensions, like:
 
@@ -86,11 +88,13 @@ Check [our roadmap](https://flowershow.app/docs/roadmap) to learn more!
 Alpha version, under very active construction 👷‍🏗🚧
 
 ## Contributing
+
 If you want to contribute, you are more than welcome! You can start by checking our [project backlog](https://github.com/orgs/flowershow/projects/1).
 
 If you have an idea for improvement, and it doesn't have a corresponding issue yet, simply submit a new one.
 
 If you'd like to work on an existing issue:
+
 1. Fork the main repository.
 2. Clone the forked repository to your machine.
 3. Create a feature branch (e.g. `50-update-readme`, where `50` is the number of the related issue).
