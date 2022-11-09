@@ -17,6 +17,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
+      - uses: nrwl/nx-set-shas@v3
       - uses: pnpm/action-setup@v2.2.4
         with:
           version: 7
@@ -24,8 +25,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
-          cache: 'pnpm'
-      - uses: nrwl/nx-set-shas@v3
+          cache: "pnpm"
       - run: pnpm install
       - run: npx nx workspace-lint
       - run: npx nx format:check
+      - run: npx nx affected --target=lint --parallel=3

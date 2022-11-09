@@ -25,7 +25,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
-          cache: 'pnpm'
+          cache: "pnpm"
       - uses: nrwl/nx-set-shas@v3
       - run: pnpm install
       - run: sudo apt-get install -y expect
@@ -33,4 +33,5 @@ jobs:
       - name: Run tests
         env:
           NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
-        run: npx nx run-many --target=e2e
+          TERM: xterm # fix for tput
+        run: npx nx affected:e2e
