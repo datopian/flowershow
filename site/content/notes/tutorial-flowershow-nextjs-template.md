@@ -9,7 +9,7 @@ Original guide [[docs/guide-setup]]
 2 options
 
 - Use the CLI
-- Use npx 
+- Use npx
 
 ## Use the cli Luke!
 

@@ -23,7 +23,7 @@ Renders as:
 Flowershow supports 13 different Obsidian callout types (with aliases) like note, abstract, todo, or tip. See this [Obsidian docs page](https://help.obsidian.md/How+to/Use+callouts) to learn more about different callout types.
 
 - note
-- tip  (alias: hint, important)
+- tip (alias: hint, important)
 - warning (alias: caution, attention)
 - abstract (alias: summary, tldr)
 - info
@@ -37,5 +37,4 @@ Flowershow supports 13 different Obsidian callout types (with aliases) like note
 - quote (alias: cite)
 
 > [!info]
-> To learn more about the Obsidian extensions refer to the [Obsidian Help site](https://help.obsidian.md/How+to/Format+your+notes). 
-
+> To learn more about the Obsidian extensions refer to the [Obsidian Help site](https://help.obsidian.md/How+to/Format+your+notes).

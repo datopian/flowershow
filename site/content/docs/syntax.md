@@ -301,7 +301,6 @@ Two '-' will convert to ndash. Three '-' will convert to mdash. Three '.' with o
 ...ellipse\
 ...another ellipse
 
-
 ### PDF embedding
 
 **Example:**

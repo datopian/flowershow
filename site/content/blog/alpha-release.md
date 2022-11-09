@@ -22,7 +22,7 @@ https://flowershow.app/docs/publish-tutorial
 
 ⛑️ Need assistance? Jump on our [discord chat channel][discord] and one of the team will be happy to help!
 
-[discord]: https://discord.gg/vQ5Y2uUzt6  
+[discord]: https://discord.gg/vQ5Y2uUzt6
 
 ## Feedback 📣
 
