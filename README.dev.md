@@ -78,29 +78,51 @@ npx nx affected --target=<target>
 
 Nx uses eslint for code linting and prettier for code formatting. There is a base `eslintrc.json` file in the root of this repository that defines global eslint configs. Each project can have its own `eslintrc.json` for project-specific eslint confiurations.
 
-Each project should have a `lint` target defined, so to lint the code in it you can run:
+To lint the code in a single project:
 
 ```sh
 npx nx lint <project>
 # npx nx lint cli
 ```
 
-You can also lint the whole workspace (repository) by running:
+To lint all projects:
 
-```sh
+```
+npx nx run-many --target=lint
+```
+
+To lint nx specific workspace files (nx.json):
+
+```
 npx nx workspace-lint
 ```
 
-To check code formatting in the workspace:
+To check code formatting in selected projects:
 
 ```sh
-npx nx format:check
+npx nx format:check --projects=<array projects>
+# npx nx format:check --projects=cli,template
 ```
 
-To check and fix formatting in the workspace:
+To check code formatting in all projects:
 
 ```sh
-npx nx format
+npx nx format:check --all
+```
+
+To fix code formatting in selected projects:
+
+```sh
+npx nx format:write --projects=<array projects>
+# npx nx format:write --projects=cli,template
+```
+
+To fix formatting in all projects:
+
+```sh
+npx nx format --all
+# or
+# npx nx format:write --all
 ```
 
 ### Creating a library
