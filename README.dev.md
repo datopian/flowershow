@@ -91,12 +91,6 @@ To lint all projects:
 npx nx run-many --target=lint
 ```
 
-To lint nx specific workspace files (nx.json):
-
-```
-npx nx workspace-lint
-```
-
 To check code formatting in selected projects:
 
 ```sh
@@ -124,6 +118,8 @@ npx nx format --all
 # or
 # npx nx format:write --all
 ```
+
+> To learn more about all the available options for the format command, see [format:check](https://nx.dev/nx/format-check) and [format:write](https://nx.dev/nx/format-write) docs pages.
 
 ### Creating a library
 
