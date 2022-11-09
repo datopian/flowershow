@@ -8,6 +8,13 @@
 .next
 out
 
+# TEMPORARY 
+# this won't be needed when we create a separate project for our website
+# and the template itself will be "clean", i.e. it won't have any symlinks pointing to /site
+packages/template/content
+packages/template/public/assets
+packages/template/components/custom
+
 # dependencies
 node_modules/
 
