@@ -72,6 +72,10 @@ npx nx run-many --target=<target>
 ```sh
 npx nx affected --target=<target>
 # e.g. npx nx affected --target=e2e
+
+# or
+# npx nx affected:<target>
+# e.g. npx nx affected:e2e
 ```
 
 ### Linting and formatting
