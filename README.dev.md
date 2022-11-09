@@ -69,39 +69,67 @@ npx nx run-many --target=<target>
 
 #### Running tasks affected by your changes
 
+When you run `nx affected --target=<some-target>`, Nx looks at the files you changed (compares current HEAD vs base), and it uses this to figure the list of projects in the workspace that can be affected by this change. It then runs the run-many command with that list.
+
 ```sh
 npx nx affected --target=<target>
 # e.g. npx nx affected --target=e2e
+
+# or
+# npx nx affected:<target>
+# e.g. npx nx affected:e2e
 ```
+
+> To learn more about how Affected works, read [this Nx docs page](https://nx.dev/concepts/affected#how-affected-works).
 
 ### Linting and formatting
 
 Nx uses eslint for code linting and prettier for code formatting. There is a base `eslintrc.json` file in the root of this repository that defines global eslint configs. Each project can have its own `eslintrc.json` for project-specific eslint confiurations.
 
-Each project should have a `lint` target defined, so to lint the code in it you can run:
+To lint the code in a single project:
 
 ```sh
 npx nx lint <project>
 # npx nx lint cli
 ```
 
-You can also lint the whole workspace (repository) by running:
+To lint all projects:
 
-```sh
-npx nx workspace-lint
+```
+npx nx run-many --target=lint
 ```
 
-To check code formatting in the workspace:
+To check code formatting in selected projects:
 
 ```sh
-npx nx format:check
+npx nx format:check --projects=<array projects>
+# npx nx format:check --projects=cli,template
 ```
 
-To check and fix formatting in the workspace:
+To check code formatting in all projects:
 
 ```sh
-npx nx format
+npx nx format:check --all
+# or
+# npx nx format
 ```
+
+To fix code formatting in selected projects:
+
+```sh
+npx nx format:write --projects=<array projects>
+# npx nx format:write --projects=cli,template
+```
+
+To fix formatting in all projects:
+
+```sh
+npx nx format --all
+# or
+# npx nx format:write --all
+```
+
+> To learn more about all the available options for the format command, see [format:check](https://nx.dev/nx/format-check) and [format:write](https://nx.dev/nx/format-write) docs pages.
 
 ### Creating a library
 

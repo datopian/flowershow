@@ -6,12 +6,13 @@ last-updated: 2022-07-18
 ---
 
 > [!warning]
-> Please see the [[docs/publish-tutorial|new publishing tutorial]]. This is an old tutorial for alpha users that is now out of date. 
+> Please see the [[docs/publish-tutorial|new publishing tutorial]]. This is an old tutorial for alpha users that is now out of date.
 
 > [!note]
 > 🚧 The following steps describe the current, temporary process of using Flowershow (as of June 2022). In the future, many of these tasks will be done by the CLI tool.
 
 > [!info] Pre-requisites
+>
 > - [Node.js](https://nodejs.org/en/) installed
 > - [Git](https://git-scm.com/) installed
 

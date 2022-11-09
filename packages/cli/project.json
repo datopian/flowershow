@@ -37,6 +37,5 @@
       "outputs": ["coverage/packages/cli-e2e"]
     }
   },
-  "tags": [],
-  "implicitDependencies": ["template"]
+  "tags": []
 }

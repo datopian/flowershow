@@ -2,7 +2,8 @@
   "name": "flowershow",
   "version": "1.0.0",
   "scripts": {
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint": "eslint --fix"
   },
   "lint-staged": {
     "*.+(js|jsx)": [
