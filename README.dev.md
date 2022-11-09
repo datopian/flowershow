@@ -69,6 +69,8 @@ npx nx run-many --target=<target>
 
 #### Running tasks affected by your changes
 
+When you run `nx affected --target=<some-target>`, Nx looks at the files you changed (compares current HEAD vs base), and it uses this to figure the list of projects in the workspace that can be affected by this change. It then runs the run-many command with that list.
+
 ```sh
 npx nx affected --target=<target>
 # e.g. npx nx affected --target=e2e
@@ -77,6 +79,8 @@ npx nx affected --target=<target>
 # npx nx affected:<target>
 # e.g. npx nx affected:e2e
 ```
+
+> To learn more about how Affected works, read [this Nx docs page](https://nx.dev/concepts/affected#how-affected-works).
 
 ### Linting and formatting
 
