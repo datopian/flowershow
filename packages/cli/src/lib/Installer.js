@@ -186,11 +186,9 @@ export default class Installer {
     }
 
     // update content and assets symlinks
-    fs.unlinkSync(`${flowershowDir}/content`);
     const contentSymlinkPath = path.relative(`${flowershowDir}`, contentDir);
     fs.symlinkSync(contentSymlinkPath, `${flowershowDir}/content`);
 
-    fs.unlinkSync(`${flowershowDir}/public/assets`);
     if (assetsFolder !== "none") {
       const assetsSymlinkPath = path.relative(
         `${flowershowDir}/public`,
