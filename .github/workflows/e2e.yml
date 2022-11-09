@@ -33,4 +33,5 @@ jobs:
       - name: Run tests
         env:
           NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
+          TERM: xterm
         run: npx nx affected:e2e
