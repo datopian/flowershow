@@ -1,6 +1,6 @@
 {
   "name": "flowershow",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Publish your digital garden",
   "bin": {
     "flowershow": "src/bin/cli.js"
