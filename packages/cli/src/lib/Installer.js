@@ -15,6 +15,7 @@ import {
   success,
   logWithSpinner,
   stopSpinner,
+  isSubdir,
 } from "./utils/index.js";
 
 import { FLOWERSHOW_FOLDER_NAME } from "./const.js";
@@ -77,6 +78,20 @@ export default class Creator {
     ]);
 
     const contentDir = path.resolve(context, contentPath);
+
+    // don't allow for installing the template anywhere within the content folder
+    // as it will break esbuild
+    if (isSubdir(flowershowDir, contentDir)) {
+      log(`Provided content directory: ${contentDir}`);
+      log(
+        `Provided Flowershow template installation directory: ${flowershowDir}`
+      );
+      error(
+        `You can't install the Flowershow template inside your content folder.`
+      );
+      exit(1);
+    }
+
     const assetFolderChoices = fs
       .readdirSync(contentDir, { withFileTypes: true })
       .filter((d) => d.isDirectory())
