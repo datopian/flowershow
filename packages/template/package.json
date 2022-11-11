@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "cross-env NODE_OPTIONS='--experimental-json-modules --experimental-modules' node ./scripts/search.mjs",
     "start": "next start",
     "export": "next build && next export"
   },
@@ -18,6 +19,7 @@
     "date-fns": "^2.29.2",
     "gray-matter": "^4.0.3",
     "hastscript": "^7.0.2",
+    "kbar": "^0.1.0-beta.37",
     "mdx-mermaid": "^2.0.0-rc1",
     "mermaid": "^9.1.4",
     "next": "^12.3.1",
@@ -41,6 +43,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.4",
+    "cross-env": "^7.0.3",
     "postcss": "^8.4.12",
     "tailwindcss": "^3.1.8"
   }

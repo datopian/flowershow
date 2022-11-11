@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import { siteConfig } from "../config/siteConfig";
 import { MobileNavigation } from "./MobileNavigation";
 import { NavItem } from "./NavItem";
-import { Search } from "./Search";
 import { ThemeSelector } from "./ThemeSelector";
+import { SearchContext, SearchField } from "./search";
+
+const Search = SearchContext(siteConfig.search?.provider);
 
 function GitHubIcon(props) {
   return (
@@ -61,6 +63,13 @@ function NavbarTitle() {
 
 export function Nav() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [modifierKey, setModifierKey] = useState();
+
+  useEffect(() => {
+    setModifierKey(
+      /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform) ? "⌘" : "Ctrl "
+    );
+  }, []);
 
   useEffect(() => {
     function onScroll() {
@@ -96,7 +105,13 @@ export function Nav() {
         </div>
       </div>
       <div className="relative flex items-center basis-auto justify-end gap-6 xl:gap-8 md:shrink w-full">
-        <Search />
+        {Search && (
+          <Search>
+            {({ query }) => (
+              <SearchField modifierKey={modifierKey} onOpen={query?.toggle} />
+            )}
+          </Search>
+        )}
         <ThemeSelector />
         {siteConfig.github && (
           <Link href={siteConfig.github}>
