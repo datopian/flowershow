@@ -127,17 +127,17 @@ After running this command, you will now be able to see your website on http://l
 If your ready to publish your site, you can now build it with the following command:
 
 ```bash
-npx flowershow build
-# or npx flowershow build some-parent-dir
+npx flowershow export
+# or npx flowershow export some-parent-dir
 ```
 
 It will create a `.flowershow/.next` folder with your website files ready to be deployed to any hosting provider that supports Node.js.
 
-If you want to deploy it to a static website hosting provider, you need to run the following command instead:
+If you want to deploy it to a static website hosting provider, you can run the following command instead:
 
 ```bash
-npx flowershow build-static
-# or npx flowershow build-static some-parent-dir
+npx flowershow export
+# or npx flowershow export some-parent-dir
 ```
 
 It will create a `.flowershow/out` folder with static files.
