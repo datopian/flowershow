@@ -1,5 +1,11 @@
 # flowershow
 
+## 0.0.10
+
+### Patch Changes
+
+- Rename `flowershow build-static` to `flowershow export`.
+
 ## 0.0.9
 
 ### Patch Changes
