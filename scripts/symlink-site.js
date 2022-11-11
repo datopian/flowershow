@@ -4,10 +4,13 @@
 // It probably won't be needed after we create a separate project for our website (e.g. /apps/flowershow)
 
 const fs = require("fs");
+const process = require("process");
 
-const contentSymlink = "./packages/template/content";
-const assetsSymlink = "./packages/template/public/assets";
-const componentsSymlink = "./packages/template/components/custom";
+process.chdir(__dirname);
+
+const contentSymlink = "../packages/template/content";
+const assetsSymlink = "../packages/template/public/assets";
+const componentsSymlink = "../packages/template/components/custom";
 
 if (!fs.existsSync(contentSymlink)) {
   fs.symlinkSync("../../site/content", contentSymlink);
