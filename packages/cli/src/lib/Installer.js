@@ -149,7 +149,7 @@ export default class Installer {
         `${contentPath}/index.md`,
         homePageContent,
         { flag: "a" },
-        (err) => {}
+        (err) => {} // eslint-disable-line no-unused-vars
       );
     }
 
@@ -158,12 +158,11 @@ export default class Installer {
       info(
         `No config.js file found in ${contentDir}. Flowershow will create one for you.`
       );
-      // eslint-disable-next-line no-unused-vars
       fs.writeFile(
         `${contentPath}/config.js`,
         "{}",
         { flag: "a" },
-        (err) => {}
+        (err) => {} // eslint-disable-line no-unused-vars
       );
     }
 
@@ -186,11 +185,9 @@ export default class Installer {
     }
 
     // update content and assets symlinks
-    fs.unlinkSync(`${flowershowDir}/content`);
     const contentSymlinkPath = path.relative(`${flowershowDir}`, contentDir);
     fs.symlinkSync(contentSymlinkPath, `${flowershowDir}/content`);
 
-    fs.unlinkSync(`${flowershowDir}/public/assets`);
     if (assetsFolder !== "none") {
       const assetsSymlinkPath = path.relative(
         `${flowershowDir}/public`,

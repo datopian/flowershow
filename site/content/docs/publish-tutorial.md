@@ -5,8 +5,8 @@ title: Self publish your digital garden with Flowershow
 ## Prepare the content
 
 > [!warning] OS
-> Flowershow CLI is not yet supported on Windows.
-> See [this issue](https://github.com/flowershow/flowershow/issues/234) to learn about the progress on it so far.
+> Flowershow CLI has a basic support for Windows, but it hasn't been thoroughly tested on this OS yet. Please let us know of any unexpected issues.
+> Also, please note that on Windows you have to run Flowershow CLI in an admin console. You can open it by right-clicking on the Command Prompt (or e.g. PowerShell) and clicking on "Run as administrator".
 
 > [!note] Pre-requisites
 > [Node.js](https://nodejs.org/en/) installed
