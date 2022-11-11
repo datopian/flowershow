@@ -7,7 +7,7 @@ import os from "os";
 
 if (os.platform() === "win32") {
   warn(
-    "This may not work as expected. You're trying to run Flowreshow CLI on Windows, which is not supported yet..."
+    "This may not work as expected. You're trying to run Flowreshow CLI on Windows, which is not thoroughly tested. Please submit an issue if you encounter any problems: https://github.com/flowershow/flowershow/issues"
   );
 }
 
@@ -54,16 +54,16 @@ program
   });
 
 program
-  .command("build-static")
-  .description("build static Flowershow website")
+  .command("export")
+  .description("build a static Flowershow website")
   .argument(
     "[project-dir]",
     "Path to the folder where Flowershow template is installed (root folder of .flowershow)",
     "."
   )
   .action(async (projectPath) => {
-    const { default: buildStatic } = await import("../lib/buildStatic.js");
-    buildStatic(projectPath);
+    const { default: buildExport } = await import("../lib/buildExport.js");
+    buildExport(projectPath);
   });
 
 program

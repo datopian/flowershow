@@ -77,7 +77,7 @@ teardown() {
     run [ -d .flowershow/node_modules ]
     assert_success
 
-    run cli.js build-static
+    run cli.js export
     assert_success
     assert [ -d .flowershow/out ]
     cd .flowershow
