@@ -187,7 +187,7 @@ export function Layout({ children, tableOfContents }) {
                       </a>
                     </Link>
                   </h3>
-                  {section.children.length > 0 && (
+                  {section.children && section.children.length > 0 && (
                     <ol className="mt-2 space-y-3 pl-5 text-slate-500 dark:text-slate-400">
                       {section.children.map((subSection) => (
                         <li key={subSection.id}>
