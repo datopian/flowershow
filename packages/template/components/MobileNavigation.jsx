@@ -84,7 +84,12 @@ export function MobileNavigation({ navigation }) {
             >
               <CloseIcon className="h-6 w-6 stroke-slate-500" />
             </button>
-            <Link href="/" className="ml-6" aria-label="Home page">
+            <Link
+              href="/"
+              className="ml-6"
+              aria-label="Home page"
+              legacyBehavior
+            >
               {/* <Logomark className="h-9 w-9" /> */}
               <div className="font-extrabold text-slate-900 dark:text-white text-2xl ml-6">
                 {siteConfig.author}
@@ -102,13 +107,12 @@ export function MobileNavigation({ navigation }) {
                 <Menu.Button>
                   {Object.prototype.hasOwnProperty.call(link, "href") ? (
                     <li key={link.href}>
-                      <Link href={link.href}>
-                        <a
-                          className={`
-                      block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300`}
-                        >
-                          {link.name}
-                        </a>
+                      <Link
+                        href={link.href}
+                        className={`
+                  block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300`}
+                      >
+                        {link.name}
                       </Link>
                     </li>
                   ) : (
