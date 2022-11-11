@@ -118,8 +118,7 @@ importers:
       "@silvenon/remark-smartypants": ^1.0.0
       "@tailwindcss/typography": ^0.5.2
       autoprefixer: ^10.4.4
-      contentlayer: ^0.2.8
-      cross-env: ^7.0.3
+      contentlayer: ^0.2.9
       date-fns: ^2.29.2
       gray-matter: ^4.0.3
       hastscript: ^7.0.2
