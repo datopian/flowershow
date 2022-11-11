@@ -28,6 +28,14 @@ const config = {
   ],
   github: "https://github.com/flowershow/flowershow",
   discord: "https://discord.gg/cPxejPzpwt",
+  search: {
+    provider: "algolia",
+    algoliaConfig: {
+      appId: process.env.NEXT_PUBLIC_DOCSEARCH_APP_ID,
+      apiKey: process.env.NEXT_PUBLIC_DOCSEARCH_API_KEY,
+      indexName: process.env.NEXT_PUBLIC_DOCSEARCH_INDEX_NAME,
+    },
+  },
   nextSeo: {
     titleTemplate: "%s | Flowershow",
     description:

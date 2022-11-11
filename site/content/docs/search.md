@@ -2,19 +2,62 @@
 title: Search Feature
 ---
 
-## Users
-
 ![[search-component.jpg]]
 
 Flowershow supports search functionality on the website to deliver realtime results for content available on all your pages. Clicking the result will lead the user to the relevant page.
 
 It is available in the navbar or can also be accessed by pressing the Ctrl+K (⌘+K on macOS) keyboard shortcut to open the search modal.
 
-## Developers
+## Adding the search component
 
-The search functionilty uses the [Algolia Docsearch](https://docsearch.algolia.com/) to support realtime results. To add this on your website you will need to register an account with the mentioned link and request access to their api.
+There are two kinds of providers to choose from when setting up the search component on your flowershow site. These are 'kbar' and 'algolia' which can be configured in your `config.js` file.
 
-There are some required config values which should be included for the search to function accordingly. These are:
+The difference between the two is that algolia search allows for a full-text search with external indexing whereas in kbar you don't need an external provider but you can only do keyword searches.
+
+### Kbar
+
+To add the keyword-only search feature, just setup the search config in your `config.js` file to the following.
+
+```js
+const config = {
+  search: {
+    provider: "kbar",
+  },
+};
+```
+
+**Additional config:**
+
+Using the kbar provider you can also add additional names to the search list with custom search keywords which links to any one of your site's pages.
+
+For example, with the following configuration "Blog" is added to the search list, and writing the word "content" in the search field would show it in search results. Clicking it will lead to your blog page, if exists.
+
+```js
+const config = {
+  search: {
+    provider: "kbar",
+    kbarConfig: {
+      defaultActions: [
+        {
+          id: "blog",
+          name: "Blog",
+          keywords: "content",
+          perform: () => (window.location.pathname = "blog"),
+        },
+      ],
+    },
+  },
+};
+```
+
+### Algolia search
+
+[Algolia](https://www.algolia.com/) is a powerful search and discovery provider that generates realtime results on your website and can be easily integrated with flowershow.
+
+> [!note]
+> Before adding this feature, you will need to register an account with them by following their instructions at [Algolia Docsearch](https://docsearch.algolia.com/) and requesting access to their api.
+
+There are some required config values that should be included for the search to function accordingly. These are:
 
 - App ID
 - Api key
@@ -22,14 +65,17 @@ There are some required config values which should be included for the search to
 
 These values will be available once you have followed the steps provided to apply for algolia docsearch and your request is granted.
 
-Once these are available, you can then include them in an environment variable `.env` file which should be in the root of the template. For example in `templates/default/` folder.
+Once these are available, you can then setup the algolia search provider and fill in the provided values in your `config.js` file as shown below.
 
-You may also have a look at the `.env.example` file that is included within the template.
-
-Add the variables in the `.env` as shown below:
-
-```
-NEXT_PUBLIC_DOCSEARCH_APP_ID=YOUR_API_ID
-NEXT_PUBLIC_DOCSEARCH_API_KEY=YOUR_API_KEY
-NEXT_PUBLIC_DOCSEARCH_INDEX_NAME=YOUR_INDEX_NAME
+```js
+const config = {
+  search: {
+    provider: "algolia",
+    algoliaConfig: {
+      appId: "",
+      apiKey: "",
+      indexName: "",
+    },
+  },
+};
 ```

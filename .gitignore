@@ -7,6 +7,7 @@
 .contentlayer
 .next
 out
+search.json
 
 # TEMPORARY 
 # this won't be needed when we create a separate project for our website

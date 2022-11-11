@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import "tailwindcss/tailwind.css";
 
 import { Layout } from "../components/Layout";
+import { SearchProvider } from "../components/search";
 import { siteConfig } from "../config/siteConfig";
 import * as gtag from "../lib/gtag";
 import "../styles/docsearch.css";
@@ -89,9 +90,11 @@ function MyApp({ Component, pageProps }) {
           }}
         />
       )}
-      <Layout title={pageProps.title} tableOfContents={tableOfContents}>
-        <Component {...pageProps} />
-      </Layout>
+      <SearchProvider searchConfig={siteConfig.search}>
+        <Layout title={pageProps.title} tableOfContents={tableOfContents}>
+          <Component {...pageProps} />
+        </Layout>
+      </SearchProvider>
     </ThemeProvider>
   );
 }
