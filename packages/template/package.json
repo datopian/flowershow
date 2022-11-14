@@ -39,7 +39,7 @@
     "remark-math": "^5.1.1",
     "remark-smartypants": "^2.0.0",
     "remark-toc": "^8.0.1",
-    "remark-wiki-link-plus": "^1.1.0"
+    "remark-wiki-link-plus": "^1.1.1"
   },
   "devDependencies": {
     "@types/react": "18.0.20",
