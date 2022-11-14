@@ -1,9 +1,11 @@
-import { DocSearchModal, useDocSearchKeyboardEvents } from "@docsearch/react";
+import { useDocSearchKeyboardEvents } from "@docsearch/react";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { createContext, useCallback, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+
+let DocSearchModal = null;
 
 function Hit({ hit, children }) {
   return <Link href={hit.url}>{children}</Link>;
