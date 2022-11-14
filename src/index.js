@@ -35,15 +35,17 @@ function wikiLinkPlugin (opts = { markdownFolder: '' }) {
       if (!image && !name.startsWith('#') && name.match(/#/)) {
         [, heading] = name.split('#')
         name = name.replace(`#${heading}`, '')
+      } else if (name.startsWith('#')) {
+        name = name.toLowerCase()
       }
       if (opts.permalinks || opts.markdownFolder) {
         const url = opts.permalinks.find(p => p === name || (p.split('/').pop() === name && !opts.permalinks.includes(p.split('/').pop())))
         if (url) {
-          if (heading) return [`${url}#${heading}`.replace(/ /g, '-').toLowerCase()]
-          return image ? [url] : [url.replace(/ /g, '-').toLowerCase()]
+          if (heading) return [`${url}#${heading.toLowerCase()}`.replace(/ /g, '-')]
+          return image ? [url] : [url.replace(/ /g, '-')]
         }
       }
-      return image ? [name] : [name.replace(/ /g, '-').toLowerCase()]
+      return image ? [name] : [name.replace(/ /g, '-')]
     },
     permalinks: opts.markdownFolder ? getFiles(opts.markdownFolder).map(file => file.replace(/\.mdx?$/, '')) : opts.permalinks
   }

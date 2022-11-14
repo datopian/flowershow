@@ -29,6 +29,26 @@ describe('remark-wiki-link-plus', () => {
     })
   })
 
+  it('parses a wiki link that has a matching permalink (Case sensitive)', () => {
+    const processor = unified()
+      .use(markdown)
+      .use(wikiLinkPlugin, {
+        permalinks: ['Test']
+      })
+
+    var ast = processor.parse('[[Test]]')
+    ast = processor.runSync(ast)
+
+    visit(ast, 'wikiLink', (node) => {
+      assert.equal(node.data.permalink, 'Test')
+      assert.equal(node.data.exists, true)
+      assert.equal(node.data.hName, 'a')
+      assert.equal(node.data.hProperties.className, 'internal')
+      assert.equal(node.data.hProperties.href, '/Test')
+      assert.equal(node.data.hChildren[0].value, 'Test')
+    })
+  })
+
   it('parses a wiki link that has no matching permalink', () => {
     const processor = unified()
       .use(markdown)
@@ -41,10 +61,10 @@ describe('remark-wiki-link-plus', () => {
 
     visit(ast, 'wikiLink', (node) => {
       assert.equal(node.data.exists, false)
-      assert.equal(node.data.permalink, 'new-page')
+      assert.equal(node.data.permalink, 'New-Page')
       assert.equal(node.data.hName, 'a')
       assert.equal(node.data.hProperties.className, 'internal new')
-      assert.equal(node.data.hProperties.href, '/new-page')
+      assert.equal(node.data.hProperties.href, '/New-Page')
       assert.equal(node.data.hChildren[0].value, 'New Page')
     })
   })
@@ -88,6 +108,26 @@ describe('remark-wiki-link-plus', () => {
       assert.equal(node.data.hProperties.className, 'internal')
       assert.equal(node.data.hProperties.href, '/example/test#with-heading')
       assert.equal(node.data.hChildren[0].value, 'example/test#with heading')
+    })
+  })
+
+  it('handles wiki links with heading (case insensitive)', () => {
+    const processor = unified()
+      .use(markdown)
+      .use(wikiLinkPlugin, {
+        permalinks: ['example/test']
+      })
+
+    var ast = processor.parse('[[example/test#With heading]]')
+    ast = processor.runSync(ast)
+
+    visit(ast, 'wikiLink', node => {
+      assert.equal(node.data.exists, true)
+      assert.equal(node.data.permalink, 'example/test#with-heading')
+      assert.equal(node.data.hName, 'a')
+      assert.equal(node.data.hProperties.className, 'internal')
+      assert.equal(node.data.hProperties.href, '/example/test#with-heading')
+      assert.equal(node.data.hChildren[0].value, 'example/test#With heading')
     })
   })
 
@@ -257,7 +297,7 @@ describe('remark-wiki-link-plus', () => {
       ast = processor.runSync(ast)
 
       visit(ast, 'wikiLink', (node) => {
-        assert.equal(node.data.hProperties.href, 'a-page')
+        assert.equal(node.data.hProperties.href, 'A-Page')
       })
     })
 
@@ -269,7 +309,7 @@ describe('remark-wiki-link-plus', () => {
           permalinks: ['a-page']
         })
 
-      var ast = processor.parse('[[A Page]]')
+      var ast = processor.parse('[[a page]]')
       ast = processor.runSync(ast)
 
       visit(ast, 'wikiLink', (node) => {

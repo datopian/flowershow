@@ -13,7 +13,7 @@ function wikiLinkTransclusionFormat (extension) {
 
 function fromMarkdown (opts = {}) {
   const permalinks = opts.permalinks || []
-  const defaultPageResolver = (name) => [name.replace(/ /g, '-').toLowerCase()]
+  const defaultPageResolver = (name) => [name.replace(/ /g, '-')]
   const pageResolver = opts.pageResolver || defaultPageResolver
   const newClassName = opts.newClassName || 'new'
   const wikiLinkClassName = opts.wikiLinkClassName || 'internal'
