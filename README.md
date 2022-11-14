@@ -60,6 +60,13 @@ npm run test
 
 # Change Log
 
+## [1.1.1] - 2022-11-14
+
+### Fixed
+
+- Permalinks not linking to case sensitive url paths 
+  - eg. before `[[Page]]` generates `href="/page"` but will now generate `href="/Page"`
+
 ## [1.1.0] - 2022-09-06
 
 ### Added
