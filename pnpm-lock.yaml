@@ -131,7 +131,7 @@ importers:
       rehype-slug: ^5.0.1
       remark-callouts: ^1.0.2
       remark-code-extra: ^1.0.1
-      remark-embed-plus: ^1.0.1
+      remark-embed-plus: ^1.0.2
       remark-gfm: ^3.0.0
       remark-math: ^5.1.1
       remark-smartypants: ^2.0.0
@@ -163,7 +163,7 @@ importers:
       rehype-slug: 5.1.0
       remark-callouts: 1.0.2
       remark-code-extra: 1.0.1
-      remark-embed-plus: 1.0.1
+      remark-embed-plus: 1.0.2
       remark-gfm: 3.0.1
       remark-math: 5.1.1
       remark-smartypants: 2.0.0
@@ -17598,10 +17598,10 @@ packages:
       unist-util-visit: 1.4.1
     dev: false
 
-  /remark-embed-plus/1.0.1:
+  /remark-embed-plus/1.0.2:
     resolution:
       {
-        integrity: sha512-4PDp31v0RLVKQYEUePR2oS1ye28rkZFyn6XFHolPlgkNbkw5aUdNtFOQ4dwxofUKLWKePKX4GNRnT78/yG8Cpw==,
+        integrity: sha512-YY2zE9s/em61GBqW4MKw0gevsQvldEOoOQmn5ah2oKqTFYQfOSCdlFoXDP/rfMSXCcTu2++zWb+jpAViDWIM/g==,
       }
     dependencies:
       unist-util-visit: 4.1.1
