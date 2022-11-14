@@ -11,6 +11,7 @@ Inserting a youtube url in between new lines
 https://www.youtube.com/watch?v=dQw4w9WgXcQ
 (open line)
 `
+
 will render the following:
 
 https://www.youtube.com/watch?v=dQw4w9WgXcQ
