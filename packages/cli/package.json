@@ -1,6 +1,6 @@
 {
   "name": "flowershow",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Publish your digital garden",
   "bin": {
     "flowershow": "src/bin/cli.js"
@@ -29,7 +29,8 @@
     "degit": "^2.8.4",
     "execa": "^6.1.0",
     "inquirer": "^9.1.1",
-    "ora": "^6.1.2"
+    "ora": "^6.1.2",
+    "universal-analytics": "^0.5.3"
   },
   "type": "module",
   "engines": {

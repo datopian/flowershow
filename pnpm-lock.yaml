@@ -94,6 +94,7 @@ importers:
       execa: ^6.1.0
       inquirer: ^9.1.1
       ora: ^6.1.2
+      universal-analytics: ^0.5.3
     dependencies:
       chalk: 5.1.2
       commander: 9.4.1
@@ -101,6 +102,7 @@ importers:
       execa: 6.1.0
       inquirer: 9.1.4
       ora: 6.1.2
+      universal-analytics: 0.5.3
 
   packages/template:
     specifiers:
@@ -20096,6 +20098,19 @@ packages:
       "@types/unist": 2.0.6
       unist-util-is: 5.1.1
       unist-util-visit-parents: 5.1.1
+    dev: false
+
+  /universal-analytics/0.5.3:
+    resolution:
+      {
+        integrity: sha512-HXSMyIcf2XTvwZ6ZZQLfxfViRm/yTGoRgDeTbojtq6rezeyKB0sTBcKH2fhddnteAHRcHiKgr/ACpbgjGOC6RQ==,
+      }
+    engines: { node: ">=12.18.2" }
+    dependencies:
+      debug: 4.3.4
+      uuid: 8.3.2
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /universalify/0.1.2:
