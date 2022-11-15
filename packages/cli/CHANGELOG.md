@@ -1,5 +1,11 @@
 # flowershow
 
+## 0.0.11
+
+### Patch Changes
+
+- Basic anonymous telemetry (OS, Flowershow version and command being run).
+
 ## 0.0.10
 
 ### Patch Changes

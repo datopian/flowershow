@@ -1,9 +1,10 @@
 #!/usr/bin/env node
+import os from "os";
 import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
-import { warn } from "../lib/utils/index.js";
-
-import os from "os";
+import { warn, sendEvent } from "../lib/utils/index.js";
+import { Command } from "commander";
+import inquirer from "inquirer";
 
 if (os.platform() === "win32") {
   warn(
@@ -14,7 +15,22 @@ if (os.platform() === "win32") {
 // TODO check current vs required node version (package.json engines)
 // const requiredNodeVersion = require("../package.json").engines.node;
 
-import { Command } from "commander";
+// ask the user for permission to send anonymous telemetry
+if (process.env.FLOWERSHOW !== "dev") {
+  const { allow } = await inquirer.prompt([
+    {
+      name: "allow",
+      type: "confirm",
+      message:
+        "If you don't mind, we'd like to collect very basic anonymous telemetry that will help us improve this tool. Is that ok?",
+    },
+  ]);
+
+  if (allow) {
+    const [, , cmd, ...args] = process.argv;
+    sendEvent(cmd, args);
+  }
+}
 
 const program = new Command();
 
