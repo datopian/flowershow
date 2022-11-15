@@ -13,5 +13,5 @@ export function sendEvent(cmd, args) {
       JSON.stringify({ cli: version, node: process.version })
     )
     .send();
-  visitor.event("cli-usage-by-command", cmd, JSON.stringify({ args })).send();
+  visitor.event("cli-usage-by-command", cmd, args).send();
 }
