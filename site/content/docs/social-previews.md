@@ -15,5 +15,3 @@ https://www.youtube.com/watch?v=dQw4w9WgXcQ
 will render the following:
 
 https://www.youtube.com/watch?v=dQw4w9WgXcQ
-
-
