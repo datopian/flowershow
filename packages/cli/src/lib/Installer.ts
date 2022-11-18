@@ -1,8 +1,8 @@
 import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 
-import fs from "fs";
-import path from "path";
+import * as fs from "fs";
+import * as path from "path";
 import chalk from "chalk";
 import degit from "degit";
 import { execa } from "execa";
@@ -22,7 +22,10 @@ import {
 import { FLOWERSHOW_FOLDER_NAME } from "./const.js";
 
 export default class Installer {
-  constructor(context, targetDir) {
+  context: any;
+  targetDir: string;
+
+  constructor(context: any, targetDir: string) {
     this.context = context;
     this.targetDir = targetDir;
   }
@@ -41,7 +44,7 @@ export default class Installer {
 
     let existsAction;
     if (fs.existsSync(flowershowDir)) {
-      let { action } = await inquirer.prompt([
+      const { action } = await inquirer.prompt([
         {
           name: "action",
           type: "list",
@@ -62,7 +65,7 @@ export default class Installer {
       existsAction = action;
     }
 
-    let { contentPath } = await inquirer.prompt([
+    const { contentPath } = await inquirer.prompt([
       {
         name: "contentPath",
         type: "input",
