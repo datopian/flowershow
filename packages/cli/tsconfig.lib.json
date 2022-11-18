@@ -1,10 +1,10 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "module": "commonjs",
-    "outDir": "../../dist/out-tsc",
+    "target": "es2020",
+    "module": "es2020",
     "declaration": true,
-    "types": ["node"]
+    "allowSyntheticDefaultImports": true
   },
   "exclude": [
     "jest.config.ts",
