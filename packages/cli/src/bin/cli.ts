@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 import { warn, exit, sendEvent } from "../lib/utils/index.js";
@@ -63,9 +62,9 @@ program
     "."
   )
   // .option('-t, --template [template-name]', 'Flowershow template name to use', 'default')
-  .action(async (targetDir, options) => {
+  .action(async (targetDir) => {
     const { default: install } = await import("../lib/install.js");
-    install(targetDir, options);
+    install(targetDir);
   });
 
 program

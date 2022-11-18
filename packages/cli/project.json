@@ -4,6 +4,17 @@
   "sourceRoot": "packages/cli/src",
   "projectType": "library",
   "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/cli",
+        "tsConfig": "packages/cli/tsconfig.lib.json",
+        "packageJson": "packages/cli/package.json",
+        "main": "packages/cli/src/bin/cli.ts",
+        "assets": ["packages/cli/*.md"]
+      }
+    },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
