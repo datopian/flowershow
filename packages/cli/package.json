@@ -10,6 +10,9 @@
     "url": "git+https://github.com/flowershow/flowershow",
     "directory": "packages/cli"
   },
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "flowershow",
     "cli"
