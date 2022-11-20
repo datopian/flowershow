@@ -4,3 +4,4 @@ test_helper/
 .next/
 .contentlayer/
 out/
+dist/
