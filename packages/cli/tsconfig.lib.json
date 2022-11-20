@@ -1,17 +1,15 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "allowJs": true,
     "target": "es2020",
     "module": "es2020",
-    "declaration": true,
-    "allowSyntheticDefaultImports": true
+    "types": ["node"],
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
   },
-  "exclude": [
-    "jest.config.ts",
-    "**/*.spec.ts",
-    "**/*.test.ts",
-    "**/*.spec.js",
-    "**/*.test.js"
-  ],
-  "include": ["**/*.ts", "**/*.js"]
+  "exclude": ["jest.config.ts", "**/*.spec.ts", "**/*.test.ts"],
+  "include": ["src/**/*.ts"]
 }
