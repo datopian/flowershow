@@ -31,6 +31,8 @@ export default class Installer {
   }
 
   get templateRepo() {
+    // simplify importing data from package.json with this line after we no longer want to support node 16
+    // import packageJson from "#package.json" assert { type: "json" };
     const flowershowRepo = require("../../package.json").repository.url.replace(
       "git+",
       ""

@@ -7,6 +7,8 @@ import { Command } from "commander";
 // const requiredNodeVersion = require("../package.json").engines.node;
 
 const { version: cli } = require("../../package.json");
+// simplify importing data from package.json with this line after we no longer want to support node 16
+// import packageJson from "#package.json" assert { type: "json" };
 const { version: node, platform, argv } = process;
 
 if (platform === "win32") {
