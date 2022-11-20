@@ -18,8 +18,8 @@ setup() {
     echo "# Hello world" > "$E2E_TEMP_DIR/content/index.md"
     cd $E2E_TEMP_DIR || exit
 
-    # make executables in scripts/ and ../bin visible to PATH
-    PATH="$BATS_TEST_DIRNAME/scripts:$BATS_TEST_DIRNAME/../bin:$PATH"
+    PATH="$BATS_TEST_DIRNAME/scripts:$PATH"
+    CLI_EXE="$BATS_TEST_DIRNAME/../dist/src/bin/cli.js"
 }
 
 teardown() {
@@ -27,12 +27,12 @@ teardown() {
 }
 
 @test "Install Flowershow template and preview site" {
-    run install.sh
+    run install.sh $CLI_EXE
     assert_success
     assert_output --partial "Successfuly installed"
     assert [ -d .flowershow/node_modules ]
 
-    run cli.js preview & sleep 20
+    run node $CLI_EXE preview & sleep 20
     assert_success
     run curl "http://localhost:3000"
     # kill the process before testing the output
@@ -43,12 +43,12 @@ teardown() {
 }
 
 @test "Install Flowershow template, build and start site" {
-    run install.sh
+    run install.sh $CLI_EXE
     assert_success
     assert_output --partial "Successfuly installed"
     assert [ -d .flowershow/node_modules ]
 
-    run cli.js build
+    run node $CLI_EXE build
     assert_success
     run [ -d .flowershow/.next ]
     assert_success
@@ -72,12 +72,12 @@ teardown() {
         export $(grep -v '^#' $BATS_TEST_DIRNAME/.env | xargs)
     fi
 
-    run install.sh
+    run install.sh $CLI_EXE
     assert_output --partial "Successfuly installed"
     run [ -d .flowershow/node_modules ]
     assert_success
 
-    run cli.js export
+    run node $CLI_EXE export
     assert_success
     assert [ -d .flowershow/out ]
     cd .flowershow
