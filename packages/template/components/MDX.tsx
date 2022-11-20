@@ -10,6 +10,7 @@ const components = {
   a: CustomLink,
   pre: Pre,
   wrapper: ({ layout, ...rest }) => {
+    /* eslint-disable-next-line @typescript-eslint/no-var-requires*/
     const Layout = require(`../layouts/${layout}`).default;
     return <Layout {...rest} />;
   },
