@@ -25,7 +25,11 @@
     "**/*.ts",
     "**/*.js",
     "**/*.jsx",
-    ".contentlayer/generated"
+    ".contentlayer/generated",
+    "../../site/**/*.tsx",
+    "../../site/**/*.ts",
+    "../../site/**/*.js",
+    "../../site/**/*.jsx"
   ],
   "exclude": ["node_modules"]
 }
