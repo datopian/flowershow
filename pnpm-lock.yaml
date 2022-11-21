@@ -145,7 +145,7 @@ importers:
       remark-math: ^5.1.1
       remark-smartypants: ^2.0.0
       remark-toc: ^8.0.1
-      remark-wiki-link-plus: ^1.1.0
+      remark-wiki-link-plus: ^1.1.1
       tailwindcss: ^3.1.8
       typescript: ^4.9.3
     dependencies:
@@ -178,7 +178,7 @@ importers:
       remark-math: 5.1.1
       remark-smartypants: 2.0.0
       remark-toc: 8.0.1
-      remark-wiki-link-plus: 1.1.0
+      remark-wiki-link-plus: 1.1.1
     devDependencies:
       "@types/react": 18.0.20
       autoprefixer: 10.4.13_postcss@8.4.18
@@ -17760,10 +17760,10 @@ packages:
       unified: 10.1.2
     dev: false
 
-  /remark-wiki-link-plus/1.1.0:
+  /remark-wiki-link-plus/1.1.1:
     resolution:
       {
-        integrity: sha512-nQ10RpO9yevF9dBn4zBcZI2zQN2s+e/7Nu9vpDuQ5ZObf7AsUJHS3ZrTEJosJyVlMvkvZLz4kGCgiDk4xDZV3w==,
+        integrity: sha512-zSnIF3MrGQN+Bckl0+83pScJkhQe02OCAmbkgKqbhLkjnJSOJZk/UuyCRA6FNLkcAK9fhERUvwtsQKxEI/M76w==,
       }
     dependencies:
       "@babel/runtime": 7.20.1
