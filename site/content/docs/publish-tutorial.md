@@ -2,6 +2,10 @@
 title: Self publish your digital garden with Flowershow
 ---
 
+## Video Tutorial
+
+https://www.youtube.com/watch?v=HxD6NWYCea0
+
 ## Prepare the content
 
 > [!warning] OS
