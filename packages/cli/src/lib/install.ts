@@ -5,7 +5,7 @@ import inquirer from "inquirer";
 import Installer from "./Installer.js";
 import { error, exit } from "./utils/index.js";
 
-export default async function install(dir, options) {
+export default async function install(dir: string) {
   const currentDir = process.cwd();
   const inCurrentDir = dir === ".";
 
@@ -30,5 +30,5 @@ export default async function install(dir, options) {
   }
 
   const installer = new Installer(currentDir, targetDir);
-  await installer.install(options);
+  await installer.install();
 }
