@@ -1,6 +1,6 @@
 {
   "extends": [
-    "plugin:@nrwl/nx/react-typescript",
+    "plugin:@nrwl/nx/react",
     "next",
     "next/core-web-vitals",
     "../../.eslintrc.json"
@@ -16,14 +16,6 @@
         ],
         "react/no-unescaped-entities": "warn"
       }
-    },
-    {
-      "files": ["*.ts", "*.tsx"],
-      "rules": {}
-    },
-    {
-      "files": ["*.js", "*.jsx"],
-      "rules": {}
     }
   ],
   "rules": {
