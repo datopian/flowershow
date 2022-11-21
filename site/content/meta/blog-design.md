@@ -40,8 +40,8 @@ When publishing my site I want a way to create or designate pages as blog posts 
 
 ## Features
 
-* Simple way to make a note into a blog/article
-* Simple way to show list of blog posts in reverse date order
+- Simple way to make a note into a blog/article
+- Simple way to show list of blog posts in reverse date order
 
 Specifically
 
@@ -63,7 +63,7 @@ make the searchable blogs list a component, which users can use in any of their 
 - we could even use query params for the search terms I think
 - re pagination: see section below. summary: don't have pagination just load more / infinite scroll
 
-> 👍👍 ~rufus though note this requires an allBlogs variable to be available to pass to the component. I guess we can have this work with our `data` attribute (which i more and more think is a stroke of genius. it's a way to have global variables that can be used on demand from content level - or, in nextjs terms a way to sort of have `getStaticProps` at content/markdown level**
+> 👍👍 ~rufus though note this requires an allBlogs variable to be available to pass to the component. I guess we can have this work with our `data` attribute (which i more and more think is a stroke of genius. it's a way to have global variables that can be used on demand from content level - or, in nextjs terms a way to sort of have `getStaticProps` at content/markdown level\*\*
 
 ### Individual blog page
 
@@ -87,5 +87,5 @@ Discussion (now maybe irrelevant if we go for load more etc)
 - Do we want to support blog pages in the current (default) app template, or do we want to create a new "blog" template? **✅2022-11-17 use the current template**
 - Do we provide an example / obsidian template for blog (in docs for now) **✅2022-11-17 👍 yes we do**
 - **How to make it opt-in:** **❌2022-11-18 ~rufus for now ok to make this hard-coded (KISS)**
-  - Idea A (simpler): /pages/blog could be renamed to e.g. /pages/_blog and we could define a new property in the config file for specifying what path should point to it (could be `/blog` by default) and use next redirects to handle it (https://nextjs.org/docs/api-reference/next.config.js/redirects) **❌2022-11-18 i don't think redirects are good**
+  - Idea A (simpler): /pages/blog could be renamed to e.g. /pages/\_blog and we could define a new property in the config file for specifying what path should point to it (could be `/blog` by default) and use next redirects to handle it (https://nextjs.org/docs/api-reference/next.config.js/redirects) **❌2022-11-18 i don't think redirects are good**
   - Idea B: create a new package, an add-on that could be added by `npx flowershow add blog`, which would create /pages/blog and add Blog type to contentlayer config

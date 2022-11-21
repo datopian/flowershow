@@ -8,20 +8,17 @@ Thank you so much for your interest in Flowershow!
 
 Here are some of the new features we have implemented. 😎🚀
 
-
 ### Right Hand Side (RHS) Table of Contents (ToC)
 
-Flowershow supports adding a [RHS ToC sidebar](https://flowershow.app/docs/table-of-contents#right-hand-side-rhs)  to your pages.
+Flowershow supports adding a [RHS ToC sidebar](https://flowershow.app/docs/table-of-contents#right-hand-side-rhs) to your pages.
 
 ![[rhs-toc.jpg]]
-
 
 ### Local search with Kbar
 
 As an alternative to Algolia search engine integration, Flowershow now supports local content search with [Kbar](https://flowershow.app/docs/search).
 
 ![[search-component.jpg]]
-
 
 ### Custom data getters
 
