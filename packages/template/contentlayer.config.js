@@ -48,7 +48,7 @@ const Page = defineDocumentType(() => ({
 
 const blogFields = {
   created: { type: "date" },
-  "last-updated": { type: "date" },
+  lastUpdated: { type: "date" },
   layout: { type: "string", default: "blog" },
   authors: {
     type: "list",
