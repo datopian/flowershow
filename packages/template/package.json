@@ -42,6 +42,7 @@
     "remark-wiki-link-plus": "^1.1.0"
   },
   "devDependencies": {
+    "@types/react": "18.0.20",
     "autoprefixer": "^10.4.4",
     "cross-env": "^7.0.3",
     "postcss": "^8.4.12",
