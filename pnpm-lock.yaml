@@ -147,6 +147,7 @@ importers:
       remark-toc: ^8.0.1
       remark-wiki-link-plus: ^1.1.0
       tailwindcss: ^3.1.8
+      typescript: ^4.9.3
     dependencies:
       "@docsearch/react": 3.3.0_uih7neib2oyi6j6td2qk3hqyue
       "@headlessui/react": 1.7.4_sfoxds7t5ydpegc3knd667wn6m
@@ -184,6 +185,7 @@ importers:
       cross-env: 7.0.3
       postcss: 8.4.18
       tailwindcss: 3.2.2_postcss@8.4.18
+      typescript: 4.9.3
 
 packages:
   /@algolia/autocomplete-core/1.7.2:
@@ -19819,6 +19821,15 @@ packages:
     resolution:
       {
         integrity: sha512-QCh+85mCy+h0IGff8r5XWzOVSbBO+KfeYrMQh7NJ58QujwcE22u+NUSmUxqF+un70P9GXKxa2HCNiTTMJknyjQ==,
+      }
+    engines: { node: ">=4.2.0" }
+    hasBin: true
+    dev: true
+
+  /typescript/4.9.3:
+    resolution:
+      {
+        integrity: sha512-CIfGzTelbKNEnLpLdGFgdyKhG23CKdKgQPOBc+OUNrkJ2vr+KSzsSV5kq5iWhEQbok+quxgGzrAtGWCyU7tHnA==,
       }
     engines: { node: ">=4.2.0" }
     hasBin: true
