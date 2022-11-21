@@ -32,7 +32,7 @@
     "rehype-mathjax": "^4.0.2",
     "rehype-prism-plus": "^1.4.2",
     "rehype-slug": "^5.0.1",
-    "remark-callouts": "^1.0.2",
+    "remark-callouts": "^2.0.0",
     "remark-code-extra": "^1.0.1",
     "remark-embed-plus": "^1.0.2",
     "remark-gfm": "^3.0.0",
