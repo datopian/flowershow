@@ -4,6 +4,17 @@
   "sourceRoot": "packages/cli/src",
   "projectType": "library",
   "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "packages/cli/dist",
+        "tsConfig": "packages/cli/tsconfig.lib.json",
+        "packageJson": "packages/cli/package.json",
+        "main": "packages/cli/src/bin/cli.ts",
+        "assets": ["packages/cli/*.md"]
+      }
+    },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
@@ -24,17 +35,18 @@
       "options": {
         "commands": [
           "mkdir -p coverage/packages/cli-e2e",
-          "packages/cli/src/e2e/bats/bin/bats packages/cli/src/e2e/test.bats -p --report-formatter pretty -o coverage/packages/cli-e2e --verbose-run"
+          "packages/cli/e2e/bats/bin/bats packages/cli/e2e/test.bats -p --report-formatter pretty -o coverage/packages/cli-e2e --verbose-run"
         ]
       },
       "parallel": false,
       "inputs": [
         "default",
         "^production",
-        "{projectRoot}/src/e2e/.env",
+        "{projectRoot}/e2e/.env",
         { "env": "NETLIFY_TOKEN" }
       ],
-      "outputs": ["coverage/packages/cli-e2e"]
+      "outputs": ["coverage/packages/cli-e2e"],
+      "dependsOn": ["build"]
     }
   },
   "tags": []

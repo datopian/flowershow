@@ -10,6 +10,9 @@
     "url": "git+https://github.com/flowershow/flowershow",
     "directory": "packages/cli"
   },
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "flowershow",
     "cli"
@@ -34,6 +37,6 @@
   },
   "type": "module",
   "engines": {
-    "node": ">=12.2.0 || >=14.13.0"
+    "node": ">=16.3.0"
   }
 }

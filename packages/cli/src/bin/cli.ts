@@ -8,6 +8,8 @@ import { Command } from "commander";
 // const requiredNodeVersion = require("../package.json").engines.node;
 
 const { version: cli } = require("../../package.json");
+// simplify importing data from package.json with this line after we no longer want to support node 16
+// import packageJson from "#package.json" assert { type: "json" };
 const { version: node, platform, argv } = process;
 
 if (platform === "win32") {
@@ -63,9 +65,9 @@ program
     "."
   )
   // .option('-t, --template [template-name]', 'Flowershow template name to use', 'default')
-  .action(async (targetDir, options) => {
+  .action(async (targetDir) => {
     const { default: install } = await import("../lib/install.js");
-    install(targetDir, options);
+    install(targetDir);
   });
 
 program
