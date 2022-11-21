@@ -1,5 +1,7 @@
 ---
 title: Alpha Release
+created: 2022-11-07
+authors: [Philippe Du Preez]
 ---
 
 We've just released the first alpha of Flowershow for self-publishing 🙌

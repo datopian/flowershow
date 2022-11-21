@@ -1,8 +1,12 @@
 ---
-title: I'm an example blog post
-created: 2022-07-19
-authors: [John Doe]
 type: Blog
+title: I'm an example blog post in /docs folder
+created: 2022-07-19
+authors: [John Doe, Mickey Mouse]
+tags:
+  - tutorial
+  - next.js
+  - programming
 ---
 
 This is a demo page of the **Blog** layout.
