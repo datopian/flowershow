@@ -1,19 +1,14 @@
 #!/usr/bin/expect -f
 
-# get test directory that contains a content folder from bats test file
-# if you want to run this file manually, you need to pass the path to your test directory as it's argument
-set TEST_DIR [lindex $argv 0]
+set CLI_EXE [lindex $argv 0]
+set TEST_DIR [lindex $argv 1]
 
-# bats test file adds /packages/cli/bin to PATH
-# if you want to run this file manually, you need to manually add /packages/cli/bin directory to PATH yourself
-# e.g. PATH=~/flowershow/packages/cli/bin:$PATH
-spawn cli.js install "$TEST_DIR"
+spawn node "$CLI_EXE" install "$TEST_DIR"
 
 expect {
     -re "Flowershow template is already installed in directory" { send -- "\r" }
 }
 expect {
-    # TODO this seems to expect content folder name rather than path
     -re "Path to the folder with your markdown files" { send -- "content\r" }
     timeout { send_error "Failed to get prompt for content folder \n"; exit 1 }
 }
