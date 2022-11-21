@@ -147,15 +147,9 @@ importers:
       remark-wiki-link-plus: ^1.1.1
       tailwindcss: ^3.1.8
     dependencies:
-<<<<<<< HEAD
-      "@docsearch/react": 3.3.0_2oftdjc235pafh5xn5kpmut4wm
-      "@headlessui/react": 1.7.4_sfoxds7t5ydpegc3knd667wn6m
-      "@heroicons/react": 1.0.6_react@17.0.2
-=======
       "@docsearch/react": 3.3.0_ftygaz6e6e5e4cecsqmsnm4myu
       "@headlessui/react": 1.7.4_biqbaboplfbrettd7655fr4n2y
       "@heroicons/react": 1.0.6_react@18.2.0
->>>>>>> a875245 ([packages/template][xs]: react 18 and next 13 up)
       "@silvenon/remark-smartypants": 1.0.0
       "@tailwindcss/typography": 0.5.8_tailwindcss@3.2.4
       contentlayer: 0.2.9_esbuild@0.14.54
@@ -184,10 +178,10 @@ importers:
       remark-toc: 8.0.1
       remark-wiki-link-plus: 1.1.1
     devDependencies:
-      autoprefixer: 10.4.13_postcss@8.4.18
+      autoprefixer: 10.4.13_postcss@8.4.19
       cross-env: 7.0.3
-      postcss: 8.4.18
-      tailwindcss: 3.2.2_postcss@8.4.18
+      postcss: 8.4.19
+      tailwindcss: 3.2.4_postcss@8.4.19
 
 packages:
   /@algolia/autocomplete-core/1.7.2:
@@ -2488,11 +2482,7 @@ packages:
       }
     dev: false
 
-<<<<<<< HEAD
-  /@docsearch/react/3.3.0_2oftdjc235pafh5xn5kpmut4wm:
-=======
   /@docsearch/react/3.3.0_ftygaz6e6e5e4cecsqmsnm4myu:
->>>>>>> a875245 ([packages/template][xs]: react 18 and next 13 up)
     resolution:
       {
         integrity: sha512-fhS5adZkae2SSdMYEMVg6pxI5a/cE+tW16ki1V0/ur4Fdok3hBRkmN/H8VvlXnxzggkQIIRIVvYPn00JPjen3A==,
