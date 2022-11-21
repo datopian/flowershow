@@ -117,6 +117,7 @@ importers:
       "@heroicons/react": ^1.0.4
       "@silvenon/remark-smartypants": ^1.0.0
       "@tailwindcss/typography": ^0.5.2
+      "@types/react": 18.0.20
       autoprefixer: ^10.4.4
       contentlayer: ^0.2.8
       cross-env: ^7.0.3
@@ -146,8 +147,9 @@ importers:
       remark-toc: ^8.0.1
       remark-wiki-link-plus: ^1.1.0
       tailwindcss: ^3.1.8
+      typescript: ^4.9.3
     dependencies:
-      "@docsearch/react": 3.3.0_2oftdjc235pafh5xn5kpmut4wm
+      "@docsearch/react": 3.3.0_uih7neib2oyi6j6td2qk3hqyue
       "@headlessui/react": 1.7.4_sfoxds7t5ydpegc3knd667wn6m
       "@heroicons/react": 1.0.6_react@17.0.2
       "@silvenon/remark-smartypants": 1.0.0
@@ -178,10 +180,12 @@ importers:
       remark-toc: 8.0.1
       remark-wiki-link-plus: 1.1.0
     devDependencies:
+      "@types/react": 18.0.20
       autoprefixer: 10.4.13_postcss@8.4.18
       cross-env: 7.0.3
       postcss: 8.4.18
       tailwindcss: 3.2.2_postcss@8.4.18
+      typescript: 4.9.3
 
 packages:
   /@algolia/autocomplete-core/1.7.2:
@@ -2470,7 +2474,7 @@ packages:
       }
     dev: false
 
-  /@docsearch/react/3.3.0_2oftdjc235pafh5xn5kpmut4wm:
+  /@docsearch/react/3.3.0_uih7neib2oyi6j6td2qk3hqyue:
     resolution:
       {
         integrity: sha512-fhS5adZkae2SSdMYEMVg6pxI5a/cE+tW16ki1V0/ur4Fdok3hBRkmN/H8VvlXnxzggkQIIRIVvYPn00JPjen3A==,
@@ -2490,6 +2494,7 @@ packages:
       "@algolia/autocomplete-core": 1.7.2
       "@algolia/autocomplete-preset-algolia": 1.7.2_qs6lk5nhygj2o3hj4sf6xnr724
       "@docsearch/css": 3.3.0
+      "@types/react": 18.0.20
       algoliasearch: 4.14.2
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -5533,7 +5538,6 @@ packages:
       {
         integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==,
       }
-    dev: true
 
   /@types/qs/6.9.7:
     resolution:
@@ -5567,7 +5571,6 @@ packages:
       "@types/prop-types": 15.7.5
       "@types/scheduler": 0.16.2
       csstype: 3.1.1
-    dev: true
 
   /@types/resolve/1.17.1:
     resolution:
@@ -5589,7 +5592,6 @@ packages:
       {
         integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==,
       }
-    dev: true
 
   /@types/semver/6.2.3:
     resolution:
@@ -8121,7 +8123,6 @@ packages:
       {
         integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==,
       }
-    dev: true
 
   /csv-generate/3.4.3:
     resolution:
@@ -19820,6 +19821,15 @@ packages:
     resolution:
       {
         integrity: sha512-QCh+85mCy+h0IGff8r5XWzOVSbBO+KfeYrMQh7NJ58QujwcE22u+NUSmUxqF+un70P9GXKxa2HCNiTTMJknyjQ==,
+      }
+    engines: { node: ">=4.2.0" }
+    hasBin: true
+    dev: true
+
+  /typescript/4.9.3:
+    resolution:
+      {
+        integrity: sha512-CIfGzTelbKNEnLpLdGFgdyKhG23CKdKgQPOBc+OUNrkJ2vr+KSzsSV5kq5iWhEQbok+quxgGzrAtGWCyU7tHnA==,
       }
     engines: { node: ">=4.2.0" }
     hasBin: true
