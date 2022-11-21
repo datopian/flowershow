@@ -8,7 +8,11 @@ import { createPortal } from "react-dom";
 let DocSearchModal = null;
 
 function Hit({ hit, children }) {
-  return <Link href={hit.url}>{children}</Link>;
+  return (
+    <Link href={hit.url} legacyBehavior>
+      {children}
+    </Link>
+  );
 }
 
 export const AlgoliaSearchContext = createContext({});
