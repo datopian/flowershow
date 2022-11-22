@@ -34,7 +34,7 @@
     "rehype-slug": "^5.0.1",
     "remark-callouts": "^1.0.2",
     "remark-code-extra": "^1.0.1",
-    "remark-embed-plus": "^1.0.2",
+    "remark-embed-plus": "^1.0.3",
     "remark-gfm": "^3.0.0",
     "remark-math": "^5.1.1",
     "remark-smartypants": "^2.0.0",
@@ -42,6 +42,7 @@
     "remark-wiki-link-plus": "^1.1.1"
   },
   "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.2",
     "autoprefixer": "^10.4.4",
     "cross-env": "^7.0.3",
     "postcss": "^8.4.12",

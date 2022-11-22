@@ -116,6 +116,7 @@ importers:
       "@headlessui/react": ^1.6.6
       "@heroicons/react": ^1.0.4
       "@silvenon/remark-smartypants": ^1.0.0
+      "@tailwindcss/aspect-ratio": ^0.4.2
       "@tailwindcss/typography": ^0.5.2
       autoprefixer: ^10.4.4
       contentlayer: ^0.2.8
@@ -139,7 +140,7 @@ importers:
       rehype-slug: ^5.0.1
       remark-callouts: ^1.0.2
       remark-code-extra: ^1.0.1
-      remark-embed-plus: ^1.0.2
+      remark-embed-plus: ^1.0.3
       remark-gfm: ^3.0.0
       remark-math: ^5.1.1
       remark-smartypants: ^2.0.0
@@ -171,13 +172,14 @@ importers:
       rehype-slug: 5.1.0
       remark-callouts: 1.0.2
       remark-code-extra: 1.0.1
-      remark-embed-plus: 1.0.2
+      remark-embed-plus: 1.0.3
       remark-gfm: 3.0.1
       remark-math: 5.1.1
       remark-smartypants: 2.0.0
       remark-toc: 8.0.1
       remark-wiki-link-plus: 1.1.1
     devDependencies:
+      "@tailwindcss/aspect-ratio": 0.4.2_tailwindcss@3.2.2
       autoprefixer: 10.4.13_postcss@8.4.18
       cross-env: 7.0.3
       postcss: 8.4.18
@@ -4992,6 +4994,17 @@ packages:
       }
     dependencies:
       tslib: 2.4.1
+
+  /@tailwindcss/aspect-ratio/0.4.2_tailwindcss@3.2.2:
+    resolution:
+      {
+        integrity: sha512-8QPrypskfBa7QIMuKHg2TA7BqES6vhBrDLOv8Unb6FcFyd3TjKbc6lcmb9UPQHxfl24sXoJ41ux/H7qQQvfaSQ==,
+      }
+    peerDependencies:
+      tailwindcss: ">=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1"
+    dependencies:
+      tailwindcss: 3.2.2_postcss@8.4.18
+    dev: true
 
   /@tailwindcss/typography/0.5.8_tailwindcss@3.2.2:
     resolution:
@@ -17639,10 +17652,10 @@ packages:
       unist-util-visit: 1.4.1
     dev: false
 
-  /remark-embed-plus/1.0.2:
+  /remark-embed-plus/1.0.3:
     resolution:
       {
-        integrity: sha512-YY2zE9s/em61GBqW4MKw0gevsQvldEOoOQmn5ah2oKqTFYQfOSCdlFoXDP/rfMSXCcTu2++zWb+jpAViDWIM/g==,
+        integrity: sha512-D4iqzVAydPEZ85M0N2k7P6VMF1rMf6ZTw8ne+oBhrxS6k1/8DXlHIZogqdKwB7ZeTpxYokYbpi+jWFgAKg98Hw==,
       }
     dependencies:
       unist-util-visit: 4.1.1
