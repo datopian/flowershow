@@ -51,7 +51,7 @@ const Blog = defineDocumentType(() => ({
   contentType: "mdx",
   fields: {
     ...sharedFields,
-    layout: { type: "string", default: "blog" },
+    // layout: { type: "string", default: "blog" },
     created: { type: "date" },
     authors: {
       type: "list",

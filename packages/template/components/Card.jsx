@@ -1,6 +1,7 @@
 // import Link from 'next/link'
 import clsx from "clsx";
-import { ChevronRightIcon } from "./ChevronRightIcon.jsx";
+import { ChevronRightIcon } from "@/components/ChevronRightIcon.jsx";
+import { initialsFromName } from "@/lib/initialsFromName.js";
 
 export function Card({ as: Component = "div", className, children }) {
   return (
@@ -19,7 +20,7 @@ Card.Link = function CardLink({ children, ...props }) {
   // </Link>
   return (
     <>
-      <div className="absolute -inset-y-6 -inset-x-4 z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 dark:bg-zinc-800/50 sm:-inset-x-6 sm:rounded-2xl" />
+      <div className="absolute -inset-y-6 -inset-x-4 z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 dark:bg-slate-800/75 sm:-inset-x-6 sm:rounded-2xl" />
       <a {...props}>
         <span className="absolute -inset-y-6 -inset-x-4 z-20 sm:-inset-x-6 sm:rounded-2xl" />
         <span className="relative z-10">{children}</span>
@@ -53,6 +54,35 @@ Card.Cta = function CardCta({ children }) {
       {children}
       <ChevronRightIcon className="ml-1 h-4 w-4 stroke-current" />
     </div>
+  );
+};
+
+Card.Avatar = function CardAvatar({ name, src, href }) {
+  return (
+    <a href={href} className="group block flex-shrink-0 mt-2">
+      <div className="flex items-center">
+        <div>
+          {src ? (
+            <img
+              className="inline-block h-9 w-9 rounded-full"
+              src={src}
+              alt={name}
+            />
+          ) : (
+            <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-gray-500">
+              <span className="text-xs font-medium leading-none text-white">
+                {initialsFromName(name)}
+              </span>
+            </span>
+          )}
+        </div>
+        <div className="ml-3">
+          <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">
+            {name}
+          </p>
+        </div>
+      </div>
+    </a>
   );
 };
 
