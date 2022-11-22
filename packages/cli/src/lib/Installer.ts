@@ -184,10 +184,11 @@ export default class Installer {
     try {
       const emitter = degit(templateRepo);
       await emitter.clone(flowershowDir);
-    } catch {
+    } catch (err) {
       error(
         `Failed to clone Flowershow template into ${flowershowDir}. This may be a problem with Flowershow. Please let us know about it by submitting an issue: https://github.com/flowershow/flowershow/issues.`
       );
+      log(err);
       exit(1);
     }
 
