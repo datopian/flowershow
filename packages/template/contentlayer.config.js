@@ -24,7 +24,7 @@ const sharedFields = {
   editLink: { type: "boolean" },
   toc: { type: "boolean" },
   isDraft: { type: "boolean" },
-  // TODO document usage of data field
+  path: { type: "string" },
   data: { type: "list", of: { type: "string" }, default: [] },
 };
 
@@ -32,7 +32,7 @@ const computedFields = {
   url_path: {
     type: "string",
     /* eslint no-underscore-dangle: off */
-    resolve: (post) => post._raw.flattenedPath,
+    resolve: (post) => post.path ?? post._raw.flattenedPath,
   },
 };
 
