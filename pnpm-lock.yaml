@@ -137,7 +137,7 @@ importers:
       rehype-mathjax: ^4.0.2
       rehype-prism-plus: ^1.4.2
       rehype-slug: ^5.0.1
-      remark-callouts: ^1.0.2
+      remark-callouts: ^2.0.0
       remark-code-extra: ^1.0.1
       remark-embed-plus: ^1.0.2
       remark-gfm: ^3.0.0
@@ -169,7 +169,7 @@ importers:
       rehype-mathjax: 4.0.2
       rehype-prism-plus: 1.5.0
       rehype-slug: 5.1.0
-      remark-callouts: 1.0.2
+      remark-callouts: 2.0.0
       remark-code-extra: 1.0.1
       remark-embed-plus: 1.0.2
       remark-gfm: 3.0.1
@@ -17617,10 +17617,10 @@ packages:
       unified: 10.1.2
     dev: false
 
-  /remark-callouts/1.0.2:
+  /remark-callouts/2.0.0:
     resolution:
       {
-        integrity: sha512-c29i32l++jUmh/Ol3s6s/UMer2gk02/jTitbjcxPY9RFShXE7XjK9cOmZfMeFMgz/TWH1iP3YeeB4ttTzjTLDg==,
+        integrity: sha512-kTtBca6NzVNVn71wKMBiliSS/XEtYr6CQgWFQt+s6lkqtHHwHsfP4PxsqFbL98m9nxqlnqTyoYfNr1//u9jrlA==,
       }
     dependencies:
       mdast-util-from-markdown: 1.2.0
