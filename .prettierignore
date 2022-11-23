@@ -5,3 +5,5 @@ test_helper/
 .contentlayer/
 out/
 dist/
+excalidraw/
+notes/
