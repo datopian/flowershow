@@ -1,6 +1,6 @@
 {
   "name": "flowershow",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Publish your digital garden",
   "bin": {
     "flowershow": "src/bin/cli.js"
@@ -11,7 +11,7 @@
     "directory": "packages/cli"
   },
   "files": [
-    "dist"
+    "**/*"
   ],
   "keywords": [
     "flowershow",
