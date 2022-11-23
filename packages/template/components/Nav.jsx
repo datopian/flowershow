@@ -52,11 +52,13 @@ function NavbarTitle() {
   );
 
   return (
-    <Link href="/" aria-label="Home page">
-      <a className="flex items-center font-extrabold text-xl sm:text-2xl text-slate-900 dark:text-white">
-        {siteConfig.navbarTitle && chunk}
-        {!siteConfig.navbarTitle && siteConfig.title}
-      </a>
+    <Link
+      href="/"
+      aria-label="Home page"
+      className="flex items-center font-extrabold text-xl sm:text-2xl text-slate-900 dark:text-white"
+    >
+      {siteConfig.navbarTitle && chunk}
+      {!siteConfig.navbarTitle && siteConfig.title}
     </Link>
   );
 }
@@ -114,17 +116,17 @@ export function Nav() {
         )}
         <ThemeSelector />
         {siteConfig.github && (
-          <Link href={siteConfig.github}>
-            <a className="group" aria-label="GitHub">
-              <GitHubIcon className="h-6 w-6 dark:fill-slate-400 group-hover:fill-slate-500 dark:group-hover:fill-slate-300" />
-            </a>
+          <Link href={siteConfig.github} className="group" aria-label="GitHub">
+            <GitHubIcon className="h-6 w-6 dark:fill-slate-400 group-hover:fill-slate-500 dark:group-hover:fill-slate-300" />
           </Link>
         )}
         {siteConfig.discord && (
-          <Link href={siteConfig.discord}>
-            <a className="group" aria-label="Discord">
-              <DiscordIcon className="h-8 w-8 dark:fill-slate-400 group-hover:fill-slate-500 dark:group-hover:fill-slate-300" />
-            </a>
+          <Link
+            href={siteConfig.discord}
+            className="group"
+            aria-label="Discord"
+          >
+            <DiscordIcon className="h-8 w-8 dark:fill-slate-400 group-hover:fill-slate-500 dark:group-hover:fill-slate-300" />
           </Link>
         )}
       </div>
