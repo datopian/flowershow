@@ -115,15 +115,13 @@ export function Layout({ children, tableOfContents }) {
             {siteConfig.navLinks.map(
               (item) =>
                 !Object.prototype.hasOwnProperty.call(item, "subItems") && (
-                  <Link key={item.href} href={item.href}>
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className="inline-flex items-center mx-4 px-1 pt-1 font-regular hover:text-slate-300 no-underline"
-                      aria-current={item.current ? "page" : undefined}
-                    >
-                      {item.name}
-                    </a>
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="inline-flex items-center mx-4 px-1 pt-1 font-regular hover:text-slate-300 no-underline"
+                    aria-current={item.current ? "page" : undefined}
+                  >
+                    {item.name}
                   </Link>
                 )
             )}
@@ -175,32 +173,30 @@ export function Layout({ children, tableOfContents }) {
               {tableOfContents.map((section) => (
                 <li key={section.id}>
                   <h3>
-                    <Link href={`#${section.id}`}>
-                      <a
-                        className={
-                          isActive(section)
-                            ? "text-sky-500"
-                            : "font-normal text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300"
-                        }
-                      >
-                        {section.title}
-                      </a>
+                    <Link
+                      href={`#${section.id}`}
+                      className={
+                        isActive(section)
+                          ? "text-sky-500"
+                          : "font-normal text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300"
+                      }
+                    >
+                      {section.title}
                     </Link>
                   </h3>
                   {section.children && section.children.length > 0 && (
                     <ol className="mt-2 space-y-3 pl-5 text-slate-500 dark:text-slate-400">
                       {section.children.map((subSection) => (
                         <li key={subSection.id}>
-                          <Link href={`#${subSection.id}`}>
-                            <a
-                              className={
-                                isActive(subSection)
-                                  ? "text-sky-500"
-                                  : "hover:text-slate-600 dark:hover:text-slate-300"
-                              }
-                            >
-                              {subSection.title}
-                            </a>
+                          <Link
+                            href={`#${subSection.id}`}
+                            className={
+                              isActive(subSection)
+                                ? "text-sky-500"
+                                : "hover:text-slate-600 dark:hover:text-slate-300"
+                            }
+                          >
+                            {subSection.title}
                           </Link>
                         </li>
                       ))}

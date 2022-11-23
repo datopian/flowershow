@@ -27,13 +27,11 @@ export function NavItem({ item }) {
         onMouseLeave={closeDropdown}
       >
         {Object.prototype.hasOwnProperty.call(item, "href") ? (
-          <Link href={item.href}>
-            <a
-              href={item.href}
-              className="text-slate-500 inline-flex items-center mr-2 px-1 pt-1 text-sm font-medium hover:text-slate-600"
-            >
-              {item.name}
-            </a>
+          <Link
+            href={item.href}
+            className="text-slate-500 inline-flex items-center mr-2 px-1 pt-1 text-sm font-medium hover:text-slate-600"
+          >
+            {item.name}
           </Link>
         ) : (
           <div className="text-slate-500 inline-flex items-center mr-2 px-1 pt-1 text-sm font-medium hover:text-slate-600 fill-slate-500 hover:fill-slate-600">
