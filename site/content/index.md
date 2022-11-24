@@ -9,6 +9,10 @@ import { WhatIsFlowershow } from "components/custom/WhatIsFlowershow.jsx"
 <Hero />
 <WhatIsFlowershow />
 
+<div className="mx-auto lg:max-w-3xl">
+  https://www.youtube.com/watch?v=HxD6NWYCea0
+</div>
+
 {/** Self publish **/}
 
 <div className="py-10 sm:px-2 lg:relative lg:px-0" id="self-publish">
@@ -16,7 +20,6 @@ import { WhatIsFlowershow } from "components/custom/WhatIsFlowershow.jsx"
     <h2 className="text-center">
       Self-publish your digital garden with Flowershow
     </h2>
-    <p className="text-center">⚠ Not yet supported on Windows</p>
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-12">
       { /* 1. markdown folder */ }
       <div className="relative">
@@ -71,6 +74,7 @@ import { WhatIsFlowershow } from "components/custom/WhatIsFlowershow.jsx"
       <img src="/assets/images/netlify_deploy.png" alt="" className="m-0 rounded-md lg:my-6"/>
     </div>
     <div className="text-center mt-12 text-lg">👉 See our [[publish-tutorial|self-publish tutorial]] to learn more!</div>
+
   </div>
 </div>
 
