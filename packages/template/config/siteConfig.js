@@ -18,6 +18,7 @@ const defaultConfig = {
   content: "content",
   contentExclude: [],
   contentInclude: [],
+  blogDir: "blog",
   // Theme
   theme: {
     default: "dark",

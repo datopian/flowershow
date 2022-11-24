@@ -1,5 +1,8 @@
 ---
 title: Updated Features
+description: Check out what's new in the latest version of Flowershow template and our CLI! 🚀🔥
+created: 2022-11-21
+authors: [Philippe Du Preez]
 ---
 
 Hey digital gardeners🌱!

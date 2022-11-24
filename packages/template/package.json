@@ -15,6 +15,7 @@
     "@heroicons/react": "^1.0.4",
     "@silvenon/remark-smartypants": "^1.0.0",
     "@tailwindcss/typography": "^0.5.2",
+    "clsx": "^1.2.1",
     "contentlayer": "^0.2.8",
     "date-fns": "^2.29.2",
     "gray-matter": "^4.0.3",

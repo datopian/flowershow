@@ -118,6 +118,7 @@ importers:
       "@silvenon/remark-smartypants": ^1.0.0
       "@tailwindcss/typography": ^0.5.2
       autoprefixer: ^10.4.4
+      clsx: ^1.2.1
       contentlayer: ^0.2.8
       cross-env: ^7.0.3
       date-fns: ^2.29.2
@@ -152,6 +153,7 @@ importers:
       "@heroicons/react": 1.0.6_react@18.2.0
       "@silvenon/remark-smartypants": 1.0.0
       "@tailwindcss/typography": 0.5.8_tailwindcss@3.2.2
+      clsx: 1.2.1
       contentlayer: 0.2.9_esbuild@0.14.54
       date-fns: 2.29.3
       gray-matter: 4.0.3
@@ -7333,6 +7335,14 @@ packages:
         integrity: sha512-JQHZ2QMW6l3aH/j6xCqQThY/9OH4D/9ls34cgkUBiEeocRTU04tHfKPBsUK1PqZCUQM7GiA0IIXJSuXHI64Kbg==,
       }
     engines: { node: ">=0.8" }
+
+  /clsx/1.2.1:
+    resolution:
+      {
+        integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==,
+      }
+    engines: { node: ">=6" }
+    dev: false
 
   /co/4.6.0:
     resolution:

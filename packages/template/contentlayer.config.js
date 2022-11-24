@@ -24,7 +24,6 @@ const sharedFields = {
   editLink: { type: "boolean" },
   toc: { type: "boolean" },
   isDraft: { type: "boolean" },
-  // TODO document usage of data field
   data: { type: "list", of: { type: "string" }, default: [] },
 };
 
@@ -46,22 +45,22 @@ const Page = defineDocumentType(() => ({
   computedFields,
 }));
 
-const blogFields = {
-  created: { type: "date" },
-  "last-updated": { type: "date" },
-  layout: { type: "string", default: "blog" },
-  authors: {
-    type: "list",
-    of: { type: "string" },
-  },
-};
-
 const Blog = defineDocumentType(() => ({
   name: "Blog",
+  filePathPattern: `${siteConfig.blogDir}/!(index)*.md*`,
   contentType: "mdx",
   fields: {
     ...sharedFields,
-    ...blogFields,
+    // layout: { type: "string", default: "blog" },
+    created: { type: "date" },
+    authors: {
+      type: "list",
+      of: { type: "string" },
+    },
+    tags: {
+      type: "list",
+      of: { type: "string" },
+    },
   },
   computedFields,
 }));
