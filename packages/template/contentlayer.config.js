@@ -47,7 +47,7 @@ const Page = defineDocumentType(() => ({
 
 const Blog = defineDocumentType(() => ({
   name: "Blog",
-  filePathPattern: "blog/!(index)*.md*",
+  filePathPattern: `${siteConfig.blogDir}/!(index)*.md*`,
   contentType: "mdx",
   fields: {
     ...sharedFields,
