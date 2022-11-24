@@ -1,6 +1,5 @@
 ---
-title: Writings on lorem ipsum dolor sit amet, consectetur
-description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+title: Blog posts
 layout: simple
 data:
   - blogs
