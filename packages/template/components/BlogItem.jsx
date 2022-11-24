@@ -16,7 +16,6 @@ export function BlogItem({ blog }) {
         </Card.Eyebrow>
         <Card.Description>{blog.description}</Card.Description>
         <Card.Cta>Read article</Card.Cta>
-        <Card.Avatar name={blog.authors[0]} />
       </Card>
       <Card.Eyebrow
         as="time"
