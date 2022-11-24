@@ -18,6 +18,7 @@ const config = {
     { href: "/#overview", name: "Overview" },
     { href: "/#features", name: "Features" },
     { href: "/docs", name: "Docs" },
+    { href: "/blog", name: "Blog" },
     { href: "/docs/roadmap", name: "Roadmap" },
     { href: "/about", name: "About" },
     {
