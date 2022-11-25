@@ -47,7 +47,7 @@ export function SearchProvider({ searchConfig, children }) {
   }
 }
 
-export const SearchContext = (provider) => {
+export function SearchContext(provider) {
   switch (provider) {
     case "algolia":
       return AlgoliaSearchContext;
@@ -55,6 +55,6 @@ export const SearchContext = (provider) => {
       return KBarContext;
     default:
   }
-};
+}
 
 export { SearchField } from "./SearchField";
