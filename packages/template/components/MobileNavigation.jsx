@@ -5,7 +5,7 @@ import { Fragment, useEffect, useState } from "react";
 
 import { siteConfig } from "../config/siteConfig";
 import { BaseLink } from "./BaseLink";
-import { SearchContext, SearchField } from "./search";
+import { SearchContext, SearchField } from "./search/index.jsx";
 
 const Search = SearchContext(siteConfig.search?.provider);
 
