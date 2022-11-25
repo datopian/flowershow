@@ -5,7 +5,7 @@ import { siteConfig } from "../config/siteConfig";
 import { MobileNavigation } from "./MobileNavigation";
 import { NavItem } from "./NavItem";
 import { ThemeSelector } from "./ThemeSelector";
-import { SearchContext, SearchField } from "./search";
+import { SearchContext, SearchField } from "./search/index.jsx";
 
 const Search = SearchContext(siteConfig.search?.provider);
 
