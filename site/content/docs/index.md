@@ -28,3 +28,4 @@ Flowershow supports **CommonMark** and **GitHub Flavored Markdown**, but also ma
 11. [[seo|SEO configuration]]
 12. [[theme|Dark-light theme]]
 13. [[search|Full-text search]]
+14. [[docs/blog|Blog support]]
