@@ -1,9 +1,8 @@
 ---
 title: Blog support
-created: 2022-10-10
 ---
 
-Apart from the `Page` document type, which Flowershow uses for all your fs content files by default, you can also use the `Blog` type for your blog posts. This way you'll be able to fetch and display them on any of your pages by using our `BlogsList` component (or you can create a custom one).
+Apart from the `Page` document type, which Flowershow uses for all your content files by default, you can also use the `Blog` type for your blog posts. This way you'll be able to fetch and display them on any of your pages by using our `BlogsList` component (or you can create a custom one).
 
 ## Marking files as `Blog`
 
@@ -32,10 +31,12 @@ type: Blog
 
 - `created` (required) - date that will be displayed on the blog page and that will be used to sort blog search results
 - `authors` (optional)
+- `description` (optional)
 
 ```md
 ---
 title: Blog post title
+description: My blog post on lorem ipsum dolor sit amet.
 created: 2022-11-29
 authors: [John Doe, Jan Kowalski]
 ---
