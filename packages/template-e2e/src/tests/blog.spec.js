@@ -22,7 +22,7 @@ test.describe.parallel("blog index", () => {
 
   test("blog link3", async ({ page }) => {
     await page.locator("text=Conquer the puddles").click();
-    await expect(page).toHaveURL("/blog/blogtest3");
+    await expect(page).toHaveURL("/blogtest3");
     await expect(page).toHaveTitle("Conquer the puddles");
   });
 });
