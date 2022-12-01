@@ -14,7 +14,9 @@ export function BlogItem({ blog }) {
         >
           {formatDate(blog.created)}
         </Card.Eyebrow>
-        <Card.Description>{blog.description}</Card.Description>
+        {blog.description && (
+          <Card.Description>{blog.description}</Card.Description>
+        )}
         <Card.Cta>Read article</Card.Cta>
       </Card>
       <Card.Eyebrow
