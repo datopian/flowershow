@@ -1,7 +1,7 @@
 import { Card } from "@/components/Card";
 import { formatDate } from "@/lib/formatDate";
 
-export const BlogItem = ({ blog }) => {
+export function BlogItem({ blog }) {
   return (
     <article className="md:grid md:grid-cols-4 md:items-baseline">
       <Card className="md:col-span-3">
@@ -28,4 +28,4 @@ export const BlogItem = ({ blog }) => {
       </Card.Eyebrow>
     </article>
   );
-};
+}
