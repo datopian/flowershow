@@ -98,7 +98,7 @@ import { BlogsList } from "components/BlogsList.jsx"
 
 That's it! We can now see a list of all the blog posts we've just created when we visit http://localhost:3000/blogs. You can click at each to read its content.
 
-![[Pasted image 20221130120203.png]]
+![[blogs-list.png]]
 
 ## Using all files in a given folder
 
