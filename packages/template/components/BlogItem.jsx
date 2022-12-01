@@ -1,10 +1,9 @@
 import { Card } from "@/components/Card";
 import { formatDate } from "@/lib/formatDate";
-import { forwardRef } from "react";
 
-const BlogItem = forwardRef(({ blog }, ref) => {
+export const BlogItem = ({ blog }) => {
   return (
-    <article ref={ref} className="md:grid md:grid-cols-4 md:items-baseline">
+    <article className="md:grid md:grid-cols-4 md:items-baseline">
       <Card className="md:col-span-3">
         <Card.Title href={`${blog.url_path}`}>{blog.title}</Card.Title>
         <Card.Eyebrow
@@ -29,8 +28,4 @@ const BlogItem = forwardRef(({ blog }, ref) => {
       </Card.Eyebrow>
     </article>
   );
-});
-
-BlogItem.displayName = "BaseLink";
-
-export { BlogItem };
+};

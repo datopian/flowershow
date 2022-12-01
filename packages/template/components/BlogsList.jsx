@@ -1,39 +1,35 @@
 import { BlogItem } from "@/components/BlogItem.jsx";
-import { useState, useRef, useCallback } from "react";
+import { useState } from "react";
 
 const BLOGS_LOAD_COUNT = 10;
 
 export function BlogsList({ blogs }) {
   const [blogsCount, setBlogsCount] = useState(BLOGS_LOAD_COUNT);
 
-  const observer = useRef();
-  const lastPostElementRef = useCallback((node) => {
-    if (observer.current) observer.current.disconnect();
-    observer.current = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        setBlogsCount((prevBlogsCount) => prevBlogsCount + BLOGS_LOAD_COUNT);
-      }
-    });
-    if (node) observer.current.observe(node);
-  }, []);
+  const handleLoadMore = () => {
+    setBlogsCount((prevCount) => prevCount + BLOGS_LOAD_COUNT);
+  };
 
   return (
-    <div className="md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40">
-      <div className="flex flex-col space-y-16">
-        {blogs.slice(0, blogsCount).map((blog, index) => {
-          if (blogsCount === index + 1) {
-            return (
-              <BlogItem
-                ref={lastPostElementRef}
-                key={blog.url_path}
-                blog={blog}
-              />
-            );
-          } else {
+    <>
+      <div className="md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40">
+        <div className="flex flex-col space-y-16">
+          {blogs.slice(0, blogsCount).map((blog) => {
             return <BlogItem key={blog.url_path} blog={blog} />;
-          }
-        })}
+          })}
+        </div>
       </div>
-    </div>
+      {blogs.length > blogsCount && (
+        <div className="text-center pt-20">
+          <button
+            onClick={handleLoadMore}
+            type="button"
+            className="inline-flex items-center rounded border border-gray-300 px-2.5 py-1.5 text-xs font-medium text-gray-200 shadow-sm hover:bg-gray-50/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          >
+            Show more
+          </button>
+        </div>
+      )}
+    </>
   );
 }
