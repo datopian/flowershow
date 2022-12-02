@@ -14,6 +14,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/register": "^7.18.9",
     "@changesets/changelog-github": "^0.4.7",
     "@changesets/cli": "^2.25.2",
     "@nrwl/eslint-plugin-nx": "15.0.5",
@@ -48,12 +49,18 @@
     "jest": "28.1.1",
     "jest-environment-jsdom": "28.1.1",
     "lint-staged": "^13.0.3",
+    "mocha": "^10.2.0",
     "nx": "15.0.5",
     "prettier": "^2.7.1",
     "react-test-renderer": "18.2.0",
+    "remark-parse": "^10.0.1",
+    "remark-stringify": "^10.0.2",
     "sass": "1.55.0",
     "ts-jest": "28.0.5",
-    "ts-node": "10.9.1"
+    "ts-node": "10.9.1",
+    "unified": "^10.1.2",
+    "unist-util-select": "^4.0.1",
+    "unist-util-visit": "^4.1.0"
   },
   "dependencies": {
     "core-js": "^3.6.5",
