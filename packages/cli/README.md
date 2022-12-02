@@ -1,5 +1,7 @@
 # Flowershow CLI
 
+## CLI commands
+
 Install Flowershow:
 
 ```
