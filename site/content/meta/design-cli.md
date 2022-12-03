@@ -1,4 +1,4 @@
-# Install and Upgrade - Design
+# Design of Flowershow Command Line
 
 Overview of the command line experience
 
