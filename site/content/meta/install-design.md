@@ -1,5 +1,92 @@
 # Install and Upgrade - Design
 
+Overview of the command line experience
+
+```
+mkdir my-garden
+cd my-garden
+vi index.md
+# add some content
+
+npx flowershow install
+npx flowershow build
+
+# or if cloud publishing
+npx flowershow publish
+```
+
+Recommended layout for your digital garden
+
+```
+components
+content
+```
+
+But you can do anything ... (we just have to symlink stuff into the right places)
+
+Key commands:
+
+- `install`: install flowershow app
+- `preview`: live preview of your flowershow site
+- `build`: build flowershow site locally
+- `publish`: publish your flowershow site on flowershow cloud - see [[meta/publishing-design]]
+
+Other aspects of UX (not yet addressed):
+
+- Upgrading
+- Uninstalling
+- Configuration
+
+### Install
+
+- degit seems one of the most efficient ways to get the template down
+- degit does overwrite
+- ? degit won't remove old files
+
+```bash=
+mkdir -p .flowershow/app
+cd .flowershow/app
+npx degit flowershow/flowershow/templates/default
+
+# symlink content directory
+ln -s ../../ content
+ln -s ../../components components/custom
+ln -s ../../assets public/assets
+```
+
+### Preview
+
+```
+flowershow run
+```
+
+What it does
+
+```
+cd .flowershow/app
+npm run dev
+open localhost:3000
+```
+
+### Upgrade
+
+```
+flowershow upgrade
+```
+
+How it works
+
+```
+npx degit flowershow/flowershow/templates/default --force
+```
+
+### Publish
+
+```
+flowershow publish
+```
+
+
 # Notes
 
 ## What about package.json conflicts on upgrade - 2022-09-30
@@ -44,7 +131,7 @@ packages/template-default
 packages/template-default
 ```
 
-## Reflections - 2022-08-24
+## Alpha Product Design (CLI) - 2022-08-24
 
 See [[notes/upgrading-template-apps]]
 
