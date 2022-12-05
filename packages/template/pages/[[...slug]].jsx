@@ -17,14 +17,15 @@ export async function getStaticProps({ params }) {
   const page = allDocuments.find((p) => p.url_path === urlPath);
   const data = await getPageData(page.data);
 
-  const authorList = page.authors || ["default"];
-  const authorDetails = authorList.map((author) => {
-    return (
-      allAuthors.find(
-        (p) => p.slug === author.toLowerCase().replace(/\s/g, "")
-      ) || allAuthors.find((p) => p.slug === "default")
-    );
-  });
+  const authorList = page.authors || null;
+  const authorDetails =
+    authorList?.map((author) => {
+      return (
+        allAuthors.find(
+          (p) => p.slug === author.toLowerCase().replace(/\s/g, "")
+        ) || allAuthors.find((p) => p.slug === "default")
+      );
+    }) || null;
 
   return { props: { ...page, data, authorDetails } };
 }

@@ -14,22 +14,26 @@ export default function BlogLayout({ children, frontMatter }) {
             </p>
           )}
           <div className="flex items-center space-x-6 justify-center">
-            {authorDetails.map((author) => {
-              return (
-                <div key={author.name} className="flex items-center space-x-2">
-                  <img
-                    src={author.avatar}
-                    width="38px"
-                    height="38px"
-                    alt="avatar"
-                    className="h-10 w-10 rounded-full"
-                  />
-                  <p className="text-sm text-black dark:text-white font-medium">
-                    {author.name}
-                  </p>
-                </div>
-              );
-            })}
+            {authorDetails &&
+              authorDetails.map((author) => {
+                return (
+                  <div
+                    key={author.name}
+                    className="flex items-center space-x-2"
+                  >
+                    <img
+                      src={author.avatar}
+                      width="38px"
+                      height="38px"
+                      alt="avatar"
+                      className="h-10 w-10 rounded-full"
+                    />
+                    <p className="text-sm text-black dark:text-white font-medium">
+                      {author.name}
+                    </p>
+                  </div>
+                );
+              })}
           </div>
         </div>
       </header>
