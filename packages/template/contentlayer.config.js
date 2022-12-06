@@ -33,10 +33,6 @@ const computedFields = {
     /* eslint no-underscore-dangle: off */
     resolve: (post) => post._raw.flattenedPath,
   },
-  slug: {
-    type: "string",
-    resolve: (post) => post._raw.flattenedPath.replace(/^.+?(\/)/, ""),
-  },
 };
 
 const Page = defineDocumentType(() => ({
@@ -58,6 +54,7 @@ const Blog = defineDocumentType(() => ({
     layout: { type: "string", default: "blog" },
     created: { type: "date" },
     authors: {
+      required: true,
       type: "list",
       of: { type: "string" },
     },
@@ -80,7 +77,10 @@ export const Author = defineDocumentType(() => ({
     },
     avatar: {
       type: "string",
+      default: siteConfig.avatarPlaceholder,
     },
+    ...sharedFields,
+    isDraft: { type: "boolean", default: true },
   },
   computedFields,
 }));

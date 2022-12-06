@@ -1,5 +1,5 @@
 /* eslint import/no-default-export: off */
-import { allDocuments, allAuthors } from "contentlayer/generated";
+import { allDocuments } from "contentlayer/generated";
 import { useMDXComponent } from "next-contentlayer/hooks";
 
 import { MdxPage } from "../components/MDX";
@@ -17,17 +17,7 @@ export async function getStaticProps({ params }) {
   const page = allDocuments.find((p) => p.url_path === urlPath);
   const data = await getPageData(page.data);
 
-  const authorList = page.authors || null;
-  const authorDetails =
-    authorList?.map((author) => {
-      return (
-        allAuthors.find(
-          (p) => p.slug === author.toLowerCase().replace(/\s/g, "")
-        ) || allAuthors.find((p) => p.slug === "default")
-      );
-    }) || null;
-
-  return { props: { ...page, data, authorDetails } };
+  return { props: { ...page, data } };
 }
 
 export async function getStaticPaths() {

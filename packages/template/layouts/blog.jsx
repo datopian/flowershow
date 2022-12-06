@@ -1,8 +1,20 @@
 /* eslint import/no-default-export: off */
 import { formatDate } from "@/lib/formatDate.js";
+import { allAuthors } from "contentlayer/generated";
+import { siteConfig } from "../config/siteConfig.js";
 
 export default function BlogLayout({ children, frontMatter }) {
-  const { title, created, authorDetails } = frontMatter;
+  const { title, created, authors } = frontMatter;
+
+  const authorDetails = authors.map((author) => {
+    return (
+      allAuthors.find((p) => p.name === author) || {
+        name: author,
+        avatar: siteConfig.avatarPlaceholder,
+      }
+    );
+  });
+
   return (
     <article className="docs prose dark:prose-invert prose-a:break-words mx-auto p-6">
       <header>

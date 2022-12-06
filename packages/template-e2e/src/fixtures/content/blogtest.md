@@ -4,6 +4,7 @@ description: I will conquer all the puddles in my nearby vicinity
 created: 2022-11-30
 authors: [Aleksandra the not-so-great]
 type: Blog
+isDraft: true
 ---
 
 Yardarm strike colors jack swab belaying pin fore chandler trysail hogshead scurvy. Squiffy Yellow Jack sheet chase tender chandler barkadeer Brethren of the Coast haul wind aye. Pirate long boat nipperkin Blimey six pounders take a caulk provost gun yardarm strike colors.
