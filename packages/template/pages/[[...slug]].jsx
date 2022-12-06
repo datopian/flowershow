@@ -16,7 +16,6 @@ export async function getStaticProps({ params }) {
   const urlPath = params.slug ? params.slug.join("/") : "";
   const page = allDocuments.find((p) => p.url_path === urlPath);
   const data = await getPageData(page.data);
-
   return { props: { ...page, data } };
 }
 

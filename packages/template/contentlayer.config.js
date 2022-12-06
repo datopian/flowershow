@@ -71,6 +71,7 @@ export const Author = defineDocumentType(() => ({
   filePathPattern: "authors/**/*.md*",
   contentType: "mdx",
   fields: {
+    ...sharedFields,
     name: {
       type: "string",
       required: true,
@@ -79,8 +80,6 @@ export const Author = defineDocumentType(() => ({
       type: "string",
       default: siteConfig.avatarPlaceholder,
     },
-    ...sharedFields,
-    isDraft: { type: "boolean", default: true },
   },
   computedFields,
 }));
