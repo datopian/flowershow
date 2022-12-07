@@ -1,5 +1,8 @@
 ---
 title: How to modify your theme
+description: Learn how to add custom fonts and colors to your site
+type: Blog
+created: 2022-12-07
 ---
 
 ## Adding custom fonts to your site
