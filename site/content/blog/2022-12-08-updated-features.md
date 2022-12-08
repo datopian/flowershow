@@ -15,7 +15,7 @@ Here are some of the new features we have implemented. 😎🚀
 
 Apart from the `Page` document type, which Flowershow uses for all your content files by default, you can also use the `Blog` type for your blog posts. This way you'll be able to fetch and display them on any of your pages by using our `BlogsList` component (or you can create a custom one).
 
-![[bloglist.png]]
+![[blogs-list.png]]
 
 Blog tutorial: https://flowershow.app/docs/blog
 
