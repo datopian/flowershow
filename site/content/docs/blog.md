@@ -83,9 +83,13 @@ import { BlogsList } from "components/BlogsList.jsx"
 
 ## Blog authors
 
-Flowershow will try to find an author page for each author you provide in the `authors` frontmatter field. It look for an author page with a matching author `id`, `slug` (file name), or `name`. If no matching page have been found, the provided string will be used.
+Flowershow will display authors from the `authors` frontmatter list field below the blog title. It will also try to link each author to the corresponding author's page, if such a page exists.
 
-By default, Flowershow will look treat all pages in `<your-content-folder>/people` directory as author pages, as well as each page with `type: Person` in its frontmatter.
+> [!note]
+> By default, Flowershow treats all pages in `<your-content-folder>/people` directory as author pages (as well as each page with `type: Person` in its frontmatter).
+> You can configure path to the folder with your authors pages by setting `peopleDir` property in your config.js file.
+
+Flowershow will look for an author page with the `id`, `slug` (file name), or `name` matching the value provided in the `authors` list. If no matching page have been found, the provided string will be used. If the page has been found, the author's name will be displayed and it will be linked to the author page.
 
 ### Blog author frontmatter fields
 
