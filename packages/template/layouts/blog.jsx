@@ -4,7 +4,7 @@ import { formatDate } from "@/lib/formatDate.js";
 import { siteConfig } from "@/config/siteConfig.js";
 import { Avatar } from "@/components/Avatar.jsx";
 
-const getBlogAuthors = ({ authors, defaultAuthor }) => {
+const getAuthorsDetails = ({ people, authors, defaultAuthor }) => {
   let blogAuthors = [];
 
   if (authors) {
@@ -15,7 +15,7 @@ const getBlogAuthors = ({ authors, defaultAuthor }) => {
 
   return blogAuthors.map((author) => {
     return (
-      allPeople.find(
+      people.find(
         ({ id, slug, name }) =>
           id === author || slug === author || name === author
       ) ?? { name: author, avatar: siteConfig.avatarPlaceholder }
@@ -26,7 +26,8 @@ const getBlogAuthors = ({ authors, defaultAuthor }) => {
 export default function BlogLayout({ children, frontMatter }) {
   const { title, created, authors } = frontMatter;
 
-  const blogAuthors = getBlogAuthors({
+  const authorsDetails = getAuthorsDetails({
+    people: allPeople,
     authors,
     defaultAuthor: siteConfig.defaultAuthor,
   });
@@ -41,9 +42,9 @@ export default function BlogLayout({ children, frontMatter }) {
               <time dateTime={created}>{formatDate(created)}</time>
             </p>
           )}
-          {blogAuthors && (
+          {authorsDetails && (
             <div className="flex flex-wrap not-prose items-center space-x-6 space-y-3 justify-center">
-              {blogAuthors.map(({ name, avatar, isDraft, url_path }) => (
+              {authorsDetails.map(({ name, avatar, isDraft, url_path }) => (
                 <Avatar
                   key={url_path}
                   name={name}
