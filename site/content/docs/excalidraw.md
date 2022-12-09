@@ -1,24 +1,53 @@
-# Excalidraw support in flowershow
+# Excalidraw in Flowershow
 
-Flowershow supports displaying your excalidraw images on your site.
+Excalidraw is a virtual collaborative whiteboard tool that lets you easily sketch diagrams that have a hand-drawn feel to them.
 
-## Auto generating Excalidraw images
+There is great integration of Excalidraw into many tools like Obsidian and LogSeq.
 
-In Obsidian you can use the excalidraw plugin to auto generate images next to it's relevant file.
+Here we walk through how you can use Excalidraw in your Flowershow site.
 
-_Assuming that you have this plugin installed ..._
+## Plain Excalidraw
 
-Head over to the excalidraw plugin in Obsidian settings and make sure you have the following setup configured.
+If you are creating diagrams on https://excalidraw.com/ then using them in Flowershow is easy:
 
-1. Configure the plugin to export svg or png
+- export the drawing as svg and png
+- add them to your assets folder
+- then link them like any other image
+
+Flowershow supports displaying your Excalidraw images on your site.
+
+## Obsidian support
+
+We can use the Excalidraw integration in [[notes/obsidian|Obsidian]] to create Excalidraw drawings locally and display them with Flowershow. There are three simple steps:
+
+- Install the Excalidraw plugin for Obsidian
+- Configure the plugin to generate rendered images (as well as Excalidraw source)
+- Link the images folder
+
+### 1. Install the Excalidraw plugin
+
+Install the [Excalidraw plugin](https://github.com/zsviczian/obsidian-excalidraw-plugin).
+
+### 2. Configure auto-generation of rendered images
+
+In the Obsidian settings, head over to the Excalidraw plugin settings section and make the following changes.
+
+Note that you can choose png or svg. In this screenshot we are choosing svg.
+
+![[docs-excalidraw-images-2.png]] 
+Optional (bonus): you can also configure use of wiki-links which Flowershow supports:
 
 ![[docs-excalidraw-images-1.png]]
-Note that you can choose png or svg ...
 
-![[docs-excalidraw-images-2.png]] 2. Make sure you have a defined folder for your excalidraw files.
+### 3. Symlink
 
-![[docs-excalidraw-images-3.png]]
-Symlink this directory into public folder in flowershow.
+First, make sure you have a defined folder for your Excalidraw files. This entry shouldn't be blank. The default is `Excalidraw` (in this example it is has been lower-cased!)
+
+![[assets/images/docs-excalidraw-images-3.png]]
+
+Then, symlink this excalidraw directory into the public folder in flowershow.
+
+For example, assuming your Obsidian vault is your Flowershow content folder you'd do the following:
 
 ```bash=
 $ cd <your-flowershow-directory>
