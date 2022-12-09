@@ -1,18 +1,34 @@
 /* eslint import/no-default-export: off */
+import { allPeople } from "contentlayer/generated";
 import { formatDate } from "@/lib/formatDate.js";
-import { allAuthors } from "contentlayer/generated";
-import { siteConfig } from "../config/siteConfig.js";
+import { siteConfig } from "@/config/siteConfig.js";
+import { Avatar } from "@/components/Avatar.jsx";
+
+const getBlogAuthors = ({ authors, defaultAuthor }) => {
+  let blogAuthors = [];
+
+  if (authors) {
+    blogAuthors = authors;
+  } else if (defaultAuthor) {
+    blogAuthors = [defaultAuthor];
+  }
+
+  return blogAuthors.map((author) => {
+    return (
+      allPeople.find(
+        ({ id, slug, name }) =>
+          id === author || slug === author || name === author
+      ) ?? { name: author, avatar: siteConfig.avatarPlaceholder }
+    );
+  });
+};
 
 export default function BlogLayout({ children, frontMatter }) {
   const { title, created, authors } = frontMatter;
 
-  const authorDetails = authors.map((author) => {
-    return (
-      allAuthors.find((p) => p.name === author) || {
-        name: author,
-        avatar: siteConfig.avatarPlaceholder,
-      }
-    );
+  const blogAuthors = getBlogAuthors({
+    authors,
+    defaultAuthor: siteConfig.defaultAuthor,
   });
 
   return (
@@ -25,28 +41,18 @@ export default function BlogLayout({ children, frontMatter }) {
               <time dateTime={created}>{formatDate(created)}</time>
             </p>
           )}
-          <div className="flex items-center space-x-6 justify-center">
-            {authorDetails &&
-              authorDetails.map((author) => {
-                return (
-                  <div
-                    key={author.name}
-                    className="flex items-center space-x-2"
-                  >
-                    <img
-                      src={author.avatar}
-                      width="38px"
-                      height="38px"
-                      alt="avatar"
-                      className="h-10 w-10 rounded-full"
-                    />
-                    <p className="text-sm text-black dark:text-white font-medium">
-                      {author.name}
-                    </p>
-                  </div>
-                );
-              })}
-          </div>
+          {blogAuthors && (
+            <div className="flex flex-wrap not-prose items-center space-x-6 space-y-3 justify-center">
+              {blogAuthors.map(({ name, avatar, isDraft, url_path }) => (
+                <Avatar
+                  key={url_path}
+                  name={name}
+                  img={avatar}
+                  href={url_path && !isDraft ? `/${url_path}` : undefined}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </header>
       <section>{children}</section>
