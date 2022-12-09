@@ -31,12 +31,10 @@ type: Blog
 
 - `created` (required) - date that will be displayed on the blog page and that will be used to sort blog search results
 - `authors` (optional)
-- `description` (optional)
 
 ```md
 ---
 title: Blog post title
-description: My blog post on lorem ipsum dolor sit amet.
 created: 2022-11-29
 authors: [John Doe, Jan Kowalski]
 ---
@@ -81,4 +79,24 @@ data:
 import { BlogsList } from "components/BlogsList.jsx"
 
 <BlogsList blogs={blogs}/>
+```
+
+## Blog authors
+
+Flowershow will try to find an author page for each author you provide in the `authors` frontmatter field. It look for an author page with a matching author `id`, `slug` (file name), or `name`. If no matching page have been found, the provided string will be used.
+
+By default, Flowershow will look treat all pages in `<your-content-folder>/people` directory as author pages, as well as each page with `type: Person` in its frontmatter.
+
+### Blog author frontmatter fields
+
+- `id` (optional) - if set, id can be used in `authors` frontmatter field (instead of slug or `name`, and will take precedence over both)
+- `name` (required)
+- `avatar` (optional) - if you don't specify it, a placeholder image will be used; path relative to your content folder
+
+```md
+---
+id: john123
+name: John Doe (required)
+avatar: path/to/johns-avatar.jpg
+---
 ```
