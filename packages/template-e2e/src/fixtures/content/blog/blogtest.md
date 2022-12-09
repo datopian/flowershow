@@ -2,7 +2,7 @@
 title: Conquer the seven seas
 description: I will conquer all the seas across the globe
 created: 2022-11-28
-authors: [Aleksandra the Great]
+authors: [john-doe, jane123, Joe Bloggs, john-nokes, The Other Guy]
 ---
 
 Pillage starboard lateen sail pressgang fire in the hole hearties spanker cog aft jack. Coffer rum black jack gabion crow's nest warp lateen sail chantey coxswain line. Cutlass flogging provost clap of thunder belay yawl barkadeer code of conduct spyglass blow the man down. Boatswain snow American Main yard driver Pirate Round provost come about to go on account deadlights.
