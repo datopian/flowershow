@@ -2,7 +2,7 @@
 title: Wordpress to Flowershow migration tutorial
 description: Easily migrate your Wordpress content in 3 easy steps!
 created: 2022-11-30
-authors: [Philippe Du Preez]
+authors: [philippe-du-preez]
 ---
 
 Is your Wordpress site's speed comparable to a tortoise with cramping legs? 🐢 Server costs bleeding you dry? 🖥️ Lucky for you, migrating your content over to Flowershow has never been easier! Flowershow 🌷 is an **awesome** open source Next.js template that comes with batteries included 🔋
