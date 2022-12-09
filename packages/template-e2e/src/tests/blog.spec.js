@@ -73,11 +73,11 @@ test.describe.parallel("blog page without authors", () => {
     await Page.getData();
   });
 
-  test("displays a default author on Blogs with no frontmatter `authors` field set", async ({
+  test("displays a default author (set in config.js) on Blogs with no frontmatter `authors` field set", async ({
     page,
   }) => {
-    await page.locator("a", { hasText: "Default Author" }).click();
-    await expect(page).toHaveURL("/people/default");
-    await expect(page).toHaveTitle("Default Author");
+    await page.locator("a", { hasText: "John the Great" }).click();
+    await expect(page).toHaveURL("/people/john-doe");
+    await expect(page).toHaveTitle("John the Great");
   });
 });
