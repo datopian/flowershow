@@ -1,36 +1,9 @@
 /* eslint import/no-default-export: off */
-import { allPeople } from "contentlayer/generated";
 import { formatDate } from "@/lib/formatDate.js";
-import { siteConfig } from "@/config/siteConfig.js";
 import { Avatar } from "@/components/Avatar.jsx";
 
-const getAuthorsDetails = ({ people, authors, defaultAuthor }) => {
-  let blogAuthors = [];
-
-  if (authors) {
-    blogAuthors = authors;
-  } else if (defaultAuthor) {
-    blogAuthors = [defaultAuthor];
-  }
-
-  return blogAuthors.map((author) => {
-    return (
-      people.find(
-        ({ id, slug, name }) =>
-          id === author || slug === author || name === author
-      ) ?? { name: author, avatar: siteConfig.avatarPlaceholder }
-    );
-  });
-};
-
 export default function BlogLayout({ children, frontMatter }) {
-  const { title, created, authors } = frontMatter;
-
-  const authorsDetails = getAuthorsDetails({
-    people: allPeople,
-    authors,
-    defaultAuthor: siteConfig.defaultAuthor,
-  });
+  const { title, created, authorsDetails } = frontMatter;
 
   return (
     <article className="docs prose dark:prose-invert prose-a:break-words mx-auto p-6">
