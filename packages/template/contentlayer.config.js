@@ -36,7 +36,7 @@ const computedFields = {
   slug: {
     type: "string",
     /* eslint no-underscore-dangle: off */
-    resolve: (doc) => doc._raw.flattenedPath.replace(/^.+?\//, ""),
+    resolve: (doc) => doc._raw.flattenedPath.replace(/^(.+?\/)*/, ""),
   },
 };
 
