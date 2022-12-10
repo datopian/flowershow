@@ -14,8 +14,6 @@ If you are creating diagrams on https://excalidraw.com/ then using them in Flowe
 - add them to your assets folder
 - then link them like any other image
 
-Flowershow supports displaying your Excalidraw images on your site.
-
 ## Obsidian support
 
 We can use the Excalidraw integration in [[notes/obsidian|Obsidian]] to create Excalidraw drawings locally and display them with Flowershow. There are three simple steps:
@@ -34,18 +32,18 @@ In the Obsidian settings, head over to the Excalidraw plugin settings section an
 
 Note that you can choose png or svg. In this screenshot we are choosing svg.
 
-![[docs-excalidraw-images-2.png]] 
+![[docs-excalidraw-images-2.png]]
 Optional (bonus): you can also configure use of wiki-links which Flowershow supports:
 
 ![[docs-excalidraw-images-1.png]]
 
-### 3. Symlink
+### 3. Symlink the Excalidraw directory into Flowershow public
 
 First, make sure you have a defined folder for your Excalidraw files. This entry shouldn't be blank. The default is `Excalidraw` (in this example it is has been lower-cased!)
 
 ![[assets/images/docs-excalidraw-images-3.png]]
 
-Then, symlink this excalidraw directory into the public folder in flowershow.
+Then, symlink this directory into the public folder in flowershow.
 
 For example, assuming your Obsidian vault is your Flowershow content folder you'd do the following:
 
