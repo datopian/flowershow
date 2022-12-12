@@ -31,7 +31,12 @@ const computedFields = {
   url_path: {
     type: "string",
     /* eslint no-underscore-dangle: off */
-    resolve: (post) => post._raw.flattenedPath,
+    resolve: (doc) => doc._raw.flattenedPath,
+  },
+  slug: {
+    type: "string",
+    /* eslint no-underscore-dangle: off */
+    resolve: (doc) => doc._raw.flattenedPath.replace(/^(.+?\/)*/, ""),
   },
 };
 
@@ -51,8 +56,10 @@ const Blog = defineDocumentType(() => ({
   contentType: "mdx",
   fields: {
     ...sharedFields,
-    // layout: { type: "string", default: "blog" },
-    created: { type: "date" },
+    layout: { type: "string", default: "blog" },
+    created: {
+      type: "date",
+    },
     authors: {
       type: "list",
       of: { type: "string" },
@@ -60,6 +67,39 @@ const Blog = defineDocumentType(() => ({
     tags: {
       type: "list",
       of: { type: "string" },
+    },
+  },
+  computedFields,
+}));
+
+export const Person = defineDocumentType(() => ({
+  name: "Person",
+  filePathPattern: `${siteConfig.peopleDir}/!(index)*.md*`,
+  contentType: "mdx",
+  fields: {
+    ...sharedFields,
+    id: {
+      type: "string",
+    },
+    name: {
+      type: "string",
+      required: true,
+    },
+    avatar: {
+      type: "string",
+      default: siteConfig.avatarPlaceholder,
+    },
+    email: {
+      type: "string",
+    },
+    twitter: {
+      type: "string",
+    },
+    linkedin: {
+      type: "string",
+    },
+    github: {
+      type: "string",
     },
   },
   computedFields,
@@ -85,7 +125,7 @@ export default makeSource({
     ...siteConfig.contentExclude,
   ]),
   contentDirInclude: siteConfig.contentInclude,
-  documentTypes: [Blog, Page],
+  documentTypes: [Blog, Person, Page],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [

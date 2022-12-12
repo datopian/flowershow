@@ -4,6 +4,7 @@ import { useMDXComponent } from "next-contentlayer/hooks";
 
 import { MdxPage } from "../components/MDX";
 import { getPageData } from "../lib/getPageData";
+import { getAuthorsDetails } from "../lib/getAuthorsDetails";
 
 export default function Page({ body, data, ...rest }) {
   const mdxComponent = useMDXComponent(body.code, data);
@@ -16,7 +17,9 @@ export async function getStaticProps({ params }) {
   const urlPath = params.slug ? params.slug.join("/") : "";
   const page = allDocuments.find((p) => p.url_path === urlPath);
   const data = await getPageData(page.data);
-  return { props: { ...page, data } };
+  // temporary workaround for passing authors to blog layout
+  const authorsDetails = getAuthorsDetails(page.authors);
+  return { props: { ...page, data, authorsDetails } };
 }
 
 export async function getStaticPaths() {
