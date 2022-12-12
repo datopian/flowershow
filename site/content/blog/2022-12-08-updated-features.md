@@ -2,7 +2,7 @@
 title: Flowershow News No. 2
 description: Here are some of the new features we have implemented. 😎🚀
 created: 2022-12-08
-authors: [Philippe Du Preez]
+authors: [philippe-du-preez]
 ---
 
 Hey digital gardeners! 💐

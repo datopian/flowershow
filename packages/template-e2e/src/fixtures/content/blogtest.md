@@ -2,7 +2,6 @@
 title: Conquer the puddles
 description: I will conquer all the puddles in my nearby vicinity
 created: 2022-11-30
-authors: [Aleksandra the not-so-great]
 type: Blog
 ---
 
