@@ -1,0 +1,45 @@
+{
+  "name": "remark-embed-plus",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/remark-embed-plus/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/remark-embed-plus/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/remark-embed-plus/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "build": {
+      "executor": "@nrwl/web:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "entryFile": "packages/remark-embed-plus/src/index.ts",
+        "outputPath": "packages/remark-embed-plus/dist",
+        "compiler": "babel",
+        "tsConfig": "packages/remark-embed-plus/tsconfig.lib.json",
+        "project": "packages/remark-embed-plus/package.json",
+        "format": ["esm", "cjs"],
+        "external": ["unist-util-visit"],
+        "generateExportsField": true,
+        "assets": [
+          {
+            "glob": "packages/remark-embed-plus/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    }
+  },
+  "tags": []
+}

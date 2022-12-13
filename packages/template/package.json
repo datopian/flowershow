@@ -35,7 +35,7 @@
     "rehype-slug": "^5.0.1",
     "remark-callouts": "workspace:*",
     "remark-code-extra": "^1.0.1",
-    "remark-embed-plus": "^1.0.4",
+    "remark-embed-plus": "workspace:*",
     "remark-gfm": "^3.0.0",
     "remark-math": "^5.1.1",
     "remark-smartypants": "^2.0.0",
