@@ -3,6 +3,7 @@
     "baseUrl": ".",
     "paths": {
       "remark-callouts": ["packages/remark-callouts/src/index.ts"],
+      "remark-embed-plus": ["packages/remark-embed-plus/src/index.ts"],
       "remark-wiki-link-plus": ["packages/remark-wiki-link-plus/src/index.ts"]
     }
   }

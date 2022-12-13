@@ -156,6 +156,12 @@ importers:
       svg-parser: 2.0.4
       unist-util-visit: 4.1.1
 
+  packages/remark-embed-plus:
+    specifiers:
+      unist-util-visit: ^4.1.1
+    dependencies:
+      unist-util-visit: 4.1.1
+
   packages/remark-wiki-link-plus:
     specifiers:
       mdast-util-wiki-link: ^0.0.2
@@ -192,7 +198,7 @@ importers:
       rehype-slug: ^5.0.1
       remark-callouts: workspace:*
       remark-code-extra: ^1.0.1
-      remark-embed-plus: ^1.0.4
+      remark-embed-plus: workspace:*
       remark-gfm: ^3.0.0
       remark-math: ^5.1.1
       remark-smartypants: ^2.0.0
@@ -225,7 +231,7 @@ importers:
       rehype-slug: 5.1.0
       remark-callouts: link:../remark-callouts
       remark-code-extra: 1.0.1
-      remark-embed-plus: 1.0.4
+      remark-embed-plus: link:../remark-embed-plus
       remark-gfm: 3.0.1
       remark-math: 5.1.1
       remark-smartypants: 2.0.0
@@ -17841,15 +17847,6 @@ packages:
       }
     dependencies:
       unist-util-visit: 1.4.1
-    dev: false
-
-  /remark-embed-plus/1.0.4:
-    resolution:
-      {
-        integrity: sha512-EMtrNvcIeb+4G+5DHZbykMfYJ0N7GL8sZ3NrEmY9yfqj1h3wjawPGXNwYKj5j/zfr/BnDDvEy/NTaz1vGW32Nw==,
-      }
-    dependencies:
-      unist-util-visit: 4.1.1
     dev: false
 
   /remark-frontmatter/4.0.1:
