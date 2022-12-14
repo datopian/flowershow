@@ -6,6 +6,7 @@ const defaultConfig = {
   repoRoot: "",
   repoEditPath: "",
   editLinkShow: false,
+  linkPreviews: true,
   author: "",
   authorLogo: "",
   authorUrl: "",

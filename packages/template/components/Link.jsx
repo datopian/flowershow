@@ -1,16 +1,30 @@
 import Link from "next/link";
+import { Tooltip } from "./Tooltip";
+import { siteConfig } from "../config/siteConfig";
 
-export function CustomLink({ href, ...rest }) {
+export function CustomLink(props) {
+  const { href } = props;
   const isInternalLink = href && href.startsWith("/");
   const isAnchorLink = href && href.startsWith("#");
 
   if (isInternalLink) {
-    return <Link href={href} {...rest}></Link>;
+    return (
+      <>
+        {siteConfig.linkPreviews ? (
+          <Tooltip
+            {...props}
+            render={(tooltipTriggerProps) => <Link {...tooltipTriggerProps} />}
+          />
+        ) : (
+          <Link {...props} />
+        )}
+      </>
+    );
   }
 
   if (isAnchorLink) {
-    return <a href={href} {...rest} />;
+    return <a {...props} />;
   }
 
-  return <a target="_blank" rel="noopener noreferrer" href={href} {...rest} />;
+  return <a target="_blank" rel="noopener noreferrer" {...props} />;
 }
