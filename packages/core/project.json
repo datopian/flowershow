@@ -9,7 +9,7 @@
       "executor": "@nrwl/web:rollup",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/packages/core",
+        "outputPath": "packages/core/dist",
         "tsConfig": "packages/core/tsconfig.lib.json",
         "project": "packages/core/package.json",
         "entryFile": "packages/core/src/index.ts",
