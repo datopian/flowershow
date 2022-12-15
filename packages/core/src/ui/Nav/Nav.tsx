@@ -6,8 +6,7 @@ import { SearchContext, SearchField } from "../Search";
 import { GitHubIcon, DiscordIcon } from "../Icons";
 import { NavMobile } from "./NavMobile";
 import { NavItem } from "./NavItem";
-
-/* import styles from "./Nav.module.scss"; */
+import { NavTitle } from "./NavTitle";
 
 /* eslint-disable-next-line */
 /* export interface NavProps {} */
@@ -16,37 +15,6 @@ import { NavItem } from "./NavItem";
 const siteConfig: any = {};
 
 const Search = SearchContext(siteConfig.search?.provider);
-
-function NavbarTitle() {
-  const chunk = (
-    <>
-      {siteConfig.navbarTitle?.logo && (
-        <img
-          src={siteConfig.navbarTitle.logo}
-          alt={siteConfig.navbarTitle.text}
-          className="w-9 h-9 mr-1 fill-white"
-        />
-      )}
-      {siteConfig.navbarTitle?.text}
-      {siteConfig.navbarTitle?.version && (
-        <div className="mx-2 rounded-full border border-slate-500 py-1 px-3 text-xs text-slate-500">
-          {siteConfig.navbarTitle?.version}
-        </div>
-      )}
-    </>
-  );
-
-  return (
-    <Link
-      href="/"
-      aria-label="Home page"
-      className="flex items-center font-extrabold text-xl sm:text-2xl text-slate-900 dark:text-white"
-    >
-      {siteConfig.navbarTitle && chunk}
-      {!siteConfig.navbarTitle && siteConfig.title}
-    </Link>
-  );
-}
 
 export function Nav() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -86,7 +54,7 @@ export function Nav() {
         <NavMobile navigation={siteConfig.navLinks} />
       </div>
       <div className="flex flex-none items-center">
-        <NavbarTitle />
+        <NavTitle siteConfig={siteConfig} />
         <div className="hidden lg:flex ml-8 mr-6 sm:mr-8 md:mr-0">
           {siteConfig.navLinks.map((item) => (
             <NavItem item={item} key={item.name} />

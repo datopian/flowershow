@@ -3,8 +3,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 
 import { siteConfig } from "../config/siteConfig";
-import { Nav } from "./Nav";
-import { Nav as Nav2 } from "@flowershow/core";
+import { Nav } from "@flowershow/core";
 
 function useTableOfContents(tableOfContents) {
   const [currentSection, setCurrentSection] = useState(tableOfContents[0]?.id);
@@ -78,7 +77,6 @@ export function Layout({ children, tableOfContents }) {
       </Head>
       <div className="min-h-screen bg-background dark:bg-background-dark">
         <Nav />
-        <Nav2 />
         <div className="relative mx-auto">
           <main className="flex-auto">
             {children}

@@ -6,8 +6,9 @@ import Script from "next/script";
 import { useEffect, useState } from "react";
 import "tailwindcss/tailwind.css";
 
+import { SearchProvider } from "@flowershow/core";
+
 import { Layout } from "../components/Layout";
-import { SearchProvider } from "../components/search";
 import { siteConfig } from "../config/siteConfig";
 import * as gtag from "../lib/gtag";
 import "../styles/docsearch.css";

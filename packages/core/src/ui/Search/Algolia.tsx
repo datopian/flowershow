@@ -17,9 +17,7 @@ function Hit({ hit, children }) {
 
 export const AlgoliaSearchContext = createContext({});
 
-export function AlgoliaSearchProvider({ children, ...props }) {
-  const { algoliaConfig } = props;
-
+export function AlgoliaSearchProvider({ children, config }) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [initialQuery, setInitialQuery] = useState(undefined);
@@ -111,7 +109,7 @@ export function AlgoliaSearchProvider({ children, ...props }) {
         query faster, especially on mobile. */}
         <link
           rel="preconnect"
-          href={`https://${algoliaConfig.appId}-dsn.algolia.net`}
+          href={`https://${config.appId}-dsn.algolia.net`}
           crossOrigin="anonymous"
         />
       </Head>
@@ -126,7 +124,7 @@ export function AlgoliaSearchProvider({ children, ...props }) {
             navigator={navigator}
             transformItems={transformItems}
             hitComponent={Hit}
-            {...algoliaConfig}
+            {...config}
           />,
           document.body
         )}
