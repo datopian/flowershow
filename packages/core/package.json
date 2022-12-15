@@ -17,5 +17,11 @@
     "access": "public"
   },
   "type": "module",
-  "main": "./dist/index.js"
+  "main": "./dist/index.js",
+  "dependencies": {
+    "@docsearch/react": "^3.3.0",
+    "@headlessui/react": "^1.7.6",
+    "kbar": "0.1.0-beta.39",
+    "next-themes": "^0.2.1"
+  }
 }

@@ -1,7 +1,8 @@
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
-import { siteConfig } from "../config/siteConfig";
+/* import { siteConfig } from "../config/siteConfig"; */
+const siteConfig: any = {};
 
 export function ThemeSelector() {
   const [mounted, setMounted] = useState(false);

@@ -3,43 +3,16 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
 
-import { siteConfig } from "../config/siteConfig";
-import { BaseLink } from "./BaseLink";
-import { SearchContext, SearchField } from "./search/index.jsx";
+import { SearchContext, SearchField } from "../Search";
+import { BaseLink } from "../Base";
+import { MenuIcon, CloseIcon } from "../Icons";
+
+/* import { siteConfig } from "../config/siteConfig"; */
+const siteConfig: any = {};
 
 const Search = SearchContext(siteConfig.search?.provider);
 
-function MenuIcon(props) {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      fill="none"
-      strokeWidth="2"
-      strokeLinecap="round"
-      {...props}
-    >
-      <path d="M4 7h16M4 12h16M4 17h16" />
-    </svg>
-  );
-}
-
-function CloseIcon(props) {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      fill="none"
-      strokeWidth="2"
-      strokeLinecap="round"
-      {...props}
-    >
-      <path d="M5 5l14 14M19 5l-14 14" />
-    </svg>
-  );
-}
-
-export function MobileNavigation({ navigation }) {
+export function NavMobile({ navigation }) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -98,7 +71,7 @@ export function MobileNavigation({ navigation }) {
           </div>
           {Search && (
             <Search>
-              {({ query }) => <SearchField mobile onOpen={query.toggle} />}
+              {({ query }: any) => <SearchField mobile onOpen={query.toggle} />}
             </Search>
           )}
           <ul className="mt-2 space-y-2 border-l-2 border-slate-100 dark:border-slate-800 lg:mt-4 lg:space-y-4 lg:border-slate-200">
@@ -131,7 +104,7 @@ export function MobileNavigation({ navigation }) {
                     </li>
                   )}
                 </Menu.Button>
-                {Object.prototype.hasOwnProperty.call("subItems") && (
+                {Object.prototype.hasOwnProperty.call(link, "subItems") && (
                   <Transition
                     as={Fragment}
                     enter="transition ease-out duration-200"

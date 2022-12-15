@@ -14,7 +14,7 @@ const AlgoliaSearchContext = dynamic(
   { ssr: false }
 );
 
-const KBarSearchProvider = dynamic(
+const KBarSearchProvider: any = dynamic(
   () => {
     return import("./KBar").then((mod) => mod.KBarSearchProvider);
   },
@@ -54,7 +54,6 @@ export function SearchContext(provider) {
     case "kbar":
       return KBarContext;
     default:
+      return undefined;
   }
 }
-
-export { SearchField } from "./SearchField";

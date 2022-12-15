@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { createContext, useCallback, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
-let DocSearchModal = null;
+let DocSearchModal: any = null;
 
 function Hit({ hit, children }) {
   return (

@@ -2,7 +2,7 @@ import { Menu, Transition } from "@headlessui/react";
 import Link from "next/link";
 import { Fragment, useRef, useState } from "react";
 
-import { BaseLink } from "./BaseLink";
+import { BaseLink } from "../Base";
 
 export function NavItem({ item }) {
   const dropdownRef = useRef(null);
@@ -58,12 +58,10 @@ export function NavItem({ item }) {
             onMouseLeave={closeDropdown}
           >
             {item.subItems.map((subItem) => (
-              <Menu.Item
-                key={subItem.name}
-                onClick={() => setshowDropdown(false)}
-              >
+              <Menu.Item key={subItem.name}>
                 <BaseLink
                   href={subItem.href}
+                  onClick={() => setshowDropdown(false)}
                   className="text-slate-500 inline-flex items-center mt-2 px-1 pt-1 text-sm font-medium hover:text-slate-600"
                 >
                   {subItem.name}
