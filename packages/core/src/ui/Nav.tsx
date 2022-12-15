@@ -1,9 +1,9 @@
-import styles from "./core.module.scss";
+import styles from "./Nav.module.scss";
 
 /* eslint-disable-next-line */
-export interface CoreProps {}
+/* export interface NavProps {} */
 
-export function Core(props: CoreProps) {
+export function Nav() {
   return (
     <div className={styles["container"]}>
       <h1>Welcome to Core!</h1>
@@ -11,4 +11,4 @@ export function Core(props: CoreProps) {
   );
 }
 
-export default Core;
+export default Nav;
