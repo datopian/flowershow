@@ -124,7 +124,7 @@ export function AlgoliaSearchProvider({ children, algoliaConfig }) {
             navigator={navigator}
             transformItems={transformItems}
             hitComponent={Hit}
-            {...config}
+            {...algoliaConfig}
           />,
           document.body
         )}
