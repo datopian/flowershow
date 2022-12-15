@@ -1,3 +1,5 @@
+const defaultTheme = require("tailwindcss/defaultTheme");
+
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
@@ -11,6 +13,12 @@ module.exports = {
       // support wider width for large screens >1440px eg. in hero
       maxWidth: {
         "8xl": "88rem",
+      },
+      fontFamily: {
+        sans: ["ui-sans-serif", ...defaultTheme.fontFamily.sans],
+        serif: ["ui-serif", ...defaultTheme.fontFamily.serif],
+        mono: ["ui-monospace", ...defaultTheme.fontFamily.mono],
+        headings: ["-apple-system", ...defaultTheme.fontFamily.sans],
       },
     },
   },
