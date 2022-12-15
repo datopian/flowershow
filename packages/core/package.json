@@ -1,4 +1,20 @@
 {
   "name": "@flowershow/core",
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "description": "Core Flowershow components, configs and utils.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flowershow/flowershow.git",
+    "directory": "packages/remark-callouts"
+  },
+  "author": "Rufus Pollock",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/flowershow/flowershow/issues"
+  },
+  "homepage": "https://github.com/flowershow/flowershow#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module"
 }
