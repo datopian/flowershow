@@ -178,6 +178,7 @@ importers:
   packages/template:
     specifiers:
       "@docsearch/react": ^3.2.0
+      "@flowershow/core": workspace:^0.0.1
       "@headlessui/react": ^1.6.6
       "@heroicons/react": ^1.0.4
       "@silvenon/remark-smartypants": ^1.0.0
@@ -214,6 +215,7 @@ importers:
       tailwindcss: ^3.1.8
     dependencies:
       "@docsearch/react": 3.3.0_ftygaz6e6e5e4cecsqmsnm4myu
+      "@flowershow/core": link:../core
       "@headlessui/react": 1.7.5_biqbaboplfbrettd7655fr4n2y
       "@heroicons/react": 1.0.6_react@18.2.0
       "@silvenon/remark-smartypants": 1.0.0
