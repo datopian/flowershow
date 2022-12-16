@@ -6,7 +6,7 @@ export default function BlogLayout({ children, frontMatter }) {
   const { title, created, authorsDetails } = frontMatter;
 
   return (
-    <article className="docs prose dark:prose-invert prose-a:break-words mx-auto p-6">
+    <article className="docs prose prose-headings:font-headings dark:prose-invert prose-a:break-words mx-auto p-6">
       <header>
         <div className="mb-4 flex-col items-center">
           {title && <h1 className="flex justify-center">{title}</h1>}
