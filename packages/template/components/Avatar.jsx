@@ -11,7 +11,7 @@ export function Avatar({ name, img, href }) {
           />
         </div>
         <div className="ml-3">
-          <p className="text-sm font-medium text-black dark:text-white">
+          <p className="text-sm font-medium text-primary dark:text-primary-dark">
             {name}
           </p>
         </div>
