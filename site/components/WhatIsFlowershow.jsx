@@ -18,7 +18,7 @@ export function WhatIsFlowershow() {
                 alt=""
                 className="h-12 w-auto"
               />
-              <h2 className="mt-4 font-display text-base text-slate-900 dark:text-white">
+              <h2 className="mt-4 font-display text-base text-primary dark:text-primary-dark">
                 Crafted for Obsidian
               </h2>
               <p className="mt-1 text-sm text-slate-700 dark:text-slate-400">
@@ -37,7 +37,7 @@ export function WhatIsFlowershow() {
                 alt=""
                 className="h-12 w-auto"
               />
-              <h2 className="mt-4 font-display text-base text-slate-900 dark:text-white">
+              <h2 className="mt-4 font-display text-base text-primary dark:text-primary-dark">
                 Elegant & Functional
               </h2>
               <p className="mt-1 text-sm text-slate-700 dark:text-slate-400">
@@ -56,7 +56,7 @@ export function WhatIsFlowershow() {
                 alt=""
                 className="h-12 w-auto"
               />
-              <h2 className="mt-4 font-display text-base text-slate-900 dark:text-white">
+              <h2 className="mt-4 font-display text-base text-primary dark:text-primary-dark">
                 Customize and extend (if that’s your thing!)
               </h2>
               <p className="mt-1 text-sm text-slate-700 dark:text-slate-400">
@@ -75,7 +75,7 @@ export function WhatIsFlowershow() {
                 alt=""
                 className="h-12 w-auto"
               />
-              <h2 className="mt-4 font-display text-base text-slate-900 dark:text-white">
+              <h2 className="mt-4 font-display text-base text-primary dark:text-primary-dark">
                 Backed by an experienced team
               </h2>
               <p className="mt-1 text-sm text-slate-700 dark:text-slate-400">
