@@ -6,7 +6,7 @@ import Script from "next/script";
 import { useEffect, useState } from "react";
 import "tailwindcss/tailwind.css";
 
-import { SearchProvider } from "@flowershow/core";
+// import { SearchProvider } from "@flowershow/core";
 
 import { Layout } from "../components/Layout";
 import { siteConfig } from "../config/siteConfig";
@@ -91,11 +91,11 @@ function MyApp({ Component, pageProps }) {
           }}
         />
       )}
-      <SearchProvider searchConfig={siteConfig.search}>
-        <Layout title={pageProps.title} tableOfContents={tableOfContents}>
-          <Component {...pageProps} />
-        </Layout>
-      </SearchProvider>
+      {/* <SearchProvider searchConfig={siteConfig.search}> */}
+      <Layout title={pageProps.title} tableOfContents={tableOfContents}>
+        <Component {...pageProps} />
+      </Layout>
+      {/* </SearchProvider> */}
     </ThemeProvider>
   );
 }

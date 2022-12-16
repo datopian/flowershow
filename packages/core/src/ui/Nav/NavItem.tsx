@@ -4,7 +4,13 @@ import { Fragment, useRef, useState } from "react";
 
 import { BaseLink } from "../Base";
 
-export function NavItem({ item }) {
+import { NavLink, NavDropdown, isNavDropdown } from "../types";
+
+interface Props {
+  link: NavLink | NavDropdown;
+}
+
+export const NavItem: React.FC<Props> = ({ link }) => {
   const dropdownRef = useRef(null);
   const [showDropdown, setshowDropdown] = useState(false);
 
@@ -26,21 +32,21 @@ export function NavItem({ item }) {
         onMouseEnter={openDropdown}
         onMouseLeave={closeDropdown}
       >
-        {Object.prototype.hasOwnProperty.call(item, "href") ? (
+        {!isNavDropdown(link) ? (
           <Link
-            href={item.href}
+            href={link.href}
             className="text-slate-500 inline-flex items-center mr-2 px-1 pt-1 text-sm font-medium hover:text-slate-600"
           >
-            {item.name}
+            {link.name}
           </Link>
         ) : (
           <div className="text-slate-500 inline-flex items-center mr-2 px-1 pt-1 text-sm font-medium hover:text-slate-600 fill-slate-500 hover:fill-slate-600">
-            {item.name}
+            {link.name}
           </div>
         )}
       </Menu.Button>
 
-      {Object.prototype.hasOwnProperty.call(item, "subItems") && (
+      {isNavDropdown(link) && (
         <Transition
           as={Fragment}
           show={showDropdown}
@@ -57,14 +63,14 @@ export function NavItem({ item }) {
             onMouseEnter={openDropdown}
             onMouseLeave={closeDropdown}
           >
-            {item.subItems.map((subItem) => (
-              <Menu.Item key={subItem.name}>
+            {link.subItems.map(({ name, href }) => (
+              <Menu.Item key={name}>
                 <BaseLink
-                  href={subItem.href}
+                  href={href}
                   onClick={() => setshowDropdown(false)}
                   className="text-slate-500 inline-flex items-center mt-2 px-1 pt-1 text-sm font-medium hover:text-slate-600"
                 >
-                  {subItem.name}
+                  {name}
                 </BaseLink>
               </Menu.Item>
             ))}
@@ -73,4 +79,4 @@ export function NavItem({ item }) {
       )}
     </Menu>
   );
-}
+};

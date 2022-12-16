@@ -1,10 +1,15 @@
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
-/* import { siteConfig } from "../config/siteConfig"; */
-const siteConfig: any = {};
+interface Props {
+  defaultTheme: "dark" | "light";
+  toggleIcon: string;
+}
 
-export function ThemeSelector() {
+export const ThemeSelector: React.FC<Props> = ({
+  defaultTheme,
+  toggleIcon,
+}) => {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
 
@@ -15,7 +20,8 @@ export function ThemeSelector() {
    */
   if (!mounted) return null;
 
-  if (!siteConfig.theme.default) return null;
+  // TODO why?
+  if (!defaultTheme) return null;
 
   return (
     <button
@@ -27,7 +33,7 @@ export function ThemeSelector() {
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
       <img
-        src={siteConfig.theme.toggleIcon}
+        src={toggleIcon}
         alt="toggle theme"
         width={24}
         height={24}
@@ -35,4 +41,4 @@ export function ThemeSelector() {
       />
     </button>
   );
-}
+};

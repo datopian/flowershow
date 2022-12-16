@@ -76,7 +76,13 @@ export function Layout({ children, tableOfContents }) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <div className="min-h-screen bg-background dark:bg-background-dark">
-        <Nav />
+        {/* TODO logic for picking title */}
+        <Nav
+          title="test"
+          links={siteConfig.navLinks}
+          search={siteConfig.search}
+          social={siteConfig.social}
+        />
         <div className="relative mx-auto">
           <main className="flex-auto">
             {children}

@@ -1,32 +1,39 @@
-import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { ThemeSelector } from "../Base";
 import { SearchContext, SearchField } from "../Search";
-import { GitHubIcon, DiscordIcon } from "../Icons";
 import { NavMobile } from "./NavMobile";
 import { NavItem } from "./NavItem";
 import { NavTitle } from "./NavTitle";
+import { NavSocial } from "./NavSocial";
 
-/* eslint-disable-next-line */
-/* export interface NavProps {} */
+import {
+  NavLink,
+  NavDropdown,
+  SocialLink,
+  SearchProviderConfig,
+} from "../types";
 
-/* import { siteConfig } from "../config/siteConfig"; */
-const siteConfig: any = {};
+interface Props {
+  title: string;
+  logo?: string;
+  version?: string;
+  links?: Array<NavLink | NavDropdown>;
+  search?: SearchProviderConfig;
+  social?: Array<SocialLink>;
+}
 
-const Search = SearchContext(siteConfig.search?.provider);
-
-export function Nav() {
+export const Nav: React.FC<Props> = ({
+  title,
+  logo,
+  version,
+  links,
+  search,
+  social,
+}) => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [modifierKey, setModifierKey] = useState();
-
-  useEffect(() => {
-    setModifierKey(
-      /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)
-        ? "⌘"
-        : ("Ctrl " as any)
-    );
-  }, []);
+  const [modifierKey, setModifierKey] = useState<string>();
+  const [Search, setSearch] = useState<any>(); // TODO types
 
   useEffect(() => {
     function onScroll() {
@@ -35,9 +42,20 @@ export function Nav() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
-      window.removeEventListener("scroll", onScroll, { passive: true } as any);
+      window.removeEventListener("scroll", onScroll);
     };
   }, []);
+
+  // TODO refactor this, navigator.platform is deprecated
+  useEffect(() => {
+    setModifierKey(
+      /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform) ? "⌘" : "Ctrl "
+    );
+  }, []);
+
+  useEffect(() => {
+    setSearch(SearchContext(search));
+  }, [search]);
 
   return (
     <header
@@ -50,16 +68,20 @@ export function Nav() {
         }
       `}
     >
+      {/* Mobile navigation  */}
       <div className="mr-2 sm:mr-4 flex lg:hidden">
-        <NavMobile navigation={siteConfig.navLinks} />
+        <NavMobile links={links} />
       </div>
+      {/* Non-mobile navigation */}
       <div className="flex flex-none items-center">
-        <NavTitle siteConfig={siteConfig} />
-        <div className="hidden lg:flex ml-8 mr-6 sm:mr-8 md:mr-0">
-          {siteConfig.navLinks.map((item) => (
-            <NavItem item={item} key={item.name} />
-          ))}
-        </div>
+        <NavTitle title={title} logo={logo} version={version} />
+        {links && (
+          <div className="hidden lg:flex ml-8 mr-6 sm:mr-8 md:mr-0">
+            {links.map((link) => (
+              <NavItem link={link} key={link.name} />
+            ))}
+          </div>
+        )}
       </div>
       <div className="relative flex items-center basis-auto justify-end gap-6 xl:gap-8 md:shrink w-full">
         {Search && (
@@ -70,21 +92,8 @@ export function Nav() {
           </Search>
         )}
         <ThemeSelector />
-        {siteConfig.github && (
-          <Link href={siteConfig.github} className="group" aria-label="GitHub">
-            <GitHubIcon className="h-6 w-6 dark:fill-slate-400 group-hover:fill-slate-500 dark:group-hover:fill-slate-300" />
-          </Link>
-        )}
-        {siteConfig.discord && (
-          <Link
-            href={siteConfig.discord}
-            className="group"
-            aria-label="Discord"
-          >
-            <DiscordIcon className="h-8 w-8 dark:fill-slate-400 group-hover:fill-slate-500 dark:group-hover:fill-slate-300" />
-          </Link>
-        )}
+        {social && <NavSocial links={social} />}
       </div>
     </header>
   );
-}
+};

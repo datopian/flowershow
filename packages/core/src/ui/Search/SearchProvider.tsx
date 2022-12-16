@@ -32,13 +32,13 @@ export function SearchProvider({ searchConfig, children }) {
   switch (searchConfig?.provider) {
     case "algolia":
       return (
-        <AlgoliaSearchProvider algoliaConfig={searchConfig.algoliaConfig}>
+        <AlgoliaSearchProvider config={searchConfig.config}>
           {children}
         </AlgoliaSearchProvider>
       );
     case "kbar":
       return (
-        <KBarSearchProvider kbarConfig={searchConfig.kbarConfig}>
+        <KBarSearchProvider config={searchConfig.config}>
           {children}
         </KBarSearchProvider>
       );

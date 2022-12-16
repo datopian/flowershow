@@ -27,11 +27,13 @@ const config = {
     },
     { href: "/_all", name: "All" },
   ],
-  github: "https://github.com/flowershow/flowershow",
-  discord: "https://discord.gg/cPxejPzpwt",
+  social: [
+    { label: "github", href: "https://github.com/flowershow/flowershow" },
+    { label: "discord", href: "https://discord.gg/cPxejPzpwt" },
+  ],
   search: {
     provider: "algolia",
-    algoliaConfig: {
+    config: {
       appId: process.env.NEXT_PUBLIC_DOCSEARCH_APP_ID,
       apiKey: process.env.NEXT_PUBLIC_DOCSEARCH_API_KEY,
       indexName: process.env.NEXT_PUBLIC_DOCSEARCH_INDEX_NAME,
