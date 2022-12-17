@@ -11,8 +11,8 @@ const config = {
   },
   editLinkRoot:
     "https://github.com/flowershow/flowershow/edit/main/site/content",
-  editLinkShow: true,
-  tableOfContents: true,
+  showEditLink: true,
+  showToc: true,
   analytics: "G-RQWLTRWBS2",
   navLinks: [
     { href: "/#overview", name: "Overview" },

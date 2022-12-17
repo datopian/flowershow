@@ -1,15 +1,37 @@
 import Head from "next/head";
 import Link from "next/link";
 
-import { useTableOfContents } from "../lib/useTableOfContents";
-import { siteConfig } from "../config/siteConfig";
-import { Nav } from "@flowershow/core";
+import { useTableOfContents } from "./useTableOfContents";
+import { Nav } from "../Nav";
+import {
+  NavConfig,
+  AuthorConfig,
+  ThemeConfig,
+  SearchProviderConfig,
+  SocialLink,
+  isNavDropdown,
+} from "../types";
 
-export function Layout({ children, tableOfContents }) {
-  const { editLink, toc, _raw } = children.props;
-  /* if editLink is not set in page frontmatter, link bool value will depend on siteConfig.editLinkShow */
-  const editUrl = `${siteConfig.repoRoot}${siteConfig.repoEditPath}${_raw?.sourceFilePath}`;
+interface Props extends React.PropsWithChildren {
+  nav: NavConfig;
+  author: AuthorConfig;
+  theme: ThemeConfig;
+  tableOfContents: Array<any>; // TODO type
+  showToc: boolean;
+  showEditLink: boolean;
+  edit_url?: string;
+}
 
+export const Layout: React.FC<Props> = ({
+  children,
+  nav,
+  author,
+  theme,
+  tableOfContents,
+  showEditLink,
+  showToc,
+  edit_url,
+}) => {
   const currentSection = useTableOfContents(tableOfContents);
 
   function isActive(section) {
@@ -35,20 +57,22 @@ export function Layout({ children, tableOfContents }) {
       <div className="min-h-screen bg-background dark:bg-background-dark">
         {/* TODO logic for picking title */}
         <Nav
-          title={siteConfig.navbarTitle?.text || siteConfig.title}
-          logo={siteConfig.navbarTitle?.logo}
-          links={siteConfig.navLinks}
-          search={siteConfig.search}
-          social={siteConfig.social}
+          title={nav.title}
+          logo={nav.logo}
+          links={nav.links}
+          search={nav.search}
+          social={nav.social}
+          defaultTheme={theme.defaultTheme}
+          themeToggleIcon={theme.themeToggleIcon}
         />
         <div className="relative mx-auto">
           <main className="flex-auto">
             {children}
-            {(editLink ?? siteConfig.editLinkShow) && (
+            {showEditLink && edit_url && (
               <div className="mb-10 prose dark:prose-invert p-6 mx-auto">
                 <a
                   className="flex no-underline font-semibold justify-center"
-                  href={editUrl}
+                  href={edit_url}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -76,15 +100,15 @@ export function Layout({ children, tableOfContents }) {
         </div>
         <footer className="bg-background dark:bg-background-dark prose dark:prose-invert max-w-none flex flex-col items-center justify-center w-full h-auto pt-10 pb-20">
           <div className="flex w-full flex-wrap justify-center">
-            {siteConfig.navLinks.map(
+            {nav.links.map(
               (item) =>
-                !Object.prototype.hasOwnProperty.call(item, "subItems") && (
+                !isNavDropdown(item) && (
                   <Link
                     key={item.href}
                     href={item.href}
                     className="inline-flex items-center mx-4 px-1 pt-1 font-regular hover:text-slate-300 no-underline"
-                    aria-current={item.current ? "page" : undefined}
                   >
+                    {/* TODO aria-current={item.current ? "page" : undefined} */}
                     {item.name}
                   </Link>
                 )
@@ -93,19 +117,19 @@ export function Layout({ children, tableOfContents }) {
           <p className="flex items-center justify-center">
             Created by
             <a
-              href={siteConfig.authorUrl}
+              href={author.url}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center no-underline"
             >
-              {siteConfig.authorLogo && (
+              {author.logo && (
                 <img
-                  src={siteConfig.authorLogo}
-                  alt={siteConfig.author}
+                  src={author.logo}
+                  alt={author.name}
                   className="my-0 h-6 block"
                 />
               )}
-              {siteConfig.author}
+              {author.name}
             </a>
           </p>
           <p className="flex items-center justify-center">
@@ -127,7 +151,7 @@ export function Layout({ children, tableOfContents }) {
         </footer>
       </div>
       {/** TABLE OF CONTENTS */}
-      {tableOfContents.length > 0 && (toc ?? siteConfig.tableOfContents) && (
+      {showToc && tableOfContents.length > 0 && (
         <div className="hidden xl:fixed xl:right-0 xl:top-[4.5rem] xl:block xl:w-1/5 xl:h-[calc(100vh-4.5rem)] xl:flex-none xl:overflow-y-auto xl:py-16 xl:pr-6 xl:mb-16">
           <nav aria-labelledby="on-this-page-title" className="w-56">
             <h2 className="font-display text-md font-medium text-slate-900 dark:text-white">
@@ -174,4 +198,4 @@ export function Layout({ children, tableOfContents }) {
       )}
     </>
   );
-}
+};

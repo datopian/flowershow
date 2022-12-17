@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
-export function useTableOfContents(tableOfContents) {
+// TODO types
+export const useTableOfContents = (tableOfContents) => {
   const [currentSection, setCurrentSection] = useState(tableOfContents[0]?.id);
 
   const getHeadings = useCallback((toc) => {
@@ -36,9 +37,9 @@ export function useTableOfContents(tableOfContents) {
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => {
-      window.removeEventListener("scroll", onScroll, { passive: true });
+      window.removeEventListener("scroll", onScroll);
     };
   }, [getHeadings, tableOfContents]);
 
   return currentSection;
-}
+};

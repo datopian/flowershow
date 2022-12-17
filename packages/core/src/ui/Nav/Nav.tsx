@@ -6,24 +6,9 @@ import { NavMobile } from "./NavMobile";
 import { NavItem } from "./NavItem";
 import { NavTitle } from "./NavTitle";
 import { NavSocial } from "./NavSocial";
+import { NavConfig, ThemeConfig } from "../types";
 
-import {
-  NavLink,
-  NavDropdown,
-  SocialLink,
-  SearchProviderConfig,
-} from "../types";
-
-interface Props {
-  title: string;
-  logo?: string;
-  version?: string;
-  links?: Array<NavLink | NavDropdown>;
-  search?: SearchProviderConfig;
-  social?: Array<SocialLink>;
-  defaultTheme: "dark" | "light";
-  themeToggleIcon: string;
-}
+interface Props extends NavConfig, ThemeConfig {}
 
 export const Nav: React.FC<Props> = ({
   title,

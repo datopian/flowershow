@@ -1,7 +1,7 @@
 // shared types used in more than one component
 // TODO find out what's the best place to put them, what's the best practice
 
-// navigation
+// layout
 export interface NavLink {
   name: string;
   href: string;
@@ -16,6 +16,26 @@ export function isNavDropdown(
   link: NavLink | NavDropdown
 ): link is NavDropdown {
   return (link as NavDropdown).subItems !== undefined;
+}
+
+export interface NavConfig {
+  title: string;
+  logo?: string;
+  version?: string;
+  links: Array<NavLink | NavDropdown>;
+  search?: SearchProviderConfig;
+  social?: Array<SocialLink>;
+}
+
+export interface AuthorConfig {
+  name: string;
+  url: string;
+  logo: string;
+}
+
+export interface ThemeConfig {
+  defaultTheme: "dark" | "light";
+  themeToggleIcon: string;
 }
 
 // social

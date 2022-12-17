@@ -44,7 +44,7 @@ const computedFields = {
       siteConfig.editLinkRoot
         ? /* eslint no-underscore-dangle: off */
           `${siteConfig.editLinkRoot}${post._raw.sourceFilePath}`
-        : null,
+        : undefined,
   },
 };
 

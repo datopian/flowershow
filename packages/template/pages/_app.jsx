@@ -6,9 +6,7 @@ import Script from "next/script";
 import { useEffect, useState } from "react";
 import "tailwindcss/tailwind.css";
 
-// TODO
-import { SearchProvider } from "@flowershow/core";
-import { Layout } from "../components/Layout";
+import { Layout, SearchProvider } from "@flowershow/core";
 
 import { siteConfig } from "../config/siteConfig";
 import { collectHeadings } from "../lib/collectHeadings";
@@ -18,7 +16,32 @@ import "../styles/global.css";
 import "../styles/prism.css";
 
 function MyApp({ Component, pageProps }) {
+  const [tableOfContents, setTableOfContents] = useState([]);
   const router = useRouter();
+
+  // TODO maybe use computed fields for showEditLink and showToc to make this even cleaner?
+  const layoutProps = {
+    showToc: pageProps.showToc ?? siteConfig.tableOfContents,
+    showEditLink: pageProps.showEditLink ?? siteConfig.editLinkShow,
+    edit_url: pageProps.edit_url,
+    tableOfContents,
+    nav: {
+      title: siteConfig.navbarTitle?.text || siteConfig.title,
+      logo: siteConfig.navbarTitle?.logo,
+      links: siteConfig.navLinks,
+      search: siteConfig.search,
+      social: siteConfig.social,
+    },
+    author: {
+      name: siteConfig.author,
+      url: siteConfig.authorUrl,
+      logo: siteConfig.authorLogo,
+    },
+    theme: {
+      defaultTheme: siteConfig.theme.default,
+      themeToggleIcon: siteConfig.theme.toggleIcon,
+    },
+  };
 
   useEffect(() => {
     if (siteConfig.analytics) {
@@ -31,8 +54,6 @@ function MyApp({ Component, pageProps }) {
       };
     }
   }, [router.events]);
-
-  const [tableOfContents, setTableOfContents] = useState([]);
 
   useEffect(() => {
     const headingNodes = document.querySelectorAll("h2,h3");
@@ -72,7 +93,7 @@ function MyApp({ Component, pageProps }) {
         />
       )}
       <SearchProvider searchConfig={siteConfig.search}>
-        <Layout {...pageProps} tableOfContents={tableOfContents}>
+        <Layout {...layoutProps}>
           <Component {...pageProps} />
         </Layout>
       </SearchProvider>

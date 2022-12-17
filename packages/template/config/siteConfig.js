@@ -3,7 +3,8 @@ import config from "../content/config";
 const defaultConfig = {
   title: "Flowershow",
   description: "",
-  editLinkShow: false,
+  showEditLink: false,
+  showToc: true,
   author: "",
   authorLogo: "",
   authorUrl: "",
