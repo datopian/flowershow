@@ -21,8 +21,8 @@ const sharedFields = {
   description: { type: "string" },
   image: { type: "string" },
   layout: { type: "string", default: "docs" },
-  editLink: { type: "boolean" },
-  toc: { type: "boolean" },
+  showEditLink: { type: "boolean" },
+  showToc: { type: "boolean" },
   isDraft: { type: "boolean" },
   data: { type: "list", of: { type: "string" }, default: [] },
 };
@@ -37,6 +37,14 @@ const computedFields = {
     type: "string",
     /* eslint no-underscore-dangle: off */
     resolve: (doc) => doc._raw.flattenedPath.replace(/^(.+?\/)*/, ""),
+  },
+  edit_url: {
+    type: "string",
+    resolve: (post) =>
+      siteConfig.editLinkRoot
+        ? /* eslint no-underscore-dangle: off */
+          `${siteConfig.editLinkRoot}${post._raw.sourceFilePath}`
+        : null,
   },
 };
 

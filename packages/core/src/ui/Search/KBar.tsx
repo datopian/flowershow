@@ -1,18 +1,19 @@
-import Router from "next/router";
+import router from "next/router";
+import { Action } from "kbar";
 
 import { KBarModal } from "./KBarModal";
 
-export function KBarSearchProvider({ kbarConfig, children }) {
-  const defaultActions = kbarConfig?.defaultActions;
+export const KBarSearchProvider = ({ config, children }) => {
+  const defaultActions = config?.defaultActions;
   const searchDocumentsPath = "search.json";
 
-  let startingActions = [
+  let startingActions: Action[] = [
     {
       id: "homepage",
       name: "Homepage",
       keywords: "",
       section: "Home",
-      perform: () => Router.push("/"),
+      perform: () => router.push("/"),
     },
   ];
 
@@ -29,4 +30,4 @@ export function KBarSearchProvider({ kbarConfig, children }) {
   ) : (
     children
   );
-}
+};

@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react";
 import {
+  Action,
   KBarAnimator,
   KBarPortal,
   KBarPositioner,
@@ -7,52 +9,22 @@ import {
   useMatches,
   useRegisterActions,
 } from "kbar";
-import Router from "next/router";
-import React, { useEffect, useState } from "react";
+import { kbarActionsFromDocuments } from "./kbarActionsFromDocuments";
 
-const formatDate = (date, locale = "en-US") => {
-  const options = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
-  const now = new Date(date).toLocaleDateString(locale, options);
+interface Props {
+  searchDocumentsPath: string;
+}
 
-  return now;
-};
-
-const nameFromUrl = (url) => {
-  const name = url.split("/").slice(-1)[0].replace("-", " ");
-  return name.charAt(0).toUpperCase() + name.slice(1);
-};
-
-export function Portal({ searchDocumentsPath }) {
-  const [searchActions, setSearchActions] = useState([]);
+export const Portal: React.FC<Props> = ({ searchDocumentsPath }) => {
+  const [searchActions, setSearchActions] = useState<Action[]>([]);
 
   useEffect(() => {
-    const mapPosts = (posts) => {
-      const actions = [];
-      for (const post of posts) {
-        // excluding home path as this is defined in starting actions
-        post.url_path &&
-          actions.push({
-            id: post.url_path,
-            name: post.title ?? nameFromUrl(post.url_path),
-            keywords: post.description ?? "",
-            section: post.sourceDir ?? "Page",
-            subtitle: post.date && formatDate(post.date, "en-US"),
-            perform: () => Router.push(`/${post.url_path}`),
-          });
-      }
-      return actions;
-    };
-
-    async function fetchData() {
+    const fetchData = async () => {
       const res = await fetch(searchDocumentsPath);
       const json = await res.json();
-      const actions = mapPosts(json);
+      const actions = kbarActionsFromDocuments(json);
       setSearchActions(actions);
-    }
+    };
     fetchData();
   }, [searchDocumentsPath]);
 
@@ -91,7 +63,7 @@ export function Portal({ searchDocumentsPath }) {
       </KBarPositioner>
     </KBarPortal>
   );
-}
+};
 
 function RenderItem(props) {
   const { item, active } = props;

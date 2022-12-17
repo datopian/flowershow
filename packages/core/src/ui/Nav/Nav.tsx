@@ -21,6 +21,8 @@ interface Props {
   links?: Array<NavLink | NavDropdown>;
   search?: SearchProviderConfig;
   social?: Array<SocialLink>;
+  defaultTheme: "dark" | "light";
+  themeToggleIcon: string;
 }
 
 export const Nav: React.FC<Props> = ({
@@ -30,6 +32,8 @@ export const Nav: React.FC<Props> = ({
   links,
   search,
   social,
+  defaultTheme,
+  themeToggleIcon,
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [modifierKey, setModifierKey] = useState<string>();
@@ -54,7 +58,9 @@ export const Nav: React.FC<Props> = ({
   }, []);
 
   useEffect(() => {
-    setSearch(SearchContext(search));
+    if (search) {
+      setSearch(SearchContext(search.provider));
+    }
   }, [search]);
 
   return (
@@ -91,7 +97,10 @@ export const Nav: React.FC<Props> = ({
             )}
           </Search>
         )}
-        <ThemeSelector />
+        <ThemeSelector
+          defaultTheme={defaultTheme}
+          toggleIcon={themeToggleIcon}
+        />
         {social && <NavSocial links={social} />}
       </div>
     </header>

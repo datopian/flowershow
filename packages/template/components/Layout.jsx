@@ -1,52 +1,9 @@
 import Head from "next/head";
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
 
+import { useTableOfContents } from "../lib/useTableOfContents";
 import { siteConfig } from "../config/siteConfig";
 import { Nav } from "@flowershow/core";
-
-function useTableOfContents(tableOfContents) {
-  const [currentSection, setCurrentSection] = useState(tableOfContents[0]?.id);
-
-  const getHeadings = useCallback((toc) => {
-    return toc
-      .flatMap((node) => [node.id, ...node.children.map((child) => child.id)])
-      .map((id) => {
-        const el = document.getElementById(id);
-        if (!el) return null;
-
-        const style = window.getComputedStyle(el);
-        const scrollMt = parseFloat(style.scrollMarginTop);
-
-        const top = window.scrollY + el.getBoundingClientRect().top - scrollMt;
-        return { id, top };
-      })
-      .filter((el) => !!el);
-  }, []);
-
-  useEffect(() => {
-    if (tableOfContents.length === 0) return;
-    const headings = getHeadings(tableOfContents);
-    function onScroll() {
-      const top = window.scrollY + 4.5;
-      let current = headings[0].id;
-      headings.forEach((heading) => {
-        if (top >= heading.top) {
-          current = heading.id;
-        }
-        return current;
-      });
-      setCurrentSection(current);
-    }
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => {
-      window.removeEventListener("scroll", onScroll, { passive: true });
-    };
-  }, [getHeadings, tableOfContents]);
-
-  return currentSection;
-}
 
 export function Layout({ children, tableOfContents }) {
   const { editLink, toc, _raw } = children.props;

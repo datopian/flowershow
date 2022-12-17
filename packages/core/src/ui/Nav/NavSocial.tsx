@@ -17,7 +17,7 @@ export const NavSocial: React.FC<Props> = ({ links }) => {
       {links.map(({ label, href }) => {
         const Icon = icons[label];
         return (
-          <Link href={href} aria-label={label} className="group">
+          <Link key={label} href={href} aria-label={label} className="group">
             <Icon className="h-6 w-6 dark:fill-slate-400 group-hover:fill-slate-500 dark:group-hover:fill-slate-300" />
           </Link>
         );

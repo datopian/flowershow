@@ -9,8 +9,8 @@ const config = {
     text: "Flowershow",
     version: "Alpha",
   },
-  repoRoot: "https://github.com/flowershow/flowershow",
-  repoEditPath: "/edit/main/site/content/",
+  editLinkRoot:
+    "https://github.com/flowershow/flowershow/edit/main/site/content",
   editLinkShow: true,
   tableOfContents: true,
   analytics: "G-RQWLTRWBS2",

@@ -42,7 +42,9 @@ export const NavMobile: React.FC<Props> = ({ links, search, author }) => {
     }, [router, isOpen]);
 
     useEffect(() => {
-        setSearch(SearchContext(search?.provider));
+        if (search) {
+            setSearch(SearchContext(search.provider));
+        }
     }, [search]);
 
     return (

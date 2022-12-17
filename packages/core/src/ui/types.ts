@@ -27,9 +27,29 @@ export interface SocialLink {
 }
 
 // search
-type SearchProvider = "algolia" | "kbar";
+export type SearchProvider = "algolia" | "kbar";
 
 export interface SearchProviderConfig {
   provider: SearchProvider;
   config: object;
+}
+
+// TEMP contentlayer
+export interface Page {
+  title?: string;
+  description?: string;
+  image?: string;
+  layout: string;
+  showEditLink?: boolean;
+  showToc?: boolean;
+  isDraft?: boolean;
+  data: Array<string>;
+  url_path: string;
+  edit_url: string | null;
+}
+
+export interface Blog extends Page {
+  created?: string;
+  authors?: Array<string>;
+  tags?: Array<string>;
 }

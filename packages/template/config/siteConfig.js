@@ -3,8 +3,6 @@ import config from "../content/config";
 const defaultConfig = {
   title: "Flowershow",
   description: "",
-  repoRoot: "",
-  repoEditPath: "",
   editLinkShow: false,
   author: "",
   authorLogo: "",
