@@ -35,7 +35,8 @@ export function Layout({ children, tableOfContents }) {
       <div className="min-h-screen bg-background dark:bg-background-dark">
         {/* TODO logic for picking title */}
         <Nav
-          title="test"
+          title={siteConfig.navbarTitle?.text || siteConfig.title}
+          logo={siteConfig.navbarTitle?.logo}
           links={siteConfig.navLinks}
           search={siteConfig.search}
           social={siteConfig.social}
