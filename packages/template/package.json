@@ -19,7 +19,7 @@
     "clsx": "^1.2.1",
     "contentlayer": "^0.2.8",
     "date-fns": "^2.29.2",
-    "framer-motion": "^7.8.0",
+    "framer-motion": "^7.10.2",
     "gray-matter": "^4.0.3",
     "hastscript": "^7.0.2",
     "kbar": "^0.1.0-beta.37",

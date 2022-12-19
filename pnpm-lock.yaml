@@ -113,6 +113,7 @@ importers:
   packages/template:
     specifiers:
       "@docsearch/react": ^3.2.0
+      "@floating-ui/react": ^0.14.0
       "@headlessui/react": ^1.6.6
       "@heroicons/react": ^1.0.4
       "@silvenon/remark-smartypants": ^1.0.0
@@ -122,9 +123,11 @@ importers:
       contentlayer: ^0.2.8
       cross-env: ^7.0.3
       date-fns: ^2.29.2
+      framer-motion: ^7.10.2
       gray-matter: ^4.0.3
       hastscript: ^7.0.2
       kbar: ^0.1.0-beta.37
+      marked: ^4.2.4
       mdx-mermaid: ^2.0.0-rc1
       mermaid: ^9.1.4
       next: ^13.0.4
@@ -149,6 +152,7 @@ importers:
       tailwindcss: ^3.1.8
     dependencies:
       "@docsearch/react": 3.3.0_ftygaz6e6e5e4cecsqmsnm4myu
+      "@floating-ui/react": 0.14.0_biqbaboplfbrettd7655fr4n2y
       "@headlessui/react": 1.7.4_biqbaboplfbrettd7655fr4n2y
       "@heroicons/react": 1.0.6_react@18.2.0
       "@silvenon/remark-smartypants": 1.0.0
@@ -156,9 +160,11 @@ importers:
       clsx: 1.2.1
       contentlayer: 0.2.9_esbuild@0.14.54
       date-fns: 2.29.3
+      framer-motion: 7.10.2_biqbaboplfbrettd7655fr4n2y
       gray-matter: 4.0.3
       hastscript: 7.1.0
       kbar: 0.1.0-beta.38_biqbaboplfbrettd7655fr4n2y
+      marked: 4.2.4
       mdx-mermaid: 2.0.0-rc3_4xihcobe3b7sve2ddom6j73w6m
       mermaid: 9.2.0
       next: 13.0.4_biqbaboplfbrettd7655fr4n2y
@@ -2572,6 +2578,25 @@ packages:
       }
     dev: false
 
+  /@emotion/is-prop-valid/0.8.8:
+    resolution:
+      {
+        integrity: sha512-u5WtneEAr5IDG2Wv65yhunPSMLIpuKsbuOktRojfrEiEvRyC85LgPMZI63cr7NUqT8ZIGdSVg8ZKGxIug4lXcA==,
+      }
+    requiresBuild: true
+    dependencies:
+      "@emotion/memoize": 0.7.4
+    dev: false
+    optional: true
+
+  /@emotion/memoize/0.7.4:
+    resolution:
+      {
+        integrity: sha512-Ja/Vfqe3HpuzRsG1oBtWTHk2PGZ7GR+2Vz5iYGelAw8dx32K0y7PjVuxK6z1nMpZOqAFsRUPCkK1YjJ56qJlgw==,
+      }
+    dev: false
+    optional: true
+
   /@esbuild-plugins/node-resolve/0.1.4_esbuild@0.14.54:
     resolution:
       {
@@ -2626,6 +2651,54 @@ packages:
       {
         integrity: sha512-cEee/Z+I12mZcFJshKcCqC8tuX5hG3s+d+9nZ3LabqKF1vKdF41B92pJVCBggjAGORAeOzyyDDKrZwIkLffeOQ==,
       }
+    dev: false
+
+  /@floating-ui/core/1.0.4:
+    resolution:
+      {
+        integrity: sha512-FPFLbg2b06MIw1dqk2SOEMAMX3xlrreGjcui5OTxfBDtaKTmh0kioOVjT8gcfl58juawL/yF+S+gnq8aUYQx/Q==,
+      }
+    dev: false
+
+  /@floating-ui/dom/1.0.12:
+    resolution:
+      {
+        integrity: sha512-HeG/wHoa2laUHlDX3xkzqlUqliAfa+zqV04LaKIwNCmCNaW2p0fQi4/Kd0LB4GdFoJ2UllLFq5gWnXAd67lg7w==,
+      }
+    dependencies:
+      "@floating-ui/core": 1.0.4
+    dev: false
+
+  /@floating-ui/react-dom/1.0.1_biqbaboplfbrettd7655fr4n2y:
+    resolution:
+      {
+        integrity: sha512-UW0t1Gi8ikbDRr8cQPVcqIDMBwUEENe5V4wlHWdrJ5egFnRQFBV9JirauTBFI6S8sM1qFUC1i+qa3g87E6CLTw==,
+      }
+    peerDependencies:
+      react: ">=16.8.0"
+      react-dom: ">=16.8.0"
+    dependencies:
+      "@floating-ui/dom": 1.0.12
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@floating-ui/react/0.14.0_biqbaboplfbrettd7655fr4n2y:
+    resolution:
+      {
+        integrity: sha512-IGzsoBR6gVRSF+EWjkUNQr/wThi/ypSJN8y/QZCt2MzddYvvibH4Wcw2VMXcOgwCMmMqXZGk9sQSMSBoixzsPg==,
+      }
+    peerDependencies:
+      react: ">=16.8.0"
+      react-dom: ">=16.8.0"
+    dependencies:
+      "@floating-ui/react-dom": 1.0.1_biqbaboplfbrettd7655fr4n2y
+      aria-hidden: 1.2.2_react@18.2.0
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      tabbable: 6.0.1
+    transitivePeerDependencies:
+      - "@types/react"
     dev: false
 
   /@grpc/grpc-js/1.7.3:
@@ -3209,6 +3282,71 @@ packages:
       vfile: 5.3.6
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /@motionone/animation/10.15.1:
+    resolution:
+      {
+        integrity: sha512-mZcJxLjHor+bhcPuIFErMDNyrdb2vJur8lSfMCsuCB4UyV8ILZLvK+t+pg56erv8ud9xQGK/1OGPt10agPrCyQ==,
+      }
+    dependencies:
+      "@motionone/easing": 10.15.1
+      "@motionone/types": 10.15.1
+      "@motionone/utils": 10.15.1
+      tslib: 2.4.1
+    dev: false
+
+  /@motionone/dom/10.15.3:
+    resolution:
+      {
+        integrity: sha512-FQ7a2zMBXc1UeU8CG9G3yDpst55fbb0+C9A0VGfwOITitBCzigKZnXRgsRSWWR+FW57GSc13eGQxtYB0lKG0Ng==,
+      }
+    dependencies:
+      "@motionone/animation": 10.15.1
+      "@motionone/generators": 10.15.1
+      "@motionone/types": 10.15.1
+      "@motionone/utils": 10.15.1
+      hey-listen: 1.0.8
+      tslib: 2.4.1
+    dev: false
+
+  /@motionone/easing/10.15.1:
+    resolution:
+      {
+        integrity: sha512-6hIHBSV+ZVehf9dcKZLT7p5PEKHGhDwky2k8RKkmOvUoYP3S+dXsKupyZpqx5apjd9f+php4vXk4LuS+ADsrWw==,
+      }
+    dependencies:
+      "@motionone/utils": 10.15.1
+      tslib: 2.4.1
+    dev: false
+
+  /@motionone/generators/10.15.1:
+    resolution:
+      {
+        integrity: sha512-67HLsvHJbw6cIbLA/o+gsm7h+6D4Sn7AUrB/GPxvujse1cGZ38F5H7DzoH7PhX+sjvtDnt2IhFYF2Zp1QTMKWQ==,
+      }
+    dependencies:
+      "@motionone/types": 10.15.1
+      "@motionone/utils": 10.15.1
+      tslib: 2.4.1
+    dev: false
+
+  /@motionone/types/10.15.1:
+    resolution:
+      {
+        integrity: sha512-iIUd/EgUsRZGrvW0jqdst8st7zKTzS9EsKkP+6c6n4MPZoQHwiHuVtTQLD6Kp0bsBLhNzKIBlHXponn/SDT4hA==,
+      }
+    dev: false
+
+  /@motionone/utils/10.15.1:
+    resolution:
+      {
+        integrity: sha512-p0YncgU+iklvYr/Dq4NobTRdAPv9PveRDUXabPEeOjBLSO/1FNB2phNTZxOxpi1/GZwYpAoECEa0Wam+nsmhSw==,
+      }
+    dependencies:
+      "@motionone/types": 10.15.1
+      hey-listen: 1.0.8
+      tslib: 2.4.1
     dev: false
 
   /@next/env/13.0.4:
@@ -6226,6 +6364,23 @@ packages:
       {
         integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==,
       }
+
+  /aria-hidden/1.2.2_react@18.2.0:
+    resolution:
+      {
+        integrity: sha512-6y/ogyDTk/7YAe91T3E2PR1ALVKyM2QbTio5HwM+N1Q6CMlCKhvClyIjkckBswa0f2xJhjsfzIGa1yVSe1UMVA==,
+      }
+    engines: { node: ">=10" }
+    peerDependencies:
+      "@types/react": ^16.9.0 || ^17.0.0 || ^18.0.0
+      react: ^16.9.0 || ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      "@types/react":
+        optional: true
+    dependencies:
+      react: 18.2.0
+      tslib: 2.4.1
+    dev: false
 
   /aria-query/4.2.2:
     resolution:
@@ -10839,6 +10994,24 @@ packages:
       }
     dev: true
 
+  /framer-motion/7.10.2_biqbaboplfbrettd7655fr4n2y:
+    resolution:
+      {
+        integrity: sha512-2OAII9hjpMNz2Nbl2w09uKo7A0bD6xRtGnCZbPzuGGueucWgmSBLjAwzPhXwzCQWMpL3LU8jmXHjxAwIyjslxg==,
+      }
+    peerDependencies:
+      react: ^18.0.0
+      react-dom: ^18.0.0
+    dependencies:
+      "@motionone/dom": 10.15.3
+      hey-listen: 1.0.8
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      tslib: 2.4.0
+    optionalDependencies:
+      "@emotion/is-prop-valid": 0.8.8
+    dev: false
+
   /fresh/0.5.2:
     resolution:
       {
@@ -11463,6 +11636,13 @@ packages:
       }
     hasBin: true
     dev: true
+
+  /hey-listen/1.0.8:
+    resolution:
+      {
+        integrity: sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==,
+      }
+    dev: false
 
   /hosted-git-info/2.8.9:
     resolution:
@@ -13908,6 +14088,15 @@ packages:
       {
         integrity: sha512-y8j3a5/DkJCmS5x4dMCQL+OR0+2EAq3DOtio1COSHsmW2BGXnNCK3v12hJt1LrUz5iZH5g0LmuYOjDdI+czghA==,
       }
+    dev: false
+
+  /marked/4.2.4:
+    resolution:
+      {
+        integrity: sha512-Wcc9ikX7Q5E4BYDPvh1C6QNSxrjC9tBgz+A/vAhp59KXUgachw++uMvMKiSW8oA85nopmPZcEvBoex/YLMsiyA==,
+      }
+    engines: { node: ">= 12" }
+    hasBin: true
     dev: false
 
   /mathjax-full/3.2.2:
@@ -16988,6 +17177,7 @@ packages:
         integrity: sha512-7Au6iC98rS6WEAD110V4Bxd0iIbqoFtzz9XzkG1BSofidS1VAJ881E1+GFR7Xn2Yea0hbj8n0ErzRyseMp1Ctg==,
       }
     engines: { node: ">=14.1.0" }
+    deprecated: < 18.1.0 is no longer supported
     requiresBuild: true
     dependencies:
       cross-fetch: 3.1.5
@@ -19086,6 +19276,13 @@ packages:
         integrity: sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==,
       }
 
+  /tabbable/6.0.1:
+    resolution:
+      {
+        integrity: sha512-SYJSIgeyXW7EuX1ytdneO5e8jip42oHWg9xl/o3oTYhmXusZVgiA+VlPvjIN+kHii9v90AmzTZEBcsEvuAY+TA==,
+      }
+    dev: false
+
   /tailwindcss/3.2.2_postcss@8.4.18:
     resolution:
       {
@@ -19528,6 +19725,13 @@ packages:
         integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==,
       }
     dev: true
+
+  /tslib/2.4.0:
+    resolution:
+      {
+        integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==,
+      }
+    dev: false
 
   /tslib/2.4.1:
     resolution:
