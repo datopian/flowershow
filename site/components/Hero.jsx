@@ -8,7 +8,7 @@ export function Hero() {
             <p className="inline bg-gradient-to-r from-indigo-200 via-sky-400 to-indigo-200 bg-clip-text text-6xl tracking-tight text-transparent">
               Publish your Obsidian notes, beautifully.
             </p>
-            <p className="mt-4 text-3xl dark:text-white tracking-tight">
+            <p className="mt-4 text-3xl text-primary dark:text-primary-dark tracking-tight">
               For free, no coding.
             </p>
             <p className="mt-4 text-xl tracking-tight text-slate-400">
