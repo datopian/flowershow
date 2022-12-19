@@ -75,7 +75,7 @@ export function Layout({ children, tableOfContents }) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <div className="min-h-screen dark:bg-slate-900">
+      <div className="min-h-screen bg-background dark:bg-background-dark">
         <Nav />
         <div className="relative mx-auto">
           <main className="flex-auto">
@@ -110,7 +110,7 @@ export function Layout({ children, tableOfContents }) {
             )}
           </main>
         </div>
-        <footer className="dark:bg-slate-900 prose dark:prose-invert max-w-none flex flex-col items-center justify-center w-full h-auto pt-10 pb-20">
+        <footer className="bg-background dark:bg-background-dark prose dark:prose-invert max-w-none flex flex-col items-center justify-center w-full h-auto pt-10 pb-20">
           <div className="flex w-full flex-wrap justify-center">
             {siteConfig.navLinks.map(
               (item) =>
