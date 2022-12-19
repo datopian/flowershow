@@ -1,7 +1,8 @@
 /* eslint import/no-default-export: off */
-import { formatDate } from "@/lib/formatDate.js";
+import { formatDate } from "../../utils/formatDate";
 
-export default function DocsLayout({ children, frontMatter }) {
+// TODO types
+export const DocsLayout: React.FC<any> = ({ children, ...frontMatter }) => {
   const { title, created } = frontMatter;
   return (
     <article className="docs prose text-primary dark:text-primary-dark dark:prose-invert prose-headings:font-headings prose-a:break-words mx-auto p-6">
@@ -18,4 +19,4 @@ export default function DocsLayout({ children, frontMatter }) {
       <section>{children}</section>
     </article>
   );
-}
+};

@@ -1,8 +1,12 @@
-import { Mermaid } from "mdx-mermaid/Mermaid";
 import { useRef, useState } from "react";
+import { Mermaid } from "mdx-mermaid/lib/Mermaid";
 
-export function Pre({ children, ...props }) {
-  const textInput = useRef(null);
+interface Props extends React.PropsWithChildren {
+  className?: string;
+}
+
+export const Pre: React.FC<Props> = ({ children, ...props }) => {
+  const ref = useRef<any>(); // TODO type
   const [hovered, setHovered] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -15,7 +19,7 @@ export function Pre({ children, ...props }) {
   };
   const onCopy = () => {
     setCopied(true);
-    navigator.clipboard.writeText(textInput.current.textContent);
+    navigator.clipboard.writeText(ref.current.textContent);
     setTimeout(() => {
       setCopied(false);
     }, 2000);
@@ -24,14 +28,15 @@ export function Pre({ children, ...props }) {
   if (props.className && props.className === "code-mermaid") {
     return (
       <div className="my-10">
-        <Mermaid chart={children} />
+        {/* TODO types */}
+        <Mermaid chart={children as any} />
       </div>
     );
   }
 
   return (
     <div
-      ref={textInput}
+      ref={ref}
       onMouseEnter={onEnter}
       onMouseLeave={onExit}
       className="relative"
@@ -76,4 +81,4 @@ export function Pre({ children, ...props }) {
       <pre>{children}</pre>
     </div>
   );
-}
+};

@@ -3,14 +3,7 @@ import Link from "next/link";
 
 import { useTableOfContents } from "./useTableOfContents";
 import { Nav } from "../Nav";
-import {
-  NavConfig,
-  AuthorConfig,
-  ThemeConfig,
-  SearchProviderConfig,
-  SocialLink,
-  isNavDropdown,
-} from "../types";
+import { NavConfig, AuthorConfig, ThemeConfig, isNavDropdown } from "../types";
 
 interface Props extends React.PropsWithChildren {
   nav: NavConfig;

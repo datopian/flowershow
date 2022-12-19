@@ -6,11 +6,14 @@ import Script from "next/script";
 import { useEffect, useState } from "react";
 import "tailwindcss/tailwind.css";
 
-import { Layout, SearchProvider } from "@flowershow/core";
+import {
+  Layout,
+  SearchProvider,
+  collectHeadings,
+  pageview,
+} from "@flowershow/core";
 
 import { siteConfig } from "../config/siteConfig";
-import { collectHeadings } from "../lib/collectHeadings";
-import { pageview } from "../lib/gtag";
 import "../styles/docsearch.css";
 import "../styles/global.css";
 import "../styles/prism.css";
@@ -71,17 +74,16 @@ function MyApp({ Component, pageProps }) {
       <DefaultSeo defaultTitle={siteConfig.title} {...siteConfig.nextSeo} />
       {/* Global Site Tag (gtag.js) - Google Analytics */}
       {siteConfig.analytics && (
-        <Script
-          strategy="afterInteractive"
-          src={`https://www.googletagmanager.com/gtag/js?id=${siteConfig.analytics}`}
-        />
-      )}
-      {siteConfig.analytics && (
-        <Script
-          id="gtag-init"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
+        <>
+          <Script
+            strategy="afterInteractive"
+            src={`https://www.googletagmanager.com/gtag/js?id=${siteConfig.analytics}`}
+          />
+          <Script
+            id="gtag-init"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
@@ -89,8 +91,9 @@ function MyApp({ Component, pageProps }) {
                 page_path: window.location.pathname,
               });
             `,
-          }}
-        />
+            }}
+          />
+        </>
       )}
       <SearchProvider searchConfig={siteConfig.search}>
         <Layout {...layoutProps}>

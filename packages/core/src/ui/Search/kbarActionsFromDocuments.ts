@@ -1,7 +1,9 @@
-import { Action } from "kbar";
-import { formatDate, nameFromUrl } from "../../lib";
 // TODO don't import router here?
 import router from "next/router";
+import { Action } from "kbar";
+
+import { formatDate } from "../../utils/formatDate";
+import { nameFromUrl } from "../../utils/nameFromUrl";
 
 // TODO temp type
 type Document = any;

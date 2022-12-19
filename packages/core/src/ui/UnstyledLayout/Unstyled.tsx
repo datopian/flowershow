@@ -1,4 +1,6 @@
 /* eslint import/no-default-export: off */
-export default function UnstyledLayout({ children }) {
+export const UnstyledLayout: React.FC<React.PropsWithChildren> = ({
+  children,
+}) => {
   return <div className="unstyled dark:text-white">{children}</div>;
-}
+};

@@ -1,7 +1,8 @@
 /* eslint import/no-default-export: off */
-import { Container } from "@/components/Container.jsx";
+import { Container } from "./Container";
 
-export default function SimpleLayout({ children, frontMatter }) {
+// TODO types
+export const SimpleLayout: React.FC<any> = ({ children, ...frontMatter }) => {
   const { title, description } = frontMatter;
   return (
     <Container className="my-16 sm:mt-32">
@@ -16,4 +17,4 @@ export default function SimpleLayout({ children, frontMatter }) {
       <div className="mt-16 sm:mt-20">{children}</div>
     </Container>
   );
-}
+};

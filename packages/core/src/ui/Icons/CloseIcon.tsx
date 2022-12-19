@@ -1,4 +1,4 @@
-export function CloseIcon(props) {
+export const CloseIcon: React.FC<{ [x: string]: unknown }> = (props) => {
   return (
     <svg
       aria-hidden="true"
@@ -11,4 +11,4 @@ export function CloseIcon(props) {
       <path d="M5 5l14 14M19 5l-14 14" />
     </svg>
   );
-}
+};

@@ -1,4 +1,4 @@
-export function MenuIcon(props) {
+export const MenuIcon: React.FC<{ [x: string]: unknown }> = (props) => {
   return (
     <svg
       aria-hidden="true"
@@ -11,4 +11,4 @@ export function MenuIcon(props) {
       <path d="M4 7h16M4 12h16M4 17h16" />
     </svg>
   );
-}
+};

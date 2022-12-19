@@ -1,7 +1,12 @@
-import { Card } from "@/components/Card";
-import { formatDate } from "@/lib/formatDate";
+import { Card } from "../Card";
+import { formatDate } from "../../utils/formatDate";
+import { Blog } from "../types";
 
-export function BlogItem({ blog }) {
+interface Props {
+  blog: Blog;
+}
+
+export const BlogItem: React.FC<Props> = ({ blog }) => {
   return (
     <article className="md:grid md:grid-cols-4 md:items-baseline">
       <Card className="md:col-span-3">
@@ -28,4 +33,4 @@ export function BlogItem({ blog }) {
       </Card.Eyebrow>
     </article>
   );
-}
+};

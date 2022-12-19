@@ -5,6 +5,6 @@ data:
   - blogs
 ---
 
-import { BlogsList } from "components/BlogsList.jsx"
+import { BlogsList } from "@flowershow/core"
 
 <BlogsList blogs={blogs}/>

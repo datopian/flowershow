@@ -1,4 +1,4 @@
-export function ChevronRightIcon(props) {
+export const ChevronRightIcon: React.FC<{ [x: string]: unknown }> = (props) => {
   return (
     <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" {...props}>
       <path
@@ -9,4 +9,4 @@ export function ChevronRightIcon(props) {
       />
     </svg>
   );
-}
+};

@@ -55,7 +55,7 @@ export interface SearchProviderConfig {
 }
 
 // TEMP contentlayer
-export interface Page {
+interface SharedFields {
   title?: string;
   description?: string;
   image?: string;
@@ -64,12 +64,17 @@ export interface Page {
   showToc?: boolean;
   isDraft?: boolean;
   data: Array<string>;
-  url_path: string;
-  edit_url: string | null;
 }
 
-export interface Blog extends Page {
-  created?: string;
+interface ComputedFields {
+  url_path: string;
+  edit_url?: string;
+}
+
+export interface Page extends SharedFields, ComputedFields {}
+
+export interface Blog extends SharedFields, ComputedFields {
+  created: string; // TODO type?
   authors?: Array<string>;
   tags?: Array<string>;
 }
