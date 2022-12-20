@@ -71,7 +71,7 @@ Once these are available, you can then setup the algolia search provider and fil
 const config = {
   search: {
     provider: "algolia",
-    algoliaConfig: {
+    config: {
       appId: "",
       apiKey: "",
       indexName: "",

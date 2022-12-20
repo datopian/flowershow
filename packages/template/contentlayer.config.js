@@ -5,14 +5,14 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeMathjax from "rehype-mathjax";
 import rehypePrismPlus from "rehype-prism-plus";
 import rehypeSlug from "rehype-slug";
-import callouts from "remark-callouts";
 import codeExtra from "remark-code-extra";
-import remarkEmbed from "remark-embed-plus";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import smartypants from "remark-smartypants";
 import remarkToc from "remark-toc";
-import wikiLinkPlugin from "remark-wiki-link-plus";
+import callouts from "@flowershow/remark-callouts";
+import remarkEmbed from "@flowershow/remark-embed";
+import wikiLinkPlugin from "@flowershow/remark-wiki-link";
 
 import { siteConfig } from "./config/siteConfig";
 
@@ -21,8 +21,8 @@ const sharedFields = {
   description: { type: "string" },
   image: { type: "string" },
   layout: { type: "string", default: "docs" },
-  editLink: { type: "boolean" },
-  toc: { type: "boolean" },
+  showEditLink: { type: "boolean" },
+  showToc: { type: "boolean" },
   isDraft: { type: "boolean" },
   data: { type: "list", of: { type: "string" }, default: [] },
 };
@@ -37,6 +37,14 @@ const computedFields = {
     type: "string",
     /* eslint no-underscore-dangle: off */
     resolve: (doc) => doc._raw.flattenedPath.replace(/^(.+?\/)*/, ""),
+  },
+  edit_url: {
+    type: "string",
+    resolve: (post) =>
+      siteConfig.editLinkRoot
+        ? /* eslint no-underscore-dangle: off */
+          `${siteConfig.editLinkRoot}${post._raw.sourceFilePath}/`
+        : undefined,
   },
 };
 
@@ -57,9 +65,7 @@ const Blog = defineDocumentType(() => ({
   fields: {
     ...sharedFields,
     layout: { type: "string", default: "blog" },
-    created: {
-      type: "date",
-    },
+    created: { type: "date", required: true },
     authors: {
       type: "list",
       of: { type: "string" },

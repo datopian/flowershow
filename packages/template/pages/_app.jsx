@@ -6,43 +6,50 @@ import Script from "next/script";
 import { useEffect, useState } from "react";
 import "tailwindcss/tailwind.css";
 
-import { Layout } from "../components/Layout";
-import { SearchProvider } from "../components/search";
+import {
+  Layout,
+  SearchProvider,
+  collectHeadings,
+  pageview,
+} from "@flowershow/core";
+
 import { siteConfig } from "../config/siteConfig";
-import * as gtag from "../lib/gtag";
 import "../styles/docsearch.css";
 import "../styles/global.css";
 import "../styles/prism.css";
 
-// ToC: get the html nodelist for headings
-function collectHeadings(nodes) {
-  const sections = [];
-
-  Array.from(nodes).forEach((node) => {
-    const { id, innerText: title, tagName: level } = node;
-    if (!(id && title)) {
-      return;
-    }
-    if (level === "H3") {
-      const parentSection = sections[sections.length - 1];
-      if (parentSection) parentSection.children.push({ id, title });
-    } else if (level === "H2") {
-      sections.push({ id, title, children: [] });
-    }
-
-    sections.push(...collectHeadings(node.children ?? []));
-  });
-
-  return sections;
-}
-
 function MyApp({ Component, pageProps }) {
+  const [tableOfContents, setTableOfContents] = useState([]);
   const router = useRouter();
+
+  // TODO maybe use computed fields for showEditLink and showToc to make this even cleaner?
+  const layoutProps = {
+    showToc: pageProps.showToc ?? siteConfig.tableOfContents,
+    showEditLink: pageProps.showEditLink ?? siteConfig.editLinkShow,
+    edit_url: pageProps.edit_url,
+    tableOfContents,
+    nav: {
+      title: siteConfig.navbarTitle?.text || siteConfig.title,
+      logo: siteConfig.navbarTitle?.logo,
+      links: siteConfig.navLinks,
+      search: siteConfig.search,
+      social: siteConfig.social,
+    },
+    author: {
+      name: siteConfig.author,
+      url: siteConfig.authorUrl,
+      logo: siteConfig.authorLogo,
+    },
+    theme: {
+      defaultTheme: siteConfig.theme.default,
+      themeToggleIcon: siteConfig.theme.toggleIcon,
+    },
+  };
 
   useEffect(() => {
     if (siteConfig.analytics) {
       const handleRouteChange = (url) => {
-        gtag.pageview(url);
+        pageview(url);
       };
       router.events.on("routeChangeComplete", handleRouteChange);
       return () => {
@@ -50,8 +57,6 @@ function MyApp({ Component, pageProps }) {
       };
     }
   }, [router.events]);
-
-  const [tableOfContents, setTableOfContents] = useState([]);
 
   useEffect(() => {
     const headingNodes = document.querySelectorAll("h2,h3");
@@ -69,17 +74,16 @@ function MyApp({ Component, pageProps }) {
       <DefaultSeo defaultTitle={siteConfig.title} {...siteConfig.nextSeo} />
       {/* Global Site Tag (gtag.js) - Google Analytics */}
       {siteConfig.analytics && (
-        <Script
-          strategy="afterInteractive"
-          src={`https://www.googletagmanager.com/gtag/js?id=${siteConfig.analytics}`}
-        />
-      )}
-      {siteConfig.analytics && (
-        <Script
-          id="gtag-init"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
+        <>
+          <Script
+            strategy="afterInteractive"
+            src={`https://www.googletagmanager.com/gtag/js?id=${siteConfig.analytics}`}
+          />
+          <Script
+            id="gtag-init"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
@@ -87,11 +91,12 @@ function MyApp({ Component, pageProps }) {
                 page_path: window.location.pathname,
               });
             `,
-          }}
-        />
+            }}
+          />
+        </>
       )}
       <SearchProvider searchConfig={siteConfig.search}>
-        <Layout title={pageProps.title} tableOfContents={tableOfContents}>
+        <Layout {...layoutProps}>
           <Component {...pageProps} />
         </Layout>
       </SearchProvider>

@@ -3,9 +3,8 @@ import config from "../content/config";
 const defaultConfig = {
   title: "Flowershow",
   description: "",
-  repoRoot: "",
-  repoEditPath: "",
-  editLinkShow: false,
+  showEditLink: false,
+  showToc: true,
   author: "",
   authorLogo: "",
   authorUrl: "",
