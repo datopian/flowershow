@@ -1,5 +1,5 @@
 {
-  "name": "remark-callouts",
+  "name": "@flowershow/remark-callouts",
   "version": "2.0.0",
   "description": "remark plugin to add support for blockquote-based admonitions/callouts",
   "repository": {

@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: "remark-embed-plus",
+  displayName: "remark-embed",
   preset: "../../jest.preset.js",
   globals: {
     "ts-jest": {
@@ -12,5 +12,5 @@ export default {
     "^.+\\.[tj]sx?$": "ts-jest",
   },
   moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
-  coverageDirectory: "../../coverage/packages/remark-embed-plus",
+  coverageDirectory: "../../coverage/packages/remark-embed",
 };

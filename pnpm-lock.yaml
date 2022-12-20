@@ -192,13 +192,13 @@ importers:
       svg-parser: 2.0.4
       unist-util-visit: 4.1.1
 
-  packages/remark-embed-plus:
+  packages/remark-embed:
     specifiers:
       unist-util-visit: ^4.1.1
     dependencies:
       unist-util-visit: 4.1.1
 
-  packages/remark-wiki-link-plus:
+  packages/remark-wiki-link:
     specifiers:
       mdast-util-wiki-link: ^0.0.2
     dependencies:
@@ -206,7 +206,10 @@ importers:
 
   packages/template:
     specifiers:
-      "@flowershow/core": workspace:*
+      "@flowershow/core": ^0.0.1
+      "@flowershow/remark-callouts": ^2.0.0
+      "@flowershow/remark-embed": ^1.0.2
+      "@flowershow/remark-wiki-link": ^1.1.0
       "@heroicons/react": ^1.0.4
       "@silvenon/remark-smartypants": ^1.0.0
       "@tailwindcss/typography": ^0.5.2
@@ -226,17 +229,17 @@ importers:
       rehype-mathjax: ^4.0.2
       rehype-prism-plus: ^1.4.2
       rehype-slug: ^5.0.1
-      remark-callouts: workspace:*
       remark-code-extra: ^1.0.1
-      remark-embed-plus: workspace:*
       remark-gfm: ^3.0.0
       remark-math: ^5.1.1
       remark-smartypants: ^2.0.0
       remark-toc: ^8.0.1
-      remark-wiki-link-plus: workspace:*
       tailwindcss: ^3.1.8
     dependencies:
       "@flowershow/core": link:../core
+      "@flowershow/remark-callouts": link:../remark-callouts
+      "@flowershow/remark-embed": link:../remark-embed
+      "@flowershow/remark-wiki-link": link:../remark-wiki-link
       "@heroicons/react": 1.0.6_react@18.2.0
       "@silvenon/remark-smartypants": 1.0.0
       "@tailwindcss/typography": 0.5.8_tailwindcss@3.2.4
@@ -253,14 +256,11 @@ importers:
       rehype-mathjax: 4.0.2
       rehype-prism-plus: 1.5.0
       rehype-slug: 5.1.0
-      remark-callouts: link:../remark-callouts
       remark-code-extra: 1.0.1
-      remark-embed-plus: link:../remark-embed-plus
       remark-gfm: 3.0.1
       remark-math: 5.1.1
       remark-smartypants: 2.0.0
       remark-toc: 8.0.1
-      remark-wiki-link-plus: link:../remark-wiki-link-plus
     devDependencies:
       autoprefixer: 10.4.13_postcss@8.4.20
       cross-env: 7.0.3

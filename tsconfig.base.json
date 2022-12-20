@@ -3,9 +3,9 @@
     "baseUrl": ".",
     "paths": {
       "@flowershow/core": ["packages/core/src/index.ts"],
-      "remark-callouts": ["packages/remark-callouts/src/index.ts"],
-      "remark-embed-plus": ["packages/remark-embed-plus/src/index.ts"],
-      "remark-wiki-link-plus": ["packages/remark-wiki-link-plus/src/index.ts"]
+      "@flowershow/remark-callouts": ["packages/remark-callouts/src/index.ts"],
+      "@flowershow/remark-embed": ["packages/remark-embed/src/index.ts"],
+      "@flowershow/remark-wiki-link": ["packages/remark-wiki-link/src/index.ts"]
     }
   }
 }

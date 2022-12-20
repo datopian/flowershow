@@ -5,14 +5,14 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeMathjax from "rehype-mathjax";
 import rehypePrismPlus from "rehype-prism-plus";
 import rehypeSlug from "rehype-slug";
-import callouts from "remark-callouts";
 import codeExtra from "remark-code-extra";
-import remarkEmbed from "remark-embed-plus";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import smartypants from "remark-smartypants";
 import remarkToc from "remark-toc";
-import wikiLinkPlugin from "remark-wiki-link-plus";
+import callouts from "@flowershow/remark-callouts";
+import remarkEmbed from "@flowershow/remark-embed";
+import wikiLinkPlugin from "@flowershow/remark-wiki-link";
 
 import { siteConfig } from "./config/siteConfig";
 

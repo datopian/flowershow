@@ -10,7 +10,10 @@
     "export": "npm run build && next export"
   },
   "dependencies": {
-    "@flowershow/core": "workspace:*",
+    "@flowershow/core": "^0.0.1",
+    "@flowershow/remark-callouts": "^2.0.0",
+    "@flowershow/remark-embed": "^1.0.2",
+    "@flowershow/remark-wiki-link": "^1.1.0",
     "@heroicons/react": "^1.0.4",
     "@silvenon/remark-smartypants": "^1.0.0",
     "@tailwindcss/typography": "^0.5.2",
@@ -27,14 +30,11 @@
     "rehype-mathjax": "^4.0.2",
     "rehype-prism-plus": "^1.4.2",
     "rehype-slug": "^5.0.1",
-    "remark-callouts": "workspace:*",
     "remark-code-extra": "^1.0.1",
-    "remark-embed-plus": "workspace:*",
     "remark-gfm": "^3.0.0",
     "remark-math": "^5.1.1",
     "remark-smartypants": "^2.0.0",
-    "remark-toc": "^8.0.1",
-    "remark-wiki-link-plus": "workspace:*"
+    "remark-toc": "^8.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.4",

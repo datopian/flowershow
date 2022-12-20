@@ -1,4 +1,4 @@
-# remark-wiki-link-plus
+# remark-wiki-link
 
 Parse and render wiki-style links in markdown especially Obsidian style links.
 
@@ -29,7 +29,7 @@ Future support:
 ## Installation
 
 ```bash
-npm install remark-wiki-link-plus
+npm install @flowershow/remark-wiki-link
 ```
 
 ## Usage
@@ -37,7 +37,7 @@ npm install remark-wiki-link-plus
 ```javascript
 const unified = require("unified");
 const markdown = require("remark-parse");
-const wikiLinkPlugin = require("remark-wiki-link-plus");
+const wikiLinkPlugin = require("@flowershow/remark-wiki-link");
 
 let processor = unified().use(markdown, { gfm: true }).use(wikiLinkPlugin);
 ```

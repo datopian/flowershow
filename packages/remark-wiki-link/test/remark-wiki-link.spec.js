@@ -8,7 +8,7 @@ import { visit } from "unist-util-visit";
 import { wikiLinkPlugin } from "../src/index.js";
 import defaultWikiLinkPlugin from "../src/index.js";
 
-describe("remark-wiki-link-plus", () => {
+describe("remark-wiki-link", () => {
   it("parses a wiki link that has a matching permalink", () => {
     const processor = unified()
       .use(markdown)
