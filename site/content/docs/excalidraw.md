@@ -47,7 +47,9 @@ Then, symlink this directory into the public folder in flowershow.
 
 For example, assuming your Obsidian vault is your Flowershow content folder you'd do the following:
 
-```bash=
-$ cd <your-flowershow-directory>
-$ ln -s content/excalidraw/ site/public/
+```bash
+$ cd <flowershow-template-directory>
+# .flowershow folder created by `npx flowershow@latest install`, e.g. ~/.flowershow
+$ ln -s <relative-path-to-excalidraw-folder> ./public/excalidraw
+# e.g. ln -s ../my-digital-garden/excalidraw ./public/excalidraw
 ```
