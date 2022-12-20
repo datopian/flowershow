@@ -1,6 +1,6 @@
 {
   "name": "@flowershow/remark-embed",
-  "version": "1.0.2",
+  "version": "1.0.0",
   "description": "Converts youtube link in mdx to an iframe embed",
   "repository": {
     "type": "git",
