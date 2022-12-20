@@ -5,7 +5,7 @@ import { Avatar } from "../Avatar";
 // TODO
 type Props = any;
 
-export const BlogLayout: React.FC<Props> = ({ children, frontMatter }) => {
+export const BlogLayout: React.FC<Props> = ({ children, ...frontMatter }) => {
   const { title, created, authorsDetails } = frontMatter;
 
   return (
