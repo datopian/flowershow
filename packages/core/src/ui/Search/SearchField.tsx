@@ -1,6 +1,7 @@
 import { SearchIcon } from "../Icons";
 
-export function SearchField(props) {
+// TODO types
+export const SearchField: React.FC<any> = (props) => {
   const { modifierKey, onOpen, mobile } = props;
   return (
     <button
@@ -44,4 +45,4 @@ export function SearchField(props) {
       )}
     </button>
   );
-}
+};
