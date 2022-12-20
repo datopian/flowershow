@@ -5,6 +5,4 @@ data:
   - blogs
 ---
 
-import { BlogsList } from "@flowershow/core"
-
 <BlogsList blogs={blogs}/>
