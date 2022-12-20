@@ -2,7 +2,10 @@
 import { formatDate } from "../../utils/formatDate";
 import { Avatar } from "../Avatar";
 
-export default function BlogLayout({ children, frontMatter }) {
+// TODO
+type Props = any;
+
+export const BlogLayout: React.FC<Props> = ({ children, frontMatter }) => {
   const { title, created, authorsDetails } = frontMatter;
 
   return (
@@ -32,4 +35,4 @@ export default function BlogLayout({ children, frontMatter }) {
       <section>{children}</section>
     </article>
   );
-}
+};
