@@ -1,8 +1,5 @@
 #!/usr/bin/node
 
-// This is a temporary script that creates symlinks in the template package that point to some of the /site subfolders.
-// It probably won't be needed after we create a separate project for our website (e.g. /apps/flowershow)
-
 const fs = require("fs");
 const process = require("process");
 
