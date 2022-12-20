@@ -9,9 +9,7 @@
 out
 search.json
 
-# TEMPORARY 
-# this won't be needed when we create a separate project for our website
-# and the template itself will be "clean", i.e. it won't have any symlinks pointing to /site
+# symlinks
 packages/template/content
 packages/template/public/assets
 packages/template/public/excalidraw
