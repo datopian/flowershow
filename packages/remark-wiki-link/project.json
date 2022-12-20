@@ -1,0 +1,43 @@
+{
+  "name": "remark-wiki-link",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/remark-wiki-link/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/remark-wiki-link/**/*.js"]
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "mocha --require @babel/register packages/remark-wiki-link/test/remark-wiki-link.spec.js"
+      }
+    },
+    "build": {
+      "executor": "@nrwl/web:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "entryFile": "packages/remark-wiki-link/src/index.js",
+        "outputPath": "packages/remark-wiki-link/dist",
+        "compiler": "babel",
+        "tsConfig": "packages/remark-wiki-link/tsconfig.lib.json",
+        "project": "packages/remark-wiki-link/package.json",
+        "format": ["esm", "cjs"],
+        "external": ["mdast-util-wiki-link"],
+        "generateExportsField": true,
+        "assets": [
+          {
+            "glob": "packages/remark-wiki-link/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    }
+  },
+  "tags": []
+}

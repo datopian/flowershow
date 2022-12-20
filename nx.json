@@ -43,5 +43,14 @@
       }
     }
   },
+  "generators": {
+    "@nrwl/react": {
+      "component": {
+        "pascalCaseFiles": true,
+        "pascalCaseDirectory": true,
+        "style": "scss"
+      }
+    }
+  },
   "defaultProject": "template"
 }
