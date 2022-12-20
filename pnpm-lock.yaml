@@ -207,9 +207,9 @@ importers:
   packages/template:
     specifiers:
       "@flowershow/core": ^0.0.1
-      "@flowershow/remark-callouts": ^2.0.0
-      "@flowershow/remark-embed": ^1.0.2
-      "@flowershow/remark-wiki-link": ^1.1.0
+      "@flowershow/remark-callouts": ^1.0.0
+      "@flowershow/remark-embed": ^1.0.0
+      "@flowershow/remark-wiki-link": ^1.0.0
       "@heroicons/react": ^1.0.4
       "@silvenon/remark-smartypants": ^1.0.0
       "@tailwindcss/typography": ^0.5.2
