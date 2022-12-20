@@ -255,3 +255,51 @@ npx changeset publish
 ```
 
 This command will run npm publish in each package which version is different from the currently published one.
+
+## Styling and Tailwind
+
+When styling components using tailwind use named semantic colors and fonts which are defined in `tailwind.config.js`. This makes it easy to change colors and fonts across the whole site in one place. For example, use `text-primary` rather than a named color from tailwind palette.
+
+We currently have definitions for fonts (sans, serif, mono, headings) and for colors (`background`, `primary`, `secondary`).
+
+```js
+  theme: {
+    fontFamily: {
+      'sans': ['ui-sans-serif', 'system-ui', ...], # changes default and body font
+      'serif': ['ui-serif', 'Georgia', ...],
+      'mono': ['ui-monospace', 'SFMono-Regular', ...],
+      'headings': ['Oswald', ...],
+    }
+  },
+  colors: {
+    background: {
+      DEFAULT: colors.black,
+      dark
+   },
+   primary: {
+     DEFAULT: ...
+     dark:
+   },
+   secondary: {
+     DEFAULT: ...
+     dark:
+   }
+```
+
+### Example
+
+For example, rather than doing this (uses `text-black`):
+
+```jsx
+<div className="ml-3">
+  <p className="text-sm font-medium text-black dark:text-white">...</p>
+</div>
+```
+
+Do this:
+
+```jsx
+<div className="ml-3">
+  <p className="text-sm font-medium text-primary dark:text-primary-dark">...</p>
+</div>
+```
