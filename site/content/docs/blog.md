@@ -42,7 +42,7 @@ authors: [John Doe, Jan Kowalski]
 
 ## `BlogsList` component
 
-In order to list all your blog posts on a given page, you can use our `BlogsList` component and pass it a list of your blog posts.
+In order to list all your blog posts on a given page, you can use our `BlogsList` component and pass it a list of your blog posts. It's globally available, so you don't need to import it in your mdx file.
 
 The `BlogsList` component requires a `simple` page layout, which you need to specify in the frontmatter of your blogs index page.
 
@@ -50,8 +50,6 @@ The `BlogsList` component requires a `simple` page layout, which you need to spe
 ---
 layout: simple
 ---
-
-import { BlogsList } from "components/BlogsList.jsx"
 
 <BlogsList blogs={[]}/>
 ```
@@ -75,8 +73,6 @@ layout: simple
 data:
   - blogs
 ---
-
-import { BlogsList } from "components/BlogsList.jsx"
 
 <BlogsList blogs={blogs}/>
 ```
