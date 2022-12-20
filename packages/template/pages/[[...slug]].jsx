@@ -3,7 +3,7 @@ import { NextSeo } from "next-seo";
 import { allDocuments } from "contentlayer/generated";
 import { useMDXComponent } from "next-contentlayer/hooks";
 
-import { CustomLink, Pre } from "@flowershow/core";
+import { CustomLink, Pre, BlogsList } from "@flowershow/core";
 
 import { getPageData } from "../lib/getPageData";
 import { getAuthorsDetails } from "../lib/getAuthorsDetails";
@@ -18,6 +18,9 @@ export default function Page({ globals, body, ...meta }) {
     a: CustomLink,
     pre: Pre,
     /* eslint no-unused-vars: off */
+    // TODO this is a temporary workaround for errors resulting from importing this component directly in mdx file
+    // see this issue for ref: https://github.com/kentcdodds/mdx-bundler/issues/156
+    BlogsList,
     wrapper: ({ components, layout, ...props }) => {
       const Layout = require("../layouts/index.js")[layout];
       return <Layout {...props} />;
