@@ -29,7 +29,8 @@
       "options": {
         "command": "npm run dev",
         "cwd": "packages/template"
-      }
+      },
+      "dependsOn": ["^build"]
     },
     "test": {
       "executor": "@nrwl/jest:jest",
