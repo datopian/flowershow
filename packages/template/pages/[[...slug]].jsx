@@ -41,13 +41,13 @@ export default function Page({ globals, body, ...meta }) {
           description: description,
           images: image
             ? [
-              {
-                url: seoImageUrl,
-                width: 1200,
-                height: 627,
-                alt: title,
-              },
-            ]
+                {
+                  url: seoImageUrl,
+                  width: 1200,
+                  height: 627,
+                  alt: title,
+                },
+              ]
             : siteConfig?.nextSeo?.openGraph?.images || [],
         }}
       />
@@ -60,15 +60,10 @@ export async function getStaticProps({ params }) {
   // params.slug is undefined for root index page
   const urlPath = params.slug ? params.slug.join("/") : "";
   const page = allDocuments.find((p) => p.url_path === urlPath);
-<<<<<<< HEAD
-  const data = await getPageData(page.data);
-  // temporary workaround for passing authors to blog layout
-  const authorsDetails = getAuthorsDetails(page.authors);
-  return { props: { ...page, data, authorsDetails } };
-=======
   const globals = await getPageData(page.data);
-  return { props: { ...page, globals } };
->>>>>>> 21fc4c9 (all components moved to core, works)
+  // TODO this is a temporary solution used to pass authors to blog layout
+  const authorsDetails = getAuthorsDetails(page.authors);
+  return { props: { ...page, authorsDetails, globals } };
 }
 
 export async function getStaticPaths() {

@@ -1,6 +1,6 @@
 /* eslint import/no-default-export: off */
-import { formatDate } from "@/lib/formatDate.js";
-import { Avatar } from "@/components/Avatar.jsx";
+import { formatDate } from "../../utils/formatDate";
+import { Avatar } from "../Avatar";
 
 export default function BlogLayout({ children, frontMatter }) {
   const { title, created, authorsDetails } = frontMatter;
