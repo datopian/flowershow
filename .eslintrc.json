@@ -1,6 +1,6 @@
 {
   "root": true,
-  "ignorePatterns": ["node_modules"],
+  "ignorePatterns": ["node_modules", "dist"],
   "plugins": ["@nrwl/nx"],
   "overrides": [
     {
