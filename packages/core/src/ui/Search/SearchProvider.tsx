@@ -51,9 +51,7 @@ export const SearchProvider = ({
         <KBarProvider config={searchConfig.config}>{children}</KBarProvider>
       );
     default:
-      return (
-        <KBarProvider config={searchConfig.config}>{children}</KBarProvider>
-      );
+      return children;
   }
 };
 
@@ -64,6 +62,6 @@ export const SearchContext = (provider: SearchProviderType) => {
     case "kbar":
       return KBarSearchContext;
     default:
-      return KBarSearchContext;
+      return undefined;
   }
 };
