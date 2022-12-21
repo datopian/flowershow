@@ -8,6 +8,7 @@ module.exports = {
     "./layouts/**/*.{js,ts,jsx,tsx}",
     "./content/**/*.{md,mdx}",
     "./node_modules/@flowershow/core/dist/*.js",
+    "./node_modules/@flowershow/core/*.js",
   ],
   darkMode: "class",
   theme: {
