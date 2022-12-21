@@ -1,6 +1,6 @@
 {
   "name": "@flowershow/core",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Core Flowershow components, configs and utils.",
   "repository": {
     "type": "git",
@@ -27,10 +27,10 @@
     "mermaid": "^9.3.0"
   },
   "peerDependencies": {
-    "next": ">=12.0.0",
+    "next": "^13.0.0",
     "next-contentlayer": "^0.2.9",
     "next-themes": "^0.2.1",
-    "react": "^17.0.2 || ^18.0.0",
-    "react-dom": "^17.0.2 || ^18.0.0"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   }
 }
