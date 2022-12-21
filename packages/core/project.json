@@ -13,7 +13,13 @@
         "tsConfig": "packages/core/tsconfig.lib.json",
         "project": "packages/core/package.json",
         "entryFile": "packages/core/src/index.ts",
-        "external": ["react/jsx-runtime", "react", "next", "next-contentlayer"],
+        "external": [
+          "react/jsx-runtime",
+          "react",
+          "next",
+          "next-contentlayer",
+          "next-themes"
+        ],
         "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
         "compiler": "babel",
         "assets": [
