@@ -1,6 +1,6 @@
 {
   "name": "@flowershow/core",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Core Flowershow components, configs and utils.",
   "repository": {
     "type": "git",
