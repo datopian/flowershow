@@ -178,9 +178,10 @@ importers:
       mermaid: 9.3.0
       next: 13.0.6_6l5554ty5ajsajah6yazvrjhoe
       next-contentlayer: 0.2.9_6dg5dh33rpjekwisbapfjqnvq4
-      next-themes: 0.2.1_wrk65vydtghkjwj2yfejc5ocja
       react: 17.0.2
       react-dom: 18.2.0_react@17.0.2
+    devDependencies:
+      next-themes: 0.2.1_wrk65vydtghkjwj2yfejc5ocja
 
   packages/remark-callouts:
     specifiers:
@@ -222,6 +223,7 @@ importers:
       next: ^13.0.4
       next-contentlayer: ^0.2.9
       next-seo: ^5.14.1
+      next-themes: ^0.2.1
       postcss: ^8.4.12
       react: ^18.2.0
       react-dom: ^18.2.0
@@ -250,6 +252,7 @@ importers:
       next: 13.0.6_biqbaboplfbrettd7655fr4n2y
       next-contentlayer: 0.2.9_iyzttdtebgzmw3dlqai4xlsdte
       next-seo: 5.15.0_6jx7hpii6hgsrmhxgqrmo3277u
+      next-themes: 0.2.1_6jx7hpii6hgsrmhxgqrmo3277u
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       rehype-autolink-headings: 6.1.1
@@ -3491,7 +3494,6 @@ packages:
       {
         integrity: sha512-yceT6DCHKqPRS1cAm8DHvDvK74DLIkDQdm5iV+GnIts8h0QbdHvkUIkdOvQoOODgpr6018skbmSQp12z5OWIQQ==,
       }
-    dev: false
 
   /@next/env/13.0.7:
     resolution:
@@ -3517,7 +3519,6 @@ packages:
     cpu: [arm]
     os: [android]
     requiresBuild: true
-    dev: false
     optional: true
 
   /@next/swc-android-arm-eabi/13.0.7:
@@ -3540,7 +3541,6 @@ packages:
     cpu: [arm64]
     os: [android]
     requiresBuild: true
-    dev: false
     optional: true
 
   /@next/swc-android-arm64/13.0.7:
@@ -3563,7 +3563,6 @@ packages:
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
-    dev: false
     optional: true
 
   /@next/swc-darwin-arm64/13.0.7:
@@ -3586,7 +3585,6 @@ packages:
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
-    dev: false
     optional: true
 
   /@next/swc-darwin-x64/13.0.7:
@@ -3609,7 +3607,6 @@ packages:
     cpu: [x64]
     os: [freebsd]
     requiresBuild: true
-    dev: false
     optional: true
 
   /@next/swc-freebsd-x64/13.0.7:
@@ -3632,7 +3629,6 @@ packages:
     cpu: [arm]
     os: [linux]
     requiresBuild: true
-    dev: false
     optional: true
 
   /@next/swc-linux-arm-gnueabihf/13.0.7:
@@ -3655,7 +3651,6 @@ packages:
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
-    dev: false
     optional: true
 
   /@next/swc-linux-arm64-gnu/13.0.7:
@@ -3678,7 +3673,6 @@ packages:
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
-    dev: false
     optional: true
 
   /@next/swc-linux-arm64-musl/13.0.7:
@@ -3701,7 +3695,6 @@ packages:
     cpu: [x64]
     os: [linux]
     requiresBuild: true
-    dev: false
     optional: true
 
   /@next/swc-linux-x64-gnu/13.0.7:
@@ -3724,7 +3717,6 @@ packages:
     cpu: [x64]
     os: [linux]
     requiresBuild: true
-    dev: false
     optional: true
 
   /@next/swc-linux-x64-musl/13.0.7:
@@ -3747,7 +3739,6 @@ packages:
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
-    dev: false
     optional: true
 
   /@next/swc-win32-arm64-msvc/13.0.7:
@@ -3770,7 +3761,6 @@ packages:
     cpu: [ia32]
     os: [win32]
     requiresBuild: true
-    dev: false
     optional: true
 
   /@next/swc-win32-ia32-msvc/13.0.7:
@@ -3793,7 +3783,6 @@ packages:
     cpu: [x64]
     os: [win32]
     requiresBuild: true
-    dev: false
     optional: true
 
   /@next/swc-win32-x64-msvc/13.0.7:
@@ -16138,6 +16127,21 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
+  /next-themes/0.2.1_6jx7hpii6hgsrmhxgqrmo3277u:
+    resolution:
+      {
+        integrity: sha512-B+AKNfYNIzh0vqQQKqQItTS8evEouKD7H5Hj3kmuPERwddR2TxvDSFZuTj6T7Jfn1oyeUyJMydPl1Bkxkh0W7A==,
+      }
+    peerDependencies:
+      next: "*"
+      react: "*"
+      react-dom: "*"
+    dependencies:
+      next: 13.0.6_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
   /next-themes/0.2.1_wrk65vydtghkjwj2yfejc5ocja:
     resolution:
       {
@@ -16151,7 +16155,7 @@ packages:
       next: 13.0.6_6l5554ty5ajsajah6yazvrjhoe
       react: 17.0.2
       react-dom: 18.2.0_react@17.0.2
-    dev: false
+    dev: true
 
   /next/13.0.6_6l5554ty5ajsajah6yazvrjhoe:
     resolution:
@@ -16198,7 +16202,6 @@ packages:
     transitivePeerDependencies:
       - "@babel/core"
       - babel-plugin-macros
-    dev: false
 
   /next/13.0.6_biqbaboplfbrettd7655fr4n2y:
     resolution:
@@ -18122,7 +18125,6 @@ packages:
       loose-envify: 1.4.0
       react: 17.0.2
       scheduler: 0.23.0
-    dev: false
 
   /react-dom/18.2.0_react@18.2.0:
     resolution:
@@ -18205,7 +18207,6 @@ packages:
     dependencies:
       loose-envify: 1.4.0
       object-assign: 4.1.1
-    dev: false
 
   /react/18.2.0:
     resolution:
@@ -19952,7 +19953,6 @@ packages:
     dependencies:
       client-only: 0.0.1
       react: 17.0.2
-    dev: false
 
   /styled-jsx/5.1.0_react@18.2.0:
     resolution:
