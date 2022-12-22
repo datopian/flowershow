@@ -5,7 +5,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/flowershow/flowershow.git",
-    "directory": "packages/remark-callouts"
+    "directory": "packages/core"
   },
   "author": "Rufus Pollock",
   "license": "MIT",
@@ -27,10 +27,17 @@
     "mermaid": "^9.3.0"
   },
   "peerDependencies": {
-    "next": "^13.0.0",
+    "next": "^13.0.4",
     "next-contentlayer": "^0.2.9",
     "next-themes": "^0.2.1",
-    "react": "^18.0.0",
+    "react": "^18.2.0",
     "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^24.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-typescript": "^10.0.1",
+    "@types/react": "18.0.26",
+    "@types/react-dom": "18.0.9"
   }
 }

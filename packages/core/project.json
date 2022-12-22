@@ -22,7 +22,7 @@
           "next-themes"
         ],
         "generateExportsField": true,
-        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "rollupConfig": "packages/core/rollup.config.cjs",
         "compiler": "babel",
         "assets": [
           {
