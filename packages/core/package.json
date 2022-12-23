@@ -5,7 +5,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/flowershow/flowershow.git",
-    "directory": "packages/remark-callouts"
+    "directory": "packages/core"
   },
   "author": "Rufus Pollock",
   "license": "MIT",
