@@ -26,7 +26,7 @@ It looks like this:
 
 You may be thinking: _"Hold on, but isn't it just some Markdown with an HTML block wrapping around some more Markdown... which is a standard CommonMark syntax?"_
 
-The answer to this question is - yes... and no ¯\_(ツ)\_/¯.
+The answer to this question is - yes... and no ¯\\\_(ツ)\_/¯.
 
 **Yes**, because it really is a CommonMark syntax, which allows you to add HTML parts and even intertwine them with Markdown like in our example. You may have written something similar without even hearing about MDX and if you're starting your new Flowershow project with your existing Markdown content - it will all work! This is because MDX supports CommonMark by default. Additionally, Flowershow provides support for GFM (GitHub Flavored Markdown) and some Obsidian-specific syntax elements. (See our [[syntax|Syntax]] guide to learn more.)
 
