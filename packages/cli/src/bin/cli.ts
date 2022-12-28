@@ -14,7 +14,7 @@ const { version: node, platform, argv } = process;
 
 if (platform === "win32") {
   warn(
-    "This may not work as expected. You're trying to run Flowreshow CLI on Windows, which is not thoroughly tested. Please submit an issue if you encounter any problems: https://github.com/flowershow/flowershow/issues"
+    "This may not work as expected. You're trying to run Flowershow CLI on Windows, which is not thoroughly tested. Please submit an issue if you encounter any problems: https://github.com/flowershow/flowershow/issues"
   );
 }
 
