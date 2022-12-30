@@ -14,6 +14,7 @@ search.json
 # and the template itself will be "clean", i.e. it won't have any symlinks pointing to /site
 packages/template/content
 packages/template/public/assets
+packages/template/public/excalidraw
 packages/template/components/custom
 
 # dependencies
