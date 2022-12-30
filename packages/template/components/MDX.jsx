@@ -4,10 +4,15 @@ import Head from "next/head";
 import { siteConfig } from "../config/siteConfig";
 import { CustomLink } from "./Link";
 import { Pre } from "./Pre";
+import { BlogsList } from "./BlogsList";
 
 const components = {
   Head,
   a: CustomLink,
+  /* eslint no-unused-vars: off */
+  // TODO this is a temporary workaround for errors resulting from importing this component directly in mdx file
+  // see this issue for ref: https://github.com/kentcdodds/mdx-bundler/issues/156
+  BlogsList,
   pre: Pre,
   wrapper: ({ layout, ...rest }) => {
     const Layout = require(`../layouts/${layout}`).default;
