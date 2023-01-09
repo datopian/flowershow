@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "next/link.js";
 import { GitHubIcon, DiscordIcon } from "../Icons";
 import { SocialLink, SocialPlatform } from "../types";
 
