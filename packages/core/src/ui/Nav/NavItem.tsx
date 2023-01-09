@@ -1,5 +1,5 @@
 import { Menu, Transition } from "@headlessui/react";
-import Link from "next/link";
+import Link from "next/link.js";
 import { Fragment, useRef, useState } from "react";
 
 import { BaseLink } from "../Base";

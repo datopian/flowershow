@@ -1,4 +1,4 @@
-import dynamic from "next/dynamic";
+import dynamic from "next/dynamic.js";
 import {
   SearchProvider as SearchProviderType,
   SearchProviderConfig,

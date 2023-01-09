@@ -1,7 +1,7 @@
 import { useDocSearchKeyboardEvents } from "@docsearch/react";
-import Head from "next/head";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import Head from "next/head.js";
+import Link from "next/link.js";
+import { useRouter } from "next/router.js";
 import { createContext, useCallback, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
