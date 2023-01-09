@@ -1,5 +1,5 @@
 // TODO don't import router here?
-import router from "next/router";
+import router from "next/router.js";
 import { Action } from "kbar";
 
 import { formatDate } from "../../utils/formatDate";

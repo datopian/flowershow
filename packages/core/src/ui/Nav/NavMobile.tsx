@@ -1,6 +1,6 @@
 import { Dialog, Menu, Transition } from "@headlessui/react";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import Link from "next/link.js";
+import { useRouter } from "next/router.js";
 import { Fragment, useEffect, useState } from "react";
 
 import { SearchContext, SearchField } from "../Search";
