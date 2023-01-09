@@ -13,11 +13,14 @@
         "tsConfig": "packages/core/tsconfig.lib.json",
         "project": "packages/core/package.json",
         "entryFile": "packages/core/src/index.ts",
-        "format": ["esm", "cjs"],
+        "format": ["esm"],
         "external": [
           "react/jsx-runtime",
           "react",
-          "next",
+          "next/link",
+          "next/head",
+          "next/router",
+          "next/dynamic",
           "next-contentlayer",
           "next-themes"
         ],
