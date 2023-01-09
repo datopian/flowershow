@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "next/link.js";
 import { forwardRef } from "react";
 
 const BaseLink = forwardRef((props: any, ref) => {

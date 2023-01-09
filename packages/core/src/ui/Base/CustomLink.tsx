@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "next/link.js";
 
 interface Props {
   href?: string;

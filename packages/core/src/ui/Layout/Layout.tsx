@@ -1,5 +1,5 @@
-import Head from "next/head";
-import Link from "next/link";
+import Head from "next/head.js";
+import Link from "next/link.js";
 
 import { useTableOfContents } from "./useTableOfContents";
 import { Nav } from "../Nav";
