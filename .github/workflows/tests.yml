@@ -30,10 +30,10 @@ jobs:
       - run: pnpm install
       - run: sudo apt-get install -y expect
       - run: npx playwright install --with-deps
-      - name: Run tests
+      - name: Run E2E tests
         env:
           NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
           TERM: xterm # fix for tput
-        run: |
-          npx nx affected:e2e
-          npx nx affected:test
+        run: npx nx affected:e2e
+      - name: Run other tests
+        run: npx nx affected:test
