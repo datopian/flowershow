@@ -7,6 +7,7 @@ import { CustomLink, Pre, BlogsList } from "@flowershow/core";
 
 import { getPageData } from "../lib/getPageData";
 import { getAuthorsDetails } from "../lib/getAuthorsDetails";
+import layouts from "../layouts";
 import { siteConfig } from "../config/siteConfig";
 
 export default function Page({ globals, body, ...meta }) {
@@ -22,7 +23,7 @@ export default function Page({ globals, body, ...meta }) {
     // see this issue for ref: https://github.com/kentcdodds/mdx-bundler/issues/156
     BlogsList,
     wrapper: ({ components, layout, ...props }) => {
-      const Layout = require("../layouts/index.js")[layout];
+      const Layout = layouts[layout];
       return <Layout {...props} />;
     },
     // user defined MDX components could be added here
