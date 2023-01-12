@@ -1,4 +1,4 @@
-name: E2E
+name: Tests
 
 on: [push]
 
@@ -11,7 +11,7 @@ jobs:
       matrix:
         node: [16, 18]
 
-    name: Node ${{ matrix.node }} E2E
+    name: Node ${{ matrix.node }}
 
     steps:
       - uses: actions/checkout@v2
@@ -34,4 +34,6 @@ jobs:
         env:
           NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
           TERM: xterm # fix for tput
-        run: npx nx affected:e2e
+        run: |
+          npx nx affected:e2e
+          npx nx affected:test
