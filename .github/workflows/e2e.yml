@@ -1,4 +1,4 @@
-name: Test
+name: E2E
 
 on: [push]
 
@@ -34,4 +34,4 @@ jobs:
         env:
           NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
           TERM: xterm # fix for tput
-        run: npx nx affected:e2e && npx nx affected:test
+        run: npx nx affected:e2e
