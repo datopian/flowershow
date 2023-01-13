@@ -1,5 +1,11 @@
 # flowershow
 
+## 0.1.3
+
+### Patch Changes
+
+- Remove unneeded dev files from cloned template.
+
 ## 0.1.0
 
 ### Minor Changes
