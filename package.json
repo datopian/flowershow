@@ -2,8 +2,7 @@
   "name": "flowershow",
   "version": "1.0.0",
   "scripts": {
-    "prepare": "husky install && node ./scripts/symlink-site.js",
-    "lint": "eslint --fix"
+    "prepare": "husky install && node ./scripts/symlink-site.js"
   },
   "lint-staged": {
     "*.+(js|jsx)": [

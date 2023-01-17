@@ -192,6 +192,11 @@ export default class Installer {
       exit(1);
     }
 
+    // remove unneeded dev files
+    fs.rmSync(`${flowershowDir}/project.json`, { force: true });
+    fs.rmSync(`${flowershowDir}/.eslintrc.json`, { force: true });
+    fs.rmSync(`${flowershowDir}/jest.config.js`, { force: true });
+
     // update content and assets symlinks
     const contentSymlinkPath = path.relative(`${flowershowDir}`, contentDir);
     fs.symlinkSync(contentSymlinkPath, `${flowershowDir}/content`);

@@ -18,6 +18,7 @@
       "executor": "nx:run-commands",
       "outputs": ["{options.outputPath}"],
       "inputs": ["production", "^production", "siteContent"],
+      "dependsOn": ["^build"],
       "options": {
         "command": "npm run export",
         "cwd": "packages/template",

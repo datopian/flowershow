@@ -1,6 +1,5 @@
-import router from "next/router";
+import router from "next/router.js";
 import { Action } from "kbar";
-
 import { KBarModal } from "./KBarModal";
 
 export const KBarSearchProvider = ({ config, children }) => {
