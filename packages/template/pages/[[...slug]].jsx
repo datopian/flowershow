@@ -25,7 +25,6 @@ export default function Page({ globals, body, ...meta }) {
     // see this issue for ref: https://github.com/kentcdodds/mdx-bundler/issues/156
     BlogsList,
     wrapper: ({ components, layout, ...props }) => {
-
       const Layout = layouts[layout];
 
       return <Layout {...props} />;
