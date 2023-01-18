@@ -208,19 +208,17 @@ Each project also has it's own configuration file - `project.json`, where you ca
 
 To learn more see this [offical docs page](https://nx.dev/reference/project-configuration).
 
-## Changesets
+## Changesets and publishing packages
 
 > This monorepo is set up with changesets versioning tool. See their [github repository](https://github.com/changesets/changesets) to learn more.
 
 ### What are Changesets?
 
-Changesets are files that describe the intention of a contributor to change a version of the package according to their changes, and provide a description of those changes, which will be added to the package changelog in the time of release creation.
+Changesets are files that describe the intention of a contributor to change a version of the package according to their changes, and provide a description of those changes, which will be added to the package changelog just before publishing new version of the package.
 
 ### Workflow
 
-1. Contributors add changesets along with the changes they make.
-
-- not every change requires a changelog, e.g. some minor changes to docs or (atm) any changes to `/site`
+1. Contributors add changesets files along with the changes they make.
 
 2. After reviewing the changesets and at an agreed time the version command is run.
 
@@ -238,6 +236,9 @@ The description of the changes related to the changelog you're adding should be 
 
 To learn about semantic versioning standards see [this semver doc page](https://semver.org/).
 
+> [!NOTE] Not every change (commit or PR) requires a changeset file
+> Some small changes to docs or other really minor changes to code, that don't affect how packages work e.g. any changes made to `/site` folder, or changes to developer dependencies configurations.
+
 ### Versioning and publishing
 
 > This should only be done after all the files in the `.changeset` folder are reviewed by a designated person and at a pre-agreed time.
@@ -246,15 +247,28 @@ To learn about semantic versioning standards see [this semver doc page](https://
 npx changeset version
 ```
 
-This command will consume all the files in the `.changeset` folder, update packages to the most appropriate semver version based on them and will write changelog entires in respective `CHANGELOG.md` files.
+This command will consume all the files in the `.changeset` folder, update packages to the most appropriate semver versions based on change types specified in their related changeset files (e.g. `"@flowershow/remark-embed": patch`) and will write changelog entries in their `CHANGELOG.md` files.
 
-After doing that both all the version bumps and changelog entries of the changed packages should be reviewed. If needed, changelog entires should be manually adjusted to provide the most accurate description of the changes included in the new release. If everything is correct, packages can be published by running:
+To ignore changeset files of some packages (e.g. we don't want to version bump them yet), you can run:
 
 ```
-npx changeset publish
+npx changeset version --ignore @flowershow/template
 ```
 
-This command will run npm publish in each package which version is different from the currently published one.
+After running version command, both all the version bumps and changelog entries of the changed packages should be reviewed before commiting changes made by the command. If needed, changelog entires should be manually adjusted to provide the most accurate description of the changes included in the new release. If everything is correct, packages can be published by running:
+
+```
+pnpm nx publish <project-name>
+# pnpm nx publish cli
+```
+
+If you want to check what's going to be published, before actually publishing to npm:
+
+```
+pnpm nx publish:dry <project-name>
+```
+
+> [!NOTE] > `nx publish` (and `nx publish:dry`) command will automatically re-build the package first, if any of its source files (or source files of other workspace projects it depends on) changes.
 
 ## Styling and Tailwind
 
