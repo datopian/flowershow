@@ -20,6 +20,7 @@
   "main": "./dist/index.js",
   "dependencies": {
     "@docsearch/react": "^3.3.0",
+    "@floating-ui/react-dom": "^1.2.1",
     "@floating-ui/react-dom-interactions": "^0.13.3",
     "@headlessui/react": "^1.7.6",
     "clsx": "^1.2.1",

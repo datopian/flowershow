@@ -1,11 +1,16 @@
 import React, { useState, useEffect, useRef, Fragment } from "react";
 
+// importing separately due to build error
+// Module '"@floating-ui/react-dom-interactions"' has no exported member 'autoPlacement' ...
 import {
   arrow,
   autoPlacement,
   inline,
   offset,
   shift,
+} from "@floating-ui/react-dom";
+
+import {
   FloatingPortal,
   useDismiss,
   useFloating,

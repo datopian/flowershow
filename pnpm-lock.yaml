@@ -159,6 +159,7 @@ importers:
   packages/core:
     specifiers:
       "@docsearch/react": ^3.3.0
+      "@floating-ui/react-dom": ^1.2.1
       "@floating-ui/react-dom-interactions": ^0.13.3
       "@headlessui/react": ^1.7.6
       clsx: ^1.2.1
@@ -173,6 +174,7 @@ importers:
       react-dom: ^18.0.0
     dependencies:
       "@docsearch/react": 3.3.0_ftygaz6e6e5e4cecsqmsnm4myu
+      "@floating-ui/react-dom": 1.2.1_biqbaboplfbrettd7655fr4n2y
       "@floating-ui/react-dom-interactions": 0.13.3_biqbaboplfbrettd7655fr4n2y
       "@headlessui/react": 1.7.6_biqbaboplfbrettd7655fr4n2y
       clsx: 1.2.1
