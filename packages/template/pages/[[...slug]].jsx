@@ -2,6 +2,7 @@
 import { NextSeo } from "next-seo";
 import { allDocuments } from "contentlayer/generated";
 import { useMDXComponent } from "next-contentlayer/hooks";
+import {} from "next-contentlayer/hooks";
 
 import { CustomLink, Pre, BlogsList } from "@flowershow/core";
 
@@ -16,7 +17,14 @@ export default function Page({ globals, body, ...meta }) {
 
   const MDXComponents = {
     /* Head, */ // TODO why do we need this here?
-    a: CustomLink,
+    a: (props) => (
+      <CustomLink
+        data={allDocuments}
+        usehook={useMDXComponent}
+        config={siteConfig}
+        {...props}
+      />
+    ),
     pre: Pre,
     /* eslint no-unused-vars: off */
     // TODO this is a temporary workaround for errors resulting from importing this component directly in mdx file
