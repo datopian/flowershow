@@ -8,7 +8,7 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "src/support/testsetup.sh ../template src/fixtures/content",
+          "src/support/testsetup.sh ../template src/fixtures/content src/fixtures/components",
           "playwright test",
           "src/support/testteardown.sh"
         ],
