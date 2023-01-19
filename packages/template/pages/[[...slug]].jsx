@@ -2,7 +2,6 @@
 import { NextSeo } from "next-seo";
 import { allDocuments } from "contentlayer/generated";
 import { useMDXComponent } from "next-contentlayer/hooks";
-import {} from "next-contentlayer/hooks";
 
 import { CustomLink, Pre, BlogsList } from "@flowershow/core";
 
@@ -21,7 +20,7 @@ export default function Page({ globals, body, ...meta }) {
       <CustomLink
         data={allDocuments}
         usehook={useMDXComponent}
-        config={siteConfig}
+        preview={siteConfig.showLinkPreviews}
         {...props}
       />
     ),
