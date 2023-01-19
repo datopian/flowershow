@@ -133,6 +133,10 @@ export default makeSource({
   contentDirInclude: siteConfig.contentInclude,
   documentTypes: [Blog, Person, Page],
   mdx: {
+    esbuildOptions: (opts) => {
+      opts.tsconfig = `${process.env.PWD}/tsconfig.mdx.json`;
+      return opts;
+    },
     cwd: process.cwd(),
     remarkPlugins: [
       remarkEmbed,
