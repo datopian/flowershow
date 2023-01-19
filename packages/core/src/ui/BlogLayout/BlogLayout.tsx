@@ -22,7 +22,7 @@ export const BlogLayout: React.FC<Props> = ({ children, ...frontMatter }) => {
             <div className="flex flex-wrap not-prose items-center space-x-6 space-y-3 justify-center">
               {authorsDetails.map(({ name, avatar, isDraft, url_path }) => (
                 <Avatar
-                  key={url_path}
+                  key={url_path || name}
                   name={name}
                   img={avatar}
                   href={url_path && !isDraft ? `/${url_path}` : undefined}
