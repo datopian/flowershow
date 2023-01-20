@@ -1,5 +1,11 @@
 # @flowershow/core
 
+## 0.0.8
+
+### Patch Changes
+
+- 3a005dc: Fix: remove reference to "document" from Tooltip
+
 ## 0.0.7
 
 ### Patch Changes
