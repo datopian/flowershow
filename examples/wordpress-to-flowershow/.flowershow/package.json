@@ -22,7 +22,7 @@
     "hastscript": "^7.0.2",
     "kbar": "^0.1.0-beta.37",
     "mdx-mermaid": "^2.0.0-rc1",
-    "mermaid": "^9.1.4",
+    "mermaid": "^9.3.0",
     "next": "^13.0.4",
     "next-contentlayer": "^0.2.9",
     "next-seo": "^5.14.1",
