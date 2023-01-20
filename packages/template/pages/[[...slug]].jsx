@@ -16,7 +16,14 @@ export default function Page({ globals, body, ...meta }) {
 
   const MDXComponents = {
     /* Head, */ // TODO why do we need this here?
-    a: CustomLink,
+    a: (props) => (
+      <CustomLink
+        data={allDocuments}
+        usehook={useMDXComponent}
+        preview={siteConfig.showLinkPreviews}
+        {...props}
+      />
+    ),
     pre: Pre,
     /* eslint no-unused-vars: off */
     // TODO this is a temporary workaround for errors resulting from importing this component directly in mdx file
