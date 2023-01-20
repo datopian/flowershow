@@ -15,7 +15,7 @@ export const CustomLink: React.FC<Props> = ({
   preview,
   ...props
 }) => {
-  const { href } = props;
+  const { href } = props; // keep href in props to render tooltip content
   const isInternalLink = href && href.startsWith("/");
   const isAnchorLink = href && href.startsWith("#");
 
