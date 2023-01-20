@@ -1,9 +1,11 @@
-import { useDocSearchKeyboardEvents } from "@docsearch/react";
+import * as docsearch from "@docsearch/react";
 import Head from "next/head.js";
 import Link from "next/link.js";
 import { useRouter } from "next/router.js";
 import { createContext, useCallback, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+
+const { useDocSearchKeyboardEvents } = docsearch;
 
 let DocSearchModal: any = null;
 
