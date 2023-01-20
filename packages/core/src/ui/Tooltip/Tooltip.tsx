@@ -23,8 +23,8 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 
 interface Props extends React.PropsWithChildren {
-  render?: (t) => React.ReactNode;
-  href?: string;
+  render: (t) => React.ReactNode;
+  href: string;
   data: any;
   usehook?: any;
   className?: string;
@@ -127,10 +127,7 @@ export const Tooltip: React.FC<Props> = ({
   // get tooltip data
   let image: string;
   let PageContent;
-  // create a temporary anchor tag to convert relative href to absolute path
-  const tempLink = document.createElement("a");
-  tempLink.href = props.href as string;
-  const filePath = tempLink.pathname.slice(1); // remove slash from the beginning
+  const filePath = props.href.slice(1); // remove slash from the beginning
 
   const page = data.find((p) => p._raw.flattenedPath === filePath);
 
