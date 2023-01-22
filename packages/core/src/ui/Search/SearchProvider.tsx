@@ -51,7 +51,7 @@ export const SearchProvider = ({
         <KBarProvider config={searchConfig.config}>{children}</KBarProvider>
       );
     default:
-      return children;
+      return <>{children}</>;
   }
 };
 
