@@ -2,6 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "@flowershow/core": ["node_modules/@flowershow/core/dist/src"],
       "contentlayer/generated": ["./.contentlayer/generated"],
       "@/*": ["./*"]
     },
