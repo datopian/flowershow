@@ -3,6 +3,12 @@
     "baseUrl": ".",
     "paths": {
       "@flowershow/core": ["node_modules/@flowershow/core/dist/src"],
+      "@flowershow/remark-callouts": [
+        "node_modules/@flowershow/remark-callouts/dist/src"
+      ],
+      "@flowershow/remark-embed": [
+        "node_modules/@flowershow/remark-embed/dist/src"
+      ],
       "contentlayer/generated": ["./.contentlayer/generated"],
       "@/*": ["./*"]
     },
@@ -22,6 +28,7 @@
     "jsx": "preserve"
   },
   "include": [
+    "types.d.ts",
     "next-env.d.ts",
     "**/*.tsx",
     "**/*.ts",
