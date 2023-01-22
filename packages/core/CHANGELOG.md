@@ -1,5 +1,12 @@
 # @flowershow/core
 
+## 0.0.9
+
+### Patch Changes
+
+- d8c918c: Fix import for `useDocSearchKeyboardEvents` in Algolia search component.
+- e12b558: Fix: prop types in CustomLink
+
 ## 0.0.8
 
 ### Patch Changes
