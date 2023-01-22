@@ -1,15 +1,17 @@
 import Head from "next/head.js";
 import Link from "next/link.js";
 
+import { useState, useEffect } from "react";
 import { useTableOfContents } from "./useTableOfContents";
+import { collectHeadings } from "../../utils";
 import { Nav } from "../Nav";
 import { NavConfig, AuthorConfig, ThemeConfig, isNavDropdown } from "../types";
+import { NextRouter, useRouter } from "next/router.js";
 
 interface Props extends React.PropsWithChildren {
   nav: NavConfig;
   author: AuthorConfig;
   theme: ThemeConfig;
-  tableOfContents: Array<any>; // TODO type
   showToc: boolean;
   showEditLink: boolean;
   edit_url?: string;
@@ -20,11 +22,21 @@ export const Layout: React.FC<Props> = ({
   nav,
   author,
   theme,
-  tableOfContents,
   showEditLink,
   showToc,
   edit_url,
 }) => {
+  const [tableOfContents, setTableOfContents] = useState([] as any); // TODO types
+  const router: NextRouter = useRouter();
+
+  useEffect(() => {
+    if (!showToc) return;
+    const headingNodes: NodeListOf<HTMLHeadingElement> =
+      document.querySelectorAll("h1,h2,h3");
+    const toc = collectHeadings(headingNodes);
+    setTableOfContents(toc ?? []);
+  }, [router.asPath]); // update table of contents on route change with next/link
+
   const currentSection = useTableOfContents(tableOfContents);
 
   function isActive(section) {
@@ -179,6 +191,25 @@ export const Layout: React.FC<Props> = ({
                           >
                             {subSection.title}
                           </Link>
+                          {subSection.children &&
+                            subSection.children.length > 0 && (
+                              <ol className="mt-2 space-y-3 pl-5 text-slate-500 dark:text-slate-400">
+                                {subSection.children.map((thirdSection) => (
+                                  <li key={thirdSection.id}>
+                                    <Link
+                                      href={`#${thirdSection.id}`}
+                                      className={
+                                        isActive(thirdSection)
+                                          ? "text-sky-500"
+                                          : "hover:text-slate-600 dark:hover:text-slate-300"
+                                      }
+                                    >
+                                      {thirdSection.title}
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ol>
+                            )}
                         </li>
                       ))}
                     </ol>
