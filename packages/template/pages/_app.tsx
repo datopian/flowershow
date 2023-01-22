@@ -3,15 +3,10 @@ import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "next-themes";
 import { useRouter } from "next/router";
 import Script from "next/script";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "tailwindcss/tailwind.css";
 
-import {
-  Layout,
-  SearchProvider,
-  collectHeadings,
-  pageview,
-} from "@flowershow/core";
+import { Layout, SearchProvider, pageview } from "@flowershow/core";
 
 import { siteConfig } from "../config/siteConfig";
 import "../styles/docsearch.css";
@@ -19,15 +14,13 @@ import "../styles/global.css";
 import "../styles/prism.css";
 
 function MyApp({ Component, pageProps }) {
-  const [tableOfContents, setTableOfContents] = useState([]);
   const router = useRouter();
 
   // TODO maybe use computed fields for showEditLink and showToc to make this even cleaner?
   const layoutProps = {
-    showToc: pageProps.showToc ?? siteConfig.tableOfContents,
+    showToc: pageProps.showToc ?? siteConfig.showToc,
     showEditLink: pageProps.showEditLink ?? siteConfig.editLinkShow,
     edit_url: pageProps.edit_url,
-    tableOfContents,
     nav: {
       title: siteConfig.navbarTitle?.text || siteConfig.title,
       logo: siteConfig.navbarTitle?.logo,
@@ -57,13 +50,6 @@ function MyApp({ Component, pageProps }) {
       };
     }
   }, [router.events]);
-
-  useEffect(() => {
-    const headingNodes = document.querySelectorAll("h2,h3");
-    // TODO types
-    const toc = collectHeadings(headingNodes as any);
-    setTableOfContents(toc ?? []);
-  }, [router.asPath]); // update table of contents on route change with next/link
 
   return (
     <ThemeProvider

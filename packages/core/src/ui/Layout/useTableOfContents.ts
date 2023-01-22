@@ -6,7 +6,13 @@ export const useTableOfContents = (tableOfContents) => {
 
   const getHeadings = useCallback((toc) => {
     return toc
-      .flatMap((node) => [node.id, ...node.children.map((child) => child.id)])
+      .flatMap((node) => [
+        node.id,
+        ...node.children.flatMap((child) => [
+          child.id,
+          ...child.children.map((subChild) => subChild.id),
+        ]),
+      ])
       .map((id) => {
         const el = document.getElementById(id);
         if (!el) return null;
