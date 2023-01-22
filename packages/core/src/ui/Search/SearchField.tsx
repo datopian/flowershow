@@ -27,7 +27,7 @@ export const SearchField: React.FC<any> = (props) => {
         }
       `}
       >
-        Search docs
+        Search
       </span>
       {modifierKey && (
         <kbd
