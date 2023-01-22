@@ -2,7 +2,7 @@ import Link from "next/link.js";
 import { Tooltip } from "../Tooltip";
 
 interface Props {
-  href?: string;
+  href: string;
   data: any;
   usehook: any;
   preview: boolean;
@@ -30,7 +30,7 @@ export const CustomLink: React.FC<Props> = ({
         render={(tooltipTriggerProps) => <Link {...tooltipTriggerProps} />}
       />
     ) : (
-      <Link href={href} {...props} />
+      <Link {...props} />
     );
   }
 

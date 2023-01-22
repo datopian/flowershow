@@ -212,7 +212,7 @@ importers:
 
   packages/template:
     specifiers:
-      "@flowershow/core": ^0.0.8
+      "@flowershow/core": ^0.0.9
       "@flowershow/remark-callouts": ^1.0.0
       "@flowershow/remark-embed": ^1.0.0
       "@flowershow/remark-wiki-link": ^1.0.0
