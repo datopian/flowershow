@@ -8,14 +8,29 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "src/support/testsetup.sh ../template src/fixtures/content src/fixtures/components",
-          "playwright test",
-          "src/support/testteardown.sh"
+          "src/support/testsetup.sh ../template \"$(pwd)\"/src/fixtures/content \"$(pwd)\"/src/fixtures/components",
+          "npm run dev --prefix ../template &",
+          "npx playwright test",
+          "src/support/testteardown.sh ../template \"$(pwd)\"/../../site/content \"$(pwd)\"/../../site/components"
         ],
         "parallel": false,
         "cwd": "packages/template-e2e"
       },
-      "dependsOn": []
+      "dependsOn": ["^build"]
+    },
+    "e2e:setup": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "src/support/testsetup.sh ../template \"$(pwd)\"/src/fixtures/content \"$(pwd)\"/src/fixtures/components",
+        "cwd": "packages/template-e2e"
+      }
+    },
+    "e2e:teardown": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "src/support/testteardown.sh ../template \"$(pwd)\"/../../site/content \"$(pwd)\"/../../site/components",
+        "cwd": "packages/template-e2e"
+      }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
