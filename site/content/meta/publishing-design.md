@@ -37,7 +37,7 @@ Designing the Flowershow publishing experience.
 
 ### Self-publishing in the rawest way
 
-Original example below. See [[docs/guide-setup]] for full gory details atm.
+Original example below. See [[blog/flowershow-setup-v0.0.1-for-alpha-users-june-2022]] for full gory details atm.
 
 1. You have a have some markdown files (and maybe data). Preferably in a git repo.
 2. You install the flowershow app template (later this could be encapsulated in a command line tool)
