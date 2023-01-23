@@ -16,7 +16,8 @@ import wikiLinkPlugin from "@flowershow/remark-wiki-link";
 
 import { siteConfig } from "./config/siteConfig";
 
-const sharedFields = {
+// TODO types
+const sharedFields: any = {
   title: { type: "string" },
   description: { type: "string" },
   image: { type: "string" },
@@ -27,7 +28,8 @@ const sharedFields = {
   data: { type: "list", of: { type: "string" }, default: [] },
 };
 
-const computedFields = {
+// TODO types
+const computedFields: any = {
   url_path: {
     type: "string",
     /* eslint no-underscore-dangle: off */
@@ -133,6 +135,10 @@ export default makeSource({
   contentDirInclude: siteConfig.contentInclude,
   documentTypes: [Blog, Person, Page],
   mdx: {
+    esbuildOptions: (opts) => {
+      opts.tsconfig = `${process.env.PWD}/tsconfig.mdx.json`;
+      return opts;
+    },
     cwd: process.cwd(),
     remarkPlugins: [
       remarkEmbed,
