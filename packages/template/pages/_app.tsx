@@ -60,7 +60,8 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     const headingNodes = document.querySelectorAll("h2,h3");
-    const toc = collectHeadings(headingNodes);
+    // TODO types
+    const toc = collectHeadings(headingNodes as any);
     setTableOfContents(toc ?? []);
   }, [router.asPath]); // update table of contents on route change with next/link
 

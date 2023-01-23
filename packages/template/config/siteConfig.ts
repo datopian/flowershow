@@ -1,7 +1,8 @@
 import { defaultConfig } from "@flowershow/core";
 import userConfig from "../content/config";
 
-export const siteConfig = {
+// TODO types
+export const siteConfig: any = {
   ...defaultConfig,
   ...userConfig,
   // prevent theme object overrides for

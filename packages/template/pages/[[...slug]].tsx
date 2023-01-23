@@ -79,7 +79,8 @@ export default function Page({ globals, body, ...meta }) {
 export async function getStaticProps({ params }) {
   // params.slug is undefined for root index page
   const urlPath = params.slug ? params.slug.join("/") : "";
-  const page = allDocuments.find((p) => p.url_path === urlPath);
+  // TODO types
+  const page: any = allDocuments.find((p) => p.url_path === urlPath);
   const globals = await getPageData(page.data);
   // TODO this is a temporary solution used to pass authors to blog layout
   const authorsDetails = getAuthorsDetails(page.authors);
