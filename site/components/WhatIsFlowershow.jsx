@@ -81,9 +81,7 @@ export function WhatIsFlowershow() {
               <p className="mt-1 text-sm text-slate-700 dark:text-slate-400">
                 We’ve been building content and data driven products for over a
                 decade, and we’re passionate about sharing knowledge and ideas
-                with others.
-                <br />
-                We love markdown as much as we love open-source (which is a
+                with others. We love markdown as much as we love open-source (a
                 lot!).
               </p>
             </div>
