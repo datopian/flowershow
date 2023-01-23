@@ -13,6 +13,7 @@ Flowershow supports **CommonMark** and **GitHub Flavored Markdown**, but also ma
 
 1. [[publish-tutorial|How to (self) publish your markdown files with Flowershow]]
 2. [[blog-tutorial|How to add blog support to your website]]
+3. [[custom-theme|Customize theme]]
 
 ## Guides
 
