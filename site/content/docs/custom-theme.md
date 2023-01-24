@@ -37,22 +37,7 @@ We are going to change the heading font to _Kanit_ and body font to _Roboto_ acr
 
 3. By default, Tailwind provides three font family utilities: a cross-browser sans-serif stack, a cross-browser serif stack, and a cross-browser monospaced stack. You can change, add, or remove these by editing the theme.fontFamily section of your Tailwind config. Open the file `tailwind.config.js` in `.flowershow` and add the new fonts by extending the fontFamily property of `theme` as shown below.
 
-Change the **default config**
-
-```js=
-module.exports = {
-  theme: {
-    extend: {
-      fontFamily: {
-        sans: ["ui-sans-serif", ...defaultTheme.fontFamily.sans],
-        headings: ["-apple-system", ...defaultTheme.fontFamily.sans],
-      },
-    },
-  },
-};
-```
-
-To **this:**
+The sans font will determine the body font, so change the sans and heading value in the `tailwind.config.js` to **this:**
 
 ```js=
 module.exports = {
@@ -81,24 +66,7 @@ We are going to change our primary light and dark color to #3C6255 and #A6BB8D w
 
 To add custom colors in your site, extend the colors property for `theme` in `tailwind.config.js` as shown below
 
-Change the **default config**
-
-```js=
-module.exports = {
-  colors: {
-    background: {
-      DEFAULT: colors.white,
-      dark: colors.slate[900],
-    },
-    primary: {
-      DEFAULT: colors.gray[700],
-      dark: colors.gray[300],
-    },
-  },
-};
-```
-
-To **this:**
+Add the chosen colors to the background and primary color values in `tailwind.config.js` like **this:**
 
 ```js=
 module.exports = {
