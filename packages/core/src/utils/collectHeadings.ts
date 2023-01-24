@@ -8,17 +8,15 @@ interface TocSection {
 
 export function collectHeadings(nodes: NodeListOf<HTMLHeadingElement>) {
   const sections: Array<TocSection> = [];
-  const headerTitle = document.querySelector("main header h1");
 
   Array.from(nodes).forEach((node) => {
-    const pageHeading: boolean = node.parentElement?.firstChild === node;
     const { id, innerText: title, tagName: level } = node;
 
     if (!(id && title)) {
       return;
     }
 
-    if (level === "H1" && (headerTitle ?? !pageHeading)) {
+    if (level === "H1") {
       sections.push({ id, title, level, children: [] });
     }
 
