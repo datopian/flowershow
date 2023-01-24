@@ -1,2 +1,2 @@
 export { pageview } from "./gtag";
-export { collectHeadings } from "./collectHeadins";
+export { collectHeadings } from "./collectHeadings";

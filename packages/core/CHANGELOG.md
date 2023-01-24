@@ -1,5 +1,11 @@
 # @flowershow/core
 
+## 0.0.11
+
+### Patch Changes
+
+- 1a2fd9f: Fix: ToC not showing up on some pages, and not rendering all the headings.
+
 ## 0.0.10
 
 ### Patch Changes

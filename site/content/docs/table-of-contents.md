@@ -52,12 +52,12 @@ const config = {
 };
 ```
 
-### Disable/Enable ToC for page
+### Disabling / Enabling ToC for a single page
 
-You can also add/remove table of contents for specific pages by setting `toc` to **true** or **false** in the page's frontmatter like below.
+You can also add/remove table of contents for specific pages by setting `showToc` to **true** or **false** in the page's frontmatter like below.
 
 ```md
 ---
-toc: true
+showToc: true
 ---
 ```

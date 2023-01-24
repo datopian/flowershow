@@ -1,6 +1,6 @@
 ---
 layout: unstyled
-toc: false
+showToc: false
 ---
 
 import { Hero } from "components/custom/Hero.jsx"
