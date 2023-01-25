@@ -9,7 +9,7 @@ export const BlogLayout: React.FC<Props> = ({ children, ...frontMatter }) => {
   const { title, created, authorsDetails } = frontMatter;
 
   return (
-    <article className="docs prose prose-headings:font-headings dark:prose-invert prose-a:break-words mx-auto p-6">
+    <article className="docs prose prose-a:text-primary dark:prose-a:text-primary-dark prose-strong:text-primary dark:prose-strong:text-primary-dark prose-code:text-primary dark:prose-code:text-primary-dark prose-headings:text-primary dark:prose-headings:text-primary-dark prose text-primary dark:text-primary-dark prose-headings:font-headings dark:prose-invert prose-a:break-words mx-auto p-6">
       <header>
         <div className="mb-4 flex-col items-center">
           {title && <h1 className="flex justify-center">{title}</h1>}
