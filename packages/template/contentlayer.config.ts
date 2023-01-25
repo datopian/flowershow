@@ -45,7 +45,7 @@ const computedFields: any = {
     resolve: (post) =>
       siteConfig.editLinkRoot
         ? /* eslint no-underscore-dangle: off */
-          `${siteConfig.editLinkRoot}${post._raw.sourceFilePath}/`
+          `${siteConfig.editLinkRoot}/${post._raw.sourceFilePath}`
         : undefined,
   },
 };
