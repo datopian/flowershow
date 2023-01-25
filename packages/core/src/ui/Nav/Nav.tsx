@@ -20,20 +20,8 @@ export const Nav: React.FC<Props> = ({
   defaultTheme,
   themeToggleIcon,
 }) => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [modifierKey, setModifierKey] = useState<string>();
   const [Search, setSearch] = useState<any>(); // TODO types
-
-  useEffect(() => {
-    function onScroll() {
-      setIsScrolled(window.scrollY > 0);
-    }
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, []);
 
   // TODO refactor this, navigator.platform is deprecated
   useEffect(() => {
@@ -49,16 +37,7 @@ export const Nav: React.FC<Props> = ({
   }, [search]);
 
   return (
-    <header
-      className={`
-        sticky top-0 z-50 flex items-center justify-between px-4 py-5 sm:px-6 lg:px-8 max-w-full
-        ${
-          isScrolled
-            ? "dark:bg-background-dark/95 bg-background/95 backdrop-blur [@supports(backdrop-filter:blur(0))]:dark:bg-background-dark/75"
-            : "dark:bg-background-dark bg-background"
-        }
-      `}
-    >
+    <header className="flex items-center justify-between">
       {/* Mobile navigation  */}
       <div className="mr-2 sm:mr-4 flex lg:hidden">
         <NavMobile links={links} />
