@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }) {
   // TODO maybe use computed fields for showEditLink and showToc to make this even cleaner?
   const layoutProps = {
     showToc: pageProps.showToc ?? siteConfig.showToc,
-    showEditLink: pageProps.showEditLink ?? siteConfig.editLinkShow,
+    showEditLink: pageProps.showEditLink ?? siteConfig.showEditLink,
     edit_url: pageProps.edit_url,
     nav: {
       title: siteConfig.navbarTitle?.text || siteConfig.title,
