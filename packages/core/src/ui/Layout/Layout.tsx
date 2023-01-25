@@ -1,5 +1,6 @@
 import Head from "next/head.js";
 import { useEffect, useState } from "react";
+import clsx from "clsx";
 
 import { useTableOfContents } from "./useTableOfContents";
 import { collectHeadings } from "../../utils";
@@ -33,6 +34,7 @@ export const Layout: React.FC<Props> = ({
   url_path,
   edit_url,
 }) => {
+  const [isScrolled, setIsScrolled] = useState(false);
   const [tableOfContents, setTableOfContents] = useState<TocSection[]>([]);
   const [sitemap, setSitemap] = useState<PageLink[]>([]);
   const currentSection = useTableOfContents(tableOfContents);
@@ -55,6 +57,17 @@ export const Layout: React.FC<Props> = ({
     fetchData();
   }, [showSidebar]);
 
+  useEffect(() => {
+    function onScroll() {
+      setIsScrolled(window.scrollY > 0);
+    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
   return (
     <>
       <Head>
@@ -66,41 +79,59 @@ export const Layout: React.FC<Props> = ({
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <div className="min-h-screen bg-background dark:bg-background-dark">
-        <Nav
-          title={nav.title}
-          logo={nav.logo}
-          links={nav.links}
-          search={nav.search}
-          social={nav.social}
-          defaultTheme={theme.defaultTheme}
-          themeToggleIcon={theme.themeToggleIcon}
-        />
-        {/* 3-column wrapper for sidebar, content and toc */}
-        <div className="flex">
+        {/* NAVBAR */}
+        <div
+          className={clsx(
+            "sticky top-0 z-50 w-full",
+            isScrolled
+              ? "dark:bg-background-dark/95 bg-background/95 backdrop-blur [@supports(backdrop-filter:blur(0))]:dark:bg-background-dark/75"
+              : "dark:bg-background-dark bg-background"
+          )}
+        >
+          <div className="max-w-8xl mx-auto">
+            <Nav
+              title={nav.title}
+              logo={nav.logo}
+              links={nav.links}
+              search={nav.search}
+              social={nav.social}
+              defaultTheme={theme.defaultTheme}
+              themeToggleIcon={theme.themeToggleIcon}
+            />
+          </div>
+        </div>
+        {/* 2 column wrapper for sidebar & content */}
+        <div className="max-w-8xl mx-auto px-4 md:px-8">
           {/* SIDEBAR */}
-          {showSidebar && <Sidebar currentPath={url_path} siteMap={sitemap} />}
-          {/* main content and footer wrapper */}
-          <div className="relative mx-auto">
-            {/* MAIN CONTENT */}
-            <main className="flex-auto">
-              {children}
-              {/* EDIT THIS PAGE LINK */}
-              {showEditLink && edit_url && <EditThisPage url={edit_url} />}
-            </main>
-            {/* FOOTER */}
-            <Footer links={nav.links} author={author} />
+          {showSidebar && (
+            <div className="hidden lg:block fixed z-20 inset-0 top-[3.8125rem] left-[max(0px,calc(50%-45rem))] right-auto w-[19.5rem] pb-10 px-8 overflow-y-auto">
+              <Sidebar currentPath={url_path} siteMap={sitemap} />
+            </div>
+          )}
+          {/* MAIN CONTENT & FOOTER */}
+          <div className="lg:pl-[19.5rem]">
+            <div className="max-w-3xl mx-auto pt-10 xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
+              <div className="relative mx-auto">
+                <main className="flex-auto">
+                  {children}
+                  {/* EDIT THIS PAGE LINK */}
+                  {showEditLink && edit_url && <EditThisPage url={edit_url} />}
+                </main>
+                <Footer links={nav.links} author={author} />
+                {/** TABLE OF CONTENTS */}
+                {showToc && tableOfContents.length > 0 && (
+                  <div className="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 overflow-y-auto hidden xl:block">
+                    <TableOfContents
+                      tableOfContents={tableOfContents}
+                      currentSection={currentSection}
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      {/** TABLE OF CONTENTS */}
-      {showToc && tableOfContents.length > 0 && (
-        <div className="hidden xl:fixed xl:right-0 xl:top-[4.5rem] xl:block xl:w-1/5 xl:h-[calc(100vh-4.5rem)] xl:flex-none xl:overflow-y-auto xl:py-16 xl:pr-6 xl:mb-16">
-          <TableOfContents
-            tableOfContents={tableOfContents}
-            currentSection={currentSection}
-          />
-        </div>
-      )}
     </>
   );
 };
