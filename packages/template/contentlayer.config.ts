@@ -24,6 +24,7 @@ const sharedFields: any = {
   layout: { type: "string", default: "docs" },
   showEditLink: { type: "boolean" },
   showToc: { type: "boolean" },
+  showSidebar: { type: "boolean" },
   isDraft: { type: "boolean" },
   data: { type: "list", of: { type: "string" }, default: [] },
 };
