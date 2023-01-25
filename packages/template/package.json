@@ -36,7 +36,8 @@
     "remark-gfm": "^3.0.0",
     "remark-math": "^5.1.1",
     "remark-smartypants": "^2.0.0",
-    "remark-toc": "^8.0.1"
+    "remark-toc": "^8.0.1",
+    "typed.js": "^2.0.12"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.4",
