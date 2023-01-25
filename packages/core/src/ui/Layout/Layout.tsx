@@ -1,7 +1,8 @@
 import Head from "next/head.js";
 import Link from "next/link.js";
+import { useEffect, useState } from "react";
+import clsx from "clsx";
 
-import { useState, useEffect } from "react";
 import { useTableOfContents } from "./useTableOfContents";
 import { collectHeadings } from "../../utils";
 import { Nav } from "../Nav";
@@ -14,7 +15,15 @@ interface Props extends React.PropsWithChildren {
   theme: ThemeConfig;
   showToc: boolean;
   showEditLink: boolean;
+  showSidebar: boolean;
+  url_path: string;
   edit_url?: string;
+}
+
+interface Page {
+  slug: string;
+  url_path: string;
+  title?: string;
 }
 
 export const Layout: React.FC<Props> = ({
@@ -24,9 +33,13 @@ export const Layout: React.FC<Props> = ({
   theme,
   showEditLink,
   showToc,
+  showSidebar,
+  url_path,
   edit_url,
 }) => {
   const [tableOfContents, setTableOfContents] = useState([] as any); // TODO types
+  const [sitemap, setSitemap] = useState<Page[]>([]);
+  const currentSection = useTableOfContents(tableOfContents);
   const router: NextRouter = useRouter();
 
   useEffect(() => {
@@ -35,18 +48,29 @@ export const Layout: React.FC<Props> = ({
       document.querySelectorAll("h1,h2,h3");
     const toc = collectHeadings(headingNodes);
     setTableOfContents(toc ?? []);
-  }, [router.asPath]); // update table of contents on route change with next/link
+  }, [router.asPath, showToc]); // update table of contents on route change with next/link
 
-  const currentSection = useTableOfContents(tableOfContents);
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch("/search.json");
+      const json = await res.json();
+      setSitemap(json);
+    };
+    fetchData();
+  }, [showSidebar]);
 
-  function isActive(section) {
+  function isActiveSection(section) {
     if (section.id === currentSection) {
       return true;
     }
     if (!section.children) {
       return false;
     }
-    return section.children.findIndex(isActive) > -1;
+    return section.children.findIndex(isActiveSection) > -1;
+  }
+
+  function isActivePath(path) {
+    return path === url_path;
   }
 
   return (
@@ -70,38 +94,65 @@ export const Layout: React.FC<Props> = ({
           defaultTheme={theme.defaultTheme}
           themeToggleIcon={theme.themeToggleIcon}
         />
-        <div className="relative mx-auto">
-          <main className="flex-auto">
-            {children}
-            {showEditLink && edit_url && (
-              <div className="mb-10 prose dark:prose-invert p-6 mx-auto">
-                <a
-                  className="flex no-underline font-semibold justify-center"
-                  href={edit_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Edit this page
-                  <span className="mx-1">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                      />
-                    </svg>
-                  </span>
-                </a>
+        {/* sidebar and content wrapper */}
+        <div className="flex flex-grow px-4 py-5 sm:px-6 lg:px-8 max-w-full">
+          {showSidebar && (
+            <div className="hidden md:fixed md:inset-y-0 md:top-[81px] md:flex md:w-64 md:flex-col">
+              <div className="flex min-h-0 flex-1 flex-col border-r border-gray-200 bg-white">
+                <div className="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
+                  <nav className="mt-5 flex-1 space-y-1 bg-white px-2">
+                    {sitemap.map((item) => (
+                      <Link
+                        key={item.url_path}
+                        href={item.url_path}
+                        className={clsx(
+                          isActivePath(item.url_path)
+                            ? "bg-gray-100 text-gray-900"
+                            : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+                          "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                        )}
+                      >
+                        {item.title ?? item.slug}
+                      </Link>
+                    ))}
+                  </nav>
+                </div>
               </div>
-            )}
-          </main>
+            </div>
+          )}
+          <div className="relative mx-auto">
+            <main className="flex-auto">
+              {children}
+              {showEditLink && edit_url && (
+                <div className="mb-10 prose dark:prose-invert p-6 mx-auto">
+                  <a
+                    className="flex no-underline font-semibold justify-center"
+                    href={edit_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Edit this page
+                    <span className="mx-1">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                        />
+                      </svg>
+                    </span>
+                  </a>
+                </div>
+              )}
+            </main>
+          </div>
         </div>
         <footer className="bg-background dark:bg-background-dark prose dark:prose-invert max-w-none flex flex-col items-center justify-center w-full h-auto pt-10 pb-20">
           <div className="flex w-full flex-wrap justify-center">
@@ -169,7 +220,7 @@ export const Layout: React.FC<Props> = ({
                     <Link
                       href={`#${section.id}`}
                       className={
-                        isActive(section)
+                        isActiveSection(section)
                           ? "text-sky-500"
                           : "font-normal text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300"
                       }
@@ -184,7 +235,7 @@ export const Layout: React.FC<Props> = ({
                           <Link
                             href={`#${subSection.id}`}
                             className={
-                              isActive(subSection)
+                              isActiveSection(subSection)
                                 ? "text-sky-500"
                                 : "hover:text-slate-600 dark:hover:text-slate-300"
                             }
@@ -199,7 +250,7 @@ export const Layout: React.FC<Props> = ({
                                     <Link
                                       href={`#${thirdSection.id}`}
                                       className={
-                                        isActive(thirdSection)
+                                        isActiveSection(thirdSection)
                                           ? "text-sky-500"
                                           : "hover:text-slate-600 dark:hover:text-slate-300"
                                       }
