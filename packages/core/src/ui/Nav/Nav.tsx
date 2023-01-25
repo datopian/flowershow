@@ -52,7 +52,11 @@ export const Nav: React.FC<Props> = ({
     <header
       className={`
         sticky top-0 z-50 flex items-center justify-between px-4 py-5 sm:px-6 lg:px-8 max-w-full
-        ${isScrolled ? "backdrop-blur" : ""}
+        ${
+          isScrolled
+            ? "dark:bg-background-dark/95 bg-background/95 backdrop-blur"
+            : "dark:bg-background-dark bg-background"
+        }
       `}
     >
       {/* Mobile navigation  */}
