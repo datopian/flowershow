@@ -13,7 +13,7 @@ const config = {
     "https://github.com/flowershow/flowershow/edit/main/site/content",
   showEditLink: true,
   showToc: true,
-  showSidebar: true,
+  showSidebar: false,
   analytics: "G-RQWLTRWBS2",
   navLinks: [
     { href: "/#overview", name: "Overview" },
