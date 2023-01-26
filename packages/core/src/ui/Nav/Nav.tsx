@@ -37,7 +37,7 @@ export const Nav: React.FC<Props> = ({
   }, [search]);
 
   return (
-    <header className="flex items-center justify-between">
+    <header className="flex justify-between">
       {/* Mobile navigation  */}
       <div className="mr-2 sm:mr-4 flex lg:hidden">
         <NavMobile links={links} />
@@ -53,6 +53,7 @@ export const Nav: React.FC<Props> = ({
           </div>
         )}
       </div>
+      {/* Search field and social links */}
       <div className="relative flex items-center basis-auto justify-end gap-6 xl:gap-8 md:shrink w-full">
         {Search && (
           <Search>
