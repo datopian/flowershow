@@ -29,3 +29,7 @@ You can also enable/disable the sidebar for specific pages by setting `showSideb
 showToc: false
 ---
 ```
+
+## 🚧 Configuring sidebar contents
+
+Currently all the pages on your website (apart from pages marked as drafts) will be listed in the Sidebar. In the next iteration we'll enable configuring it as well as grouping of your pages.
