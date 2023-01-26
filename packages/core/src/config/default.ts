@@ -3,6 +3,7 @@ export const defaultConfig = {
   description: "",
   showEditLink: false,
   showToc: true,
+  showSidebar: false,
   showLinkPreviews: true,
   author: "",
   authorLogo: "",
