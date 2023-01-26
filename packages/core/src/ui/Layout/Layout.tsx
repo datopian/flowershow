@@ -51,8 +51,13 @@ export const Layout: React.FC<Props> = ({
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch("/search.json");
-      const json = await res.json();
-      setSitemap(json);
+      const json = await res.json(); // TODO types
+      const sitemap = json.sort((a, b) => {
+        const displayNameA = a.title ?? a.slug;
+        const displayNameB = b.title ?? b.slug;
+        return displayNameA.localeCompare(displayNameB);
+      });
+      setSitemap(sitemap);
     };
     fetchData();
   }, [showSidebar]);
@@ -100,8 +105,14 @@ export const Layout: React.FC<Props> = ({
             />
           </div>
         </div>
-        {/* wrapper for sidebar & content */}
-        <div className="max-w-8xl mx-auto px-4 md:px-8">
+        {/* wrapper for sidebar, main content and ToC */}
+        <div
+          className={clsx(
+            "max-w-8xl mx-auto px-4 md:px-8",
+            showSidebar && "lg:ml-[18rem]",
+            showToc && "xl:mr-[18rem]"
+          )}
+        >
           {/* SIDEBAR */}
           {showSidebar && (
             <div className="hidden lg:block fixed z-20 w-[18rem] top-[4.6rem] right-auto bottom-0 left-[max(0px,calc(50%-44rem))] p-8 overflow-y-auto">
@@ -109,14 +120,12 @@ export const Layout: React.FC<Props> = ({
             </div>
           )}
           {/* MAIN CONTENT & FOOTER */}
-          <div className="lg:ml-[18rem] xl:mr-[18rem]">
-            <main className="mx-auto pt-8">
-              {children}
-              {/* EDIT THIS PAGE LINK */}
-              {showEditLink && edit_url && <EditThisPage url={edit_url} />}
-            </main>
-            <Footer links={nav.links} author={author} />
-          </div>
+          <main className="mx-auto pt-8">
+            {children}
+            {/* EDIT THIS PAGE LINK */}
+            {showEditLink && edit_url && <EditThisPage url={edit_url} />}
+          </main>
+          <Footer links={nav.links} author={author} />
           {/** TABLE OF CONTENTS */}
           {showToc && tableOfContents.length > 0 && (
             <div className="hidden xl:block fixed z-20 w-[18rem] top-[4.6rem] bottom-0 right-[max(0px,calc(50%-44rem))] left-auto p-8 overflow-y-auto">
