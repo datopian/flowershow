@@ -46,15 +46,7 @@ authors: [John Doe, Jan Kowalski]
 Blog content here
 ```
 
-## Using all files in a given folder
-
-In the above example we have manually marked some files as blog posts by using a frontmatter `type` field and setting it to `Blog`. However, by default, all files inside the `<your-content-folder>/blog` directory will be treated as blog posts by Flowershow.
-
-> [!note]
-> If you want, you can also use a different folder by setting `blogDir` in your `config.js` file. Read [[blog]] to learn more.
-> So, let's create this folder and move all our blog posts there. Each blog post will be available under `/blog/my-blog-post*.md`.
-
-### Marking all files in a given folder
+## Marking all files in a given folder
 
 By default, all files inside the `<your-content-folder>/blog` will be treated as blog/news/article posts.
 
