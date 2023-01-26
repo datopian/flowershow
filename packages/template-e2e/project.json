@@ -11,7 +11,8 @@
           "src/support/testsetup.sh ../template \"$(pwd)\"/src/fixtures/content \"$(pwd)\"/src/fixtures/components",
           "npm run dev --prefix ../template -- -p 3030 &",
           "playwright test",
-          "src/support/testteardown.sh ../template \"$(pwd)\"/../../site/content \"$(pwd)\"/../../site/components"
+          "src/support/testteardown.sh ../template \"$(pwd)\"/../../site/content \"$(pwd)\"/../../site/components",
+          "fuser -k 3030/tcp"
         ],
         "parallel": false,
         "cwd": "packages/template-e2e"

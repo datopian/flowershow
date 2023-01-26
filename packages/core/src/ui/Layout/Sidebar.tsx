@@ -18,7 +18,7 @@ export const Sidebar: React.FC<Props> = ({ currentPath, siteMap }) => {
   }
 
   return (
-    <nav className="">
+    <nav data-testid="lhs-sidebar">
       {siteMap.map((item) => (
         <Link
           key={item.url_path}
