@@ -88,7 +88,7 @@ export const Layout: React.FC<Props> = ({
               : "dark:bg-background-dark bg-background"
           )}
         >
-          <div className="max-w-8xl mx-auto">
+          <div className="max-w-8xl mx-auto p-4 md:px-8">
             <Nav
               title={nav.title}
               logo={nav.logo}
@@ -100,36 +100,32 @@ export const Layout: React.FC<Props> = ({
             />
           </div>
         </div>
-        {/* 2 column wrapper for sidebar & content */}
+        {/* wrapper for sidebar & content */}
         <div className="max-w-8xl mx-auto px-4 md:px-8">
           {/* SIDEBAR */}
           {showSidebar && (
-            <div className="hidden lg:block fixed z-20 inset-0 top-[3.8125rem] left-[max(0px,calc(50%-45rem))] right-auto w-[19.5rem] pb-10 px-8 overflow-y-auto">
+            <div className="hidden lg:block fixed z-20 w-[18rem] top-[4.6rem] right-auto bottom-0 left-[max(0px,calc(50%-44rem))] p-8 overflow-y-auto">
               <Sidebar currentPath={url_path} siteMap={sitemap} />
             </div>
           )}
           {/* MAIN CONTENT & FOOTER */}
-          <div className="lg:pl-[19.5rem]">
-            <div className="max-w-3xl mx-auto pt-10 xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
-              <div className="relative mx-auto">
-                <main className="flex-auto">
-                  {children}
-                  {/* EDIT THIS PAGE LINK */}
-                  {showEditLink && edit_url && <EditThisPage url={edit_url} />}
-                </main>
-                <Footer links={nav.links} author={author} />
-                {/** TABLE OF CONTENTS */}
-                {showToc && tableOfContents.length > 0 && (
-                  <div className="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 overflow-y-auto hidden xl:block">
-                    <TableOfContents
-                      tableOfContents={tableOfContents}
-                      currentSection={currentSection}
-                    />
-                  </div>
-                )}
-              </div>
-            </div>
+          <div className="lg:ml-[18rem] xl:mr-[18rem]">
+            <main className="mx-auto pt-8">
+              {children}
+              {/* EDIT THIS PAGE LINK */}
+              {showEditLink && edit_url && <EditThisPage url={edit_url} />}
+            </main>
+            <Footer links={nav.links} author={author} />
           </div>
+          {/** TABLE OF CONTENTS */}
+          {showToc && tableOfContents.length > 0 && (
+            <div className="hidden xl:block fixed z-20 w-[18rem] top-[4.6rem] bottom-0 right-[max(0px,calc(50%-44rem))] left-auto p-8 overflow-y-auto">
+              <TableOfContents
+                tableOfContents={tableOfContents}
+                currentSection={currentSection}
+              />
+            </div>
+          )}
         </div>
       </div>
     </>
