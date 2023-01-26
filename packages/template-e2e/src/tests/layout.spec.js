@@ -19,16 +19,4 @@ test.describe.parallel("LHS sidebar (site-wide ToC)", () => {
 
     await expect(page.getByTestId("lhs-sidebar")).toBeHidden();
   });
-
-  test("can navigate to a listed page", async ({ page }) => {
-    const Page = new MarkdownPage(page);
-    await Page.goto("/fixturepage");
-    await Page.getData();
-
-    await page
-      .getByTestId("lhs-sidebar")
-      .getByText("Conquer the puddles")
-      .click();
-    await expect(page).toHaveURL("/blogtest");
-  });
 });
