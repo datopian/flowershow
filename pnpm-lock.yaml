@@ -243,6 +243,7 @@ importers:
       remark-smartypants: ^2.0.0
       remark-toc: ^8.0.1
       tailwindcss: ^3.1.8
+      typed.js: ^2.0.12
     dependencies:
       "@flowershow/core": link:../core
       "@flowershow/remark-callouts": link:../remark-callouts
@@ -271,6 +272,7 @@ importers:
       remark-math: 5.1.1
       remark-smartypants: 2.0.0
       remark-toc: 8.0.1
+      typed.js: 2.0.12
     devDependencies:
       autoprefixer: 10.4.13_postcss@8.4.20
       cross-env: 7.0.3
@@ -20900,6 +20902,13 @@ packages:
         integrity: sha512-KNNZtayBCtmnNmbo5mG47p1XsCyrx6iVqomjcZnec/1Y5GGARaxPs6r49RnSPeUP3YjNYiU9sQHAtY4BBvnZwg==,
       }
     dev: true
+
+  /typed.js/2.0.12:
+    resolution:
+      {
+        integrity: sha512-lyACZh1cu+vpfYY3DG/bvsGLXXbdoDDpWxmqta10IQUdMXisMXOEyl+jos+YT9uBbzK4QaKYBjT3R0kTJO0Slw==,
+      }
+    dev: false
 
   /typescript/4.9.4:
     resolution:
