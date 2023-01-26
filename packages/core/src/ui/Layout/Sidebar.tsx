@@ -25,8 +25,8 @@ export const Sidebar: React.FC<Props> = ({ currentPath, siteMap }) => {
           href={item.url_path}
           className={clsx(
             isActivePath(item.url_path)
-              ? "bg-gray-200 text-gray-900"
-              : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+              ? "text-sky-500"
+              : "font-normal text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300",
             "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
           )}
         >
