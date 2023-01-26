@@ -34,7 +34,10 @@ export function Hero() {
               <h1 className="inline bg-gradient-to-r from-indigo-200 via-sky-400 to-indigo-200 bg-clip-text text-6xl tracking-tight text-transparent">
                 Publish your
                 <br />
-                <span ref={el} />
+                <span
+                  className="md:whitespace-pre lg:whitespace-normal xl:whitespace-pre"
+                  ref={el}
+                />
               </h1>
             </div>
             <p className="mt-4 text-3xl text-primary dark:text-primary-dark tracking-tight">
