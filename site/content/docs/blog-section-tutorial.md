@@ -6,7 +6,7 @@ created: 2023-01-25
 authors: [philippe-du-preez]
 ---
 
-If you're writing blogs, news, or articles on your site and you are familiar with Nextjs, then this is for you! By using [Flowershow](https://flowershow.app/) as a Next.js template, this is easier than ever!
+If you're writing blogs, news, or articles on your site, then this is for you! By using [Flowershow](https://flowershow.app/) as a Next.js template, this is easier than ever!
 
 You probably would like to list all your posts in an elegant way somewhere on your website and display each of them a certain way, including displaying the authors. We are covering **all** of this in this tutorial.
 
