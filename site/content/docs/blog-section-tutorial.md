@@ -139,7 +139,7 @@ authors: [John Doe]
 ---
 ```
 
-That's it! We can now see a list of all the blog posts we've just created when we visit `http://localhost:3000/blogs`.
+That's it!
 
 ![[blogs-list.png]]
 
