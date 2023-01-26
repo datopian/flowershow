@@ -34,7 +34,7 @@ Blog content here
 ## Blog post frontmatter fields
 
 - `created` (required) - date that will be displayed on the blog page and that will be used to sort blog search results
-- `authors` (optional)
+- `authors` (optional) - authors of the blog that will be displayed on the blog page
 
 ```md
 ---
