@@ -32,4 +32,6 @@ showToc: false
 
 ## 🚧 Configuring sidebar contents
 
-Currently all the pages on your website (apart from pages marked as drafts) will be listed in the Sidebar. In the next iteration we'll enable configuring it as well as grouping of your pages.
+Currently all the pages on your website (apart from pages marked as drafts) will be listed in the Sidebar, sorted alphabetically by their frontmatter's `title` field or their slug (if no `title` is set).
+
+In the next iteration we'll enable configuring listed pages as well as grouping them.
