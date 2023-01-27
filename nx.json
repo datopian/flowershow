@@ -9,7 +9,7 @@
   "implicitDependencies": {},
   "namedInputs": {
     "sharedGlobals": [],
-    "siteContent": ["{workspaceRoot}/site"],
+    "siteContent": ["{workspaceRoot}/site/**/*"],
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "production": [
       "default",
