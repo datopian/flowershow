@@ -1,1 +1,5 @@
+---
+showSidebar: false
+---
+
 # Hello Flowershow
