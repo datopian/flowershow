@@ -5,7 +5,8 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const PORT = 3000;
+// it seems, for github workflow to work, port needs to be different than 3000
+const PORT = 3030;
 
 // Set webServer.url and use.baseURL with the location of the WebServer respecting the correct set port
 const baseURL = `http://localhost:${PORT}`;
@@ -24,7 +25,7 @@ const config = {
   // Run your local dev server before starting the tests:
   // https://playwright.dev/docs/test-advanced#launching-a-development-web-server-during-the-tests
   webServer: {
-    command: "npm run dev --prefix ../template",
+    command: `npm run dev --prefix ../template -- -p ${PORT}`,
     url: baseURL,
     timeout: 60 * 1000,
     // reuseExistingServer: !process.env.CI,
