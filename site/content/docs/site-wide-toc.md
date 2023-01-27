@@ -26,7 +26,7 @@ You can also enable/disable the sidebar for specific pages by setting `showSideb
 
 ```md
 ---
-showToc: false
+showSidebar: false
 ---
 ```
 
