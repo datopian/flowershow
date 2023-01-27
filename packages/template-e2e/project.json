@@ -6,6 +6,7 @@
   "targets": {
     "e2e": {
       "executor": "nx:run-commands",
+      "inputs": ["default", "{workspaceRoot}/packages/template/**/*"],
       "options": {
         "commands": [
           "src/support/testsetup.sh ../template \"$(pwd)\"/src/fixtures/content \"$(pwd)\"/src/fixtures/components",
@@ -40,5 +41,9 @@
     }
   },
   "tags": [],
-  "implicitDependencies": ["template"]
+  "implicitDependencies": [
+    "remark-callouts",
+    "remark-wiki-link",
+    "remark-embed"
+  ]
 }
