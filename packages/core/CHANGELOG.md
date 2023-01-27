@@ -1,5 +1,11 @@
 # @flowershow/core
 
+## 0.1.0
+
+### Minor Changes
+
+- 411995f: Feature: sidebar with site-wide table of contents.
+
 ## 0.0.11
 
 ### Patch Changes
