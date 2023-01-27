@@ -1,6 +1,7 @@
 ---
 title: Conquer the seven seas
 description: I will conquer all the seas across the globe
+showSidebar: false
 created: 2022-11-28
 authors: [john-doe, jane123, Joe Bloggs, john-nokes, The Other Guy]
 ---
