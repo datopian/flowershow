@@ -38,6 +38,15 @@ export interface ThemeConfig {
   themeToggleIcon: string;
 }
 
+// ToC
+
+export interface TocSection {
+  id: string;
+  title: string;
+  level: string;
+  children?: any;
+}
+
 // social
 export type SocialPlatform = "github" | "discord";
 

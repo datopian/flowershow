@@ -1,10 +1,5 @@
 // ToC: get the html nodelist for headings
-interface TocSection {
-  id: string;
-  title: string;
-  level: string;
-  children?: any;
-}
+import { TocSection } from "../ui/types";
 
 export function collectHeadings(nodes: NodeListOf<HTMLHeadingElement>) {
   const sections: Array<TocSection> = [];

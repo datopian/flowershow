@@ -1,6 +1,7 @@
 ---
 title: Conquer the puddles
 description: I will conquer all the puddles in my nearby vicinity
+showSidebar: false
 created: 2022-11-30
 type: Blog
 ---

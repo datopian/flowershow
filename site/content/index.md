@@ -1,6 +1,7 @@
 ---
 layout: unstyled
 showToc: false
+showSidebar: false
 ---
 
 import { Hero } from "components/custom/Hero.jsx"
