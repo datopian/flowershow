@@ -71,7 +71,7 @@ export default function Page({ globals, body, ...meta }) {
             : siteConfig?.nextSeo?.openGraph?.images || [],
         }}
       />
-      <MDXPage components={MDXComponents} {...meta} />;
+      <MDXPage components={MDXComponents} {...meta} />
     </>
   );
 }
