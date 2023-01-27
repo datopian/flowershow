@@ -5,7 +5,7 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const PORT = 3030;
+const PORT = 3000;
 
 // Set webServer.url and use.baseURL with the location of the WebServer respecting the correct set port
 const baseURL = `http://localhost:${PORT}`;
@@ -13,7 +13,7 @@ const baseURL = `http://localhost:${PORT}`;
 // Reference: https://playwright.dev/docs/test-configuration
 const config = {
   // Timeout per test
-  timeout: 120 * 1000,
+  timeout: 30 * 1000,
   // Test directory
   testDir: path.join(__dirname, "src/tests"),
   // If a test fails, retry it additional 2 times
@@ -23,12 +23,12 @@ const config = {
 
   // Run your local dev server before starting the tests:
   // https://playwright.dev/docs/test-advanced#launching-a-development-web-server-during-the-tests
-  // webServer: {
-  //   command: 'npm run dev',
-  //   url: baseURL,
-  //   timeout: 120 * 1000,
-  //   reuseExistingServer: !process.env.CI,
-  // },
+  webServer: {
+    command: "npm run dev --prefix ../template",
+    url: baseURL,
+    timeout: 60 * 1000,
+    // reuseExistingServer: !process.env.CI,
+  },
 
   use: {
     // Use baseURL so to make navigations relative.
