@@ -4,10 +4,12 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "next dev",
+    "predev": "npm run generate",
+    "prebuild": "npm run generate",
     "build": "next build",
-    "postbuild": "cross-env NODE_OPTIONS=\"--experimental-json-modules --experimental-modules\" node ./scripts/search.mjs",
     "start": "next start",
-    "export": "npm run build && next export"
+    "export": "npm run build && next export",
+    "generate": "contentlayer build && cross-env NODE_OPTIONS=\"--experimental-json-modules --experimental-modules\" node ./scripts/search.mjs"
   },
   "dependencies": {
     "@flowershow/core": "^0.1.0",
