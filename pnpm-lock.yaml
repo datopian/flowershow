@@ -220,6 +220,9 @@ importers:
       "@silvenon/remark-smartypants": ^1.0.0
       "@tailwindcss/line-clamp": ^0.4.2
       "@tailwindcss/typography": ^0.5.2
+      "@types/node": 18.11.17
+      "@types/react": 18.0.26
+      "@types/react-dom": 18.0.9
       autoprefixer: ^10.4.4
       contentlayer: ^0.2.8
       cross-env: ^7.0.3
@@ -244,6 +247,7 @@ importers:
       remark-toc: ^8.0.1
       tailwindcss: ^3.1.8
       typed.js: ^2.0.12
+      typescript: ^4.9.4
     dependencies:
       "@flowershow/core": link:../core
       "@flowershow/remark-callouts": link:../remark-callouts
@@ -253,6 +257,9 @@ importers:
       "@silvenon/remark-smartypants": 1.0.0
       "@tailwindcss/line-clamp": 0.4.2_tailwindcss@3.2.4
       "@tailwindcss/typography": 0.5.8_tailwindcss@3.2.4
+      "@types/node": 18.11.17
+      "@types/react": 18.0.26
+      "@types/react-dom": 18.0.9
       contentlayer: 0.2.9_esbuild@0.14.54
       date-fns: 2.29.3
       gray-matter: 4.0.3
@@ -273,6 +280,7 @@ importers:
       remark-smartypants: 2.0.0
       remark-toc: 8.0.1
       typed.js: 2.0.12
+      typescript: 4.9.4
     devDependencies:
       autoprefixer: 10.4.13_postcss@8.4.20
       cross-env: 7.0.3
@@ -5889,7 +5897,6 @@ packages:
       {
         integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==,
       }
-    dev: true
 
   /@types/qs/6.9.7:
     resolution:
@@ -5912,7 +5919,6 @@ packages:
       }
     dependencies:
       "@types/react": 18.0.26
-    dev: true
 
   /@types/react/18.0.26:
     resolution:
@@ -5923,7 +5929,6 @@ packages:
       "@types/prop-types": 15.7.5
       "@types/scheduler": 0.16.2
       csstype: 3.1.1
-    dev: true
 
   /@types/resolve/1.17.1:
     resolution:
@@ -5953,7 +5958,6 @@ packages:
       {
         integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==,
       }
-    dev: true
 
   /@types/semver/6.2.3:
     resolution:
@@ -8685,7 +8689,6 @@ packages:
       {
         integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==,
       }
-    dev: true
 
   /csv-generate/3.4.3:
     resolution:
@@ -20917,7 +20920,6 @@ packages:
       }
     engines: { node: ">=4.2.0" }
     hasBin: true
-    dev: true
 
   /unbox-primitive/1.0.2:
     resolution:
