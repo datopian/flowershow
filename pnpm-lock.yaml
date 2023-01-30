@@ -161,6 +161,7 @@ importers:
       "@docsearch/react": ^3.3.0
       "@floating-ui/react-dom": ^1.2.1
       "@floating-ui/react-dom-interactions": ^0.13.3
+      "@giscus/react": ^2.2.6
       "@headlessui/react": ^1.7.6
       clsx: ^1.2.1
       framer-motion: ^8.4.3
@@ -176,6 +177,7 @@ importers:
       "@docsearch/react": 3.3.0_ftygaz6e6e5e4cecsqmsnm4myu
       "@floating-ui/react-dom": 1.2.1_biqbaboplfbrettd7655fr4n2y
       "@floating-ui/react-dom-interactions": 0.13.3_biqbaboplfbrettd7655fr4n2y
+      "@giscus/react": 2.2.6_biqbaboplfbrettd7655fr4n2y
       "@headlessui/react": 1.7.6_biqbaboplfbrettd7655fr4n2y
       clsx: 1.2.1
       framer-motion: 8.4.3_biqbaboplfbrettd7655fr4n2y
@@ -2821,6 +2823,20 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
+  /@giscus/react/2.2.6_biqbaboplfbrettd7655fr4n2y:
+    resolution:
+      {
+        integrity: sha512-qGjikDm7euLOCfMPn500d7F3UIl/qI55/dWF4ALC5Fo/7i5qktKCAwy6/zop93PjP0hJL6mi54K6x36SyvaLyQ==,
+      }
+    peerDependencies:
+      react: ^16 || ^17 || ^18
+      react-dom: ^16 || ^17 || ^18
+    dependencies:
+      giscus: 1.2.6
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
   /@grpc/grpc-js/1.8.0:
     resolution:
       {
@@ -3504,6 +3520,22 @@ packages:
         integrity: sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==,
       }
     dev: true
+
+  /@lit-labs/ssr-dom-shim/1.0.0:
+    resolution:
+      {
+        integrity: sha512-ic93MBXfApIFTrup4a70M/+ddD8xdt2zxxj9sRwHQzhS9ag/syqkD8JPdTXsc1gUy2K8TTirhlCqyTEM/sifNw==,
+      }
+    dev: false
+
+  /@lit/reactive-element/1.6.1:
+    resolution:
+      {
+        integrity: sha512-va15kYZr7KZNNPZdxONGQzpUr+4sxVu7V/VG7a8mRfPPXUyhEYj5RzXCQmGrlP3tAh0L3HHm5AjBMFYRqlM9SA==,
+      }
+    dependencies:
+      "@lit-labs/ssr-dom-shim": 1.0.0
+    dev: false
 
   /@manypkg/find-root/1.1.0:
     resolution:
@@ -6030,6 +6062,13 @@ packages:
         integrity: sha512-Q5vtl1W5ue16D+nIaW8JWebSSraJVlK+EthKn7e7UcD4KWsaSJ8BqGPXNaPghgtcn/fhvrN17Tv8ksUsQpiplw==,
       }
     dev: true
+
+  /@types/trusted-types/2.0.2:
+    resolution:
+      {
+        integrity: sha512-F5DIZ36YVLE+PN+Zwws4kJogq47hNgX3Nx6WyDJ3kcplxyke3XIzB8uK5n/Lpm1HBsbGzd6nmGehL8cPekP+Tg==,
+      }
+    dev: false
 
   /@types/unist/2.0.6:
     resolution:
@@ -11757,6 +11796,15 @@ packages:
       }
     dev: true
 
+  /giscus/1.2.6:
+    resolution:
+      {
+        integrity: sha512-VqMWmCdlUk9krX2M3oMgn9/Y6XEbRXRHtfhNTuRn/AdeGOeko54OFEIsizQ/nYWymuUNGZR48KGptCtYL77rtA==,
+      }
+    dependencies:
+      lit: 2.6.1
+    dev: false
+
   /github-slugger/1.5.0:
     resolution:
       {
@@ -14724,6 +14772,36 @@ packages:
       through: 2.3.8
       wrap-ansi: 7.0.0
     dev: true
+
+  /lit-element/3.2.2:
+    resolution:
+      {
+        integrity: sha512-6ZgxBR9KNroqKb6+htkyBwD90XGRiqKDHVrW/Eh0EZ+l+iC+u+v+w3/BA5NGi4nizAVHGYvQBHUDuSmLjPp7NQ==,
+      }
+    dependencies:
+      "@lit/reactive-element": 1.6.1
+      lit-html: 2.6.1
+    dev: false
+
+  /lit-html/2.6.1:
+    resolution:
+      {
+        integrity: sha512-Z3iw+E+3KKFn9t2YKNjsXNEu/LRLI98mtH/C6lnFg7kvaqPIzPn124Yd4eT/43lyqrejpc5Wb6BHq3fdv4S8Rw==,
+      }
+    dependencies:
+      "@types/trusted-types": 2.0.2
+    dev: false
+
+  /lit/2.6.1:
+    resolution:
+      {
+        integrity: sha512-DT87LD64f8acR7uVp7kZfhLRrHkfC/N4BVzAtnw9Yg8087mbBJ//qedwdwX0kzDbxgPccWRW6mFwGbRQIxy0pw==,
+      }
+    dependencies:
+      "@lit/reactive-element": 1.6.1
+      lit-element: 3.2.2
+      lit-html: 2.6.1
+    dev: false
 
   /load-yaml-file/0.2.0:
     resolution:
