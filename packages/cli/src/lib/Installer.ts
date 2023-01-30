@@ -154,7 +154,7 @@ export default class Installer {
         `${contentPath}/index.md`,
         homePageContent,
         { flag: "a" },
-        (err) => {} // eslint-disable-line no-unused-vars
+        (err) => {} // eslint-disable-line @typescript-eslint/no-empty-function
       );
     }
 
@@ -165,9 +165,9 @@ export default class Installer {
       );
       fs.writeFile(
         `${contentPath}/config.js`,
-        "{}",
+        "const config = {};\nexport default config;",
         { flag: "a" },
-        (err) => {} // eslint-disable-line no-unused-vars
+        (err) => {} // eslint-disable-line @typescript-eslint/no-empty-function
       );
     }
 
