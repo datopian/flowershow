@@ -32,3 +32,4 @@ Flowershow supports **CommonMark** and **GitHub Flavored Markdown**, but also ma
 13. [[theme|Dark-light theme]]
 14. [[search|Full-text search]]
 15. [[docs/blog|Blog support]]
+16. [[page-comments|Page comments]]
