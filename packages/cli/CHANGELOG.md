@@ -1,5 +1,11 @@
 # flowershow
 
+## 0.1.4
+
+### Patch Changes
+
+- Fix: incorrect `config.js` file created by the CLI
+
 ## 0.1.3
 
 ### Patch Changes
