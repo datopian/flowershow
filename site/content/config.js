@@ -14,6 +14,16 @@ const config = {
   showEditLink: true,
   showToc: true,
   showSidebar: false,
+  comments: {
+    provider: "giscus", // supported providers: giscus, utterances
+    pages: ["blog"], // page directories where we want commments
+    config: {
+      repo: process.env.NEXT_PUBLIC_GISCUS_REPO,
+      repositoryId: process.env.NEXT_PUBLIC_GISCUS_REPOSITORY_ID,
+      category: process.env.NEXT_PUBLIC_GISCUS_CATEGORY,
+      categoryId: process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID,
+    },
+  },
   analytics: "G-RQWLTRWBS2",
   navLinks: [
     { href: "/#overview", name: "Overview" },
