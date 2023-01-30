@@ -8,10 +8,59 @@ import { Nav } from "../Nav";
 import { Footer } from "./Footer";
 import { EditThisPage } from "./EditThisPage";
 import { TableOfContents } from "./TableOfContents";
-import { Sidebar, PageLink } from "./Sidebar";
+import { Sidebar, NavItem } from "./Sidebar";
 import { NavConfig, AuthorConfig, ThemeConfig, TocSection } from "../types";
 import { NextRouter, useRouter } from "next/router.js";
 import { Comments, CommentsConfig } from "../Comments";
+
+const navigation = [
+  { name: "Dashboard", href: "#" },
+  {
+    name: "Team",
+    children: [
+      { name: "Overview", href: "#" },
+      { name: "Members", href: "#" },
+      { name: "Calendar", href: "#" },
+      { name: "Settings", href: "#" },
+    ],
+  },
+  {
+    name: "Projects",
+    children: [
+      { name: "Overview", href: "#" },
+      { name: "Members", href: "#" },
+      { name: "Calendar", href: "#" },
+      { name: "Settings", href: "#" },
+    ],
+  },
+  {
+    name: "Calendar",
+    children: [
+      { name: "Overview", href: "#" },
+      { name: "Members", href: "#" },
+      { name: "Calendar", href: "#" },
+      { name: "Settings", href: "#" },
+    ],
+  },
+  {
+    name: "Documents",
+    children: [
+      { name: "Overview", href: "#" },
+      { name: "Members", href: "#" },
+      { name: "Calendar", href: "#" },
+      { name: "Settings", href: "#" },
+    ],
+  },
+  {
+    name: "Reports",
+    children: [
+      { name: "Overview", href: "#" },
+      { name: "Members", href: "#" },
+      { name: "Calendar", href: "#" },
+      { name: "Settings", href: "#" },
+    ],
+  },
+];
 
 interface Props extends React.PropsWithChildren {
   nav: NavConfig;
@@ -41,7 +90,7 @@ export const Layout: React.FC<Props> = ({
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [tableOfContents, setTableOfContents] = useState<TocSection[]>([]);
-  const [sitemap, setSitemap] = useState<PageLink[]>([]);
+  const [sitemap, setSitemap] = useState<any[]>([]);
   const currentSection = useTableOfContents(tableOfContents);
   const router: NextRouter = useRouter();
 
@@ -121,7 +170,7 @@ export const Layout: React.FC<Props> = ({
           {/* SIDEBAR */}
           {showSidebar && (
             <div className="hidden lg:block fixed z-20 w-[18rem] top-[4.6rem] right-auto bottom-0 left-[max(0px,calc(50%-44rem))] p-8 overflow-y-auto">
-              <Sidebar currentPath={url_path} siteMap={sitemap} />
+              <Sidebar currentPath={url_path} nav={navigation} />
             </div>
           )}
           {/* MAIN CONTENT & FOOTER */}
