@@ -20,8 +20,11 @@ function MyApp({ Component, pageProps }) {
   const layoutProps = {
     showToc: pageProps.showToc ?? siteConfig.showToc,
     showEditLink: pageProps.showEditLink ?? siteConfig.showEditLink,
+    showComments: pageProps.showComments,
+    commentsConfig: siteConfig.comments,
     edit_url: pageProps.edit_url,
     url_path: pageProps.url_path,
+    raw: pageProps._raw,
     nav: {
       title: siteConfig.navbarTitle?.text || siteConfig.title,
       logo: siteConfig.navbarTitle?.logo,
