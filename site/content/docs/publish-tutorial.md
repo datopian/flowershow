@@ -121,13 +121,13 @@ You can now customize your website by wrapping your content in custom layouts, u
 You can preview your website locally by running the following command in the directory where `.flowershow` has been installed:
 
 ```bash
-npx flowershow preview
+npx flowershow@latest preview
 ```
 
 ...or by passing this directory as a command argument:
 
 ```bash
-npx flowershow preview some-parent-dir
+npx flowershow@latest preview some-parent-dir
 ```
 
 After running this command, you will now be able to see your website on http://localhost:3000/ - it will reload every time you make some changes to your content.
@@ -135,20 +135,13 @@ After running this command, you will now be able to see your website on http://l
 If your ready to publish your site, you can now build it with the following command:
 
 ```bash
-npx flowershow export
-# or npx flowershow export some-parent-dir
+npx flowershow@latest export
+# or npx flowershow@latest export some-parent-dir
 ```
 
 It will create a `.flowershow/.next` folder with your website files ready to be deployed to any hosting provider that supports Node.js.
 
-If you want to deploy it to a static website hosting provider, you can run the following command instead:
-
-```bash
-npx flowershow export
-# or npx flowershow export some-parent-dir
-```
-
-It will create a `.flowershow/out` folder with static files.
+If you want to deploy it to a static website hosting provider, the command above will create a `.flowershow/out` folder with static files that you can use.
 
 ## Deploy
 
