@@ -25,6 +25,7 @@
     "@giscus/react": "^2.2.6",
     "@headlessui/react": "^1.7.6",
     "clsx": "^1.2.1",
+    "disqus-react": "^1.1.5",
     "framer-motion": "^8.4.3",
     "kbar": "0.1.0-beta.39",
     "mdx-mermaid": "^1.3.2",
