@@ -47,8 +47,13 @@ export const Layout: React.FC<Props> = ({
   const currentSection = useTableOfContents(tableOfContents);
   const router: NextRouter = useRouter();
 
+  /**
+   * showing page comments either set through frontmatter,
+   * or set in config's pages property. frontmatter takes precedence.
+   * if neither are set then defaults to show on all pages.
+   */
   const showPageComments =
-    showComments ?? commentsConfig?.pages?.includes(raw.sourceFileDir);
+    showComments ?? commentsConfig?.pages?.includes(raw?.sourceFileDir) ?? true;
 
   useEffect(() => {
     if (!showToc) return;
