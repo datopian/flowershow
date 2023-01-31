@@ -3,14 +3,6 @@ import { GiscusReactComponent, GiscusConfig, GiscusProps } from "./Giscus";
 import { Utterances, UtterancesConfig, UtterancesProps } from "./Utterances";
 import { Disqus, DisqusConfig, DisqusProps } from "./Disqus";
 
-declare global {
-  interface Window {
-    disqus_config?: (...args: any[]) => void;
-    DISQUS?: (...args: any[]) => void;
-    page?: any;
-  }
-}
-
 export type CommentsConfig = GiscusConfig | UtterancesConfig | DisqusConfig;
 
 export interface CommentsProps {
@@ -39,15 +31,6 @@ const DisqusComponent = dynamic<DisqusProps>(
   { ssr: false }
 );
 
-/**
- * Supports Giscus, Utterances
- * If you want to use a comments provider you have to add it to the
- * content security policy in the `next.config.js` file.
- * slug is used in disqus to identify the page
- *
- * @param {CommentsProps} { comments, slug }
- * @return {*}
- */
 export const Comments = ({ commentsConfig, slug }: CommentsProps) => {
   switch (commentsConfig.provider) {
     case "giscus":

@@ -22,7 +22,7 @@ interface Props extends React.PropsWithChildren {
   showSidebar: boolean;
   url_path: string;
   showComments: boolean;
-  commentsConfig?: CommentsConfig;
+  commentsConfig: CommentsConfig;
   edit_url?: string;
   raw?: any; // TODO type
 }
@@ -39,21 +39,12 @@ export const Layout: React.FC<Props> = ({
   showComments,
   commentsConfig,
   edit_url,
-  raw,
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [tableOfContents, setTableOfContents] = useState<TocSection[]>([]);
   const [sitemap, setSitemap] = useState<PageLink[]>([]);
   const currentSection = useTableOfContents(tableOfContents);
   const router: NextRouter = useRouter();
-
-  /**
-   * showing page comments either set through frontmatter,
-   * or set in config's pages property. frontmatter takes precedence.
-   * if neither are set then defaults to show on all pages.
-   */
-  const showPageComments =
-    showComments ?? commentsConfig?.pages?.includes(raw?.sourceFileDir) ?? true;
 
   useEffect(() => {
     if (!showToc) return;
@@ -140,17 +131,12 @@ export const Layout: React.FC<Props> = ({
             {/* EDIT THIS PAGE LINK */}
             {showEditLink && edit_url && <EditThisPage url={edit_url} />}
             {/* PAGE COMMENTS */}
-            {commentsConfig && showPageComments && (
+            {showComments && (
               <div
                 className="prose mx-auto pt-6 pb-6 text-center text-gray-700 dark:text-gray-300"
                 id="comment"
               >
-                {
-                  <Comments
-                    commentsConfig={commentsConfig}
-                    slug={raw?.flattenedPath}
-                  />
-                }
+                {<Comments commentsConfig={commentsConfig} slug={url_path} />}
               </div>
             )}
           </main>

@@ -6,20 +6,20 @@ export interface UtterancesConfig {
   pages?: Array<string>;
   config: {
     theme?: string;
-    repo?: string;
-    label?: string;
-    issueTerm?: string;
+    repo: string;
+    label: string;
+    issueTerm: string;
   };
 }
 
 export type UtterancesProps = UtterancesConfig["config"];
 
-export const Utterances = ({
+export const Utterances: React.FC<UtterancesProps> = ({
   repo,
   label = "comments",
   issueTerm = "pathname",
   theme = "github-light",
-}: UtterancesProps) => {
+}) => {
   const { theme: nextTheme, resolvedTheme } = useTheme();
   // TODO: remove preferred-color-scheme after theme toggle fix
   const commentsTheme = nextTheme
@@ -33,10 +33,10 @@ export const Utterances = ({
   const LoadComments = useCallback(() => {
     const script = document.createElement("script");
     script.src = "https://utteranc.es/client.js";
-    script.setAttribute("repo", repo as string);
-    script.setAttribute("issue-term", issueTerm as string);
-    script.setAttribute("label", label as string);
-    script.setAttribute("theme", commentsTheme as string);
+    script.setAttribute("repo", repo);
+    script.setAttribute("issue-term", issueTerm);
+    script.setAttribute("label", label);
+    script.setAttribute("theme", commentsTheme);
     script.setAttribute("crossorigin", "anonymous");
     script.async = true;
 

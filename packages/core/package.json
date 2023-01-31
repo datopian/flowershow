@@ -37,10 +37,5 @@
     "next-themes": "^0.2.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
-  },
-  "overrides": {
-    "kbar": {
-      "react": "^17.0.0"
-    }
   }
 }
