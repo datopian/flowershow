@@ -4,6 +4,8 @@ title: Site-wide table of contents (LHS Sidebar)
 
 Flowershow supports adding a site-wide table of contents in a LFH sidebar to allow your users to easily navigate to other pages on your website.
 
+![[site-wide-toc.png]]
+
 ## Enabling / disabling the sidebar
 
 The sidebar is disabled by default. You can enable it for all your pages in your `config.js` file, and then disable it for some of your pages, like e.g. your home page.
