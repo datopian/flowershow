@@ -8,59 +8,59 @@ import { Nav } from "../Nav";
 import { Footer } from "./Footer";
 import { EditThisPage } from "./EditThisPage";
 import { TableOfContents } from "./TableOfContents";
-import { Sidebar, NavItem } from "./Sidebar";
+import { Sidebar, NavItem, NavGroup } from "./Sidebar";
 import { NavConfig, AuthorConfig, ThemeConfig, TocSection } from "../types";
 import { NextRouter, useRouter } from "next/router.js";
 import { Comments, CommentsConfig } from "../Comments";
 
-const navigation = [
-  { name: "Dashboard", href: "#" },
-  {
-    name: "Team",
-    children: [
-      { name: "Overview", href: "#" },
-      { name: "Members", href: "#" },
-      { name: "Calendar", href: "#" },
-      { name: "Settings", href: "#" },
-    ],
-  },
-  {
-    name: "Projects",
-    children: [
-      { name: "Overview", href: "#" },
-      { name: "Members", href: "#" },
-      { name: "Calendar", href: "#" },
-      { name: "Settings", href: "#" },
-    ],
-  },
-  {
-    name: "Calendar",
-    children: [
-      { name: "Overview", href: "#" },
-      { name: "Members", href: "#" },
-      { name: "Calendar", href: "#" },
-      { name: "Settings", href: "#" },
-    ],
-  },
-  {
-    name: "Documents",
-    children: [
-      { name: "Overview", href: "#" },
-      { name: "Members", href: "#" },
-      { name: "Calendar", href: "#" },
-      { name: "Settings", href: "#" },
-    ],
-  },
-  {
-    name: "Reports",
-    children: [
-      { name: "Overview", href: "#" },
-      { name: "Members", href: "#" },
-      { name: "Calendar", href: "#" },
-      { name: "Settings", href: "#" },
-    ],
-  },
-];
+/* const navigation = [
+ *   { name: "Dashboard", href: "#" },
+ *   {
+ *     name: "Team",
+ *     children: [
+ *       { name: "Overview", href: "#" },
+ *       { name: "Members", href: "#" },
+ *       { name: "Calendar", href: "#" },
+ *       { name: "Settings", href: "#" },
+ *     ],
+ *   },
+ *   {
+ *     name: "Projects",
+ *     children: [
+ *       { name: "Overview", href: "#" },
+ *       { name: "Members", href: "#" },
+ *       { name: "Calendar", href: "#" },
+ *       { name: "Settings", href: "#" },
+ *     ],
+ *   },
+ *   {
+ *     name: "Calendar",
+ *     children: [
+ *       { name: "Overview", href: "#" },
+ *       { name: "Members", href: "#" },
+ *       { name: "Calendar", href: "#" },
+ *       { name: "Settings", href: "#" },
+ *     ],
+ *   },
+ *   {
+ *     name: "Documents",
+ *     children: [
+ *       { name: "Overview", href: "#" },
+ *       { name: "Members", href: "#" },
+ *       { name: "Calendar", href: "#" },
+ *       { name: "Settings", href: "#" },
+ *     ],
+ *   },
+ *   {
+ *     name: "Reports",
+ *     children: [
+ *       { name: "Overview", href: "#" },
+ *       { name: "Members", href: "#" },
+ *       { name: "Calendar", href: "#" },
+ *       { name: "Settings", href: "#" },
+ *     ],
+ *   },
+ * ]; */
 
 interface Props extends React.PropsWithChildren {
   nav: NavConfig;
@@ -73,6 +73,13 @@ interface Props extends React.PropsWithChildren {
   showComments: boolean;
   commentsConfig: CommentsConfig;
   edit_url?: string;
+}
+
+interface SearchPage {
+  title?: string;
+  url_path: string;
+  slug: string;
+  sourceDir: string;
 }
 
 export const Layout: React.FC<Props> = ({
@@ -90,7 +97,7 @@ export const Layout: React.FC<Props> = ({
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [tableOfContents, setTableOfContents] = useState<TocSection[]>([]);
-  const [sitemap, setSitemap] = useState<any[]>([]);
+  const [sitemap, setSitemap] = useState<Array<NavItem | NavGroup>>([]);
   const currentSection = useTableOfContents(tableOfContents);
   const router: NextRouter = useRouter();
 
@@ -105,13 +112,32 @@ export const Layout: React.FC<Props> = ({
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch("/search.json");
-      const json = await res.json(); // TODO types
-      const sitemap = json.sort((a, b) => {
-        const displayNameA = a.title ?? a.slug;
-        const displayNameB = b.title ?? b.slug;
-        return displayNameA.localeCompare(displayNameB);
-      });
-      setSitemap(sitemap);
+      const json: Array<SearchPage> = await res.json(); // TODO types
+      const pagesGrouped = json.reduce((acc, curr) => {
+        const key = curr.sourceDir ? curr.sourceDir.split("/")[0] : "ungrouped";
+        if (!(key in acc)) {
+          acc[key] = [];
+        }
+        acc[key].push({
+          name: curr.title ?? curr.slug,
+          href: curr.url_path,
+        });
+        return acc;
+      }, {});
+      const siteMap: Array<NavItem | NavGroup> = [];
+      for (const key in pagesGrouped) {
+        if (key === "ungrouped") {
+          pagesGrouped[key].forEach((p) => {
+            siteMap.push(p);
+          });
+        } else {
+          siteMap.push({
+            name: key[0].toUpperCase() + key.slice(1),
+            children: pagesGrouped[key],
+          });
+        }
+      }
+      setSitemap(siteMap);
     };
     fetchData();
   }, [showSidebar]);
@@ -170,7 +196,7 @@ export const Layout: React.FC<Props> = ({
           {/* SIDEBAR */}
           {showSidebar && (
             <div className="hidden lg:block fixed z-20 w-[18rem] top-[4.6rem] right-auto bottom-0 left-[max(0px,calc(50%-44rem))] p-8 overflow-y-auto">
-              <Sidebar currentPath={url_path} nav={navigation} />
+              <Sidebar currentPath={url_path} nav={sitemap} />
             </div>
           )}
           {/* MAIN CONTENT & FOOTER */}

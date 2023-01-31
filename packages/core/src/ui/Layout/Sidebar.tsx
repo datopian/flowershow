@@ -7,7 +7,7 @@ export interface NavItem {
   href: string;
 }
 
-interface NavGroup {
+export interface NavGroup {
   name: string;
   children: Array<NavItem>;
 }
@@ -26,12 +26,12 @@ export const Sidebar: React.FC<Props> = ({ currentPath, nav }) => {
     return item.href === currentPath;
   }
 
-  function isActiveGroup(group: NavGroup): boolean {
-    return (
-      group.children.length > 0 &&
-      group.children.some((item) => item.href === currentPath)
-    );
-  }
+  /* function isActiveGroup(group: NavGroup): boolean {
+   *   return (
+   *     group.children.length > 0 &&
+   *     group.children.some((item) => item.href === currentPath)
+   *   );
+   * } */
 
   return (
     <nav data-testid="lhs-sidebar">
