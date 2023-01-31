@@ -6,14 +6,13 @@ export interface GiscusConfig {
   pages?: Array<string>;
   config: {
     theme?: string;
-    darkTheme?: string;
-    mapping?: Mapping;
-    repo?: Repo;
-    repositoryId?: string;
-    category?: string;
-    categoryId?: string;
-    reactions?: string;
-    metadata?: string;
+    mapping: Mapping;
+    repo: Repo;
+    repositoryId: string;
+    category: string;
+    categoryId: string;
+    reactions: BooleanString;
+    metadata: BooleanString;
     inputPosition?: string;
     lang?: string;
   };
@@ -21,7 +20,7 @@ export interface GiscusConfig {
 
 export type GiscusProps = GiscusConfig["config"];
 
-export const GiscusReactComponent = ({
+export const GiscusReactComponent: React.FC<GiscusProps> = ({
   repo,
   repositoryId,
   category,
@@ -30,7 +29,7 @@ export const GiscusReactComponent = ({
   metadata = "0",
   mapping = "pathname",
   theme = "light",
-}: GiscusProps) => {
+}) => {
   const { theme: nextTheme, resolvedTheme } = useTheme();
   const commentsTheme =
     nextTheme === "dark" || resolvedTheme === "dark"
@@ -39,14 +38,14 @@ export const GiscusReactComponent = ({
 
   return (
     <Giscus
-      repo={repo as Repo}
-      repoId={repositoryId as string}
-      category={category as string}
-      categoryId={categoryId as string}
-      mapping={mapping as Mapping}
+      repo={repo}
+      repoId={repositoryId}
+      category={category}
+      categoryId={categoryId}
+      mapping={mapping}
       inputPosition="top"
-      reactionsEnabled={reactions as BooleanString}
-      emitMetadata={metadata as BooleanString}
+      reactionsEnabled={reactions}
+      emitMetadata={metadata}
       // TODO: remove transparent_dark after theme toggle fix
       theme={nextTheme ? commentsTheme : "transparent_dark"}
     />
