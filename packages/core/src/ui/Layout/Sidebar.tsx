@@ -69,14 +69,13 @@ export const Sidebar: React.FC<Props> = ({ currentPath, nav }) => {
                 </Disclosure.Button>
                 <Disclosure.Panel className="space-y-1">
                   {item.children.map((subItem) => (
-                    <Disclosure.Button
+                    <Link
                       key={subItem.name}
-                      as={Link}
                       href={subItem.href}
                       className="group flex w-full items-center rounded-md py-2 pl-10 pr-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                     >
                       {subItem.name}
-                    </Disclosure.Button>
+                    </Link>
                   ))}
                 </Disclosure.Panel>
               </>
@@ -87,13 +86,3 @@ export const Sidebar: React.FC<Props> = ({ currentPath, nav }) => {
     </nav>
   );
 };
-
-/*
- *                                 <Disclosure.Button
- *                                     className={clsx(
- *                                         item.current
- *                                             ? 'bg-gray-100 text-gray-900'
- *                                             : 'bg-white text-gray-600 hover:bg-gray-50 hover:text-gray-900',
- *                                         'group w-full flex items-center pr-2 py-2 text-left text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500'
- *                                     )}
- *                                 > */
