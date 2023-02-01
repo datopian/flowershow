@@ -24,7 +24,6 @@ interface Props extends React.PropsWithChildren {
   showComments: boolean;
   commentsConfig: CommentsConfig;
   edit_url?: string;
-  raw?: any; // TODO type
 }
 
 export const Layout: React.FC<Props> = ({
