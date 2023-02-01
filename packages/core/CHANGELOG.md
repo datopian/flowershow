@@ -1,5 +1,11 @@
 # @flowershow/core
 
+## 0.2.0
+
+### Minor Changes
+
+- 0ff6c06: Add: Page comments feature with support for three providers - giscus, utterances and disqus.
+
 ## 0.1.0
 
 ### Minor Changes
