@@ -11,6 +11,7 @@ import { TableOfContents } from "./TableOfContents";
 import { Sidebar, PageLink } from "./Sidebar";
 import { NavConfig, AuthorConfig, ThemeConfig, TocSection } from "../types";
 import { NextRouter, useRouter } from "next/router.js";
+import { Comments, CommentsConfig } from "../Comments";
 
 interface Props extends React.PropsWithChildren {
   nav: NavConfig;
@@ -20,6 +21,8 @@ interface Props extends React.PropsWithChildren {
   showEditLink: boolean;
   showSidebar: boolean;
   url_path: string;
+  showComments: boolean;
+  commentsConfig: CommentsConfig;
   edit_url?: string;
 }
 
@@ -32,6 +35,8 @@ export const Layout: React.FC<Props> = ({
   showToc,
   showSidebar,
   url_path,
+  showComments,
+  commentsConfig,
   edit_url,
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -124,6 +129,15 @@ export const Layout: React.FC<Props> = ({
             {children}
             {/* EDIT THIS PAGE LINK */}
             {showEditLink && edit_url && <EditThisPage url={edit_url} />}
+            {/* PAGE COMMENTS */}
+            {showComments && (
+              <div
+                className="prose mx-auto pt-6 pb-6 text-center text-gray-700 dark:text-gray-300"
+                id="comment"
+              >
+                {<Comments commentsConfig={commentsConfig} slug={url_path} />}
+              </div>
+            )}
           </main>
           <Footer links={nav.links} author={author} />
           {/** TABLE OF CONTENTS */}
