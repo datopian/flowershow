@@ -25,6 +25,7 @@ const sharedFields: any = {
   showEditLink: { type: "boolean" },
   showToc: { type: "boolean" },
   showSidebar: { type: "boolean" },
+  showComments: { type: "boolean" },
   isDraft: { type: "boolean" },
   data: { type: "list", of: { type: "string" }, default: [] },
 };
