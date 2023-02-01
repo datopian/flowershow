@@ -71,6 +71,7 @@ interface SharedFields {
   layout: string;
   showEditLink?: boolean;
   showToc?: boolean;
+  showComments?: boolean;
   isDraft?: boolean;
   data: Array<string>;
 }

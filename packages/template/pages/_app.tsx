@@ -16,12 +16,25 @@ import "../styles/prism.css";
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
 
+  /**
+   * Page comments
+   * Showing page comments either set through frontmatter,
+   * or set in config's pages property. Frontmatter takes precedence.
+   * if neither are set then defaults to show on all pages.
+   */
+  const showComments =
+    pageProps.showComments ??
+    siteConfig?.comments?.pages?.includes(pageProps._raw?.sourceFileDir) ??
+    true;
+
   // TODO maybe use computed fields for showEditLink and showToc to make this even cleaner?
   const layoutProps = {
     showToc: pageProps.showToc ?? siteConfig.showToc,
     showEditLink: pageProps.showEditLink ?? siteConfig.showEditLink,
     edit_url: pageProps.edit_url,
     url_path: pageProps.url_path,
+    commentsConfig: siteConfig.comments,
+    showComments,
     nav: {
       title: siteConfig.navbarTitle?.text || siteConfig.title,
       logo: siteConfig.navbarTitle?.logo,

@@ -1,6 +1,6 @@
 {
   "name": "@flowershow/core",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Core Flowershow components, configs and utils.",
   "repository": {
     "type": "git",
@@ -22,8 +22,10 @@
     "@docsearch/react": "^3.3.0",
     "@floating-ui/react-dom": "^1.2.1",
     "@floating-ui/react-dom-interactions": "^0.13.3",
+    "@giscus/react": "^2.2.6",
     "@headlessui/react": "^1.7.6",
     "clsx": "^1.2.1",
+    "disqus-react": "^1.1.5",
     "framer-motion": "^8.4.3",
     "kbar": "0.1.0-beta.39",
     "mdx-mermaid": "^1.3.2",
