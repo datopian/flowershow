@@ -46,11 +46,11 @@ export const Sidebar: React.FC<Props> = ({ currentPath, nav }) => {
           <Disclosure as="div" key={item.name} className="space-y-1">
             {({ open }) => (
               <>
-                <Disclosure.Button className="group w-full flex items-center pr-2 py-2 text-left text-mm font-medium rounded-md">
+                <Disclosure.Button className="group w-full flex items-center p-2 text-left font-medium text-md text-slate-900 dark:text-white">
                   <svg
                     className={clsx(
-                      open ? "text-gray-400 rotate-90" : "text-gray-300",
-                      "mr-2 h-5 w-5 flex-shrink-0 transform transition-colors duration-150 ease-in-out group-hover:text-gray-400"
+                      open ? "text-slate-400 rotate-90" : "text-slate-300",
+                      "mr-2 h-5 w-5 flex-shrink-0 transform transition-colors duration-150 ease-in-out group-hover:text-slate-400"
                     )}
                     viewBox="0 0 20 20"
                     aria-hidden="true"
@@ -66,7 +66,7 @@ export const Sidebar: React.FC<Props> = ({ currentPath, nav }) => {
                       className={clsx(
                         isActiveItem(subItem)
                           ? "text-sky-500"
-                          : "font-normal text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300",
+                          : "text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300",
                         "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
                       )}
                     >
