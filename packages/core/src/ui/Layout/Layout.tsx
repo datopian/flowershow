@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
 import Head from "next/head.js";
 import { NextRouter, useRouter } from "next/router.js";
 import clsx from "clsx";
@@ -152,7 +151,9 @@ export const Layout: React.FC<Props> = ({
               social={nav.social}
               defaultTheme={theme.defaultTheme}
               themeToggleIcon={theme.themeToggleIcon}
-            />
+            >
+              {showSidebar && <SiteToc currentPath={url_path} nav={sitemap} />}
+            </Nav>
           </div>
         </div>
         {/* wrapper for sidebar, main content and ToC */}
@@ -167,10 +168,6 @@ export const Layout: React.FC<Props> = ({
           {showSidebar && (
             <div className="hidden lg:block fixed z-20 w-[18rem] top-[4.6rem] right-auto bottom-0 left-[max(0px,calc(50%-44rem))] p-8 overflow-y-auto">
               <SiteToc currentPath={url_path} nav={sitemap} />
-              {createPortal(
-                <SiteToc currentPath={url_path} nav={sitemap} />,
-                document.getElementById("site-toc-mobile")
-              )}
             </div>
           )}
           {/* MAIN CONTENT & FOOTER */}
