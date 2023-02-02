@@ -26,13 +26,6 @@ export const Sidebar: React.FC<Props> = ({ currentPath, nav }) => {
     return item.href === currentPath;
   }
 
-  /* function isActiveGroup(group: NavGroup): boolean {
-   *   return (
-   *     group.children.length > 0 &&
-   *     group.children.some((item) => item.href === currentPath)
-   *   );
-   * } */
-
   return (
     <nav data-testid="lhs-sidebar">
       {nav.map((item) =>
@@ -54,7 +47,7 @@ export const Sidebar: React.FC<Props> = ({ currentPath, nav }) => {
           <Disclosure as="div" key={item.name} className="space-y-1">
             {({ open }) => (
               <>
-                <Disclosure.Button className="group w-full flex items-center pr-2 py-2 text-left text-sm font-medium rounded-md">
+                <Disclosure.Button className="group w-full flex items-center pr-2 py-2 text-left text-mm font-medium rounded-md">
                   <svg
                     className={clsx(
                       open ? "text-gray-400 rotate-90" : "text-gray-300",
@@ -70,9 +63,13 @@ export const Sidebar: React.FC<Props> = ({ currentPath, nav }) => {
                 <Disclosure.Panel className="space-y-1">
                   {item.children.map((subItem) => (
                     <Link
-                      key={subItem.name}
                       href={subItem.href}
-                      className="group flex w-full items-center rounded-md py-2 pl-10 pr-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                      className={clsx(
+                        isActiveItem(subItem)
+                          ? "text-sky-500"
+                          : "font-normal text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300",
+                        "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                      )}
                     >
                       {subItem.name}
                     </Link>
