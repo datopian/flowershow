@@ -13,55 +13,6 @@ import { NavConfig, AuthorConfig, ThemeConfig, TocSection } from "../types";
 import { NextRouter, useRouter } from "next/router.js";
 import { Comments, CommentsConfig } from "../Comments";
 
-/* const navigation = [
- *   { name: "Dashboard", href: "#" },
- *   {
- *     name: "Team",
- *     children: [
- *       { name: "Overview", href: "#" },
- *       { name: "Members", href: "#" },
- *       { name: "Calendar", href: "#" },
- *       { name: "Settings", href: "#" },
- *     ],
- *   },
- *   {
- *     name: "Projects",
- *     children: [
- *       { name: "Overview", href: "#" },
- *       { name: "Members", href: "#" },
- *       { name: "Calendar", href: "#" },
- *       { name: "Settings", href: "#" },
- *     ],
- *   },
- *   {
- *     name: "Calendar",
- *     children: [
- *       { name: "Overview", href: "#" },
- *       { name: "Members", href: "#" },
- *       { name: "Calendar", href: "#" },
- *       { name: "Settings", href: "#" },
- *     ],
- *   },
- *   {
- *     name: "Documents",
- *     children: [
- *       { name: "Overview", href: "#" },
- *       { name: "Members", href: "#" },
- *       { name: "Calendar", href: "#" },
- *       { name: "Settings", href: "#" },
- *     ],
- *   },
- *   {
- *     name: "Reports",
- *     children: [
- *       { name: "Overview", href: "#" },
- *       { name: "Members", href: "#" },
- *       { name: "Calendar", href: "#" },
- *       { name: "Settings", href: "#" },
- *     ],
- *   },
- * ]; */
-
 interface Props extends React.PropsWithChildren {
   nav: NavConfig;
   author: AuthorConfig;
@@ -109,7 +60,9 @@ export const Layout: React.FC<Props> = ({
     setTableOfContents(toc ?? []);
   }, [router.asPath, showToc]); // update table of contents on route change with next/link
 
+  // TODO move
   useEffect(() => {
+    if (!showSidebar) return;
     const fetchData = async () => {
       const res = await fetch("/search.json");
       const json: Array<SearchPage> = await res.json(); // TODO types
