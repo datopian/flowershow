@@ -148,6 +148,8 @@ export const NavMobile: React.FC<Props> = ({ links, search, author }) => {
               ))}
             </ul>
           )}
+          {/* Portal from Layout for SiteToc component */}
+          <div id="site-toc-mobile"></div>
         </Dialog.Panel>
       </Dialog>
     </>

@@ -1,6 +1,6 @@
 import Link from "next/link.js";
 import clsx from "clsx";
-import { Disclosure } from "@headlessui/react";
+import { Disclosure, Transition } from "@headlessui/react";
 
 export interface NavItem {
   name: string;
@@ -21,13 +21,13 @@ function isNavGroup(item: NavItem | NavGroup): item is NavGroup {
   return (item as NavGroup).children !== undefined;
 }
 
-export const Sidebar: React.FC<Props> = ({ currentPath, nav }) => {
+export const SiteToc: React.FC<Props> = ({ currentPath, nav }) => {
   function isActiveItem(item: NavItem) {
     return item.href === currentPath;
   }
 
   return (
-    <nav data-testid="lhs-sidebar">
+    <nav data-testid="lhs-sidebar" className="flex flex-col space-y-3 text-sm">
       {nav.map((item) =>
         !isNavGroup(item) ? (
           <Link
@@ -37,16 +37,20 @@ export const Sidebar: React.FC<Props> = ({ currentPath, nav }) => {
               isActiveItem(item)
                 ? "text-sky-500"
                 : "font-normal text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300",
-              "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+              "block"
             )}
           >
             {item.name}
           </Link>
         ) : (
-          <Disclosure as="div" key={item.name} className="space-y-1">
+          <Disclosure
+            as="div"
+            className="flex flex-col space-y-3"
+            key={item.name}
+          >
             {({ open }) => (
               <>
-                <Disclosure.Button className="group w-full flex items-center p-2 text-left font-medium text-md text-slate-900 dark:text-white">
+                <Disclosure.Button className="group w-full flex items-center text-left text-md font-medium text-slate-900 dark:text-white">
                   <svg
                     className={clsx(
                       open ? "text-slate-400 rotate-90" : "text-slate-300",
@@ -59,21 +63,30 @@ export const Sidebar: React.FC<Props> = ({ currentPath, nav }) => {
                   </svg>
                   {item.name}
                 </Disclosure.Button>
-                <Disclosure.Panel className="space-y-1">
-                  {item.children.map((subItem) => (
-                    <Link
-                      href={subItem.href}
-                      className={clsx(
-                        isActiveItem(subItem)
-                          ? "text-sky-500"
-                          : "text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300",
-                        "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
-                      )}
-                    >
-                      {subItem.name}
-                    </Link>
-                  ))}
-                </Disclosure.Panel>
+                <Transition
+                  enter="transition duration-100 ease-out"
+                  enterFrom="transform scale-95 opacity-0"
+                  enterTo="transform scale-100 opacity-100"
+                  leave="transition duration-75 ease-out"
+                  leaveFrom="transform scale-100 opacity-100"
+                  leaveTo="transform scale-95 opacity-0"
+                >
+                  <Disclosure.Panel className="flex flex-col space-y-3">
+                    {item.children.map((subItem) => (
+                      <Link
+                        href={subItem.href}
+                        className={clsx(
+                          isActiveItem(subItem)
+                            ? "text-sky-500"
+                            : "text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300",
+                          "block ml-7"
+                        )}
+                      >
+                        {subItem.name}
+                      </Link>
+                    ))}
+                  </Disclosure.Panel>
+                </Transition>
               </>
             )}
           </Disclosure>

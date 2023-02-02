@@ -1,17 +1,19 @@
-import Head from "next/head.js";
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import Head from "next/head.js";
+import { NextRouter, useRouter } from "next/router.js";
 import clsx from "clsx";
 
 import { useTableOfContents } from "./useTableOfContents";
 import { collectHeadings } from "../../utils";
+
 import { Nav } from "../Nav";
+import { SiteToc, NavItem, NavGroup } from "../SiteToc";
+import { Comments, CommentsConfig } from "../Comments";
+import { NavConfig, AuthorConfig, ThemeConfig, TocSection } from "../types";
 import { Footer } from "./Footer";
 import { EditThisPage } from "./EditThisPage";
 import { TableOfContents } from "./TableOfContents";
-import { Sidebar, NavItem, NavGroup } from "./Sidebar";
-import { NavConfig, AuthorConfig, ThemeConfig, TocSection } from "../types";
-import { NextRouter, useRouter } from "next/router.js";
-import { Comments, CommentsConfig } from "../Comments";
 
 interface Props extends React.PropsWithChildren {
   nav: NavConfig;
@@ -164,7 +166,11 @@ export const Layout: React.FC<Props> = ({
           {/* SIDEBAR */}
           {showSidebar && (
             <div className="hidden lg:block fixed z-20 w-[18rem] top-[4.6rem] right-auto bottom-0 left-[max(0px,calc(50%-44rem))] p-8 overflow-y-auto">
-              <Sidebar currentPath={url_path} nav={sitemap} />
+              <SiteToc currentPath={url_path} nav={sitemap} />
+              {createPortal(
+                <SiteToc currentPath={url_path} nav={sitemap} />,
+                document.getElementById("site-toc-mobile")
+              )}
             </div>
           )}
           {/* MAIN CONTENT & FOOTER */}
