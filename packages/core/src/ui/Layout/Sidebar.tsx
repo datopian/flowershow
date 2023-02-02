@@ -30,19 +30,18 @@ export const Sidebar: React.FC<Props> = ({ currentPath, nav }) => {
     <nav data-testid="lhs-sidebar">
       {nav.map((item) =>
         !isNavGroup(item) ? (
-          <div key={item.name}>
-            <Link
-              href={item.href}
-              className={clsx(
-                isActiveItem(item)
-                  ? "text-sky-500"
-                  : "font-normal text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300",
-                "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
-              )}
-            >
-              {item.name}
-            </Link>
-          </div>
+          <Link
+            key={item.name}
+            href={item.href}
+            className={clsx(
+              isActiveItem(item)
+                ? "text-sky-500"
+                : "font-normal text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300",
+              "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+            )}
+          >
+            {item.name}
+          </Link>
         ) : (
           <Disclosure as="div" key={item.name} className="space-y-1">
             {({ open }) => (

@@ -65,31 +65,46 @@ export const Layout: React.FC<Props> = ({
     if (!showSidebar) return;
     const fetchData = async () => {
       const res = await fetch("/search.json");
-      const json: Array<SearchPage> = await res.json(); // TODO types
-      const pagesGrouped = json.reduce((acc, curr) => {
-        const key = curr.sourceDir ? curr.sourceDir.split("/")[0] : "ungrouped";
-        if (!(key in acc)) {
-          acc[key] = [];
-        }
-        acc[key].push({
-          name: curr.title ?? curr.slug,
-          href: curr.url_path,
-        });
-        return acc;
-      }, {});
-      const siteMap: Array<NavItem | NavGroup> = [];
-      for (const key in pagesGrouped) {
-        if (key === "ungrouped") {
-          pagesGrouped[key].forEach((p) => {
-            siteMap.push(p);
+      const json: Array<SearchPage> = await res.json();
+
+      // group pages by the top level dir only (content/<dir>)
+      const pagesGroupedByDir: { [x: string]: Array<NavItem> } = json.reduce(
+        (acc, curr) => {
+          const key = curr.sourceDir ? curr.sourceDir.split("/")[0] : "_loose";
+          if (!(key in acc)) {
+            acc[key] = [];
+          }
+          acc[key].push({
+            name: curr.title ?? curr.slug,
+            href: curr.url_path,
           });
+          return acc;
+        },
+        {}
+      );
+
+      let siteMap: Array<NavItem | NavGroup> = [];
+      const groupedPages: Array<NavGroup> = [];
+
+      for (const dir in pagesGroupedByDir) {
+        // sort pages in a group in alphabetical order
+        const pagesSorted: Array<NavItem> = [...pagesGroupedByDir[dir]].sort(
+          (a, b) => a.name.localeCompare(b.name)
+        );
+        // add loose pages directly to the sitemap array
+        if (dir === "_loose") {
+          siteMap = siteMap.concat(pagesSorted);
         } else {
-          siteMap.push({
-            name: key[0].toUpperCase() + key.slice(1),
-            children: pagesGrouped[key],
+          groupedPages.push({
+            name: dir,
+            children: pagesSorted,
           });
         }
       }
+      // sort groups alphabetically
+      groupedPages.sort((a, b) => a.name.localeCompare(b.name));
+      siteMap = siteMap.concat(groupedPages);
+      console.log({ siteMap });
       setSitemap(siteMap);
     };
     fetchData();
