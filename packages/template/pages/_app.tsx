@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }) {
   const showComments =
     pageProps.showComments ??
     siteConfig?.comments?.pages?.includes(pageProps._raw?.sourceFileDir) ??
-    true;
+    false;
 
   // TODO maybe use computed fields for showEditLink and showToc to make this even cleaner?
   const layoutProps = {
