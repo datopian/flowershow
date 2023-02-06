@@ -8,9 +8,10 @@ import { NavTitle } from "./NavTitle";
 import { NavSocial } from "./NavSocial";
 import { NavConfig, ThemeConfig } from "../types";
 
-interface Props extends NavConfig, ThemeConfig {}
+interface Props extends NavConfig, ThemeConfig, React.PropsWithChildren {}
 
 export const Nav: React.FC<Props> = ({
+  children,
   title,
   logo,
   version,
@@ -40,7 +41,7 @@ export const Nav: React.FC<Props> = ({
     <header className="flex justify-between">
       {/* Mobile navigation  */}
       <div className="mr-2 sm:mr-4 flex lg:hidden">
-        <NavMobile links={links} />
+        <NavMobile links={links}>{children}</NavMobile>
       </div>
       {/* Non-mobile navigation */}
       <div className="flex flex-none items-center">

@@ -13,14 +13,19 @@ import {
   SearchProviderConfig,
 } from "../types";
 
-interface Props {
+interface Props extends React.PropsWithChildren {
   author?: string;
   links?: Array<NavLink | NavDropdown>;
   search?: SearchProviderConfig;
 }
 
 // TODO why mobile navigation only accepts author and regular nav accepts different things like title, logo, version
-export const NavMobile: React.FC<Props> = ({ links, search, author }) => {
+export const NavMobile: React.FC<Props> = ({
+  children,
+  links,
+  search,
+  author,
+}) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [Search, setSearch] = useState<any>(); // TODO types
@@ -148,6 +153,9 @@ export const NavMobile: React.FC<Props> = ({ links, search, author }) => {
               ))}
             </ul>
           )}
+          {/* <div className="pt-6 border border-t-2">
+                        {children}
+                    </div> */}
         </Dialog.Panel>
       </Dialog>
     </>
