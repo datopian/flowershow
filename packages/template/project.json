@@ -33,6 +33,14 @@
       },
       "dependsOn": ["^build"]
     },
+    "serve:e2e": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm run dev -- -p 3030",
+        "cwd": "packages/template"
+      },
+      "dependsOn": ["^build"]
+    },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],

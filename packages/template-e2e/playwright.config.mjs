@@ -14,7 +14,7 @@ const baseURL = `http://localhost:${PORT}`;
 // Reference: https://playwright.dev/docs/test-configuration
 const config = {
   // Timeout per test
-  timeout: 30 * 1000,
+  timeout: 60 * 1000,
   // Test directory
   testDir: path.join(__dirname, "src/tests"),
   // If a test fails, retry it additional 2 times
@@ -25,10 +25,11 @@ const config = {
   // Run your local dev server before starting the tests:
   // https://playwright.dev/docs/test-advanced#launching-a-development-web-server-during-the-tests
   webServer: {
-    command: `npm run dev --prefix ../template -- -p ${PORT}`,
-    url: baseURL,
+    // TODO can port be forwarded to original serve target instead of creatinga new one only for this purpose?
+    command: `pnpm nx serve:e2e`,
+    port: PORT,
     timeout: 60 * 1000,
-    // reuseExistingServer: !process.env.CI,
+    reuseExistingServer: !process.env.CI,
   },
 
   use: {
