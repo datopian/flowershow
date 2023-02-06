@@ -1,2 +1,6 @@
 [build]
   ignore = "false"
+
+[build.environment]
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
+  
