@@ -29,11 +29,11 @@ jobs:
       - uses: nrwl/nx-set-shas@v3
       - run: pnpm install
       - run: sudo apt-get install -y expect
-      - run: npx playwright install --with-deps
+      - run: pnpm playwright install --with-deps
       - name: Run E2E tests
         env:
           NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
           TERM: xterm # fix for tput
-        run: npx nx affected:e2e
+        run: pnpm nx affected:e2e --verbose
       - name: Run other tests
-        run: npx nx affected:test
+        run: pnpm nx affected:test --verbose
