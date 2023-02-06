@@ -1,5 +1,9 @@
 ---
-title: Page comments
+title: Empower Your Flowershow Website or Blog with User Comments
+description: "Get more feedback or simply increase visitor engagement by easily adding page comments to your Flowershow website or blog."
+type: Blog
+created: 2023-02-04
+authors: [Khalil Ali]
 ---
 
 Flowershow supports the integration of a user commenting feature on your website, allowing visitors to provide their feedback and thoughts on your pages. This functionality can be configured in the config file and can be optionally added to each page's frontmatter for more granular control.
