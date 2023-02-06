@@ -19,8 +19,15 @@ if (typeof process === 'undefined') {
 }
 `;
 
+// this is a workaround for error's thrown in contentlayer's
+// useMDXComponent hook when md file is empty
+const defaultCode = `
+return {default: () => React.createElement('div', null, '')}
+`;
+
 export default function Page({ globals, body, ...meta }) {
-  const MDXPage = useMDXComponent(codePrefix + body.code, globals);
+  const pageCode = body.code.length > 0 ? body.code : defaultCode;
+  const MDXPage = useMDXComponent(`${codePrefix}${pageCode}`, globals);
   const { image, title, description } = meta;
 
   const MDXComponents = {
