@@ -31,10 +31,11 @@ function MyApp({ Component, pageProps }) {
   const layoutProps = {
     showToc: pageProps.showToc ?? siteConfig.showToc,
     showEditLink: pageProps.showEditLink ?? siteConfig.showEditLink,
+    showSidebar: pageProps.showSidebar ?? siteConfig.showSidebar,
+    showComments,
     edit_url: pageProps.edit_url,
     url_path: pageProps.url_path,
     commentsConfig: siteConfig.comments,
-    showComments,
     nav: {
       title: siteConfig.navbarTitle?.text || siteConfig.title,
       logo: siteConfig.navbarTitle?.logo,
@@ -51,7 +52,6 @@ function MyApp({ Component, pageProps }) {
       defaultTheme: siteConfig.theme.default,
       themeToggleIcon: siteConfig.theme.toggleIcon,
     },
-    showSidebar: pageProps.showSidebar ?? siteConfig.showSidebar,
   };
 
   useEffect(() => {
