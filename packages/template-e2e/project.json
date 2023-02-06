@@ -9,12 +9,12 @@
       "inputs": ["default", "{workspaceRoot}/packages/template/**/*"],
       "options": {
         "commands": [
-          "../template-e2e/src/support/testsetup.sh",
-          "playwright test --config ../template-e2e",
-          "../template-e2e/src/support/testteardown.sh"
+          "./src/support/testsetup.sh",
+          "playwright test",
+          "./src/support/testteardown.sh"
         ],
         "parallel": false,
-        "cwd": "packages/template"
+        "cwd": "packages/template-e2e"
       },
       "dependsOn": ["^build"]
     },
