@@ -28,7 +28,7 @@ const config = {
     command: `npm run dev --prefix ../template -- -p ${PORT}`,
     url: baseURL,
     timeout: 60 * 1000,
-    // reuseExistingServer: !process.env.CI,
+    reuseExistingServer: !process.env.CI,
   },
 
   use: {
