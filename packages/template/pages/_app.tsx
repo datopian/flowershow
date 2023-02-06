@@ -22,10 +22,20 @@ function MyApp({ Component, pageProps }) {
    * or set in config's pages property. Frontmatter takes precedence.
    * if neither are set then defaults to show on all pages.
    */
-  const showComments =
-    pageProps.showComments ??
-    siteConfig?.comments?.pages?.includes(pageProps._raw?.sourceFileDir) ??
-    false;
+  let showComments = false;
+  const comments = siteConfig.comments;
+
+  if (comments && comments.provider && comments.config) {
+    const sourceDir = pageProps.type
+      ? pageProps.type.toLowerCase()
+      : pageProps._raw?.sourceFileDir;
+    const pagesFromConfig =
+      Array.isArray(comments.pages) && comments.pages.length > 0
+        ? comments.pages?.includes(sourceDir)
+        : true;
+
+    showComments = pageProps.showComments ?? pagesFromConfig;
+  }
 
   // TODO maybe use computed fields for showEditLink and showToc to make this even cleaner?
   const layoutProps = {
