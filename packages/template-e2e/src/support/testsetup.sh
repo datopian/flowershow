@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/bin/sh
 
 TEMPLATE_DIR=$1
 TEST_CONTENT_DIR=$2
