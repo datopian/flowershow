@@ -34,6 +34,6 @@ jobs:
         env:
           NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
           TERM: xterm # fix for tput
-        run: pnpm nx affected:e2e
+        run: pnpm nx affected:e2e --verbose
       - name: Run other tests
-        run: pnpm nx affected:test
+        run: pnpm nx affected:test --verbose
