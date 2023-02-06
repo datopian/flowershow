@@ -25,7 +25,7 @@ const config = {
   // Run your local dev server before starting the tests:
   // https://playwright.dev/docs/test-advanced#launching-a-development-web-server-during-the-tests
   webServer: {
-    command: `cd ../template && npm run dev`,
+    command: `npm run dev --prefix ../template`,
     port: PORT,
     timeout: 60 * 1000,
     reuseExistingServer: !process.env.CI,
