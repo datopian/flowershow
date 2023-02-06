@@ -28,12 +28,12 @@ jobs:
           cache: "pnpm"
       - uses: nrwl/nx-set-shas@v3
       - run: pnpm install
-      # - run: sudo apt-get install -y expect
+      - run: sudo apt-get install -y expect
       - run: pnpm playwright install --with-deps
       - name: Run E2E tests
         env:
           NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
           TERM: xterm # fix for tput
         run: pnpm nx affected:e2e --verbose
-      # - name: Run other tests
-      #   run: pnpm nx affected:test --verbose
+      - name: Run other tests
+        run: pnpm nx affected:test --verbose
