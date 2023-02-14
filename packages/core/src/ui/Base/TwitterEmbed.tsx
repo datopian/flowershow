@@ -1,16 +1,17 @@
+// TODO dark and light theme
+
 import { useEffect, useCallback, useState, useRef, RefObject } from "react";
 
 const twitterWidgetJs = "https://platform.twitter.com/widgets.js";
-const message = "Loading tweet...";
+enum TweetState {
+  LOADING,
+  LOADED,
+  FAILED,
+}
 
 interface TweetConfig {
   theme: string;
 }
-
-type TweetState = {
-  isLoading: boolean;
-  message: string | null;
-};
 
 declare global {
   interface Window {
@@ -29,55 +30,40 @@ declare global {
 
 export default function TwitterEmbed({ url, ...props }) {
   const ref = useRef<HTMLDivElement | null>(null);
-  const [state, setState] = useState<TweetState>({
-    isLoading: true,
-    message: message,
-  });
+  const [tweetState, setTweetState] = useState<TweetState>(TweetState.LOADING);
 
   const tweetId = url.split("status/").pop();
 
   const renderTweet = useCallback(() => {
-    if (typeof window !== undefined) {
-      window.twttr.widgets
-        .createTweet(tweetId, ref.current as any, {
-          theme: "dark",
-        })
-        .then((el) => {
-          if (el) return setState((prev) => ({ ...prev, isLoading: false }));
-          return setState((prev) => ({
-            ...prev,
-            message: null,
-          }));
-        });
-      return window.twttr.widgets.load(ref.current as any);
-    }
+    window.twttr.widgets
+      .createTweet(tweetId, ref.current as any, {
+        theme: "dark",
+      })
+      .then((el) => {
+        if (el) {
+          setTweetState(TweetState.LOADED);
+        } else {
+          setTweetState(TweetState.FAILED);
+        }
+      });
+    return window.twttr.widgets.load(ref.current as any);
   }, [tweetId]);
 
   useEffect(() => {
-    let componentMounted = true;
-
-    const script = document.createElement("script");
-    script.src = twitterWidgetJs;
-    script.async = true;
-    script.onload = () => renderTweet();
-
-    if (componentMounted) {
-      if (!window.twttr) {
-        document.head.appendChild(script);
-      } else {
-        renderTweet();
-      }
+    if (!window.twttr) {
+      const script = document.createElement("script");
+      script.src = twitterWidgetJs;
+      script.async = true;
+      script.onload = () => renderTweet();
+      document.head.appendChild(script);
+    } else {
+      renderTweet();
     }
-
-    return () => {
-      setState({ isLoading: true, message: message });
-      componentMounted = false;
-    };
   }, [renderTweet]);
 
   return (
     <>
-      {state.isLoading && state.message && (
+      {tweetState === TweetState.LOADING && (
         <div className="relative my-4 w-full sm:max-w-xl bg-neutral-900 drop-shadow-md rounded-lg">
           <div className="absolute flex flex-col flex-wrap break-all items-center justify-center bg-slate-700/60 w-full h-full px-4 py-2 rounded-lg top-0 left-0 z-10">
             <svg
@@ -93,14 +79,10 @@ export default function TwitterEmbed({ url, ...props }) {
               />
             </svg>
             <div className="text-gray-300 font-bold my-2 italic">
-              {state.message}
+              {"Loading tweet..."}
             </div>
           </div>
-          <div
-            className={`p-3 space-y-4 ${
-              state.isLoading && state.message === message && "animate-pulse"
-            }`}
-          >
+          <div className="p-3 space-y-4 animate-pulse">
             <div className="flex items-center">
               <div className="mr-2 h-10 w-10 rounded-full bg-slate-700" />
               <div className="w-1/3 h-4 bg-slate-700"></div>
@@ -118,7 +100,7 @@ export default function TwitterEmbed({ url, ...props }) {
         </div>
       )}
       <div className="twitter-tweet" ref={ref} />
-      {!state.message && <p {...props} />}
+      {tweetState === TweetState.LOADED && <p {...props} />}
     </>
   );
 }
