@@ -92,6 +92,14 @@ const config = {
 };
 ```
 
+### Developers
+
+When a user visits a web page, Giscus searches for a discussion whose title contains the page's pathname URL component. If there are no matches (i.e., no comments have been made about that page), then a new discussion is created for that page.
+
+By using the pathname for mapping with a page, Giscus ensures that each discussion is unique to a particular page and that comments made on that page are kept together.
+
+More info on how this connection is achieved can be found on their '**how it works**' section in their repo - [https://github.com/giscus/giscus#how-it-works](https://github.com/giscus/giscus#how-it-works) and also in the '**Page <-> Discussions Mapping**' section at https://giscus.app/
+
 ## Setting up comments using utterances
 
 [Utterances](https://utteranc.es/) uses your github repo's issues to store comments for your pages and display them on your site. To setup comments with utterances, you would need to do the following:
