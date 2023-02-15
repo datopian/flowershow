@@ -1,5 +1,15 @@
 # @flowershow/core
 
+## 0.3.0
+
+### Minor Changes
+
+- ffd2b6c: Feature: Twitter urls turn into embeds
+
+### Patch Changes
+
+- 124e24e: Site-wide ToC: grouping
+
 ## 0.2.1
 
 ### Patch Changes
