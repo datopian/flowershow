@@ -12,7 +12,7 @@
     "generate": "contentlayer build && cross-env NODE_OPTIONS=\"--experimental-json-modules --experimental-modules\" node ./scripts/search.mjs"
   },
   "dependencies": {
-    "@flowershow/core": "^0.3.0",
+    "@flowershow/core": "^0.3.1",
     "@flowershow/remark-callouts": "^1.0.0",
     "@flowershow/remark-embed": "^1.0.0",
     "@flowershow/remark-wiki-link": "^1.0.0",
