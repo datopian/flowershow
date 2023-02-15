@@ -1,5 +1,11 @@
 # @flowershow/core
 
+## 0.3.1
+
+### Patch Changes
+
+- 0520975: Fix: remove twitter URLs displayed after embeds
+
 ## 0.3.0
 
 ### Minor Changes
