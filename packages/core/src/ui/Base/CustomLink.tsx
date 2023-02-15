@@ -1,5 +1,9 @@
 import Link from "next/link.js";
 import { Tooltip } from "../Tooltip";
+import TwitterEmbed from "./TwitterEmbed";
+
+const TWITTER_REGEX =
+  /^https?:\/\/twitter\.com\/(?:#!\/)?(\w+)\/status(es)?\/(\d+)/;
 
 interface Props {
   href: string;
@@ -36,6 +40,10 @@ export const CustomLink: React.FC<Props> = ({
 
   if (isAnchorLink) {
     return <a {...props} />;
+  }
+
+  if (TWITTER_REGEX.test(href)) {
+    return <TwitterEmbed url={href} {...props} />;
   }
 
   return <a target="_blank" rel="noopener noreferrer" {...props} />;
