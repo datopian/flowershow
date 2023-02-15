@@ -34,22 +34,22 @@ export default function TwitterEmbed({ url, ...props }) {
 
   const tweetId = url.split("status/").pop();
 
-  const renderTweet = useCallback(() => {
-    window.twttr.widgets
-      .createTweet(tweetId, ref.current as any, {
-        theme: "dark",
-      })
-      .then((el) => {
-        if (el) {
-          setTweetState(TweetState.LOADED);
-        } else {
-          setTweetState(TweetState.FAILED);
-        }
-      });
-    return window.twttr.widgets.load(ref.current as any);
-  }, [tweetId]);
-
   useEffect(() => {
+    const renderTweet = () => {
+      window.twttr.widgets
+        .createTweet(tweetId, ref.current as any, {
+          theme: "dark",
+        })
+        .then((el) => {
+          if (el) {
+            setTweetState(TweetState.LOADED);
+          } else {
+            setTweetState(TweetState.FAILED);
+          }
+        });
+      return window.twttr.widgets.load(ref.current as any);
+    };
+
     if (!window.twttr) {
       const script = document.createElement("script");
       script.src = twitterWidgetJs;
@@ -59,7 +59,7 @@ export default function TwitterEmbed({ url, ...props }) {
     } else {
       renderTweet();
     }
-  }, [renderTweet]);
+  }, [tweetId]);
 
   return (
     <>
