@@ -57,7 +57,8 @@
         "commands": ["npm publish --dry-run"],
         "parallel": false,
         "cwd": "packages/core/dist"
-      }
+      },
+      "dependsOn": ["build"]
     },
     "publish": {
       "executor": "nx:run-commands",
@@ -65,7 +66,8 @@
         "commands": ["npm publish"],
         "parallel": false,
         "cwd": "packages/core/dist"
-      }
+      },
+      "dependsOn": ["build"]
     }
   }
 }
