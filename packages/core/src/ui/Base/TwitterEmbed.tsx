@@ -1,6 +1,6 @@
 // TODO dark and light theme
 
-import { useEffect, useCallback, useState, useRef, RefObject } from "react";
+import { useEffect, useState, useRef, RefObject } from "react";
 
 const twitterWidgetJs = "https://platform.twitter.com/widgets.js";
 enum TweetState {
@@ -100,7 +100,6 @@ export default function TwitterEmbed({ url, ...props }) {
         </div>
       )}
       <div className="twitter-tweet" ref={ref} />
-      {tweetState === TweetState.LOADED && <p {...props} />}
     </>
   );
 }
