@@ -7,22 +7,11 @@ export interface NavLink {
   href: string;
 }
 
-export interface NavDropdown {
-  name: string;
-  subItems: Array<NavLink>;
-}
-
-export function isNavDropdown(
-  link: NavLink | NavDropdown
-): link is NavDropdown {
-  return (link as NavDropdown).subItems !== undefined;
-}
-
 export interface NavConfig {
   title: string;
   logo?: string;
   version?: string;
-  links: Array<NavLink | NavDropdown>;
+  links: Array<NavLink>;
   search?: SearchProviderConfig;
   social?: Array<SocialLink>;
 }
