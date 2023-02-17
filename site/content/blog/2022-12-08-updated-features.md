@@ -1,5 +1,5 @@
 ---
-title: Flowershow News No. 2
+title: Flowershow News December 2022
 description: Here are some of the new features we have implemented. 😎🚀
 created: 2022-12-08
 authors: [philippe-du-preez]
