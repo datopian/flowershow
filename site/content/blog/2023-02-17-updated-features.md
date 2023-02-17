@@ -13,7 +13,7 @@ Here are some of the new features we have implemented. 😎🚀
 
 ## Page comments
 
-Flowershow supports the integration of a user commenting feature on your website, allowing visitors to provide their feedback and thoughts on your pages.
+Flowershow supports the integration of [Giscus](https://giscus.app/), [Utterances](https://utteranc.es/), or [Disqus](https://disqus.com/) to add comments functionality to your website, allowing visitors to provide their feedback and thoughts on your content.
 
 ![[page_comments.png]]
 
@@ -30,6 +30,8 @@ https://flowershow.app/docs/site-wide-toc
 ## Twitter embeds
 
 Inserting a twitter url in between new lines will automatically be converted into an embed
+
+![[twitterembed.png]]
 
 https://flowershow.app/docs/social-previews
 
