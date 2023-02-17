@@ -1,8 +1,8 @@
 @import "@flowershow/remark-callouts/styles.css";
 
 /* mathjax */
-.math-inline {
-  display: flex;
+.math-inline > mjx-container > svg {
+  display: inline;
   align-items: center;
 }
 
