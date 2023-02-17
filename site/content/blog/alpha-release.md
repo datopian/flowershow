@@ -13,7 +13,7 @@ It's as simple as (once you have node installed):
 
 ```
 npx flowershow@latest install
-npx flowershow build-static
+npx flowershow export
 
 # then copy the build site folder to your favorite hosting service!
 # cp flowershow-export-folder to-my-hosting-platform
