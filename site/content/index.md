@@ -59,7 +59,7 @@ import { WhatIsFlowershow } from "components/custom/WhatIsFlowershow.jsx"
         </div>
         <p>If you don't need a static build, run `npx flowershow build`.</p>
       </div>
-      <img src="/assets/images/npx_build.png" alt="" className="lg:max-h-[20rem] m-0 lg:my-6"/>
+      <img src="/assets/images/npx_export.png" alt="" className="lg:max-h-[20rem] m-0 lg:my-6"/>
       { /* 4. self hosting */ }
       <div className="relative">
         <div className="flex items-center space-x-4 sm:space-x-8">
