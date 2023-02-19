@@ -2,7 +2,7 @@
 title: Obsidian Database Research
 ---
 
-Research on the details of the internal Obsidian "database" i.e. its cache of files and their metadata, links etc which in turn power functionality like network graph, page links, plugins etc.
+Research on the details of the internal [[notes/obsidian|Obsidian]] "database" i.e. its cache of files and their metadata, links etc which in turn power functionality like network graph, page links, plugins etc.
 
 Relates to Flowershow's need to have its own metadata database to power things like a network graph, links etc (tracking issue: https://github.com/flowershow/flowershow/issues/5)
 
@@ -43,6 +43,12 @@ Have some basic info but not a lot of detail yet and also some info online looks
 - look into how https://github.com/blacksmithgu/obsidian-dataview works
 
 # Notes
+
+## 2023-02-18 - obsidian is very fast
+
+Jan 2022: https://www.goedel.io/p/tft-performance-obsidian
+
+Read this a while ago and indicates obsidian is very fast at indexing. (and at everything else). wonder how.
 
 ## 2022-11-06
 
@@ -87,3 +93,13 @@ lengthy comment from Dec 2021 explaining there are 2 caches a persistent and eph
 > - A link resolver worker: `MetadataCache.resolveLinks(srcFilePath)`
 >
 > On app startup, all markdown files within the vault are passed into the `linkResolverQueue` and the results are stored in the resolved and unresolved link cache.
+
+## 2022-03-12
+
+Investigating [[notes/obsidian]] vault structure
+
+* Does Obsidian have an index? ✅ Yes
+* What is the API to it? ✅ https://marcus.se.net/obsidian-plugin-docs/api/classes/MetadataCache
+* Where is it stored? ✅ https://help.obsidian.md/Advanced+topics/How+Obsidian+stores+data "Obsidian also stores some information in the system directory. This is different per Operating System; on Mac it's `/Users/yourusername/Library/Application Support/obsidian`"
+* What is the structure of that index?
+- How do you use it from a plugin? ✅ `import MetadataCache from 'obsidian'` see e.g. https://github.com/blacksmithgu/obsidian-dataview/blob/master/src/data-index/index.ts#L4
