@@ -8,3 +8,4 @@ export { SimpleLayout } from "./SimpleLayout";
 export { DocsLayout } from "./DocsLayout";
 export { UnstyledLayout } from "./UnstyledLayout";
 export { BlogLayout } from "./BlogLayout";
+export { ThemeProvider } from "./Base";
