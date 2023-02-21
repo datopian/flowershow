@@ -1,12 +1,16 @@
 /* eslint import/no-default-export: off */
 import { DefaultSeo } from "next-seo";
-import { ThemeProvider } from "next-themes";
 import { useRouter } from "next/router";
 import Script from "next/script";
 import { useEffect } from "react";
 import "tailwindcss/tailwind.css";
 
-import { Layout, SearchProvider, pageview } from "@flowershow/core";
+import {
+  Layout,
+  SearchProvider,
+  pageview,
+  ThemeProvider,
+} from "@flowershow/core";
 
 import { siteConfig } from "../config/siteConfig";
 import "../styles/docsearch.css";
