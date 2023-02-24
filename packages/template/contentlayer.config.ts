@@ -50,12 +50,20 @@ const computedFields: ComputedFields = {
   title: {
     type: "string",
     /* eslint no-underscore-dangle: off */
-    resolve: (doc) => {
+    resolve: async (doc) => {
       // use frontmatter title if exists
       if (doc.title) return doc.title;
       // use h1 heading on first line (if exists)
       const heading = doc.body.raw.trim().match(/^#\s+(.*?)\n/);
-      if (heading) return heading[1];
+      if (heading) {
+        const title = heading[1]
+          // replace wikilink with only text value
+          .replace(/\[\[([\S]*?)]]/, "$1");
+
+        const stripTitle = await remark().use(stripMarkdown).process(title);
+
+        return stripTitle.toString().trim();
+      }
     },
   },
   description: {
