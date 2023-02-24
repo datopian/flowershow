@@ -1,6 +1,12 @@
 /* eslint import/no-unresolved: off */
-import { defineDocumentType, makeSource } from "contentlayer/source-files";
+import {
+  ComputedFields,
+  defineDocumentType,
+  makeSource,
+  FieldDefs,
+} from "contentlayer/source-files";
 import { h } from "hastscript";
+import { remark } from "remark";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeMathjax from "rehype-mathjax";
 import rehypePrismPlus from "rehype-prism-plus";
@@ -13,11 +19,11 @@ import remarkToc from "remark-toc";
 import callouts from "@flowershow/remark-callouts";
 import remarkEmbed from "@flowershow/remark-embed";
 import wikiLinkPlugin from "@flowershow/remark-wiki-link";
+import stripMarkdown, { Options } from "strip-markdown";
 
 import { siteConfig } from "./config/siteConfig";
 
-// TODO types
-const sharedFields: any = {
+const sharedFields: FieldDefs = {
   title: { type: "string" },
   description: { type: "string" },
   image: { type: "string" },
@@ -30,8 +36,7 @@ const sharedFields: any = {
   data: { type: "list", of: { type: "string" }, default: [] },
 };
 
-// TODO types
-const computedFields: any = {
+const computedFields: ComputedFields = {
   url_path: {
     type: "string",
     /* eslint no-underscore-dangle: off */
@@ -41,6 +46,52 @@ const computedFields: any = {
     type: "string",
     /* eslint no-underscore-dangle: off */
     resolve: (doc) => doc._raw.flattenedPath.replace(/^(.+?\/)*/, ""),
+  },
+  title: {
+    type: "string",
+    /* eslint no-underscore-dangle: off */
+    resolve: (doc) => {
+      // use frontmatter title if exists
+      if (doc.title) return doc.title;
+      // use h1 heading on first line (if exists)
+      const heading = doc.body.raw.trim().match(/^#\s+(.*?)\n/);
+      if (heading) return heading[1];
+    },
+  },
+  description: {
+    type: "string",
+    /* eslint no-underscore-dangle: off */
+    resolve: async (doc) => {
+      // use frontmatter description if exists
+      if (doc.description) return doc.description;
+
+      const content = doc.body.raw
+        // remove commented lines
+        .replace(/{\/\*.*\*\/}/g, "")
+        // remove import statements
+        .replace(
+          /^import\s*(?:\{\s*[\w\s,\n]+\s*\})?(\s*(\w+))?\s*from\s*("|')[^"]+("|');?$/gm,
+          ""
+        )
+        // remove youtube links
+        .replace(/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/gm, "")
+        // replace wikilinks with only text
+        .replace(/([^!])\[\[(\S*?)\]]/g, "$1$2")
+        // remove wikilink images
+        .replace(/!\[[\S]*?]]/g, "");
+
+      // remove markdown formatting
+      const stripped = await remark()
+        .use(stripMarkdown, {
+          remove: ["heading", "blockquote", "list", "image", "html", "code"],
+        } as Options)
+        .process(content);
+
+      if (stripped.value) {
+        const description: string = stripped.value.toString().slice(0, 200);
+        return description + "...";
+      }
+    },
   },
   edit_url: {
     type: "string",
