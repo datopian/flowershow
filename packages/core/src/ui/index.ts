@@ -1,3 +1,4 @@
+export { ThemeProvider } from "next-themes";
 export { Nav } from "./Nav";
 export { SearchProvider } from "./Search";
 export { Layout } from "./Layout";
@@ -8,4 +9,3 @@ export { SimpleLayout } from "./SimpleLayout";
 export { DocsLayout } from "./DocsLayout";
 export { UnstyledLayout } from "./UnstyledLayout";
 export { BlogLayout } from "./BlogLayout";
-export { ThemeProvider } from "./Base";
