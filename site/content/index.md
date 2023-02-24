@@ -21,7 +21,7 @@ import { WhatIsFlowershow } from "components/custom/WhatIsFlowershow.jsx"
     <h2 className="text-center">
       Self-publish your digital garden with Flowershow
     </h2>
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-12">
+    <div className="grid grid-cols-1 md:grid-cols-2 md:gap-8 gap-4 lg:gap-12">
       { /* 1. markdown folder */ }
       <div className="relative">
         <div className="flex items-center space-x-4 sm:space-x-8">
@@ -88,7 +88,7 @@ import { WhatIsFlowershow } from "components/custom/WhatIsFlowershow.jsx"
     </h2>
     <p className="text-center">🚧 Coming soon! 🚧</p>
     <p>We are actively trialling Flowershow before wide release. If you'd like to help us test or be first on the list to use it please sign up using the form at the top of this page.</p>
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-12">
+    <div className="grid grid-cols-1 md:grid-cols-2 md:gap-8 gap-4 lg:gap-12">
       { /* 1. markdown folder */ }
       <div className="relative">
         <div className="flex items-center space-x-4 sm:space-x-8">

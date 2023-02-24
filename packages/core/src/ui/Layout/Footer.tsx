@@ -1,9 +1,9 @@
 import Link from "next/link.js";
 
-import { AuthorConfig, isNavDropdown, NavDropdown, NavLink } from "../types";
+import { AuthorConfig, NavLink } from "../types";
 
 interface Props {
-  links: Array<NavLink | NavDropdown>;
+  links: Array<NavLink>;
   author: AuthorConfig;
 }
 
@@ -11,19 +11,16 @@ export const Footer: React.FC<Props> = ({ links, author }) => {
   return (
     <footer className="bg-background dark:bg-background-dark prose dark:prose-invert max-w-none flex flex-col items-center justify-center w-full h-auto pt-10 pb-20">
       <div className="flex w-full flex-wrap justify-center">
-        {links.map(
-          (item) =>
-            !isNavDropdown(item) && (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="inline-flex items-center mx-4 px-1 pt-1 font-regular hover:text-slate-300 no-underline"
-              >
-                {/* TODO aria-current={item.current ? "page" : undefined} */}
-                {item.name}
-              </Link>
-            )
-        )}
+        {links.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            className="inline-flex items-center mx-4 px-1 pt-1 font-regular hover:text-slate-300 no-underline"
+          >
+            {/* TODO aria-current={item.current ? "page" : undefined} */}
+            {item.name}
+          </Link>
+        ))}
       </div>
       <p className="flex items-center justify-center">
         Created by

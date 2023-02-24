@@ -1,5 +1,11 @@
 # @flowershow/core
 
+## 0.3.2
+
+### Patch Changes
+
+- e83bc87: Remove support for nav dropdown
+
 ## 0.3.1
 
 ### Patch Changes
