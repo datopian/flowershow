@@ -54,14 +54,13 @@ const computedFields: ComputedFields = {
       // use frontmatter title if exists
       if (doc.title) return doc.title;
       // use h1 heading on first line (if exists)
-      const heading = doc.body.raw.trim().match(/^#\s+(.*?)\n/);
+      const heading = doc.body.raw.trim().match(/^#\s+(.*)/);
       if (heading) {
         const title = heading[1]
           // replace wikilink with only text value
           .replace(/\[\[([\S]*?)]]/, "$1");
 
         const stripTitle = await remark().use(stripMarkdown).process(title);
-
         return stripTitle.toString().trim();
       }
     },
