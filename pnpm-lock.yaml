@@ -238,7 +238,6 @@ importers:
       next: ^13.0.4
       next-contentlayer: ^0.2.9
       next-seo: ^5.14.1
-      next-themes: ^0.2.1
       postcss: ^8.4.12
       react: ^18.2.0
       react-dom: ^18.2.0
@@ -273,7 +272,6 @@ importers:
       next: 13.0.6_biqbaboplfbrettd7655fr4n2y
       next-contentlayer: 0.2.9_iyzttdtebgzmw3dlqai4xlsdte
       next-seo: 5.15.0_6jx7hpii6hgsrmhxgqrmo3277u
-      next-themes: 0.2.1_6jx7hpii6hgsrmhxgqrmo3277u
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       rehype-autolink-headings: 6.1.1
@@ -16818,21 +16816,6 @@ packages:
       next: ^8.1.1-canary.54 || >=9.0.0
       react: ">=16.0.0"
       react-dom: ">=16.0.0"
-    dependencies:
-      next: 13.0.6_biqbaboplfbrettd7655fr4n2y
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-    dev: false
-
-  /next-themes/0.2.1_6jx7hpii6hgsrmhxgqrmo3277u:
-    resolution:
-      {
-        integrity: sha512-B+AKNfYNIzh0vqQQKqQItTS8evEouKD7H5Hj3kmuPERwddR2TxvDSFZuTj6T7Jfn1oyeUyJMydPl1Bkxkh0W7A==,
-      }
-    peerDependencies:
-      next: "*"
-      react: "*"
-      react-dom: "*"
     dependencies:
       next: 13.0.6_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
