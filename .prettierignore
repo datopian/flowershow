@@ -6,6 +6,6 @@ test_helper/
 out/
 dist/
 excalidraw/
-notes/
+content/
 meta/
 .github/
