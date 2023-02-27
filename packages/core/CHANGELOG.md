@@ -1,5 +1,11 @@
 # @flowershow/core
 
+## 0.4.0
+
+### Minor Changes
+
+- 3588a8e: Fix: broken theme switch (use Themeprovider from @flowershow/core)
+
 ## 0.3.2
 
 ### Patch Changes
