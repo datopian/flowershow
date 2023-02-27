@@ -27,6 +27,6 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: "pnpm"
       - run: pnpm install
-      - run: pnpm nx workspace-lint
-      - run: pnpm nx format:check
-      - run: pnpm nx affected --target=lint --parallel=3
+      - run: pnpm nx workspace-lint --verbose
+      - run: pnpm nx format:check --verbose
+      - run: pnpm nx affected --target=lint --verbose --parallel=3
