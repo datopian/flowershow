@@ -29,7 +29,7 @@
     "framer-motion": "^8.4.3",
     "kbar": "0.1.0-beta.39",
     "mdx-mermaid": "2.0.0-rc7",
-    "mermaid": "9.4.2-rc.2"
+    "mermaid": "10.0.1-rc.2"
   },
   "peerDependencies": {
     "next": "^13.0.0",
