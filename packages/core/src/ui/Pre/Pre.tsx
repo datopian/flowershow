@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-import { Mermaid } from "mdx-mermaid/lib/Mermaid";
 
 interface Props extends React.PropsWithChildren {
   className?: string;
@@ -24,15 +23,6 @@ export const Pre: React.FC<Props> = ({ children, ...props }) => {
       setCopied(false);
     }, 2000);
   };
-
-  if (props.className && props.className === "code-mermaid") {
-    return (
-      <div className="my-10">
-        {/* TODO types */}
-        <Mermaid chart={children as any} />
-      </div>
-    );
-  }
 
   return (
     <div
