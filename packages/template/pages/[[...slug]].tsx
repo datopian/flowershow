@@ -3,12 +3,15 @@ import { NextSeo } from "next-seo";
 import { allDocuments } from "contentlayer/generated";
 import { useMDXComponent } from "next-contentlayer/hooks";
 
-import { CustomLink, Pre, BlogsList } from "@flowershow/core";
+import { CustomLink, Pre, BlogsList, Mermaid } from "@flowershow/core";
 
 import { getPageData } from "../lib/getPageData";
 import { getAuthorsDetails } from "../lib/getAuthorsDetails";
 import layouts from "../layouts";
 import { siteConfig } from "../config/siteConfig";
+
+// import type { MermaidProps } from "mdx-mermaid/lib/Mermaid";
+// const Mermaid = dynamic(() => import("mdx-mermaid/lib/Mermaid").then((res) => res.Mermaid), { ssr: false })
 
 // workaround solution to allow importing components
 // that import from "next" package (e.g. next/link) in MDX pages
@@ -41,6 +44,7 @@ export default function Page({ globals, body, ...meta }) {
       />
     ),
     pre: Pre,
+    mermaid: Mermaid,
     /* eslint no-unused-vars: off */
     // TODO this is a temporary workaround for errors resulting from importing this component directly in mdx file
     // see this issue for ref: https://github.com/kentcdodds/mdx-bundler/issues/156
