@@ -52,7 +52,10 @@ export const Portal: React.FC<Props> = ({ searchDocumentsPath }) => {
                   />
                 </svg>
               </span>
-              <KBarSearch className="h-8 w-full bg-transparent text-slate-600 placeholder-slate-400 focus:outline-none dark:text-slate-200 dark:placeholder-slate-500" />
+              <KBarSearch
+                defaultPlaceholder="Search"
+                className="h-8 w-full bg-transparent text-slate-600 placeholder-slate-400 focus:outline-none dark:text-slate-200 dark:placeholder-slate-500"
+              />
               <span className="inline-block whitespace-nowrap rounded border border-slate-400/70 px-1.5 align-middle font-medium leading-4 tracking-wide text-slate-500 [font-size:10px] dark:border-slate-600 dark:text-slate-400">
                 ESC
               </span>
@@ -68,7 +71,13 @@ export const Portal: React.FC<Props> = ({ searchDocumentsPath }) => {
 function RenderItem(props) {
   const { item, active } = props;
   return (
-    <div>
+    <div
+      className={
+        typeof item === "string"
+          ? ""
+          : "hover:bg-gray-200 hover:dark:bg-gray-800"
+      }
+    >
       {typeof item === "string" ? (
         <div className="pt-3">
           <div className="text-primary-600 block border-t border-gray-100 px-4 pt-6 pb-2 text-xs font-semibold uppercase dark:border-gray-800">
