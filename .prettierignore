@@ -9,3 +9,4 @@ excalidraw/
 content/
 meta/
 .github/
+pnpm-lock.yaml
