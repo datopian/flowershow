@@ -24,11 +24,9 @@ export const Nav: React.FC<Props> = ({
   const [modifierKey, setModifierKey] = useState<string>();
   const [Search, setSearch] = useState<any>(); // TODO types
 
-  // TODO refactor this, navigator.platform is deprecated
   useEffect(() => {
-    setModifierKey(
-      /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform) ? "⌘" : "Ctrl "
-    );
+    const isMac = /(Mac|iPhone|iPod|iPad)/i.test(navigator.userAgent);
+    setModifierKey(isMac ? "⌘" : "Ctrl ");
   }, []);
 
   useEffect(() => {

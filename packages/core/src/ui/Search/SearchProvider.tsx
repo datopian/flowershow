@@ -6,28 +6,30 @@ import {
 
 const AlgoliaSearchProvider = dynamic(
   async () => {
-    return import("./Algolia").then((mod) => mod.AlgoliaSearchProvider);
+    return await import("./Algolia").then((mod) => mod.AlgoliaSearchProvider);
   },
   { ssr: false }
 );
 
 const AlgoliaSearchContext = dynamic(
   async () => {
-    return import("./Algolia").then((mod) => mod.AlgoliaSearchContext.Consumer);
+    return await import("./Algolia").then(
+      (mod) => mod.AlgoliaSearchContext.Consumer
+    );
   },
   { ssr: false }
 );
 
 const KBarProvider = dynamic(
   async () => {
-    return import("./KBar").then((mod) => mod.KBarSearchProvider);
+    return await import("./KBar").then((mod) => mod.KBarSearchProvider);
   },
   { ssr: false }
 );
 
 const KBarSearchContext = dynamic(
   async () => {
-    return import("kbar").then((mod) => mod.KBarContext.Consumer);
+    return await import("kbar").then((mod) => mod.KBarContext.Consumer);
   },
   { ssr: false }
 );
