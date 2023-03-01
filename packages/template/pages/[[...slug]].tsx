@@ -1,7 +1,9 @@
 /* eslint import/no-default-export: off */
+import { useEffect } from "react";
 import { NextSeo } from "next-seo";
 import { allDocuments } from "contentlayer/generated";
 import { useMDXComponent } from "next-contentlayer/hooks";
+import { Document } from "contentlayer/core";
 
 import { CustomLink, Pre, BlogsList, Mermaid } from "@flowershow/core";
 
@@ -29,6 +31,25 @@ export default function Page({ globals, body, ...meta }) {
   const pageCode = body.code.length > 0 ? body.code : defaultCode;
   const MDXPage = useMDXComponent(`${codePrefix}${pageCode}`, globals);
   const { image, title, description } = meta;
+
+  // workaround to handle repeating titles
+  // remove the first heading from markdown if it's a title and displayed on page
+  useEffect(() => {
+    const headings = Array.from(document.getElementsByTagName("h1"));
+    // check if frontmatter title is displayed on page (as h1)
+    // warning?: this may return true if we have h1 as jsx in markdown with title value
+    // and can return false if we give the frontmatter title (h1) an id
+    const headingTitle = headings?.find((h) => !h.id && h.innerHTML === title);
+
+    if (headingTitle) {
+      // find and remove the markdown heading
+      const firstMarkdownHeading = headings.find((h) => {
+        return h.id && headingTitle.innerHTML === h.innerHTML;
+      });
+
+      firstMarkdownHeading?.parentElement.removeChild(firstMarkdownHeading);
+    }
+  }, [title]);
 
   const MDXComponents = {
     /* Head, */ // TODO why do we need this here?
@@ -87,8 +108,7 @@ export default function Page({ globals, body, ...meta }) {
 export async function getStaticProps({ params }) {
   // params.slug is undefined for root index page
   const urlPath = params.slug ? params.slug.join("/") : "";
-  // TODO types
-  const page: any = allDocuments.find((p) => p.url_path === urlPath);
+  const page: Document = allDocuments.find((p) => p.url_path === urlPath);
   const globals = await getPageData(page.data);
   // TODO this is a temporary solution used to pass authors to blog layout
   const authorsDetails = getAuthorsDetails(page.authors);
