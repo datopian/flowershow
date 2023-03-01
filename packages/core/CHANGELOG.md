@@ -1,5 +1,11 @@
 # @flowershow/core
 
+## 0.4.1
+
+### Patch Changes
+
+- e811ddc: Create mermaid components and update dependencies
+
 ## 0.4.0
 
 ### Minor Changes
