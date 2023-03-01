@@ -1,6 +1,5 @@
 ---
 "@flowershow/template": patch
-"@flowershow/core": patch
 ---
 
-Create mermaid components in core and add/update dependencies
+Add mdx-mermaid plugin and remove remark-code-extra plugin
