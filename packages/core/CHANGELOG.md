@@ -1,5 +1,11 @@
 # @flowershow/core
 
+## 0.4.2
+
+### Patch Changes
+
+- e5c6e08: Update all dependencies and refactor search components
+
 ## 0.4.1
 
 ### Patch Changes
