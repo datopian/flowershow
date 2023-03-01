@@ -10,9 +10,6 @@ import { getAuthorsDetails } from "../lib/getAuthorsDetails";
 import layouts from "../layouts";
 import { siteConfig } from "../config/siteConfig";
 
-// import type { MermaidProps } from "mdx-mermaid/lib/Mermaid";
-// const Mermaid = dynamic(() => import("mdx-mermaid/lib/Mermaid").then((res) => res.Mermaid), { ssr: false })
-
 // workaround solution to allow importing components
 // that import from "next" package (e.g. next/link) in MDX pages
 // more info: https://github.com/contentlayerdev/contentlayer/issues/288
