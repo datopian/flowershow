@@ -10,11 +10,7 @@ const { useDocSearchKeyboardEvents } = docsearch;
 let DocSearchModal: any = null;
 
 function Hit({ hit, children }) {
-  return (
-    <Link href={hit.url} legacyBehavior>
-      {children}
-    </Link>
-  );
+  return <Link href={hit.url}>{children}</Link>;
 }
 
 export const AlgoliaSearchContext = createContext({});
@@ -24,18 +20,15 @@ export function AlgoliaSearchProvider({ children, config }) {
   const [isOpen, setIsOpen] = useState(false);
   const [initialQuery, setInitialQuery] = useState(undefined);
 
-  const importDocSearchModalIfNeeded = useCallback(() => {
+  const importDocSearchModalIfNeeded = useCallback(async () => {
     if (DocSearchModal) {
       return Promise.resolve();
     }
 
-    return Promise.all([import("./AlgoliaModal")]).then(
-      ([{ DocSearchModal: Modal }]) => {
-        // eslint-disable-next-line
-        DocSearchModal = Modal;
-      }
-    );
-  }, []);
+    const [{ DocSearchModal: Modal }] = await Promise.all([docsearch]);
+    // eslint-disable-next-line
+    DocSearchModal = Modal;
+  }, [DocSearchModal]);
 
   const onOpen = useCallback(() => {
     importDocSearchModalIfNeeded().then(() => {
@@ -57,6 +50,8 @@ export function AlgoliaSearchProvider({ children, config }) {
     [importDocSearchModalIfNeeded, setIsOpen, setInitialQuery]
   );
 
+  // web accessibility
+  // https://www.algolia.com/doc/ui-libraries/autocomplete/core-concepts/keyboard-navigation/
   const navigator = useRef({
     navigate({ itemUrl }) {
       // Algolia results could contain URL's from other domains which cannot
@@ -71,7 +66,8 @@ export function AlgoliaSearchProvider({ children, config }) {
     },
   }).current;
 
-  const transformItems = useRef((items) =>
+  // https://docsearch.algolia.com/docs/api#transformitems
+  const transformItems = (items) =>
     items.map((item) => {
       // If Algolia contains a external domain, we should navigate without
       // relative URL
@@ -88,8 +84,8 @@ export function AlgoliaSearchProvider({ children, config }) {
         // url: withBaseUrl(`${url.pathname}${url.hash}`),
         url: `${url.pathname}${url.hash}`,
       };
-    })
-  ).current;
+    });
+  // ).current;
 
   useDocSearchKeyboardEvents({
     isOpen,
@@ -126,6 +122,7 @@ export function AlgoliaSearchProvider({ children, config }) {
             navigator={navigator}
             transformItems={transformItems}
             hitComponent={Hit}
+            placeholder={config.placeholder ?? "Search"}
             {...config}
           />,
           document.body
