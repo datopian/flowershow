@@ -1,8 +1,8 @@
 export function Feature({ feature, index }) {
   if (index % 2 == 0) {
     return (
-      <div className="overflow-hidden sm:grid sm:grid-cols-2 sm:items-center">
-        <div className="p-8 md:mt-12 md:p-12 lg:px-16 lg:py-24">
+      <div className="overflow-hidden sm:grid sm:grid-cols-2 sm:items-center lg:p-8 xl:p-12">
+        <div className="p-8">
           <div className="mx-auto max-w-xl text-center sm:text-left">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white md:text-3xl">
               {feature.title}
@@ -23,14 +23,14 @@ export function Feature({ feature, index }) {
         <img
           alt={feature.title}
           src={feature.imageSrc}
-          className="h-full w-full object-cover self-end"
+          className="lg:max-h-[25rem] lg:px-8 xl:px-12"
         />
       </div>
     );
   } else {
     return (
-      <div className="overflow-hidden sm:grid sm:grid-cols-2 sm:items-center">
-        <div className="order-2 p-8 md:p-12 lg:px-16 lg:py-12">
+      <div className="overflow-hidden sm:grid sm:grid-cols-2 sm:items-center lg:p-8 xl:p-12">
+        <div className="order-2 p-8">
           <div className="mx-auto max-w-xl text-center sm:text-left">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white md:text-3xl">
               {feature.title}
@@ -51,7 +51,7 @@ export function Feature({ feature, index }) {
         <img
           alt={feature.title}
           src={feature.imageSrc}
-          className="order-1 h-full w-full object-cover self-end "
+          className="order-1 lg:max-h-[25rem] lg:px-8 xl:px-12"
         />
       </div>
     );
