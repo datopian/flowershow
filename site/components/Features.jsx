@@ -55,14 +55,12 @@ const features = [
 export function Features() {
   return (
     <>
-      <div className="prose dark:prose-invert mx-auto max-w-screen-xl px-4 py-6 lg:flex lg:items-center text-black dark:text-white ">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2>Features</h2>
-          <p className="mx-auto mt-6 max-w-xl sm:text-xl sm:leading-relaxed">
-            Here are some of the cool features that are currently supported by
-            Flowershow
-          </p>
-        </div>
+      <div className="prose dark:prose-invert mx-auto max-w-screen-xl px-4 py-6 lg:flex lg:items-center text-center">
+        <h2>Features</h2>
+        <p>
+          Here are some of the cool features that are currently supported by
+          Flowershow
+        </p>
       </div>
 
       {features.map((feature, index) => (
