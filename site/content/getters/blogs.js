@@ -2,11 +2,11 @@ import { allBlogs } from "contentlayer/generated";
 
 export default function getBlogs() {
   return allBlogs
-    .map(({ title, description = null, created, url_path }) => ({
+    .map(({ title, description = null, date, url_path }) => ({
       title,
       description,
-      created,
+      date,
       url_path,
     }))
-    .sort((a, b) => new Date(b.created) - new Date(a.created));
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
 }
