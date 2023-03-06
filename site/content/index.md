@@ -6,6 +6,7 @@ showSidebar: false
 
 import { Hero } from "components/custom/Hero.jsx"
 import { WhatIsFlowershow } from "components/custom/WhatIsFlowershow.jsx"
+import { Features } from "components/custom/Features.jsx"
 
 <Hero />
 <WhatIsFlowershow />
@@ -130,71 +131,9 @@ import { WhatIsFlowershow } from "components/custom/WhatIsFlowershow.jsx"
   </div> 
 </div>
 
-{/** Features (tb replaced with something nicer) **/}
+{/** Features **/}
 
-<div className="py-10 sm:px-2 lg:relative lg:px-0" id="features">
-  <div className="prose dark:prose-invert mx-auto max-w-2xl px-4 lg:max-w-4xl lg:px-8 xl:px-12">
-    <h2 className="text-center">Features</h2>
-
-Here are some of the cool features that are currently supported by Flowershow, and some that we're intensively working on.
-
-### Markdown
-
-Flowershow supports **CommonMark** and **GitHub Flavoured Markdown (GFM)** syntax, e.g. code blocks, blockquotes, lists, tasks lists and tables.
-
-[[docs/syntax|Learn more ➡]]
-
-### Obsidian wiki links
-
-Flowershow has been designed with Obsidian users in mind and so, currently, it supports internal links to other pages. Links to headings, blocks, and transclusions will also be supported in the future.
-
-[[docs/syntax|Learn more ➡]]
-
-### Custom page layouts and components
-
-You can customize and create new layouts for your pages.
-
-[[docs/layouts|Learn more ➡]]
-
-Also, thanks to MDX support, you can use custom React components within your markdown notes.
-
-[[docs/mdx|Learn more ➡]].
-
-### Tailwind support
-
-Tailwind support makes it easy to style your in-markdown HTML and custom React components.
-
-[[docs/tailwind|Learn more ➡]]
-
-### Mermaid
-
-Displaying Mermaid diagrams within in your notes.
-
-[[docs/mermaid|Learn more ➡]]
-
-### Math
-
-MathJax math exaptions support.
-
-[[docs/math|Learn more ➡]]
-
-### SEO
-
-Support for meta tags for SEO and social sharing.
-
-[[docs/seo|Learn more ➡]]
-
-### CLI tool
-
-Our goal is to make using Flowershow as seamless as possible. To facilitate smooth bootstrapping and upgrading your website we're creating a CLI tool that will take care of all the intricacies related to the whole process of publishing your notes.
-
-[[publish-tutorial|Learn more ➡]]
-
-    👷 There is a lot of other exciting stuff we're working on.
-    <a href="/docs/roadmap">Check our roadmap to learn more!</a>
-
-  </div>
-</div>
+<Features />
 
 {/** Why the name? **/}
 
