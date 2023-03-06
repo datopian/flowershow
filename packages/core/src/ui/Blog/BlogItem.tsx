@@ -13,11 +13,11 @@ export const BlogItem: React.FC<Props> = ({ blog }) => {
         <Card.Title href={`${blog.url_path}`}>{blog.title}</Card.Title>
         <Card.Eyebrow
           as="time"
-          dateTime={blog.created}
+          dateTime={blog.date}
           className="md:hidden"
           decorate
         >
-          {formatDate(blog.created)}
+          {formatDate(blog.date)}
         </Card.Eyebrow>
         {blog.description && (
           <Card.Description>{blog.description}</Card.Description>
@@ -26,10 +26,10 @@ export const BlogItem: React.FC<Props> = ({ blog }) => {
       </Card>
       <Card.Eyebrow
         as="time"
-        dateTime={blog.created}
+        dateTime={blog.date}
         className="mt-1 hidden md:block"
       >
-        {formatDate(blog.created)}
+        {formatDate(blog.date)}
       </Card.Eyebrow>
     </article>
   );
