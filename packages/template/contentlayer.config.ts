@@ -136,7 +136,7 @@ const Blog = defineDocumentType(() => ({
   fields: {
     ...sharedFields,
     layout: { type: "string", default: "blog" },
-    date: { type: "date", required: true },
+    date: { type: "date" },
     created: { type: "date" },
     authors: {
       type: "list",
