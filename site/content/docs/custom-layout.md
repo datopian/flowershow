@@ -59,18 +59,17 @@ const Recipe = defineDocumentType(() => ({
   fields: {
     ...sharedFields,
     created: { type: "date", required: true },
-  authors: {
-    type: "list",
-    of: { type: "string" },
-  },
-  difficulty: { type: "string" },
-  time : { type: "string" },
-  ingredients: {
-    type: "list",
-    of: { type: "string" },
-  },
-  serves: { type: "string"},
-  layout: { type: "string", default: "recipe" },
+    authors: {
+      type: "list",
+      of: { type: "string" },
+    },
+    difficulty: { type: "string" },
+    time: { type: "string" },
+    ingredients: {
+      type: "list",
+      of: { type: "string" },
+    },
+    serves: { type: "string" },
   },
   computedFields,
 }));
@@ -89,24 +88,25 @@ difficulty: Easy
 time: 30m
 serves: 1-2
 ingredients:
-- 1 pound of ground beef
-- 1 large onion, chopped
-- 2 cloves of garlic, minced
-- 1 jar of marinara sauce
-- 1 can of crushed tomatoes
-- 1 tablespoon of dried basil
-- Salt and pepper
-- 1 package of lasagne noodles
-- 15 oz ricotta cheese
-- 2 cups of shredded mozzarella cheese
-- 1/2 cup grated parmesan cheese
-- Fresh parsley, chopped (for garnish)
+  - 1 pound of ground beef
+  - 1 large onion, chopped
+  - 2 cloves of garlic, minced
+  - 1 jar of marinara sauce
+  - 1 can of crushed tomatoes
+  - 1 tablespoon of dried basil
+  - Salt and pepper
+  - 1 package of lasagne noodles
+  - 15 oz ricotta cheese
+  - 2 cups of shredded mozzarella cheese
+  - 1/2 cup grated parmesan cheese
+  - Fresh parsley, chopped (for garnish)
 ---
 
 Lasagne is a classic ...
 ```
->[!info] Info
->See more on how to use the `authors` frontmatter field [here](https://flowershow.app/docs/blog#blog-authors)
+
+> [!info] Info
+> See more on how to use the `authors` frontmatter field [here](https://flowershow.app/docs/blog#blog-authors)
 
 After creating our `Recipe` document type, we are ready to create a custom layout to display this.
 
@@ -116,15 +116,26 @@ After creating our `Recipe` document type, we are ready to create a custom layou
 
 Let's create a file named `RecipeLayout.tsx` in `.flowershow/layouts` folder with the following content:
 
-```javascript
+```jsx
 export function RecipeLayout({ children, ...frontMatter }) {
-  const { created, title, authors, difficulty, serves, time, ingredients, image } = frontMatter
+  const {
+    created,
+    title,
+    authors,
+    difficulty,
+    serves,
+    time,
+    ingredients,
+    image,
+  } = frontMatter;
   return (
     <article className="docs prose prose-a:text-primary dark:prose-a:text-primary-dark prose-strong:text-primary dark:prose-strong:text-primary-dark prose-code:text-primary dark:prose-code:text-primary-dark prose-headings:text-primary dark:prose-headings:text-primary-dark text-primary dark:text-primary-dark prose-headings:font-headings dark:prose-invert prose-a:break-words mx-auto p-6">
       <header>
         <div className="container mx-auto">
           <h1 className="text-center text-4xl">{title}</h1>
-          <p className="text-center text-gray-800 mb-3">Created {(new Date(created)).toLocaleDateString()}</p>
+          <p className="text-center text-gray-800 mb-3">
+            Created {new Date(created).toLocaleDateString()}
+          </p>
           <p className="text-center text-gray-800 mb-3">
             Written by{" "}
             <a
@@ -140,11 +151,7 @@ export function RecipeLayout({ children, ...frontMatter }) {
             {/* card */}
             <div className="overflow-hidden relative">
               <div>
-                <img
-                  className="w-full"
-                  src={image}
-                  alt="Recipe Title"
-                />
+                <img className="w-full" src={image} alt="Recipe Title" />
               </div>
               <div className="p-2">
                 <div className="flex justify-between mt-4 mb-4 text-gray-500">
@@ -179,7 +186,9 @@ export function RecipeLayout({ children, ...frontMatter }) {
                         clipRule="evenodd"
                       />
                     </svg>
-                    <span className="ml-1 lg:text-xl">{ingredients.length}</span>
+                    <span className="ml-1 lg:text-xl">
+                      {ingredients.length}
+                    </span>
                   </div>
                   <div className="flex items-center">
                     <svg
@@ -196,13 +205,11 @@ export function RecipeLayout({ children, ...frontMatter }) {
                 <h2>Ingredients</h2>
                 <div className="flex justify-center bg-yellow-100">
                   <ul className="w-full">
-                    {ingredients.map(ingredient => (
-                      <li
-                      className="w-full border-b-2 border-neutral-100 border-opacity-100 py-2">
-                      {ingredient}
-                    </li>
+                    {ingredients.map((ingredient) => (
+                      <li className="w-full border-b-2 border-neutral-100 border-opacity-100 py-2">
+                        {ingredient}
+                      </li>
                     ))}
-                    
                   </ul>
                 </div>
               </div>
@@ -272,7 +279,7 @@ export default function getRecipes() {
 
 Now, let's create a home page file in `<your-content-folder>/recipes/index.md` with the following content:
 
-```bash
+```md
 ---
 title: Great Recipes
 layout: simple
