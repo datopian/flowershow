@@ -22,3 +22,13 @@ const config = {
   showLinkPreviews: false,
 };
 ```
+
+### Disable/Enable link preview for page
+
+You can also add/remove link previews for specific pages by setting  `showLinkPreview` to **true** or **false** in the page's frontmatter like below.
+
+```md
+---
+showLinkPreview: true
+---
+```

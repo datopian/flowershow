@@ -2,6 +2,7 @@
 layout: unstyled
 showToc: false
 showSidebar: false
+showLinkPreview: false
 ---
 
 import { Hero } from "components/custom/Hero.jsx"

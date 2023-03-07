@@ -30,7 +30,7 @@ return {default: () => React.createElement('div', null, '')}
 export default function Page({ globals, body, ...meta }) {
   const pageCode = body.code.length > 0 ? body.code : defaultCode;
   const MDXPage = useMDXComponent(`${codePrefix}${pageCode}`, globals);
-  const { image, title, description } = meta;
+  const { image, title, description, showLinkPreview } = meta;
 
   // workaround to handle repeating titles
   // remove the first heading from markdown if it's a title and displayed on page
@@ -57,7 +57,7 @@ export default function Page({ globals, body, ...meta }) {
       <CustomLink
         data={allDocuments}
         usehook={useMDXComponent}
-        preview={siteConfig.showLinkPreviews}
+        preview={showLinkPreview ?? siteConfig.showLinkPreviews}
         {...props}
       />
     ),
