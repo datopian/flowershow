@@ -2,7 +2,7 @@ import { allRecipes } from "contentlayer/generated";
 
 export default function getRecipes() {
   return allRecipes
-    .map(({ title, description = null, created, url_path }) => ({
+    .map(({ title, description, created, url_path }) => ({
       title,
       description,
       created,

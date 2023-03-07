@@ -1,33 +1,55 @@
 ---
 title: How to create custom page types and layouts
-description: You may have many different types of notes that you want to display in different ways on your Flowershow website. In this tutorial we will cover how to add a new `Recipe` document type for our cooking blog as well as a custom `RecipeLayout` for that specific document type.
+description: You may have many different types of notes that you want to display in different ways on your Flowershow website, like tutorials, docs, news, or... recipes! In this tutorial, we will cover how to add a new `Recipe` document type for our cooking blog as well as a custom `RecipeLayout` to make our recipes look nice. Then we will create a home page for listing all the pages of this type. 
 type: Blog
 created: 2023-03-02
 authors: [philippe-du-preez]
 ---
 
-You may have many different types of notes that you want to display in different ways on your Flowershow website. In this tutorial we will cover how to add a new `Recipe` document type for our cooking blog as well as a custom `RecipeLayout` for that specific document type. Then we will create a home page for listing all the pages of this type. 
+You may have many different types of notes that you want to display in different ways on your Flowershow website, like tutorials, docs, news, or... recipes! In this tutorial, we will cover how to add a new `Recipe` document type for our cooking blog as well as a custom `RecipeLayout` to make our recipes look nice. Then we will create a home page for listing all the pages of this type.  
 
 >[!info] Note
->An example of this has been created at https://github.com/flowershow/flowershow/tree/main/examples/layouts-and-pages .
+>You can find the code of the example app created in this tutorial at https://github.com/flowershow/flowershow/tree/main/examples/layouts-and-pages .
 
-Let's start with creating a new `Recipe` document type.
+## Create a custom document type
 
-## Create a custom Contentlayer document type
-
-In order to create our new `Recipe` document type, we need to go inside `.flowershow/contentlayer.config.ts` and add instructions to tell Contentlayer which metadata are needed. Since we are making a `Recipe` type, we are going to add the following:
-
-- difficulty (Easy, Medium, Hard)
-- time (How much time is needed in total minutes)
-- serves (Range of amount of people served)
-- ingredients (list of all ingredients needed)
-- created (date when post was written)
-- authors (author of post)
-- layout (we will specify a default layout for our recipes)
-
-Let us now add these extra fields inside our `Recipe` type as well as using the sharedFields (title, description etc.) These fields will be accessible in the `RecipeLayout` we will be making.
+Let's start with creating a new `Recipe` document type in `.flowershow/contentlayer.config.ts` file, like so:
 
 ```javascript
+//contentlayer.config.ts
+// ...
+const Recipe = defineDocumentType(() => ({
+  name: "Recipe",
+  filePathPattern: "recipes/!(index)*.md*",
+  contentType: "mdx",
+  fields: {
+    ...sharedFields,
+  },
+  computedFields,
+}));
+```
+
+- `name: "Recipe"` is the name of our new document type and will allow us to import `allRecipes` and use them to create a list of all our recipes (you can name it whatever you want depending on your use case; then you'll be able to import all these documents by referring to them as `all<YourDocument>s` - note `s` in the end)
+- `filePathPattern: "recipes/!(index)*.md"` is a glob pattern that matches all our recipe files, in this case all .md files inside of `/recipes` folder apart from `index.md` file (adjust it)
+- `contentType` is just telling Contentlayer that it should parse content of these files as MDX instead of simple MD (just leave it as is)
+- `...sharedFields` in `fields` is needed for different Flowershow features to work properly, so don't remove this (unless you know what you're doing 😎)
+- `computedFields` this is also needed for Flowershow to work properly, so don't remove this
+
+Since we are making a `Recipe` type, apart from the default Flowershow fields defined in `sharedFields` and `computedFields` we will need the following metadata about out recipes:
+
+- difficulty (Easy, Medium, Hard)
+- time (how much time is needed)
+- serves (range of amount of people served)
+- ingredients (list of all ingredients needed)
+- created (date when post was written)
+- authors (authors of post)
+- layout (a default page layout used for our recipes)
+
+Obviously, we could just write all this data inline, e.g. in a bullet list above or below the recipe instructions, but this way we will be able to access this data in a custom layout created specifically for our recipes and display it in a consistent way across all the recipes and in a nicer way (e.g. show ingredients list in a sidebar, or display prep time and servings with nice styling and icons).
+
+Now, let's create the `Recipe` document type in `.flowershow/contentlayer.config.js` file with all the frontmatter fields we've listed above. 
+
+```javascript {9-20}
 //contentlayer.config.ts
 // ...
 const Recipe = defineDocumentType(() => ({
@@ -54,10 +76,9 @@ const Recipe = defineDocumentType(() => ({
 }));
 ```
 
- 
-When making a markdown file we want as `Type: recipe`, we do not have to include the `Type` in the frontmatter, since we are adding the file in the `content/recipes` directory, where it is picked up in the filePathPattern specified above. We can then add the needed fields to the frontmatter of our recipe posts, like so:
+Now that we have the `Recipe` document type schema defined, let's create our first recipe! We'll add the following content to `<your-content-folder>/recipes/lasagne.md`.
 
-```bash
+```md
 ---
 title: Homemade Lasagne Recipe
 description: Lasagne is a classic Italian dish that is perfect for any occasion. It's a hearty and delicious meal that can be enjoyed by everyone.
@@ -85,13 +106,15 @@ ingredients:
 Lasagne is a classic ...
 ```
 >[!info] Info
->See more on how to use the `Author` document type [here](https://flowershow.app/docs/blog#blog-authors)
+>See more on how to use the `authors` frontmatter field [here](https://flowershow.app/docs/blog#blog-authors)
 
 After creating our `Recipe` document type, we are ready to create a custom layout to display this.
 
-## Create a custom layout
+## Create a custom page layout
 
-Now, we can create our `RecipeLayout.tsx` at `.flowershow/layouts` to receive and display the date, title, authors, difficulty, people served, time, ingredients, and image specified in the frontmatter of each `Recipe` document.
+After creating our `Recipe` document type, we are ready to create a custom layout to display the recipe instructions along with the creation date, title, authors, difficulty, servings, prep time, ingredients, and image specified in the frontmatter of each `Recipe` document.
+
+Let's create a file named `RecipeLayout.tsx` in `.flowershow/layouts` folder with the following content:
 
 ```javascript
 export function RecipeLayout({ children, ...frontMatter }) {
@@ -196,14 +219,32 @@ export function RecipeLayout({ children, ...frontMatter }) {
 }
 ```
 
-Then add the following to `.flowershow/layouts/index`:
+The last thing we need to do is to export the layout from `.flowershow/layouts/index.ts` file, so that it can then be imported by Flowershow to render our recipe documents.
 
-```bash
+>[!note]
+> Note, that the name under which the layout is exported needs to match the name of the layout specified on the Contentlayer's document type, in this case `recipe`.
+
+```javascript {4}
 import {RecipeLayout} from "./RecipeLayout";
 export default {
   ...
   recipe: RecipeLayout
 };
+```
+
+Once the recipe layout is created, we need to associate our `Recipe` documents with it. In order to do that, we can use Contentlayer's `layout` field on our custom `Recipe` document type, like so:
+
+```javascript {7}
+//contentlayer.config.ts
+// ...
+const Recipe = defineDocumentType(() => ({
+  // ...
+  fields: {
+    // ...
+    layout: { type: "string", default: "recipe" },
+  },
+  // ...
+}));
 ```
 
 After applying some Tailwind classes, an example recipe blog post will look like this:
@@ -216,11 +257,11 @@ The last step we have is to create a home page where all our recipes will be dis
 
 ## Create a home page
 
-In order to list all our recipes on a given page, we can use our `BlogsList` component and pass it a list of our recipes. It's globally available, so we don't need to import it.
+In order to list all our recipes on a given page, we can use the core Flowershow's `BlogsList` component and pass it a list of our recipes. It's globally available, so we don't need to import it.
 
-First we need to create a getter function that will fetch all our recipes:
+But first, we need to create a getter function that will fetch all our recipes:
 
-```bash
+```javascript
 // <your-content-folder>/getters/recipes.js
 import { allRecipes } from "contentlayer/generated";
 
@@ -229,7 +270,8 @@ export default function getRecipes() {
 }
 ```
 
-Then we can use our `Bloglist` component in our `content/recipes/index` file and pass our `recipes` to it like so:
+Now, let's create a home page file in `<your-content-folder>/recipes/index.md` with the following content:
+
 ```bash
 ---
 title: Great Recipes
@@ -240,6 +282,11 @@ data:
 
 <BlogsList blogs={recipes}/>
 ```
+
+- `data: - recipes` is the way we tell Flowershow which getter functions we want to call in order to provide the page with the data it needs. This data will then be available in the whole MDX under the same name, so you'll be able to pass it to your own custom components.
+
+> [!note]
+> Note, that the name of the getter listed in the `data` frontmatter field (in our case `recipes`) needs to be exactly the same as the name of the getter function used to fetch your custom-type documents.
 
 Then after creating a couple of recipes in `content/recipes` our home page at `/recipes` will look like this!
 
