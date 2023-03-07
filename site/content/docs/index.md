@@ -15,6 +15,7 @@ Flowershow supports **CommonMark** and **GitHub Flavored Markdown**, but also ma
 2. [[blog-tutorial|How to add blog support to your website]]
 3. [[custom-theme|Customize theme]]
 4. [[2023-02-16-nextjs-tutorial|Jumpstart a NextJS site with Flowershow]]
+5. [[custom-layout|How to create custom page types and layouts]]
 
 ## Guides
 
