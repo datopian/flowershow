@@ -55,7 +55,7 @@ const features = [
 export function Features() {
   return (
     <>
-      <div className="prose dark:prose-invert mx-auto max-w-screen-xl px-4 py-6 lg:flex lg:items-center text-center">
+      <div className="prose dark:prose-invert mx-auto max-w-screen-xl px-4 py-6 lg:items-center text-center">
         <h2>Features</h2>
         <p>
           Here are some of the cool features that are currently supported by
