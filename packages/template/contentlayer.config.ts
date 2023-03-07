@@ -33,6 +33,7 @@ const sharedFields: FieldDefs = {
   showSidebar: { type: "boolean" },
   showComments: { type: "boolean" },
   isDraft: { type: "boolean" },
+  showLinkPreview: { type: "boolean" },
   data: { type: "list", of: { type: "string" }, default: [] },
 };
 
