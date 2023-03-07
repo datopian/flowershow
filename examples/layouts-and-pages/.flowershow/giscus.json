@@ -1,0 +1,5 @@
+{
+  "origins": ["https://flowershow.app"],
+  "originsRegex": ["http://localhost:[0-9]+"],
+  "defaultCommentOrder": "newest"
+}
