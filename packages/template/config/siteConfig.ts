@@ -1,5 +1,5 @@
 import { defaultConfig } from "@flowershow/core";
-import userConfig from "../content/config";
+import userConfig from "../content/config.mjs";
 
 // TODO types
 export const siteConfig: any = {
