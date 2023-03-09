@@ -1,1 +1,1 @@
-export { Nav } from "./Nav";
+export { Nav, NavConfig, ThemeConfig } from "./Nav";

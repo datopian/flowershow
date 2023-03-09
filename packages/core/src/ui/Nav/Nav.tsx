@@ -6,7 +6,21 @@ import { NavMobile } from "./NavMobile";
 import { NavItem } from "./NavItem";
 import { NavTitle } from "./NavTitle";
 import { NavSocial } from "./NavSocial";
-import { NavConfig, ThemeConfig } from "../types";
+import { NavLink, SocialLink, SearchProviderConfig } from "../types";
+
+export interface ThemeConfig {
+  defaultTheme: "dark" | "light";
+  themeToggleIcon: string;
+}
+
+export interface NavConfig {
+  title: string;
+  logo?: string;
+  version?: string;
+  links: Array<NavLink>;
+  search?: SearchProviderConfig;
+  social?: Array<SocialLink>;
+}
 
 interface Props extends NavConfig, ThemeConfig, React.PropsWithChildren {}
 
