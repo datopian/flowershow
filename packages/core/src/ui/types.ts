@@ -7,33 +7,10 @@ export interface NavLink {
   href: string;
 }
 
-export interface NavConfig {
-  title: string;
-  logo?: string;
-  version?: string;
-  links: Array<NavLink>;
-  search?: SearchProviderConfig;
-  social?: Array<SocialLink>;
-}
-
 export interface AuthorConfig {
   name: string;
   url: string;
   logo: string;
-}
-
-export interface ThemeConfig {
-  defaultTheme: "dark" | "light";
-  themeToggleIcon: string;
-}
-
-// ToC
-
-export interface TocSection {
-  id: string;
-  title: string;
-  level: string;
-  children?: any;
 }
 
 // social
