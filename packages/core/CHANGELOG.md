@@ -1,5 +1,11 @@
 # @flowershow/core
 
+## 0.4.3
+
+### Patch Changes
+
+- 19842b6: Extend public API of the core package.
+
 ## 0.4.2
 
 ### Patch Changes
