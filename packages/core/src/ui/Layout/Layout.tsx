@@ -9,10 +9,11 @@ import { collectHeadings } from "../../utils";
 import { Nav } from "../Nav";
 import { SiteToc, NavItem, NavGroup } from "../SiteToc";
 import { Comments, CommentsConfig } from "../Comments";
-import { NavConfig, AuthorConfig, ThemeConfig, TocSection } from "../types";
 import { Footer } from "./Footer";
 import { EditThisPage } from "./EditThisPage";
-import { TableOfContents } from "./TableOfContents";
+import { TableOfContents, TocSection } from "./TableOfContents";
+import { NavConfig, ThemeConfig } from "../Nav";
+import { AuthorConfig } from "../types";
 
 interface Props extends React.PropsWithChildren {
   nav: NavConfig;

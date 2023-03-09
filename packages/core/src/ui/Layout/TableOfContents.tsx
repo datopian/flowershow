@@ -1,5 +1,11 @@
 import Link from "next/link.js";
-import { TocSection } from "../types";
+
+export interface TocSection {
+  id: string;
+  title: string;
+  level: string;
+  children?: any;
+}
 
 interface Props {
   tableOfContents: TocSection[];
