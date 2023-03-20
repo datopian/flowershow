@@ -23,7 +23,7 @@ setup() {
 }
 
 teardown() {
-    rm -rf $E2E_TEMP_DIR
+    rm -rf $E2E_TEMP_DIR || true
 }
 
 @test "Install Flowershow template and preview site" {
