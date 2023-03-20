@@ -158,13 +158,25 @@ export default class Installer {
       );
     }
 
-    // // if there is no config.js file, create one
-    if (!fs.existsSync(`${contentPath}/config.js`)) {
+    // if there is a config.js file from older flowershow, change it's extension.
+    if (fs.existsSync(`${contentPath}/config.js`)) {
+      fs.rename(
+        `${contentPath}/config.js`,
+        `${contentPath}/config.mjs`,
+        (err) => {
+          if (err) info(`Failed to rename ${contentPath}/config.js file`);
+          info(`Renamed config.js file in ${contentDir} to config.mjs`);
+        }
+      );
+    }
+
+    // // if there is no config.mjs file, create one
+    if (!fs.existsSync(`${contentPath}/config.mjs`)) {
       info(
-        `No config.js file found in ${contentDir}. Flowershow will create one for you.`
+        `No config.mjs file found in ${contentDir}. Flowershow will create one for you.`
       );
       fs.writeFile(
-        `${contentPath}/config.js`,
+        `${contentPath}/config.mjs`,
         "const config = {};\nexport default config;",
         { flag: "a" },
         (err) => {} // eslint-disable-line @typescript-eslint/no-empty-function

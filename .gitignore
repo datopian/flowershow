@@ -8,6 +8,7 @@
 .next
 out
 search.json
+sitemap.xml
 
 # symlinks
 packages/template/content
