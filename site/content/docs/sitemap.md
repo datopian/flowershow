@@ -4,7 +4,7 @@ A sitemap is a file that contains information about your pages, videos and other
 
 Having a sitemap for your website is beneficial and recommended by google as it improves search visibility and ultimately drives more traffic to your site.
 
-Sitemaps are typically created in XML format, although there are other formats available as well. In flowershow this is generated in XML format.
+Sitemaps are typically created in XML format, although there are other formats available as well. In Flowershow it is generated in XML format.
 
 ## Generating sitemaps in Flowershow
 
