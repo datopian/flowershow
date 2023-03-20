@@ -8,7 +8,7 @@ Sitemaps are typically created in XML format, although there are other formats a
 
 ## Generating sitemaps in Flowershow
 
-It is fairly easy and simple to add a sitemap to your flowershow website. All you have to do is add your website url in your config file's `authorUrl` property as below.
+In order to create a sitemap for your Flowershow website, add a domain on which your website will be hosted to `authorUrl` field in your `config.js` file, like so:
 
 ```js
 // config.mjs
