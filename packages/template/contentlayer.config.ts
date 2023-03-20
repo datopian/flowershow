@@ -51,10 +51,7 @@ const computedFields: ComputedFields = {
   date: {
     type: "date",
     /* eslint no-underscore-dangle: off */
-    resolve: (doc) => {
-      if (doc.date) return doc.date;
-      else if (doc.created) return doc.created;
-    },
+    resolve: (doc) => doc.date ?? doc.created ?? null,
   },
   title: {
     type: "string",
