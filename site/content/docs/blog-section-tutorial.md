@@ -2,7 +2,7 @@
 title: Create a blog/news/articles site with Flowershow!
 description: Create a blog/news/articles site with Flowershow!
 type: Blog
-created: 2023-01-25
+date: 2023-01-25
 authors: [philippe-du-preez]
 ---
 

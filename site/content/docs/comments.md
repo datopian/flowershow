@@ -2,7 +2,7 @@
 title: Empower Your Flowershow Website or Blog with User Comments
 description: "Get more feedback or simply increase visitor engagement by easily adding page comments to your Flowershow website or blog."
 type: Blog
-created: 2023-02-04
+date: 2023-02-04
 authors: [Khalil Ali]
 ---
 

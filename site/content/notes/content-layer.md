@@ -1,6 +1,6 @@
 ---
 title: Content Layer
-created: 2022-03-06
+date: 2022-03-06
 ---
 
 A Content Layer is an API to content, in our case markdown. It provides an intermediate layer between presentation layer and the raw content on disk.

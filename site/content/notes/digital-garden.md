@@ -1,7 +1,7 @@
 ---
 title: Digital Gardens
 description: "Digital Gardens. What they are and why create one"
-created: 2022-05-29
+date: 2022-05-29
 tags: [todo/tidy]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Flowershow News November 2022
 description: Check out what's new in the latest version of Flowershow template and our CLI! 🚀🔥
-created: 2022-11-21
+date: 2022-11-21
 authors: [philippe-du-preez]
 ---
 

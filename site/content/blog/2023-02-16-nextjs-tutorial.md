@@ -1,7 +1,7 @@
 ---
 title: Jumpstart a content-driven NextJS site with Flowershow
 description: This article will guide you through the process of building a basic static blog with Next.js using the Flowershow template.
-created: 2023-02-16
+date: 2023-02-16
 authors: [philippe-du-preez]
 ---
 
