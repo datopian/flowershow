@@ -1,7 +1,7 @@
 ---
 title: Flowershow News January 2023
 description: Here are some of the new features we have implemented. 😎🚀
-created: 2023-01-25
+date: 2023-01-25
 authors: [philippe-du-preez]
 ---
 

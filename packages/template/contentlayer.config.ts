@@ -48,6 +48,11 @@ const computedFields: ComputedFields = {
     /* eslint no-underscore-dangle: off */
     resolve: (doc) => doc._raw.flattenedPath.replace(/^(.+?\/)*/, ""),
   },
+  date: {
+    type: "date",
+    /* eslint no-underscore-dangle: off */
+    resolve: (doc) => doc.date ?? doc.created ?? null,
+  },
   title: {
     type: "string",
     /* eslint no-underscore-dangle: off */
@@ -128,7 +133,8 @@ const Blog = defineDocumentType(() => ({
   fields: {
     ...sharedFields,
     layout: { type: "string", default: "blog" },
-    created: { type: "date", required: true },
+    date: { type: "date" },
+    created: { type: "date" },
     authors: {
       type: "list",
       of: { type: "string" },

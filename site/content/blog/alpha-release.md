@@ -1,7 +1,7 @@
 ---
 title: Alpha Release
 description: We've just released the first alpha of Flowershow for self-publishing 🙌 Publish your markdown digital garden (obsidian-powered or otherwise) as fast as lighting ⚡
-created: 2022-11-07
+date: 2022-11-07
 authors: [philippe-du-preez]
 ---
 

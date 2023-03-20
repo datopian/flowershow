@@ -2,7 +2,7 @@
 title: Self publish your digital garden with Flowershow
 description: Learn how to create and publish your first Flowershow website 🌷
 type: Blog
-created: 2022-09-14
+date: 2022-09-14
 authors: [Ola Rubaj]
 ---
 

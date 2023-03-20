@@ -29,13 +29,13 @@ type: Blog
 
 ## Blog post frontmatter fields
 
-- `created` (required) - date that will be displayed on the blog page and that will be used to sort blog search results
+- `date` - date that will be displayed on the blog page and that will be used to sort blog search results
 - `authors` (optional)
 
 ```md
 ---
 title: Blog post title
-created: 2022-11-29
+date: 2022-11-29
 authors: [John Doe, Jan Kowalski]
 ---
 ```
@@ -61,7 +61,7 @@ In addition to that, you also need to create a getter function that will fetch a
 import { allBlogs } from "contentlayer/generated";
 
 export default function getBlogs() {
-  return allBlogs.sort((a, b) => new Date(b.created) - new Date(a.created));
+  return allBlogs.sort((a, b) => new Date(b.date) - new Date(a.date));
 }
 ```
 
@@ -108,7 +108,7 @@ Now you can reference John in one of your blog pages using e.g. the id you've se
 ```md
 ---
 title: Some blog page
-created: 2022-12-12
+date: 2022-12-12
 authors: [john123]
 ---
 ```
@@ -118,7 +118,7 @@ authors: [john123]
 ```md
 ---
 title: Some blog page
-created: 2022-12-12
+date: 2022-12-12
 authors: [john-doe]
 ---
 ```
@@ -128,7 +128,7 @@ authors: [john-doe]
 ```md
 ---
 title: Some blog page
-created: 2022-12-12
+date: 2022-12-12
 authors: [John Doe]
 ---
 ```

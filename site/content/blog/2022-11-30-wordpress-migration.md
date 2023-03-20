@@ -1,7 +1,7 @@
 ---
 title: Wordpress to Flowershow migration tutorial
 description: Easily migrate your Wordpress content in 3 easy steps!
-created: 2022-11-30
+date: 2022-11-30
 authors: [philippe-du-preez]
 ---
 

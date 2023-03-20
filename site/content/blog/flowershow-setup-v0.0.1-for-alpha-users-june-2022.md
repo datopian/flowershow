@@ -1,7 +1,7 @@
 ---
 title: Flowershow Setup Guide v0.0.1 for Alpha Users (June 2022)
 authors: [rufuspollock, olayway]
-created: 2022-06-26
+date: 2022-06-26
 last-updated: 2022-07-18
 ---
 

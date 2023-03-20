@@ -1,6 +1,6 @@
 ---
 title: Research on how to do signups for petitions in JAMStack world
-created: 2020-04-05
+date: 2020-04-05
 ---
 
 I want to ...
