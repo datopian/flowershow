@@ -45,12 +45,13 @@ interface SharedFields {
 interface ComputedFields {
   url_path: string;
   edit_url?: string;
+  date?: string;
 }
 
 export interface Page extends SharedFields, ComputedFields {}
 
 export interface Blog extends SharedFields, ComputedFields {
-  created: string; // TODO type?
+  date: string; // TODO type?
   authors?: Array<string>;
   tags?: Array<string>;
 }
