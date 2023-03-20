@@ -18,4 +18,4 @@ const config = {
 }
 ```
 
-Thats it! Your XML sitemap will be auto generated and ready for search engines to crawl your content.
+Thats it! Your XML sitemap will be auto generated in `public/sitemap.xml` and ready for search engines to crawl your content.
