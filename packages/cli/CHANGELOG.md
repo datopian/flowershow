@@ -1,5 +1,11 @@
 # flowershow
 
+## 0.1.5
+
+### Patch Changes
+
+- Replace config.js with config.mjs
+
 ## 0.1.4
 
 ### Patch Changes
