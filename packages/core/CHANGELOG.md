@@ -1,5 +1,11 @@
 # @flowershow/core
 
+## 0.4.4
+
+### Patch Changes
+
+- 6bc7200: Make date frontmatter the default field being used, created can still be used in frontmatter
+
 ## 0.4.3
 
 ### Patch Changes
