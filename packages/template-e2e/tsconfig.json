@@ -6,5 +6,10 @@
     "allowJs": true,
     "types": ["playwright", "node"]
   },
-  "include": ["src/**/*.ts", "src/**/*.js", "playwright.config.mjs"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.js",
+    "playwright.config.mjs",
+    "src/fixtures/content/config.mjs"
+  ]
 }

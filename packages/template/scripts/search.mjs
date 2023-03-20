@@ -1,5 +1,6 @@
 import { writeFileSync } from "fs";
 import { allDocuments } from "../.contentlayer/generated/index.mjs";
+import config from "../content/config.mjs";
 
 const omit = (obj = {}, keys = []) => {
   const result = Object.assign({}, obj);
@@ -22,4 +23,9 @@ const coreContent = allDocuments
     )
   );
 
-writeFileSync("public/search.json", JSON.stringify(coreContent));
+export default function search() {
+  if (config?.search?.provider === "kbar") {
+    writeFileSync("public/search.json", JSON.stringify(coreContent));
+    console.log("Local search index generated...");
+  }
+}
