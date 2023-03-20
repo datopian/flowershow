@@ -153,7 +153,7 @@ my-flowershow-app
 
 If you looked at the schema of the `Blog` type in `contentlayer.config.ts` file, you noticed that apart from shared fields like title or description, this type has the following extra fields:
 
-- `created` (required) - date that will be displayed on the blog page and that will be used to sort your list of blogs (if you'll use our `BlogsList` component)
+- `date` - date that will be displayed on the blog page and that will be used to sort your list of blogs (if you'll use our `BlogsList` component)
 - `authors` (optional) - this will search for authors and display their images on the post ([Authors docs](https://flowershow.app/docs/blog#blog-authors))
 
 We will also need to add a title and a description of each blog, which will be displayed on the blog home page that we'll create later on.
@@ -164,7 +164,7 @@ So your `my-blog-post.md` file will look like this:
 ---
 title: Blog post title
 description: This blog post is about how to write a blog
-created: 2022-11-29
+date: 2022-11-29
 authors: [John Doe, Jane Doe]
 ---
 
@@ -210,7 +210,7 @@ In addition to that, you also need to create a getter function that will fetch a
 import { allBlogs } from "contentlayer/generated";
 
 export default function getBlogs() {
-  return allBlogs.sort((a, b) => new Date(b.created) - new Date(a.created));
+  return allBlogs.sort((a, b) => new Date(b.date) - new Date(a.date));
 }
 ```
 

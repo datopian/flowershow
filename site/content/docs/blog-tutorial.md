@@ -26,7 +26,7 @@ Now, in order for Flowershow to pick this file up as one of your blog files, we 
 title: My blog post
 description: My first Flowershow blog post!
 type: Blog
-created: 2022-11-29
+date: 2022-11-29
 authors: [John Doe]
 ---
 
@@ -74,7 +74,7 @@ Before we use the `BlogsList` component on this page, we also need to have a lis
 import { allBlogs } from "contentlayer/generated";
 
 export default function getBlogs() {
-  return allBlogs.sort((a, b) => new Date(b.created) - new Date(a.created));
+  return allBlogs.sort((a, b) => new Date(b.date) - new Date(a.date));
 }
 ```
 
