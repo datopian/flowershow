@@ -51,7 +51,7 @@ function MyApp({ Component, pageProps }) {
     url_path: pageProps.url_path,
     commentsConfig: siteConfig.comments,
     nav: {
-      title: siteConfig.navbarTitle?.text || siteConfig.title,
+      title: siteConfig.navbarTitle?.text ?? siteConfig.title,
       logo: siteConfig.navbarTitle?.logo,
       links: siteConfig.navLinks,
       search: siteConfig.search,
