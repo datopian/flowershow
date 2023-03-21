@@ -39,7 +39,7 @@ export const TableOfContents: React.FC<Props> = ({
                 href={`#${section.id}`}
                 className={
                   isActiveSection(section)
-                    ? "text-sky-500"
+                    ? "text-secondary dark:text-secondary-dark"
                     : "font-normal text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300"
                 }
               >
@@ -54,7 +54,7 @@ export const TableOfContents: React.FC<Props> = ({
                       href={`#${subSection.id}`}
                       className={
                         isActiveSection(subSection)
-                          ? "text-sky-500"
+                          ? "text-secondary dark:text-secondary-dark"
                           : "hover:text-slate-600 dark:hover:text-slate-300"
                       }
                     >
@@ -68,7 +68,7 @@ export const TableOfContents: React.FC<Props> = ({
                               href={`#${thirdSection.id}`}
                               className={
                                 isActiveSection(thirdSection)
-                                  ? "text-sky-500"
+                                  ? "text-secondary dark:text-secondary-dark"
                                   : "hover:text-slate-600 dark:hover:text-slate-300"
                               }
                             >

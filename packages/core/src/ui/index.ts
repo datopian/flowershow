@@ -1,5 +1,3 @@
-import { SiteToc } from "./SiteToc";
-
 export { ThemeProvider } from "next-themes";
 export { Nav, NavConfig, ThemeConfig } from "./Nav";
 export { SearchProvider } from "./Search";
