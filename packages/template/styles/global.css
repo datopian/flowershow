@@ -1,5 +1,9 @@
 @import "@flowershow/remark-callouts/styles.css";
 
+.nav-logo {
+  height: 2.25rem;
+}
+
 /* mathjax */
 .math-inline > mjx-container > svg {
   display: inline;
