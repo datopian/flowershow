@@ -1,5 +1,11 @@
 # @flowershow/core
 
+## 0.4.5
+
+### Patch Changes
+
+- 0167dda: Minor style adjustements to Card, TableOfContents and nav logo.
+
 ## 0.4.4
 
 ### Patch Changes
