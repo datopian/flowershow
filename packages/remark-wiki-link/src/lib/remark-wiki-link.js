@@ -1,6 +1,5 @@
 import { toMarkdown } from "mdast-util-wiki-link";
 import { syntax } from "./syntax.js";
-import { getFiles } from "./getFiles.js";
 import { fromMarkdown, wikiLinkTransclusionFormat } from "./fromMarkdown.js";
 
 let warningIssued;
@@ -11,6 +10,11 @@ function wikiLinkPlugin(opts = { markdownFolder: "" }) {
   function add(field, value) {
     if (data[field]) data[field].push(value);
     else data[field] = [value];
+  }
+
+  async function getPermaLinks(markdownFolder) {
+    const getFiles = await import("./getFiles.js");
+    return getFiles(markdownFolder).map((file) => file.replace(/\.mdx?$/, ""));
   }
 
   if (
@@ -56,7 +60,7 @@ function wikiLinkPlugin(opts = { markdownFolder: "" }) {
           return image ? [name] : [name.replace(/ /g, "-").toLowerCase()];
         },
     permalinks: opts.markdownFolder
-      ? getFiles(opts.markdownFolder).map((file) => file.replace(/\.mdx?$/, ""))
+      ? getPermaLinks(opts.markdownFolder)
       : opts.permalinks,
   };
 
