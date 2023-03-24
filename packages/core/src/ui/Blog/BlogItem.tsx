@@ -8,26 +8,30 @@ interface Props {
 
 export const BlogItem: React.FC<Props> = ({ blog }) => {
   return (
-    <article className="md:grid md:grid-cols-4 md:items-baseline">
-      <Card className="md:col-span-3">
-        <Card.Title href={`${blog.url_path}`}>{blog.title}</Card.Title>
+    <article className="blogitem md:grid md:grid-cols-4 md:items-baseline">
+      <Card className="blogitem-card md:col-span-3">
+        <Card.Title className="blogitem-title" href={`${blog.url_path}`}>
+          {blog.title}
+        </Card.Title>
         <Card.Eyebrow
           as="time"
           dateTime={blog.date}
-          className="md:hidden"
+          className="blogitem-date md:hidden"
           decorate
         >
           {formatDate(blog.date)}
         </Card.Eyebrow>
         {blog.description && (
-          <Card.Description>{blog.description}</Card.Description>
+          <Card.Description className="blogitem-descr">
+            {blog.description}
+          </Card.Description>
         )}
-        <Card.Cta>Read article</Card.Cta>
+        <Card.Cta className="blogitem-cta">Read article</Card.Cta>
       </Card>
       <Card.Eyebrow
         as="time"
         dateTime={blog.date}
-        className="mt-1 hidden md:block"
+        className="blogitem-date mt-1 hidden md:block"
       >
         {formatDate(blog.date)}
       </Card.Eyebrow>
