@@ -1,9 +1,9 @@
-import { wikiLinkTransclusionFormat } from "./fromMarkdown.js";
+import { isMediaFile } from "./isMediaFile.js";
 
 function html(opts = {}) {
   const permalinks = opts.permalinks || [];
   const defaultPageResolver = (name) => {
-    const image = wikiLinkTransclusionFormat(name)[1];
+    const image = isMediaFile(name)[1];
     return image ? [name] : [name.replace(/ /g, "_").toLowerCase()];
   };
   const pageResolver = opts.pageResolver || defaultPageResolver;
@@ -56,7 +56,7 @@ function html(opts = {}) {
       classNames += " " + newClassName;
     }
 
-    const transclusionFormat = wikiLinkTransclusionFormat(wikiLink.value);
+    const transclusionFormat = isMediaFile(wikiLink.value);
 
     if (wikiLinkTransclusion) {
       if (!transclusionFormat[0]) {

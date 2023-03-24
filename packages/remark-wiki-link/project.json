@@ -14,7 +14,7 @@
     "test": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "mocha --require @babel/register packages/remark-wiki-link/test/remark-wiki-link.spec.js"
+        "command": "mocha --require @babel/register packages/remark-wiki-link/**/*.spec.js"
       }
     },
     "build": {

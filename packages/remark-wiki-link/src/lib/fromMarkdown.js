@@ -1,26 +1,4 @@
-function wikiLinkTransclusionFormat(extension) {
-  const transclusionFormats = [
-    /\.jpe?g$/,
-    /\.a?png$/,
-    /\.webp$/,
-    /\.avif$/,
-    /\.gif$/,
-    /\.svg$/,
-    /\.bmp$/,
-    /\.ico$/,
-    /\.pdf$/,
-  ];
-
-  const supportedFormat = extension.match(
-    transclusionFormats.filter((r) => extension.match(r))[0]
-  )[0];
-  const strippedExtension = extension.match(/\.[0-9a-z]{1,4}$/gi);
-
-  if (!supportedFormat)
-    return [false, strippedExtension && strippedExtension[0].replace(".", "")];
-
-  return [true, supportedFormat.replace(".", "")];
-}
+import { isMediaFile } from "./isMediaFile";
 
 function fromMarkdown(opts = {}) {
   const permalinks = opts.permalinks || [];
@@ -97,7 +75,7 @@ function fromMarkdown(opts = {}) {
     let transclusionFormat;
 
     if (wikiLinkTransclusion) {
-      transclusionFormat = wikiLinkTransclusionFormat(wikiLink.value);
+      transclusionFormat = isMediaFile(wikiLink.value);
       if (!transclusionFormat[0]) {
         displayName = `Document type ${
           transclusionFormat[1] ? transclusionFormat[1].toUpperCase() : null
@@ -194,4 +172,4 @@ function fromMarkdown(opts = {}) {
   };
 }
 
-export { fromMarkdown, wikiLinkTransclusionFormat };
+export { fromMarkdown };
