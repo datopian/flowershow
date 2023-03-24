@@ -1,4 +1,4 @@
-import { isMediaFile } from "./isMediaFile";
+import { isEmbeddedFileLink } from "./isEmbeddedFileLink.js";
 
 function fromMarkdown(opts = {}) {
   const permalinks = opts.permalinks || [];
@@ -75,7 +75,7 @@ function fromMarkdown(opts = {}) {
     let transclusionFormat;
 
     if (wikiLinkTransclusion) {
-      transclusionFormat = isMediaFile(wikiLink.value);
+      transclusionFormat = isEmbeddedFileLink(wikiLink.value);
       if (!transclusionFormat[0]) {
         displayName = `Document type ${
           transclusionFormat[1] ? transclusionFormat[1].toUpperCase() : null
