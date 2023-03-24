@@ -9,15 +9,22 @@ interface CardProps extends React.PropsWithChildren {
 
 interface CardLinkProps extends React.PropsWithChildren {
   href?: string;
+  className?: string;
 }
 
 interface CardTitleProps extends React.PropsWithChildren {
   as?: React.ElementType;
   href?: string;
+  className?: string;
 }
 
-type CardDescriptionProps = React.PropsWithChildren;
-type CardCtaProps = React.PropsWithChildren;
+interface CardDescriptionProps extends React.PropsWithChildren {
+  className?: string;
+}
+
+interface CardCtaProps extends React.PropsWithChildren {
+  className?: string;
+}
 
 interface CardEyebrowProps extends React.PropsWithChildren {
   as?: React.ElementType;
@@ -42,7 +49,7 @@ export const Card: Card = ({ children, as: Component = "div", className }) => {
   );
 };
 
-Card.Link = function CardLink({ children, href, ...props }) {
+Card.Link = function CardLink({ children, href, className, ...props }) {
   // <Link {...props}>
   //   <span className="absolute -inset-y-6 -inset-x-4 z-20 sm:-inset-x-6 sm:rounded-2xl" />
   //   <span className="relative z-10">{children}</span>
@@ -50,7 +57,7 @@ Card.Link = function CardLink({ children, href, ...props }) {
   return (
     <>
       <div className="absolute -inset-y-6 -inset-x-4 z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 dark:bg-slate-800/75 sm:-inset-x-6 sm:rounded-2xl" />
-      <a href={href} {...props}>
+      <a href={href} className={className} {...props}>
         <span className="absolute -inset-y-6 -inset-x-4 z-20 sm:-inset-x-6 sm:rounded-2xl" />
         <span className="relative z-10">{children}</span>
       </a>
@@ -58,27 +65,45 @@ Card.Link = function CardLink({ children, href, ...props }) {
   );
 };
 
-Card.Title = function CardTitle({ as: Component = "h2", href, children }) {
+Card.Title = function CardTitle({
+  as: Component = "h2",
+  href,
+  children,
+  className,
+}) {
   return (
-    <Component className="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
+    <Component
+      className={clsx(
+        className,
+        "text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100"
+      )}
+    >
       {href ? <Card.Link href={href}>{children}</Card.Link> : children}
     </Component>
   );
 };
 
-Card.Description = function CardDescription({ children }) {
+Card.Description = function CardDescription({ children, className }) {
   return (
-    <p className="relative z-10 mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+    <p
+      className={clsx(
+        className,
+        "relative z-10 mt-2 text-sm text-zinc-600 dark:text-zinc-400"
+      )}
+    >
       {children}
     </p>
   );
 };
 
-Card.Cta = function CardCta({ children }) {
+Card.Cta = function CardCta({ children, className }) {
   return (
     <div
       aria-hidden="true"
-      className="relative z-10 mt-4 flex items-center text-sm font-medium text-secondary dark:text-secondary-dark"
+      className={clsx(
+        className,
+        "relative z-10 mt-4 flex items-center text-sm font-medium text-secondary dark:text-secondary-dark"
+      )}
     >
       {children}
       <ChevronRightIcon className="ml-1 h-4 w-4 stroke-current" />
