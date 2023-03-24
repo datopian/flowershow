@@ -14,7 +14,13 @@ export const supportedFileFormats = [
 
 export const isMediaFile = (filePath) => {
   const fileExtensionPattern = /\.([0-9a-z]{1,4})$/i;
-  const [, extension] = filePath.match(fileExtensionPattern);
+  const match = filePath.match(fileExtensionPattern);
+
+  if (!match) {
+    return [false, ""];
+  }
+
+  const [, extension] = match;
   const isSupported = supportedFileFormats.includes(extension);
 
   return [isSupported, extension];

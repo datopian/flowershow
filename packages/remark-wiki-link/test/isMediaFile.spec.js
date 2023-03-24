@@ -23,4 +23,9 @@ describe("isMediaFile", () => {
     const filePath = "/home/user/image.png";
     assert.equal(isMediaFile(filePath)[0], true);
   });
+
+  it("should return false for a path with no file extension", () => {
+    const filePath = "/content/some/markdown/page";
+    assert.equal(isMediaFile(filePath)[0], false);
+  });
 });
