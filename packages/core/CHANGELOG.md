@@ -1,5 +1,11 @@
 # @flowershow/core
 
+## 0.4.6
+
+### Patch Changes
+
+- 6e04357: Add BEM classes to BlogItem.
+
 ## 0.4.5
 
 ### Patch Changes
