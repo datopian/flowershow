@@ -25,12 +25,12 @@ function wikiLink(opts = {}) {
   const endMarker = "]]";
 
   function tokenize(effects, ok, nok) {
-    var data;
-    var alias;
+    let data;
+    let alias;
 
-    var aliasCursor = 0;
-    var startMarkerCursor = 0;
-    var endMarkerCursor = 0;
+    let aliasCursor = 0;
+    let startMarkerCursor = 0;
+    let endMarkerCursor = 0;
 
     return start;
 
@@ -165,7 +165,7 @@ function wikiLink(opts = {}) {
     }
   }
 
-  var call = { tokenize: tokenize };
+  const call = { tokenize: tokenize };
 
   return {
     text: { 91: call, 33: call }, // 91: left square bracket, 33: exclamation mark

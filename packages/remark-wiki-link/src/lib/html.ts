@@ -1,9 +1,9 @@
-import { isMediaFile } from "./isMediaFile.js";
+import { isEmbeddedFileLink } from "./isEmbeddedFileLink.js";
 
 function html(opts = {}) {
   const permalinks = opts.permalinks || [];
   const defaultPageResolver = (name) => {
-    const image = isMediaFile(name)[1];
+    const image = isEmbeddedFileLink(name)[1];
     return image ? [name] : [name.replace(/ /g, "_").toLowerCase()];
   };
   const pageResolver = opts.pageResolver || defaultPageResolver;
@@ -56,7 +56,7 @@ function html(opts = {}) {
       classNames += " " + newClassName;
     }
 
-    const transclusionFormat = isMediaFile(wikiLink.value);
+    const transclusionFormat = isEmbeddedFileLink(wikiLink.value);
 
     if (wikiLinkTransclusion) {
       if (!transclusionFormat[0]) {

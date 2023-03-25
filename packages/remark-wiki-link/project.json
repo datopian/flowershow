@@ -8,7 +8,7 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["packages/remark-wiki-link/**/*.js"]
+        "lintFilePatterns": ["packages/remark-wiki-link/**/*.{ts,js}"]
       }
     },
     "test": {
@@ -21,7 +21,7 @@
       "executor": "@nrwl/web:rollup",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "entryFile": "packages/remark-wiki-link/src/index.js",
+        "entryFile": "packages/remark-wiki-link/src/index.ts",
         "outputPath": "packages/remark-wiki-link/dist",
         "compiler": "babel",
         "tsConfig": "packages/remark-wiki-link/tsconfig.lib.json",
