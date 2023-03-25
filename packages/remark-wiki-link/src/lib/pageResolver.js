@@ -4,7 +4,7 @@ const slugify = (name) => {
   return name.replace(/ /g, "-").toLowerCase();
 };
 
-export const pageResolver = (path, permalinks) => {
+export const pageResolver = (permalinks) => (path) => {
   // for file embed links return the original path (e.g. e.g. ../../Assets/Image 1.png)
   if (isEmbeddedFileLink(path)[0]) {
     return path;
