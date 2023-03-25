@@ -18,7 +18,6 @@ const recursiveGetFiles = (dir) => {
 };
 
 export const getPermalinks = (markdownFolder) => {
-  console.log({ markdownFolder });
   const files = recursiveGetFiles(markdownFolder);
   const permalinks = files.map((file) => {
     const permalink = file
