@@ -29,7 +29,7 @@ teardown() {
 @test "Install Flowershow template and preview site" {
     run install.sh $CLI_EXE
     assert_success
-    assert_output --partial "Successfuly installed"
+    assert_output --partial "Successfully installed"
     assert [ -d .flowershow/node_modules ]
 
     run node $CLI_EXE preview & sleep 20
@@ -45,7 +45,7 @@ teardown() {
 @test "Install Flowershow template, build and start site" {
     run install.sh $CLI_EXE
     assert_success
-    assert_output --partial "Successfuly installed"
+    assert_output --partial "Successfully installed"
     assert [ -d .flowershow/node_modules ]
 
     run node $CLI_EXE build
@@ -73,7 +73,7 @@ teardown() {
     fi
 
     run install.sh $CLI_EXE
-    assert_output --partial "Successfuly installed"
+    assert_output --partial "Successfully installed"
     run [ -d .flowershow/node_modules ]
     assert_success
 
