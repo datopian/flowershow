@@ -158,7 +158,7 @@ export default class Installer {
       );
     }
 
-    // if there is a config.js file from older flowershow, change it's extension.
+    // if there is a config.js file from older flowershow, change its extension.
     if (fs.existsSync(`${contentPath}/config.js`)) {
       fs.rename(
         `${contentPath}/config.js`,
@@ -234,7 +234,7 @@ export default class Installer {
       log(stdout);
       log(stderr);
       stopSpinner();
-      success("Successfuly installed Flowershow!");
+      success("Successfully installed Flowershow!");
     } catch (err) {
       error(`Failed to install Flowershow dependencies: ${err.message}`);
       exit(err.exitCode);
