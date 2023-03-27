@@ -1,5 +1,14 @@
 // Adjusted copy of https://github.com/landakram/micromark-extension-wiki-link/blob/master/src/index.js
-import { codes } from "micromark-util-symbol/codes.js";
+// import { html } from "./html.js";
+// import { html } from "micromark-extension-wiki-link";
+
+const codes = {
+  horizontalTab: -2,
+  virtualSpace: -1,
+  nul: 0,
+  eof: null,
+  space: 32,
+};
 
 function markdownLineEndingOrSpace(code: number) {
   return code < codes.nul || code === codes.space;
@@ -14,7 +23,7 @@ export interface WikiLinkOpts {
 }
 
 function wikiLink(opts: WikiLinkOpts = {}) {
-  const aliasDivider = opts.aliasDivider || ":";
+  const aliasDivider = opts.aliasDivider || "|";
 
   const aliasMarker = aliasDivider;
   const startMarker = "[[";
@@ -22,8 +31,8 @@ function wikiLink(opts: WikiLinkOpts = {}) {
   const endMarker = "]]";
 
   function tokenize(effects, ok, nok) {
-    let data = false;
-    let alias = false;
+    let data;
+    let alias;
 
     let aliasCursor = 0;
     let startMarkerCursor = 0;
@@ -165,14 +174,12 @@ function wikiLink(opts: WikiLinkOpts = {}) {
     }
   }
 
-  const wikiLinkConstruct = { name: "wikiLink", tokenize };
+  const call = { tokenize: tokenize };
 
   return {
-    text: {
-      [codes.leftSquareBracket]: wikiLinkConstruct,
-      [codes.space]: wikiLinkConstruct,
-    },
+    text: { 91: call, 33: call }, // 91: left square bracket, 33: exclamation mark
   };
 }
 
+// export { wikiLink as syntax, html };
 export { wikiLink as syntax };

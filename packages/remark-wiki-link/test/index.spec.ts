@@ -8,46 +8,107 @@ import { Node } from "unist";
 import wikiLinkPlugin from "../src";
 
 describe("remark-wiki-link", () => {
-  test("adds two plus two", () => {
-    expect(2 + 2).toBe(4);
-  });
+  describe("wiki link with matching permalink", () => {
+    test("parses a wiki link with relative path", () => {
+      const processor = unified()
+        .use(markdown)
+        .use(wikiLinkPlugin, {
+          permalinks: ["wiki-link"],
+        });
 
-  test("parses a wiki link that has a matching permalink", () => {
-    const processor = unified()
-      .use(markdown)
-      .use(wikiLinkPlugin, {
-        permalinks: ["test"],
-        hrefTemplate: (permalink: string) => `/${permalink}`,
+      let ast = processor.parse("[[Wiki Link]]");
+      ast = processor.runSync(ast);
+
+      visit(ast, "wikiLink", (node: Node) => {
+        expect(node.data?.exists).toEqual(true);
+        expect(node.data?.permalink).toEqual("wiki-link");
+        expect(node.data?.hName).toEqual("a");
+        expect((node.data?.hProperties as any).className).toEqual("internal");
+        expect((node.data?.hProperties as any).href).toEqual("wiki-link");
+        expect((node.data?.hChildren as any)[0].value).toEqual("Wiki Link");
       });
+    });
 
-    let ast = processor.parse("[[test]]");
-    ast = processor.runSync(ast);
+    test("parses a wiki link with absolute path", () => {
+      const processor = unified()
+        .use(markdown)
+        .use(wikiLinkPlugin, {
+          permalinks: ["/some/folder/wiki-link"],
+          absoltePaths: true,
+        });
 
-    visit(ast, "wikiLink", (node: Node) => {
-      expect(node.data?.permalink).toEqual("test");
-      expect(node.data?.exists).toEqual(true);
-      expect(node.data?.hName).toEqual("a");
-      expect((node.data?.hProperties as any).className).toEqual("internal");
-      expect((node.data?.hProperties as any).href).toEqual("/test");
-      expect((node.data?.hChildren as any)[0].value).toEqual("test");
+      let ast = processor.parse("[[some/folder/Wiki Link]]");
+      ast = processor.runSync(ast);
+
+      visit(ast, "wikiLink", (node: Node) => {
+        expect(node.data?.exists).toEqual(false);
+        expect(node.data?.permalink).toEqual("/some/folder/wiki-link");
+        expect(node.data?.hName).toEqual("a");
+        expect((node.data?.hProperties as any).className).toEqual("internal");
+        expect((node.data?.hProperties as any).href).toEqual("wiki-link");
+        expect((node.data?.hChildren as any)[0].value).toEqual("Wiki Link");
+      });
+    });
+
+    test("parses a relative wiki link to file in upper directory", () => {
+      const processor = unified()
+        .use(markdown)
+        .use(wikiLinkPlugin, {
+          permalinks: ["wiki-link"],
+        });
+
+      let ast = processor.parse("[[Wiki Link]]");
+      ast = processor.runSync(ast);
+
+      visit(ast, "wikiLink", (node: Node) => {
+        expect(node.data?.exists).toEqual(true);
+        expect(node.data?.permalink).toEqual("wiki-link");
+        expect(node.data?.hName).toEqual("a");
+        expect((node.data?.hProperties as any).className).toEqual("internal");
+        expect((node.data?.hProperties as any).href).toEqual("wiki-link");
+        expect((node.data?.hChildren as any)[0].value).toEqual("Wiki Link");
+      });
     });
   });
 
   // test("parses a wiki link that has no matching permalink", () => {
-  //   const processor = unified().use(markdown).use(wikiLinkPlugin, {
-  //     permalinks: [],
-  //   });
+  //   const processor = unified()
+  //     .use(markdown)
+  //     .use(wikiLinkPlugin, {
+  //       permalinks: [],
+  //     });
 
-  //   var ast = processor.parse("[[New Page]]");
+  //   let ast = processor.parse("[[New Page]]");
   //   ast = processor.runSync(ast);
 
-  //   vistest(ast, "wikiLink", (node) => {
-  //     assert.equal(node.data.exists, false);
-  //     assert.equal(node.data.permalink, "new-page");
-  //     assert.equal(node.data.hName, "a");
-  //     assert.equal(node.data.hProperties.className, "internal new");
-  //     assert.equal(node.data.hProperties.href, "/new-page");
-  //     assert.equal(node.data.hChildren[0].value, "New Page");
+  //   visit(ast, "wikiLink", (node: Node) => {
+  //     expect(node.data?.exists).toEqual(false);
+  //     expect(node.data?.permalink).toEqual("new-page");
+  //     expect(node.data?.hName).toEqual("a");
+  //     expect((node.data?.hProperties as any).className).toEqual("internal new");
+  //     expect((node.data?.hProperties as any).href).toEqual("new-page");
+  //     expect((node.data?.hChildren as any)[0].value).toEqual("New Page");
+  //   });
+  // });
+
+  // test("parses wiki links with aliases", () => {
+  //   const processor = unified()
+  //     .use(markdown)
+  //     .use(wikiLinkPlugin, {
+  //       permalinks: []
+  //     });
+
+  //   let ast = processor.parse("[[Real Page|Page Alias]]");
+  //   ast = processor.runSync(ast);
+
+  //   visit(ast, "wikiLink", (node: Node) => {
+  //     expect(node.data?.exists).toEqual(false);
+  //     expect(node.data?.permalink).toEqual("real-page");
+  //     expect(node.data?.hName).toEqual("a");
+  //     expect(node.data?.alias).toEqual("Page Alias");
+  //     expect((node.data?.hProperties as any).className).toEqual("internal new");
+  //     expect((node.data?.hProperties as any).href).toEqual("real-page");
+  //     expect((node.data?.hChildren as any)[0].value).toEqual("Page Alias");
   //   });
   // });
 
@@ -55,41 +116,41 @@ describe("remark-wiki-link", () => {
   //   const processor = unified()
   //     .use(markdown)
   //     .use(wikiLinkPlugin, {
-  //       permalinks: ["example/test"],
+  //       permalinks: [],
+  //       aliasDivider: ":"
   //     });
 
-  //   var ast = processor.parse("[[example/test|custom text]]");
+  //   let ast = processor.parse("[[Real Page:Page Alias]]");
   //   ast = processor.runSync(ast);
 
-  //   vistest(ast, "wikiLink", (node) => {
-  //     assert.equal(node.data.exists, true);
-  //     assert.equal(node.data.permalink, "example/test");
-  //     assert.equal(node.data.hName, "a");
-  //     assert.equal(node.data.alias, "custom text");
-  //     assert.equal(node.value, "example/test");
-  //     assert.equal(node.data.hProperties.className, "internal");
-  //     assert.equal(node.data.hProperties.href, "/example/test");
-  //     assert.equal(node.data.hChildren[0].value, "custom text");
+  //   visit(ast, "wikiLink", (node: Node) => {
+  //     expect(node.data?.exists).toEqual(false);
+  //     expect(node.data?.permalink).toEqual("real-page");
+  //     expect(node.data?.hName).toEqual("a");
+  //     expect(node.data?.alias).toEqual("Page Alias");
+  //     expect((node.data?.hProperties as any).className).toEqual("internal new");
+  //     expect((node.data?.hProperties as any).href).toEqual("real-page");
+  //     expect((node.data?.hChildren as any)[0].value).toEqual("Page Alias");
   //   });
   // });
 
-  // test("handles wiki links with heading", () => {
+  // test("parses wiki links with heading", () => {
   //   const processor = unified()
   //     .use(markdown)
   //     .use(wikiLinkPlugin, {
-  //       permalinks: ["example/test"],
+  //       permalinks: [],
   //     });
 
-  //   var ast = processor.parse("[[example/test#with heading]]");
+  //   let ast = processor.parse("[[Wiki Link#With Heading]]");
   //   ast = processor.runSync(ast);
 
-  //   vistest(ast, "wikiLink", (node) => {
-  //     assert.equal(node.data.exists, true);
-  //     assert.equal(node.data.permalink, "example/test#with-heading");
-  //     assert.equal(node.data.hName, "a");
-  //     assert.equal(node.data.hProperties.className, "internal");
-  //     assert.equal(node.data.hProperties.href, "/example/test#with-heading");
-  //     assert.equal(node.data.hChildren[0].value, "example/test#with heading");
+  //   visit(ast, "wikiLink", (node: Node) => {
+  //     expect(node.data?.exists).toEqual(false);
+  //     expect(node.data?.permalink).toEqual("wiki-link#with-heading");
+  //     expect(node.data?.hName).toEqual("a");
+  //     expect((node.data?.hProperties as any).className).toEqual("internal new");
+  //     expect((node.data?.hProperties as any).href).toEqual("wiki-link#with-heading");
+  //     expect((node.data?.hChildren as any)[0].value).toEqual("Wiki Link#With Heading"); // TODO
   //   });
   // });
 
@@ -97,19 +158,64 @@ describe("remark-wiki-link", () => {
   //   const processor = unified()
   //     .use(markdown)
   //     .use(wikiLinkPlugin, {
-  //       permalinks: ["example/test"],
+  //       permalinks: [],
   //     });
 
-  //   var ast = processor.parse("[[example/test#with heading|custom text]]");
+  //   let ast = processor.parse("[[Real Page#With Heading|Page Alias]]");
   //   ast = processor.runSync(ast);
 
-  //   vistest(ast, "wikiLink", (node) => {
-  //     assert.equal(node.data.exists, true);
-  //     assert.equal(node.data.permalink, "example/test#with-heading");
-  //     assert.equal(node.data.hName, "a");
-  //     assert.equal(node.data.hProperties.className, "internal");
-  //     assert.equal(node.data.hProperties.href, "/example/test#with-heading");
-  //     assert.equal(node.data.hChildren[0].value, "custom text");
+  //   visit(ast, "wikiLink", (node: Node) => {
+  //     expect(node.data.exists).toEqual(false);
+  //     expect(node.data.permalink).toEqual("real-page#with-heading");
+  //     expect(node.data.hName).toEqual("a");
+  //     expect(node.data.alias).toEqual("Page Alias");
+  //     expect((node.data.hProperties as any).className).toEqual("internal new");
+  //     expect((node.data.hProperties as any).href).toEqual("real-page#with-heading");
+  //     expect((node.data.hChildren as any)[0].value).toEqual("Page Alias");
+  //   });
+  // });
+
+  // test("handles wiki alias links with heading, custom divider and matching permalink", () => {
+  //   const processor = unified()
+  //     .use(markdown)
+  //     .use(wikiLinkPlugin, {
+  //       permalinks: ["real-page"],
+  //     });
+
+  //   let ast = processor.parse("[[Real Page#With Heading|Page Alias]]");
+  //   ast = processor.runSync(ast);
+
+  //   visit(ast, "wikiLink", (node: Node) => {
+  //     expect(node.data.exists).toEqual(false);
+  //     expect(node.data.permalink).toEqual("real-page#with-heading");
+  //     expect(node.data.hName).toEqual("a");
+  //     expect(node.data.alias).toEqual("Page Alias");
+  //     expect((node.data.hProperties as any).className).toEqual("internal new");
+  //     expect((node.data.hProperties as any).href).toEqual("real-page#with-heading");
+  //     expect((node.data.hChildren as any)[0].value).toEqual("Page Alias");
+  //   });
+  // });
+
+  // test("handles wiki alias links with heading, custom divider, matching permalink and shortened obsidian path", () => {
+  //   const processor = unified()
+  //     .use(markdown)
+  //     .use(wikiLinkPlugin, {
+  //       permalinks: ["/some/folder/real-page"],
+  //     });
+
+  //   let ast = processor.parse("[[Real Page#With Heading|Page Alias]]");
+  //   ast = processor.runSync(ast);
+
+  //   console.log(ast)
+
+  //   visit(ast, "wikiLink", (node: Node) => {
+  //     expect(node.data.exists).toEqual(false);
+  //     expect(node.data.permalink).toEqual("real-page#with-heading");
+  //     expect(node.data.hName).toEqual("a");
+  //     expect(node.data.alias).toEqual("Page Alias");
+  //     expect((node.data.hProperties as any).className).toEqual("internal new");
+  //     expect((node.data.hProperties as any).href).toEqual("/some/folder/real-page#with-heading");
+  //     expect((node.data.hChildren as any)[0].value).toEqual("Page Alias");
   //   });
   // });
 

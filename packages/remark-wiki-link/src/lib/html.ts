@@ -1,15 +1,26 @@
-import { isEmbeddedFileLink } from "./isEmbeddedFileLink.js";
+import { isEmbeddedFileLink } from "./isEmbeddedFileLink";
 
-function html(opts = {}) {
+// Micromark HtmlExtension
+// https://github.com/micromark/micromark#htmlextension
+
+export interface HtmlOpts {
+  permalinks?: string[];
+  pageResolver?: (name: string) => string[];
+  newClassName?: string;
+  wikiLinkClassName?: string;
+  hrefTemplate?: (permalink: string) => string;
+}
+
+function html(opts: HtmlOpts = {}) {
   const permalinks = opts.permalinks || [];
-  const defaultPageResolver = (name) => {
+  const defaultPageResolver = (name: string) => {
     const image = isEmbeddedFileLink(name)[1];
     return image ? [name] : [name.replace(/ /g, "_").toLowerCase()];
   };
   const pageResolver = opts.pageResolver || defaultPageResolver;
   const newClassName = opts.newClassName || "new";
   const wikiLinkClassName = opts.wikiLinkClassName || "internal";
-  const defaultHrefTemplate = (permalink) => `/${permalink}`;
+  const defaultHrefTemplate = (permalink: string) => `/${permalink}`;
   const hrefTemplate = opts.hrefTemplate || defaultHrefTemplate;
 
   function enterWikiLink() {
@@ -33,6 +44,7 @@ function html(opts = {}) {
     const target = this.sliceSerialize(token);
     const current = top(this.getData("wikiLinkStack"));
     current.target = target;
+    current.value = target;
   }
 
   function exitWikiLink() {
@@ -56,12 +68,14 @@ function html(opts = {}) {
       classNames += " " + newClassName;
     }
 
+    console.log({ wikiLink });
+
     const transclusionFormat = isEmbeddedFileLink(wikiLink.value);
 
     if (wikiLinkTransclusion) {
       if (!transclusionFormat[0]) {
         this.raw(displayName);
-      } else if (transclusionFormat[1] === "pdf") {
+      } else if (transclusionFormat[2] === "pdf") {
         this.tag(
           `<embed width="100%" data="${hrefTemplate(
             permalink

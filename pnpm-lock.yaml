@@ -214,10 +214,15 @@ importers:
   packages/remark-wiki-link:
     specifiers:
       mdast-util-wiki-link: ^0.0.2
+      micromark: ^3.1.0
       micromark-extension-wiki-link: ^0.0.4
+      micromark-util-symbol: ^1.0.1
     dependencies:
       mdast-util-wiki-link: 0.0.2
       micromark-extension-wiki-link: 0.0.4
+      micromark-util-symbol: 1.0.1
+    devDependencies:
+      micromark: 3.1.0
 
   packages/template:
     specifiers:

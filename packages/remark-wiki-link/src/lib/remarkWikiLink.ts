@@ -1,7 +1,7 @@
-import { fromMarkdown, toMarkdown } from "mdast-util-wiki-link";
-import { syntax } from "micromark-extension-wiki-link";
-// import { syntax } from "./syntax.js";
-// import { fromMarkdown } from "./fromMarkdown.js";
+// import { fromMarkdown, toMarkdown } from "mdast-util-wiki-link";
+import { syntax } from "./syntax";
+import { html } from "./html";
+
 import { getPermalinks } from "./getPermalinks";
 import { pageResolver } from "./pageResolver";
 
@@ -10,8 +10,14 @@ let warningIssued = false;
 // interface PluginOptions {
 //     // our options
 //     markdownFolder?: string
-//     // toMarkdown options
+//     // syntax options
 //     aliasDivider?: string
+//     // html options
+//     permalinks?: string[]\
+//     pageResolver?: (permalink: string) => string[]
+//     hrefTemplate?: (permalink: string) => string
+//     wikiLinkClassName?: [string]
+//     newClassName?: [string]
 //
 // }
 
@@ -23,6 +29,13 @@ function remarkWikiLink(opts: any = { markdownFolder: "" }) {
   function add(field, value) {
     if (data[field]) data[field].push(value);
     else data[field] = [value];
+  }
+
+  function getHrefTemplate(absolute) {
+    function hrefTemplate(permalink: string) {
+      return `${absolute ? "/" : ""}${permalink}`;
+    }
+    return hrefTemplate;
   }
 
   if (
@@ -50,6 +63,8 @@ function remarkWikiLink(opts: any = { markdownFolder: "" }) {
   opts = {
     ...opts,
     aliasDivider: opts.aliasDivider ?? "|",
+    absolutePaths: opts.absolutePaths ?? false,
+    hrefTemplate: opts.hrefTemplate ?? getHrefTemplate(opts.absolute),
     pageResolver: opts.pageResolver ?? pageResolver(opts.permaLinks),
     permalinks: opts.markdownFolder
       ? getPermalinks(opts.markdownFolder)
@@ -60,11 +75,11 @@ function remarkWikiLink(opts: any = { markdownFolder: "" }) {
 
   // add extensions to packages used by remark-parse
   // micromark extensions
-  add("micromarkExtensions", syntax(opts));
+  add("micromarkExtensions", [syntax(opts), html(opts)]);
   // mdast-util-from-markdown extensions
-  add("fromMarkdownExtensions", fromMarkdown(opts));
+  // add("fromMarkdownExtensions", fromMarkdown(opts)); // TODO: not sure if this is needed
   // mdast-util-to-markdown extensions
-  add("toMarkdownExtensions", toMarkdown(opts));
+  // add("toMarkdownExtensions", toMarkdown(opts)); // TODO: not sure if this is needed
 }
 
 export default remarkWikiLink;

@@ -4,6 +4,12 @@ const slugify = (name: string): string => {
   return name.replace(/ /g, "-").toLowerCase();
 };
 
+/**
+ * A function that maps a page name/path to an array of possible permalinks.
+ * These possible permalinks are cross-referenced with options.permalinks to determine whether a page exists.
+ * If a page doesn't exist, the first element of the array is considered the permalink.
+ */
+
 export const pageResolver =
   (permalinks?: Array<string>) =>
   (path: string): Array<string> => {
@@ -20,7 +26,8 @@ export const pageResolver =
       return [slugifiedPath];
     }
 
-    const pathWithOptionalHeadingPattern = /([a-z0-9./_-]*)(#.*)?/;
+    // eslint-disable-next-line no-useless-escape
+    const pathWithOptionalHeadingPattern = /([a-z0-9\.\/_-]*)(#.*)?/;
     const patternMatch = slugifiedPath.match(pathWithOptionalHeadingPattern);
 
     // if some weird path is passed, return the original path
