@@ -1,44 +1,54 @@
 // Adjusted copy of https://github.com/landakram/micromark-extension-wiki-link/blob/master/src/index.js
 import { codes } from "micromark-util-symbol/codes.js";
 
-function markdownLineEndingOrSpace(code: number) {
-  return code < codes.nul || code === codes.space;
-}
-
-function markdownLineEnding(code: number) {
-  return code < codes.horizontalTab;
-}
-
 export interface WikiLinkOpts {
   aliasDivider?: string;
 }
 
+function isEndOfLineOrFile(code: number) {
+  return (
+    code === codes.carriageReturnLineFeed ||
+    code === codes.carriageReturn ||
+    code === codes.lineFeed ||
+    code === codes.eof
+  );
+}
+
+/**
+ * Token types:
+ * - `wikiLink`:
+ * - `wikiLinkMarker`: The opening and closing brackets
+ * - `wikiLinkData`: The data between the brackets
+ * - `wikiLinkTarget`: The target of the link (the part before the alias divider)
+ * - `wikiLinkAliasMarker`: The alias divider
+ * - `wikiLinkAlias`: The alias of the link (the part after the alias divider)
+ * */
+
 function wikiLink(opts: WikiLinkOpts = {}) {
   const aliasDivider = opts.aliasDivider || ":";
 
-  const aliasMarker = aliasDivider;
-  const startMarker = "[[";
-  const embedStartMarker = "![[";
-  const endMarker = "]]";
+  const aliasMarker = aliasDivider.charCodeAt(0);
+  const startMarker = codes.leftSquareBracket;
+  const embedStartMarker = codes.exclamationMark;
+  const endMarker = codes.rightSquareBracket;
 
   function tokenize(effects, ok, nok) {
     let data = false;
     let alias = false;
 
-    let aliasCursor = 0;
-    let startMarkerCursor = 0;
-    let endMarkerCursor = 0;
+    let startMarkerCount = 0;
+    let endMarkerCount = 0;
 
     return start;
 
     // recognize the start of a wiki link
     function start(code: number) {
-      if (code === startMarker.charCodeAt(startMarkerCursor)) {
+      if (code === startMarker) {
         effects.enter("wikiLink");
         effects.enter("wikiLinkMarker");
 
         return consumeStart(code);
-      } else if (code === embedStartMarker.charCodeAt(startMarkerCursor)) {
+      } else if (code === embedStartMarker) {
         effects.enter("wikiLink", { isType: "embed" });
         effects.enter("wikiLinkMarker", { isType: "embed" });
 
@@ -51,26 +61,22 @@ function wikiLink(opts: WikiLinkOpts = {}) {
     //
     function consumeStart(code: number) {
       // when coursor is at the first character after the start marker `[[`
-      if (startMarkerCursor === startMarker.length) {
+      if (startMarkerCount === 2) {
         effects.exit("wikiLinkMarker");
         return consumeData(code);
       }
 
-      // if (
-      //   code === startMarker.charCodeAt(startMarkerCursor) ||
-      //   code === embedStartMarker.charCodeAt(startMarkerCursor)
-      // ) {
-      effects.consume(code);
-      if (code === 91) startMarkerCursor++;
-
-      return consumeStart;
-      // } else {
-      //   return nok(code);
-      // }
+      if (code === startMarker) {
+        effects.consume(code);
+        startMarkerCount++;
+        return consumeStart(code);
+      } else {
+        return nok(code);
+      }
     }
 
     function consumeData(code: number) {
-      if (markdownLineEnding(code) || code === codes.eof) {
+      if (isEndOfLineOrFile(code)) {
         return nok(code);
       }
 
@@ -80,14 +86,14 @@ function wikiLink(opts: WikiLinkOpts = {}) {
     }
 
     function consumeTarget(code: number) {
-      if (code === aliasMarker.charCodeAt(aliasCursor)) {
+      if (code === aliasMarker) {
         if (!data) return nok(code);
         effects.exit("wikiLinkTarget");
         effects.enter("wikiLinkAliasMarker");
         return consumeAliasMarker(code);
       }
 
-      if (code === endMarker.charCodeAt(endMarkerCursor)) {
+      if (code === endMarker) {
         if (!data) return nok(code);
         effects.exit("wikiLinkTarget");
         effects.exit("wikiLinkData");
@@ -95,38 +101,24 @@ function wikiLink(opts: WikiLinkOpts = {}) {
         return consumeEnd(code);
       }
 
-      if (markdownLineEnding(code) || code === codes.eof) {
+      if (isEndOfLineOrFile(code)) {
         return nok(code);
       }
 
-      if (!markdownLineEndingOrSpace(code)) {
-        data = true;
-      }
-
+      data = true;
       effects.consume(code);
 
       return consumeTarget;
     }
 
-    function consumeAliasMarker(code) {
-      if (aliasCursor === aliasMarker.length) {
-        effects.exit("wikiLinkAliasMarker");
-        effects.enter("wikiLinkAlias");
-        return consumeAlias(code);
-      }
-
-      if (code !== aliasMarker.charCodeAt(aliasCursor)) {
-        return nok(code);
-      }
-
-      effects.consume(code);
-      aliasCursor++;
-
-      return consumeAliasMarker;
+    function consumeAliasMarker(code: number) {
+      effects.exit("wikiLinkAliasMarker");
+      effects.enter("wikiLinkAlias");
+      return consumeAlias(code);
     }
 
-    function consumeAlias(code) {
-      if (code === endMarker.charCodeAt(endMarkerCursor)) {
+    function consumeAlias(code: number) {
+      if (code === endMarker) {
         if (!alias) return nok(code);
         effects.exit("wikiLinkAlias");
         effects.exit("wikiLinkData");
@@ -134,32 +126,29 @@ function wikiLink(opts: WikiLinkOpts = {}) {
         return consumeEnd(code);
       }
 
-      if (markdownLineEnding(code) || code === codes.eof) {
+      if (isEndOfLineOrFile(code)) {
         return nok(code);
       }
 
-      if (!markdownLineEndingOrSpace(code)) {
-        alias = true;
-      }
-
+      alias = true;
       effects.consume(code);
 
       return consumeAlias;
     }
 
-    function consumeEnd(code) {
-      if (endMarkerCursor === endMarker.length) {
+    function consumeEnd(code: number) {
+      if (endMarkerCount === 2) {
         effects.exit("wikiLinkMarker");
         effects.exit("wikiLink");
         return ok(code);
       }
 
-      if (code !== endMarker.charCodeAt(endMarkerCursor)) {
+      if (code !== endMarker) {
         return nok(code);
       }
 
       effects.consume(code);
-      endMarkerCursor++;
+      endMarkerCount++;
 
       return consumeEnd;
     }
