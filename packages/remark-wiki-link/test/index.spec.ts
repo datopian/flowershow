@@ -34,7 +34,6 @@ describe("remark-wiki-link", () => {
         .use(markdown)
         .use(wikiLinkPlugin, {
           permalinks: ["/some/folder/wiki-link"],
-          absoltePaths: true,
         });
 
       let ast = processor.parse("[[some/folder/Wiki Link]]");

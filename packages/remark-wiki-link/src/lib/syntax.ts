@@ -1,7 +1,7 @@
 // Adjusted copy of https://github.com/landakram/micromark-extension-wiki-link/blob/master/src/index.js
 import { codes } from "micromark-util-symbol/codes.js";
 
-export interface WikiLinkOpts {
+export interface SyntaxOptions {
   aliasDivider?: string;
 }
 
@@ -24,8 +24,8 @@ function isEndOfLineOrFile(code: number) {
  * - `wikiLinkAlias`: The alias of the link (the part after the alias divider)
  * */
 
-function wikiLink(opts: WikiLinkOpts = {}) {
-  const aliasDivider = opts.aliasDivider || ":";
+function wikiLink(opts: SyntaxOptions = {}) {
+  const aliasDivider = opts.aliasDivider || "|";
 
   const aliasMarker = aliasDivider.charCodeAt(0);
   const startMarker = codes.leftSquareBracket;
@@ -111,7 +111,8 @@ function wikiLink(opts: WikiLinkOpts = {}) {
       return consumeTarget;
     }
 
-    function consumeAliasMarker(code: number) {
+    function consumeAliasMarker(code) {
+      effects.consume(code);
       effects.exit("wikiLinkAliasMarker");
       effects.enter("wikiLinkAlias");
       return consumeAlias(code);

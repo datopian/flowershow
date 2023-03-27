@@ -12,18 +12,16 @@ export const supportedFileFormats = [
   "ico",
 ];
 
-export const isEmbeddedFileLink = (
-  filePath: string
-): [boolean, boolean, string] => {
+export const isSupportedFileFormat = (filePath: string): [boolean, string] => {
   const fileExtensionPattern = /\.([0-9a-z]{1,4})$/i;
   const match = filePath.match(fileExtensionPattern);
 
   if (!match) {
-    return [false, null, null];
+    return [false, null];
   }
 
   const [, extension] = match;
   const isSupported = supportedFileFormats.includes(extension);
 
-  return [true, isSupported, extension];
+  return [isSupported, extension];
 };
