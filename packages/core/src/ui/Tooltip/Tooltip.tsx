@@ -74,7 +74,7 @@ export const Tooltip: React.FC<Props> = ({
   const arrowRef = useRef(null);
   const [showTooltip, setShowTooltip] = useState(false);
   const [tooltipData, setTooltipData] = useState({
-    content: <Fragment />,
+    content: null || <Fragment />,
     image: "",
   });
   const [tooltipContentLoaded, setTooltipContentLoaded] = useState(false);
@@ -131,7 +131,7 @@ export const Tooltip: React.FC<Props> = ({
 
   const page = data.find((p) => p._raw.flattenedPath === filePath);
 
-  if (page) {
+  if (page && page.body.code.length > 0) {
     const Component = usehook(page.body.code);
     PageContent = Component;
     image = page.image ?? "";
@@ -159,14 +159,14 @@ export const Tooltip: React.FC<Props> = ({
           }}
         />
       );
+
+      setTooltipData({
+        content: Body,
+        image: image,
+      });
+
+      setTooltipContentLoaded(true);
     }
-
-    setTooltipData({
-      content: Body,
-      image: image,
-    });
-
-    setTooltipContentLoaded(true);
   };
 
   useEffect(() => {
@@ -200,9 +200,11 @@ export const Tooltip: React.FC<Props> = ({
                     height={100}
                   />
                 )}
-                <div className="tooltip-body" style={tooltipBodyStyle(theme)}>
-                  {tooltipData.content}
-                </div>
+                {tooltipData.content && (
+                  <div className="tooltip-body" style={tooltipBodyStyle(theme)}>
+                    {tooltipData.content}
+                  </div>
+                )}
               </div>
               <div
                 ref={arrowRef}
