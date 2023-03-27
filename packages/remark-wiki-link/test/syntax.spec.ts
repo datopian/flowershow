@@ -6,10 +6,10 @@ describe("micromark-extension-wiki-link", () => {
   it("parses a wiki link that has a matching permalink", () => {
     const serialized = micromark("[[Wiki Link]]", {
       extensions: [syntax()],
-      htmlExtensions: [html({ permalinks: ["wiki_link"] })],
+      htmlExtensions: [html({ permalinks: ["wiki-link"] })],
     });
     expect(serialized).toBe(
-      '<p><a href="/wiki_link" class="internal">Wiki Link</a></p>'
+      '<p><a href="/wiki-link" class="internal">Wiki Link</a></p>'
     );
   });
 });

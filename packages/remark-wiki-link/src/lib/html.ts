@@ -14,8 +14,9 @@ export interface HtmlOpts {
 function html(opts: HtmlOpts = {}) {
   const permalinks = opts.permalinks || [];
   const defaultPageResolver = (name: string) => {
-    const image = isEmbeddedFileLink(name)[1];
-    return image ? [name] : [name.replace(/ /g, "_").toLowerCase()];
+    return isEmbeddedFileLink(name)[0]
+      ? [name]
+      : [name.replace(/ /g, "-").toLowerCase()];
   };
   const pageResolver = opts.pageResolver || defaultPageResolver;
   const newClassName = opts.newClassName || "new";
@@ -23,21 +24,15 @@ function html(opts: HtmlOpts = {}) {
   const defaultHrefTemplate = (permalink: string) => `/${permalink}`;
   const hrefTemplate = opts.hrefTemplate || defaultHrefTemplate;
 
+  function top(stack) {
+    return stack[stack.length - 1];
+  }
+
   function enterWikiLink() {
     let stack = this.getData("wikiLinkStack");
     if (!stack) this.setData("wikiLinkStack", (stack = []));
 
     stack.push({});
-  }
-
-  function top(stack) {
-    return stack[stack.length - 1];
-  }
-
-  function exitWikiLinkAlias(token) {
-    const alias = this.sliceSerialize(token);
-    const current = top(this.getData("wikiLinkStack"));
-    current.alias = alias;
   }
 
   function exitWikiLinkTarget(token) {
@@ -47,9 +42,15 @@ function html(opts: HtmlOpts = {}) {
     current.value = target;
   }
 
+  function exitWikiLinkAlias(token) {
+    const alias = this.sliceSerialize(token);
+    const current = top(this.getData("wikiLinkStack"));
+    current.alias = alias;
+  }
+
   function exitWikiLink() {
     const wikiLink = this.getData("wikiLinkStack").pop();
-    const wikiLinkTransclusion = wikiLink.isType === "transclusions";
+    const isEmbed = wikiLink.isType === "embed";
 
     const pagePermalinks = pageResolver(wikiLink.target);
     let permalink = pagePermalinks.find((p) => permalinks.indexOf(p) !== -1);
@@ -68,14 +69,10 @@ function html(opts: HtmlOpts = {}) {
       classNames += " " + newClassName;
     }
 
-    console.log({ wikiLink });
-
-    const transclusionFormat = isEmbeddedFileLink(wikiLink.value);
-
-    if (wikiLinkTransclusion) {
-      if (!transclusionFormat[0]) {
+    if (isEmbed) {
+      if (!isEmbeddedFileLink(wikiLink.value)[0]) {
         this.raw(displayName);
-      } else if (transclusionFormat[2] === "pdf") {
+      } else if (isEmbeddedFileLink(wikiLink.value)[2] === "pdf") {
         this.tag(
           `<embed width="100%" data="${hrefTemplate(
             permalink
