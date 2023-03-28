@@ -6,7 +6,7 @@ let warningIssued = false;
 
 type RemarkWikiLinkOptions = FromMarkdownOptions & SyntaxOptions;
 
-function remarkWikiLink(opts: RemarkWikiLinkOptions) {
+function remarkWikiLink(opts: RemarkWikiLinkOptions = {}) {
   const data = this.data(); // this is a reference to the processor
 
   function add(field, value) {

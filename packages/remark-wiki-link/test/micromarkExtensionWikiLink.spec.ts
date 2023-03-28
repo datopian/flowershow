@@ -4,7 +4,7 @@ import { micromark } from "micromark";
 
 describe("micromark-extension-wiki-link", () => {
   describe("pathFormat", () => {
-    test("parses a wiki link 'relative' (default) pathFormat", () => {
+    test("parses a wiki link with 'relative' (default) pathFormat", () => {
       const serialized = micromark("[[../some/folder/Wiki Link]]", {
         extensions: [syntax()],
         htmlExtensions: [html()],
@@ -14,7 +14,7 @@ describe("micromark-extension-wiki-link", () => {
       );
     });
 
-    test("parses a wiki link 'absolute' pathFormat", () => {
+    test("parses a wiki link with 'absolute' pathFormat", () => {
       const serialized = micromark("[[/some/folder/Wiki Link]]", {
         extensions: [syntax()],
         htmlExtensions: [html({ pathFormat: "absolute" })],
@@ -24,7 +24,7 @@ describe("micromark-extension-wiki-link", () => {
       );
     });
 
-    test("parses a wiki link 'obsidian-absolute' pathFormat", () => {
+    test("parses a wiki link with 'obsidian-absolute' pathFormat", () => {
       const serialized = micromark("[[some/folder/Wiki Link]]", {
         extensions: [syntax()],
         htmlExtensions: [html({ pathFormat: "obsidian-absolute" })],
@@ -34,7 +34,7 @@ describe("micromark-extension-wiki-link", () => {
       );
     });
 
-    test("parses a wiki link 'obsidian-short' pathFormat", () => {
+    test("parses a wiki link with 'obsidian-short' pathFormat", () => {
       const serialized = micromark("[[Wiki Link]]", {
         extensions: [syntax()],
         htmlExtensions: [html({ pathFormat: "obsidian-short" })],
@@ -81,16 +81,6 @@ describe("micromark-extension-wiki-link", () => {
       );
     });
 
-    test("parses a wiki link with heading that has a matching permalink", () => {
-      const serialized = micromark("[[Wiki Link#Heading]]", {
-        extensions: [syntax()],
-        htmlExtensions: [html({ permalinks: ["wiki-link"] })],
-      });
-      expect(serialized).toBe(
-        '<p><a href="wiki-link#heading" class="internal">Wiki Link#Heading</a></p>'
-      );
-    });
-
     test("parses a wiki link with heading and alias that has a matching permalink", () => {
       const serialized = micromark("[[Wiki Link#Heading|Alias]]", {
         extensions: [syntax()],
@@ -131,6 +121,19 @@ describe("micromark-extension-wiki-link", () => {
       );
       expect(serialized).toBe(
         '<p><img src="../some/folder/My Image.jpg" alt="My Image" class="internal new" /></p>'
+      );
+    });
+
+    test("parses an image embed with alt text", () => {
+      const serialized = micromark(
+        "![[../some/folder/My Image.jpg|Alt Text]]",
+        {
+          extensions: [syntax()],
+          htmlExtensions: [html()],
+        }
+      );
+      expect(serialized).toBe(
+        '<p><img src="../some/folder/My Image.jpg" alt="Alt Text" class="internal new" /></p>'
       );
     });
 

@@ -15,17 +15,16 @@ function html(opts: HtmlOptions = {}) {
   const pathFormat = opts.pathFormat || "relative";
   const permalinks = opts.permalinks || [];
   const defaultPageResolver = (name: string, isEmbed: boolean) => {
-    return isEmbed ? [name] : [name.replace(/ /g, "-").toLowerCase()];
+    const page = isEmbed ? name : name.replace(/ /g, "-").toLowerCase();
+    if (pathFormat === "obsidian-absolute") {
+      return [`/${page}`];
+    }
+    return [page];
   };
   const pageResolver = opts.pageResolver || defaultPageResolver;
   const newClassName = opts.newClassName || "new";
   const wikiLinkClassName = opts.wikiLinkClassName || "internal";
-  const defaultHrefTemplate = (permalink: string) => {
-    if (pathFormat === "obsidian-absolute") {
-      return `/${permalink}`;
-    }
-    return permalink;
-  };
+  const defaultHrefTemplate = (permalink: string) => permalink;
   const hrefTemplate = opts.hrefTemplate || defaultHrefTemplate;
 
   function top(stack) {
