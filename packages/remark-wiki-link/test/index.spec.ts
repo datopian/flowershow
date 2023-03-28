@@ -11,24 +11,23 @@ describe("remark-wiki-link", () => {
       .use(markdown)
       .use(wikiLinkPlugin, {
         permalinks: ["/some/folder/real-page"],
+        aliasDivider: ":",
+        pathFormat: "obsidian-short",
       });
 
     let ast = processor.parse("[[Real Page#With Heading:Page Alias]]");
     ast = processor.runSync(ast);
 
-    console.log((ast as any).children[0].children[0]);
-
-    visit(ast, "wikiLink", (node: any) => {
-      console.log(node);
-      expect(node.exists).toEqual(true);
-      expect(node.permalink).toEqual("real-page#with-heading");
-      expect(node.alias).toEqual("Page Alias");
+    visit(ast, "wikiLink", (node: Node) => {
+      expect(node.data.exists).toEqual(true);
+      expect(node.data.permalink).toEqual("/some/folder/real-page");
+      expect(node.data.alias).toEqual("Page Alias");
       expect(node.data.hName).toEqual("a");
-      expect((node.data.hProperties as any).className).toEqual("internal new");
+      expect((node.data.hProperties as any).className).toEqual("internal");
       expect((node.data.hProperties as any).href).toEqual(
         "/some/folder/real-page#with-heading"
       );
-      expect((node.data.hChildren as any)[0].value).toEqual("Pag Alias");
+      expect((node.data.hChildren as any)[0].value).toEqual("Page Alias");
     });
   });
 });

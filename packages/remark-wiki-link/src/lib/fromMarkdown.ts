@@ -32,19 +32,17 @@ function fromMarkdown(opts: FromMarkdownOptions = {}) {
   }
 
   function enterWikiLink(token) {
-    console.log("ENTER WIKI LINK");
-    console.log(token);
     this.enter(
       {
         type: "wikiLink",
-        isType: token.isType ? token.isType : null,
-        target: null,
-        alias: null,
-        permalink: null,
-        exists: null,
-        className: null,
-        // fields for mdast-util-to-hast (used e.g. by remark-rehype)
         data: {
+          isEmbed: token.isType === "embed",
+          target: null,
+          alias: null,
+          permalink: null,
+          exists: null,
+          className: null,
+          // fields for mdast-util-to-hast (used e.g. by remark-rehype)
           hName: null,
           hProperties: null,
           hChildren: null,
@@ -55,23 +53,22 @@ function fromMarkdown(opts: FromMarkdownOptions = {}) {
   }
 
   function exitWikiLinkTarget(token) {
-    console.log("EXIT WIKI LINK TARGET");
     const target = this.sliceSerialize(token);
     const current = top(this.stack);
-    current.target = target;
+    current.data.target = target;
   }
 
   function exitWikiLinkAlias(token) {
     const alias = this.sliceSerialize(token);
     const current = top(this.stack);
-    current.alias = alias;
+    current.data.alias = alias;
   }
 
   function exitWikiLink(token) {
-    console.log(token);
     const wikiLink = this.exit(token);
-    const { target, alias } = wikiLink;
-    const isEmbed = token.isType === "embed";
+    const {
+      data: { isEmbed, target, alias },
+    } = wikiLink;
 
     const resolveShortenedPaths = pathFormat === "obsidian-short";
     const pagePermalinks = pageResolver(target, isEmbed);
@@ -99,9 +96,11 @@ function fromMarkdown(opts: FromMarkdownOptions = {}) {
       });
     });
 
-    wikiLink.exists = !!matchingPermalink;
+    wikiLink.data.exists = !!matchingPermalink;
 
     const permalink = matchingPermalink || pagePermalinks[0];
+
+    wikiLink.data.permalink = permalink;
 
     const displayName = alias || target;
 

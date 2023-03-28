@@ -155,7 +155,7 @@ function wikiLink(opts: SyntaxOptions = {}) {
     }
   }
 
-  const wikiLinkConstruct = { name: "wikiLink", tokenize };
+  const wikiLinkConstruct = { tokenize };
 
   return {
     text: {
