@@ -69,7 +69,7 @@ function html(opts: HtmlOptions = {}) {
         return pagePermalinks.find((p) => {
           const [, pagePath, heading] = p.match(pathWithOptionalHeadingPattern);
           if (e === pagePath || e.endsWith(pagePath)) {
-            targetHeading = heading;
+            targetHeading = heading ?? "";
             return true;
           }
           return false;
@@ -78,7 +78,7 @@ function html(opts: HtmlOptions = {}) {
         return pagePermalinks.find((p) => {
           const [, pagePath, heading] = p.match(pathWithOptionalHeadingPattern);
           if (e === pagePath) {
-            targetHeading = heading;
+            targetHeading = heading ?? "";
             return true;
           }
           return false;
@@ -113,7 +113,11 @@ function html(opts: HtmlOptions = {}) {
         );
       }
     } else {
-      this.tag(`<a href="${hrefTemplate(permalink)}" class="${classNames}">`);
+      this.tag(
+        `<a href="${hrefTemplate(
+          permalink + targetHeading
+        )}" class="${classNames}">`
+      );
       this.raw(displayName);
       this.tag("</a>");
     }

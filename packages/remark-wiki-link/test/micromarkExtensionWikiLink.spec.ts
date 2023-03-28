@@ -80,6 +80,58 @@ describe("micromark-extension-wiki-link", () => {
         '<p><a href="/some/folder/wiki-link" class="internal">Wiki Link</a></p>'
       );
     });
+
+    test("parses a wiki link with heading that has a matching permalink", () => {
+      const serialized = micromark("[[Wiki Link#Heading]]", {
+        extensions: [syntax()],
+        htmlExtensions: [html({ permalinks: ["wiki-link"] })],
+      });
+      expect(serialized).toBe(
+        '<p><a href="wiki-link#heading" class="internal">Wiki Link#Heading</a></p>'
+      );
+    });
+
+    test("parses a wiki link with heading and alias that has a matching permalink", () => {
+      const serialized = micromark("[[Wiki Link#Heading|Alias]]", {
+        extensions: [syntax()],
+        htmlExtensions: [html({ permalinks: ["wiki-link"] })],
+      });
+      expect(serialized).toBe(
+        '<p><a href="wiki-link#heading" class="internal">Alias</a></p>'
+      );
+    });
+  });
+
+  describe("image embeds", () => {
+    test("parses an image embed of supported file format", () => {
+      const serialized = micromark("![[../some/folder/My Image.jpg]]", {
+        extensions: [syntax()],
+        htmlExtensions: [html()],
+      });
+      expect(serialized).toBe(
+        '<p><img src="../some/folder/My Image.jpg" alt="../some/folder/My Image.jpg" class="internal new"></p>'
+      );
+    });
+
+    // test("parses an image embed of unsupported file format", () => {
+    //   const serialized = micromark("![[../some/folder/My Image.txt]]", {
+    //     extensions: [syntax()],
+    //     htmlExtensions: [html()],
+    //   });
+    //   expect(serialized).toBe(
+    //     '<p>![[../some/folder/My Image.txt]]</p>'
+    //   );
+    // });
+
+    // test("parses an image embed with an alias", () => {
+    //   const serialized = micromark("![[../some/folder/My Image.jpg|My Image]]", {
+    //     extensions: [syntax()],
+    //     htmlExtensions: [html()],
+    //   });
+    //   expect(serialized).toBe(
+    //     '<p><img src="../some/folder/My Image.jpg" alt="My Image" class="internal new"></p>'
+    //   );
+    // });
   });
 
   describe("other options", () => {
