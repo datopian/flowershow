@@ -101,9 +101,9 @@ function html(opts: HtmlOptions = {}) {
         this.raw(`![[${target}]]`);
       } else if (format === "pdf") {
         this.tag(
-          `<embed width="100%" data="${hrefTemplate(
+          `<iframe width="100%" src="${hrefTemplate(
             permalink
-          )}" class="${classNames}" type="application/pdf"/>`
+          )}#toolbar=0" class="${classNames}" />`
         );
       } else {
         this.tag(

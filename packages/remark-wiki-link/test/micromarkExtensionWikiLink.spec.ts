@@ -121,15 +121,28 @@ describe("micromark-extension-wiki-link", () => {
       expect(serialized).toBe("<p>![[../some/folder/My Image.txt]]</p>");
     });
 
-    // test("parses an image embed with an alias", () => {
-    //   const serialized = micromark("![[../some/folder/My Image.jpg|My Image]]", {
-    //     extensions: [syntax()],
-    //     htmlExtensions: [html()],
-    //   });
-    //   expect(serialized).toBe(
-    //     '<p><img src="../some/folder/My Image.jpg" alt="My Image" class="internal new"></p>'
-    //   );
-    // });
+    test("parses an image embed with an alias", () => {
+      const serialized = micromark(
+        "![[../some/folder/My Image.jpg|My Image]]",
+        {
+          extensions: [syntax()],
+          htmlExtensions: [html()],
+        }
+      );
+      expect(serialized).toBe(
+        '<p><img src="../some/folder/My Image.jpg" alt="My Image" class="internal new" /></p>'
+      );
+    });
+
+    test("parses a pdf embed", () => {
+      const serialized = micromark("![[../some/folder/My Document.pdf]]", {
+        extensions: [syntax()],
+        htmlExtensions: [html()],
+      });
+      expect(serialized).toBe(
+        '<p><iframe width="100%" src="../some/folder/My Document.pdf#toolbar=0" class="internal new" /></p>'
+      );
+    });
   });
 
   describe("other options", () => {

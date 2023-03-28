@@ -10,6 +10,7 @@ export const supportedFileFormats = [
   "png",
   "avif",
   "ico",
+  "pdf",
 ];
 
 export const isSupportedFileFormat = (filePath: string): [boolean, string] => {
