@@ -114,11 +114,11 @@ describe("micromark-extension-wiki-link", () => {
     });
 
     test("parses an image embed of unsupported file format", () => {
-      const serialized = micromark("![[../some/folder/My Image.txt]]", {
+      const serialized = micromark("![[../some/folder/My Image.xyz]]", {
         extensions: [syntax()],
         htmlExtensions: [html()],
       });
-      expect(serialized).toBe("<p>![[../some/folder/My Image.txt]]</p>");
+      expect(serialized).toBe("<p>![[../some/folder/My Image.xyz]]</p>");
     });
 
     test("parses an image embed with an alias", () => {
