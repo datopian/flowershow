@@ -98,6 +98,7 @@ function html(opts: HtmlOptions = {}) {
     if (isEmbed) {
       const [isSupportedFormat, format] = isSupportedFileFormat(target);
       if (!isSupportedFormat) {
+        console.warn(`Embedding format .${format} files is not supported.`);
         this.raw(`![[${target}]]`);
       } else if (format === "pdf") {
         this.tag(

@@ -145,6 +145,40 @@ describe("micromark-extension-wiki-link", () => {
     });
   });
 
+  describe("invalid wiki links", () => {
+    test("doesn't parse a wiki link with two missing closing brackets", () => {
+      const serialized = micromark("[[Wiki Link", {
+        extensions: [syntax()],
+        htmlExtensions: [html()],
+      });
+      expect(serialized).toBe("<p>[[Wiki Link</p>");
+    });
+
+    test("doesn't parse a wiki link with one missing closing bracket", () => {
+      const serialized = micromark("[[Wiki Link]", {
+        extensions: [syntax()],
+        htmlExtensions: [html()],
+      });
+      expect(serialized).toBe("<p>[[Wiki Link]</p>");
+    });
+
+    test("doesn't parse a wiki link with a missing opening bracket", () => {
+      const serialized = micromark("[Wiki Link]]", {
+        extensions: [syntax()],
+        htmlExtensions: [html()],
+      });
+      expect(serialized).toBe("<p>[Wiki Link]]</p>");
+    });
+
+    test("doesn't parse a wiki link in single brackets", () => {
+      const serialized = micromark("[Wiki Link]", {
+        extensions: [syntax()],
+        htmlExtensions: [html()],
+      });
+      expect(serialized).toBe("<p>[Wiki Link]</p>");
+    });
+  });
+
   describe("other options", () => {
     test("parses a wiki link with a custom class", () => {
       const serialized = micromark("[[Wiki Link]]", {

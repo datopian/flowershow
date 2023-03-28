@@ -213,13 +213,13 @@ importers:
 
   packages/remark-wiki-link:
     specifiers:
+      mdast-util-to-markdown: ^1.5.0
       mdast-util-wiki-link: ^0.0.2
       micromark: ^3.1.0
-      micromark-extension-wiki-link: ^0.0.4
       micromark-util-symbol: ^1.0.1
     dependencies:
+      mdast-util-to-markdown: 1.5.0
       mdast-util-wiki-link: 0.0.2
-      micromark-extension-wiki-link: 0.0.4
       micromark-util-symbol: 1.0.1
     devDependencies:
       micromark: 3.1.0
@@ -1720,13 +1720,6 @@ packages:
     dependencies:
       regenerator-runtime: 0.13.11
     dev: true
-
-  /@babel/runtime/7.20.6:
-    resolution: {integrity: sha512-Q+8MqP7TiHMWzSfwiJwXCjyf4GYA4Dgw3emg/7xmwsdLJOZUp+nMqcOwOzzYheuM1rhDu8FSj2l0aoMygEuXuA==}
-    engines: {node: '>=6.9.0'}
-    dependencies:
-      regenerator-runtime: 0.13.11
-    dev: false
 
   /@babel/runtime/7.21.0:
     resolution: {integrity: sha512-xwII0//EObnq89Ji5AKYQaRYiW/nZ3llSv29d49IuxPhKbtJoLP+9QUUZ4nVragQVtaVGeZrpB+ZtG/Pdy/POw==}
@@ -11884,7 +11877,7 @@ packages:
   /mdast-util-wiki-link/0.0.2:
     resolution: {integrity: sha512-lSsR10/dPuYIxzjGZIGA4oYzsnEnqcsD6DTXL0pqdbBzNB9teKVZB2aIzZcUsdg31v/NoHOstkVwzbN6VrQLtw==}
     dependencies:
-      '@babel/runtime': 7.20.6
+      '@babel/runtime': 7.21.0
       mdast-util-to-markdown: 0.6.5
     dev: false
 
@@ -12226,12 +12219,6 @@ packages:
       micromark-extension-mdxjs-esm: 1.0.3
       micromark-util-combine-extensions: 1.0.0
       micromark-util-types: 1.0.2
-    dev: false
-
-  /micromark-extension-wiki-link/0.0.4:
-    resolution: {integrity: sha512-dJc8AfnoU8BHkN+7fWZvIS20SMsMS1ZlxQUn6We67MqeKbOiEDZV5eEvCpwqGBijbJbxX3Kxz879L4K9HIiOvw==}
-    dependencies:
-      '@babel/runtime': 7.21.0
     dev: false
 
   /micromark-factory-destination/1.0.0:

@@ -1,10 +1,10 @@
-// import { fromMarkdown, toMarkdown } from "mdast-util-wiki-link";
+import { toMarkdown } from "mdast-util-wiki-link";
 import { syntax, SyntaxOptions } from "./syntax";
-import { html, HtmlOptions } from "./html";
+import { fromMarkdown, FromMarkdownOptions } from "./fromMarkdown";
 
 let warningIssued = false;
 
-type RemarkWikiLinkOptions = HtmlOptions & SyntaxOptions;
+type RemarkWikiLinkOptions = FromMarkdownOptions & SyntaxOptions;
 
 function remarkWikiLink(opts: RemarkWikiLinkOptions) {
   const data = this.data(); // this is a reference to the processor
@@ -31,11 +31,11 @@ function remarkWikiLink(opts: RemarkWikiLinkOptions) {
 
   // add extensions to packages used by remark-parse
   // micromark extensions
-  add("micromarkExtensions", [syntax(opts), html(opts)]);
+  add("micromarkExtensions", syntax(opts));
   // mdast-util-from-markdown extensions
-  // add("fromMarkdownExtensions", fromMarkdown(opts)); // TODO: not sure if this is needed
+  add("fromMarkdownExtensions", fromMarkdown(opts)); // TODO: not sure if this is needed
   // mdast-util-to-markdown extensions
-  // add("toMarkdownExtensions", toMarkdown(opts)); // TODO: not sure if this is needed
+  add("toMarkdownExtensions", toMarkdown(opts)); // TODO: not sure if this is needed
 }
 
 export default remarkWikiLink;
