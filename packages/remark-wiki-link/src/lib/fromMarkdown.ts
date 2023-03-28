@@ -80,27 +80,23 @@ function fromMarkdown(opts: FromMarkdownOptions = {}) {
     const pathWithOptionalHeadingPattern = /([a-z0-9\.\/_-]*)(#.*)?/;
     let targetHeading = "";
 
-    // TODO this is a bit messy, but it works for now
     const matchingPermalink = permalinks.find((e) => {
-      if (resolveShortenedPaths) {
-        return pagePermalinks.find((p) => {
-          const [, pagePath, heading] = p.match(pathWithOptionalHeadingPattern);
+      return pagePermalinks.find((p) => {
+        const [, pagePath, heading] = p.match(pathWithOptionalHeadingPattern);
+        if (resolveShortenedPaths) {
           if (e === pagePath || e.endsWith(pagePath)) {
             targetHeading = heading ?? "";
             return true;
           }
           return false;
-        });
-      } else {
-        return pagePermalinks.find((p) => {
-          const [, pagePath, heading] = p.match(pathWithOptionalHeadingPattern);
+        } else {
           if (e === pagePath) {
             targetHeading = heading ?? "";
             return true;
           }
           return false;
-        });
-      }
+        }
+      });
     });
 
     wikiLink.exists = !!matchingPermalink;
