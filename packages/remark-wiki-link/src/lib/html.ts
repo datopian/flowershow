@@ -51,10 +51,10 @@ function html(opts: HtmlOptions = {}) {
     current.alias = alias;
   }
 
-  function exitWikiLink() {
+  function exitWikiLink(token) {
     const wikiLink = this.getData("wikiLinkStack").pop();
-    const { target, alias, isType } = wikiLink;
-    const isEmbed = isType === "embed";
+    const { target, alias } = wikiLink;
+    const isEmbed = token.isType === "embed";
 
     const resolveShortenedPaths = pathFormat === "obsidian-short";
     const pagePermalinks = pageResolver(target, isEmbed);
@@ -98,7 +98,7 @@ function html(opts: HtmlOptions = {}) {
     if (isEmbed) {
       const [isSupportedFormat, format] = isSupportedFileFormat(target);
       if (!isSupportedFormat) {
-        this.raw(target);
+        this.raw(`![[${target}]]`);
       } else if (format === "pdf") {
         this.tag(
           `<embed width="100%" data="${hrefTemplate(

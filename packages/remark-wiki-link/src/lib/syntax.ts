@@ -57,8 +57,6 @@ function wikiLink(opts: SyntaxOptions = {}) {
         return nok(code);
       }
     }
-
-    //
     function consumeStart(code: number) {
       // when coursor is at the first character after the start marker `[[`
       if (startMarkerCount === 2) {
@@ -66,15 +64,12 @@ function wikiLink(opts: SyntaxOptions = {}) {
         return consumeData(code);
       }
 
-      if (code === embedStartMarker) {
+      if (code === startMarker || code === embedStartMarker) {
+        if (code === startMarker) {
+          startMarkerCount++;
+        }
         effects.consume(code);
-        return consumeStart(code);
-      }
-
-      if (code === startMarker) {
-        effects.consume(code);
-        startMarkerCount++;
-        return consumeStart(code);
+        return consumeStart;
       } else {
         return nok(code);
       }

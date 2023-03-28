@@ -109,19 +109,17 @@ describe("micromark-extension-wiki-link", () => {
         htmlExtensions: [html()],
       });
       expect(serialized).toBe(
-        '<p><img src="../some/folder/My Image.jpg" alt="../some/folder/My Image.jpg" class="internal new"></p>'
+        '<p><img src="../some/folder/My Image.jpg" alt="../some/folder/My Image.jpg" class="internal new" /></p>'
       );
     });
 
-    // test("parses an image embed of unsupported file format", () => {
-    //   const serialized = micromark("![[../some/folder/My Image.txt]]", {
-    //     extensions: [syntax()],
-    //     htmlExtensions: [html()],
-    //   });
-    //   expect(serialized).toBe(
-    //     '<p>![[../some/folder/My Image.txt]]</p>'
-    //   );
-    // });
+    test("parses an image embed of unsupported file format", () => {
+      const serialized = micromark("![[../some/folder/My Image.txt]]", {
+        extensions: [syntax()],
+        htmlExtensions: [html()],
+      });
+      expect(serialized).toBe("<p>![[../some/folder/My Image.txt]]</p>");
+    });
 
     // test("parses an image embed with an alias", () => {
     //   const serialized = micromark("![[../some/folder/My Image.jpg|My Image]]", {
