@@ -66,6 +66,11 @@ function wikiLink(opts: SyntaxOptions = {}) {
         return consumeData(code);
       }
 
+      if (code === embedStartMarker) {
+        effects.consume(code);
+        return consumeStart(code);
+      }
+
       if (code === startMarker) {
         effects.consume(code);
         startMarkerCount++;
@@ -160,7 +165,7 @@ function wikiLink(opts: SyntaxOptions = {}) {
   return {
     text: {
       [codes.leftSquareBracket]: wikiLinkConstruct,
-      [codes.space]: wikiLinkConstruct,
+      [codes.exclamationMark]: wikiLinkConstruct,
     },
   };
 }
