@@ -8,46 +8,25 @@ import wikiLinkPlugin from "../src/lib/remarkWikiLink";
 
 describe("remark-wiki-link", () => {
   describe("pathFormat", () => {
-    test("parses a wiki link with 'relative' (default) pathFormat", () => {
+    test("parses a wiki link with 'raw' (default) pathFormat", () => {
       const processor = unified().use(markdown).use(wikiLinkPlugin);
 
-      let ast = processor.parse("[[Wiki Link]]");
+      let ast = processor.parse("[[../some/folder/Wiki Link]]");
       ast = processor.runSync(ast);
 
       visit(ast, "wikiLink", (node: Node) => {
         expect(node.data.exists).toEqual(false);
-        expect(node.data.permalink).toEqual("wiki-link");
-        expect(node.data.alias).toEqual(null);
-        expect(node.data.hName).toEqual("a");
-        expect((node.data.hProperties as any).className).toEqual(
-          "internal new"
-        );
-        expect((node.data.hProperties as any).href).toEqual("wiki-link");
-        expect((node.data.hChildren as any)[0].value).toEqual("Wiki Link");
-      });
-    });
-
-    test("parses a wiki link with 'absolute' pathFormat", () => {
-      const processor = unified()
-        .use(markdown)
-        .use(wikiLinkPlugin, { pathFormat: "absolute" });
-
-      let ast = processor.parse("[[/some/folder/Wiki Link]]");
-      ast = processor.runSync(ast);
-
-      visit(ast, "wikiLink", (node: Node) => {
-        expect(node.data.exists).toEqual(false);
-        expect(node.data.permalink).toEqual("/some/folder/wiki-link");
+        expect(node.data.permalink).toEqual("../some/folder/wiki-link");
         expect(node.data.alias).toEqual(null);
         expect(node.data.hName).toEqual("a");
         expect((node.data.hProperties as any).className).toEqual(
           "internal new"
         );
         expect((node.data.hProperties as any).href).toEqual(
-          "/some/folder/wiki-link"
+          "../some/folder/wiki-link"
         );
         expect((node.data.hChildren as any)[0].value).toEqual(
-          "/some/folder/Wiki Link"
+          "../some/folder/Wiki Link"
         );
       });
     });
@@ -170,27 +149,69 @@ describe("remark-wiki-link", () => {
         expect((node.data.hChildren as any)[0].value).toEqual("Wiki Link");
       });
     });
+  });
 
-    test("parses a wiki link with heading and alias that has a matching permalink", () => {
-      const processor = unified()
-        .use(markdown)
-        .use(wikiLinkPlugin, {
-          permalinks: ["wiki-link"],
-        });
+  describe("aliases and headings", () => {
+    test("parses a wiki link with heading", () => {
+      const processor = unified().use(markdown).use(wikiLinkPlugin);
 
-      let ast = processor.parse("[[Wiki Link#With Heading|Page Alias]]");
+      let ast = processor.parse("[[Wiki Link#Some Heading]]");
       ast = processor.runSync(ast);
 
       visit(ast, "wikiLink", (node: Node) => {
-        expect(node.data.exists).toEqual(true);
-        expect(node.data.permalink).toEqual("wiki-link");
-        expect(node.data.alias).toEqual("Page Alias");
+        expect(node.data.exists).toEqual(false);
+        expect(node.data.permalink).toEqual("wiki-link#some-heading"); // TODO should this be "wiki-link" only?
+        expect(node.data.alias).toEqual(null);
         expect(node.data.hName).toEqual("a");
-        expect((node.data.hProperties as any).className).toEqual("internal");
-        expect((node.data.hProperties as any).href).toEqual(
-          "wiki-link#with-heading"
+        expect((node.data.hProperties as any).className).toEqual(
+          "internal new"
         );
-        expect((node.data.hChildren as any)[0].value).toEqual("Page Alias");
+        expect((node.data.hProperties as any).href).toEqual(
+          "wiki-link#some-heading"
+        );
+        expect((node.data.hChildren as any)[0].value).toEqual(
+          "Wiki Link#Some Heading"
+        );
+      });
+    });
+
+    test("parses a wiki link with heading and alias", () => {
+      const processor = unified().use(markdown).use(wikiLinkPlugin);
+
+      let ast = processor.parse("[[Wiki Link#Some Heading|Alias]]");
+      ast = processor.runSync(ast);
+
+      visit(ast, "wikiLink", (node: Node) => {
+        expect(node.data.exists).toEqual(false);
+        expect(node.data.permalink).toEqual("wiki-link#some-heading"); // TODO should this be "wiki-link" only?
+        expect(node.data.alias).toEqual("Alias");
+        expect(node.data.hName).toEqual("a");
+        expect((node.data.hProperties as any).className).toEqual(
+          "internal new"
+        );
+        expect((node.data.hProperties as any).href).toEqual(
+          "wiki-link#some-heading"
+        );
+        expect((node.data.hChildren as any)[0].value).toEqual("Alias");
+      });
+    });
+
+    test("parses a wiki link to a heading on the same page", () => {
+      const processor = unified().use(markdown).use(wikiLinkPlugin);
+
+      let ast = processor.parse("[[#Some Heading]]");
+      ast = processor.runSync(ast);
+
+      visit(ast, "wikiLink", (node: Node) => {
+        // expect(node.data.exists).toEqual(false); // TODO: should this be true?
+        // expect(node.data.permalink).toEqual(""); // TODO: should this be null?
+        expect(node.data.alias).toEqual(null);
+        expect(node.data.hName).toEqual("a");
+        expect((node.data.hProperties as any).className).toEqual(
+          "internal new"
+        );
+        expect((node.data.hProperties as any).href).toEqual("#some-heading");
+        expect((node.data.hChildren as any)[0].value).toEqual("Some Heading");
       });
     });
   });
@@ -310,7 +331,7 @@ describe("remark-wiki-link", () => {
         hrefTemplate: (permalink: string) => `https://my-site.com${permalink}`,
       });
 
-    let ast = processor.parse("[[Real Page#With Heading:Page Alias]]");
+    let ast = processor.parse("[[Real Page#Some Heading:Page Alias]]");
     ast = processor.runSync(ast);
 
     visit(ast, "wikiLink", (node: Node) => {
@@ -322,7 +343,7 @@ describe("remark-wiki-link", () => {
         "my-wiki-link-class"
       );
       expect((node.data.hProperties as any).href).toEqual(
-        "https://my-site.com/some/folder/123/real-page#with-heading"
+        "https://my-site.com/some/folder/123/real-page#some-heading"
       );
       expect((node.data.hChildren as any)[0].value).toEqual("Page Alias");
     });

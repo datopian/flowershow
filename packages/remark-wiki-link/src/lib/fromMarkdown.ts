@@ -1,7 +1,10 @@
 import { isSupportedFileFormat } from "./isSupportedFileFormat";
 
 export interface FromMarkdownOptions {
-  pathFormat?: "relative" | "absolute" | "obsidian-absolute" | "obsidian-short";
+  pathFormat?:
+    | "raw" // default; use for regular relative or absolute paths
+    | "obsidian-absolute" // use for Obsidian-style absolute paths, i.e. with no leading slash
+    | "obsidian-short"; // use for Obsidian-style shortened paths
   permalinks?: string[];
   pageResolver?: (name: string) => string[];
   newClassName?: string;
@@ -9,8 +12,10 @@ export interface FromMarkdownOptions {
   hrefTemplate?: (permalink: string) => string;
 }
 
+// mdas-util-from-markdown extension
+// https://github.com/syntax-tree/mdast-util-from-markdown#extension
 function fromMarkdown(opts: FromMarkdownOptions = {}) {
-  const pathFormat = opts.pathFormat || "relative";
+  const pathFormat = opts.pathFormat || "raw";
   const permalinks = opts.permalinks || [];
   const defaultPageResolver = (name: string, isEmbed: boolean) => {
     const page = isEmbed ? name : name.replace(/ /g, "-").toLowerCase();
@@ -101,7 +106,8 @@ function fromMarkdown(opts: FromMarkdownOptions = {}) {
 
     wikiLink.data.permalink = permalink;
 
-    const displayName = alias || target;
+    // remove leading # if the target is a heading on the same page
+    const displayName = alias || target.replace(/^#/, "");
 
     let classNames = wikiLinkClassName;
     if (!matchingPermalink) {

@@ -1,9 +1,10 @@
 import { isSupportedFileFormat } from "./isSupportedFileFormat";
 
-// Micromark HtmlExtension
-// https://github.com/micromark/micromark#htmlextension
 export interface HtmlOptions {
-  pathFormat?: "relative" | "absolute" | "obsidian-absolute" | "obsidian-short";
+  pathFormat?:
+    | "raw" // default; use for regular relative or absolute paths
+    | "obsidian-absolute" // use for Obsidian-style absolute paths, i.e. with no leading slash
+    | "obsidian-short"; // use for Obsidian-style shortened paths
   permalinks?: string[];
   pageResolver?: (name: string) => string[];
   newClassName?: string;
@@ -11,8 +12,10 @@ export interface HtmlOptions {
   hrefTemplate?: (permalink: string) => string;
 }
 
+// Micromark HtmlExtension
+// https://github.com/micromark/micromark#htmlextension
 function html(opts: HtmlOptions = {}) {
-  const pathFormat = opts.pathFormat || "relative";
+  const pathFormat = opts.pathFormat || "raw";
   const permalinks = opts.permalinks || [];
   const defaultPageResolver = (name: string, isEmbed: boolean) => {
     const page = isEmbed ? name : name.replace(/ /g, "-").toLowerCase();
@@ -83,7 +86,8 @@ function html(opts: HtmlOptions = {}) {
 
     const permalink = matchingPermalink || pagePermalinks[0];
 
-    const displayName = alias || target;
+    // remove leading # if the target is a heading on the same page
+    const displayName = alias || target.replace(/^#/, "");
 
     let classNames = wikiLinkClassName;
     if (!matchingPermalink) {

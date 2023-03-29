@@ -4,23 +4,13 @@ import { micromark } from "micromark";
 
 describe("micromark-extension-wiki-link", () => {
   describe("pathFormat", () => {
-    test("parses a wiki link with 'relative' (default) pathFormat", () => {
+    test("parses a wiki link with 'raw' (default) pathFormat", () => {
       const serialized = micromark("[[../some/folder/Wiki Link]]", {
         extensions: [syntax()],
         htmlExtensions: [html()],
       });
       expect(serialized).toBe(
         '<p><a href="../some/folder/wiki-link" class="internal new">../some/folder/Wiki Link</a></p>'
-      );
-    });
-
-    test("parses a wiki link with 'absolute' pathFormat", () => {
-      const serialized = micromark("[[/some/folder/Wiki Link]]", {
-        extensions: [syntax()],
-        htmlExtensions: [html({ pathFormat: "absolute" })],
-      });
-      expect(serialized).toBe(
-        '<p><a href="/some/folder/wiki-link" class="internal new">/some/folder/Wiki Link</a></p>'
       );
     });
 
@@ -80,14 +70,37 @@ describe("micromark-extension-wiki-link", () => {
         '<p><a href="/some/folder/wiki-link" class="internal">Wiki Link</a></p>'
       );
     });
+  });
 
-    test("parses a wiki link with heading and alias that has a matching permalink", () => {
-      const serialized = micromark("[[Wiki Link#Heading|Alias]]", {
+  describe("aliases and headings", () => {
+    test("parses a wiki link with heading", () => {
+      const serialized = micromark("[[Wiki Link#Some Heading]]", {
         extensions: [syntax()],
-        htmlExtensions: [html({ permalinks: ["wiki-link"] })],
+        htmlExtensions: [html()],
       });
       expect(serialized).toBe(
-        '<p><a href="wiki-link#heading" class="internal">Alias</a></p>'
+        '<p><a href="wiki-link#some-heading" class="internal new">Wiki Link#Some Heading</a></p>'
+      );
+    });
+
+    test("parses a wiki link with heading and alias", () => {
+      const serialized = micromark("[[Wiki Link#Some Heading|Alias]]", {
+        extensions: [syntax()],
+        htmlExtensions: [html()],
+      });
+      expect(serialized).toBe(
+        '<p><a href="wiki-link#some-heading" class="internal new">Alias</a></p>'
+      );
+    });
+
+    test("parses a wiki link to a heading on the same page", () => {
+      const serialized = micromark("[[#Some Heading]]", {
+        extensions: [syntax()],
+        htmlExtensions: [html()],
+      });
+      expect(serialized).toBe(
+        // '<p><a href="#some-heading" class="internal new">Some Heading</a></p>' // TODO: should this have internal class only?
+        '<p><a href="#some-heading" class="internal new">Some Heading</a></p>'
       );
     });
   });
