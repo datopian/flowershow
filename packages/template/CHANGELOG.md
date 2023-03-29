@@ -1,5 +1,13 @@
 # @flowershow/template
 
+## 1.0.3
+
+### Patch Changes
+
+- Updated dependencies
+  - @flowershow/remark-wiki-link@1.1.1
+  - @flowershow/core@0.4.7
+
 ## 1.0.2
 
 ### Patch Changes
