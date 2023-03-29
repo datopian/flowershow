@@ -55,7 +55,7 @@ export default function Page({ globals, body, ...meta }) {
     /* Head, */ // TODO why do we need this here?
     a: (props) => (
       <CustomLink
-        data={allDocuments}
+        data={allDocuments} // TODO why do we pass all documents here?!
         usehook={useMDXComponent}
         preview={showLinkPreview ?? siteConfig.showLinkPreviews}
         {...props}
