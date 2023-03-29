@@ -37,6 +37,7 @@
     }
   },
   "devDependencies": {
-    "micromark": "^3.1.0"
+    "micromark": "^3.1.0",
+    "remark-gfm": "^3.0.1"
   }
 }
