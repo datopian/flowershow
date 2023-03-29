@@ -348,4 +348,23 @@ describe("remark-wiki-link", () => {
       expect((node.data.hChildren as any)[0].value).toEqual("Page Alias");
     });
   });
+
+  test("parses wiki links to index files", () => {
+    const processor = unified().use(markdown).use(wikiLinkPlugin);
+
+    let ast = processor.parse("[[/some/folder/index]]");
+    ast = processor.runSync(ast);
+
+    visit(ast, "wikiLink", (node: Node) => {
+      expect(node.data.exists).toEqual(false);
+      expect(node.data.permalink).toEqual("/some/folder");
+      expect(node.data.alias).toEqual(null);
+      expect(node.data.hName).toEqual("a");
+      expect((node.data.hProperties as any).className).toEqual("internal new");
+      expect((node.data.hProperties as any).href).toEqual("/some/folder");
+      expect((node.data.hChildren as any)[0].value).toEqual(
+        "/some/folder/index"
+      );
+    });
+  });
 });

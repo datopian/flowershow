@@ -18,7 +18,12 @@ function html(opts: HtmlOptions = {}) {
   const pathFormat = opts.pathFormat || "raw";
   const permalinks = opts.permalinks || [];
   const defaultPageResolver = (name: string, isEmbed: boolean) => {
-    const page = isEmbed ? name : name.replace(/ /g, "-").toLowerCase();
+    const page = isEmbed
+      ? name
+      : name
+          .replace(/ /g, "-")
+          .replace(/\/index$/, "")
+          .toLowerCase();
     if (pathFormat === "obsidian-absolute") {
       return [`/${page}`];
     }

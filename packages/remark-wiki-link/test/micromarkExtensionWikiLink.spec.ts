@@ -231,4 +231,14 @@ describe("micromark-extension-wiki-link", () => {
       );
     });
   });
+
+  test("parses wiki links to index files", () => {
+    const serialized = micromark("[[/some/folder/index]]", {
+      extensions: [syntax()],
+      htmlExtensions: [html()],
+    });
+    expect(serialized).toBe(
+      '<p><a href="/some/folder" class="internal new">/some/folder/index</a></p>'
+    );
+  });
 });
