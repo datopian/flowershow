@@ -8,20 +8,22 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["packages/remark-wiki-link/**/*.js"]
+        "lintFilePatterns": ["packages/remark-wiki-link/**/*.{ts,js}"]
       }
     },
     "test": {
-      "executor": "nx:run-commands",
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "command": "mocha --require @babel/register packages/remark-wiki-link/test/remark-wiki-link.spec.js"
+        "jestConfig": "packages/remark-wiki-link/jest.config.ts",
+        "passWithNoTests": true
       }
     },
     "build": {
       "executor": "@nrwl/web:rollup",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "entryFile": "packages/remark-wiki-link/src/index.js",
+        "entryFile": "packages/remark-wiki-link/src/index.ts",
         "outputPath": "packages/remark-wiki-link/dist",
         "compiler": "babel",
         "tsConfig": "packages/remark-wiki-link/tsconfig.lib.json",
