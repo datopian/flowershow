@@ -1,4 +1,5 @@
 import { isSupportedFileFormat } from "./isSupportedFileFormat";
+import { pageResolver as defaultPageResolver } from "./pageResolver";
 
 export interface FromMarkdownOptions {
   pathFormat?:
@@ -17,21 +18,6 @@ export interface FromMarkdownOptions {
 function fromMarkdown(opts: FromMarkdownOptions = {}) {
   const pathFormat = opts.pathFormat || "raw";
   const permalinks = opts.permalinks || [];
-  const defaultPageResolver = (name: string, isEmbed: boolean) => {
-    let page = isEmbed
-      ? name
-      : name
-          .replace(/ /g, "-")
-          .replace(/\/index$/, "")
-          .toLowerCase();
-    if (pathFormat === "obsidian-absolute") {
-      page = `/${page}`;
-    }
-    if (page.length === 0) {
-      page = "/";
-    }
-    return [page];
-  };
   const pageResolver = opts.pageResolver || defaultPageResolver;
   const newClassName = opts.newClassName || "new";
   const wikiLinkClassName = opts.wikiLinkClassName || "internal";
@@ -83,7 +69,8 @@ function fromMarkdown(opts: FromMarkdownOptions = {}) {
     } = wikiLink;
 
     const resolveShortenedPaths = pathFormat === "obsidian-short";
-    const pagePermalinks = pageResolver(target, isEmbed);
+    const prefix = pathFormat === "obsidian-absolute" ? "/" : "";
+    const pagePermalinks = pageResolver(target, isEmbed, prefix);
 
     // eslint-disable-next-line no-useless-escape
     const pathWithOptionalHeadingPattern = /([a-z0-9\.\/_-]*)(#.*)?/;
