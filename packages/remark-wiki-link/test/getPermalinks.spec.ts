@@ -11,6 +11,7 @@ const markdownFolder = path.join(
 
 const expectedPermalinks = [
   "/", // /index.md
+  "/abc",
   "/blog/first-post",
   "/blog/second-post",
   "/blog/third-post",
