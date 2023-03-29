@@ -1,6 +1,6 @@
 import * as path from "path";
 // import * as url from "url";
-import { getPermalinks } from "../src/lib/getPermalinks";
+import { getPermalinks } from "../src/utils";
 
 // const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 // const markdownFolder = path.join(__dirname, "/fixtures/content");
