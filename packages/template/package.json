@@ -1,7 +1,7 @@
 {
   "name": "@flowershow/template",
   "private": true,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "scripts": {
     "dev": "next dev",
     "predev": "npm run generate",
@@ -12,10 +12,10 @@
     "generate": "contentlayer build && cross-env NODE_OPTIONS=\"--experimental-json-modules --experimental-modules\" node -r esbuild-register ./scripts/postbuild.mjs"
   },
   "dependencies": {
-    "@flowershow/core": "^0.4.6",
+    "@flowershow/core": "^0.4.7",
     "@flowershow/remark-callouts": "^1.0.0",
     "@flowershow/remark-embed": "^1.0.0",
-    "@flowershow/remark-wiki-link": "^1.1.0",
+    "@flowershow/remark-wiki-link": "^1.1.1",
     "@heroicons/react": "^1.0.6",
     "@silvenon/remark-smartypants": "^2.0.0",
     "@tailwindcss/line-clamp": "^0.4.2",
