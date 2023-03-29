@@ -1,5 +1,14 @@
 # @flowershow/template
 
+## 1.0.2
+
+### Patch Changes
+
+- f60ed3f: Adjust heading links' # icons styles to latest `@flowershow/core`.
+- 22fb5f0: Use getPermalinks from @flowershow/remark-wiki-link to generate permalinks from content folder. Also, use the new version of @flowershow/remark-wiki-link plugin.
+- Updated dependencies [22fb5f0]
+  - @flowershow/remark-wiki-link@1.1.0
+
 ## 1.0.1
 
 ### Patch Changes
