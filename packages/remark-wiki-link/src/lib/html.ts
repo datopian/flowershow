@@ -63,15 +63,17 @@ function html(opts: HtmlOptions = {}) {
     const matchingPermalink = permalinks.find((e) => {
       return pagePermalinks.find((p) => {
         const [, pagePath, heading] = p.match(pathWithOptionalHeadingPattern);
-        const permalink = pagePath || "/";
+        if (!pagePath.length) {
+          return false;
+        }
         if (resolveShortenedPaths) {
-          if (e === permalink || e.endsWith(permalink)) {
+          if (e === pagePath || e.endsWith(pagePath)) {
             targetHeading = heading ?? "";
             return true;
           }
           return false;
         } else {
-          if (e === permalink) {
+          if (e === pagePath) {
             targetHeading = heading ?? "";
             return true;
           }

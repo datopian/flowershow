@@ -79,15 +79,17 @@ function fromMarkdown(opts: FromMarkdownOptions = {}) {
     const matchingPermalink = permalinks.find((e) => {
       return pagePermalinks.find((p) => {
         const [, pagePath, heading] = p.match(pathWithOptionalHeadingPattern);
-        const path = pagePath || "/";
+        if (!pagePath.length) {
+          return false;
+        }
         if (resolveShortenedPaths) {
-          if (e === path || e.endsWith(path)) {
+          if (e === pagePath || e.endsWith(pagePath)) {
             targetHeading = heading ?? "";
             return true;
           }
           return false;
         } else {
-          if (e === path) {
+          if (e === pagePath) {
             targetHeading = heading ?? "";
             return true;
           }
