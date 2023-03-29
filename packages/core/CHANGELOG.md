@@ -1,5 +1,11 @@
 # @flowershow/core
 
+## 0.4.8
+
+### Patch Changes
+
+- Fix: wiki links with tooltips not showing.
+
 ## 0.4.7
 
 ### Patch Changes
