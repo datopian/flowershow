@@ -1,14 +1,10 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "dist",
-    "target": "es2020",
-    "module": "es2020",
     "types": ["node"],
-    "moduleResolution": "node",
-    "esModuleInterop": true,
+    "outDir": "dist",
     "forceConsistentCasingInFileNames": true
   },
-  "exclude": ["**/*.spec.ts", "**/*.test.ts", "**/*.spec.js", "**/*.test.js"],
-  "include": ["src/**/*.ts", "src/**/*.js"]
+  "exclude": ["**/*.spec.ts"],
+  "include": ["**/*.ts", "**/*.js"]
 }
