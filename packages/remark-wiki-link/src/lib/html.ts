@@ -18,14 +18,17 @@ function html(opts: HtmlOptions = {}) {
   const pathFormat = opts.pathFormat || "raw";
   const permalinks = opts.permalinks || [];
   const defaultPageResolver = (name: string, isEmbed: boolean) => {
-    const page = isEmbed
+    let page = isEmbed
       ? name
       : name
           .replace(/ /g, "-")
           .replace(/\/index$/, "")
           .toLowerCase();
     if (pathFormat === "obsidian-absolute") {
-      return [`/${page}`];
+      page = `/${page}`;
+    }
+    if (page.length === 0) {
+      page = "/";
     }
     return [page];
   };
@@ -73,14 +76,15 @@ function html(opts: HtmlOptions = {}) {
     const matchingPermalink = permalinks.find((e) => {
       return pagePermalinks.find((p) => {
         const [, pagePath, heading] = p.match(pathWithOptionalHeadingPattern);
+        const permalink = pagePath || "/";
         if (resolveShortenedPaths) {
-          if (e === pagePath || e.endsWith(pagePath)) {
+          if (e === permalink || e.endsWith(permalink)) {
             targetHeading = heading ?? "";
             return true;
           }
           return false;
         } else {
-          if (e === pagePath) {
+          if (e === permalink) {
             targetHeading = heading ?? "";
             return true;
           }

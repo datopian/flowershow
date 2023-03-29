@@ -241,4 +241,44 @@ describe("micromark-extension-wiki-link", () => {
       '<p><a href="/some/folder" class="internal new">/some/folder/index</a></p>'
     );
   });
+
+  describe("other", () => {
+    test("parses a wiki link to some index page in a folder with no matching permalink", () => {
+      const serialized = micromark("[[/some/folder/index]]", {
+        extensions: [syntax()],
+        htmlExtensions: [html()],
+      });
+      expect(serialized).toBe(
+        '<p><a href="/some/folder" class="internal new">/some/folder/index</a></p>'
+      );
+    });
+
+    test("parses a wiki link to some index page in a folder with a matching permalink", () => {
+      const serialized = micromark("[[/some/folder/index]]", {
+        extensions: [syntax()],
+        htmlExtensions: [html({ permalinks: ["/some/folder"] })],
+      });
+      expect(serialized).toBe(
+        '<p><a href="/some/folder" class="internal">/some/folder/index</a></p>'
+      );
+    });
+
+    test("parses a wiki link to home index page with no matching permalink", () => {
+      const serialized = micromark("[[/index]]", {
+        extensions: [syntax()],
+        htmlExtensions: [html()],
+      });
+      expect(serialized).toBe(
+        '<p><a href="/" class="internal new">/index</a></p>'
+      );
+    });
+
+    test("parses a wiki link to home index page with a matching permalink", () => {
+      const serialized = micromark("[[/index]]", {
+        extensions: [syntax()],
+        htmlExtensions: [html({ permalinks: ["/"] })],
+      });
+      expect(serialized).toBe('<p><a href="/" class="internal">/index</a></p>');
+    });
+  });
 });
