@@ -1,5 +1,12 @@
 # @flowershow/remark-wiki-link
 
+## 1.1.1
+
+### Patch Changes
+
+- 71110e2: Fix: wiki links to index pages.
+- ffa9766: Fix wiki links to headings on the same page.
+
 ## 1.1.0
 
 ### Minor Changes
