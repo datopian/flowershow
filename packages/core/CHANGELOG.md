@@ -1,5 +1,11 @@
 # @flowershow/core
 
+## 0.4.7
+
+### Patch Changes
+
+- 0db40da: Fix logic in CustomLink component for testing if link is internal.
+
 ## 0.4.6
 
 ### Patch Changes
