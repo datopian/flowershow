@@ -20,7 +20,6 @@ export const CustomLink: React.FC<Props> = ({
   data,
   usehook,
   preview,
-  children,
   ...props
 }) => {
   const { href, className } = props; // keep href in props to render tooltip content
@@ -40,12 +39,12 @@ export const CustomLink: React.FC<Props> = ({
         render={(tooltipTriggerProps) => <Link {...tooltipTriggerProps} />}
       />
     ) : (
-      <Link {...props}>{children}</Link>
+      <Link {...props} />
     );
   }
 
   if (isHeadingLink) {
-    return <Link {...props}>{children}</Link>;
+    return <Link {...props} />;
   }
 
   if (isTwitterLink) {
@@ -54,8 +53,7 @@ export const CustomLink: React.FC<Props> = ({
 
   return (
     <a target="_blank" rel="noopener noreferrer" {...props}>
-      {" "}
-      {children}
+      {props.children}
     </a>
   );
 };
