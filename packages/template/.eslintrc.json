@@ -1,10 +1,5 @@
 {
-  "extends": [
-    "plugin:@nrwl/nx/react",
-    "next",
-    "next/core-web-vitals",
-    "../../.eslintrc.json"
-  ],
+  "extends": ["next", "next/core-web-vitals", "../../.eslintrc.json"],
   "ignorePatterns": [".obsidian/**/*", ".next/**/*", "out/**/*"],
   "overrides": [
     {
