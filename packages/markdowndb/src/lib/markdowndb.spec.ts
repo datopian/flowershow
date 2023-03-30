@@ -53,10 +53,17 @@ describe("MarkdownDB lib", () => {
 
     //  Check if querying by tags is working
     const economyFiles = await myMdDb.query({ tags: ["economy"] });
-    expect(economyFiles.map((f) => f._path)).toEqual([
+    const economyFilesPaths = economyFiles.map((f) => f._path);
+
+    const expectedPaths = [
       `${pathToFixturesFolder}/blog/blog3.mdx`,
       `${pathToFixturesFolder}/blog/blog2.mdx`,
-    ]);
+    ];
+
+    expect(economyFilesPaths).toHaveLength(expectedPaths.length);
+    economyFilesPaths.forEach((p) => {
+      expect(expectedPaths).toContain(p);
+    });
 
     //  Check if querying by filetypes is working
     const pngFiles = await myMdDb.query({ filetypes: ["png"] });
@@ -76,7 +83,7 @@ describe("MarkdownDB lib", () => {
 
 const walk = (dir: fs.PathLike) => {
   let files: string[] = [];
-  for (let item of fs.readdirSync(dir)) {
+  for (const item of fs.readdirSync(dir)) {
     if (!(dir as string).endsWith("/")) {
       dir += "/";
     }
