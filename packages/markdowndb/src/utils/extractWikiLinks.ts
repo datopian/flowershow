@@ -1,20 +1,22 @@
 import path from "path";
 import markdown from "remark-parse";
-import { unified } from "unified";
+import { unified, Plugin } from "unified";
 import { selectAll } from "unist-util-select";
-// import { Node } from "unist";
-// import gfm from "remark-gfm";
-
-import remarkWikiLink from "../lib/remarkWikiLink";
 
 // TODO pass file path or slug?
-const extractLinks = (text: string, filePath?: string) => {
-  const processor = unified()
-    .use(markdown)
-    // .use(gfm)
-    .use(remarkWikiLink);
 
-  const ast = processor.parse(text);
+export interface ExtractLinksOptions {
+  source: string;
+  filePath?: string;
+  plugins?: Array<Plugin>;
+}
+
+const extractWikiLinks = (options: ExtractLinksOptions) => {
+  const { source, filePath, plugins = [] } = options;
+
+  const processor = unified().use(markdown).use(plugins);
+
+  const ast = processor.parse(source);
 
   // WikiLinks
   const wikiLinks = selectAll("wikiLink", ast).map((node: any) => {
@@ -45,4 +47,4 @@ const extractLinks = (text: string, filePath?: string) => {
   return uniqueLinks;
 };
 
-export default extractLinks;
+export default extractWikiLinks;
