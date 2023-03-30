@@ -1,16 +1,14 @@
-/* eslint-disable */
-export default {
+import type { JestConfigWithTsJest } from "ts-jest";
+
+const jestConfig: JestConfigWithTsJest = {
   displayName: "markdowndb",
   preset: "../../jest.preset.js",
-  globals: {
-    "ts-jest": {
-      tsconfig: "<rootDir>/tsconfig.spec.json",
-    },
-  },
   testEnvironment: "node",
   transform: {
-    "^.+\\.[tj]sx?$": "ts-jest",
+    "^.+\\.[tj]s?$": "ts-jest",
   },
-  moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
-  coverageDirectory: "../../coverage/packages/markdowndb",
+  transformIgnorePatterns: ["<rootDir>/node_modules/(?!remark-parse)"],
+  moduleFileExtensions: ["ts", "js"],
 };
+
+export default jestConfig;
