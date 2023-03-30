@@ -23,7 +23,7 @@
       "executor": "@nrwl/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/packages/markdowndb",
+        "outputPath": "packages/markdowndb/dist",
         "tsConfig": "packages/markdowndb/tsconfig.lib.json",
         "packageJson": "packages/markdowndb/package.json",
         "main": "packages/markdowndb/src/index.ts",
