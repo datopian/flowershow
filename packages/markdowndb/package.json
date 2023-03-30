@@ -1,6 +1,28 @@
 {
   "name": "@flowershow/markdowndb",
   "version": "0.0.1",
+  "description": "Parse markdown files and store them in an SQL database.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flowershow/flowershow.git",
+    "directory": "packages/markdowndb"
+  },
+  "keywords": [
+    "markdown",
+    "database",
+    "content",
+    "obsidian"
+  ],
+  "author": "Rufus Pollock",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/flowershow/flowershow/issues"
+  },
+  "homepage": "https://github.com/flowershow/flowershow#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
   "dependencies": {
     "gray-matter": "^4.0.3",
     "knex": "^2.4.2",
