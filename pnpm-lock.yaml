@@ -199,11 +199,14 @@ importers:
     specifiers:
       gray-matter: ^4.0.3
       knex: ^2.4.2
+      remark-gfm: ^3.0.1
       sqlite3: ^5.1.6
     dependencies:
       gray-matter: 4.0.3
       knex: 2.4.2_sqlite3@5.1.6
       sqlite3: 5.1.6
+    devDependencies:
+      remark-gfm: 3.0.1
 
   packages/remark-callouts:
     specifiers:

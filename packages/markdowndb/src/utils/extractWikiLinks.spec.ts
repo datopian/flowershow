@@ -1,38 +1,49 @@
+import remarkWikiLink from "@flowershow/remark-wiki-link";
 import extractWikiLinks from "./extractWikiLinks";
 
 describe("extractWikiLinks", () => {
-  test("should extract wikiLinks", () => {
-    const source = "[[Page 1]] [[Page 2]] [[Page 3]]";
-    const expectedLinks = ["page-1", "page-2", "page-3"];
-    const links = extractWikiLinks({ source });
-    expect(links).toHaveLength(expectedLinks.length);
-    links.forEach((link) => {
-      expect(expectedLinks).toContain(link);
+  describe("Common Mark links", () => {
+    test("should extract CommonMark links", () => {
+      const source = "[Page 1](page-1) [Page 2](page-2) [Page 3](page-3)";
+      const expectedLinks = ["page-1", "page-2", "page-3"];
+      const links = extractWikiLinks({ source });
+      expect(links).toHaveLength(expectedLinks.length);
+      links.forEach((link) => {
+        expect(expectedLinks).toContain(link);
+      });
+    });
+
+    test("should extract embed type CommonMark links", () => {
+      const source = "![abc](My_File.png)";
+      const expectedLinks = ["My_File.png"];
+      const links = extractWikiLinks({ source });
+      expect(links[0]).toBe(expectedLinks[0]);
     });
   });
 
-  test("should extract CommonMark links", () => {
-    const source = "[Page 1](page-1) [Page 2](page-2) [Page 3](page-3)";
-    const expectedLinks = ["page-1", "page-2", "page-3"];
-    const links = extractWikiLinks({ source });
-    expect(links).toHaveLength(expectedLinks.length);
-    links.forEach((link) => {
-      expect(expectedLinks).toContain(link);
+  describe("Wiki Links parsed with @flowershow/remark-wiki-link", () => {
+    test("should extract wiki links", () => {
+      const source = "[[Page 1]] [[Page 2]] [[Page 3]]";
+      const expectedLinks = ["page-1", "page-2", "page-3"];
+      const links = extractWikiLinks({
+        source,
+        remarkPlugins: [remarkWikiLink],
+      });
+      expect(links).toHaveLength(expectedLinks.length);
+      links.forEach((link) => {
+        expect(expectedLinks).toContain(link);
+      });
     });
-  });
 
-  test("should extract embed type wikiLinks", () => {
-    const source = "![[My File.png]]]]";
-    const expectedLinks = ["My File.png"];
-    const links = extractWikiLinks({ source });
-    expect(links[0]).toBe(expectedLinks[0]);
-  });
-
-  test("should extract embed type CommonMark links", () => {
-    const source = "![](My File.png)";
-    const expectedLinks = ["My File.png"];
-    const links = extractWikiLinks({ source });
-    expect(links[0]).toBe(expectedLinks[0]);
+    test("should extract embedded wiki links", () => {
+      const source = "![[My File.png]]]]";
+      const expectedLinks = ["My File.png"];
+      const links = extractWikiLinks({
+        source,
+        remarkPlugins: [remarkWikiLink],
+      });
+      expect(links[0]).toBe(expectedLinks[0]);
+    });
   });
 
   // TODO test for links with headings and aliases ?
@@ -40,7 +51,10 @@ describe("extractWikiLinks", () => {
   test("should return unique links", () => {
     const source = "[[Page 1]] [[Page 2]] [[Page 3]] [[Page 1]]";
     const expectedLinks = ["page-1", "page-2", "page-3"];
-    const links = extractWikiLinks({ source });
+    const links = extractWikiLinks({
+      source,
+      remarkPlugins: [remarkWikiLink],
+    });
     expect(links).toHaveLength(expectedLinks.length);
     links.forEach((link) => {
       expect(expectedLinks).toContain(link);
@@ -74,7 +88,11 @@ describe("extractWikiLinks", () => {
         "/__blog__/abc/page-3",
         "/__blog__/abc/page-4",
       ];
-      const links = extractWikiLinks({ source, filePath: baseFileSlug });
+      const links = extractWikiLinks({
+        source,
+        remarkPlugins: [remarkWikiLink],
+        filePath: baseFileSlug,
+      });
       expect(links[0]).toBe(expectedLinks[0]);
     });
 
@@ -82,7 +100,11 @@ describe("extractWikiLinks", () => {
       const baseFileSlug = "/__blog__/abc/page-1";
       const source = "[[/xyz/Page 2]]";
       const expectedLinks = ["/xyz/page-2"];
-      const links = extractWikiLinks({ source, filePath: baseFileSlug });
+      const links = extractWikiLinks({
+        source,
+        remarkPlugins: [remarkWikiLink],
+        filePath: baseFileSlug,
+      });
       expect(links[0]).toBe(expectedLinks[0]);
     });
 

@@ -2,21 +2,25 @@ import path from "path";
 import markdown from "remark-parse";
 import { unified, Plugin } from "unified";
 import { selectAll } from "unist-util-select";
+import gfm from "remark-gfm";
 
 // TODO pass file path or slug?
 
 export interface ExtractLinksOptions {
   source: string;
   filePath?: string;
-  plugins?: Array<Plugin>;
+  remarkPlugins?: Array<Plugin>;
 }
 
 const extractWikiLinks = (options: ExtractLinksOptions) => {
-  const { source, filePath, plugins = [] } = options;
+  const { source, filePath, remarkPlugins = [] } = options;
 
-  const processor = unified().use(markdown).use(plugins);
+  const processor = unified()
+    .use(markdown)
+    .use([gfm, ...remarkPlugins]);
 
   const ast = processor.parse(source);
+  // console.log((ast as any).children[0]);
 
   // WikiLinks
   const wikiLinks = selectAll("wikiLink", ast).map((node: any) => {
@@ -31,7 +35,7 @@ const extractWikiLinks = (options: ExtractLinksOptions) => {
     .filter((url: string) => !url.startsWith("http"));
 
   const images = selectAll("image", ast)
-    .map((node: any) => node.src)
+    .map((node: any) => node.url)
     .filter((url: string) => !url.startsWith("http"));
 
   const allLinks = wikiLinks.concat(links, images);
