@@ -284,6 +284,12 @@ const createDatabaseFile: (path: string, folderPath: string) => DatabaseFile = (
   };
 };
 
+export interface GetLinksOptions {
+  fileId?: string;
+  type?: "normal" | "embed";
+  direction?: "to" | "from";
+}
+
 class MarkdownDB {
   db: Knex;
 
@@ -295,6 +301,18 @@ class MarkdownDB {
     return this.db("tags")
       .select()
       .then((tags) => tags.map((tag) => tag.name));
+  }
+
+  async getLinks(options: GetLinksOptions = {}) {
+    const { fileId, type, direction = "from" } = options;
+    const query = {};
+    if (fileId) {
+      query[direction] = fileId;
+    }
+    if (type) {
+      query["type"] = type;
+    }
+    return this.db("links").select().where(query);
   }
 
   async query<T = DatabaseFile>(

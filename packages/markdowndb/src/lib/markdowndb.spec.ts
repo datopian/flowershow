@@ -79,6 +79,25 @@ describe("MarkdownDB lib", () => {
         })
     ).toEqual(["png"]);
 
+    // Check if links are being saved to db
+    const allLinks = await myMdDb.getLinks();
+    expect(allLinks.length).toBe(4);
+
+    // Check if we can get all forward links of a file
+    const file = await myMdDb.query({ urlPath: "blog/blog2" });
+    const forwardLinks = await myMdDb.getLinks({
+      fileId: file[0]._id,
+      direction: "from",
+    });
+    expect(forwardLinks.length).toBe(1);
+
+    // Check if we can get all backward links of a file
+    const backwardLinks = await myMdDb.getLinks({
+      fileId: file[0]._id,
+      direction: "to",
+    });
+    expect(backwardLinks.length).toBe(2);
+
     db.destroy();
     myMdDb._destroyDb();
   });
