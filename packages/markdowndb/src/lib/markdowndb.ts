@@ -1,8 +1,12 @@
-import knex, { Knex } from "knex";
 import * as fs from "fs";
 import * as crypto from "crypto";
+import knex, { Knex } from "knex";
 import matter from "gray-matter";
+
 import { DatabaseFile, DatabaseQuery } from "./types";
+import extractWikiLinks from "../utils/extractWikiLinks";
+
+import remarkWikiLink from "@flowershow/remark-wiki-link";
 
 export const indexFolder = async (
   dbPath: string,
@@ -22,6 +26,7 @@ export const indexFolder = async (
   await createFilesTable(db);
   await createTagsTable(db);
   await createFileTagsTable(db);
+  await createLinksTable(db);
 
   //  Temporary, we don't want to handle updates now
   //  so database is refreshed every time the folder
@@ -29,12 +34,14 @@ export const indexFolder = async (
   await db("file_tags").del();
   await db("tags").del();
   await db("files").del();
+  await db("links").del();
 
   const pathsToFiles = walkFolder(folderPath);
 
   const filesToInsert = [];
   const tagsToInsert = [];
   const fileTagsToInsert = [];
+  const linksToInsert = [];
 
   for (const pathToFile of pathsToFiles) {
     let file;
@@ -121,6 +128,21 @@ const createFilesTable = async (db: Knex) => {
   }
 };
 
+const createLinksTable = async (db: Knex) => {
+  const tableExists = await db.schema.hasTable("links");
+
+  if (!tableExists) {
+    await db.schema.createTable("links", (table) => {
+      table.string("_id").primary();
+      table.enum("type", ["normal", "embed"]).notNullable();
+      table.string("from");
+      table.string("to");
+      // table.foreign("from").references("files._id").onDelete("CASCADE");
+      // table.foreign("to").references("files._id").onDelete("CASCADE");
+    });
+  }
+};
+
 const createTagsTable = async (db: Knex) => {
   const tableExists = await db.schema.hasTable("tags");
 
@@ -168,6 +190,40 @@ const createDatabaseFile: (path: string, folderPath: string) => DatabaseFile = (
     const { data } = matter(source);
     metadata = data || null;
     type = data.type || null;
+
+    // TODO pass this config as an argument, so that e.g. wikiLink doesn't have to be a dependency as it shouldnt
+    const extractWikiLinksConfig = {
+      remarkPlugins: [remarkWikiLink],
+      extractors: {
+        wikiLink: (node: any) => {
+          // TODO how to get wiki links of embed types in a better way?
+          // it should be possible, since we are adding { isType: "embed" } to tokens
+          const { href, src } = node.data?.hProperties || {};
+          return {
+            type: (href ? "normal" : "embed") as "normal" | "embed",
+            to: href ?? src,
+          };
+        },
+      },
+    };
+
+    // temporary function to sluggify file paths
+    const tempSluggify = (str: string) => {
+      return str
+        .replace(/\s+/g, "-")
+        .replace(/\.\w+$/, "")
+        .toLowerCase();
+    };
+
+    const links = extractWikiLinks({
+      source,
+      // TODO pass slug instead of file path as hrefs/srcs are sluggified too
+      // (where will we get it from?)
+      filePath: tempSluggify(`/${pathRelativeToFolder}`),
+      ...extractWikiLinksConfig,
+    });
+
+    console.log({ links });
 
     const segments = pathRelativeToFolder.split("/");
     const filename = segments.at(-1).split(".")[0];

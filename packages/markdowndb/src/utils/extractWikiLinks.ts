@@ -28,7 +28,9 @@ const resolveLink = (link: string, sourcePath?: string) => {
     return link;
   }
   const dir = path.dirname(sourcePath);
-  return path.resolve(dir, link);
+  const resolved = path.resolve(dir, link);
+  console.log({ link, sourcePath, dir, resolved });
+  return resolved;
 };
 
 const extractWikiLinks = (options: ExtractWikiLinksConfig) => {

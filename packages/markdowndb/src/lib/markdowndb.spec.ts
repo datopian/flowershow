@@ -29,6 +29,9 @@ describe("MarkdownDB lib", () => {
     //  Ensure there is a "file_tags" table
     expect(await db.schema.hasTable("file_tags")).toBe(true);
 
+    //  Ensure there is a "links" table
+    expect(await db.schema.hasTable("links")).toBe(true);
+
     const myMdDb = markdowndb.Database("markdown.db");
 
     //  Check if all files were indexed
