@@ -41,7 +41,8 @@ export const indexFolder = async (
   const filesToInsert = [];
   const tagsToInsert = [];
   const fileTagsToInsert = [];
-  const linksToInsert = [];
+
+  const extractedLinks = [];
 
   for (const pathToFile of pathsToFiles) {
     let file;
@@ -80,7 +81,11 @@ export const indexFolder = async (
           file.metadata = JSON.stringify(file.metadata);
         }
 
-        filesToInsert.push(file);
+        // TODO temp
+        const { links, ...rest } = file;
+
+        extractedLinks.push(...links);
+        filesToInsert.push(rest);
       }
     }
   }
@@ -88,6 +93,22 @@ export const indexFolder = async (
   await db.batchInsert("files", filesToInsert);
   await db.batchInsert("tags", tagsToInsert);
   await db.batchInsert("file_tags", fileTagsToInsert);
+
+  const linksToInsert = [];
+
+  for (const link of extractedLinks) {
+    const { to } = link;
+    const destPath = to.replace(/^\//, "");
+    // find the file with the same url path
+    const destFile = await db("files").where({ _url_path: destPath }).first();
+
+    linksToInsert.push({
+      ...link,
+      to: destFile?._id,
+    });
+  }
+
+  await db.batchInsert("links", linksToInsert);
 
   db.destroy();
 };
@@ -135,10 +156,10 @@ const createLinksTable = async (db: Knex) => {
     await db.schema.createTable("links", (table) => {
       table.string("_id").primary();
       table.enum("type", ["normal", "embed"]).notNullable();
-      table.string("from");
-      table.string("to");
-      // table.foreign("from").references("files._id").onDelete("CASCADE");
-      // table.foreign("to").references("files._id").onDelete("CASCADE");
+      table.string("from").notNullable();
+      table.string("to").notNullable();
+      table.foreign("from").references("files._id").onDelete("CASCADE");
+      table.foreign("to").references("files._id").onDelete("CASCADE");
     });
   }
 };
@@ -180,6 +201,7 @@ const createDatabaseFile: (path: string, folderPath: string) => DatabaseFile = (
 
   let metadata = null;
   let type = null;
+  let links = [];
 
   //  If it's not a md/mdx file, _url_path is just the relative path
   const pathRelativeToFolder = path.slice(folderPath.length + 1);
@@ -215,15 +237,24 @@ const createDatabaseFile: (path: string, folderPath: string) => DatabaseFile = (
         .toLowerCase();
     };
 
-    const links = extractWikiLinks({
+    links = extractWikiLinks({
       source,
       // TODO pass slug instead of file path as hrefs/srcs are sluggified too
       // (where will we get it from?)
       filePath: tempSluggify(`/${pathRelativeToFolder}`),
       ...extractWikiLinksConfig,
+    }).map((link) => {
+      const encodedPath = Buffer.from(path, "utf-8").toString();
+      const linkId = crypto
+        .createHash("sha1")
+        .update(encodedPath)
+        .digest("hex");
+      return {
+        ...link,
+        from: id,
+        _id: linkId,
+      };
     });
-
-    console.log({ links });
 
     const segments = pathRelativeToFolder.split("/");
     const filename = segments.at(-1).split(".")[0];
@@ -248,6 +279,7 @@ const createDatabaseFile: (path: string, folderPath: string) => DatabaseFile = (
     _url_path, //  Should exist only for MD/MDX files
     filetype,
     metadata,
+    links,
     type,
   };
 };

@@ -29,7 +29,6 @@ const resolveLink = (link: string, sourcePath?: string) => {
   }
   const dir = path.dirname(sourcePath);
   const resolved = path.resolve(dir, link);
-  console.log({ link, sourcePath, dir, resolved });
   return resolved;
 };
 
