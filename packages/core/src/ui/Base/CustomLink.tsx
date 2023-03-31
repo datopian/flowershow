@@ -22,29 +22,27 @@ export const CustomLink: React.FC<Props> = ({
   preview,
   ...props
 }) => {
-  const { href, className } = props; // keep href in props to render tooltip content
-  const isInternalLink = className?.includes("internal");
+  const { href } = props;
+  const isInternalLink = !href.startsWith("http");
   // eslint-disable-next-line no-useless-escape
-  const isHeadingLink = /#[\w\-]* $/.test(href);
+  const isHeadingLink = href.startsWith("#");
   const isTwitterLink = TWITTER_REGEX.test(href);
 
   // Use next link for pages within app and <a> for external links.
   // https://nextjs.org/learn/basics/navigate-between-pages/client-side
   if (isInternalLink) {
-    return preview ? (
-      <Tooltip
-        {...props}
-        data={data} // TODO again, why do we pass all documents here?!
-        usehook={usehook}
-        render={(tooltipTriggerProps) => <Link {...tooltipTriggerProps} />}
-      />
-    ) : (
-      <Link {...props} />
-    );
-  }
-
-  if (isHeadingLink) {
-    return <Link {...props} />;
+    if (preview && !isHeadingLink) {
+      return (
+        <Tooltip
+          {...props}
+          data={data} // TODO again, why do we pass all documents here?!
+          usehook={usehook}
+          render={(tooltipTriggerProps) => <Link {...tooltipTriggerProps} />}
+        />
+      );
+    } else {
+      return <Link {...props} />;
+    }
   }
 
   if (isTwitterLink) {
