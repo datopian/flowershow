@@ -1,0 +1,9 @@
+{
+  "name": "@flowershow/markdowndb",
+  "version": "0.0.1",
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "knex": "^2.4.2",
+    "sqlite3": "^5.1.6"
+  }
+}

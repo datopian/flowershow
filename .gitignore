@@ -7,8 +7,11 @@
 .contentlayer
 .next
 out
+# created by template package
 search.json
 sitemap.xml
+# created by markdowndb package
+markdown.db
 
 # symlinks
 packages/template/content
