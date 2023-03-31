@@ -1,5 +1,11 @@
 # @flowershow/core
 
+## 0.4.9
+
+### Patch Changes
+
+- Minor fix of CustomLink.
+
 ## 0.4.8
 
 ### Patch Changes
