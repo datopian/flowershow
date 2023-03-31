@@ -29,6 +29,24 @@
         "main": "packages/markdowndb/src/index.ts",
         "assets": ["packages/markdowndb/*.md"]
       }
+    },
+    "publish:dry": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["npm publish --dry-run"],
+        "parallel": false,
+        "cwd": "packages/markdowndb/dist"
+      },
+      "dependsOn": ["build"]
+    },
+    "publish": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["npm publish"],
+        "parallel": false,
+        "cwd": "packages/markdowndb/dist"
+      },
+      "dependsOn": ["build"]
     }
   },
   "tags": []
