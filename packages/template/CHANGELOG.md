@@ -1,5 +1,12 @@
 # @flowershow/template
 
+## 1.0.5
+
+### Patch Changes
+
+- Updated dependencies
+  - @flowershow/core@0.4.9
+
 ## 1.0.4
 
 ### Patch Changes
