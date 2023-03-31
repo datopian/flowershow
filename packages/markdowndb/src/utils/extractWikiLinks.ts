@@ -6,13 +6,32 @@ import gfm from "remark-gfm";
 
 // TODO pass file path or slug?
 
-export interface ExtractLinksOptions {
+export interface ExtractWikiLinksConfig {
   source: string;
   filePath?: string;
   remarkPlugins?: Array<Plugin>;
+  extractors?: LinkExtractors;
 }
 
-const extractWikiLinks = (options: ExtractLinksOptions) => {
+export interface LinkExtractors {
+  [test: string]: (node: any) => Pick<Link, "to" | "type">;
+}
+
+export interface Link {
+  from: string;
+  to: string;
+  type: "normal" | "embed";
+}
+
+const resolveLink = (link: string, sourcePath?: string) => {
+  if (!sourcePath) {
+    return link;
+  }
+  const dir = path.dirname(sourcePath);
+  return path.resolve(dir, link);
+};
+
+const extractWikiLinks = (options: ExtractWikiLinksConfig) => {
   const { source, filePath, remarkPlugins = [] } = options;
 
   const processor = unified()
@@ -20,35 +39,46 @@ const extractWikiLinks = (options: ExtractLinksOptions) => {
     .use([gfm, ...remarkPlugins]);
 
   const ast = processor.parse(source);
-  // console.log((ast as any).children[0]);
 
-  // WikiLinks
-  const wikiLinks = selectAll("wikiLink", ast).map((node: any) => {
-    // href for links, src for embedded images/pdfs
-    const { href, src } = node.data?.hProperties || {};
-    return href ?? src;
-  });
+  // Common Mark and Gfm links
+  const links: Link[] = selectAll("link", ast)
+    .filter((node: any) => !node.url.startsWith("http"))
+    .map((node: any) => ({
+      from: filePath,
+      to: resolveLink(node.url, filePath),
+      type: "normal",
+    }));
 
-  // CommonMark links
-  const links = selectAll("link", ast)
-    .map((node: any) => node.url)
-    .filter((url: string) => !url.startsWith("http"));
+  const images: Link[] = selectAll("image", ast)
+    .filter((node: any) => !node.url.startsWith("http"))
+    .map((node: any) => ({
+      from: filePath,
+      to: resolveLink(node.url, filePath),
+      type: "embed",
+    }));
 
-  const images = selectAll("image", ast)
-    .map((node: any) => node.url)
-    .filter((url: string) => !url.startsWith("http"));
+  // Wiki links extracted by plugins
+  let wikiLinks: Link[] = [];
 
-  const allLinks = wikiLinks.concat(links, images);
-  const uniqueLinks = [...new Set(allLinks)];
-
-  // convert relative links to absolute links
-  if (filePath) {
-    return uniqueLinks.map((link) => {
-      return path.resolve(path.dirname(filePath), link);
+  if (options.extractors) {
+    Object.entries(options.extractors).forEach(([test, extractor]) => {
+      const nodes = selectAll(test, ast);
+      wikiLinks = nodes.map((node: any) => {
+        const link = extractor(node);
+        return {
+          from: filePath,
+          to: resolveLink(link.to, filePath),
+          type: link.type || "normal",
+        };
+      });
     });
   }
 
-  return uniqueLinks;
+  const allLinks: Link[] = links.concat(wikiLinks, images);
+  // const uniqueLinks = [...new Set(allLinks)];
+
+  // return uniqueLinks;
+  return allLinks;
 };
 
 export default extractWikiLinks;
