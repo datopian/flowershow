@@ -6,7 +6,7 @@ import { DatabaseFile, DatabaseQuery } from "./types";
 
 export const indexFolder = async (
   dbPath: string,
-  folderPath: string = "content",
+  folderPath = "content",
   ignorePatterns: RegExp[] = []
 ) => {
   const dbConfig = {
@@ -36,7 +36,7 @@ export const indexFolder = async (
   const tagsToInsert = [];
   const fileTagsToInsert = [];
 
-  for (let pathToFile of pathsToFiles) {
+  for (const pathToFile of pathsToFiles) {
     let file;
 
     try {
@@ -51,7 +51,7 @@ export const indexFolder = async (
 
     if (file) {
       let isIgnoredByPattern = false;
-      for (let pattern of ignorePatterns) {
+      for (const pattern of ignorePatterns) {
         if (pattern.test(file._url_path)) {
           isIgnoredByPattern = true;
         }
@@ -62,7 +62,7 @@ export const indexFolder = async (
         if (["md", "mdx"].includes(file.filetype)) {
           const tags = file.metadata?.tags || [];
 
-          for (let tag of tags) {
+          for (const tag of tags) {
             if (!tagsToInsert.find((item) => item.name === tag)) {
               tagsToInsert.push({ name: tag });
             }
@@ -88,7 +88,7 @@ export const indexFolder = async (
 //  Get files inside a folder, return an array of file paths
 const walkFolder = (dir: fs.PathLike) => {
   let files = [];
-  for (let item of fs.readdirSync(dir)) {
+  for (const item of fs.readdirSync(dir)) {
     if (!(dir as string).endsWith("/")) {
       dir += "/";
     }
@@ -224,7 +224,7 @@ class MarkdownDB {
               folder = query.folder.slice(0, -1);
             }
 
-            builder.whereLike("_url_path", `${folder}\/%`);
+            builder.whereLike("_url_path", `${folder}/%`);
           }
 
           const tags = query.tags;
