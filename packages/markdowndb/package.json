@@ -18,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/flowershow/flowershow/issues"
   },
-  "homepage": "https://github.com/flowershow/flowershow#readme",
+  "homepage": "https://github.com/flowershow/flowershow/blob/main/packages/markdowndb/README.md",
   "publishConfig": {
     "access": "public"
   },
