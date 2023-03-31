@@ -1,1 +1,1 @@
-export * from "./lib/markdowndb";
+export * from "./lib/markdowndb.js";
