@@ -6,7 +6,10 @@
       "@flowershow/markdowndb": ["packages/markdowndb/src/index.ts"],
       "@flowershow/remark-callouts": ["packages/remark-callouts/src/index.ts"],
       "@flowershow/remark-embed": ["packages/remark-embed/src/index.ts"],
-      "@flowershow/remark-wiki-link": ["packages/remark-wiki-link/src/index.ts"]
+      "@flowershow/remark-wiki-link": [
+        "packages/remark-wiki-link/src/index.ts"
+      ],
+      "@flowershow/shared": ["packages/shared/src/index.ts"]
     }
   }
 }
