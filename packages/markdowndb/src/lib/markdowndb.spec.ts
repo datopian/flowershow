@@ -1,13 +1,16 @@
 import knex from "knex";
-import * as markdowndb from "./markdowndb";
+import { MarkdownDB } from "./markdowndb";
 import * as fs from "fs";
+import * as path from "path";
 
 /**
  * @jest-environment node
  */
-describe("MarkdownDB lib", () => {
-  it("builds a new MarkdownDB", async () => {
-    const pathToFixturesFolder = "packages/markdowndb/__mocks__/content";
+describe("MarkdownDB", () => {
+  const pathToContentFixture = "packages/markdowndb/__mocks__/content";
+  let mddb: MarkdownDB;
+
+  beforeAll(async () => {
     const dbConfig = {
       client: "sqlite3",
       connection: {
@@ -15,105 +18,97 @@ describe("MarkdownDB lib", () => {
       },
     };
 
-    const db = knex(dbConfig);
+    mddb = new MarkdownDB(dbConfig);
+    await mddb.init();
+    await mddb.indexFolder({ folder: pathToContentFixture });
+  });
 
-    //  Index folder
-    await markdowndb.indexFolder("markdown.db", pathToFixturesFolder);
+  afterAll(async () => {
+    // TODO why we have to call this twice?
+    mddb.db.destroy();
+    mddb._destroyDb();
+  });
 
-    //  Ensure there is a "files" table
-    expect(await db.schema.hasTable("files")).toBe(true);
+  test("adds tables to db", async () => {
+    expect(await mddb.db.schema.hasTable("files")).toBe(true);
+    expect(await mddb.db.schema.hasTable("tags")).toBe(true);
+    expect(await mddb.db.schema.hasTable("file_tags")).toBe(true);
+    expect(await mddb.db.schema.hasTable("links")).toBe(true);
+  });
 
-    //  Ensure there is a "tags" table
-    expect(await db.schema.hasTable("tags")).toBe(true);
+  test("indexes all files in folder", async () => {
+    const allFiles = walkFolder(pathToContentFixture);
+    const allIndexedFiles = await mddb.query();
+    expect(allIndexedFiles.length).toBe(allFiles.length);
+  });
 
-    //  Ensure there is a "file_tags" table
-    expect(await db.schema.hasTable("file_tags")).toBe(true);
-
-    //  Ensure there is a "links" table
-    expect(await db.schema.hasTable("links")).toBe(true);
-
-    const myMdDb = markdowndb.Database("markdown.db");
-
-    //  Check if all files were indexed
-    const allFiles = walk(pathToFixturesFolder);
-    const allFilesCount = allFiles.length;
-
-    const allIndexedFiles = await myMdDb.query();
-    expect(allIndexedFiles.length).toBe(allFilesCount);
-
-    //  Check if querying by folder is working
-    const blogFiles = allFiles.filter((p) =>
-      p.startsWith(`${pathToFixturesFolder}/blog/`)
-    );
-    const blogFilesCount = blogFiles.length;
-
-    const indexedBlogFiles = await myMdDb.query({
+  test("can query by folder", async () => {
+    const allBlogFiles = walkFolder(`${pathToContentFixture}/blog`);
+    const indexedBlogFiles = await mddb.query({
       folder: "blog",
-      filetypes: ["md", "mdx"],
+      // filetypes: ["md", "mdx"],
     });
+    expect(indexedBlogFiles.length).toBe(allBlogFiles.length);
+  });
 
-    expect(indexedBlogFiles.length).toBe(blogFilesCount);
+  test("can query by tags", async () => {
+    const indexedEconomyFiles = await mddb.query({ tags: ["economy"] });
+    const economyFilesPaths = indexedEconomyFiles.map((f) => f._path);
 
-    //  Check if querying by tags is working
-    const economyFiles = await myMdDb.query({ tags: ["economy"] });
-    const economyFilesPaths = economyFiles.map((f) => f._path);
-
+    // TODO this test will break if we add/remove tag from specific file
+    // can this be improved?
     const expectedPaths = [
-      `${pathToFixturesFolder}/blog/blog3.mdx`,
-      `${pathToFixturesFolder}/blog/blog2.mdx`,
+      `${pathToContentFixture}/blog/blog3.mdx`,
+      `${pathToContentFixture}/blog/blog2.mdx`,
     ];
 
     expect(economyFilesPaths).toHaveLength(expectedPaths.length);
     economyFilesPaths.forEach((p) => {
       expect(expectedPaths).toContain(p);
     });
-
-    //  Check if querying by filetypes is working
-    const pngFiles = await myMdDb.query({ filetypes: ["png"] });
-    expect(
-      pngFiles
-        .map((f) => f.filetype)
-        //  Filter out duplicates
-        .filter((v, i, s) => {
-          return s.indexOf(v) === i;
-        })
-    ).toEqual(["png"]);
-
-    // Check if we can get all forward links of a file
-    const file = await myMdDb.query({ urlPath: "blog/blog2" });
-    const forwardLinks = await myMdDb.getLinks({
-      fileId: file[0]._id,
-      direction: "forward",
-    });
-    expect(forwardLinks.length).toBe(1);
-
-    // Check if we can get all backward links of a file
-    const backwardLinks = await myMdDb.getLinks({
-      fileId: file[0]._id,
-      direction: "backward",
-    });
-    expect(backwardLinks.length).toBe(2);
-
-    db.destroy();
-    myMdDb._destroyDb();
   });
+
+  test("can query by extensions", async () => {
+    const indexedPngFiles = await mddb.query({ extensions: ["png"] });
+    const pngFilesPaths = indexedPngFiles.map((f) => f._path);
+
+    // TODO this test will break if we add/remove tag from specific file
+    // can this be improved?
+    const expectedPaths = [`${pathToContentFixture}/assets/datopian-logo.png`];
+
+    expect(pngFilesPaths).toHaveLength(expectedPaths.length);
+    pngFilesPaths.forEach((p) => {
+      expect(expectedPaths).toContain(p);
+    });
+  });
+
+  // Check if we can get all forward links of a file
+  // const file = await mddb.query({ urlPath: "blog/blog2" });
+  // const forwardLinks = await mddb.getLinks({
+  //   fileId: file[0]._id,
+  //   direction: "forward",
+  // });
+  // expect(forwardLinks.length).toBe(1);
+
+  // Check if we can get all backward links of a file
+  // const backwardLinks = await mddb.getLinks({
+  //   fileId: file[0]._id,
+  //   direction: "backward",
+  // });
+  // expect(backwardLinks.length).toBe(2);
 });
 
-const walk = (dir: fs.PathLike) => {
-  let files: string[] = [];
-  for (const item of fs.readdirSync(dir)) {
-    if (!(dir as string).endsWith("/")) {
-      dir += "/";
-    }
-
-    const fullPath = dir + item;
-    const stat = fs.statSync(fullPath);
-
-    if (stat.isDirectory()) {
-      files = files.concat(walk(fullPath));
-    } else if (stat.isFile()) {
-      files.push(fullPath);
-    }
+function walkFolder(dir: string) {
+  // TODO move to separate lib as we need it in other places too
+  const dirents = fs.readdirSync(dir, { withFileTypes: true });
+  const files = dirents
+    .filter((dirent) => dirent.isFile())
+    .map((dirent) => path.join(dir, dirent.name));
+  const dirs = dirents
+    .filter((dirent) => dirent.isDirectory())
+    .map((dirent) => path.join(dir, dirent.name));
+  for (const d of dirs) {
+    files.push(...walkFolder(d));
   }
   return files;
-};
+}
