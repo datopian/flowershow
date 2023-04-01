@@ -14,13 +14,13 @@ export interface ExtractWikiLinksConfig {
 }
 
 export interface LinkExtractors {
-  [test: string]: (node: any) => Pick<Link, "to" | "type">;
+  [test: string]: (node: any) => Pick<Link, "to" | "linkType">;
 }
 
 export interface Link {
   from: string;
   to: string;
-  type: "normal" | "embed";
+  linkType: "normal" | "embed";
 }
 
 const resolveLink = (link: string, sourcePath?: string) => {
@@ -47,7 +47,7 @@ const extractWikiLinks = (options: ExtractWikiLinksConfig) => {
     .map((node: any) => ({
       from: filePath,
       to: resolveLink(node.url, filePath),
-      type: "normal",
+      linkType: "normal",
     }));
 
   const images: Link[] = selectAll("image", ast)
@@ -55,7 +55,7 @@ const extractWikiLinks = (options: ExtractWikiLinksConfig) => {
     .map((node: any) => ({
       from: filePath,
       to: resolveLink(node.url, filePath),
-      type: "embed",
+      linkType: "embed",
     }));
 
   // Wiki links extracted by plugins
@@ -69,7 +69,7 @@ const extractWikiLinks = (options: ExtractWikiLinksConfig) => {
         return {
           from: filePath,
           to: resolveLink(link.to, filePath),
-          type: link.type || "normal",
+          linkType: link.linkType || "normal",
         };
       });
     });

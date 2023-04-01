@@ -8,6 +8,8 @@ import extractWikiLinks from "../utils/extractWikiLinks";
 
 import remarkWikiLink from "@flowershow/remark-wiki-link";
 
+import { Link } from "./schema";
+
 export const indexFolder = async (
   dbPath: string,
   folderPath = "content",
@@ -155,7 +157,7 @@ const createLinksTable = async (db: Knex) => {
   if (!tableExists) {
     await db.schema.createTable("links", (table) => {
       table.string("_id").primary();
-      table.enum("type", ["normal", "embed"]).notNullable();
+      table.enum("link_type", ["normal", "embed"]).notNullable();
       table.string("from").notNullable();
       table.string("to").notNullable();
       table.foreign("from").references("files._id").onDelete("CASCADE");
@@ -222,7 +224,7 @@ const createDatabaseFile: (path: string, folderPath: string) => DatabaseFile = (
           // it should be possible, since we are adding { isType: "embed" } to tokens
           const { href, src } = node.data?.hProperties || {};
           return {
-            type: (href ? "normal" : "embed") as "normal" | "embed",
+            linkType: (href ? "normal" : "embed") as "normal" | "embed",
             to: href ?? src,
           };
         },
@@ -244,15 +246,19 @@ const createDatabaseFile: (path: string, folderPath: string) => DatabaseFile = (
       filePath: tempSluggify(`/${pathRelativeToFolder}`),
       ...extractWikiLinksConfig,
     }).map((link) => {
-      const encodedPath = Buffer.from(path, "utf-8").toString();
+      const linkEncodedPath = Buffer.from(
+        JSON.stringify(link),
+        "utf-8"
+      ).toString();
       const linkId = crypto
         .createHash("sha1")
-        .update(encodedPath)
+        .update(linkEncodedPath)
         .digest("hex");
       return {
-        ...link,
-        from: id,
         _id: linkId,
+        from: id,
+        to: link.to,
+        link_type: link.linkType,
       };
     });
 
@@ -285,9 +291,9 @@ const createDatabaseFile: (path: string, folderPath: string) => DatabaseFile = (
 };
 
 export interface GetLinksOptions {
-  fileId?: string;
-  type?: "normal" | "embed";
-  direction?: "to" | "from";
+  fileId: string;
+  linkType?: "normal" | "embed";
+  direction?: "forward" | "backward";
 }
 
 class MarkdownDB {
@@ -303,16 +309,22 @@ class MarkdownDB {
       .then((tags) => tags.map((tag) => tag.name));
   }
 
-  async getLinks(options: GetLinksOptions = {}) {
-    const { fileId, type, direction = "from" } = options;
-    const query = {};
-    if (fileId) {
-      query[direction] = fileId;
+  async getLinks(options: GetLinksOptions): Promise<Link[]> {
+    const { fileId, direction = "forward", linkType } = options;
+    const joinKey = direction === "forward" ? "from" : "to";
+    const query: any = {
+      [joinKey]: fileId,
+    };
+    if (linkType) {
+      query["link_type"] = linkType;
     }
-    if (type) {
-      query["type"] = type;
-    }
-    return this.db("links").select().where(query);
+    const dbLinks = await this.db("links")
+      .where(query)
+      .select("links._id", "links.link_type", "files._url_path")
+      .rightJoin("files", `links.${joinKey}`, "=", "files._id");
+
+    const links = dbLinks.map((link) => new Link(link));
+    return links;
   }
 
   async query<T = DatabaseFile>(
