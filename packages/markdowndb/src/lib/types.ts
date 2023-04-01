@@ -4,7 +4,7 @@ export type DatabaseFile<T = { [key: string]: any }> = {
   _id: string;
   _path: string;
   _url_path: string;
-  filetype: string;
+  extension: string;
   metadata: any;
   type: string;
 } & T;
@@ -25,6 +25,6 @@ export interface DatabaseQuery {
   folder?: string;
   type?: string; // TODO
   tags?: string[];
-  filetypes?: string[];
+  extensions?: string[];
   urlPath?: string;
 }
