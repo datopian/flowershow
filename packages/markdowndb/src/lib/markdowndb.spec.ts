@@ -1,7 +1,6 @@
-import knex from "knex";
+// import knex from "knex";
 import { MarkdownDB, Table } from "./markdowndb";
-import * as fs from "fs";
-import * as path from "path";
+import { recursiveWalkDir } from "./utils";
 
 /**
  * @jest-environment node
@@ -37,13 +36,13 @@ describe("MarkdownDB", () => {
   });
 
   test("indexes all files in folder", async () => {
-    const allFiles = walkFolder(pathToContentFixture);
+    const allFiles = recursiveWalkDir(pathToContentFixture);
     const allIndexedFiles = await mddb.query();
     expect(allIndexedFiles.length).toBe(allFiles.length);
   });
 
   test("can query by folder", async () => {
-    const allBlogFiles = walkFolder(`${pathToContentFixture}/blog`);
+    const allBlogFiles = recursiveWalkDir(`${pathToContentFixture}/blog`);
     const indexedBlogFiles = await mddb.query({
       folder: "blog",
       // filetypes: ["md", "mdx"],
@@ -99,18 +98,3 @@ describe("MarkdownDB", () => {
     expect(backwardLinks.length).toBe(2);
   });
 });
-
-function walkFolder(dir: string) {
-  // TODO move to separate lib as we need it in other places too
-  const dirents = fs.readdirSync(dir, { withFileTypes: true });
-  const files = dirents
-    .filter((dirent) => dirent.isFile())
-    .map((dirent) => path.join(dir, dirent.name));
-  const dirs = dirents
-    .filter((dirent) => dirent.isDirectory())
-    .map((dirent) => path.join(dir, dirent.name));
-  for (const d of dirs) {
-    files.push(...walkFolder(d));
-  }
-  return files;
-}

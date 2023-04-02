@@ -1,5 +1,4 @@
 import * as fs from "fs";
-import * as path from "path";
 import * as crypto from "crypto";
 import knex, { Knex } from "knex";
 import matter from "gray-matter";
@@ -10,6 +9,7 @@ import extractWikiLinks from "../utils/extractWikiLinks";
 import remarkWikiLink from "@flowershow/remark-wiki-link";
 
 import { File, Link, Tag, FileTag } from "./schema";
+import { recursiveWalkDir } from "./utils";
 
 export enum Table {
   Files = "files",
@@ -130,22 +130,6 @@ export class MarkdownDB {
     this.config = config;
   }
 
-  #walkFolder(dir: string) {
-    // TODO move to separate lib as we need it in other places too
-    // tried but couldn't make importing code non publishable utils library work
-    const dirents = fs.readdirSync(dir, { withFileTypes: true });
-    const files = dirents
-      .filter((dirent) => dirent.isFile())
-      .map((dirent) => path.join(dir, dirent.name));
-    const dirs = dirents
-      .filter((dirent) => dirent.isDirectory())
-      .map((dirent) => path.join(dir, dirent.name));
-    for (const d of dirs) {
-      files.push(...this.#walkFolder(d));
-    }
-    return files;
-  }
-
   async #createTable(
     table: Table,
     creator: (table: Knex.CreateTableBuilder) => void
@@ -185,7 +169,7 @@ export class MarkdownDB {
     await this.#createTable(Table.FileTags, FileTag.tableCreator);
     await this.#createTable(Table.Links, Link.tableCreator);
 
-    const pathsToFiles = this.#walkFolder(folder);
+    const pathsToFiles = recursiveWalkDir(folder);
 
     const filesToInsert = [];
     const tagsToInsert = [];
