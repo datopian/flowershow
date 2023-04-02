@@ -1,10 +1,26 @@
 import { Knex } from "knex";
 
+/*
+ * Types
+ */
 type MetaData = {
-  [key: string]: string | number | boolean | null | any[];
+  [key: string]: any;
 };
 
+export interface FileSerialized {
+  _id: string;
+  _path: string;
+  _url_path: string;
+  metadata: string;
+  extension: string;
+  filetype: string;
+}
+
+/*
+ * Schema
+ */
 class File {
+  static supportedExtensions = ["md", "mdx"];
   _id: string;
   _path: string;
   _url_path: string;
@@ -12,18 +28,11 @@ class File {
   extension: string;
   filetype: string; // TODO
 
-  constructor(dbFile: {
-    _id: string;
-    _path: string;
-    _url_path: string;
-    metadata: MetaData;
-    extension: string;
-    filetype: string;
-  }) {
+  constructor(dbFile: FileSerialized) {
     this._id = dbFile._id;
     this._path = dbFile._path;
     this._url_path = dbFile._url_path;
-    this.metadata = dbFile.metadata;
+    this.metadata = JSON.parse(dbFile.metadata);
     this.extension = dbFile.extension;
     this.filetype = dbFile.filetype;
   }
@@ -33,12 +42,16 @@ class File {
       table.string("_id").primary();
       table.string("_path").unique().notNullable(); //  Can be used to read a file
       table.string("_url_path").unique(); //  Can be used to query by folder
+      // table.string("_relative_path").unique(); //  Can be used to query by folder
       table.string("metadata");
       table.string("extension").notNullable();
       // table.enu("fileclass", ["text", "image", "data"]).notNullable();
       table.string("type"); // type field in frontmatter if it exists
     };
   }
+
+  // TODO return type
+  static serialize(source: string) {}
 }
 
 class Link {

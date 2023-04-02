@@ -1,14 +1,3 @@
-// File entity type
-// Maps to fields on the DB
-export type DatabaseFile<T = { [key: string]: any }> = {
-  _id: string;
-  _path: string;
-  _url_path: string;
-  extension: string;
-  metadata: any;
-  type: string;
-} & T;
-
 //  Every mdx file will have tags and links
 //  Generic so that we can create custom
 //  types later... Not definite

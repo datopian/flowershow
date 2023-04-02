@@ -1,14 +1,15 @@
 import * as fs from "fs";
+import * as path from "path";
 import * as crypto from "crypto";
 import knex, { Knex } from "knex";
 import matter from "gray-matter";
 
-import { DatabaseFile, DatabaseQuery } from "./types";
+import { DatabaseQuery } from "./types";
 import extractWikiLinks from "../utils/extractWikiLinks";
 
 import remarkWikiLink from "@flowershow/remark-wiki-link";
 
-import { File, Link, Tag, FileTag } from "./schema";
+import { File, FileSerialized, Link, Tag, FileTag } from "./schema";
 import { recursiveWalkDir } from "./utils";
 
 export enum Table {
@@ -18,102 +19,113 @@ export enum Table {
   Links = "links",
 }
 
-const createDatabaseFile: (path: string, folderPath: string) => DatabaseFile = (
-  path: string,
-  folderPath: string
-) => {
-  const extension = path.split(".").at(-1);
-
-  const encodedPath = Buffer.from(path, "utf-8").toString();
-  const id = crypto.createHash("sha1").update(encodedPath).digest("hex");
-
-  let metadata = null;
-  let type = null;
+const extractLinks = (source: string) => {
   let links = [];
 
-  //  If it's not a md/mdx file, _url_path is just the relative path
-  const pathRelativeToFolder = path.slice(folderPath.length + 1);
-  let _url_path = pathRelativeToFolder;
-
-  if (["md", "mdx"].includes(extension)) {
-    const source = fs.readFileSync(path, { encoding: "utf8", flag: "r" });
-    const { data } = matter(source);
-    metadata = data || null;
-    type = data.type || null;
-
-    // TODO pass this config as an argument, so that e.g. wikiLink doesn't have to be a dependency as it shouldnt
-    const extractWikiLinksConfig = {
-      remarkPlugins: [remarkWikiLink],
-      extractors: {
-        wikiLink: (node: any) => {
-          // TODO how to get wiki links of embed types in a better way?
-          // it should be possible, since we are adding { isType: "embed" } to tokens
-          const { href, src } = node.data?.hProperties || {};
-          return {
-            linkType: (href ? "normal" : "embed") as "normal" | "embed",
-            to: href ?? src,
-          };
-        },
+  // TODO pass this config as an argument, so that e.g. wikiLink doesn't have to bea dependency as it shouldnt
+  const extractWikiLinksConfig = {
+    remarkPlugins: [remarkWikiLink],
+    extractors: {
+      wikiLink: (node: any) => {
+        // TODO how to get wiki links of embed types in a better way?
+        // it should be possible, since we are adding { isType: "embed" } to tokens
+        const { href, src } = node.data?.hProperties || {};
+        return {
+          linkType: (href ? "normal" : "embed") as "normal" | "embed",
+          to: href ?? src,
+        };
       },
-    };
-
-    // temporary function to sluggify file paths
-    const tempSluggify = (str: string) => {
-      return str
-        .replace(/\s+/g, "-")
-        .replace(/\.\w+$/, "")
-        .toLowerCase();
-    };
-
-    links = extractWikiLinks({
-      source,
-      // TODO pass slug instead of file path as hrefs/srcs are sluggified too
-      // (where will we get it from?)
-      filePath: tempSluggify(`/${pathRelativeToFolder}`),
-      ...extractWikiLinksConfig,
-    }).map((link) => {
-      const linkEncodedPath = Buffer.from(
-        JSON.stringify(link),
-        "utf-8"
-      ).toString();
-      const linkId = crypto
-        .createHash("sha1")
-        .update(linkEncodedPath)
-        .digest("hex");
-      return {
-        _id: linkId,
-        from: id,
-        to: link.to,
-        link_type: link.linkType,
-      };
-    });
-
-    const segments = pathRelativeToFolder.split("/");
-    const filename = segments.at(-1).split(".")[0];
-
-    const pathToFileFolder = segments.slice(0, -1).join("/");
-
-    if (filename != "index") {
-      if (pathToFileFolder) {
-        _url_path = `${pathToFileFolder}/${filename}`;
-      } else {
-        //  The file is in the root folder
-        _url_path = filename;
-      }
-    } else {
-      _url_path = pathToFileFolder;
-    }
-  }
-
-  return {
-    _id: id,
-    _path: path,
-    _url_path, //  Should exist only for MD/MDX files
-    extension,
-    metadata,
-    links,
-    type,
+    },
   };
+
+  // temporary function to sluggify file paths
+  const tempSluggify = (str: string) => {
+    return str
+      .replace(/\s+/g, "-")
+      .replace(/\.\w+$/, "")
+      .toLowerCase();
+  };
+
+  links = extractWikiLinks({
+    source,
+    // TODO pass slug instead of file path as hrefs/srcs are sluggified too
+    // (where will we get it from?)
+    filePath: tempSluggify(`/${pathRelativeToFolder}`),
+    ...extractWikiLinksConfig,
+  }).map((link) => {
+    const linkEncodedPath = Buffer.from(
+      JSON.stringify(link),
+      "utf-8"
+    ).toString();
+    const linkId = crypto
+      .createHash("sha1")
+      .update(linkEncodedPath)
+      .digest("hex");
+    return {
+      _id: linkId,
+      from: id,
+      to: link.to,
+      link_type: link.linkType,
+    };
+  });
+};
+
+const createSerializedFile: (
+  filePath: string,
+  folderPath: string
+) => FileSerialized = (filePath: string, folderPath: string) => {
+  const serializedFile = {
+    _id: null,
+    _path: null,
+    _url_path: null,
+    extension: null,
+    metadata: null,
+    filetype: null,
+  };
+
+  // EXTENSION
+  const [, extension] = filePath.match("/.(w+)$/") || [];
+  if (!File.supportedExtensions.includes(extension)) {
+    console.error("Unsupported file extension: ", extension);
+  }
+  serializedFile.extension = extension;
+
+  // ID
+  const encodedPath = Buffer.from(filePath, "utf-8").toString();
+  const id = crypto.createHash("sha1").update(encodedPath).digest("hex");
+  serializedFile._id = id;
+
+  // METADATA
+  const source: string = fs.readFileSync(filePath, {
+    encoding: "utf8",
+    flag: "r",
+  });
+  const { data } = matter(source);
+  serializedFile.metadata = data;
+
+  // FILETYPE
+  const fileType = data.type;
+  serializedFile.filetype = fileType;
+
+  // _PATH
+  serializedFile._path = filePath;
+
+  // _URL_PATH
+  const pathRelativeToFolder = path.relative(folderPath, filePath);
+  serializedFile._url_path = pathRelativeToFolder;
+
+  // SLUGGIFY
+  // if (filename != "index") {
+  //   if (pathToFileFolder) {
+  //     _url_path = `${pathToFileFolder}/${filename}`;
+  //   } else {
+  //     //  The file is in the root folder
+  //     _url_path = filename;
+  //   }
+  // } else {
+  //   _url_path = pathToFileFolder;
+  // }
+  return serializedFile;
 };
 
 export interface GetLinksOptions {
@@ -151,7 +163,7 @@ export class MarkdownDB {
 
   async indexFolder({
     folder,
-    ignorePatterns,
+    ignorePatterns = [],
   }: {
     folder: string;
     ignorePatterns?: RegExp[];
@@ -169,82 +181,67 @@ export class MarkdownDB {
     await this.#createTable(Table.FileTags, FileTag.tableCreator);
     await this.#createTable(Table.Links, Link.tableCreator);
 
-    const pathsToFiles = recursiveWalkDir(folder);
+    const filePathsToIndex = recursiveWalkDir(folder);
 
     const filesToInsert = [];
+    // TODO shouldn't tags be defined in some config file instead of being extracted from files?
     const tagsToInsert = [];
     const fileTagsToInsert = [];
 
-    const extractedLinks = [];
-
-    for (const pathToFile of pathsToFiles) {
-      let file;
+    for (const filePath of filePathsToIndex) {
+      let serializedFile = null;
+      let metadata = null;
 
       try {
-        file = createDatabaseFile(pathToFile, folder);
+        serializedFile = createSerializedFile(filePath, folder);
+        metadata = JSON.parse(serializedFile.metadata);
       } catch (e) {
         console.log(
-          `MarkdownDB Error: Failed to parse '${pathToFile}'. Skipping...`
+          `MarkdownDB Error: Failed to parse '${filePath}'. Skipping...\n${e}`
         );
-        console.log(e);
-        file = null;
+        continue;
       }
 
-      if (file) {
-        let isIgnoredByPattern = false;
-
-        if (ignorePatterns) {
-          for (const pattern of ignorePatterns) {
-            if (pattern.test(file._url_path)) {
-              isIgnoredByPattern = true;
-            }
-          }
+      // TAGS
+      //  There are probably better ways of doing this...
+      const tags = metadata.tags || [];
+      tags.forEach((tag: string) => {
+        if (!tagsToInsert.includes(tag)) {
+          tagsToInsert.push(tag);
         }
+        fileTagsToInsert.push({ tag, file: serializedFile._id });
+      });
 
-        if (!isIgnoredByPattern) {
-          //  There are probably better ways of doing this...
-          if (["md", "mdx"].includes(file.extension)) {
-            const tags = file.metadata?.tags || [];
-
-            for (const tag of tags) {
-              if (!tagsToInsert.find((item) => item.name === tag)) {
-                tagsToInsert.push({ name: tag });
-              }
-              fileTagsToInsert.push({ tag, file: file._id });
-            }
-
-            //  Sqlite3 does not support JSON fields
-            file.metadata = JSON.stringify(file.metadata);
-          }
-
-          // TODO temp
-          const { links, ...rest } = file;
-
-          extractedLinks.push(...links);
-          filesToInsert.push(rest);
-        }
-      }
+      filesToInsert.push(serializedFile);
     }
 
     await this.db.batchInsert("files", filesToInsert);
+    // TODO only tags of successfully inserted files should be inserted
     await this.db.batchInsert("tags", tagsToInsert);
+    // TODO only fileTags of successfully inserted files should be inserted
     await this.db.batchInsert("file_tags", fileTagsToInsert);
 
+    // TODO only links of successfully inserted files should be inserted
     const linksToInsert = [];
 
-    for (const link of extractedLinks) {
-      const { to } = link;
-      const destPath = to.replace(/^\//, "");
-      // find the file with the same url path
-      const destFile = await this.db("files")
-        .where({ _url_path: destPath })
-        .first();
-
-      linksToInsert.push({
-        ...link,
-        to: destFile?._id,
+    filesToInsert.forEach((file) => {
+      const links = extractLinks(file);
+      links.forEach((link) => {
+        linksToInsert.push(link);
       });
-    }
+    });
+
+    const { to } = link;
+    const destPath = to.replace(/^\//, "");
+    // find the file with the same url path
+    const destFile = await this.db("files")
+      .where({ _url_path: destPath })
+      .first();
+
+    linksToInsert.push({
+      ...link,
+      to: destFile?._id,
+    });
 
     await this.db.batchInsert("links", linksToInsert);
   }
