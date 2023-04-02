@@ -1,5 +1,5 @@
 import knex from "knex";
-import { MarkdownDB } from "./markdowndb";
+import { MarkdownDB, Table } from "./markdowndb";
 import * as fs from "fs";
 import * as path from "path";
 
@@ -30,10 +30,10 @@ describe("MarkdownDB", () => {
   });
 
   test("adds tables to db", async () => {
-    expect(await mddb.db.schema.hasTable("files")).toBe(true);
-    expect(await mddb.db.schema.hasTable("tags")).toBe(true);
-    expect(await mddb.db.schema.hasTable("file_tags")).toBe(true);
-    expect(await mddb.db.schema.hasTable("links")).toBe(true);
+    expect(await mddb.db.schema.hasTable(Table.Files)).toBe(true);
+    expect(await mddb.db.schema.hasTable(Table.Tags)).toBe(true);
+    expect(await mddb.db.schema.hasTable(Table.FileTags)).toBe(true);
+    expect(await mddb.db.schema.hasTable(Table.Links)).toBe(true);
   });
 
   test("indexes all files in folder", async () => {

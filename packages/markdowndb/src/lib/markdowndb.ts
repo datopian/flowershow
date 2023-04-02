@@ -9,7 +9,14 @@ import extractWikiLinks from "../utils/extractWikiLinks";
 
 import remarkWikiLink from "@flowershow/remark-wiki-link";
 
-import { Link } from "./schema";
+import { File, Link, Tag, FileTag } from "./schema";
+
+export enum Table {
+  Files = "files",
+  Tags = "tags",
+  FileTags = "file_tags",
+  Links = "links",
+}
 
 const createDatabaseFile: (path: string, folderPath: string) => DatabaseFile = (
   path: string,
@@ -115,17 +122,6 @@ export interface GetLinksOptions {
   direction?: "forward" | "backward";
 }
 
-//  MarkdownDB Factory
-
-// const dbConfig = {
-//   client: "sqlite3",
-//   connection: {
-//     filename: dbPath,
-//   },
-//   useNullAsDefault: true,
-// };
-
-/* START REFACTORED */
 export class MarkdownDB {
   config: Knex.Config;
   db: Knex;
@@ -136,6 +132,7 @@ export class MarkdownDB {
 
   #walkFolder(dir: string) {
     // TODO move to separate lib as we need it in other places too
+    // tried but couldn't make importing code non publishable utils library work
     const dirents = fs.readdirSync(dir, { withFileTypes: true });
     const files = dirents
       .filter((dirent) => dirent.isFile())
@@ -149,61 +146,19 @@ export class MarkdownDB {
     return files;
   }
 
-  async #createFilesTable() {
-    const tableExists = await this.db.schema.hasTable("files");
+  async #createTable(
+    table: Table,
+    creator: (table: Knex.CreateTableBuilder) => void
+  ) {
+    const tableExists = await this.db.schema.hasTable(table);
 
     if (!tableExists) {
-      await this.db.schema.createTable("files", (table) => {
-        table.string("_id").primary();
-        table.string("_path").unique().notNullable(); //  Can be used to read a file
-        table.string("_url_path").unique(); //  Can be used to query by folder
-        table.string("metadata");
-        table.string("extension").notNullable();
-        // table.enu("fileclass", ["text", "image", "data"]).notNullable();
-        table.string("type"); // type field in frontmatter if it exists
-      });
+      await this.db.schema.createTable(table, creator);
     }
   }
 
-  async #createLinksTable() {
-    const tableExists = await this.db.schema.hasTable("links");
-
-    if (!tableExists) {
-      await this.db.schema.createTable("links", (table) => {
-        table.string("_id").primary();
-        table.enum("link_type", ["normal", "embed"]).notNullable();
-        table.string("from").notNullable();
-        table.string("to").notNullable();
-        table.foreign("from").references("files._id").onDelete("CASCADE");
-        table.foreign("to").references("files._id").onDelete("CASCADE");
-      });
-    }
-  }
-
-  async #createTagsTable() {
-    const tableExists = await this.db.schema.hasTable("tags");
-
-    if (!tableExists) {
-      await this.db.schema.createTable("tags", (table) => {
-        // table.string("_id"); We probably don't need an id
-        table.string("name").primary();
-      });
-    }
-  }
-
-  async #createFileTagsTable() {
-    const tableExists = await this.db.schema.hasTable("file_tags");
-
-    if (!tableExists) {
-      await this.db.schema.createTable("file_tags", (table) => {
-        table.string("tag").notNullable();
-        table.string("file").notNullable();
-
-        table.foreign("tag").references("tags.name").onDelete("CASCADE");
-        table.foreign("file").references("files._id").onDelete("CASCADE");
-        //  ... maybe onUpdate(CASCADE) as well?
-      });
-    }
+  async #deleteTable(table: Table) {
+    await this.db.schema.dropTableIfExists(table);
   }
 
   async init() {
@@ -217,18 +172,18 @@ export class MarkdownDB {
     folder: string;
     ignorePatterns?: RegExp[];
   }) {
-    await this.#createFilesTable();
-    await this.#createTagsTable();
-    await this.#createFileTagsTable();
-    await this.#createLinksTable();
-
     //  Temporary, we don't want to handle updates now
     //  so database is refreshed every time the folder
     //  is indexed
-    await this.db("file_tags").del();
-    await this.db("tags").del();
-    await this.db("files").del();
-    await this.db("links").del();
+    await this.#deleteTable(Table.Files);
+    await this.#deleteTable(Table.Tags);
+    await this.#deleteTable(Table.FileTags);
+    await this.#deleteTable(Table.Links);
+
+    await this.#createTable(Table.Files, File.tableCreator);
+    await this.#createTable(Table.Tags, Tag.tableCreator);
+    await this.#createTable(Table.FileTags, FileTag.tableCreator);
+    await this.#createTable(Table.Links, Link.tableCreator);
 
     const pathsToFiles = this.#walkFolder(folder);
 
