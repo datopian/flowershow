@@ -14,36 +14,28 @@ type MetaData = {
   [key: string]: any;
 };
 
-export interface FileSerialized {
-  _id: string;
-  path: string;
-  url_path: string;
-  slug: string | null;
-  metadata: string | null;
-  extension: string;
-  filetype: string | null;
-}
-
 /*
  * Schema
  */
+export interface FileSerialized extends Omit<File, "metadata"> {
+  metadata: string | null;
+}
+
 class File {
   static table = Table.Files;
   static supportedExtensions = ["md", "mdx"];
 
   _id: string;
-  path: string;
+  file_path: string;
   url_path: string;
-  slug: string | null;
   metadata: MetaData | null;
   extension: string;
   filetype: string | null;
 
   constructor(dbFile: FileSerialized) {
     this._id = dbFile._id;
-    this.path = dbFile.path;
+    this.file_path = dbFile.file_path;
     this.url_path = dbFile.url_path;
-    this.slug = dbFile.slug;
     this.metadata = dbFile.metadata ? JSON.parse(dbFile.metadata) : null;
     this.extension = dbFile.extension;
     this.filetype = dbFile.filetype;
@@ -52,9 +44,8 @@ class File {
   static async createTable(db: Knex) {
     const creator = (table: Knex.TableBuilder) => {
       table.string("_id").primary();
-      table.string("path").unique().notNullable(); // Path relative to process.cwd()
-      table.string("url_path").unique().notNullable(); // Path relative to content folder root
-      table.string("slug").unique(); // Slugified path (used for routing)
+      table.string("file_path").unique().notNullable(); // Path relative to process.cwd()
+      table.string("url_path").unique().notNullable(); // Sluggfied path
       table.string("metadata").notNullable(); // All frontmatter data
       table.string("extension").notNullable(); // File extension
       table.string("filetype"); // type field in frontmatter if it exists
@@ -85,23 +76,26 @@ class File {
 class Link {
   static table = Table.Links;
 
-  _id: string;
-  url: string;
-  linkType: "normal" | "embed";
+  // _id: string;
+  link_type: "normal" | "embed";
+  from: string;
+  to: string;
 
   constructor(dbLink: {
-    _id: string;
-    _url_path: string;
+    // _id: string;
     link_type: "normal" | "embed";
+    from: string;
+    to: string;
   }) {
-    this._id = dbLink._id;
-    this.url = dbLink._url_path;
-    this.linkType = dbLink.link_type;
+    // this._id = dbLink._id;
+    this.link_type = dbLink.link_type;
+    this.from = dbLink.from;
+    this.to = dbLink.to;
   }
 
   static async createTable(db: Knex) {
     const creator = (table: Knex.TableBuilder) => {
-      table.string("_id").primary();
+      // table.string("_id").primary();
       table.enum("link_type", ["normal", "embed"]).notNullable();
       table.string("from").notNullable();
       table.string("to").notNullable();

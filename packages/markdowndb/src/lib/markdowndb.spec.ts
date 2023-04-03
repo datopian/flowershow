@@ -6,6 +6,8 @@ import { recursiveWalkDir } from "../utils";
 /**
  * @jest-environment node
  */
+
+// TODO test index files
 describe("MarkdownDB", () => {
   const pathToContentFixture = "packages/markdowndb/__mocks__/content";
   let mddb: MarkdownDB;
@@ -47,7 +49,7 @@ describe("MarkdownDB", () => {
   describe("querying files", () => {
     test("can get all files", async () => {
       const dbFiles = await mddb.getFiles();
-      const dbFilesPaths = dbFiles.map((f) => f.path);
+      const dbFilesPaths = dbFiles.map((f) => f.file_path);
       const allFilesPaths = recursiveWalkDir(pathToContentFixture);
 
       expect(dbFiles).toHaveLength(allFilesPaths.length);
@@ -58,7 +60,7 @@ describe("MarkdownDB", () => {
 
     test("can query by file type", async () => {
       const dbFiles = await mddb.getFiles({ filetypes: ["blog"] });
-      const dbFilesPaths = dbFiles.map((f) => f.path);
+      const dbFilesPaths = dbFiles.map((f) => f.file_path);
 
       const expectedPaths = [
         `${pathToContentFixture}/blog/blog3.mdx`,
@@ -74,7 +76,7 @@ describe("MarkdownDB", () => {
 
     test("can query by tags", async () => {
       const dbFiles = await mddb.getFiles({ tags: ["economy", "politics"] });
-      const dbFilesPaths = dbFiles.map((f) => f.path);
+      const dbFilesPaths = dbFiles.map((f) => f.file_path);
 
       const expectedPaths = [
         `${pathToContentFixture}/blog/blog3.mdx`,
@@ -89,7 +91,7 @@ describe("MarkdownDB", () => {
 
     test("can query by extensions", async () => {
       const dbFiles = await mddb.getFiles({ extensions: ["png"] });
-      const dbFilesPaths = dbFiles.map((f) => f.path);
+      const dbFilesPaths = dbFiles.map((f) => f.file_path);
 
       const expectedPaths = [
         `${pathToContentFixture}/assets/datopian-logo.png`,
@@ -107,7 +109,7 @@ describe("MarkdownDB", () => {
         filetypes: ["news"],
         extensions: ["md", "mdx"],
       });
-      const dbFilesPaths = dbFiles.map((f) => f.path);
+      const dbFilesPaths = dbFiles.map((f) => f.file_path);
       const expectedPaths = [`${pathToContentFixture}/news/news1.mdx`];
 
       expect(dbFilesPaths).toHaveLength(expectedPaths.length);
@@ -116,15 +118,15 @@ describe("MarkdownDB", () => {
       });
     });
 
-    test("can find file by slug", async () => {
-      const dbFile = await mddb.getFileBySlug("blog/blog2");
-      expect(dbFile.slug).toBe("blog/blog2");
+    test("can find file by url path", async () => {
+      const dbFile = await mddb.getFileByUrl("blog/blog2");
+      expect(dbFile.url_path).toBe("blog/blog2");
     });
 
     test("can find file by id", async () => {
-      const dbFile = await mddb.getFileBySlug("blog/blog2");
+      const dbFile = await mddb.getFileByUrl("blog/blog2");
       const dbFileById = await mddb.getFileById(dbFile._id);
-      expect(dbFileById.slug).toBe("blog/blog2");
+      expect(dbFileById.url_path).toBe("blog/blog2");
     });
   });
 
@@ -147,21 +149,31 @@ describe("MarkdownDB", () => {
   });
 
   describe("getLinks", () => {
-    // test("can get all forward links of a file by file id", async () => {
-    //   const file = await mddb.getFile({ slug: "blog/blog2" });
-    //   const forwardLinks = await mddb.getLinks({
-    //     fileId: file[0]._id,
-    //   });
-    //   expect(forwardLinks.length).toBe(1);
-    // });
-    // test("can get all backward links of a file", async () => {
-    //   const file = await mddb.query({ urlPath: "blog/blog2" });
-    //   const backwardLinks = await mddb.getLinks({
-    //     fileId: file[0]._id,
-    //     direction: "backward",
-    //   });
-    //   expect(backwardLinks.length).toBe(2);
-    // });
+    test("can get all forward links of a file", async () => {
+      const fromFile = await mddb.getFileByUrl("blog/blog2");
+      const toFile = await mddb.getFileByUrl("blog0");
+
+      const forwardLinks = await mddb.getLinks({
+        fileId: fromFile._id,
+      });
+      expect(forwardLinks.length).toBe(1);
+      expect(forwardLinks[0].to).toBe(toFile._id);
+    });
+
+    test("can get all backward links of a file", async () => {
+      const toFile = await mddb.getFileByUrl("blog/blog2");
+      const fromFile1 = await mddb.getFileByUrl("blog0");
+      const fromFile2 = await mddb.getFileByUrl("blog/blog1");
+
+      const backwardLinks = await mddb.getLinks({
+        fileId: toFile._id,
+        direction: "backward",
+      });
+      const backwardLinksFileIds = backwardLinks.map((l) => l.from);
+      expect(backwardLinksFileIds).toHaveLength(2);
+      expect(backwardLinksFileIds).toContain(fromFile1._id);
+      expect(backwardLinksFileIds).toContain(fromFile2._id);
+    });
   });
 
   // TODO why is this needed?

@@ -6,7 +6,7 @@ import knex, { Knex } from "knex";
 import { recursiveWalkDir, parseFile, WikiLink } from "../utils";
 import { File, Link, Tag, FileTag } from "./schema";
 
-// TODO this should be in sync with slugs returned by extractWikiLinks
+// TODO this should be in sync with paths created by remark-wiki-link
 const sluggifyFilePath = (str: string) => {
   return str
     .replace(/\s+/g, "-")
@@ -14,13 +14,17 @@ const sluggifyFilePath = (str: string) => {
     .toLowerCase();
 };
 
-const resolveLinkToFilePath = (link: string, sourceFilePath?: string) => {
+const resolveLinkToUrlPath = (link: string, sourceFilePath?: string) => {
   if (!sourceFilePath) {
     return link;
   }
-  const dir = path.dirname(sourceFilePath);
+  // needed to make path.resolve work correctly
+  // becuase we store urls without leading slash
+  const sourcePath = "/" + sourceFilePath;
+  const dir = path.dirname(sourcePath);
   const resolved = path.resolve(dir, link);
-  return resolved;
+  // remove leading slash
+  return resolved.slice(1);
 };
 
 export class MarkdownDB {
@@ -73,7 +77,10 @@ export class MarkdownDB {
     // This is used after all files have been parsed and added to filesToInsert
     // to resolve paths in links to target file ids
     const filesLinksMap: {
-      [fileId: string]: WikiLink[];
+      [fileId: string]: {
+        url: string;
+        links: WikiLink[];
+      };
     } = {};
 
     for (const filePath of filePathsToIndex) {
@@ -83,9 +90,8 @@ export class MarkdownDB {
 
       const fileToInsert: File = {
         _id: "",
-        path: "",
+        file_path: "",
         url_path: "",
-        slug: null,
         extension: "",
         metadata: null,
         filetype: null,
@@ -97,12 +103,12 @@ export class MarkdownDB {
       fileToInsert._id = id;
 
       // path
-      fileToInsert.path = filePath;
+      fileToInsert.file_path = filePath;
 
       // url_path
       const pathRelativeToFolder = path.relative(folderPath, filePath);
-      fileToInsert.url_path = pathRelativeToFolder;
-      fileToInsert.slug = sluggifyFilePath(pathRelativeToFolder);
+      const urlPath = sluggifyFilePath(pathRelativeToFolder);
+      fileToInsert.url_path = urlPath;
 
       // extension
       const [, extension] = filePath.match(/.(\w+)$/) || [];
@@ -121,8 +127,13 @@ export class MarkdownDB {
 
       const { metadata, links } = parseFile(source);
       fileToInsert.filetype = metadata?.type || null;
+      fileToInsert.metadata = metadata || null;
+
       // TODO is there a better way to do this?
-      filesLinksMap[filePath] = links;
+      filesLinksMap[id] = {
+        url: urlPath,
+        links,
+      };
 
       const tags = metadata?.tags || [];
       tags.forEach((tag: string) => {
@@ -135,25 +146,21 @@ export class MarkdownDB {
       filesToInsert.push(fileToInsert);
     }
 
-    Object.entries(filesLinksMap).forEach(([fileId, links]) => {
+    Object.entries(filesLinksMap).forEach(([fileId, { url, links }]) => {
       links.forEach(({ linkSrc, linkType }) => {
-        const destPath = resolveLinkToFilePath(linkSrc, fileId);
-        // find the file with the same url path
+        const destPath = resolveLinkToUrlPath(linkSrc, url);
         const destFile = filesToInsert.find(
           (file) => file.url_path === destPath
         );
-        return {
+        const linkToInsert = {
+          // _id: id,
           from: fileId,
           to: destFile?._id,
           link_type: linkType,
         };
+        linksToInsert.push(linkToInsert);
       });
     });
-
-    // console.log("filesToInsert", filesToInsert);
-    // console.log("tagsToInsert", tagsToInsert);
-    // console.log("fileTagsToInsert", fileTagsToInsert);
-    console.log("linksToInsert", linksToInsert);
 
     await File.batchInsert(this.db, filesToInsert);
 
@@ -170,28 +177,10 @@ export class MarkdownDB {
     return new File(file);
   }
 
-  async getFileBySlug(slug: string): Promise<File | null> {
-    const file = await this.db.from("files").where("slug", slug).first();
+  async getFileByUrl(url: string): Promise<File | null> {
+    const file = await this.db.from("files").where("url_path", url).first();
     return new File(file);
   }
-
-  // TODO not sure if this is even needed
-  // async getFileByUrlPath(urlPath: string): Promise<File | null> {
-  //   const file = await this.db
-  //     .from("files")
-  //     .where("url_path", urlPath)
-  //     .first();
-  //   return file;
-  // }
-
-  // TODO not sure if this is even needed
-  // async getFileByPath(path: string): Promise<File | null> {
-  //   const file = await this.db
-  //     .from("files")
-  //     .where("path", path)
-  //     .first();
-  //   return file;
-  // }
 
   async getFiles(query?: {
     filetypes?: string[];
@@ -201,7 +190,7 @@ export class MarkdownDB {
     const { filetypes, tags, extensions } = query || {};
 
     const files = await this.db
-      // TODO join only if tags are specified
+      // TODO join only if tags are specified ?
       .leftJoin("file_tags", "files._id", "file_tags.file")
       .where((builder) => {
         // if (path) {
@@ -242,16 +231,17 @@ export class MarkdownDB {
   }): Promise<Link[]> {
     const { fileId, direction = "forward", linkType } = query;
     const joinKey = direction === "forward" ? "from" : "to";
-    const where: any = {
+    const where = {
       [joinKey]: fileId,
     };
     if (linkType) {
-      query["link_type"] = linkType;
+      where["link_type"] = linkType;
     }
-    const dbLinks = await this.db("links")
-      .where(where)
-      .select("links._id", "links.link_type", "files._url_path")
-      .rightJoin("files", `links.${joinKey}`, "=", "files._id");
+    const dbLinks = await this.db
+      .select("links.*")
+      .from("links")
+      .rightJoin("files", `links.${joinKey}`, "=", "files._id")
+      .where(where);
 
     const links = dbLinks.map((link) => new Link(link));
     return links;
