@@ -1,7 +1,4 @@
 import { Knex } from "knex";
-import matter from "gray-matter";
-import * as crypto from "crypto";
-import * as path from "path";
 
 /*
  * Types
@@ -30,7 +27,9 @@ export interface FileSerialized {
  * Schema
  */
 class File {
+  static table = Table.Files;
   static supportedExtensions = ["md", "mdx"];
+
   _id: string;
   _path: string;
   _url_path: string;
@@ -47,8 +46,8 @@ class File {
     this.filetype = dbFile.filetype;
   }
 
-  static get tableCreator() {
-    return (table: Knex.TableBuilder) => {
+  static async createTable(db: Knex) {
+    const creator = (table: Knex.TableBuilder) => {
       table.string("_id").primary();
       table.string("_path").unique().notNullable(); //  Can be used to read a file
       table.string("_url_path").unique(); //  Can be used to query by folder
@@ -58,69 +57,32 @@ class File {
       // table.enu("fileclass", ["text", "image", "data"]).notNullable();
       table.string("filetype"); // type field in frontmatter if it exists
     };
+    const tableExists = await db.schema.hasTable(this.table);
+
+    if (!tableExists) {
+      await db.schema.createTable(this.table, creator);
+    }
   }
 
-  // TODO return type
-  static parse({
-    filePath,
-    folderPath,
-    source,
-  }: {
-    filePath: string;
-    folderPath: string;
-    source: string;
-  }) {
-    const serializedFile = {
-      _id: null,
-      _path: null,
-      _url_path: null,
-      extension: null,
-      metadata: null,
-      filetype: null,
-    };
+  static async deleteTable(db: Knex) {
+    await db.schema.dropTableIfExists(this.table);
+  }
 
-    // EXTENSION
-    const [, extension] = filePath.match(/.(\w+)$/) || [];
-    if (!File.supportedExtensions.includes(extension)) {
-      console.error("Unsupported file extension: ", extension);
-    }
-    serializedFile.extension = extension;
+  static batchInsert(db: Knex, files: File[]) {
+    const serializedFiles = files.map((file) => {
+      return {
+        ...file,
+        metadata: JSON.stringify(file.metadata),
+      };
+    });
 
-    // ID
-    const encodedPath = Buffer.from(filePath, "utf-8").toString();
-    const id = crypto.createHash("sha1").update(encodedPath).digest("hex");
-    serializedFile._id = id;
-
-    // METADATA
-    const { data } = matter(source);
-    serializedFile.metadata = data;
-
-    // FILETYPE
-    serializedFile.filetype = data.type || null;
-
-    // _PATH
-    serializedFile._path = filePath;
-
-    // _URL_PATH
-    const pathRelativeToFolder = path.relative(folderPath, filePath);
-    serializedFile._url_path = pathRelativeToFolder;
-
-    // SLUGGIFY
-    // if (filename != "index") {
-    //   if (pathToFileFolder) {
-    //     _url_path = `${pathToFileFolder}/${filename}`;
-    //   } else {
-    //     //  The file is in the root folder
-    //     _url_path = filename;
-    //   }
-    // } else {
-    //   _url_path = pathToFileFolder;
-    // }
-    return serializedFile;
+    return db.batchInsert(Table.Files, serializedFiles);
   }
 }
 
 class Link {
+  static table = Table.Links;
+
   _id: string;
   url: string;
   linkType: "normal" | "embed";
@@ -135,8 +97,8 @@ class Link {
     this.linkType = dbLink.link_type;
   }
 
-  static get tableCreator() {
-    return (table: Knex.TableBuilder) => {
+  static async createTable(db: Knex) {
+    const creator = (table: Knex.TableBuilder) => {
       table.string("_id").primary();
       table.enum("link_type", ["normal", "embed"]).notNullable();
       table.string("from").notNullable();
@@ -144,10 +106,21 @@ class Link {
       table.foreign("from").references("files._id").onDelete("CASCADE");
       table.foreign("to").references("files._id").onDelete("CASCADE");
     };
+    const tableExists = await db.schema.hasTable(this.table);
+
+    if (!tableExists) {
+      await db.schema.createTable(this.table, creator);
+    }
+  }
+
+  static async deleteTable(db: Knex) {
+    await db.schema.dropTableIfExists(this.table);
   }
 }
 
 class Tag {
+  static table = Table.Tags;
+
   name: string;
   // description: string;
 
@@ -159,15 +132,29 @@ class Tag {
     // this.description = dbTag.description;
   }
 
-  static get tableCreator() {
-    return (table: Knex.TableBuilder) => {
+  static async createTable(db: Knex) {
+    const creator = (table: Knex.TableBuilder) => {
       table.string("name").primary();
       // table.string("description");
     };
+    const tableExists = await db.schema.hasTable(this.table);
+
+    if (!tableExists) {
+      await db.schema.createTable(this.table, creator);
+    }
+  }
+
+  static async deleteTable(db: Knex) {
+    await db.schema.dropTableIfExists(this.table);
+  }
+
+  static batchInsert(db: Knex, tags: Tag[]) {
+    return db.batchInsert(Table.Tags, tags);
   }
 }
 
 class FileTag {
+  static table = Table.FileTags;
   // _id: string;
   tag: string;
   file: string;
@@ -177,14 +164,27 @@ class FileTag {
     this.file = dbFileTag.file;
   }
 
-  static get tableCreator() {
-    return (table: Knex.TableBuilder) => {
+  static async createTable(db: Knex) {
+    const creator = (table: Knex.TableBuilder) => {
       table.string("tag").notNullable();
       table.string("file").notNullable();
 
       table.foreign("tag").references("tags.name").onDelete("CASCADE");
       table.foreign("file").references("files._id").onDelete("CASCADE");
     };
+    const tableExists = await db.schema.hasTable(this.table);
+
+    if (!tableExists) {
+      await db.schema.createTable(this.table, creator);
+    }
+  }
+
+  static async deleteTable(db: Knex) {
+    await db.schema.dropTableIfExists(this.table);
+  }
+
+  static batchInsert(db: Knex, fileTags: FileTag[]) {
+    return db.batchInsert(Table.FileTags, fileTags);
   }
 }
 

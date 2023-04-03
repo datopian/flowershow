@@ -82,20 +82,20 @@ describe("MarkdownDB", () => {
     });
   });
 
-  test("can get all forward links of a file", async () => {
-    const file = await mddb.query({ urlPath: "blog/blog2" });
-    const forwardLinks = await mddb.getLinks({
-      fileId: file[0]._id,
-    });
-    expect(forwardLinks.length).toBe(1);
-  });
+  // test("can get all forward links of a file", async () => {
+  //   const file = await mddb.query({ urlPath: "blog/blog2" });
+  //   const forwardLinks = await mddb.getLinks({
+  //     fileId: file[0]._id,
+  //   });
+  //   expect(forwardLinks.length).toBe(1);
+  // });
 
-  test("can get all backward links of a file", async () => {
-    const file = await mddb.query({ urlPath: "blog/blog2" });
-    const backwardLinks = await mddb.getLinks({
-      fileId: file[0]._id,
-      direction: "backward",
-    });
-    expect(backwardLinks.length).toBe(2);
-  });
+  // test("can get all backward links of a file", async () => {
+  //   const file = await mddb.query({ urlPath: "blog/blog2" });
+  //   const backwardLinks = await mddb.getLinks({
+  //     fileId: file[0]._id,
+  //     direction: "backward",
+  //   });
+  //   expect(backwardLinks.length).toBe(2);
+  // });
 });

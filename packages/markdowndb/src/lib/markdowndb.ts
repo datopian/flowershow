@@ -1,74 +1,10 @@
-import * as crypto from "crypto";
 import * as fs from "fs";
 import knex, { Knex } from "knex";
-// TODO temporary here
-import remarkWikiLink from "@flowershow/remark-wiki-link";
 
-import { recursiveWalkDir, extractWikiLinks } from "../utils";
+import { recursiveWalkDir } from "../utils";
 import { File, Link, Tag, FileTag, Table } from "./schema";
 
 import { DatabaseFile, DatabaseQuery } from "./types";
-
-// config to extractWikiLinks utility
-const extractWikiLinksConfig = {
-  remarkPlugins: [remarkWikiLink],
-  extractors: {
-    wikiLink: (node: any) => {
-      // TODO how to get wiki links of embed types in a better way?
-      // it should be possible, since we are adding { isType: "embed" } to tokens
-      const { href, src } = node.data?.hProperties || {};
-      return {
-        linkType: (href ? "normal" : "embed") as "normal" | "embed",
-        to: href ?? src,
-      };
-    },
-  },
-};
-
-const extractLinks = (source: string, filePath: string, fileId: string) => {
-  let links = [];
-
-  // TODO pass this config as an argument, so that e.g. wikiLink doesn't have to bea dependency as it shouldnt
-
-  // temporary function to sluggify file paths
-  const tempSluggify = (str: string) => {
-    return str
-      .replace(/\s+/g, "-")
-      .replace(/\.\w+$/, "")
-      .toLowerCase();
-  };
-
-  links = extractWikiLinks({
-    source,
-    // TODO pass slug instead of file path as hrefs/srcs are sluggified too
-    // (where will we get it from?)
-    filePath: tempSluggify(`/${filePath}`),
-    ...extractWikiLinksConfig,
-  }).map((link) => {
-    const linkEncodedPath = Buffer.from(
-      JSON.stringify(link),
-      "utf-8"
-    ).toString();
-    const linkId = crypto
-      .createHash("sha1")
-      .update(linkEncodedPath)
-      .digest("hex");
-    return {
-      _id: linkId,
-      from: fileId,
-      to: link.to,
-      link_type: link.linkType,
-    };
-  });
-
-  return links;
-};
-
-export interface GetLinksOptions {
-  fileId: string;
-  linkType?: "normal" | "embed";
-  direction?: "forward" | "backward";
-}
 
 export class MarkdownDB {
   config: Knex.Config;
@@ -82,20 +18,20 @@ export class MarkdownDB {
     this.db = knex(this.config);
   }
 
-  async #createTable(
-    table: Table,
-    creator: (table: Knex.CreateTableBuilder) => void
-  ) {
-    const tableExists = await this.db.schema.hasTable(table);
+  // async #createTable(
+  //   table: string,
+  //   creator: (table: Knex.CreateTableBuilder) => void
+  // ) {
+  //   const tableExists = await this.db.schema.hasTable(table);
 
-    if (!tableExists) {
-      await this.db.schema.createTable(table, creator);
-    }
-  }
+  //   if (!tableExists) {
+  //     await this.db.schema.createTable(table, creator);
+  //   }
+  // }
 
-  async #deleteTable(table: Table) {
-    await this.db.schema.dropTableIfExists(table);
-  }
+  // async #deleteTable(table: string) {
+  //   await this.db.schema.dropTableIfExists(table);
+  // }
 
   async indexFolder({
     folderPath,
@@ -107,15 +43,15 @@ export class MarkdownDB {
     //  Temporary, we don't want to handle updates now
     //  so database is refreshed every time the folder
     //  is indexed
-    await this.#deleteTable(Table.Files);
-    await this.#deleteTable(Table.Tags);
-    await this.#deleteTable(Table.FileTags);
-    await this.#deleteTable(Table.Links);
+    await File.deleteTable(this.db);
+    await Tag.deleteTable(this.db);
+    await FileTag.deleteTable(this.db);
+    await Link.deleteTable(this.db);
 
-    await this.#createTable(Table.Files, File.tableCreator);
-    await this.#createTable(Table.Tags, Tag.tableCreator);
-    await this.#createTable(Table.FileTags, FileTag.tableCreator);
-    await this.#createTable(Table.Links, Link.tableCreator);
+    await File.createTable(this.db);
+    await Tag.createTable(this.db);
+    await FileTag.createTable(this.db);
+    await Link.createTable(this.db);
 
     const filePathsToIndex = recursiveWalkDir(folderPath);
 
@@ -168,12 +104,13 @@ export class MarkdownDB {
 
     console.log("filesToInsert", filesToInsert);
 
-    await this.db.batchInsert("files", filesToInsert);
+    await File.batchInsert(this.db, filesToInsert);
+    await Tag.batchInsert(this.db, tagsToInsert);
+    await FileTag.batchInsert(this.db, fileTagsToInsert);
+
     // TODO  what happens if some of the files were not inserted?
     // I guess inserting tags or links with such files used as foreign keys will fail too,
     // but need to check
-    await this.db.batchInsert("tags", tagsToInsert);
-    await this.db.batchInsert("file_tags", fileTagsToInsert);
 
     // const destPath = to.replace(/^\//, "");
     // // find the file with the same url path
@@ -186,7 +123,7 @@ export class MarkdownDB {
     //   to: destFile?._id,
     // });
 
-    // await this.db.batchInsert("links", linksToInsert);
+    // await Link.batchInsert(this.db, fileLinksToInsert);
   }
 
   async getTags() {
@@ -268,4 +205,10 @@ export class MarkdownDB {
   _destroyDb() {
     this.db.destroy();
   }
+}
+
+export interface GetLinksOptions {
+  fileId: string;
+  linkType?: "normal" | "embed";
+  direction?: "forward" | "backward";
 }
