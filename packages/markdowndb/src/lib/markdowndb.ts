@@ -3,9 +3,25 @@ import fs from "fs";
 import path from "path";
 import knex, { Knex } from "knex";
 
-import { recursiveWalkDir, parseFile } from "../utils";
+import { recursiveWalkDir, parseFile, WikiLink } from "../utils";
 import { File, Link, Tag, FileTag } from "./schema";
-import { DatabaseFile, DatabaseQuery } from "./types";
+
+// TODO this should be in sync with slugs returned by extractWikiLinks
+const sluggifyFilePath = (str: string) => {
+  return str
+    .replace(/\s+/g, "-")
+    .replace(/\.\w+$/, "")
+    .toLowerCase();
+};
+
+const resolveLinkToFilePath = (link: string, sourceFilePath?: string) => {
+  if (!sourceFilePath) {
+    return link;
+  }
+  const dir = path.dirname(sourceFilePath);
+  const resolved = path.resolve(dir, link);
+  return resolved;
+};
 
 export class MarkdownDB {
   config: Knex.Config;
@@ -39,52 +55,61 @@ export class MarkdownDB {
     await FileTag.createTable(this.db);
     await Link.createTable(this.db);
 
-    // here we could also delete and create tables defined by user
-
     const filePathsToIndex = recursiveWalkDir(folderPath);
 
-    const filesToInsert = [];
-    const fileTagsToInsert = [];
-    const fileLinksToInsert = [];
+    const filesToInsert: File[] = [];
+    const fileTagsToInsert: FileTag[] = [];
     // TODO shouldn't available tags be explicitly defined in some config file
     // instead of being extracted from all files? I think it's better even from user perspective
     // as he can easily manage and see all the tags he is using
     // (he can qickly look up tag if he's not sure what term he was using in other files)
     // + it's easier to implement
-    const tagsToInsert = [];
+    const tagsToInsert: Tag[] = [];
+    const linksToInsert: Link[] = [];
+
+    // TODO is there a better way to do this?
+    // Temporary containter for storing links extracted from each file
+    // as a map of file id -> extracted links.
+    // This is used after all files have been parsed and added to filesToInsert
+    // to resolve paths in links to target file ids
+    const filesLinksMap: {
+      [fileId: string]: WikiLink[];
+    } = {};
 
     for (const filePath of filePathsToIndex) {
-      const serializedFile = {
-        _id: null,
-        path: null,
-        url_path: null,
-        extension: null,
-        metadata: null,
-        filetype: null,
-      };
-
       if (ignorePatterns.some((pattern) => pattern.test(filePath))) {
         continue;
       }
 
+      const fileToInsert: File = {
+        _id: "",
+        path: "",
+        url_path: "",
+        slug: null,
+        extension: "",
+        metadata: null,
+        filetype: null,
+      };
+
       // id
       const encodedPath = Buffer.from(filePath, "utf-8").toString();
       const id = crypto.createHash("sha1").update(encodedPath).digest("hex");
-      serializedFile._id = id;
+      fileToInsert._id = id;
 
       // path
-      serializedFile.path = filePath;
+      fileToInsert.path = filePath;
 
       // url_path
       const pathRelativeToFolder = path.relative(folderPath, filePath);
-      serializedFile.url_path = pathRelativeToFolder;
+      fileToInsert.url_path = pathRelativeToFolder;
+      fileToInsert.slug = sluggifyFilePath(pathRelativeToFolder);
 
       // extension
       const [, extension] = filePath.match(/.(\w+)$/) || [];
-      serializedFile.extension = extension || null;
+      fileToInsert.extension = extension;
 
       if (!File.supportedExtensions.includes(extension)) {
-        filesToInsert.push(serializedFile);
+        filesToInsert.push(fileToInsert);
         continue;
       }
 
@@ -95,6 +120,9 @@ export class MarkdownDB {
       });
 
       const { metadata, links } = parseFile(source);
+      fileToInsert.filetype = metadata?.type || null;
+      // TODO is there a better way to do this?
+      filesLinksMap[filePath] = links;
 
       const tags = metadata?.tags || [];
       tags.forEach((tag: string) => {
@@ -104,70 +132,44 @@ export class MarkdownDB {
         fileTagsToInsert.push({ file: id, tag });
       });
 
-      // TODO add slug
-
-      filesToInsert.push({
-        _id: id,
-        path: filePath,
-        url_path: pathRelativeToFolder,
-        extension,
-        metadata: JSON.stringify(metadata),
-        filetype: metadata?.type || null,
-      });
+      filesToInsert.push(fileToInsert);
     }
+
+    Object.entries(filesLinksMap).forEach(([fileId, links]) => {
+      links.forEach(({ linkSrc, linkType }) => {
+        const destPath = resolveLinkToFilePath(linkSrc, fileId);
+        // find the file with the same url path
+        const destFile = filesToInsert.find(
+          (file) => file.url_path === destPath
+        );
+        return {
+          from: fileId,
+          to: destFile?._id,
+          link_type: linkType,
+        };
+      });
+    });
 
     // console.log("filesToInsert", filesToInsert);
     // console.log("tagsToInsert", tagsToInsert);
     // console.log("fileTagsToInsert", fileTagsToInsert);
+    console.log("linksToInsert", linksToInsert);
 
     await File.batchInsert(this.db, filesToInsert);
-    await Tag.batchInsert(this.db, tagsToInsert);
-    await FileTag.batchInsert(this.db, fileTagsToInsert);
 
     // TODO  what happens if some of the files were not inserted?
     // I guess inserting tags or links with such files used as foreign keys will fail too,
     // but need to check
-
-    // const destPath = to.replace(/^\//, "");
-    // // find the file with the same url path
-    // const destFile = await this.db("files")
-    //   .where({ _url_path: destPath })
-    //   .first();
-
-    // linksToInsert.push({
-    //   ...link,
-    //   to: destFile?._id,
-    // });
-
-    // await Link.batchInsert(this.db, fileLinksToInsert);
+    await Tag.batchInsert(this.db, tagsToInsert);
+    await FileTag.batchInsert(this.db, fileTagsToInsert);
+    await Link.batchInsert(this.db, linksToInsert);
   }
 
-  async getTags() {
-    return this.db("tags")
-      .select()
-      .then((tags) => tags.map((tag) => tag.name));
-  }
-
-  async getLinks(options: GetLinksOptions): Promise<Link[]> {
-    const { fileId, direction = "forward", linkType } = options;
-    const joinKey = direction === "forward" ? "from" : "to";
-    const query: any = {
-      [joinKey]: fileId,
-    };
-    if (linkType) {
-      query["link_type"] = linkType;
-    }
-    const dbLinks = await this.db("links")
-      .where(query)
-      .select("links._id", "links.link_type", "files._url_path")
-      .rightJoin("files", `links.${joinKey}`, "=", "files._id");
-
-    const links = dbLinks.map((link) => new Link(link));
-    return links;
-  }
-
-  // TODO better name? move to File?
-  async query(query?: DatabaseQuery): Promise<File[]> {
+  async getFiles(query?: {
+    filetypes?: string[];
+    tags?: string[];
+    extensions?: string[];
+  }): Promise<File[]> {
     const { filetypes, tags, extensions } = query || {};
 
     const files = await this.db
@@ -200,13 +202,34 @@ export class MarkdownDB {
     return files.map((file) => new File(file));
   }
 
+  async getTags(): Promise<Tag[]> {
+    const tags = await this.db("tags").select();
+    return tags.map((tag) => new Tag(tag));
+  }
+
+  async getLinks(query?: {
+    fileId: string;
+    linkType?: "normal" | "embed";
+    direction?: "forward" | "backward";
+  }): Promise<Link[]> {
+    const { fileId, direction = "forward", linkType } = query;
+    const joinKey = direction === "forward" ? "from" : "to";
+    const where: any = {
+      [joinKey]: fileId,
+    };
+    if (linkType) {
+      query["link_type"] = linkType;
+    }
+    const dbLinks = await this.db("links")
+      .where(where)
+      .select("links._id", "links.link_type", "files._url_path")
+      .rightJoin("files", `links.${joinKey}`, "=", "files._id");
+
+    const links = dbLinks.map((link) => new Link(link));
+    return links;
+  }
+
   _destroyDb() {
     this.db.destroy();
   }
-}
-
-export interface GetLinksOptions {
-  fileId: string;
-  linkType?: "normal" | "embed";
-  direction?: "forward" | "backward";
 }

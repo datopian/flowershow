@@ -18,9 +18,10 @@ export interface FileSerialized {
   _id: string;
   path: string;
   url_path: string;
-  metadata: string;
+  slug: string | null;
+  metadata: string | null;
   extension: string;
-  filetype: string;
+  filetype: string | null;
 }
 
 /*
@@ -33,15 +34,17 @@ class File {
   _id: string;
   path: string;
   url_path: string;
-  metadata: MetaData;
+  slug: string | null;
+  metadata: MetaData | null;
   extension: string;
-  filetype: string; // TODO
+  filetype: string | null;
 
   constructor(dbFile: FileSerialized) {
     this._id = dbFile._id;
     this.path = dbFile.path;
     this.url_path = dbFile.url_path;
-    this.metadata = JSON.parse(dbFile.metadata);
+    this.slug = dbFile.slug;
+    this.metadata = dbFile.metadata ? JSON.parse(dbFile.metadata) : null;
     this.extension = dbFile.extension;
     this.filetype = dbFile.filetype;
   }
@@ -49,10 +52,11 @@ class File {
   static async createTable(db: Knex) {
     const creator = (table: Knex.TableBuilder) => {
       table.string("_id").primary();
-      table.string("path").unique().notNullable(); //  Can be used to read a file
-      table.string("url_path").unique(); //  Can be used to query by folder
-      table.string("metadata");
-      table.string("extension").notNullable();
+      table.string("path").unique().notNullable(); // Path relative to process.cwd()
+      table.string("url_path").unique().notNullable(); // Path relative to content folder root
+      table.string("slug").unique(); // Slugified path (used for routing)
+      table.string("metadata").notNullable(); // All frontmatter data
+      table.string("extension").notNullable(); // File extension
       table.string("filetype"); // type field in frontmatter if it exists
     };
     const tableExists = await db.schema.hasTable(this.table);
@@ -113,6 +117,10 @@ class Link {
 
   static async deleteTable(db: Knex) {
     await db.schema.dropTableIfExists(this.table);
+  }
+
+  static batchInsert(db: Knex, links: Link[]) {
+    return db.batchInsert(Table.Links, links);
   }
 }
 

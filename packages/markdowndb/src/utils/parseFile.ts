@@ -14,22 +14,6 @@ export function parseFile(source: string) {
   };
 }
 
-// const tempSluggify = (str: string) => {
-//   return str
-//     .replace(/\s+/g, "-")
-//     .replace(/\.\w+$/, "")
-//     .toLowerCase();
-// };
-
-// const resolveLink = (link: string, sourcePath?: string) => {
-//   if (!sourcePath) {
-//     return link;
-//   }
-//   const dir = path.dirname(sourcePath);
-//   const resolved = path.resolve(dir, link);
-//   return resolved;
-// };
-
 // links = extractWikiLinks({
 //   source,
 //   // TODO pass slug instead of file path as hrefs/srcs are sluggified too

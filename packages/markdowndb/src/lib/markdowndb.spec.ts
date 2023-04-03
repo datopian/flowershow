@@ -38,50 +38,54 @@ describe("MarkdownDB", () => {
 
   test("indexes all files in folder", async () => {
     const allFiles = recursiveWalkDir(pathToContentFixture);
-    const allIndexedFiles = await mddb.query();
+    const allIndexedFiles = await mddb.getFiles();
     expect(allIndexedFiles).toHaveLength(allFiles.length);
   });
 
-  test("can query by file type", async () => {
-    const files = await mddb.query({ filetypes: ["blog"] });
-    const filesPaths = files.map((f) => f.path);
+  describe("getFiles", () => {
+    test("can query by file type", async () => {
+      const dbFiles = await mddb.getFiles({ filetypes: ["blog"] });
+      const dbFilesPaths = dbFiles.map((f) => f.path);
 
-    const expectedPaths = [
-      `${pathToContentFixture}/blog/blog3.mdx`,
-      `${pathToContentFixture}/blog/blog2.mdx`,
-      `${pathToContentFixture}/blog0.mdx`,
-    ];
+      const expectedPaths = [
+        `${pathToContentFixture}/blog/blog3.mdx`,
+        `${pathToContentFixture}/blog/blog2.mdx`,
+        `${pathToContentFixture}/blog0.mdx`,
+      ];
 
-    expect(filesPaths).toHaveLength(expectedPaths.length);
-    filesPaths.forEach((p) => {
-      expect(expectedPaths).toContain(p);
+      expect(dbFilesPaths).toHaveLength(expectedPaths.length);
+      dbFilesPaths.forEach((p) => {
+        expect(expectedPaths).toContain(p);
+      });
     });
-  });
 
-  test("can query by tags", async () => {
-    const files = await mddb.query({ tags: ["economy", "politics"] });
-    const filesPaths = files.map((f) => f.path);
+    test("can query by tags", async () => {
+      const dbFiles = await mddb.getFiles({ tags: ["economy", "politics"] });
+      const dbFilesPaths = dbFiles.map((f) => f.path);
 
-    const expectedPaths = [
-      `${pathToContentFixture}/blog/blog3.mdx`,
-      `${pathToContentFixture}/blog/blog2.mdx`,
-    ];
+      const expectedPaths = [
+        `${pathToContentFixture}/blog/blog3.mdx`,
+        `${pathToContentFixture}/blog/blog2.mdx`,
+      ];
 
-    expect(filesPaths).toHaveLength(expectedPaths.length);
-    filesPaths.forEach((p) => {
-      expect(expectedPaths).toContain(p);
+      expect(dbFilesPaths).toHaveLength(expectedPaths.length);
+      dbFilesPaths.forEach((p) => {
+        expect(expectedPaths).toContain(p);
+      });
     });
-  });
 
-  test("can query by extensions", async () => {
-    const indexedPngFiles = await mddb.query({ extensions: ["png"] });
-    const pngFilesPaths = indexedPngFiles.map((f) => f.path);
+    test("can query by extensions", async () => {
+      const dbFiles = await mddb.getFiles({ extensions: ["png"] });
+      const dbFilesPaths = dbFiles.map((f) => f.path);
 
-    const expectedPaths = [`${pathToContentFixture}/assets/datopian-logo.png`];
+      const expectedPaths = [
+        `${pathToContentFixture}/assets/datopian-logo.png`,
+      ];
 
-    expect(pngFilesPaths).toHaveLength(expectedPaths.length);
-    pngFilesPaths.forEach((p) => {
-      expect(expectedPaths).toContain(p);
+      expect(dbFilesPaths).toHaveLength(expectedPaths.length);
+      dbFilesPaths.forEach((p) => {
+        expect(expectedPaths).toContain(p);
+      });
     });
   });
 

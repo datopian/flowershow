@@ -10,10 +10,10 @@ export interface ExtractWikiLinksOptions {
 }
 
 export interface LinkExtractors {
-  [test: string]: (node: any) => Link;
+  [test: string]: (node: any) => WikiLink;
 }
 
-export interface Link {
+export interface WikiLink {
   linkSrc: string;
   linkType: "normal" | "embed";
 }
@@ -22,7 +22,7 @@ const extractWikiLinks = (
   source: string,
   options?: ExtractWikiLinksOptions
 ) => {
-  let wikiLinks: Link[] = [];
+  let wikiLinks: WikiLink[] = [];
   const userExtractors: LinkExtractors = options?.extractors || {};
   const userRemarkPlugins: Array<Plugin> = options?.remarkPlugins || [];
 
@@ -60,9 +60,9 @@ const extractWikiLinks = (
 
   Object.entries(extractors).forEach(([test, extractor]) => {
     const nodes = selectAll(test, ast);
-    const extractedWikiLinks: Link[] = nodes
+    const extractedWikiLinks: WikiLink[] = nodes
       .map((node: any) => extractor(node))
-      .filter((link: Link) => !link.linkSrc.startsWith("http"));
+      .filter((link: WikiLink) => !link.linkSrc.startsWith("http"));
     wikiLinks = wikiLinks.concat(extractedWikiLinks);
   });
 

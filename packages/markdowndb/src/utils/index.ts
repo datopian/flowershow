@@ -1,3 +1,3 @@
 export { recursiveWalkDir } from "./recursiveWalkDir";
-export { extractWikiLinks } from "./extractWikiLinks";
+export { extractWikiLinks, WikiLink } from "./extractWikiLinks";
 export { parseFile } from "./parseFile";
