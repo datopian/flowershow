@@ -1,39 +1,56 @@
-import path from "path";
 import markdown from "remark-parse";
 import { unified, Plugin } from "unified";
 import { selectAll } from "unist-util-select";
+import remarkWikiLink from "@flowershow/remark-wiki-link";
 import gfm from "remark-gfm";
 
-// TODO pass file path or slug?
-
-export interface ExtractWikiLinksConfig {
-  source: string;
-  filePath?: string;
-  remarkPlugins?: Array<Plugin>;
-  extractors?: LinkExtractors;
+export interface ExtractWikiLinksOptions {
+  remarkPlugins?: Array<Plugin>; // remark plugins that add custom nodes to the AST
+  extractors?: LinkExtractors; // mapping from custom node types (e.g. added by above plugins) to functions that should handle them
 }
 
 export interface LinkExtractors {
-  [test: string]: (node: any) => Pick<Link, "to" | "linkType">;
+  [test: string]: (node: any) => Link;
 }
 
 export interface Link {
-  from: string;
-  to: string;
+  linkSrc: string;
   linkType: "normal" | "embed";
 }
 
-const resolveLink = (link: string, sourcePath?: string) => {
-  if (!sourcePath) {
-    return link;
-  }
-  const dir = path.dirname(sourcePath);
-  const resolved = path.resolve(dir, link);
-  return resolved;
-};
+const extractWikiLinks = (
+  source: string,
+  options?: ExtractWikiLinksOptions
+) => {
+  let wikiLinks: Link[] = [];
+  const userExtractors: LinkExtractors = options?.extractors || {};
+  const userRemarkPlugins: Array<Plugin> = options?.remarkPlugins || [];
 
-const extractWikiLinks = (options: ExtractWikiLinksConfig) => {
-  const { source, filePath, remarkPlugins = [] } = options;
+  const remarkPlugins = [
+    gfm,
+    remarkWikiLink, // adds wikiLink type nodes to AST
+    ...userRemarkPlugins,
+  ];
+  const extractors: LinkExtractors = {
+    link: (node: any) => ({
+      linkSrc: node.url,
+      linkType: "normal",
+    }),
+    image: (node: any) => ({
+      linkSrc: node.url,
+      linkType: "embed",
+    }),
+    wikiLink: (node: any) => {
+      // TODO how to get wiki links of embed types in a better way?
+      // it should be possible, since we are adding { isType: "embed" } to tokens
+      const { href, src } = node.data?.hProperties || {};
+      return {
+        linkSrc: href ?? src,
+        linkType: (href ? "normal" : "embed") as "normal" | "embed",
+      };
+    },
+    ...userExtractors,
+  };
 
   const processor = unified()
     .use(markdown)
@@ -41,45 +58,17 @@ const extractWikiLinks = (options: ExtractWikiLinksConfig) => {
 
   const ast = processor.parse(source);
 
-  // Common Mark and Gfm links
-  const links: Link[] = selectAll("link", ast)
-    .filter((node: any) => !node.url.startsWith("http"))
-    .map((node: any) => ({
-      from: filePath,
-      to: resolveLink(node.url, filePath),
-      linkType: "normal",
-    }));
+  Object.entries(extractors).forEach(([test, extractor]) => {
+    const nodes = selectAll(test, ast);
+    const extractedWikiLinks: Link[] = nodes
+      .map((node: any) => extractor(node))
+      .filter((link: Link) => !link.linkSrc.startsWith("http"));
+    wikiLinks = wikiLinks.concat(extractedWikiLinks);
+  });
 
-  const images: Link[] = selectAll("image", ast)
-    .filter((node: any) => !node.url.startsWith("http"))
-    .map((node: any) => ({
-      from: filePath,
-      to: resolveLink(node.url, filePath),
-      linkType: "embed",
-    }));
-
-  // Wiki links extracted by plugins
-  let wikiLinks: Link[] = [];
-
-  if (options.extractors) {
-    Object.entries(options.extractors).forEach(([test, extractor]) => {
-      const nodes = selectAll(test, ast);
-      wikiLinks = nodes.map((node: any) => {
-        const link = extractor(node);
-        return {
-          from: filePath,
-          to: resolveLink(link.to, filePath),
-          linkType: link.linkType || "normal",
-        };
-      });
-    });
-  }
-
-  const allLinks: Link[] = links.concat(wikiLinks, images);
   // const uniqueLinks = [...new Set(allLinks)];
 
-  // return uniqueLinks;
-  return allLinks;
+  return wikiLinks;
 };
 
 export { extractWikiLinks };
