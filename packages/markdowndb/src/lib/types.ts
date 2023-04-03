@@ -2,8 +2,8 @@
 // Maps to fields on the DB
 export type DatabaseFile<T = { [key: string]: any }> = {
   _id: string;
-  _path: string;
-  _url_path: string;
+  path: string;
+  url_path: string;
   extension: string;
   metadata: any;
   type: string;
@@ -22,9 +22,9 @@ export type MDXFile<T = { [key: string]: any }> = DatabaseFile<{
 //  Optional params so that we can build complex dynamic queries
 //  E.g I want all files in the blogs folder with X and Y tags
 export interface DatabaseQuery {
-  folder?: string;
-  type?: string; // TODO
+  // folder?: string;
+  filetypes?: string[];
   tags?: string[];
   extensions?: string[];
-  urlPath?: string;
+  // urlPath?: string;
 }

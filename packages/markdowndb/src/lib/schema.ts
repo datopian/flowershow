@@ -16,8 +16,8 @@ type MetaData = {
 
 export interface FileSerialized {
   _id: string;
-  _path: string;
-  _url_path: string;
+  path: string;
+  url_path: string;
   metadata: string;
   extension: string;
   filetype: string;
@@ -31,16 +31,16 @@ class File {
   static supportedExtensions = ["md", "mdx"];
 
   _id: string;
-  _path: string;
-  _url_path: string;
+  path: string;
+  url_path: string;
   metadata: MetaData;
   extension: string;
   filetype: string; // TODO
 
   constructor(dbFile: FileSerialized) {
     this._id = dbFile._id;
-    this._path = dbFile._path;
-    this._url_path = dbFile._url_path;
+    this.path = dbFile.path;
+    this.url_path = dbFile.url_path;
     this.metadata = JSON.parse(dbFile.metadata);
     this.extension = dbFile.extension;
     this.filetype = dbFile.filetype;
@@ -49,12 +49,10 @@ class File {
   static async createTable(db: Knex) {
     const creator = (table: Knex.TableBuilder) => {
       table.string("_id").primary();
-      table.string("_path").unique().notNullable(); //  Can be used to read a file
-      table.string("_url_path").unique(); //  Can be used to query by folder
-      // table.string("_relative_path").unique(); //  Can be used to query by folder
+      table.string("path").unique().notNullable(); //  Can be used to read a file
+      table.string("url_path").unique(); //  Can be used to query by folder
       table.string("metadata");
       table.string("extension").notNullable();
-      // table.enu("fileclass", ["text", "image", "data"]).notNullable();
       table.string("filetype"); // type field in frontmatter if it exists
     };
     const tableExists = await db.schema.hasTable(this.table);

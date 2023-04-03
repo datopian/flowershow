@@ -39,41 +39,44 @@ describe("MarkdownDB", () => {
   test("indexes all files in folder", async () => {
     const allFiles = recursiveWalkDir(pathToContentFixture);
     const allIndexedFiles = await mddb.query();
-    expect(allIndexedFiles.length).toBe(allFiles.length);
+    expect(allIndexedFiles).toHaveLength(allFiles.length);
   });
 
-  test("can query by folder", async () => {
-    const allBlogFiles = recursiveWalkDir(`${pathToContentFixture}/blog`);
-    const indexedBlogFiles = await mddb.query({
-      folder: "blog",
-      // filetypes: ["md", "mdx"],
+  test("can query by file type", async () => {
+    const files = await mddb.query({ filetypes: ["blog"] });
+    const filesPaths = files.map((f) => f.path);
+
+    const expectedPaths = [
+      `${pathToContentFixture}/blog/blog3.mdx`,
+      `${pathToContentFixture}/blog/blog2.mdx`,
+      `${pathToContentFixture}/blog0.mdx`,
+    ];
+
+    expect(filesPaths).toHaveLength(expectedPaths.length);
+    filesPaths.forEach((p) => {
+      expect(expectedPaths).toContain(p);
     });
-    expect(indexedBlogFiles.length).toBe(allBlogFiles.length);
   });
 
   test("can query by tags", async () => {
-    const indexedEconomyFiles = await mddb.query({ tags: ["economy"] });
-    const economyFilesPaths = indexedEconomyFiles.map((f) => f._path);
+    const files = await mddb.query({ tags: ["economy", "politics"] });
+    const filesPaths = files.map((f) => f.path);
 
-    // TODO this test will break if we add/remove tag from specific file
-    // can this be improved?
     const expectedPaths = [
       `${pathToContentFixture}/blog/blog3.mdx`,
       `${pathToContentFixture}/blog/blog2.mdx`,
     ];
 
-    expect(economyFilesPaths).toHaveLength(expectedPaths.length);
-    economyFilesPaths.forEach((p) => {
+    expect(filesPaths).toHaveLength(expectedPaths.length);
+    filesPaths.forEach((p) => {
       expect(expectedPaths).toContain(p);
     });
   });
 
   test("can query by extensions", async () => {
     const indexedPngFiles = await mddb.query({ extensions: ["png"] });
-    const pngFilesPaths = indexedPngFiles.map((f) => f._path);
+    const pngFilesPaths = indexedPngFiles.map((f) => f.path);
 
-    // TODO this test will break if we add/remove tag from specific file
-    // can this be improved?
     const expectedPaths = [`${pathToContentFixture}/assets/datopian-logo.png`];
 
     expect(pngFilesPaths).toHaveLength(expectedPaths.length);
@@ -97,5 +100,15 @@ describe("MarkdownDB", () => {
   //     direction: "backward",
   //   });
   //   expect(backwardLinks.length).toBe(2);
+  // });
+
+  // TODO why is this needed?
+  // test("can query by folder", async () => {
+  //   const allBlogFiles = recursiveWalkDir(`${pathToContentFixture}/blog`);
+  //   const indexedBlogFiles = await mddb.query({
+  //     folder: "blog",
+  //     // filetypes: ["md", "mdx"],
+  //   });
+  //   expect(indexedBlogFiles.length).toBe(allBlogFiles.length);
   // });
 });

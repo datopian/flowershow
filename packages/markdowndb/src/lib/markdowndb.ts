@@ -1,9 +1,10 @@
-import * as fs from "fs";
+import crypto from "crypto";
+import fs from "fs";
+import path from "path";
 import knex, { Knex } from "knex";
 
-import { recursiveWalkDir } from "../utils";
-import { File, Link, Tag, FileTag, Table } from "./schema";
-
+import { recursiveWalkDir, parseFile } from "../utils";
+import { File, Link, Tag, FileTag } from "./schema";
 import { DatabaseFile, DatabaseQuery } from "./types";
 
 export class MarkdownDB {
@@ -17,21 +18,6 @@ export class MarkdownDB {
   async init() {
     this.db = knex(this.config);
   }
-
-  // async #createTable(
-  //   table: string,
-  //   creator: (table: Knex.CreateTableBuilder) => void
-  // ) {
-  //   const tableExists = await this.db.schema.hasTable(table);
-
-  //   if (!tableExists) {
-  //     await this.db.schema.createTable(table, creator);
-  //   }
-  // }
-
-  // async #deleteTable(table: string) {
-  //   await this.db.schema.dropTableIfExists(table);
-  // }
 
   async indexFolder({
     folderPath,
@@ -53,6 +39,8 @@ export class MarkdownDB {
     await FileTag.createTable(this.db);
     await Link.createTable(this.db);
 
+    // here we could also delete and create tables defined by user
+
     const filePathsToIndex = recursiveWalkDir(folderPath);
 
     const filesToInsert = [];
@@ -66,43 +54,71 @@ export class MarkdownDB {
     const tagsToInsert = [];
 
     for (const filePath of filePathsToIndex) {
+      const serializedFile = {
+        _id: null,
+        path: null,
+        url_path: null,
+        extension: null,
+        metadata: null,
+        filetype: null,
+      };
+
       if (ignorePatterns.some((pattern) => pattern.test(filePath))) {
         continue;
       }
 
-      let serializedFile = null;
+      // id
+      const encodedPath = Buffer.from(filePath, "utf-8").toString();
+      const id = crypto.createHash("sha1").update(encodedPath).digest("hex");
+      serializedFile._id = id;
 
+      // path
+      serializedFile.path = filePath;
+
+      // url_path
+      const pathRelativeToFolder = path.relative(folderPath, filePath);
+      serializedFile.url_path = pathRelativeToFolder;
+
+      // extension
+      const [, extension] = filePath.match(/.(\w+)$/) || [];
+      serializedFile.extension = extension || null;
+
+      if (!File.supportedExtensions.includes(extension)) {
+        filesToInsert.push(serializedFile);
+        continue;
+      }
+
+      // metadata, tags, links
       const source: string = fs.readFileSync(filePath, {
         encoding: "utf8",
         flag: "r",
       });
 
-      try {
-        serializedFile = File.parse({ filePath, folderPath, source });
-      } catch (e) {
-        console.log(
-          `MarkdownDB Error: Failed to parse '${filePath}'. Skipping...\n${e}`
-        );
-        continue;
-      }
+      const { metadata, links } = parseFile(source);
 
-      // TAGS
-      let { tags = [] } = serializedFile.metadata || {};
+      const tags = metadata?.tags || [];
       tags.forEach((tag: string) => {
         if (!tagsToInsert.some((t) => t.name === tag)) {
           tagsToInsert.push({ name: tag });
         }
-        fileTagsToInsert.push({ file: serializedFile._id, tag });
+        fileTagsToInsert.push({ file: id, tag });
       });
 
-      // LINKS
-      let links = extractLinks(source, filePath, serializedFile._id);
-      fileLinksToInsert[serializedFile._id] = links;
+      // TODO add slug
 
-      filesToInsert.push(serializedFile);
+      filesToInsert.push({
+        _id: id,
+        path: filePath,
+        url_path: pathRelativeToFolder,
+        extension,
+        metadata: JSON.stringify(metadata),
+        filetype: metadata?.type || null,
+      });
     }
 
-    console.log("filesToInsert", filesToInsert);
+    // console.log("filesToInsert", filesToInsert);
+    // console.log("tagsToInsert", tagsToInsert);
+    // console.log("fileTagsToInsert", fileTagsToInsert);
 
     await File.batchInsert(this.db, filesToInsert);
     await Tag.batchInsert(this.db, tagsToInsert);
@@ -150,56 +166,38 @@ export class MarkdownDB {
     return links;
   }
 
-  async query<T = DatabaseFile>(
-    query?: DatabaseQuery
-  ): Promise<DatabaseFile<T>[]> {
-    const files = this.db
-      .select("files.*", this.db.raw("GROUP_CONCAT(tag) as tags")) //  Very hackish way to return tags without duplicating rows
-      .from<DatabaseFile>("files")
-      .leftJoin("file_tags AS ft", "ft.file", "_id")
+  // TODO better name? move to File?
+  async query(query?: DatabaseQuery): Promise<File[]> {
+    const { filetypes, tags, extensions } = query || {};
+
+    const files = await this.db
+      // TODO join only if tags are specified
+      .leftJoin("file_tags", "files._id", "file_tags.file")
       .where((builder) => {
-        if (query) {
-          let folder = query.folder;
-          if (folder) {
-            if (folder.at(-1) === "/") {
-              folder = query.folder.slice(0, -1);
-            }
+        // if (path) {
+        //   builder.whereLike("_url_path", `${folder}/%`);
+        // }
+        // if (urlPath) {
+        //   builder.where("_url_path", urlPath);
+        // }
 
-            builder.whereLike("_url_path", `${folder}/%`);
-          }
+        if (tags) {
+          builder.whereIn("tag", tags);
+        }
 
-          const tags = query.tags;
-          if (tags) {
-            builder.whereIn("tag", tags);
-          }
+        if (extensions) {
+          builder.whereIn("extension", extensions);
+        }
 
-          const extensions = query.extensions;
-          if (extensions) {
-            builder.whereIn("extension", extensions);
-          }
-
-          const urlPath = query.urlPath;
-          if (urlPath != undefined) {
-            builder.where("_url_path", urlPath);
-          }
+        if (filetypes) {
+          builder.whereIn("filetype", filetypes);
         }
       })
+      .select("files.*")
+      .from("files")
       .groupBy("_id");
 
-    return files.then((files) => {
-      return files.map((file) => {
-        if (["mdx", "md"].includes(file.extension)) {
-          // file.tags = file.tags?.split(",") || [];
-          // console.log("metadata", file.metadata);
-          // file.metadata = JSON.parse(file.metadata);
-
-          return file;
-        } else {
-          delete file.tags;
-        }
-        return file;
-      });
-    });
+    return files.map((file) => new File(file));
   }
 
   _destroyDb() {
