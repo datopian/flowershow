@@ -1,6 +1,7 @@
 // import knex from "knex";
-import { MarkdownDB, Table } from "./markdowndb";
-import { recursiveWalkDir } from "./utils";
+import { MarkdownDB } from "./markdowndb";
+import { Table } from "./schema";
+import { recursiveWalkDir } from "../utils";
 
 /**
  * @jest-environment node
@@ -19,7 +20,7 @@ describe("MarkdownDB", () => {
 
     mddb = new MarkdownDB(dbConfig);
     await mddb.init();
-    await mddb.indexFolder({ folder: pathToContentFixture });
+    await mddb.indexFolder({ folderPath: pathToContentFixture });
   });
 
   afterAll(async () => {

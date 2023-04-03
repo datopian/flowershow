@@ -82,4 +82,4 @@ const extractWikiLinks = (options: ExtractWikiLinksConfig) => {
   return allLinks;
 };
 
-export default extractWikiLinks;
+export { extractWikiLinks };

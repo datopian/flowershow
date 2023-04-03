@@ -1,8 +1,18 @@
 import { Knex } from "knex";
+import matter from "gray-matter";
+import * as crypto from "crypto";
+import * as path from "path";
 
 /*
  * Types
  */
+export enum Table {
+  Files = "files",
+  Tags = "tags",
+  FileTags = "file_tags",
+  Links = "links",
+}
+
 type MetaData = {
   [key: string]: any;
 };
@@ -46,12 +56,68 @@ class File {
       table.string("metadata");
       table.string("extension").notNullable();
       // table.enu("fileclass", ["text", "image", "data"]).notNullable();
-      table.string("type"); // type field in frontmatter if it exists
+      table.string("filetype"); // type field in frontmatter if it exists
     };
   }
 
   // TODO return type
-  static serialize(source: string) {}
+  static parse({
+    filePath,
+    folderPath,
+    source,
+  }: {
+    filePath: string;
+    folderPath: string;
+    source: string;
+  }) {
+    const serializedFile = {
+      _id: null,
+      _path: null,
+      _url_path: null,
+      extension: null,
+      metadata: null,
+      filetype: null,
+    };
+
+    // EXTENSION
+    const [, extension] = filePath.match(/.(\w+)$/) || [];
+    if (!File.supportedExtensions.includes(extension)) {
+      console.error("Unsupported file extension: ", extension);
+    }
+    serializedFile.extension = extension;
+
+    // ID
+    const encodedPath = Buffer.from(filePath, "utf-8").toString();
+    const id = crypto.createHash("sha1").update(encodedPath).digest("hex");
+    serializedFile._id = id;
+
+    // METADATA
+    const { data } = matter(source);
+    serializedFile.metadata = data;
+
+    // FILETYPE
+    serializedFile.filetype = data.type || null;
+
+    // _PATH
+    serializedFile._path = filePath;
+
+    // _URL_PATH
+    const pathRelativeToFolder = path.relative(folderPath, filePath);
+    serializedFile._url_path = pathRelativeToFolder;
+
+    // SLUGGIFY
+    // if (filename != "index") {
+    //   if (pathToFileFolder) {
+    //     _url_path = `${pathToFileFolder}/${filename}`;
+    //   } else {
+    //     //  The file is in the root folder
+    //     _url_path = filename;
+    //   }
+    // } else {
+    //   _url_path = pathToFileFolder;
+    // }
+    return serializedFile;
+  }
 }
 
 class Link {
@@ -78,14 +144,6 @@ class Link {
       table.foreign("from").references("files._id").onDelete("CASCADE");
       table.foreign("to").references("files._id").onDelete("CASCADE");
     };
-  }
-
-  get isEmbed() {
-    return this.linkType === "embed";
-  }
-
-  get path() {
-    return this.path;
   }
 }
 

@@ -1,5 +1,5 @@
 import remarkWikiLink from "@flowershow/remark-wiki-link";
-import extractWikiLinks from "./extractWikiLinks";
+import { extractWikiLinks } from "./extractWikiLinks";
 
 const config = {
   remarkPlugins: [remarkWikiLink],

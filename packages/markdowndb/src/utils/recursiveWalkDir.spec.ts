@@ -1,4 +1,4 @@
-import recursiveWalkDir from "./recursiveWalkDir";
+import { recursiveWalkDir } from "./recursiveWalkDir";
 
 describe("recursiveWalkDir", () => {
   const contentFixturePath = "packages/markdowndb/__mocks__/content/index.mdx";

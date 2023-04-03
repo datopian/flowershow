@@ -1,42 +1,34 @@
-import * as fs from "fs";
-import * as path from "path";
 import * as crypto from "crypto";
+import * as fs from "fs";
 import knex, { Knex } from "knex";
-import matter from "gray-matter";
-
-import { DatabaseQuery } from "./types";
-import extractWikiLinks from "../utils/extractWikiLinks";
-
+// TODO temporary here
 import remarkWikiLink from "@flowershow/remark-wiki-link";
 
-import { File, FileSerialized, Link, Tag, FileTag } from "./schema";
-import { recursiveWalkDir } from "./utils";
+import { recursiveWalkDir, extractWikiLinks } from "../utils";
+import { File, Link, Tag, FileTag, Table } from "./schema";
 
-export enum Table {
-  Files = "files",
-  Tags = "tags",
-  FileTags = "file_tags",
-  Links = "links",
-}
+import { DatabaseFile, DatabaseQuery } from "./types";
 
-const extractLinks = (source: string) => {
+// config to extractWikiLinks utility
+const extractWikiLinksConfig = {
+  remarkPlugins: [remarkWikiLink],
+  extractors: {
+    wikiLink: (node: any) => {
+      // TODO how to get wiki links of embed types in a better way?
+      // it should be possible, since we are adding { isType: "embed" } to tokens
+      const { href, src } = node.data?.hProperties || {};
+      return {
+        linkType: (href ? "normal" : "embed") as "normal" | "embed",
+        to: href ?? src,
+      };
+    },
+  },
+};
+
+const extractLinks = (source: string, filePath: string, fileId: string) => {
   let links = [];
 
   // TODO pass this config as an argument, so that e.g. wikiLink doesn't have to bea dependency as it shouldnt
-  const extractWikiLinksConfig = {
-    remarkPlugins: [remarkWikiLink],
-    extractors: {
-      wikiLink: (node: any) => {
-        // TODO how to get wiki links of embed types in a better way?
-        // it should be possible, since we are adding { isType: "embed" } to tokens
-        const { href, src } = node.data?.hProperties || {};
-        return {
-          linkType: (href ? "normal" : "embed") as "normal" | "embed",
-          to: href ?? src,
-        };
-      },
-    },
-  };
 
   // temporary function to sluggify file paths
   const tempSluggify = (str: string) => {
@@ -50,7 +42,7 @@ const extractLinks = (source: string) => {
     source,
     // TODO pass slug instead of file path as hrefs/srcs are sluggified too
     // (where will we get it from?)
-    filePath: tempSluggify(`/${pathRelativeToFolder}`),
+    filePath: tempSluggify(`/${filePath}`),
     ...extractWikiLinksConfig,
   }).map((link) => {
     const linkEncodedPath = Buffer.from(
@@ -63,69 +55,13 @@ const extractLinks = (source: string) => {
       .digest("hex");
     return {
       _id: linkId,
-      from: id,
+      from: fileId,
       to: link.to,
       link_type: link.linkType,
     };
   });
-};
 
-const createSerializedFile: (
-  filePath: string,
-  folderPath: string
-) => FileSerialized = (filePath: string, folderPath: string) => {
-  const serializedFile = {
-    _id: null,
-    _path: null,
-    _url_path: null,
-    extension: null,
-    metadata: null,
-    filetype: null,
-  };
-
-  // EXTENSION
-  const [, extension] = filePath.match("/.(w+)$/") || [];
-  if (!File.supportedExtensions.includes(extension)) {
-    console.error("Unsupported file extension: ", extension);
-  }
-  serializedFile.extension = extension;
-
-  // ID
-  const encodedPath = Buffer.from(filePath, "utf-8").toString();
-  const id = crypto.createHash("sha1").update(encodedPath).digest("hex");
-  serializedFile._id = id;
-
-  // METADATA
-  const source: string = fs.readFileSync(filePath, {
-    encoding: "utf8",
-    flag: "r",
-  });
-  const { data } = matter(source);
-  serializedFile.metadata = data;
-
-  // FILETYPE
-  const fileType = data.type;
-  serializedFile.filetype = fileType;
-
-  // _PATH
-  serializedFile._path = filePath;
-
-  // _URL_PATH
-  const pathRelativeToFolder = path.relative(folderPath, filePath);
-  serializedFile._url_path = pathRelativeToFolder;
-
-  // SLUGGIFY
-  // if (filename != "index") {
-  //   if (pathToFileFolder) {
-  //     _url_path = `${pathToFileFolder}/${filename}`;
-  //   } else {
-  //     //  The file is in the root folder
-  //     _url_path = filename;
-  //   }
-  // } else {
-  //   _url_path = pathToFileFolder;
-  // }
-  return serializedFile;
+  return links;
 };
 
 export interface GetLinksOptions {
@@ -140,6 +76,10 @@ export class MarkdownDB {
 
   constructor(config: Knex.Config) {
     this.config = config;
+  }
+
+  async init() {
+    this.db = knex(this.config);
   }
 
   async #createTable(
@@ -157,15 +97,11 @@ export class MarkdownDB {
     await this.db.schema.dropTableIfExists(table);
   }
 
-  async init() {
-    this.db = knex(this.config);
-  }
-
   async indexFolder({
-    folder,
+    folderPath,
     ignorePatterns = [],
   }: {
-    folder: string;
+    folderPath: string;
     ignorePatterns?: RegExp[];
   }) {
     //  Temporary, we don't want to handle updates now
@@ -181,20 +117,32 @@ export class MarkdownDB {
     await this.#createTable(Table.FileTags, FileTag.tableCreator);
     await this.#createTable(Table.Links, Link.tableCreator);
 
-    const filePathsToIndex = recursiveWalkDir(folder);
+    const filePathsToIndex = recursiveWalkDir(folderPath);
 
     const filesToInsert = [];
-    // TODO shouldn't tags be defined in some config file instead of being extracted from files?
-    const tagsToInsert = [];
     const fileTagsToInsert = [];
+    const fileLinksToInsert = [];
+    // TODO shouldn't available tags be explicitly defined in some config file
+    // instead of being extracted from all files? I think it's better even from user perspective
+    // as he can easily manage and see all the tags he is using
+    // (he can qickly look up tag if he's not sure what term he was using in other files)
+    // + it's easier to implement
+    const tagsToInsert = [];
 
     for (const filePath of filePathsToIndex) {
+      if (ignorePatterns.some((pattern) => pattern.test(filePath))) {
+        continue;
+      }
+
       let serializedFile = null;
-      let metadata = null;
+
+      const source: string = fs.readFileSync(filePath, {
+        encoding: "utf8",
+        flag: "r",
+      });
 
       try {
-        serializedFile = createSerializedFile(filePath, folder);
-        metadata = JSON.parse(serializedFile.metadata);
+        serializedFile = File.parse({ filePath, folderPath, source });
       } catch (e) {
         console.log(
           `MarkdownDB Error: Failed to parse '${filePath}'. Skipping...\n${e}`
@@ -203,47 +151,42 @@ export class MarkdownDB {
       }
 
       // TAGS
-      //  There are probably better ways of doing this...
-      const tags = metadata.tags || [];
+      let { tags = [] } = serializedFile.metadata || {};
       tags.forEach((tag: string) => {
-        if (!tagsToInsert.includes(tag)) {
-          tagsToInsert.push(tag);
+        if (!tagsToInsert.some((t) => t.name === tag)) {
+          tagsToInsert.push({ name: tag });
         }
-        fileTagsToInsert.push({ tag, file: serializedFile._id });
+        fileTagsToInsert.push({ file: serializedFile._id, tag });
       });
+
+      // LINKS
+      let links = extractLinks(source, filePath, serializedFile._id);
+      fileLinksToInsert[serializedFile._id] = links;
 
       filesToInsert.push(serializedFile);
     }
 
+    console.log("filesToInsert", filesToInsert);
+
     await this.db.batchInsert("files", filesToInsert);
-    // TODO only tags of successfully inserted files should be inserted
+    // TODO  what happens if some of the files were not inserted?
+    // I guess inserting tags or links with such files used as foreign keys will fail too,
+    // but need to check
     await this.db.batchInsert("tags", tagsToInsert);
-    // TODO only fileTags of successfully inserted files should be inserted
     await this.db.batchInsert("file_tags", fileTagsToInsert);
 
-    // TODO only links of successfully inserted files should be inserted
-    const linksToInsert = [];
+    // const destPath = to.replace(/^\//, "");
+    // // find the file with the same url path
+    // const destFile = await this.db("files")
+    //   .where({ _url_path: destPath })
+    //   .first();
 
-    filesToInsert.forEach((file) => {
-      const links = extractLinks(file);
-      links.forEach((link) => {
-        linksToInsert.push(link);
-      });
-    });
+    // linksToInsert.push({
+    //   ...link,
+    //   to: destFile?._id,
+    // });
 
-    const { to } = link;
-    const destPath = to.replace(/^\//, "");
-    // find the file with the same url path
-    const destFile = await this.db("files")
-      .where({ _url_path: destPath })
-      .first();
-
-    linksToInsert.push({
-      ...link,
-      to: destFile?._id,
-    });
-
-    await this.db.batchInsert("links", linksToInsert);
+    // await this.db.batchInsert("links", linksToInsert);
   }
 
   async getTags() {
@@ -309,8 +252,9 @@ export class MarkdownDB {
     return files.then((files) => {
       return files.map((file) => {
         if (["mdx", "md"].includes(file.extension)) {
-          file.tags = file.tags?.split(",") || [];
-          file.metadata = JSON.parse(file.metadata);
+          // file.tags = file.tags?.split(",") || [];
+          // console.log("metadata", file.metadata);
+          // file.metadata = JSON.parse(file.metadata);
 
           return file;
         } else {
