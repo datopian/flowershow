@@ -165,6 +165,34 @@ export class MarkdownDB {
     await Link.batchInsert(this.db, linksToInsert);
   }
 
+  async getFileById(id: string): Promise<File | null> {
+    const file = await this.db.from("files").where("_id", id).first();
+    return new File(file);
+  }
+
+  async getFileBySlug(slug: string): Promise<File | null> {
+    const file = await this.db.from("files").where("slug", slug).first();
+    return new File(file);
+  }
+
+  // TODO not sure if this is even needed
+  // async getFileByUrlPath(urlPath: string): Promise<File | null> {
+  //   const file = await this.db
+  //     .from("files")
+  //     .where("url_path", urlPath)
+  //     .first();
+  //   return file;
+  // }
+
+  // TODO not sure if this is even needed
+  // async getFileByPath(path: string): Promise<File | null> {
+  //   const file = await this.db
+  //     .from("files")
+  //     .where("path", path)
+  //     .first();
+  //   return file;
+  // }
+
   async getFiles(query?: {
     filetypes?: string[];
     tags?: string[];
