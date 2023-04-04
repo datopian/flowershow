@@ -183,23 +183,21 @@ export class MarkdownDB {
   }
 
   async getFiles(query?: {
+    folder?: string;
     filetypes?: string[];
     tags?: string[];
     extensions?: string[];
   }): Promise<File[]> {
-    const { filetypes, tags, extensions } = query || {};
+    const { filetypes, tags, extensions, folder } = query || {};
 
     const files = await this.db
       // TODO join only if tags are specified ?
       .leftJoin("file_tags", "files._id", "file_tags.file")
       .where((builder) => {
-        // if (path) {
-        //   builder.whereLike("_url_path", `${folder}/%`);
-        // }
-        // if (urlPath) {
-        //   builder.where("_url_path", urlPath);
-        // }
-
+        // TODO temporary solution before we have a proper way to filter files by and assign file types
+        if (folder) {
+          builder.whereLike("url_path", `${folder}/%`);
+        }
         if (tags) {
           builder.whereIn("tag", tags);
         }

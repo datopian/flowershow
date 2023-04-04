@@ -169,6 +169,7 @@ class FileTag {
       table.string("tag").notNullable();
       table.string("file").notNullable();
 
+      // TODO this is now saved as tag name, not as tag id ...
       table.foreign("tag").references("tags.name").onDelete("CASCADE");
       table.foreign("file").references("files._id").onDelete("CASCADE");
     };
@@ -189,29 +190,3 @@ class FileTag {
 }
 
 export { File, Link, Tag, FileTag };
-
-// class filetag {
-//   _id: string;
-//   file_id: string;
-//   tag_name: string;
-
-//   constructor(dbfiletag: {
-//     _id: string;
-//     file_id: string;
-//     tag_name: string;
-//   }) {
-//     this._id = dbfiletag._id;
-//     this.file_id = dbfiletag.file_id;
-//     this.tag_name = dbfiletag.tag_name;
-//   }
-
-//   static get tablecreator() {
-//     return (table: knex.tablebuilder) => {
-//       table.string("_id").primary();
-//       table.string("file_id").notnullable();
-//       table.string("tag_name").notnullable();
-//       table.foreign("file_id").references("files._id").ondelete("cascade");
-//       table.foreign("tag_name").references("tags.name").ondelete("cascade");
-//     }
-//   }
-// }

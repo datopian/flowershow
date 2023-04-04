@@ -176,13 +176,11 @@ describe("MarkdownDB", () => {
     });
   });
 
-  // TODO why is this needed?
-  // test("can query by folder", async () => {
-  //   const allBlogFiles = recursiveWalkDir(`${pathToContentFixture}/blog`);
-  //   const indexedBlogFiles = await mddb.query({
-  //     folder: "blog",
-  //     // filetypes: ["md", "mdx"],
-  //   });
-  //   expect(indexedBlogFiles.length).toBe(allBlogFiles.length);
-  // });
+  test("can query by folder", async () => {
+    const allBlogFiles = recursiveWalkDir(`${pathToContentFixture}/blog`);
+    const indexedBlogFiles = await mddb.getFiles({
+      folder: "blog",
+    });
+    expect(indexedBlogFiles.length).toBe(allBlogFiles.length);
+  });
 });
