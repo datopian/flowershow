@@ -1,0 +1,6 @@
+---
+type: news
+---
+
+# Document Title
+

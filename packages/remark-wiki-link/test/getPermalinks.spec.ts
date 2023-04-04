@@ -22,7 +22,7 @@ const expectedPermalinks = [
 describe("getPermalinks", () => {
   test("should return an array of permalinks", () => {
     const permalinks = getPermalinks(markdownFolder);
-    // assert.deepStrictEqual(permalinks, expectedPermalinks);
+    expect(permalinks).toHaveLength(expectedPermalinks.length);
     permalinks.forEach((permalink) => {
       expect(expectedPermalinks).toContain(permalink);
     });

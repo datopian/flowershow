@@ -1,281 +1,251 @@
+import crypto from "crypto";
+import fs from "fs";
+import path from "path";
 import knex, { Knex } from "knex";
-import * as fs from "fs";
-import * as crypto from "crypto";
-import matter from "gray-matter";
-import { DatabaseFile, DatabaseQuery } from "./types";
 
-export const indexFolder = async (
-  dbPath: string,
-  folderPath = "content",
-  ignorePatterns: RegExp[] = []
-) => {
-  const dbConfig = {
-    client: "sqlite3",
-    connection: {
-      filename: dbPath,
-    },
-    useNullAsDefault: true,
-  };
+import { recursiveWalkDir, parseFile, WikiLink } from "../utils";
+import { File, Link, Tag, FileTag } from "./schema";
 
-  const db = knex(dbConfig);
-
-  await createFilesTable(db);
-  await createTagsTable(db);
-  await createFileTagsTable(db);
-
-  //  Temporary, we don't want to handle updates now
-  //  so database is refreshed every time the folder
-  //  is indexed
-  await db("file_tags").del();
-  await db("tags").del();
-  await db("files").del();
-
-  const pathsToFiles = walkFolder(folderPath);
-
-  const filesToInsert = [];
-  const tagsToInsert = [];
-  const fileTagsToInsert = [];
-
-  for (const pathToFile of pathsToFiles) {
-    let file;
-
-    try {
-      file = createDatabaseFile(pathToFile, folderPath);
-    } catch (e) {
-      console.log(
-        `MarkdownDB Error: Failed to parse '${pathToFile}'. Skipping...`
-      );
-      console.log(e);
-      file = null;
-    }
-
-    if (file) {
-      let isIgnoredByPattern = false;
-      for (const pattern of ignorePatterns) {
-        if (pattern.test(file._url_path)) {
-          isIgnoredByPattern = true;
-        }
-      }
-
-      if (!isIgnoredByPattern) {
-        //  There are probably better ways of doing this...
-        if (["md", "mdx"].includes(file.filetype)) {
-          const tags = file.metadata?.tags || [];
-
-          for (const tag of tags) {
-            if (!tagsToInsert.find((item) => item.name === tag)) {
-              tagsToInsert.push({ name: tag });
-            }
-            fileTagsToInsert.push({ tag, file: file._id });
-          }
-
-          //  Sqlite3 does not support JSON fields
-          file.metadata = JSON.stringify(file.metadata);
-        }
-
-        filesToInsert.push(file);
-      }
-    }
-  }
-
-  await db.batchInsert("files", filesToInsert);
-  await db.batchInsert("tags", tagsToInsert);
-  await db.batchInsert("file_tags", fileTagsToInsert);
-
-  db.destroy();
+// TODO this should be in sync with paths created by remark-wiki-link
+const sluggifyFilePath = (str: string) => {
+  return str
+    .replace(/\s+/g, "-")
+    .replace(/\.\w+$/, "")
+    .toLowerCase();
 };
 
-//  Get files inside a folder, return an array of file paths
-const walkFolder = (dir: fs.PathLike) => {
-  let files = [];
-  for (const item of fs.readdirSync(dir)) {
-    if (!(dir as string).endsWith("/")) {
-      dir += "/";
-    }
-
-    const fullPath = dir + item;
-    const stat = fs.statSync(fullPath);
-
-    if (stat.isDirectory()) {
-      files = files.concat(walkFolder(fullPath));
-    } else if (stat.isFile()) {
-      files.push(fullPath);
-    }
+const resolveLinkToUrlPath = (link: string, sourceFilePath?: string) => {
+  if (!sourceFilePath) {
+    return link;
   }
-  return files;
+  // needed to make path.resolve work correctly
+  // becuase we store urls without leading slash
+  const sourcePath = "/" + sourceFilePath;
+  const dir = path.dirname(sourcePath);
+  const resolved = path.resolve(dir, link);
+  // remove leading slash
+  return resolved.slice(1);
 };
 
-const createFilesTable = async (db: Knex) => {
-  const tableExists = await db.schema.hasTable("files");
-
-  if (!tableExists) {
-    await db.schema.createTable("files", (table) => {
-      table.string("_id").primary();
-      table.string("_path").unique().notNullable(); //  Can be used to read a file
-      table.string("_url_path").unique(); //  Can be used to query by folder
-      table.string("metadata");
-      table.string("filetype").notNullable();
-      // table.enu("fileclass", ["text", "image", "data"]).notNullable();
-      table.string("type"); // type field in frontmatter if it exists
-    });
-  }
-};
-
-const createTagsTable = async (db: Knex) => {
-  const tableExists = await db.schema.hasTable("tags");
-
-  if (!tableExists) {
-    await db.schema.createTable("tags", (table) => {
-      // table.string("_id"); We probably don't need an id
-      table.string("name").primary();
-    });
-  }
-};
-
-const createFileTagsTable = async (db: Knex) => {
-  const tableExists = await db.schema.hasTable("file_tags");
-
-  if (!tableExists) {
-    await db.schema.createTable("file_tags", (table) => {
-      table.string("tag").notNullable();
-      table.string("file").notNullable();
-
-      table.foreign("tag").references("tags.name").onDelete("CASCADE");
-      table.foreign("file").references("files._id").onDelete("CASCADE");
-      //  ... maybe onUpdate(CASCADE) as well?
-    });
-  }
-};
-
-const createDatabaseFile: (path: string, folderPath: string) => DatabaseFile = (
-  path: string,
-  folderPath: string
-) => {
-  const filetype = path.split(".").at(-1);
-
-  const encodedPath = Buffer.from(path, "utf-8").toString();
-  const id = crypto.createHash("sha1").update(encodedPath).digest("hex");
-
-  let metadata = null;
-  let type = null;
-
-  //  If it's not a md/mdx file, _url_path is just the relative path
-  const pathRelativeToFolder = path.slice(folderPath.length + 1);
-  let _url_path = pathRelativeToFolder;
-
-  if (["md", "mdx"].includes(filetype)) {
-    const source = fs.readFileSync(path, { encoding: "utf8", flag: "r" });
-    const { data } = matter(source);
-    metadata = data || null;
-    type = data.type || null;
-
-    const segments = pathRelativeToFolder.split("/");
-    const filename = segments.at(-1).split(".")[0];
-
-    const pathToFileFolder = segments.slice(0, -1).join("/");
-
-    if (filename != "index") {
-      if (pathToFileFolder) {
-        _url_path = `${pathToFileFolder}/${filename}`;
-      } else {
-        //  The file is in the root folder
-        _url_path = filename;
-      }
-    } else {
-      _url_path = pathToFileFolder;
-    }
-  }
-
-  return {
-    _id: id,
-    _path: path,
-    _url_path, //  Should exist only for MD/MDX files
-    filetype,
-    metadata,
-    type,
-  };
-};
-
-class MarkdownDB {
+export class MarkdownDB {
+  config: Knex.Config;
   db: Knex;
 
-  constructor(db: Knex) {
-    this.db = db;
+  constructor(config: Knex.Config) {
+    this.config = config;
   }
 
-  async getTags() {
-    return this.db("tags")
-      .select()
-      .then((tags) => tags.map((tag) => tag.name));
+  async init() {
+    this.db = knex(this.config);
   }
 
-  async query<T = DatabaseFile>(
-    query?: DatabaseQuery
-  ): Promise<DatabaseFile<T>[]> {
-    const files = this.db
-      .select("files.*", this.db.raw("GROUP_CONCAT(tag) as tags")) //  Very hackish way to return tags without duplicating rows
-      .from<DatabaseFile>("files")
-      .leftJoin("file_tags AS ft", "ft.file", "_id")
-      .where((builder) => {
-        if (query) {
-          let folder = query.folder;
-          if (folder) {
-            if (folder.at(-1) === "/") {
-              folder = query.folder.slice(0, -1);
-            }
+  async indexFolder({
+    folderPath,
+    ignorePatterns = [],
+  }: {
+    folderPath: string;
+    ignorePatterns?: RegExp[];
+  }) {
+    //  Temporary, we don't want to handle updates now
+    //  so database is refreshed every time the folder
+    //  is indexed
+    await File.deleteTable(this.db);
+    await Tag.deleteTable(this.db);
+    await FileTag.deleteTable(this.db);
+    await Link.deleteTable(this.db);
 
-            builder.whereLike("_url_path", `${folder}/%`);
-          }
+    await File.createTable(this.db);
+    await Tag.createTable(this.db);
+    await FileTag.createTable(this.db);
+    await Link.createTable(this.db);
 
-          const tags = query.tags;
-          if (tags) {
-            builder.whereIn("tag", tags);
-          }
+    const filePathsToIndex = recursiveWalkDir(folderPath);
 
-          const filetypes = query.filetypes;
-          if (filetypes) {
-            builder.whereIn("filetype", filetypes);
-          }
+    const filesToInsert: File[] = [];
+    const fileTagsToInsert: FileTag[] = [];
+    // TODO shouldn't available tags be explicitly defined in some config file
+    // instead of being extracted from all files? I think it's better even from user perspective
+    // as he can easily manage and see all the tags he is using
+    // (he can qickly look up tag if he's not sure what term he was using in other files)
+    // + it's easier to implement
+    const tagsToInsert: Tag[] = [];
+    const linksToInsert: Link[] = [];
 
-          const urlPath = query.urlPath;
-          if (urlPath != undefined) {
-            builder.where("_url_path", urlPath);
-          }
+    // TODO is there a better way to do this?
+    // Temporary containter for storing links extracted from each file
+    // as a map of file id -> extracted links.
+    // This is used after all files have been parsed and added to filesToInsert
+    // to resolve paths in links to target file ids
+    const filesLinksMap: {
+      [fileId: string]: {
+        url: string;
+        links: WikiLink[];
+      };
+    } = {};
+
+    for (const filePath of filePathsToIndex) {
+      if (ignorePatterns.some((pattern) => pattern.test(filePath))) {
+        continue;
+      }
+
+      const fileToInsert: File = {
+        _id: "",
+        file_path: "",
+        url_path: "",
+        extension: "",
+        metadata: null,
+        filetype: null,
+      };
+
+      // id
+      const encodedPath = Buffer.from(filePath, "utf-8").toString();
+      const id = crypto.createHash("sha1").update(encodedPath).digest("hex");
+      fileToInsert._id = id;
+
+      // path
+      fileToInsert.file_path = filePath;
+
+      // url_path
+      const pathRelativeToFolder = path.relative(folderPath, filePath);
+      const urlPath = sluggifyFilePath(pathRelativeToFolder);
+      fileToInsert.url_path = urlPath;
+
+      // extension
+      const [, extension] = filePath.match(/.(\w+)$/) || [];
+      fileToInsert.extension = extension;
+
+      if (!File.supportedExtensions.includes(extension)) {
+        filesToInsert.push(fileToInsert);
+        continue;
+      }
+
+      // metadata, tags, links
+      const source: string = fs.readFileSync(filePath, {
+        encoding: "utf8",
+        flag: "r",
+      });
+
+      const { metadata, links } = parseFile(source);
+      fileToInsert.filetype = metadata?.type || null;
+      fileToInsert.metadata = metadata || null;
+
+      // TODO is there a better way to do this?
+      filesLinksMap[id] = {
+        url: urlPath,
+        links,
+      };
+
+      const tags = metadata?.tags || [];
+      tags.forEach((tag: string) => {
+        if (!tagsToInsert.some((t) => t.name === tag)) {
+          tagsToInsert.push({ name: tag });
         }
-      })
-      .groupBy("_id");
+        fileTagsToInsert.push({ file: id, tag });
+      });
 
-    return files.then((files) => {
-      return files.map((file) => {
-        if (["mdx", "md"].includes(file.filetype)) {
-          file.tags = file.tags?.split(",") || [];
-          file.metadata = JSON.parse(file.metadata);
+      filesToInsert.push(fileToInsert);
+    }
 
-          return file;
-        } else {
-          delete file.tags;
-        }
-        return file;
+    Object.entries(filesLinksMap).forEach(([fileId, { url, links }]) => {
+      links.forEach(({ linkSrc, linkType }) => {
+        const destPath = resolveLinkToUrlPath(linkSrc, url);
+        const destFile = filesToInsert.find(
+          (file) => file.url_path === destPath
+        );
+        const linkToInsert = {
+          // _id: id,
+          from: fileId,
+          to: destFile?._id,
+          link_type: linkType,
+        };
+        linksToInsert.push(linkToInsert);
       });
     });
+
+    await File.batchInsert(this.db, filesToInsert);
+
+    // TODO  what happens if some of the files were not inserted?
+    // I guess inserting tags or links with such files used as foreign keys will fail too,
+    // but need to check
+    await Tag.batchInsert(this.db, tagsToInsert);
+    await FileTag.batchInsert(this.db, fileTagsToInsert);
+    await Link.batchInsert(this.db, linksToInsert);
+  }
+
+  async getFileById(id: string): Promise<File | null> {
+    const file = await this.db.from("files").where("_id", id).first();
+    return new File(file);
+  }
+
+  async getFileByUrl(url: string): Promise<File | null> {
+    const file = await this.db.from("files").where("url_path", url).first();
+    return new File(file);
+  }
+
+  async getFiles(query?: {
+    folder?: string;
+    filetypes?: string[];
+    tags?: string[];
+    extensions?: string[];
+  }): Promise<File[]> {
+    const { filetypes, tags, extensions, folder } = query || {};
+
+    const files = await this.db
+      // TODO join only if tags are specified ?
+      .leftJoin("file_tags", "files._id", "file_tags.file")
+      .where((builder) => {
+        // TODO temporary solution before we have a proper way to filter files by and assign file types
+        if (folder) {
+          builder.whereLike("url_path", `${folder}/%`);
+        }
+        if (tags) {
+          builder.whereIn("tag", tags);
+        }
+
+        if (extensions) {
+          builder.whereIn("extension", extensions);
+        }
+
+        if (filetypes) {
+          builder.whereIn("filetype", filetypes);
+        }
+      })
+      .select("files.*")
+      .from("files")
+      .groupBy("_id");
+
+    return files.map((file) => new File(file));
+  }
+
+  async getTags(): Promise<Tag[]> {
+    const tags = await this.db("tags").select();
+    return tags.map((tag) => new Tag(tag));
+  }
+
+  async getLinks(query?: {
+    fileId: string;
+    linkType?: "normal" | "embed";
+    direction?: "forward" | "backward";
+  }): Promise<Link[]> {
+    const { fileId, direction = "forward", linkType } = query;
+    const joinKey = direction === "forward" ? "from" : "to";
+    const where = {
+      [joinKey]: fileId,
+    };
+    if (linkType) {
+      where["link_type"] = linkType;
+    }
+    const dbLinks = await this.db
+      .select("links.*")
+      .from("links")
+      .rightJoin("files", `links.${joinKey}`, "=", "files._id")
+      .where(where);
+
+    const links = dbLinks.map((link) => new Link(link));
+    return links;
   }
 
   _destroyDb() {
     this.db.destroy();
   }
 }
-
-//  MarkdownDB Factory
-export const Database = (dbPath: string): MarkdownDB => {
-  const dbConfig = {
-    client: "sqlite3",
-    connection: {
-      filename: dbPath,
-    },
-    useNullAsDefault: true,
-  };
-
-  const db = knex(dbConfig);
-
-  return new MarkdownDB(db);
-};

@@ -1,13 +1,18 @@
-import knex from "knex";
-import * as markdowndb from "./markdowndb";
-import * as fs from "fs";
+// import knex from "knex";
+import { MarkdownDB } from "./markdowndb";
+import { Table } from "./schema";
+import { recursiveWalkDir } from "../utils";
 
 /**
  * @jest-environment node
  */
-describe("MarkdownDB lib", () => {
-  it("builds a new MarkdownDB", async () => {
-    const pathToFixturesFolder = "packages/markdowndb/__mocks__/content";
+
+// TODO test index files
+describe("MarkdownDB", () => {
+  const pathToContentFixture = "packages/markdowndb/__mocks__/content";
+  let mddb: MarkdownDB;
+
+  beforeAll(async () => {
     const dbConfig = {
       client: "sqlite3",
       connection: {
@@ -15,87 +20,167 @@ describe("MarkdownDB lib", () => {
       },
     };
 
-    const db = knex(dbConfig);
+    mddb = new MarkdownDB(dbConfig);
+    await mddb.init();
+    await mddb.indexFolder({ folderPath: pathToContentFixture });
+  });
 
-    //  Index folder
-    await markdowndb.indexFolder("markdown.db", pathToFixturesFolder);
+  afterAll(async () => {
+    // TODO why we have to call this twice?
+    mddb.db.destroy();
+    mddb._destroyDb();
+  });
 
-    //  Ensure there is a "files" table
-    expect(await db.schema.hasTable("files")).toBe(true);
+  describe("correct startup and indexing", () => {
+    test("adds tables to db", async () => {
+      expect(await mddb.db.schema.hasTable(Table.Files)).toBe(true);
+      expect(await mddb.db.schema.hasTable(Table.Tags)).toBe(true);
+      expect(await mddb.db.schema.hasTable(Table.FileTags)).toBe(true);
+      expect(await mddb.db.schema.hasTable(Table.Links)).toBe(true);
+    });
 
-    //  Ensure there is a "tags" table
-    expect(await db.schema.hasTable("tags")).toBe(true);
+    test("indexes all files in folder", async () => {
+      const allFiles = recursiveWalkDir(pathToContentFixture);
+      const allIndexedFiles = await mddb.getFiles();
+      expect(allIndexedFiles).toHaveLength(allFiles.length);
+    });
+  });
 
-    //  Ensure there is a "file_tags" table
-    expect(await db.schema.hasTable("file_tags")).toBe(true);
+  describe("querying files", () => {
+    test("can get all files", async () => {
+      const dbFiles = await mddb.getFiles();
+      const dbFilesPaths = dbFiles.map((f) => f.file_path);
+      const allFilesPaths = recursiveWalkDir(pathToContentFixture);
 
-    const myMdDb = markdowndb.Database("markdown.db");
+      expect(dbFiles).toHaveLength(allFilesPaths.length);
+      dbFilesPaths.forEach((p) => {
+        expect(allFilesPaths).toContain(p);
+      });
+    });
 
-    //  Check if all files were indexed
-    const allFiles = walk(pathToFixturesFolder);
-    const allFilesCount = allFiles.length;
+    test("can query by file type", async () => {
+      const dbFiles = await mddb.getFiles({ filetypes: ["blog"] });
+      const dbFilesPaths = dbFiles.map((f) => f.file_path);
 
-    const allIndexedFiles = await myMdDb.query();
-    expect(allIndexedFiles.length).toBe(allFilesCount);
+      const expectedPaths = [
+        `${pathToContentFixture}/blog/blog3.mdx`,
+        `${pathToContentFixture}/blog/blog2.mdx`,
+        `${pathToContentFixture}/blog0.mdx`,
+      ];
 
-    //  Check if querying by folder is working
-    const blogFiles = allFiles.filter((p) =>
-      p.startsWith(`${pathToFixturesFolder}/blog/`)
-    );
-    const blogFilesCount = blogFiles.length;
+      expect(dbFilesPaths).toHaveLength(expectedPaths.length);
+      dbFilesPaths.forEach((p) => {
+        expect(expectedPaths).toContain(p);
+      });
+    });
 
-    const indexedBlogFiles = await myMdDb.query({
+    test("can query by tags", async () => {
+      const dbFiles = await mddb.getFiles({ tags: ["economy", "politics"] });
+      const dbFilesPaths = dbFiles.map((f) => f.file_path);
+
+      const expectedPaths = [
+        `${pathToContentFixture}/blog/blog3.mdx`,
+        `${pathToContentFixture}/blog/blog2.mdx`,
+      ];
+
+      expect(dbFilesPaths).toHaveLength(expectedPaths.length);
+      dbFilesPaths.forEach((p) => {
+        expect(expectedPaths).toContain(p);
+      });
+    });
+
+    test("can query by extensions", async () => {
+      const dbFiles = await mddb.getFiles({ extensions: ["png"] });
+      const dbFilesPaths = dbFiles.map((f) => f.file_path);
+
+      const expectedPaths = [
+        `${pathToContentFixture}/assets/datopian-logo.png`,
+      ];
+
+      expect(dbFilesPaths).toHaveLength(expectedPaths.length);
+      dbFilesPaths.forEach((p) => {
+        expect(expectedPaths).toContain(p);
+      });
+    });
+
+    test("can query by tags AND filetypes AND extensions", async () => {
+      const dbFiles = await mddb.getFiles({
+        tags: ["culture"],
+        filetypes: ["news"],
+        extensions: ["md", "mdx"],
+      });
+      const dbFilesPaths = dbFiles.map((f) => f.file_path);
+      const expectedPaths = [`${pathToContentFixture}/news/news1.mdx`];
+
+      expect(dbFilesPaths).toHaveLength(expectedPaths.length);
+      dbFilesPaths.forEach((p) => {
+        expect(expectedPaths).toContain(p);
+      });
+    });
+
+    test("can find file by url path", async () => {
+      const dbFile = await mddb.getFileByUrl("blog/blog2");
+      expect(dbFile.url_path).toBe("blog/blog2");
+    });
+
+    test("can find file by id", async () => {
+      const dbFile = await mddb.getFileByUrl("blog/blog2");
+      const dbFileById = await mddb.getFileById(dbFile._id);
+      expect(dbFileById.url_path).toBe("blog/blog2");
+    });
+  });
+
+  describe("getTags", () => {
+    // TODO the list of tags in db should be defined in some config file instead of being extracted from all the files
+    test("can get all tags", async () => {
+      const dbTags = await mddb.getTags();
+      const extectedTags = [
+        { name: "economy" },
+        { name: "politics" },
+        { name: "sports" },
+        { name: "culture" },
+      ];
+
+      expect(dbTags).toHaveLength(extectedTags.length);
+      dbTags.forEach((t) => {
+        expect(extectedTags).toContainEqual(t);
+      });
+    });
+  });
+
+  describe("getLinks", () => {
+    test("can get all forward links of a file", async () => {
+      const fromFile = await mddb.getFileByUrl("blog/blog2");
+      const toFile = await mddb.getFileByUrl("blog0");
+
+      const forwardLinks = await mddb.getLinks({
+        fileId: fromFile._id,
+      });
+      expect(forwardLinks.length).toBe(1);
+      expect(forwardLinks[0].to).toBe(toFile._id);
+    });
+
+    test("can get all backward links of a file", async () => {
+      const toFile = await mddb.getFileByUrl("blog/blog2");
+      const fromFile1 = await mddb.getFileByUrl("blog0");
+      const fromFile2 = await mddb.getFileByUrl("blog/blog1");
+
+      const backwardLinks = await mddb.getLinks({
+        fileId: toFile._id,
+        direction: "backward",
+      });
+      const backwardLinksFileIds = backwardLinks.map((l) => l.from);
+      expect(backwardLinksFileIds).toHaveLength(2);
+      expect(backwardLinksFileIds).toContain(fromFile1._id);
+      expect(backwardLinksFileIds).toContain(fromFile2._id);
+    });
+  });
+
+  test("can query by folder", async () => {
+    const allBlogFiles = recursiveWalkDir(`${pathToContentFixture}/blog`);
+    const indexedBlogFiles = await mddb.getFiles({
       folder: "blog",
-      filetypes: ["md", "mdx"],
     });
-
-    expect(indexedBlogFiles.length).toBe(blogFilesCount);
-
-    //  Check if querying by tags is working
-    const economyFiles = await myMdDb.query({ tags: ["economy"] });
-    const economyFilesPaths = economyFiles.map((f) => f._path);
-
-    const expectedPaths = [
-      `${pathToFixturesFolder}/blog/blog3.mdx`,
-      `${pathToFixturesFolder}/blog/blog2.mdx`,
-    ];
-
-    expect(economyFilesPaths).toHaveLength(expectedPaths.length);
-    economyFilesPaths.forEach((p) => {
-      expect(expectedPaths).toContain(p);
-    });
-
-    //  Check if querying by filetypes is working
-    const pngFiles = await myMdDb.query({ filetypes: ["png"] });
-    expect(
-      pngFiles
-        .map((f) => f.filetype)
-        //  Filter out duplicates
-        .filter((v, i, s) => {
-          return s.indexOf(v) === i;
-        })
-    ).toEqual(["png"]);
-
-    db.destroy();
-    myMdDb._destroyDb();
+    expect(indexedBlogFiles.length).toBe(allBlogFiles.length);
   });
 });
-
-const walk = (dir: fs.PathLike) => {
-  let files: string[] = [];
-  for (const item of fs.readdirSync(dir)) {
-    if (!(dir as string).endsWith("/")) {
-      dir += "/";
-    }
-
-    const fullPath = dir + item;
-    const stat = fs.statSync(fullPath);
-
-    if (stat.isDirectory()) {
-      files = files.concat(walk(fullPath));
-    } else if (stat.isFile()) {
-      files.push(fullPath);
-    }
-  }
-  return files;
-};
