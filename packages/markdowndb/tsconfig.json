@@ -1,6 +1,8 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "strictPropertyInitialization": false,
+    "allowJs": true,
     "moduleResolution": "node",
     "esModuleInterop": true
   },

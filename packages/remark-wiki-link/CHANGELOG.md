@@ -1,5 +1,11 @@
 # @flowershow/remark-wiki-link
 
+## 1.1.2
+
+### Patch Changes
+
+- 135a238: Small regex fix in pageResolver.
+
 ## 1.1.1
 
 ### Patch Changes
