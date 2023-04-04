@@ -14,6 +14,8 @@ describe("remark-wiki-link", () => {
       let ast = processor.parse("[[../some/folder/Wiki Link]]");
       ast = processor.runSync(ast);
 
+      expect(select("wikiLink", ast)).not.toEqual(null);
+
       visit(ast, "wikiLink", (node: Node) => {
         expect(node.data?.exists).toEqual(false);
         expect(node.data?.permalink).toEqual("../some/folder/wiki-link");
@@ -38,6 +40,8 @@ describe("remark-wiki-link", () => {
 
       let ast = processor.parse("[[some/folder/Wiki Link]]");
       ast = processor.runSync(ast);
+
+      expect(select("wikiLink", ast)).not.toEqual(null);
 
       visit(ast, "wikiLink", (node: Node) => {
         expect(node.data?.exists).toEqual(false);
@@ -67,6 +71,8 @@ describe("remark-wiki-link", () => {
       let ast = processor.parse("[[Wiki Link]]");
       ast = processor.runSync(ast);
 
+      expect(select("wikiLink", ast)).not.toEqual(null);
+
       visit(ast, "wikiLink", (node: Node) => {
         expect(node.data?.exists).toEqual(true);
         expect(node.data?.permalink).toEqual("/some/folder/wiki-link");
@@ -92,6 +98,8 @@ describe("remark-wiki-link", () => {
       let ast = processor.parse("[[Wiki Link]]");
       ast = processor.runSync(ast);
 
+      expect(select("wikiLink", ast)).not.toEqual(null);
+
       visit(ast, "wikiLink", (node: Node) => {
         expect(node.data?.exists).toEqual(true);
         expect(node.data?.permalink).toEqual("wiki-link");
@@ -112,6 +120,8 @@ describe("remark-wiki-link", () => {
 
       let ast = processor.parse("[[Wiki Link]]");
       ast = processor.runSync(ast);
+
+      expect(select("wikiLink", ast)).not.toEqual(null);
 
       visit(ast, "wikiLink", (node: Node) => {
         expect(node.data?.exists).toEqual(false);
@@ -137,6 +147,8 @@ describe("remark-wiki-link", () => {
       let ast = processor.parse("[[Wiki Link]]");
       ast = processor.runSync(ast);
 
+      expect(select("wikiLink", ast)).not.toEqual(null);
+
       visit(ast, "wikiLink", (node: Node) => {
         expect(node.data?.exists).toEqual(true);
         expect(node.data?.permalink).toEqual("/some/folder/wiki-link");
@@ -157,6 +169,8 @@ describe("remark-wiki-link", () => {
 
       let ast = processor.parse("[[Wiki Link#Some Heading]]");
       ast = processor.runSync(ast);
+
+      expect(select("wikiLink", ast)).not.toEqual(null);
 
       visit(ast, "wikiLink", (node: Node) => {
         expect(node.data?.exists).toEqual(false);
@@ -181,6 +195,8 @@ describe("remark-wiki-link", () => {
       let ast = processor.parse("[[Wiki Link#Some Heading|Alias]]");
       ast = processor.runSync(ast);
 
+      expect(select("wikiLink", ast)).not.toEqual(null);
+
       visit(ast, "wikiLink", (node: Node) => {
         expect(node.data?.exists).toEqual(false);
         expect(node.data?.permalink).toEqual("wiki-link#some-heading"); // TODO should this be "wiki-link" only?
@@ -201,6 +217,8 @@ describe("remark-wiki-link", () => {
 
       let ast = processor.parse("[[#Some Heading]]");
       ast = processor.runSync(ast);
+
+      expect(select("wikiLink", ast)).not.toEqual(null);
 
       visit(ast, "wikiLink", (node: Node) => {
         // expect(node.data?.exists).toEqual(false); // TODO: should this be true?
@@ -223,10 +241,17 @@ describe("remark-wiki-link", () => {
       let ast = processor.parse("![[../some/folder/My Image.png]]");
       ast = processor.runSync(ast);
 
-      visit(ast, "image", (node: Node) => {
+      expect(select("wikiLink", ast)).not.toEqual(null);
+
+      visit(ast, "wikiLink", (node: Node) => {
+        expect(node.data?.isEmbed).toEqual(true);
+        expect(node.data?.target).toEqual("../some/folder/My Image.png");
         expect(node.data?.permalink).toEqual("../some/folder/My Image.png");
         expect(node.data?.hName).toEqual("img");
         expect((node.data?.hProperties as any).src).toEqual(
+          "../some/folder/My Image.png"
+        );
+        expect((node.data?.hProperties as any).alt).toEqual(
           "../some/folder/My Image.png"
         );
       });
@@ -238,7 +263,11 @@ describe("remark-wiki-link", () => {
       let ast = processor.parse("![[../some/folder/My Image.xyz]]");
       ast = processor.runSync(ast);
 
-      visit(ast, "image", (node: Node) => {
+      expect(select("wikiLink", ast)).not.toEqual(null);
+
+      visit(ast, "wikiLink", (node: Node) => {
+        expect(node.data?.isEmbed).toEqual(true);
+        expect(node.data?.target).toEqual("../some/folder/My Image.xyz");
         expect(node.data?.permalink).toEqual("../some/folder/My Image.xyz");
         expect(node.data?.hName).toEqual("p");
         expect((node.data?.hChildren as any)[0].value).toEqual(
@@ -253,7 +282,11 @@ describe("remark-wiki-link", () => {
       let ast = processor.parse("![[../some/folder/My Image.png|Alt Text]]");
       ast = processor.runSync(ast);
 
-      visit(ast, "image", (node: Node) => {
+      expect(select("wikiLink", ast)).not.toEqual(null);
+
+      visit(ast, "wikiLink", (node: Node) => {
+        expect(node.data?.isEmbed).toEqual(true);
+        expect(node.data?.target).toEqual("../some/folder/My Image.png");
         expect(node.data?.permalink).toEqual("../some/folder/My Image.png");
         expect(node.data?.hName).toEqual("img");
         expect((node.data?.hProperties as any).src).toEqual(
@@ -269,11 +302,15 @@ describe("remark-wiki-link", () => {
       let ast = processor.parse("![[../some/folder/My Document.pdf]]");
       ast = processor.runSync(ast);
 
-      visit(ast, "image", (node: Node) => {
+      expect(select("wikiLink", ast)).not.toEqual(null);
+
+      visit(ast, "wikiLink", (node: Node) => {
+        expect(node.data?.isEmbed).toEqual(true);
+        expect(node.data?.target).toEqual("../some/folder/My Document.pdf");
         expect(node.data?.permalink).toEqual("../some/folder/My Document.pdf");
         expect(node.data?.hName).toEqual("iframe");
         expect((node.data?.hProperties as any).src).toEqual(
-          "../some/folder/My Document.pdf"
+          "../some/folder/My Document.pdf#toolbar=0"
         );
       });
     });
@@ -334,6 +371,8 @@ describe("remark-wiki-link", () => {
     let ast = processor.parse("[[Real Page#Some Heading:Page Alias]]");
     ast = processor.runSync(ast);
 
+    expect(select("wikiLink", ast)).not.toEqual(null);
+
     visit(ast, "wikiLink", (node: Node) => {
       expect(node.data?.exists).toEqual(true);
       expect(node.data?.permalink).toEqual("/some/folder/123/real-page");
@@ -354,6 +393,8 @@ describe("remark-wiki-link", () => {
 
     let ast = processor.parse("[[/some/folder/index]]");
     ast = processor.runSync(ast);
+
+    expect(select("wikiLink", ast)).not.toEqual(null);
 
     visit(ast, "wikiLink", (node: Node) => {
       expect(node.data?.exists).toEqual(false);
