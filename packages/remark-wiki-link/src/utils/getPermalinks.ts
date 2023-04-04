@@ -17,6 +17,7 @@ const recursiveGetFiles = (dir) => {
   return files;
 };
 
+// TODO slugify
 export const getPermalinks = (markdownFolder) => {
   const files = recursiveGetFiles(markdownFolder);
   const permalinks = files.map((file) => {

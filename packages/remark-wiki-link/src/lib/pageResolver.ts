@@ -6,7 +6,7 @@ export const pageResolver = (
   let page = isEmbed
     ? name
     : name
-        .replace(/ /g, "-")
+        .replace(/\s+/g, "-")
         .replace(/\/index$/, "")
         .toLowerCase();
   if (prefix) {
