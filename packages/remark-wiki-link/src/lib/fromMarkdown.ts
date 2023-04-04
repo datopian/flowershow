@@ -39,7 +39,6 @@ function fromMarkdown(opts: FromMarkdownOptions = {}) {
           alias: null,
           permalink: null,
           exists: null,
-          className: null,
           // fields for mdast-util-to-hast (used e.g. by remark-rehype)
           hName: null,
           hProperties: null,
@@ -127,7 +126,7 @@ function fromMarkdown(opts: FromMarkdownOptions = {}) {
         wikiLink.data.hProperties = {
           className: classNames,
           width: "100%",
-          src: `${hrefTemplate(permalink)}#toolbar = 0`,
+          src: `${hrefTemplate(permalink)}#toolbar=0`,
         };
       } else {
         wikiLink.data.hName = "img";
