@@ -190,9 +190,30 @@ describe("MarkdownDB", () => {
   describe("MddbFile schema", () => {
     it("batchInsert should throw an error if some file objects have duplicate _id", () => {
       const files: File[] = [
-        { _id: "1", file_path: "aaa.md", extension: "md" },
-        { _id: "2", file_path: "bbb.md", extension: "md" },
-        { _id: "1", file_path: "ccc.md", extension: "md" },
+        {
+          _id: "1",
+          file_path: "aaa.md",
+          extension: "md",
+          url_path: "aaa",
+          metadata: null,
+          filetype: null,
+        },
+        {
+          _id: "2",
+          file_path: "bbb.md",
+          extension: "md",
+          url_path: "bbb",
+          metadata: null,
+          filetype: null,
+        },
+        {
+          _id: "1",
+          file_path: "ccc.md",
+          extension: "md",
+          url_path: "ccc",
+          metadata: null,
+          filetype: null,
+        },
       ];
       // TODO fix types
       expect(() => MddbFile.batchInsert(mddb as any, files)).toThrow();
