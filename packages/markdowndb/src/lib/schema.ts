@@ -1,5 +1,5 @@
 import { Knex } from "knex";
-import { areUniqueObjectsByKey } from "./validate";
+import { areUniqueObjectsByKey } from "./validate.js";
 
 /*
  * Types
@@ -22,9 +22,9 @@ interface File {
   _id: string;
   file_path: string;
   extension: string;
-  url_path?: string;
-  filetype?: string;
-  metadata?: MetaData;
+  url_path: string | null;
+  filetype: string | null;
+  metadata: MetaData | null;
 }
 
 class MddbFile {
@@ -34,7 +34,9 @@ class MddbFile {
   _id: string;
   file_path: string;
   extension: string;
-  url_path: string;
+  url_path: string | null;
+  // TODO there should be a separate table for filetypes
+  // and another one for many-to-many relationship between files and filetypes
   filetype: string | null;
   metadata: MetaData | null;
 
@@ -46,6 +48,17 @@ class MddbFile {
     this.url_path = file.url_path;
     this.filetype = file.filetype;
     this.metadata = file.metadata ? JSON.parse(file.metadata) : null;
+  }
+
+  toObject(): File {
+    return {
+      _id: this._id,
+      file_path: this.file_path,
+      extension: this.extension,
+      url_path: this.url_path,
+      filetype: this.filetype,
+      metadata: this.metadata,
+    };
   }
 
   static async createTable(db: Knex) {
@@ -108,6 +121,14 @@ class MddbLink {
     this.to = link.to;
   }
 
+  toObject(): Link {
+    return {
+      link_type: this.link_type,
+      from: this.from,
+      to: this.to,
+    };
+  }
+
   static async createTable(db: Knex) {
     const creator = (table: Knex.TableBuilder) => {
       // table.string("_id").primary();
@@ -147,6 +168,13 @@ class MddbTag {
   constructor(tag: any) {
     this.name = tag.name;
     // this.description = dbTag.description;
+  }
+
+  toObject(): Tag {
+    return {
+      name: this.name,
+      // description: this.description,
+    };
   }
 
   static async createTable(db: Knex) {

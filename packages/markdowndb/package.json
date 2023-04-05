@@ -1,6 +1,6 @@
 {
   "name": "@flowershow/markdowndb",
-  "version": "0.0.15",
+  "version": "0.0.3",
   "description": "Parse markdown files and store them in an SQL database.",
   "repository": {
     "type": "git",

@@ -17,10 +17,12 @@ import {
 
 // TODO this should be in sync with paths created by remark-wiki-link
 const sluggifyFilePath = (str: string) => {
-  return str
+  const url = str
     .replace(/\s+/g, "-")
     .replace(/\.\w+$/, "")
+    .replace(/(\/)?index$/, "")
     .toLowerCase();
+  return url.length > 0 ? url : "/";
 };
 
 const resolveLinkToUrlPath = (link: string, sourceFilePath?: string) => {
@@ -51,6 +53,7 @@ export class MarkdownDB {
 
   async indexFolder({
     folderPath,
+    // TODO support glob patterns
     ignorePatterns = [],
   }: {
     folderPath: string;
@@ -111,6 +114,9 @@ export class MarkdownDB {
           _id: id,
           file_path: filePath,
           extension,
+          url_path: null,
+          filetype: null,
+          metadata: null,
         });
         continue;
       }
