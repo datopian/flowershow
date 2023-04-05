@@ -1,6 +1,6 @@
 // import knex from "knex";
 import { MarkdownDB } from "./markdowndb";
-import { Table } from "./schema";
+import { File, MddbFile, Table } from "./schema";
 import { recursiveWalkDir } from "../utils";
 
 /**
@@ -185,5 +185,17 @@ describe("MarkdownDB", () => {
       extensions: ["md", "mdx"],
     });
     expect(indexedBlogFiles.length).toBe(allBlogFiles.length);
+  });
+
+  describe("MddbFile schema", () => {
+    it("batchInsert should throw an error if some file objects have duplicate _id", () => {
+      const files: File[] = [
+        { _id: "1", file_path: "aaa.md", extension: "md" },
+        { _id: "2", file_path: "bbb.md", extension: "md" },
+        { _id: "1", file_path: "ccc.md", extension: "md" },
+      ];
+      // TODO fix types
+      expect(() => MddbFile.batchInsert(mddb as any, files)).toThrow();
+    });
   });
 });

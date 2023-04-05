@@ -1,4 +1,5 @@
 import { Knex } from "knex";
+import { areUniqueObjectsByKey } from "./validate";
 
 /*
  * Types
@@ -68,6 +69,12 @@ class MddbFile {
   }
 
   static batchInsert(db: Knex, files: File[]) {
+    if (!areUniqueObjectsByKey(files, "_id")) {
+      throw new Error("Files must have unique _id");
+    }
+    if (!areUniqueObjectsByKey(files, "file_path")) {
+      throw new Error("Files must have unique file_path");
+    }
     const serializedFiles = files.map((file) => {
       return {
         ...file,
@@ -159,6 +166,9 @@ class MddbTag {
   }
 
   static batchInsert(db: Knex, tags: Tag[]) {
+    if (!areUniqueObjectsByKey(tags, "name")) {
+      throw new Error("Tags must have unique name");
+    }
     return db.batchInsert(Table.Tags, tags);
   }
 }
