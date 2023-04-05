@@ -1,6 +1,6 @@
 {
   "name": "@flowershow/markdowndb",
-  "version": "0.0.3",
+  "version": "0.0.15",
   "description": "Parse markdown files and store them in an SQL database.",
   "repository": {
     "type": "git",
@@ -28,7 +28,8 @@
     "knex": "^2.4.2",
     "sqlite3": "^5.1.6"
   },
-  "devDependencies": {
-    "remark-gfm": "^3.0.1"
+  "peerDependencies": {
+    "@flowershow/remark-wiki-link": "^1.1.2",
+    "unist-util-select": "^4.0.3"
   }
 }

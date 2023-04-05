@@ -17,38 +17,44 @@ type MetaData = {
 /*
  * Schema
  */
-export interface FileSerialized extends Omit<File, "metadata"> {
-  metadata: string | null;
+interface File {
+  _id: string;
+  file_path: string;
+  extension: string;
+  url_path?: string;
+  filetype?: string;
+  metadata?: MetaData;
 }
 
-class File {
+class MddbFile {
   static table = Table.Files;
   static supportedExtensions = ["md", "mdx"];
 
   _id: string;
   file_path: string;
-  url_path: string;
-  metadata: MetaData | null;
   extension: string;
+  url_path: string;
   filetype: string | null;
+  metadata: MetaData | null;
 
-  constructor(dbFile: FileSerialized) {
-    this._id = dbFile._id;
-    this.file_path = dbFile.file_path;
-    this.url_path = dbFile.url_path;
-    this.metadata = dbFile.metadata ? JSON.parse(dbFile.metadata) : null;
-    this.extension = dbFile.extension;
-    this.filetype = dbFile.filetype;
+  // TODO type?
+  constructor(file: any) {
+    this._id = file._id;
+    this.file_path = file.file_path;
+    this.extension = file.extension;
+    this.url_path = file.url_path;
+    this.filetype = file.filetype;
+    this.metadata = file.metadata ? JSON.parse(file.metadata) : null;
   }
 
   static async createTable(db: Knex) {
     const creator = (table: Knex.TableBuilder) => {
       table.string("_id").primary();
       table.string("file_path").unique().notNullable(); // Path relative to process.cwd()
-      table.string("url_path").unique().notNullable(); // Sluggfied path
-      table.string("metadata").notNullable(); // All frontmatter data
       table.string("extension").notNullable(); // File extension
-      table.string("filetype"); // type field in frontmatter if it exists
+      table.string("url_path"); // Sluggfied path relative to content folder
+      table.string("filetype"); // Type field in frontmatter if it exists
+      table.string("metadata"); // All frontmatter data
     };
     const tableExists = await db.schema.hasTable(this.table);
 
@@ -73,7 +79,13 @@ class File {
   }
 }
 
-class Link {
+interface Link {
+  link_type: "normal" | "embed";
+  from: string;
+  to: string;
+}
+
+class MddbLink {
   static table = Table.Links;
 
   // _id: string;
@@ -81,16 +93,12 @@ class Link {
   from: string;
   to: string;
 
-  constructor(dbLink: {
-    // _id: string;
-    link_type: "normal" | "embed";
-    from: string;
-    to: string;
-  }) {
+  // TODO type?
+  constructor(link: any) {
     // this._id = dbLink._id;
-    this.link_type = dbLink.link_type;
-    this.from = dbLink.from;
-    this.to = dbLink.to;
+    this.link_type = link.link_type;
+    this.from = link.from;
+    this.to = link.to;
   }
 
   static async createTable(db: Knex) {
@@ -118,17 +126,19 @@ class Link {
   }
 }
 
-class Tag {
+interface Tag {
+  name: string;
+}
+
+class MddbTag {
   static table = Table.Tags;
 
   name: string;
   // description: string;
 
-  constructor(dbTag: {
-    name: string;
-    // description: string;
-  }) {
-    this.name = dbTag.name;
+  // TODO type?
+  constructor(tag: any) {
+    this.name = tag.name;
     // this.description = dbTag.description;
   }
 
@@ -153,15 +163,20 @@ class Tag {
   }
 }
 
-class FileTag {
+interface FileTag {
+  tag: string;
+  file: string;
+}
+
+class MddbFileTag {
   static table = Table.FileTags;
   // _id: string;
   tag: string;
   file: string;
 
-  constructor(dbFileTag: { tag: string; file: string }) {
-    this.tag = dbFileTag.tag;
-    this.file = dbFileTag.file;
+  constructor(fileTag: any) {
+    this.tag = fileTag.tag;
+    this.file = fileTag.file;
   }
 
   static async createTable(db: Knex) {
@@ -189,4 +204,4 @@ class FileTag {
   }
 }
 
-export { File, Link, Tag, FileTag };
+export { File, MddbFile, Link, MddbLink, Tag, MddbTag, FileTag, MddbFileTag };

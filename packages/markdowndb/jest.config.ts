@@ -9,6 +9,9 @@ const jestConfig: JestConfigWithTsJest = {
   },
   transformIgnorePatterns: ["<rootDir>/node_modules/(?!remark-parse)"],
   moduleFileExtensions: ["ts", "js"],
+  moduleNameMapper: {
+    "(.+)\\.js$": "$1",
+  },
 };
 
 export default jestConfig;

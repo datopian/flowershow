@@ -60,6 +60,7 @@ importers:
       regenerator-runtime: 0.13.11
       rehype-stringify: ^9.0.3
       remark: ^14.0.2
+      remark-gfm: ^3.0.1
       remark-parse: ^10.0.1
       remark-rehype: ^10.1.0
       remark-stringify: ^10.0.2
@@ -129,6 +130,7 @@ importers:
       react-test-renderer: 18.2.0_react@18.2.0
       rehype-stringify: 9.0.3
       remark: 14.0.2
+      remark-gfm: 3.0.1
       remark-parse: 10.0.1
       remark-rehype: 10.1.0
       remark-stringify: 10.0.2
@@ -197,16 +199,17 @@ importers:
 
   packages/markdowndb:
     specifiers:
+      '@flowershow/remark-wiki-link': ^1.1.2
       gray-matter: ^4.0.3
       knex: ^2.4.2
-      remark-gfm: ^3.0.1
       sqlite3: ^5.1.6
+      unist-util-select: ^4.0.3
     dependencies:
+      '@flowershow/remark-wiki-link': link:../remark-wiki-link
       gray-matter: 4.0.3
       knex: 2.4.2_sqlite3@5.1.6
       sqlite3: 5.1.6
-    devDependencies:
-      remark-gfm: 3.0.1
+      unist-util-select: 4.0.3
 
   packages/remark-callouts:
     specifiers:
@@ -6178,7 +6181,6 @@ packages:
 
   /boolbase/1.0.0:
     resolution: {integrity: sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==}
-    dev: true
 
   /brace-expansion/1.1.11:
     resolution: {integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==}
@@ -6950,7 +6952,6 @@ packages:
 
   /css-selector-parser/1.4.1:
     resolution: {integrity: sha512-HYPSb7y/Z7BNDCOrakL4raGO2zltZkbeXyAd6Tg9obzix6QhzxCotdBl6VT0Dv4vZfJGVz3WL/xaEI9Ly3ul0g==}
-    dev: true
 
   /css-tree/1.1.3:
     resolution: {integrity: sha512-tRpdppF7TRazZrjJ6v3stzv93qxRcSsFmW6cX0Zm2NVKpxE1WV1HblnghVv9TreireHkqI/VDEsfolRF1p6y7Q==}
@@ -13316,7 +13317,6 @@ packages:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
     dependencies:
       boolbase: 1.0.0
-    dev: true
 
   /nwsapi/2.2.2:
     resolution: {integrity: sha512-90yv+6538zuvUMnN+zCr8LuV6bPFdq50304114vJYJ8RDyK8D5O9Phpbd6SZWgI7PwzmmfN1upeOJlvybDSgCw==}
@@ -16663,7 +16663,6 @@ packages:
       css-selector-parser: 1.4.1
       nth-check: 2.1.1
       zwitch: 2.0.4
-    dev: true
 
   /unist-util-stringify-position/3.0.2:
     resolution: {integrity: sha512-7A6eiDCs9UtjcwZOcCpM4aPII3bAAGv13E96IkawkOAW0OhH+yRxtY0lzo8KiHpzEMfH7Q+FizUmwp8Iqy5EWg==}
