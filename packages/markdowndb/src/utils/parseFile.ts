@@ -1,5 +1,5 @@
 import matter from "gray-matter";
-import { extractWikiLinks } from "./extractWikiLinks";
+import { extractWikiLinks } from "./extractWikiLinks.js";
 
 export function parseFile(source: string) {
   // Metadata

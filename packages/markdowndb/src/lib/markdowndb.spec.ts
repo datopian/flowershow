@@ -1,6 +1,6 @@
 // import knex from "knex";
 import { MarkdownDB } from "./markdowndb";
-import { Table } from "./schema";
+import { File, MddbFile, Table } from "./schema";
 import { recursiveWalkDir } from "../utils";
 
 /**
@@ -120,13 +120,15 @@ describe("MarkdownDB", () => {
 
     test("can find file by url path", async () => {
       const dbFile = await mddb.getFileByUrl("blog/blog2");
-      expect(dbFile.url_path).toBe("blog/blog2");
+      expect(dbFile).not.toBeNull();
+      expect(dbFile!.url_path).toBe("blog/blog2");
     });
 
     test("can find file by id", async () => {
       const dbFile = await mddb.getFileByUrl("blog/blog2");
-      const dbFileById = await mddb.getFileById(dbFile._id);
-      expect(dbFileById.url_path).toBe("blog/blog2");
+      const dbFileById = await mddb.getFileById(dbFile!._id);
+      expect(dbFileById).not.toBeNull();
+      expect(dbFileById!.url_path).toBe("blog/blog2");
     });
   });
 
@@ -154,10 +156,10 @@ describe("MarkdownDB", () => {
       const toFile = await mddb.getFileByUrl("blog0");
 
       const forwardLinks = await mddb.getLinks({
-        fileId: fromFile._id,
+        fileId: fromFile!._id,
       });
       expect(forwardLinks.length).toBe(1);
-      expect(forwardLinks[0].to).toBe(toFile._id);
+      expect(forwardLinks[0].to).toBe(toFile!._id);
     });
 
     test("can get all backward links of a file", async () => {
@@ -166,13 +168,13 @@ describe("MarkdownDB", () => {
       const fromFile2 = await mddb.getFileByUrl("blog/blog1");
 
       const backwardLinks = await mddb.getLinks({
-        fileId: toFile._id,
+        fileId: toFile!._id,
         direction: "backward",
       });
       const backwardLinksFileIds = backwardLinks.map((l) => l.from);
       expect(backwardLinksFileIds).toHaveLength(2);
-      expect(backwardLinksFileIds).toContain(fromFile1._id);
-      expect(backwardLinksFileIds).toContain(fromFile2._id);
+      expect(backwardLinksFileIds).toContain(fromFile1!._id);
+      expect(backwardLinksFileIds).toContain(fromFile2!._id);
     });
   });
 
@@ -180,7 +182,41 @@ describe("MarkdownDB", () => {
     const allBlogFiles = recursiveWalkDir(`${pathToContentFixture}/blog`);
     const indexedBlogFiles = await mddb.getFiles({
       folder: "blog",
+      extensions: ["md", "mdx"],
     });
     expect(indexedBlogFiles.length).toBe(allBlogFiles.length);
+  });
+
+  describe("MddbFile schema", () => {
+    it("batchInsert should throw an error if some file objects have duplicate _id", () => {
+      const files: File[] = [
+        {
+          _id: "1",
+          file_path: "aaa.md",
+          extension: "md",
+          url_path: "aaa",
+          metadata: null,
+          filetype: null,
+        },
+        {
+          _id: "2",
+          file_path: "bbb.md",
+          extension: "md",
+          url_path: "bbb",
+          metadata: null,
+          filetype: null,
+        },
+        {
+          _id: "1",
+          file_path: "ccc.md",
+          extension: "md",
+          url_path: "ccc",
+          metadata: null,
+          filetype: null,
+        },
+      ];
+      // TODO fix types
+      expect(() => MddbFile.batchInsert(mddb as any, files)).toThrow();
+    });
   });
 });

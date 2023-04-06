@@ -41,12 +41,18 @@ const extractWikiLinks = (
       linkType: "embed",
     }),
     wikiLink: (node: any) => {
-      // TODO how to get wiki links of embed types in a better way?
-      // it should be possible, since we are adding { isType: "embed" } to tokens
-      const { href, src } = node.data?.hProperties || {};
+      const linkType = node.data.isEmbed ? "embed" : "normal";
+      let linkSrc = "";
+      if (node.data.hName === "img" || node.data.hName === "iframe") {
+        linkSrc = node.data.hProperties.src;
+      } else if (node.data.hName === "a") {
+        linkSrc = node.data.hProperties.href;
+      } else {
+        linkSrc = node.data.permalink;
+      }
       return {
-        linkSrc: href ?? src,
-        linkType: (href ? "normal" : "embed") as "normal" | "embed",
+        linkSrc,
+        linkType,
       };
     },
     ...userExtractors,
