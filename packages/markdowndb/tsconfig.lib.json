@@ -1,6 +1,8 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "strict": true,
+    "strictPropertyInitialization": false,
     "target": "es2020",
     "module": "es2020",
     "moduleResolution": "node",
@@ -10,5 +12,5 @@
     "types": ["node"]
   },
   "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"],
-  "include": ["src/**/*.ts"]
+  "include": ["**/*.js", "**/*.ts"]
 }
