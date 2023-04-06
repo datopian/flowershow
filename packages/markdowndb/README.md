@@ -1,4 +1,6 @@
-# MarkdownDB [![](https://badgen.net/npm/v/@flowershow/markdowndb)](https://www.npmjs.com/package/@flowershow/markdowndb)
+# MarkdownDB
+
+[![](https://badgen.net/npm/v/@flowershow/markdowndb)](https://www.npmjs.com/package/@flowershow/markdowndb)
 
 MarkdownDB is a javascript library for treating markdown files as a database -- as a "MarkdownDB". Specifically, it:
 
