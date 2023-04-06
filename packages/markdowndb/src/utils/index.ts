@@ -1,3 +1,3 @@
-export { recursiveWalkDir } from "./recursiveWalkDir";
-export { extractWikiLinks, WikiLink } from "./extractWikiLinks";
-export { parseFile } from "./parseFile";
+export { recursiveWalkDir } from "./recursiveWalkDir.js";
+export { extractWikiLinks, WikiLink } from "./extractWikiLinks.js";
+export { parseFile } from "./parseFile.js";

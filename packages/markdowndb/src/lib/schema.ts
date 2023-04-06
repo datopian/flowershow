@@ -1,4 +1,5 @@
 import { Knex } from "knex";
+import { areUniqueObjectsByKey } from "./validate.js";
 
 /*
  * Types
@@ -17,38 +18,57 @@ type MetaData = {
 /*
  * Schema
  */
-export interface FileSerialized extends Omit<File, "metadata"> {
-  metadata: string | null;
+interface File {
+  _id: string;
+  file_path: string;
+  extension: string;
+  url_path: string | null;
+  filetype: string | null;
+  metadata: MetaData | null;
 }
 
-class File {
+class MddbFile {
   static table = Table.Files;
   static supportedExtensions = ["md", "mdx"];
 
   _id: string;
   file_path: string;
-  url_path: string;
-  metadata: MetaData | null;
   extension: string;
+  url_path: string | null;
+  // TODO there should be a separate table for filetypes
+  // and another one for many-to-many relationship between files and filetypes
   filetype: string | null;
+  metadata: MetaData | null;
 
-  constructor(dbFile: FileSerialized) {
-    this._id = dbFile._id;
-    this.file_path = dbFile.file_path;
-    this.url_path = dbFile.url_path;
-    this.metadata = dbFile.metadata ? JSON.parse(dbFile.metadata) : null;
-    this.extension = dbFile.extension;
-    this.filetype = dbFile.filetype;
+  // TODO type?
+  constructor(file: any) {
+    this._id = file._id;
+    this.file_path = file.file_path;
+    this.extension = file.extension;
+    this.url_path = file.url_path;
+    this.filetype = file.filetype;
+    this.metadata = file.metadata ? JSON.parse(file.metadata) : null;
+  }
+
+  toObject(): File {
+    return {
+      _id: this._id,
+      file_path: this.file_path,
+      extension: this.extension,
+      url_path: this.url_path,
+      filetype: this.filetype,
+      metadata: this.metadata,
+    };
   }
 
   static async createTable(db: Knex) {
     const creator = (table: Knex.TableBuilder) => {
       table.string("_id").primary();
       table.string("file_path").unique().notNullable(); // Path relative to process.cwd()
-      table.string("url_path").unique().notNullable(); // Sluggfied path
-      table.string("metadata").notNullable(); // All frontmatter data
       table.string("extension").notNullable(); // File extension
-      table.string("filetype"); // type field in frontmatter if it exists
+      table.string("url_path"); // Sluggfied path relative to content folder
+      table.string("filetype"); // Type field in frontmatter if it exists
+      table.string("metadata"); // All frontmatter data
     };
     const tableExists = await db.schema.hasTable(this.table);
 
@@ -62,6 +82,12 @@ class File {
   }
 
   static batchInsert(db: Knex, files: File[]) {
+    if (!areUniqueObjectsByKey(files, "_id")) {
+      throw new Error("Files must have unique _id");
+    }
+    if (!areUniqueObjectsByKey(files, "file_path")) {
+      throw new Error("Files must have unique file_path");
+    }
     const serializedFiles = files.map((file) => {
       return {
         ...file,
@@ -73,7 +99,13 @@ class File {
   }
 }
 
-class Link {
+interface Link {
+  link_type: "normal" | "embed";
+  from: string;
+  to: string;
+}
+
+class MddbLink {
   static table = Table.Links;
 
   // _id: string;
@@ -81,16 +113,20 @@ class Link {
   from: string;
   to: string;
 
-  constructor(dbLink: {
-    // _id: string;
-    link_type: "normal" | "embed";
-    from: string;
-    to: string;
-  }) {
+  // TODO type?
+  constructor(link: any) {
     // this._id = dbLink._id;
-    this.link_type = dbLink.link_type;
-    this.from = dbLink.from;
-    this.to = dbLink.to;
+    this.link_type = link.link_type;
+    this.from = link.from;
+    this.to = link.to;
+  }
+
+  toObject(): Link {
+    return {
+      link_type: this.link_type,
+      from: this.from,
+      to: this.to,
+    };
   }
 
   static async createTable(db: Knex) {
@@ -118,18 +154,27 @@ class Link {
   }
 }
 
-class Tag {
+interface Tag {
+  name: string;
+}
+
+class MddbTag {
   static table = Table.Tags;
 
   name: string;
   // description: string;
 
-  constructor(dbTag: {
-    name: string;
-    // description: string;
-  }) {
-    this.name = dbTag.name;
+  // TODO type?
+  constructor(tag: any) {
+    this.name = tag.name;
     // this.description = dbTag.description;
+  }
+
+  toObject(): Tag {
+    return {
+      name: this.name,
+      // description: this.description,
+    };
   }
 
   static async createTable(db: Knex) {
@@ -149,19 +194,27 @@ class Tag {
   }
 
   static batchInsert(db: Knex, tags: Tag[]) {
+    if (!areUniqueObjectsByKey(tags, "name")) {
+      throw new Error("Tags must have unique name");
+    }
     return db.batchInsert(Table.Tags, tags);
   }
 }
 
-class FileTag {
+interface FileTag {
+  tag: string;
+  file: string;
+}
+
+class MddbFileTag {
   static table = Table.FileTags;
   // _id: string;
   tag: string;
   file: string;
 
-  constructor(dbFileTag: { tag: string; file: string }) {
-    this.tag = dbFileTag.tag;
-    this.file = dbFileTag.file;
+  constructor(fileTag: any) {
+    this.tag = fileTag.tag;
+    this.file = fileTag.file;
   }
 
   static async createTable(db: Knex) {
@@ -189,4 +242,4 @@ class FileTag {
   }
 }
 
-export { File, Link, Tag, FileTag };
+export { File, MddbFile, Link, MddbLink, Tag, MddbTag, FileTag, MddbFileTag };
