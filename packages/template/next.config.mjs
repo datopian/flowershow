@@ -1,6 +1,4 @@
-import { withContentlayer } from "next-contentlayer";
-
-export default withContentlayer({
+export default {
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -10,4 +8,4 @@ export default withContentlayer({
     };
     return config;
   },
-});
+};
