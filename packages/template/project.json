@@ -14,6 +14,16 @@
         "outputPath": "packages/template/.next"
       }
     },
+    "mddb": {
+      "executor": "nx:run-commands",
+      "outputs": ["{options.outputPath}"],
+      "inputs": ["siteContent"],
+      "options": {
+        "command": "npm run mddb",
+        "cwd": "packages/template",
+        "outputPath": "packages/template/markdown.db"
+      }
+    },
     "export": {
       "executor": "nx:run-commands",
       "outputs": ["{options.outputPath}"],
