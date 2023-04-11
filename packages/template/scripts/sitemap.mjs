@@ -1,14 +1,17 @@
 import { writeFileSync } from "fs";
 import { globby } from "globby";
 import prettier from "prettier";
-import { allDocuments } from "../.contentlayer/generated/index.mjs";
+
 import config from "../content/config.mjs";
+import clientPromise from "../lib/mddb.mjs";
 
 export default async function sitemap() {
   const prettierConfig = await prettier.resolveConfig("");
-  const contentPages = allDocuments
-    .filter((x) => !x.draft)
-    .map((x) => `/${x._raw.flattenedPath}`);
+  const mddb = await clientPromise;
+  const allFiles = await mddb.getFiles({ extensions: ["mdx", "md"] });
+  const contentPages = allFiles
+    .filter((x) => !x.metadata?.isDraft)
+    .map((x) => `/${x.url_path}`);
   const pages = await globby([
     "pages/*.(js|tsx)",
     "!pages/_*.(js|tsx)",
