@@ -1,4 +1,4 @@
-export async function getPageData(dataProperties) {
+export async function getPageData(dataProperties: string[]) {
   const data = {};
   for (const dataProperty of dataProperties) {
     try {

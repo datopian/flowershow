@@ -1,16 +1,16 @@
 /* eslint import/no-default-export: off */
 import { useEffect } from "react";
 import { NextSeo } from "next-seo";
-import { allDocuments } from "contentlayer/generated";
-import { useMDXComponent } from "next-contentlayer/hooks";
-import { Document } from "contentlayer/core";
 
 import { CustomLink, Pre, BlogsList, Mermaid } from "@flowershow/core";
 
-import { getPageData } from "../lib/getPageData";
-import { getAuthorsDetails } from "../lib/getAuthorsDetails";
-import layouts from "../layouts";
-import { siteConfig } from "../config/siteConfig";
+import { useMDXComponent } from "@/lib/useMDXComponent";
+import { getPageData } from "@/lib/getPageData";
+import { getAuthorsDetails } from "@/lib/getAuthorsDetails";
+import clientPromise from "@/lib/mddb.mjs";
+
+import layouts from "@/layouts";
+import { siteConfig } from "@/config/siteConfig";
 
 // workaround solution to allow importing components
 // that import from "next" package (e.g. next/link) in MDX pages
@@ -106,18 +106,24 @@ export default function Page({ globals, body, ...meta }) {
 }
 
 export async function getStaticProps({ params }) {
-  // params.slug is undefined for root index page
-  const urlPath = params.slug ? params.slug.join("/") : "";
-  const page: Document = allDocuments.find((p) => p.url_path === urlPath);
-  const globals = await getPageData(page.data);
-  // TODO this is a temporary solution used to pass authors to blog layout
-  const authorsDetails = getAuthorsDetails(page.authors);
+  const mddb = await clientPromise;
+  const urlPath = params.slug.join("/");
+  const page = await mddb.getFileByUrl(urlPath);
+
+  // TODO this is crap, refactor
+  const { data, authors } = page.metadata || {};
+  const globals = data ? await getPageData(data) : [];
+  const authorsDetails = getAuthorsDetails(authors);
+
   return { props: { ...page, authorsDetails, globals } };
 }
 
 export async function getStaticPaths() {
+  const mddb = await clientPromise;
+  const allDocuments = await mddb.getFiles({ extensions: ["mdx", "md"] });
+
   const paths = allDocuments
-    .filter((page) => !page?.isDraft)
+    .filter((page) => !page.metadata?.isDraft)
     .map((page) => {
       const parts = page.url_path.split("/");
       return { params: { slug: parts } };
