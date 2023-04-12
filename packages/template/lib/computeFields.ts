@@ -4,6 +4,7 @@ import stripMarkdown, { Options } from "strip-markdown";
 
 import { siteConfig } from "../config/siteConfig";
 import getAuthorsDetails from "./getAuthorsDetails";
+import sluggify from "./sluggify";
 
 // TODO return type
 
@@ -42,7 +43,9 @@ const computeFields = async ({
     // if (urlPath.startsWith("docs/")) return "docs";
     return "docs"; // TODO default layout from config?
   })();
-  const slug = urlPath.replace(/^(.+?\/)*/, "");
+
+  // TODO Temporary, should probably be a column in the database
+  const slug = sluggify(urlPath);
   // TODO take into accout include/exclude fields in config
   const isDraft = frontMatter.isDraft ?? false;
   const editUrl =
@@ -113,18 +116,3 @@ const extractDescription = async (source: string) => {
 };
 
 export default computeFields;
-
-// let showComments = false;
-// const comments = siteConfig.comments;
-
-// if (comments && comments.provider && comments.config) {
-//     const sourceDir = pageProps.type
-//         ? pageProps.type.toLowerCase()
-//         : pageProps._raw?.sourceFileDir;
-//     const pagesFromConfig =
-//         Array.isArray(comments.pages) && comments.pages.length > 0
-//             ? comments.pages?.includes(sourceDir)
-//             : true;
-
-//     showComments = pageProps.showComments ?? pagesFromConfig;
-// }

@@ -1,7 +1,7 @@
 ---
 title: Create a blog/news/articles site with Flowershow!
 description: Create a blog/news/articles site with Flowershow!
-type: Blog
+layout: blog
 date: 2023-01-25
 authors: [philippe-du-preez]
 ---
@@ -25,7 +25,7 @@ You can assign `Blog` type to selected documents, by specifying the type in thei
 ```md
 ---
 title: My first blog post
-type: Blog
+type: blog
 ---
 
 Blog content here

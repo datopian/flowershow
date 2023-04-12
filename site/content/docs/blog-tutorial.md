@@ -1,7 +1,7 @@
 ---
 title: Blog support
 description: Learn how to create an index page for your blog
-type: Blog
+layout: blog
 date: 2022-11-29
 authors: [Ola Rubaj]
 ---

@@ -1,15 +1,15 @@
 ---
 title: How to create custom page types and layouts
-description: You may have many different types of notes that you want to display in different ways on your Flowershow website, like tutorials, docs, news, or... recipes! In this tutorial, we will cover how to add a new `Recipe` document type for our cooking blog as well as a custom `RecipeLayout` to make our recipes look nice. Then we will create a home page for listing all the pages of this type. 
-type: Blog
+description: You may have many different types of notes that you want to display in different ways on your Flowershow website, like tutorials, docs, news, or... recipes! In this tutorial, we will cover how to add a new `Recipe` document type for our cooking blog as well as a custom `RecipeLayout` to make our recipes look nice. Then we will create a home page for listing all the pages of this type.
+layout: blog
 created: 2023-03-02
 authors: [philippe-du-preez]
 ---
 
-You may have many different types of notes that you want to display in different ways on your Flowershow website, like tutorials, docs, news, or... recipes! In this tutorial, we will cover how to add a new `Recipe` document type for our cooking blog as well as a custom `RecipeLayout` to make our recipes look nice. Then we will create a home page for listing all the pages of this type.  
+You may have many different types of notes that you want to display in different ways on your Flowershow website, like tutorials, docs, news, or... recipes! In this tutorial, we will cover how to add a new `Recipe` document type for our cooking blog as well as a custom `RecipeLayout` to make our recipes look nice. Then we will create a home page for listing all the pages of this type.
 
->[!info] Note
->You can find the code of the example app created in this tutorial at https://github.com/flowershow/flowershow/tree/main/examples/layouts-and-pages .
+> [!info] Note
+> You can find the code of the example app created in this tutorial at https://github.com/flowershow/flowershow/tree/main/examples/layouts-and-pages .
 
 ## Create a custom document type
 
@@ -47,7 +47,7 @@ Since we are making a `Recipe` type, apart from the default Flowershow fields de
 
 Obviously, we could just write all this data inline, e.g. in a bullet list above or below the recipe instructions, but this way we will be able to access this data in a custom layout created specifically for our recipes and display it in a consistent way across all the recipes and in a nicer way (e.g. show ingredients list in a sidebar, or display prep time and servings with nice styling and icons).
 
-Now, let's create the `Recipe` document type in `.flowershow/contentlayer.config.js` file with all the frontmatter fields we've listed above. 
+Now, let's create the `Recipe` document type in `.flowershow/contentlayer.config.js` file with all the frontmatter fields we've listed above.
 
 ```javascript {9-20}
 //contentlayer.config.ts
@@ -228,7 +228,7 @@ export function RecipeLayout({ children, ...frontMatter }) {
 
 The last thing we need to do is to export the layout from `.flowershow/layouts/index.ts` file, so that it can then be imported by Flowershow to render our recipe documents.
 
->[!note]
+> [!note]
 > Note, that the name under which the layout is exported needs to match the name of the layout specified on the Contentlayer's document type, in this case `recipe`.
 
 ```javascript {4}
