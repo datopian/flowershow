@@ -1,10 +1,10 @@
-import { siteConfig } from "@/config/siteConfig";
+import { siteConfig } from "../config/siteConfig";
 import clientPromise from "./mddb.mjs";
 
 export const getAuthorsDetails = async (authors?: string[]) => {
   const mddb = await clientPromise;
   const allPeople = await mddb.getFiles({ folder: "people" });
-  let blogAuthors = [];
+  let blogAuthors: string[] = [];
 
   if (authors) {
     blogAuthors = authors;
@@ -13,14 +13,14 @@ export const getAuthorsDetails = async (authors?: string[]) => {
   }
 
   return blogAuthors.map((author) => {
+    const matchedAuthor = allPeople.find(
+      (p) =>
+        p.metadata?.id === author ||
+        p.metadata?.slug === author ||
+        p.metadata?.name
+    );
     return (
-      // allPeople.find(
-      //   ({ id, slug, name }) =>
-      //     id === author || slug === author || name === author
-      // ) ?? { name: author, avatar: siteConfig.avatarPlaceholder }
-
-      // TODO add back support for lookup by id and slug
-      allPeople.find((p) => p.metadata?.name === author) ?? {
+      matchedAuthor ?? {
         name: author,
         avatar: siteConfig.avatarPlaceholder,
       }
