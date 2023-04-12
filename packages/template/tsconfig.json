@@ -9,7 +9,6 @@
       "@flowershow/remark-embed": [
         "node_modules/@flowershow/remark-embed/dist/src"
       ],
-      "contentlayer/generated": ["./.contentlayer/generated"],
       "@/*": ["./*"]
     },
     "target": "es2020",
@@ -32,7 +31,7 @@
     "next-env.d.ts",
     "**/*.tsx",
     "**/*.ts",
-    ".contentlayer/generated"
+    "lib/mddb.mjs"
   ],
   "exclude": ["node_modules"]
 }
