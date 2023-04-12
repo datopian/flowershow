@@ -4,12 +4,20 @@ import { Mermaid } from "@flowershow/core";
 
 import layouts from "../layouts";
 
+// TODO
+/* import { Hero } from "./custom/Hero"
+ * import { WhatIsFlowershow } from "./custom/WhatIsFlowershow.jsx"
+ * import { Features } from "./custom/Features.jsx" */
+
 // Custom components/renderers to pass to MDX.
 // Since the MDX files aren't loaded by webpack, they have no knowledge of how
 // to handle import statements. Instead, you must include components in scope
 // here.
 const components = {
   mermaid: Mermaid,
+  /* Hero,
+   * WhatIsFlowershow,
+   * Features */
 };
 
 export default function DRD({ source, frontMatter }) {

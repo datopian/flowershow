@@ -5,12 +5,8 @@ showSidebar: false
 showLinkPreview: false
 ---
 
-import { Hero } from "components/custom/Hero.jsx"
-import { WhatIsFlowershow } from "components/custom/WhatIsFlowershow.jsx"
-import { Features } from "components/custom/Features.jsx"
-
-<Hero />
-<WhatIsFlowershow />
+{/** <Hero /> **/}
+{/** <WhatIsFlowershow /> **/}
 
 <div className="mx-auto lg:max-w-3xl">
   https://www.youtube.com/watch?v=HxD6NWYCea0
@@ -134,7 +130,7 @@ import { Features } from "components/custom/Features.jsx"
 
 {/** Features **/}
 
-<Features />
+{/** <Features /> **/}
 
 {/** Why the name? **/}
 
