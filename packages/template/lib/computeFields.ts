@@ -1,7 +1,9 @@
 // This file is a temporary replacement for legacy contentlayer's computeFields + default fields values
 import { remark } from "remark";
 import stripMarkdown, { Options } from "strip-markdown";
+
 import { siteConfig } from "../config/siteConfig";
+import getAuthorsDetails from "./getAuthorsDetails";
 
 // TODO return type
 
@@ -45,9 +47,13 @@ const computeFields = async ({
   const isDraft = frontMatter.isDraft ?? false;
   const editUrl =
     siteConfig.editLinkRoot && `${siteConfig.editLinkRoot}/${filePath}`;
+  const authors = frontMatter.authors
+    ? await getAuthorsDetails(frontMatter.authors)
+    : null;
 
   return {
     ...frontMatter,
+    authors,
     title,
     description,
     date,

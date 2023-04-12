@@ -17,14 +17,18 @@ const getAuthorsDetails = async (authors?: string[]) => {
       (p) =>
         p.metadata?.id === author ||
         p.metadata?.slug === author ||
-        p.metadata?.name
+        p.metadata?.name === author
     );
-    return (
-      matchedAuthor ?? {
-        name: author,
-        avatar: siteConfig.avatarPlaceholder,
-      }
-    );
+    return matchedAuthor
+      ? {
+          name: matchedAuthor.metadata?.name,
+          avatar: matchedAuthor.metadata?.avatar,
+          urlPath: matchedAuthor.url_path,
+        }
+      : {
+          name: author,
+          avatar: siteConfig.avatarPlaceholder,
+        };
   });
 };
 

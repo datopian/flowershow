@@ -22,15 +22,15 @@ interface Props extends React.PropsWithChildren {
   showToc: boolean;
   showEditLink: boolean;
   showSidebar: boolean;
-  url_path: string;
+  urlPath: string;
   showComments: boolean;
   commentsConfig: CommentsConfig;
-  edit_url?: string;
+  editUrl?: string;
 }
 
 interface SearchPage {
   title?: string;
-  url_path: string;
+  urlPath: string;
   slug: string;
   sourceDir: string;
 }
@@ -43,10 +43,10 @@ export const Layout: React.FC<Props> = ({
   showEditLink,
   showToc,
   showSidebar,
-  url_path,
+  urlPath,
   showComments,
   commentsConfig,
-  edit_url,
+  editUrl,
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [tableOfContents, setTableOfContents] = useState<TocSection[]>([]);
@@ -78,7 +78,7 @@ export const Layout: React.FC<Props> = ({
           }
           acc[key].push({
             name: curr.title ?? curr.slug,
-            href: curr.url_path,
+            href: curr.urlPath,
           });
           return acc;
         },
@@ -153,7 +153,7 @@ export const Layout: React.FC<Props> = ({
               defaultTheme={theme.defaultTheme}
               themeToggleIcon={theme.themeToggleIcon}
             >
-              {showSidebar && <SiteToc currentPath={url_path} nav={sitemap} />}
+              {showSidebar && <SiteToc currentPath={urlPath} nav={sitemap} />}
             </Nav>
           </div>
         </div>
@@ -168,21 +168,21 @@ export const Layout: React.FC<Props> = ({
           {/* SIDEBAR */}
           {showSidebar && (
             <div className="hidden lg:block fixed z-20 w-[18rem] top-[4.6rem] right-auto bottom-0 left-[max(0px,calc(50%-44rem))] p-8 overflow-y-auto">
-              <SiteToc currentPath={url_path} nav={sitemap} />
+              <SiteToc currentPath={urlPath} nav={sitemap} />
             </div>
           )}
           {/* MAIN CONTENT & FOOTER */}
           <main className="mx-auto pt-8">
             {children}
             {/* EDIT THIS PAGE LINK */}
-            {showEditLink && edit_url && <EditThisPage url={edit_url} />}
+            {showEditLink && editUrl && <EditThisPage url={editUrl} />}
             {/* PAGE COMMENTS */}
             {showComments && (
               <div
                 className="prose mx-auto pt-6 pb-6 text-center text-gray-700 dark:text-gray-300"
                 id="comment"
               >
-                {<Comments commentsConfig={commentsConfig} slug={url_path} />}
+                {<Comments commentsConfig={commentsConfig} slug={urlPath} />}
               </div>
             )}
           </main>

@@ -10,10 +10,11 @@ const config = {
     version: "Alpha",
   },
   editLinkRoot:
-    "https://github.com/flowershow/flowershow/edit/main/site/content",
+    "https://github.com/flowershow/flowershow/edit/main/site",
   showEditLink: true,
   showToc: true,
   showSidebar: false,
+  showComments: true,
   comments: {
     provider: "giscus", // supported providers: giscus, utterances, disqus
     pages: ["blog"], // page directories where we want commments

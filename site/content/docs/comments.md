@@ -23,6 +23,15 @@ Each provider has it's own configuration options. It is highly recommended that 
 > [!note]
 > If you are hosting your website on hosting providers like Netlify, Vercel or Cloudflare, you will also need to add the environment variables there. Please follow their documentation to learn how to do this.
 
+No matter which one you choose, in order to enable comments on your pages you need to add `showComments` property to your config file and set it to `true`.
+
+```js
+// config.js
+...
+showComments: true,
+...
+```
+
 ### Giscus
 
 ```

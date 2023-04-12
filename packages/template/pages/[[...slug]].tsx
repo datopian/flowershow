@@ -12,8 +12,9 @@ export interface PageProps {
   meta: any;
 }
 
-export default function DRDPage({ source, meta }: PageProps) {
-  // TODO rename this component to sth else
+export default function Page({ source, meta }: PageProps) {
+  source = JSON.parse(source);
+
   return <DRD source={source} frontMatter={meta} />;
 }
 
@@ -40,7 +41,7 @@ export const getStaticProps: GetStaticProps = async ({
 
   return {
     props: {
-      source: mdxSource,
+      source: JSON.stringify(mdxSource),
       meta: frontMatterWithComputedFields,
     },
   };

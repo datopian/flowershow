@@ -24,7 +24,7 @@ const MyApp = ({ Component, pageProps }: AppProps<PageProps>) => {
   const router = useRouter();
   const { source, meta } = pageProps;
 
-  console.log("pageProps", typeof pageProps);
+  console.log({ meta });
 
   // TODO maybe use computed fields for showEditLink and showToc to make this even cleaner?
   const layoutProps = {

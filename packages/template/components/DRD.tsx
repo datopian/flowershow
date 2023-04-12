@@ -1,6 +1,6 @@
 import React from "react";
 import { MDXRemote } from "next-mdx-remote";
-import { Mermaid } from "@flowershow/core";
+import { Mermaid, Pre } from "@flowershow/core";
 
 import layouts from "../layouts";
 
@@ -15,6 +15,7 @@ import layouts from "../layouts";
 // here.
 const components = {
   mermaid: Mermaid,
+  pre: Pre,
   /* Hero,
    * WhatIsFlowershow,
    * Features */
