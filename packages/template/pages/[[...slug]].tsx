@@ -1,61 +1,52 @@
-import fs from "fs";
 import React from "react";
+import fs from "fs";
 
 import DRD from "../components/DRD";
 import clientPromise from "../lib/mddb.mjs";
+import computeFields from "../lib/computeFields";
 import parse from "../lib/markdown";
-import { getAuthorsDetails } from "../lib/getAuthorsDetails";
+import { GetStaticProps, GetStaticPaths, GetStaticPropsResult } from "next";
 
-export default function DRDPage({ source, frontMatter }) {
-  source = JSON.parse(source);
-  frontMatter = JSON.parse(frontMatter);
-
-  return <DRD source={source} frontMatter={frontMatter} />;
+export interface PageProps {
+  source: any;
+  meta: any;
 }
 
-export const getStaticProps = async ({ params }) => {
-  const urlPath = params.slug ? params.slug.join("/") : "/";
+export default function DRDPage({ source, meta }: PageProps) {
+  // TODO rename this component to sth else
+  return <DRD source={source} frontMatter={meta} />;
+}
+
+export const getStaticProps: GetStaticProps = async ({
+  params,
+}): Promise<GetStaticPropsResult<PageProps>> => {
+  const urlPath = params?.slug ? (params.slug as string[]).join("/") : "/";
 
   const mddb = await clientPromise;
   const dbFile = await mddb.getFileByUrl(urlPath);
+  const filePath = dbFile!.file_path;
+  const frontMatter = dbFile!.metadata ?? {};
 
-  const dbBacklinks = await mddb.getLinks({
-    fileId: dbFile!._id,
-    direction: "backward",
+  const source = fs.readFileSync(filePath, { encoding: "utf-8" });
+  const { mdxSource } = await parse(source, "mdx", {});
+
+  // TODO temporary replacement for contentlayer's computedFields
+  const frontMatterWithComputedFields = await computeFields({
+    frontMatter,
+    urlPath,
+    filePath,
+    source,
   });
-  // TODO temporary solution, we will have a method on MddbFile to get these links
-  const dbBacklinkFilesPromises = dbBacklinks.map((link) =>
-    mddb.getFileById(link.from)
-  );
-  const dbBacklinkFiles = await Promise.all(dbBacklinkFilesPromises);
-  const dbBacklinkUrls = dbBacklinkFiles.map(
-    (file) => file!.toObject().url_path
-  );
-
-  // TODO we can already get frontmatter from dbFile.metadata
-  // so parse could only return mdxSource
-  const source = fs.readFileSync(dbFile!.file_path, { encoding: "utf-8" });
-  const { mdxSource, frontMatter } = await parse(source, "mdx", {
-    backlinks: dbBacklinkUrls,
-  });
-
-  // Temporary, so that blogs work properly
-  if (dbFile!.url_path!.startsWith("blog/")) {
-    frontMatter.layout = "blog";
-    frontMatter.authorsDetails = await getAuthorsDetails(
-      dbFile!.metadata!.authors
-    );
-  }
 
   return {
     props: {
-      source: JSON.stringify(mdxSource),
-      frontMatter: JSON.stringify(frontMatter),
+      source: mdxSource,
+      meta: frontMatterWithComputedFields,
     },
   };
 };
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const mddb = await clientPromise;
   const allDocuments = await mddb.getFiles({ extensions: ["md", "mdx"] });
 
@@ -68,4 +59,4 @@ export async function getStaticPaths() {
     paths,
     fallback: false,
   };
-}
+};

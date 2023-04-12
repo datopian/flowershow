@@ -1,10 +1,11 @@
+import React from "react";
 /* eslint import/no-default-export: off */
+import Script from "next/script";
 import { DefaultSeo } from "next-seo";
 import { useRouter } from "next/router";
-import Script from "next/script";
 import { useEffect } from "react";
+import type { AppProps } from "next/app";
 import "tailwindcss/tailwind.css";
-
 import {
   Layout,
   SearchProvider,
@@ -17,38 +18,22 @@ import "../styles/docsearch.css";
 import "../styles/global.css";
 import "../styles/prism.css";
 
-function MyApp({ Component, pageProps }) {
+import { PageProps } from "./[[...slug]]";
+
+const MyApp = ({ Component, pageProps }: AppProps<PageProps>) => {
   const router = useRouter();
+  const { source, meta } = pageProps;
 
-  /**
-   * Page comments
-   * Showing page comments either set through frontmatter,
-   * or set in config's pages property. Frontmatter takes precedence.
-   * if neither are set then defaults to show on all pages.
-   */
-  let showComments = false;
-  const comments = siteConfig.comments;
-
-  if (comments && comments.provider && comments.config) {
-    const sourceDir = pageProps.type
-      ? pageProps.type.toLowerCase()
-      : pageProps._raw?.sourceFileDir;
-    const pagesFromConfig =
-      Array.isArray(comments.pages) && comments.pages.length > 0
-        ? comments.pages?.includes(sourceDir)
-        : true;
-
-    showComments = pageProps.showComments ?? pagesFromConfig;
-  }
+  console.log("pageProps", typeof pageProps);
 
   // TODO maybe use computed fields for showEditLink and showToc to make this even cleaner?
   const layoutProps = {
-    showToc: pageProps.showToc ?? siteConfig.showToc,
-    showEditLink: pageProps.showEditLink ?? siteConfig.showEditLink,
-    showSidebar: pageProps.showSidebar ?? siteConfig.showSidebar,
-    showComments,
-    edit_url: pageProps.edit_url,
-    url_path: pageProps.url_path,
+    showToc: meta.showToc,
+    showEditLink: meta.showEditLink,
+    showSidebar: meta.showSidebar,
+    showComments: meta.showComments,
+    editUrl: meta.editUrl,
+    urlPath: meta.urlPath,
     commentsConfig: siteConfig.comments,
     nav: {
       title: siteConfig.navbarTitle?.text ?? siteConfig.title,
@@ -118,6 +103,6 @@ function MyApp({ Component, pageProps }) {
       </SearchProvider>
     </ThemeProvider>
   );
-}
+};
 
 export default MyApp;

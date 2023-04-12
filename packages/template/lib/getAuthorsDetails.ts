@@ -1,7 +1,7 @@
 import { siteConfig } from "../config/siteConfig";
 import clientPromise from "./mddb.mjs";
 
-export const getAuthorsDetails = async (authors?: string[]) => {
+const getAuthorsDetails = async (authors?: string[]) => {
   const mddb = await clientPromise;
   const allPeople = await mddb.getFiles({ folder: "people" });
   let blogAuthors: string[] = [];
@@ -27,3 +27,5 @@ export const getAuthorsDetails = async (authors?: string[]) => {
     );
   });
 };
+
+export default getAuthorsDetails;

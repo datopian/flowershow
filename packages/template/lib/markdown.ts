@@ -1,5 +1,5 @@
 import matter from "gray-matter";
-import mdxmermaid from "mdx-mermaid";
+import mdxMermaid from "mdx-mermaid";
 import { h } from "hastscript";
 import remarkCallouts from "@flowershow/remark-callouts";
 import remarkEmbed from "@flowershow/remark-embed";
@@ -7,13 +7,16 @@ import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import remarkSmartypants from "remark-smartypants";
 import remarkToc from "remark-toc";
-import remarkWikiLink from "@flowershow/remark-wiki-link";
+// TODO adjust remark-wiki-link API to:
+// import remarkWikiLink, { getPermalinks } from "@flowershow/remark-wiki-link";
+import { remarkWikiLink, getPermalinks } from "@flowershow/remark-wiki-link";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
 import rehypePrismPlus from "rehype-prism-plus";
-
 import { serialize } from "next-mdx-remote/serialize";
+
+import { siteConfig } from "../config/siteConfig";
 
 /**
  * Parse a markdown or MDX file to an MDX source form + front matter data
@@ -24,6 +27,7 @@ import { serialize } from "next-mdx-remote/serialize";
  */
 const parse = async function (source, format, scope) {
   const { content, data } = matter(source);
+  const permalinks = await getPermalinks(siteConfig.content);
 
   const mdxSource = await serialize(
     { value: content, path: format },
@@ -36,7 +40,7 @@ const parse = async function (source, format, scope) {
           [remarkSmartypants, { quotes: false, dashes: "oldschool" }],
           remarkMath,
           remarkCallouts,
-          remarkWikiLink,
+          [remarkWikiLink, { permalinks, pathFormat: "obsidian-short" }],
           [
             remarkToc,
             {
@@ -44,7 +48,7 @@ const parse = async function (source, format, scope) {
               tight: true,
             },
           ],
-          [mdxmermaid, {}],
+          [mdxMermaid, {}],
         ],
         rehypePlugins: [
           rehypeSlug,

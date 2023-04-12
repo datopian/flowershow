@@ -1,4 +1,4 @@
-export async function getPageData(dataProperties: string[]) {
+async function getPageData(dataProperties: string[]) {
   const data = {};
   for (const dataProperty of dataProperties) {
     try {
@@ -13,3 +13,5 @@ export async function getPageData(dataProperties: string[]) {
   }
   return data;
 }
+
+export default getPageData;

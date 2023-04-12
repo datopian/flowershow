@@ -3,7 +3,67 @@ import { remark } from "remark";
 import stripMarkdown, { Options } from "strip-markdown";
 import { siteConfig } from "../config/siteConfig";
 
-const extractTitle = (source: string) => {
+// TODO return type
+
+const computeFields = async ({
+  frontMatter,
+  urlPath,
+  filePath,
+  source,
+}: {
+  frontMatter: Record<string, any>;
+  urlPath: string;
+  filePath: string;
+  source: string;
+}) => {
+  // Fields with corresponding config options
+  // TODO see _app.tsx
+  const showComments =
+    frontMatter.showComments ?? siteConfig.showComments ?? false;
+  const showEditLink =
+    frontMatter.showEditLink ?? siteConfig.showEditLink ?? false;
+  // TODO take config into accout
+  const showLinkPreview =
+    frontMatter.showLinkPreview ?? siteConfig.showLinkPreview ?? false;
+  const showToc = frontMatter.showToc ?? siteConfig.showToc ?? false;
+  const showSidebar =
+    frontMatter.showSidebar ?? siteConfig.showSidebar ?? false;
+
+  // Computed fields
+  const title = frontMatter.title ?? (await extractTitle(source));
+  const description =
+    frontMatter.description ?? (await extractDescription(source));
+  const date = frontMatter.date ?? frontMatter.created ?? null;
+  const layout = (() => {
+    if (frontMatter.layout) return frontMatter.layout;
+    if (urlPath.startsWith("blog/")) return "blog";
+    // if (urlPath.startsWith("docs/")) return "docs";
+    return "docs"; // TODO default layout from config?
+  })();
+  const slug = urlPath.replace(/^(.+?\/)*/, "");
+  // TODO take into accout include/exclude fields in config
+  const isDraft = frontMatter.isDraft ?? false;
+  const editUrl =
+    siteConfig.editLinkRoot && `${siteConfig.editLinkRoot}/${filePath}`;
+
+  return {
+    ...frontMatter,
+    title,
+    description,
+    date,
+    layout,
+    slug,
+    isDraft,
+    editUrl,
+    showComments,
+    showEditLink,
+    showLinkPreview,
+    showToc,
+    showSidebar,
+  };
+};
+
+const extractTitle = async (source: string) => {
   const heading = source.trim().match(/^#\s+(.*)/);
   if (heading) {
     const title = heading[1]
@@ -13,6 +73,7 @@ const extractTitle = (source: string) => {
     const stripTitle = await remark().use(stripMarkdown).process(title);
     return stripTitle.toString().trim();
   }
+  return null;
 };
 
 const extractDescription = async (source: string) => {
@@ -42,53 +103,22 @@ const extractDescription = async (source: string) => {
     const description: string = stripped.value.toString().slice(0, 200);
     return description + "...";
   }
+  return null;
 };
 
-export const computeFields = ({
-  frontmatter,
-  urlPath,
-  filePath,
-  source,
-}: {
-  frontmatter: Record<string, any>;
-  urlPath: string;
-  filePath: string;
-  source: string;
-}) => {
-  // Fields with corresponding config options
-  // TODO see _app.tsx
-  const showComments = frontmatter.showComments ?? siteConfig.showComments;
-  const showEditLink = frontmatter.showEditLink ?? siteConfig.showEditLink;
-  // TODO take config into accout
-  const showLinkPreview =
-    frontmatter.showLinkPreview ?? siteConfig.showLinkPreview;
-  const showToc = frontmatter.showToc ?? siteConfig.showToc;
-  const showSidebar = frontmatter.showSidebar ?? siteConfig.showSidebar;
+export default computeFields;
 
-  // Computed fields
-  const title = frontmatter.title ?? extractTitle(source);
-  const description = frontmatter.description ?? extractDescription(source);
-  const date = frontmatter.date ?? frontmatter.created ?? null;
-  // TODO blog layout for blog type pages
-  const layout = frontmatter.layout ?? "docs";
-  const slug = urlPath.replace(/^(.+?\/)*/, "");
-  const isDraft = frontmatter.isDraft ?? false;
-  const editUrl =
-    siteConfig.editLinkRoot && `${siteConfig.editLinkRoot}/${filePath}`;
+// let showComments = false;
+// const comments = siteConfig.comments;
 
-  return {
-    ...frontmatter,
-    title,
-    description,
-    date,
-    layout,
-    slug,
-    isDraft,
-    editUrl,
-    showComments,
-    showEditLink,
-    showLinkPreview,
-    showToc,
-    showSidebar,
-  };
-};
+// if (comments && comments.provider && comments.config) {
+//     const sourceDir = pageProps.type
+//         ? pageProps.type.toLowerCase()
+//         : pageProps._raw?.sourceFileDir;
+//     const pagesFromConfig =
+//         Array.isArray(comments.pages) && comments.pages.length > 0
+//             ? comments.pages?.includes(sourceDir)
+//             : true;
+
+//     showComments = pageProps.showComments ?? pagesFromConfig;
+// }
