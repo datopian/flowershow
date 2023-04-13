@@ -52,6 +52,6 @@ You can also overwrite the `showEditLink` property in a single page by including
 
 ```md
 ---
-editLink: false
+showEditLink: false
 ---
 ```
