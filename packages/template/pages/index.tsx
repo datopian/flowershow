@@ -44,12 +44,11 @@ export const getStaticProps: GetStaticProps = async (): Promise<
   return {
     props: {
       meta: {
-        layout: "unstyled",
+        urlPath: "/",
         showToc: false,
         showEditLink: false,
         showSidebar: false,
         showComments: false,
-        showLinkPreview: false,
       },
     },
   };

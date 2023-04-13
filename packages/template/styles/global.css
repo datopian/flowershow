@@ -35,6 +35,10 @@ html {
   visibility: hidden;
 }
 
+#mdxpage iframe {
+  height: 80vh;
+}
+
 /* :not(.unstyled) :is(h2, h3, h4, h5, h6):not(.blogitem-title) { */
 #mdxpage :is(h2, h3, h4, h5, h6) {
   margin-left: -2rem !important;

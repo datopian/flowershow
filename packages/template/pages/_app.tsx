@@ -37,12 +37,12 @@ const MyApp = ({ Component, pageProps }: AppProps<CustomAppProps>) => {
   const { meta } = pageProps;
 
   const layoutProps = {
-    showToc: meta.showToc,
-    showEditLink: meta.showEditLink,
-    showSidebar: meta.showSidebar,
-    showComments: meta.showComments,
-    editUrl: meta.editUrl,
-    urlPath: meta.urlPath,
+    showToc: meta?.showToc,
+    showEditLink: meta?.showEditLink,
+    showSidebar: meta?.showSidebar,
+    showComments: meta?.showComments,
+    editUrl: meta?.editUrl,
+    urlPath: meta?.urlPath,
     commentsConfig: siteConfig.comments,
     nav: {
       title: siteConfig.navbarTitle?.text ?? siteConfig.title,
