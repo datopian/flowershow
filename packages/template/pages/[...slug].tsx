@@ -51,10 +51,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const mddb = await clientPromise;
   const allDocuments = await mddb.getFiles({ extensions: ["md", "mdx"] });
 
-  const paths = allDocuments.map((page) => {
-    const parts = page!.url_path!.split("/");
-    return { params: { slug: parts } };
-  });
+  const paths = allDocuments
+    .filter((page) => page.metadata?.isDraft !== true)
+    .map((page) => {
+      const parts = page.url_path.split("/");
+      return { params: { slug: parts } };
+    });
 
   return {
     paths,
