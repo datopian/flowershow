@@ -106,7 +106,6 @@ export const Layout: React.FC<Props> = ({
       // sort groups alphabetically
       groupedPages.sort((a, b) => a.name.localeCompare(b.name));
       siteMap = siteMap.concat(groupedPages);
-      console.log({ siteMap });
       setSitemap(siteMap);
     };
     fetchData();

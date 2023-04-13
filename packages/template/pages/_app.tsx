@@ -5,7 +5,8 @@ import { DefaultSeo } from "next-seo";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import type { AppProps } from "next/app";
-import "tailwindcss/tailwind.css";
+
+import { siteConfig } from "../config/siteConfig";
 import {
   Layout,
   SearchProvider,
@@ -13,24 +14,28 @@ import {
   ThemeProvider,
 } from "@flowershow/core";
 
-import { siteConfig } from "../config/siteConfig";
+import "tailwindcss/tailwind.css";
 import "../styles/docsearch.css";
 import "../styles/global.css";
 import "../styles/prism.css";
 
-// TODO meta type
 export interface CustomAppProps {
-  meta: any;
+  meta: {
+    showToc: boolean;
+    showEditLink: boolean;
+    showSidebar: boolean;
+    showComments: boolean;
+    urlPath: string; // not sure what's this for
+    editUrl?: string;
+    [key: string]: any;
+  };
+  [key: string]: any;
 }
 
-const MyApp = ({ Component, pageProps }: AppProps<CustomAppProps | any>) => {
+const MyApp = ({ Component, pageProps }: AppProps<CustomAppProps>) => {
   const router = useRouter();
-  console.log({ pageProps });
   const { meta } = pageProps;
 
-  /* console.log({ meta }); */
-
-  // TODO maybe use computed fields for showEditLink and showToc to make this even cleaner?
   const layoutProps = {
     showToc: meta.showToc,
     showEditLink: meta.showEditLink,

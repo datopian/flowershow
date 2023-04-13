@@ -42,7 +42,6 @@ export const getStaticProps: GetStaticProps = async (): Promise<
   });
 
   const blogsList = await Promise.all(blogsMetadataPromises);
-  console.log(blogsList);
 
   return {
     props: {
@@ -51,6 +50,8 @@ export const getStaticProps: GetStaticProps = async (): Promise<
         showSidebar: false,
         showToc: false,
         showComments: false,
+        showEditLink: false,
+        urlPath: "/blog",
       },
       blogs: blogsList,
     },
