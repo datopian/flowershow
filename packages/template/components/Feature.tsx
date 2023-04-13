@@ -1,4 +1,6 @@
-export function Feature({ feature, index }) {
+import React from "react";
+
+export default function Feature({ feature, index }) {
   if (index % 2 == 0) {
     return (
       <div className="overflow-hidden sm:grid sm:grid-cols-2 sm:items-center lg:p-8 xl:p-12">

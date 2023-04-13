@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import Typed from "typed.js";
 
 /* eslint jsx-a11y/label-has-associated-control: off */
-export function Hero() {
+export default function Hero() {
   const el = useRef(null);
   const typed = useRef(null);
 

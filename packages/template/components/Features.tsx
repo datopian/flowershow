@@ -1,4 +1,5 @@
-import { Feature } from "./Feature";
+import React from "react";
+import Feature from "./Feature";
 
 const features = [
   {
@@ -52,7 +53,7 @@ const features = [
   },
 ];
 
-export function Features() {
+export default function Features() {
   return (
     <>
       <div className="prose dark:prose-invert mx-auto max-w-screen-xl px-4 py-6 lg:items-center text-center">

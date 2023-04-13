@@ -1,26 +1,26 @@
-import React from "react";
 import fs from "fs";
+import React from "react";
+import { GetStaticProps, GetStaticPaths, GetStaticPropsResult } from "next";
 
-import DRD from "../components/DRD";
+import MdxPage from "../components/MdxPage";
 import clientPromise from "../lib/mddb.mjs";
 import computeFields from "../lib/computeFields";
 import parse from "../lib/markdown";
-import { GetStaticProps, GetStaticPaths, GetStaticPropsResult } from "next";
+import type { CustomAppProps } from "./_app";
 
-export interface PageProps {
+interface SlugPageProps extends CustomAppProps {
   source: any;
-  meta: any;
 }
 
-export default function Page({ source, meta }: PageProps) {
+export default function Page({ source, meta }: SlugPageProps) {
   source = JSON.parse(source);
 
-  return <DRD source={source} frontMatter={meta} />;
+  return <MdxPage source={source} frontMatter={meta} />;
 }
 
 export const getStaticProps: GetStaticProps = async ({
   params,
-}): Promise<GetStaticPropsResult<PageProps>> => {
+}): Promise<GetStaticPropsResult<SlugPageProps>> => {
   const urlPath = params?.slug ? (params.slug as string[]).join("/") : "/";
 
   const mddb = await clientPromise;
