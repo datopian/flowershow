@@ -23,12 +23,10 @@ export default function MdxPage({ source, frontMatter }) {
   };
 
   return (
-    <div className="prose mx-auto">
-      <main>
-        <Layout>
-          <MDXRemote {...source} components={components} />
-        </Layout>
-      </main>
-    </div>
+    <main id="mdxpage" className="prose mx-auto">
+      <Layout>
+        <MDXRemote {...source} components={components} />
+      </Layout>
+    </main>
   );
 }

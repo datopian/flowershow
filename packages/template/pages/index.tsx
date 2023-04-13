@@ -17,9 +17,7 @@ export default function Home() {
       <WhatIsFlowershow />
 
       {/** Tutorial video **/}
-      <div className="mx-auto lg:max-w-3xl">
-        https://www.youtube.com/watch?v=HxD6NWYCea0
-      </div>
+      {/* <div className="mx-auto lg:max-w-3xl">https://www.youtube.com/watch?v=HxD6NWYCea0</div> */}
 
       <SelfPublishSteps />
       <CloudPublishSteps />
