@@ -1,6 +1,5 @@
 ---
 title: Site-wide table of contents (LHS Sidebar)
-showSidebar: true
 ---
 
 Flowershow supports adding a site-wide table of contents in a LFH sidebar to allow your users to easily navigate to other pages on your website.
