@@ -26,14 +26,15 @@ const computeFields = async ({
   const showEditLink =
     frontMatter.showEditLink ?? siteConfig.showEditLink ?? false;
   // TODO take config into accout
-  const showLinkPreview =
-    frontMatter.showLinkPreview ?? siteConfig.showLinkPreview ?? false;
+  const showLinkPreviews =
+    frontMatter.showLinkPreviews ?? siteConfig.showLinkPreviews ?? false;
   const showToc = frontMatter.showToc ?? siteConfig.showToc ?? false;
   const showSidebar =
     frontMatter.showSidebar ?? siteConfig.showSidebar ?? false;
 
   // Computed fields
-  const title = frontMatter.title ?? (await extractTitle(source));
+  // const title = frontMatter.title ?? (await extractTitle(source));
+  const title = frontMatter.title ?? null;
   const description =
     frontMatter.description ?? (await extractDescription(source));
   const date = frontMatter.date ?? frontMatter.created ?? null;
@@ -62,11 +63,12 @@ const computeFields = async ({
     date,
     layout,
     slug,
+    urlPath, // extra for blogs index page; temporary here
     isDraft,
     editUrl,
     showComments,
     showEditLink,
-    showLinkPreview,
+    showLinkPreviews,
     showToc,
     showSidebar,
   };

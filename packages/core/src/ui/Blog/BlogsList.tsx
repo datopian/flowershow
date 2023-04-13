@@ -16,7 +16,7 @@ export const BlogsList: React.FC<any> = ({ blogs }) => {
       <div className="md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40">
         <div className="flex flex-col space-y-16">
           {blogs.slice(0, blogsCount).map((blog) => {
-            return <BlogItem key={blog.url_path} blog={blog} />;
+            return <BlogItem key={blog.urlPath} blog={blog} />;
           })}
         </div>
       </div>

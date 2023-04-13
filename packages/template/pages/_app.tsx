@@ -18,13 +18,17 @@ import "../styles/docsearch.css";
 import "../styles/global.css";
 import "../styles/prism.css";
 
-import { PageProps } from "./[[...slug]]";
+// TODO meta type
+export interface CustomAppProps {
+  meta: any;
+}
 
-const MyApp = ({ Component, pageProps }: AppProps<PageProps>) => {
+const MyApp = ({ Component, pageProps }: AppProps<CustomAppProps | any>) => {
   const router = useRouter();
-  const { source, meta } = pageProps;
+  console.log({ pageProps });
+  const { meta } = pageProps;
 
-  console.log({ meta });
+  /* console.log({ meta }); */
 
   // TODO maybe use computed fields for showEditLink and showToc to make this even cleaner?
   const layoutProps = {
