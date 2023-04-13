@@ -1,2 +1,0 @@
-- pages marked with `isDraft` should not be saved to db?
-- pages/index.js is not indexed in the db, so we can't getFileByUrl and get its metadata
