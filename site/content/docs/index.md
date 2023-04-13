@@ -15,7 +15,6 @@ Flowershow supports **CommonMark** and **GitHub Flavored Markdown**, but also ma
 1. [[publish-tutorial|How to (self) publish your markdown files with Flowershow]]
 2. [[custom-theme|Customize theme]]
 3. [[2023-02-16-nextjs-tutorial|Jumpstart a NextJS site with Flowershow]]
-4. [[custom-layout|How to create custom page types and layouts]]
 
 ## Guides
 
@@ -24,10 +23,9 @@ Flowershow supports **CommonMark** and **GitHub Flavored Markdown**, but also ma
 3. [[callouts|Callouts (admonitions)]]
 4. [[tailwind|Styling with Tailwind]]
 5. [[table-of-contents|Table of contents]]
-6. [[contentlayer|Contentlayer configuration]]
-7. [[assets|Assets]]
-8. [[analytics|Analytics]]
-9. [[seo|SEO configuration]]
-10. [[theme|Dark-light theme]]
-11. [[search|Full-text search]]
-12. [[comments|Page comments]]
+6. [[assets|Assets]]
+7. [[analytics|Analytics]]
+8. [[seo|SEO configuration]]
+9. [[theme|Dark-light theme]]
+10. [[search|Full-text search]]
+11. [[comments|Page comments]]
