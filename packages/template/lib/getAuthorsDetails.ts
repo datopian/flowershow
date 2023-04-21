@@ -26,7 +26,8 @@ const getAuthorsDetails = async (authors?: string[]) => {
     return matchedAuthor
       ? {
           name: matchedAuthor.metadata?.name,
-          avatar: matchedAuthor.metadata?.avatar,
+          avatar:
+            matchedAuthor.metadata?.avatar ?? siteConfig.avatarPlaceholder,
           // TODO find a better way
           urlPath: !matchedAuthor.metadata?.isDraft && matchedAuthor.url_path,
         }

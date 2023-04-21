@@ -50,7 +50,8 @@ const computeFields = async ({
   // TODO take into accout include/exclude fields in config
   const isDraft = frontMatter.isDraft ?? false;
   const editUrl =
-    siteConfig.editLinkRoot && `${siteConfig.editLinkRoot}/${filePath}`;
+    (siteConfig.editLinkRoot && `${siteConfig.editLinkRoot}/${filePath}`) ||
+    null;
   const authors = frontMatter.authors
     ? await getAuthorsDetails(frontMatter.authors)
     : null;
