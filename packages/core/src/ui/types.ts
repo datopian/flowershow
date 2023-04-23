@@ -43,8 +43,8 @@ interface SharedFields {
 }
 
 interface ComputedFields {
-  url_path: string;
-  edit_url?: string;
+  urlPath: string;
+  editUrl?: string;
   date?: string;
 }
 

@@ -1,30 +1,31 @@
 const { test, expect } = require("@playwright/test");
-const { MarkdownPage } = require("../support/markdown-page");
+// const { MarkdownPage } = require("../support/markdown-page");
 
 test.describe.parallel("wiki links", () => {
   test.beforeEach(async ({ page }) => {
-    const Page = new MarkdownPage(page);
-    await Page.goto("/markdownFeatures");
-    await Page.getData();
+    // const Page = new MarkdownPage(page);
+    // await Page.goto("/markdown-features");
+    // await Page.getData();
+    await page.goto("/markdown-features");
   });
 
   test("parses a wiki link", async ({ page }) => {
     const link = page.locator("#wikiLink > p > a");
     await link.click();
-    await expect(page).toHaveURL("/fixturepage");
+    await expect(page).toHaveURL("/fixture-page");
   });
 
   test("parses a wiki link with custom divider", async ({ page }) => {
     const link = page.locator("#wikiLink-custom > p > a");
-    await expect(link).toContainText("Fixture Page");
+    await expect(link).toContainText("Some Page");
     await link.click();
-    await expect(page).toHaveURL("/fixturepage");
+    await expect(page).toHaveURL("/fixture-page");
   });
 
   test("parses a wiki link with header", async ({ page }) => {
     const link = page.locator("#wikiLink-heading > p > a");
     await link.click();
-    await expect(page).toHaveURL("/fixturepage#planned-features");
+    await expect(page).toHaveURL("/fixture-page#planned-features");
   });
 
   test("parses a wiki link with header and custom divider", async ({
@@ -33,7 +34,7 @@ test.describe.parallel("wiki links", () => {
     const link = page.locator("#wikiLink-heading-custom > p > a");
     await expect(link).toContainText("🚧 working on");
     await link.click();
-    await expect(page).toHaveURL("/fixturepage#planned-features");
+    await expect(page).toHaveURL("/fixture-page#planned-features");
   });
 
   test("link to image file", async ({ page }) => {
@@ -44,9 +45,10 @@ test.describe.parallel("wiki links", () => {
 
 test.describe.parallel("dashes & ellipse", () => {
   test.beforeEach(async ({ page }) => {
-    const Page = new MarkdownPage(page);
-    await Page.goto("/markdownFeatures");
-    await Page.getData();
+    // const Page = new MarkdownPage(page);
+    // await Page.goto("/markdown-features");
+    // await Page.getData();
+    await page.goto("/markdown-features");
   });
 
   test("nDash", async ({ page }) => {
@@ -64,9 +66,10 @@ test.describe.parallel("dashes & ellipse", () => {
 
 test.describe.parallel("commonMark", () => {
   test.beforeEach(async ({ page }) => {
-    const Page = new MarkdownPage(page);
-    await Page.goto("/markdownFeatures");
-    await Page.getData();
+    // const Page = new MarkdownPage(page);
+    // await Page.goto("/markdown-features");
+    // await Page.getData();
+    await page.goto("/markdown-features");
   });
 
   test("thematic break", async ({ page }) => {
@@ -113,7 +116,7 @@ test.describe.parallel("commonMark", () => {
     const link = page.locator("#links > p > a");
     await expect(link).toContainText("Link to fixture page");
     await link.click();
-    await expect(page).toHaveURL("/fixturepage");
+    await expect(page).toHaveURL("/fixture-page");
   });
 
   test("images", async ({ page }) => {
@@ -126,9 +129,10 @@ test.describe.parallel("commonMark", () => {
 
 test.describe.parallel("GFM", () => {
   test.beforeEach(async ({ page }) => {
-    const Page = new MarkdownPage(page);
-    await Page.goto("/markdownFeatures");
-    await Page.getData();
+    // const Page = new MarkdownPage(page);
+    // await Page.goto("/markdown-features");
+    // await Page.getData();
+    await page.goto("/markdown-features");
   });
 
   test("tables", async ({ page }) => {
