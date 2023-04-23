@@ -11,16 +11,10 @@ const config = {
   title: "My Awesome Blog",
   description: "This is my awesome blog built with Flowershow",
   author: "John",
-  // logo image
   authorLogo: "/images/logo.svg",
-  // url to author website
   authorUrl: "https://john.app/",
-  // links to the pages you want to link to in the navbar
+  // links to the pages you want to link to in the navbar and in the footer
   navLinks: [{ href: "/about", name: "About" }],
-  // any folders/files that you want to exclude from being published; all other files in your content folder will be published
-  contentExclude: ["docs/testpage.md"],
-  // publish only these folders/files in your content folder (you can combine contentInclude and contentExclude)
-  contentInclude: ["docs"],
 };
 
 export default config;
@@ -28,18 +22,14 @@ export default config;
 
 ### Title and Logo
 
-The Title and the logo in the navbar can be set by adding a **navbarTitle** attribute in your config. If you don't want a logo to be displayed in the navbar of your site, then don't include the logo field.
-
-The **navbarTitle** supports adding the following two fields:
-
-- text (your navbar title)
-- logo (path to your logo img file)
+The Title and the logo in the navbar can be set by adding a **navbarTitle** attribute in your config.
 
 ```js
 const userConfig = {
+  ...
   navBarTitle: {
     text: "Your custom title here",
-    logo: "/assets/your-logo.svg",
+    logo: "/assets/your-logo.svg", // optional
   },
 };
 ```
@@ -51,38 +41,17 @@ If you keep your content in a public GitHub repository, and would like to encour
 In order to make it work, you'll first need to set these two properties in your `config.js` file:
 
 ```js
-{
-  repoRoot: "https://github.com/flowershow/flowershow", //example
-  repoEditPath: "/edit/main/site/content/", //example
-}
+const userConfig = {
+  ...
+  showEditLink: true,
+  editLinkRoot: "https://github.com/flowershow/flowershow/edit/main/site",
+};
 ```
 
-### Default setting
-
-You can disable or enable showing the button for all your pages by setting this property in your `config.js` file. The button is disabled by default.
-
-```js
-{
-	editLinkShow: false,
-}
-```
-
-### Per-page setting
-
-You can also overwrite the default setting in single pages by including this field in the frontmatter:
+You can also overwrite the `showEditLink` property in a single page by including this field in the frontmatter:
 
 ```md
 ---
-editLink: true
----
-```
-
-## Keep file unpublished
-
-You can overwrite the contentInclude field by including this field in the frontmatter:
-
-```md
----
-isDraft: true
+showEditLink: false
 ---
 ```

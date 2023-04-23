@@ -6,7 +6,7 @@ import { Avatar } from "../Avatar";
 type Props = any;
 
 export const BlogLayout: React.FC<Props> = ({ children, ...frontMatter }) => {
-  const { title, date, authorsDetails } = frontMatter;
+  const { title, date, authors } = frontMatter;
 
   return (
     <article className="docs prose prose-a:text-primary dark:prose-a:text-primary-dark prose-strong:text-primary dark:prose-strong:text-primary-dark prose-code:text-primary dark:prose-code:text-primary-dark prose-headings:text-primary dark:prose-headings:text-primary-dark prose text-primary dark:text-primary-dark prose-headings:font-headings dark:prose-invert prose-a:break-words mx-auto p-6">
@@ -18,14 +18,14 @@ export const BlogLayout: React.FC<Props> = ({ children, ...frontMatter }) => {
               <time dateTime={date}>{formatDate(date)}</time>
             </p>
           )}
-          {authorsDetails && (
+          {authors && (
             <div className="flex flex-wrap not-prose items-center space-x-6 space-y-3 justify-center">
-              {authorsDetails.map(({ name, avatar, isDraft, url_path }) => (
+              {authors.map(({ name, avatar, urlPath }) => (
                 <Avatar
-                  key={url_path || name}
+                  key={urlPath || name}
                   name={name}
                   img={avatar}
-                  href={url_path && !isDraft ? `/${url_path}` : undefined}
+                  href={urlPath ? `/${urlPath}` : undefined}
                 />
               ))}
             </div>

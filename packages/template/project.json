@@ -8,6 +8,7 @@
       "executor": "nx:run-commands",
       "outputs": ["{options.outputPath}"],
       "inputs": ["production", "^production", "siteContent"],
+      "dependsOn": ["^build", { "target": "mddb", "projects": "self" }],
       "options": {
         "command": "npm run build",
         "cwd": "packages/template",
@@ -18,7 +19,7 @@
       "executor": "nx:run-commands",
       "outputs": ["{options.outputPath}"],
       "inputs": ["production", "^production", "siteContent"],
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build", { "target": "mddb", "projects": "self" }],
       "options": {
         "command": "npm run export",
         "cwd": "packages/template",
@@ -31,7 +32,7 @@
         "command": "npm run dev",
         "cwd": "packages/template"
       },
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build", { "target": "mddb", "projects": "self" }]
     },
     "serve:e2e": {
       "executor": "nx:run-commands",
@@ -40,6 +41,16 @@
         "cwd": "packages/template"
       },
       "dependsOn": ["^build"]
+    },
+    "mddb": {
+      "executor": "nx:run-commands",
+      "outputs": ["{options.outputPath}"],
+      "inputs": ["siteContent"],
+      "options": {
+        "command": "npm run mddb",
+        "cwd": "packages/template",
+        "outputPath": "packages/template/markdown.db"
+      }
     },
     "test": {
       "executor": "@nrwl/jest:jest",

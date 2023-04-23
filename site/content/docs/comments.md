@@ -1,7 +1,7 @@
 ---
 title: Empower Your Flowershow Website or Blog with User Comments
 description: "Get more feedback or simply increase visitor engagement by easily adding page comments to your Flowershow website or blog."
-type: Blog
+layout: blog
 date: 2023-02-04
 authors: [Khalil Ali]
 ---
@@ -22,6 +22,15 @@ Each provider has it's own configuration options. It is highly recommended that 
 
 > [!note]
 > If you are hosting your website on hosting providers like Netlify, Vercel or Cloudflare, you will also need to add the environment variables there. Please follow their documentation to learn how to do this.
+
+No matter which one you choose, in order to enable comments on your pages you need to add `showComments` property to your config file and set it to `true`.
+
+```js
+// config.js
+...
+showComments: true,
+...
+```
 
 ### Giscus
 

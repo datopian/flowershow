@@ -1,7 +1,7 @@
 ---
 title: How to theme your Flowershow website
 description: Learn how to add custom fonts and colors to your site
-type: Blog
+layout: blog
 date: 2023-01-23
 ---
 

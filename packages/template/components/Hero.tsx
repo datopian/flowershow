@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import Typed from "typed.js";
 
 /* eslint jsx-a11y/label-has-associated-control: off */
-export function Hero() {
+export default function Hero() {
   const el = useRef(null);
   const typed = useRef(null);
 
@@ -65,7 +65,7 @@ export function Hero() {
                 <input
                   name="name"
                   type="text"
-                  required="required"
+                  required={true}
                   placeholder="Your name"
                   className="block w-full sm:flex-auto sm:w-32 px-2 py-3 text-base rounded-md bg-slate-200 dark:bg-slate-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900"
                 />
@@ -75,7 +75,7 @@ export function Hero() {
                 <input
                   name="email"
                   type="email"
-                  required="required"
+                  required={true}
                   placeholder="Your email"
                   className="block w-full mt-3 sm:flex-auto sm:w-64 sm:mt-0 sm:ml-3 px-2 py-3 text-base rounded-md bg-slate-200 dark:bg-slate-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900"
                 />

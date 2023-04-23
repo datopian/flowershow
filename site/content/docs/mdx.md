@@ -134,9 +134,7 @@ The above MDX code renders as:
 
 ---
 
-import { MyComponent } from 'components/custom/MyComponent.jsx'
-
-<MyComponent list={["cat", "dog", "parrot"]} />
+REMOVED CODE
 
 Hooray! 🎊
 
@@ -158,9 +156,7 @@ This will render as:
 
 ---
 
-import data from '../../site/data/exampleData.json'
-
-<MyComponent list={data.colors}/>
+REMOVED CODE
 
 ---
 
@@ -196,23 +192,7 @@ This will render as:
 
 ---
 
-export const MyComponent2 = ({ list }) => {
-return (
-
-<div>
-<p>I'm a custom component!</p>
-<ul>
-{ list.map((x,i) => <li key={i}>{x}</li>) }
-</ul>
-</div>
-)
-}
-
-Some content...
-
-<MyComponent2 list={["I'm", "defined", "locally"]} />
-
-Some more content...
+REMOVED CODE
 
 ---
 
@@ -232,9 +212,7 @@ This renders as:
 
 ---
 
-export const myFavFlowersList = ['tulip', 'water lily', 'iris']
-
-<MyComponent list={myFavFlowersList} />
+REMOVED CODE
 
 ---
 
@@ -316,9 +294,7 @@ import ExampleMDXComponent from "components/custom/test.mdx"
 
 **Renders as:**
 
-import MDXComponent from "components/custom/test.mdx"
-
-<MDXComponent />
+REMOVED CODE
 
 ---
 
@@ -348,9 +324,7 @@ import MDXComponent2 from "components/custom/test2.mdx"
 
 **Renders as:**
 
-import MDXComponent2 from "components/custom/test2.mdx"
-
-<MDXComponent2 name="John" year="2022" />
+REMOVED CODE
 
 ---
 
@@ -376,9 +350,7 @@ import MDXComponent3 from "components/custom/test3.mdx"
 
 **Renders as:**
 
-import MDXComponent3 from "components/custom/test3.mdx"
-
-<MDXComponent3 components={{Planet: () => <span style={{color: 'tomato'}}>Pluto</span>}} />
+REMOVED CODE
 
 ### MDX components with children
 
@@ -405,9 +377,7 @@ import MDXComponent4 from "components/custom/test4.mdx"
 
 **Renders as:**
 
-import MDXComponent4 from "components/custom/test4.mdx"
-
-<MDXComponent4 />
+REMOVED CODE
 
 ## Where to store your custom components
 

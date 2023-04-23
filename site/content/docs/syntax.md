@@ -163,9 +163,8 @@ Here is some code: `print("hello world!")`
  a simple
 indented code block
 
-<div className="border-2 border-slate-400 rounded-md px-4 my-4">
-🔍 To learn more about the Markdown syntax refer to the [CommonMark specification](https://spec.commonmark.org/0.30/). 
-</div>
+> [!NOTE]
+> 🔍 To learn more about the Markdown syntax refer to the [CommonMark specification](https://spec.commonmark.org/0.30/).
 
 ---
 
@@ -219,9 +218,8 @@ Check out Flowershow at https://flowershow.app!
 
 Check out Flowershow at https://flowershow.app!
 
-<div className="border-2 border-slate-400 rounded-md px-4 my-4">
-🔍 To learn more about the GitHub Flavored Markdown syntax refer to the [GFM specification](https://github.github.com/gfm/). 
-</div>
+> [!NOTE]
+> 🔍 To learn more about the GitHub Flavored Markdown syntax refer to the [GFM specification](https://github.github.com/gfm/).
 
 ---
 
@@ -266,6 +264,7 @@ $$\begin{vmatrix}a & b\\ c & d \end{vmatrix}=ad-bc$$
 ```
 
 **Renders as:**
+
 $$\begin{vmatrix}a & b\\ c & d \end{vmatrix}=ad-bc$$
 
 ### Frontmatter

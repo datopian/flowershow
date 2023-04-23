@@ -9,7 +9,6 @@
       "@flowershow/remark-embed": [
         "node_modules/@flowershow/remark-embed/dist/src"
       ],
-      "contentlayer/generated": ["./.contentlayer/generated"],
       "@/*": ["./*"]
     },
     "target": "es2020",
@@ -27,12 +26,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": [
-    "types.d.ts",
-    "next-env.d.ts",
-    "**/*.tsx",
-    "**/*.ts",
-    ".contentlayer/generated"
-  ],
+  "include": ["types.d.ts", "next-env.d.ts", "**/*.tsx", "**/*.ts"],
   "exclude": ["node_modules"]
 }

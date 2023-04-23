@@ -10,7 +10,7 @@ export const BlogItem: React.FC<Props> = ({ blog }) => {
   return (
     <article className="blogitem md:grid md:grid-cols-4 md:items-baseline">
       <Card className="blogitem-card md:col-span-3">
-        <Card.Title className="blogitem-title" href={`${blog.url_path}`}>
+        <Card.Title className="blogitem-title" href={`${blog.urlPath}`}>
           {blog.title}
         </Card.Title>
         <Card.Eyebrow

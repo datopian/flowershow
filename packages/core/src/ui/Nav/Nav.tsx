@@ -50,7 +50,7 @@ export const Nav: React.FC<Props> = ({
   }, [search]);
 
   return (
-    <header className="flex justify-between">
+    <nav className="flex justify-between">
       {/* Mobile navigation  */}
       <div className="mr-2 sm:mr-4 flex lg:hidden">
         <NavMobile links={links}>{children}</NavMobile>
@@ -81,6 +81,6 @@ export const Nav: React.FC<Props> = ({
         />
         {social && <NavSocial links={social} />}
       </div>
-    </header>
+    </nav>
   );
 };
