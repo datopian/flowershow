@@ -108,6 +108,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
+function capitalize(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 /* function addPageToGroup(page: MddbFile, sitemap: Array<NavGroup>) { */
 function addPageToSitemap(page: any, sitemap: Array<NavGroup>) {
   const urlParts = page.url_path!.split("/").filter((part) => part);
@@ -148,10 +152,10 @@ function addPageToSitemap(page: any, sitemap: Array<NavGroup>) {
       );
       if (!matchingGroup) {
         const newGroup: NavGroup = {
-          name: urlParts[level], // blog
-          path: urlParts.slice(0, level + 1).join("/"), // blog
+          name: capitalize(urlParts[level]),
+          path: urlParts.slice(0, level + 1).join("/"),
           level,
-          children: [], // []
+          children: [],
         };
         currArray.push(newGroup);
         currArray = newGroup.children;

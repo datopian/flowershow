@@ -71,21 +71,14 @@ const NavComponent: React.FC<{
       {item.name}
     </Link>
   ) : (
-    <Disclosure
-      as="div"
-      key={item.name}
-      className={clsx(
-        item.level && `ml-${item.level * 5}`,
-        "flex flex-col space-y-3"
-      )}
-    >
+    <Disclosure as="div" key={item.name} className="flex flex-col space-y-3">
       {({ open }) => (
-        <>
+        <div>
           <Disclosure.Button className="group w-full flex items-center text-left text-md font-medium text-slate-900 dark:text-white">
             <svg
               className={clsx(
                 open ? "text-slate-400 rotate-90" : "text-slate-300",
-                "mr-2 h-5 w-5 flex-shrink-0 transform transition-colors duration-150 ease-in-out group-hover:text-slate-400"
+                "h-3 w-3 mr-2 flex-shrink-0 transform transition-colors duration-150 ease-in-out group-hover:text-slate-400"
               )}
               viewBox="0 0 20 20"
               aria-hidden="true"
@@ -102,13 +95,13 @@ const NavComponent: React.FC<{
             leaveFrom="transform scale-100 opacity-100"
             leaveTo="transform scale-95 opacity-0"
           >
-            <Disclosure.Panel className="flex flex-col space-y-3">
+            <Disclosure.Panel className="flex flex-col space-y-3 pl-5 mt-3">
               {sortNavGroupChildren(item.children).map((subItem) => (
                 <NavComponent item={subItem} isActive={false} />
               ))}
             </Disclosure.Panel>
           </Transition>
-        </>
+        </div>
       )}
     </Disclosure>
   );

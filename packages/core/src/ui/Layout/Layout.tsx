@@ -111,7 +111,7 @@ export const Layout: React.FC<Props> = ({
         >
           {/* SIDEBAR */}
           {showSidebar && (
-            <div className="hidden lg:block fixed z-20 w-[18rem] top-[4.6rem] right-auto bottom-0 left-[max(0px,calc(50%-44rem))] p-8 overflow-y-auto">
+            <div className="hidden lg:block fixed z-20 w-[18rem] top-[4.6rem] right-auto bottom-0 left-[max(0px,calc(50%-44rem))] pt-8 pl-8 overflow-y-auto">
               <SiteToc currentPath={urlPath} nav={siteMap} />
             </div>
           )}
@@ -133,7 +133,7 @@ export const Layout: React.FC<Props> = ({
           <Footer links={nav.links} author={author} />
           {/** TABLE OF CONTENTS */}
           {showToc && tableOfContents.length > 0 && (
-            <div className="hidden xl:block fixed z-20 w-[18rem] top-[4.6rem] bottom-0 right-[max(0px,calc(50%-44rem))] left-auto p-8 overflow-y-auto">
+            <div className="hidden xl:block fixed z-20 w-[18rem] top-[4.6rem] bottom-0 right-[max(0px,calc(50%-44rem))] left-auto pt-8 pr-8 overflow-y-auto">
               <TableOfContents
                 tableOfContents={tableOfContents}
                 currentSection={currentSection}
