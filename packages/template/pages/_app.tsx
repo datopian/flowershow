@@ -1,54 +1,51 @@
+import React from "react";
 /* eslint import/no-default-export: off */
+import Script from "next/script";
 import { DefaultSeo } from "next-seo";
 import { useRouter } from "next/router";
-import Script from "next/script";
 import { useEffect } from "react";
-import "tailwindcss/tailwind.css";
+import type { AppProps } from "next/app";
 
+import siteConfig from "../config/siteConfig";
 import {
   Layout,
   SearchProvider,
   pageview,
   ThemeProvider,
+  NavItem,
+  NavGroup,
 } from "@flowershow/core";
 
-import { siteConfig } from "../config/siteConfig";
+import "tailwindcss/tailwind.css";
 import "../styles/docsearch.css";
 import "../styles/global.css";
 import "../styles/prism.css";
 
-function MyApp({ Component, pageProps }) {
+export interface CustomAppProps {
+  meta: {
+    showToc: boolean;
+    showEditLink: boolean;
+    showSidebar: boolean;
+    showComments: boolean;
+    urlPath: string; // not sure what's this for
+    editUrl?: string;
+    [key: string]: any;
+  };
+  siteMap: Array<NavItem | NavGroup>;
+  [key: string]: any;
+}
+
+const MyApp = ({ Component, pageProps }: AppProps<CustomAppProps>) => {
   const router = useRouter();
+  const { meta, siteMap } = pageProps;
 
-  /**
-   * Page comments
-   * Showing page comments either set through frontmatter,
-   * or set in config's pages property. Frontmatter takes precedence.
-   * if neither are set then defaults to show on all pages.
-   */
-  let showComments = false;
-  const comments = siteConfig.comments;
-
-  if (comments && comments.provider && comments.config) {
-    const sourceDir = pageProps.type
-      ? pageProps.type.toLowerCase()
-      : pageProps._raw?.sourceFileDir;
-    const pagesFromConfig =
-      Array.isArray(comments.pages) && comments.pages.length > 0
-        ? comments.pages?.includes(sourceDir)
-        : true;
-
-    showComments = pageProps.showComments ?? pagesFromConfig;
-  }
-
-  // TODO maybe use computed fields for showEditLink and showToc to make this even cleaner?
   const layoutProps = {
-    showToc: pageProps.showToc ?? siteConfig.showToc,
-    showEditLink: pageProps.showEditLink ?? siteConfig.showEditLink,
-    showSidebar: pageProps.showSidebar ?? siteConfig.showSidebar,
-    showComments,
-    edit_url: pageProps.edit_url,
-    url_path: pageProps.url_path,
+    showToc: meta?.showToc,
+    showEditLink: meta?.showEditLink,
+    showSidebar: meta?.showSidebar,
+    showComments: meta?.showComments,
+    editUrl: meta?.editUrl,
+    urlPath: meta?.urlPath,
     commentsConfig: siteConfig.comments,
     nav: {
       title: siteConfig.navbarTitle?.text ?? siteConfig.title,
@@ -66,6 +63,7 @@ function MyApp({ Component, pageProps }) {
       defaultTheme: siteConfig.theme.default,
       themeToggleIcon: siteConfig.theme.toggleIcon,
     },
+    siteMap,
   };
 
   useEffect(() => {
@@ -118,6 +116,6 @@ function MyApp({ Component, pageProps }) {
       </SearchProvider>
     </ThemeProvider>
   );
-}
+};
 
 export default MyApp;

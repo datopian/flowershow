@@ -16,19 +16,19 @@ type: Page
 </div>
 
 <div id="wikiLink">
-[[fixturepage]]
+[[fixture-page]]
 </div>
 
 <div id="wikiLink-custom">
-[[fixturepage|Fixture Page]]
+[[fixture-page|Some Page]]
 </div>
 
 <div id="wikiLink-heading">
-[[fixturepage#Planned features]]
+[[fixture-page#Planned features]]
 </div>
 
 <div id="wikiLink-heading-custom">
-[[fixturepage#Planned features|🚧 working on...]]
+[[fixture-page#Planned features|🚧 working on...]]
 </div>
 
 <div id="wikiLink-image">
@@ -71,7 +71,7 @@ _I'm Italic!_
 </div>
 
 <div id="links">
-[Link to fixture page](/fixturepage)
+[Link to fixture page](/fixture-page)
 </div>
 
 <div id="images">
