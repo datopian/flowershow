@@ -10,6 +10,7 @@ export interface NavItem {
 export interface NavGroup {
   name: string;
   path: string;
+  level: number;
   children: Array<NavItem | NavGroup>;
 }
 
@@ -22,6 +23,22 @@ function isNavGroup(item: NavItem | NavGroup): item is NavGroup {
   return (item as NavGroup).children !== undefined;
 }
 
+function navItemBeforeNavGroup(a, b) {
+  if (isNavGroup(a) === isNavGroup(b)) {
+    return 0;
+  }
+  if (isNavGroup(a) && !isNavGroup(b)) {
+    return 1;
+  }
+  return -1;
+}
+
+function sortNavGroupChildren(items: Array<NavItem | NavGroup>) {
+  return items.sort(
+    (a, b) => navItemBeforeNavGroup(a, b) || a.name.localeCompare(b.name)
+  );
+}
+
 export const SiteToc: React.FC<Props> = ({ currentPath, nav }) => {
   function isActiveItem(item: NavItem) {
     return item.href === currentPath;
@@ -29,7 +46,7 @@ export const SiteToc: React.FC<Props> = ({ currentPath, nav }) => {
 
   return (
     <nav data-testid="lhs-sidebar" className="flex flex-col space-y-3 text-sm">
-      {nav.map((n) => (
+      {sortNavGroupChildren(nav).map((n) => (
         <NavComponent item={n} isActive={false} />
       ))}
     </nav>
@@ -54,7 +71,14 @@ const NavComponent: React.FC<{
       {item.name}
     </Link>
   ) : (
-    <Disclosure as="div" className="flex flex-col space-y-3" key={item.name}>
+    <Disclosure
+      as="div"
+      key={item.name}
+      className={clsx(
+        item.level && `ml-${item.level * 5}`,
+        "flex flex-col space-y-3"
+      )}
+    >
       {({ open }) => (
         <>
           <Disclosure.Button className="group w-full flex items-center text-left text-md font-medium text-slate-900 dark:text-white">
@@ -79,7 +103,7 @@ const NavComponent: React.FC<{
             leaveTo="transform scale-95 opacity-0"
           >
             <Disclosure.Panel className="flex flex-col space-y-3">
-              {item.children.map((subItem) => (
+              {sortNavGroupChildren(item.children).map((subItem) => (
                 <NavComponent item={subItem} isActive={false} />
               ))}
             </Disclosure.Panel>

@@ -82,8 +82,6 @@ export const getStaticProps: GetStaticProps = async ({
     });
   }
 
-  /* console.log(JSON.stringify(siteMap, null, 2)) */
-
   return {
     props: {
       source: JSON.stringify(mdxSource),
@@ -117,12 +115,16 @@ function addPageToSitemap(page: any, sitemap: Array<NavGroup>) {
   if (urlParts.length === 0) return;
   // top level, root pages
   if (urlParts.length === 1) {
-    let rootGroup = sitemap.find((g) => g.name === "root");
-    if (!rootGroup) {
-      rootGroup = { name: "root", path: "/", children: [] };
-      sitemap.push(rootGroup);
-    }
-    rootGroup.children.push({
+    /* let rootGroup = sitemap.find((g) => g.name === "root");
+     * if (!rootGroup) {
+     *     rootGroup = { name: "root", path: "/", level: 0, children: [] };
+     *     sitemap.push(rootGroup);
+     * }
+     * rootGroup.children.push({
+     *     name: page.metadata?.title || urlParts[0],
+     *     href: page.url_path,
+     * }); */
+    sitemap.push({
       name: page.metadata?.title || urlParts[0],
       href: page.url_path,
     });
@@ -148,6 +150,7 @@ function addPageToSitemap(page: any, sitemap: Array<NavGroup>) {
         const newGroup: NavGroup = {
           name: urlParts[level], // blog
           path: urlParts.slice(0, level + 1).join("/"), // blog
+          level,
           children: [], // []
         };
         currArray.push(newGroup);

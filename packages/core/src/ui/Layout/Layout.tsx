@@ -48,8 +48,6 @@ export const Layout: React.FC<Props> = ({
   const currentSection = useTableOfContents(tableOfContents);
   const router: NextRouter = useRouter();
 
-  console.log(JSON.stringify(siteMap, null, 2));
-
   useEffect(() => {
     if (!showToc) return;
     const headingNodes: NodeListOf<HTMLHeadingElement> =
