@@ -1,12 +1,15 @@
 import fs from "fs";
 import React from "react";
+import { NextSeo } from "next-seo";
 import { GetStaticProps, GetStaticPaths, GetStaticPropsResult } from "next";
+import { NavItem, NavGroup } from "@flowershow/core";
 
 import MdxPage from "../components/MdxPage";
 import clientPromise from "../lib/mddb.mjs";
 import computeFields from "../lib/computeFields";
 import parse from "../lib/markdown";
 import type { CustomAppProps } from "./_app";
+import siteConfig from "../config/siteConfig";
 
 interface SlugPageProps extends CustomAppProps {
   source: any;
@@ -15,7 +18,37 @@ interface SlugPageProps extends CustomAppProps {
 export default function Page({ source, meta }: SlugPageProps) {
   source = JSON.parse(source);
 
-  return <MdxPage source={source} frontMatter={meta} />;
+  const seoImages = (() => {
+    // if page has specific image set
+    if (meta.image) {
+      return [
+        {
+          url: meta.image.startsWith("http")
+            ? meta.image
+            : `${siteConfig.domain}${meta.image}`,
+          width: 1200,
+          height: 627,
+          alt: meta.title,
+        },
+      ];
+    }
+    // otherwise return default images array set in config file
+    return siteConfig.nextSeo?.openGraph?.images || [];
+  })();
+
+  return (
+    <>
+      <NextSeo
+        title={meta.title}
+        openGraph={{
+          title: meta.title,
+          description: meta.description,
+          images: seoImages,
+        }}
+      />
+      <MdxPage source={source} frontMatter={meta} />
+    </>
+  );
 }
 
 export const getStaticProps: GetStaticProps = async ({
@@ -39,10 +72,23 @@ export const getStaticProps: GetStaticProps = async ({
     source,
   });
 
+  const siteMap: Array<NavGroup> = [];
+
+  if (frontMatterWithComputedFields?.showSidebar) {
+    const allPages = await mddb.getFiles({ extensions: ["md", "mdx"] });
+    const pages = allPages.filter((p) => !p.metadata?.isDraft);
+    pages.forEach((page) => {
+      addPageToSitemap(page, siteMap);
+    });
+  }
+
+  /* console.log(JSON.stringify(siteMap, null, 2)) */
+
   return {
     props: {
       source: JSON.stringify(mdxSource),
       meta: frontMatterWithComputedFields,
+      siteMap,
     },
   };
 };
@@ -54,7 +100,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = allDocuments
     .filter((page) => page.metadata?.isDraft !== true)
     .map((page) => {
-      const parts = page.url_path.split("/");
+      const parts = page.url_path!.split("/");
       return { params: { slug: parts } };
     });
 
@@ -63,3 +109,52 @@ export const getStaticPaths: GetStaticPaths = async () => {
     fallback: false,
   };
 };
+
+/* function addPageToGroup(page: MddbFile, sitemap: Array<NavGroup>) { */
+function addPageToSitemap(page: any, sitemap: Array<NavGroup>) {
+  const urlParts = page.url_path!.split("/").filter((part) => part);
+  // don't add home page to the sitemap
+  if (urlParts.length === 0) return;
+  // top level, root pages
+  if (urlParts.length === 1) {
+    let rootGroup = sitemap.find((g) => g.name === "root");
+    if (!rootGroup) {
+      rootGroup = { name: "root", path: "/", children: [] };
+      sitemap.push(rootGroup);
+    }
+    rootGroup.children.push({
+      name: page.metadata?.title || urlParts[0],
+      href: page.url_path,
+    });
+  } else {
+    // /blog/blogtest
+    const nestingLevel = urlParts.length - 1; // 1
+    let currArray: Array<NavItem | NavGroup> = sitemap;
+
+    for (let level = 0; level <= nestingLevel; level++) {
+      if (level === nestingLevel) {
+        currArray.push({
+          name: urlParts[level],
+          href: page.url_path,
+        });
+        continue;
+      }
+
+      const matchingGroup = currArray.find(
+        (group) =>
+          group.path !== undefined && page.url_path.startsWith(group.path)
+      );
+      if (!matchingGroup) {
+        const newGroup: NavGroup = {
+          name: urlParts[level], // blog
+          path: urlParts.slice(0, level + 1).join("/"), // blog
+          children: [], // []
+        };
+        currArray.push(newGroup);
+        currArray = newGroup.children;
+      } else {
+        currArray = matchingGroup.children;
+      }
+    }
+  }
+}

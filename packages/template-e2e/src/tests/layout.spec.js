@@ -6,7 +6,7 @@ test.describe.parallel("LHS sidebar (site-wide ToC)", () => {
     // const Page = new MarkdownPage(page);
     // await Page.goto("/fixturepage");
     // await Page.getData();
-    await page.goto("/fixturepage");
+    await page.goto("/fixture-page");
 
     await expect(page.getByTestId("lhs-sidebar")).toBeVisible();
   });
@@ -26,7 +26,7 @@ test.describe.parallel("LHS sidebar (site-wide ToC)", () => {
     // const Page = new MarkdownPage(page);
     // await Page.goto("/fixturepage");
     // await Page.getData();
-    await page.goto("/fixturepage");
+    await page.goto("/fixture-page");
 
     await page
       .getByTestId("lhs-sidebar")

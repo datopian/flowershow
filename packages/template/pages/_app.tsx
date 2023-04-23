@@ -6,12 +6,14 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import type { AppProps } from "next/app";
 
-import { siteConfig } from "../config/siteConfig";
+import siteConfig from "../config/siteConfig";
 import {
   Layout,
   SearchProvider,
   pageview,
   ThemeProvider,
+  NavItem,
+  NavGroup,
 } from "@flowershow/core";
 
 import "tailwindcss/tailwind.css";
@@ -29,12 +31,13 @@ export interface CustomAppProps {
     editUrl?: string;
     [key: string]: any;
   };
+  siteMap: Array<NavItem | NavGroup>;
   [key: string]: any;
 }
 
 const MyApp = ({ Component, pageProps }: AppProps<CustomAppProps>) => {
   const router = useRouter();
-  const { meta } = pageProps;
+  const { meta, siteMap } = pageProps;
 
   const layoutProps = {
     showToc: meta?.showToc,
@@ -60,6 +63,7 @@ const MyApp = ({ Component, pageProps }: AppProps<CustomAppProps>) => {
       defaultTheme: siteConfig.theme.default,
       themeToggleIcon: siteConfig.theme.toggleIcon,
     },
+    siteMap,
   };
 
   useEffect(() => {

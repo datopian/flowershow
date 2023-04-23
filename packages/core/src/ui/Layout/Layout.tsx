@@ -16,23 +16,17 @@ import { NavConfig, ThemeConfig } from "../Nav";
 import { AuthorConfig } from "../types";
 
 interface Props extends React.PropsWithChildren {
+  showComments: boolean;
+  showEditLink: boolean;
+  showSidebar: boolean;
+  showToc: boolean;
   nav: NavConfig;
   author: AuthorConfig;
   theme: ThemeConfig;
-  showToc: boolean;
-  showEditLink: boolean;
-  showSidebar: boolean;
   urlPath: string;
-  showComments: boolean;
   commentsConfig: CommentsConfig;
+  siteMap: Array<NavItem | NavGroup>;
   editUrl?: string;
-}
-
-interface SearchPage {
-  title?: string;
-  urlPath: string;
-  slug: string;
-  sourceDir: string;
 }
 
 export const Layout: React.FC<Props> = ({
@@ -47,12 +41,14 @@ export const Layout: React.FC<Props> = ({
   showComments,
   commentsConfig,
   editUrl,
+  siteMap,
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [tableOfContents, setTableOfContents] = useState<TocSection[]>([]);
-  const [sitemap, setSitemap] = useState<Array<NavItem | NavGroup>>([]);
   const currentSection = useTableOfContents(tableOfContents);
   const router: NextRouter = useRouter();
+
+  console.log(JSON.stringify(siteMap, null, 2));
 
   useEffect(() => {
     if (!showToc) return;
@@ -61,55 +57,6 @@ export const Layout: React.FC<Props> = ({
     const toc = collectHeadings(headingNodes);
     setTableOfContents(toc ?? []);
   }, [router.asPath, showToc]); // update table of contents on route change with next/link
-
-  // TODO move
-  useEffect(() => {
-    if (!showSidebar) return;
-    const fetchData = async () => {
-      const res = await fetch("/search.json");
-      const json: Array<SearchPage> = await res.json();
-
-      // group pages by the top level dir only (content/<dir>)
-      const pagesGroupedByDir: { [x: string]: Array<NavItem> } = json.reduce(
-        (acc, curr) => {
-          const key = curr.sourceDir ? curr.sourceDir.split("/")[0] : "_loose";
-          if (!(key in acc)) {
-            acc[key] = [];
-          }
-          acc[key].push({
-            name: curr.title ?? curr.slug,
-            href: curr.urlPath,
-          });
-          return acc;
-        },
-        {}
-      );
-
-      let siteMap: Array<NavItem | NavGroup> = [];
-      const groupedPages: Array<NavGroup> = [];
-
-      for (const dir in pagesGroupedByDir) {
-        // sort pages in a group in alphabetical order
-        const pagesSorted: Array<NavItem> = [...pagesGroupedByDir[dir]].sort(
-          (a, b) => a.name.localeCompare(b.name)
-        );
-        // add loose pages directly to the sitemap array
-        if (dir === "_loose") {
-          siteMap = siteMap.concat(pagesSorted);
-        } else {
-          groupedPages.push({
-            name: dir,
-            children: pagesSorted,
-          });
-        }
-      }
-      // sort groups alphabetically
-      groupedPages.sort((a, b) => a.name.localeCompare(b.name));
-      siteMap = siteMap.concat(groupedPages);
-      setSitemap(siteMap);
-    };
-    fetchData();
-  }, [showSidebar]);
 
   useEffect(() => {
     function onScroll() {
@@ -152,7 +99,7 @@ export const Layout: React.FC<Props> = ({
               defaultTheme={theme.defaultTheme}
               themeToggleIcon={theme.themeToggleIcon}
             >
-              {showSidebar && <SiteToc currentPath={urlPath} nav={sitemap} />}
+              {showSidebar && <SiteToc currentPath={urlPath} nav={siteMap} />}
             </Nav>
           </div>
         </div>
@@ -167,7 +114,7 @@ export const Layout: React.FC<Props> = ({
           {/* SIDEBAR */}
           {showSidebar && (
             <div className="hidden lg:block fixed z-20 w-[18rem] top-[4.6rem] right-auto bottom-0 left-[max(0px,calc(50%-44rem))] p-8 overflow-y-auto">
-              <SiteToc currentPath={urlPath} nav={sitemap} />
+              <SiteToc currentPath={urlPath} nav={siteMap} />
             </div>
           )}
           {/* MAIN CONTENT & FOOTER */}

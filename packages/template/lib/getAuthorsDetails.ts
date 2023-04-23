@@ -1,4 +1,4 @@
-import { siteConfig } from "../config/siteConfig";
+import siteConfig from "../config/siteConfig";
 import clientPromise from "./mddb.mjs";
 import sluggify from "./sluggify";
 
@@ -11,6 +11,8 @@ const getAuthorsDetails = async (authors?: string[]) => {
     blogAuthors = authors;
   } else if (siteConfig.defaultAuthor) {
     blogAuthors = [siteConfig.defaultAuthor];
+  } else {
+    blogAuthors = [];
   }
 
   return blogAuthors.map((author) => {
