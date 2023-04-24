@@ -1,7 +1,7 @@
 {
   "name": "@flowershow/template",
   "private": true,
-  "version": "1.0.5",
+  "version": "2.0.0",
   "scripts": {
     "dev": "next dev",
     "predev": "npm run generate",
@@ -13,7 +13,7 @@
     "generate": "npm run mddb && cross-env NODE_OPTIONS=\"--experimental-json-modules --experimental-modules\" node -r esbuild-register ./scripts/postbuild.mjs"
   },
   "dependencies": {
-    "@flowershow/core": "^0.4.9",
+    "@flowershow/core": "^0.4.10",
     "@flowershow/markdowndb": "^0.1.0",
     "@flowershow/remark-callouts": "^1.0.0",
     "@flowershow/remark-embed": "^1.0.0",

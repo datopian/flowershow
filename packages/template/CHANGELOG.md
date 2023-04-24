@@ -1,5 +1,17 @@
 # @flowershow/template
 
+## 2.0.0
+
+### Major Changes
+
+- e0f21bd: Switch from Contentlayer to @flowershow/markdowndb.
+
+### Patch Changes
+
+- Updated dependencies [e0f21bd]
+- Updated dependencies [714d580]
+  - @flowershow/core@0.4.10
+
 ## 1.0.5
 
 ### Patch Changes

@@ -1,5 +1,12 @@
 # @flowershow/core
 
+## 0.4.10
+
+### Patch Changes
+
+- e0f21bd: SiteToc adjustments to display infinitely nested page directories.
+- 714d580: Fix tooltips for empty pages causing page render errors
+
 ## 0.4.9
 
 ### Patch Changes
