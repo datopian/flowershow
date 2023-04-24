@@ -7,10 +7,14 @@
     "module": "es2020",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "outDir": "../../dist/out-tsc",
     "declaration": true,
     "types": ["node"]
   },
-  "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"],
+  "exclude": [
+    "./dist",
+    "jest.config.ts",
+    "src/**/*.spec.ts",
+    "src/**/*.test.ts"
+  ],
   "include": ["**/*.js", "**/*.ts"]
 }
