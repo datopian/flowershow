@@ -249,7 +249,7 @@ importers:
   packages/template:
     specifiers:
       '@flowershow/core': ^0.4.10
-      '@flowershow/markdowndb': ^0.1.0
+      '@flowershow/markdowndb': 0.1.0
       '@flowershow/remark-callouts': ^1.0.0
       '@flowershow/remark-embed': ^1.0.0
       '@flowershow/remark-wiki-link': ^1.1.1
@@ -290,7 +290,7 @@ importers:
       typescript: ^4.9.5
     dependencies:
       '@flowershow/core': link:../core
-      '@flowershow/markdowndb': link:../markdowndb
+      '@flowershow/markdowndb': 0.1.0_bvhl7isqnqut5yqtumfgelxlae
       '@flowershow/remark-callouts': link:../remark-callouts
       '@flowershow/remark-embed': link:../remark-embed
       '@flowershow/remark-wiki-link': link:../remark-wiki-link
@@ -2443,6 +2443,44 @@ packages:
       '@floating-ui/dom': 1.2.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@flowershow/markdowndb/0.1.0_bvhl7isqnqut5yqtumfgelxlae:
+    resolution: {integrity: sha512-Bxib+2N88349hjA2f/ORptgMBurRpZnat2NJFXjDCVtuVIp9gEjJjXB34V7XHZcaAcjL/VJKvrZAyOYvhnj3EA==}
+    hasBin: true
+    peerDependencies:
+      mdast-util-wiki-link: 0.0.2
+      micromark: 3.1.0
+      micromark-util-symbol: 1.0.1
+    dependencies:
+      '@flowershow/remark-wiki-link': 1.1.2
+      gray-matter: 4.0.3
+      knex: 2.4.2_sqlite3@5.1.6
+      mdast-util-wiki-link: 0.0.2
+      micromark: 3.1.0
+      micromark-util-symbol: 1.0.1
+      remark-gfm: 3.0.1
+      remark-parse: 10.0.1
+      sqlite3: 5.1.6
+      unist-util-select: 4.0.3
+    transitivePeerDependencies:
+      - better-sqlite3
+      - bluebird
+      - encoding
+      - mysql
+      - mysql2
+      - pg
+      - pg-native
+      - supports-color
+      - tedious
+    dev: false
+
+  /@flowershow/remark-wiki-link/1.1.2:
+    resolution: {integrity: sha512-BfRkavWSx0zUDQJwyLYa7q+EFNR+M6o5VvV1FrUcaqLzB3FgJnkwQzgiaxlIGNseK1n1gtlKIniCg+YIy4x0hw==}
+    dependencies:
+      mdast-util-to-markdown: 1.5.0
+      mdast-util-wiki-link: 0.0.2
+      micromark-util-symbol: 1.0.1
     dev: false
 
   /@gar/promisify/1.1.3:
