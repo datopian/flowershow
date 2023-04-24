@@ -1,5 +1,11 @@
 # @flowershow/markdowndb
 
+## 0.1.1
+
+### Patch Changes
+
+- Fix import statement in bin/index.js file.
+
 ## 0.1.0
 
 ### Minor Changes
