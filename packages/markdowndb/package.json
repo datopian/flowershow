@@ -1,6 +1,6 @@
 {
   "name": "@flowershow/markdowndb",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Parse markdown files and store them in an SQL database.",
   "bin": {
     "mddb": "./src/bin/index.js"
