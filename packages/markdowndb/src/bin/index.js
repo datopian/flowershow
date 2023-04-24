@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { MarkdownDB } from "@flowershow/markdowndb";
+import { MarkdownDB } from "../lib/markdowndb.js";
 
 // TODO get these from markdowndb.config.js or something
 const dbPath = "markdown.db";
