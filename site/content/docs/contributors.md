@@ -12,16 +12,20 @@ Structure:
   - **cli**
   - **template**: Flowershow template installed by the CLI
   - **template-e2e**: E2E tests for the template
+  - **core**: Flowershow template's core components
+  - **remark-embed**: remark plugin for you tube embeds
+  - **remar-callouts**: remark plugin for Obsidian callouts/admonitions
+  - **remark-wiki-link**: remark plugin for Obisidian wiki-links
+  - **markdowndb**: replacement for Contentlayer; our custom "content layer"
 - **site**: the content of our website
   - **content**: all the content you can see on our website
-  - **components**: custom components used on our website, e.g. the Hero or some example components we use in our tutorials
 - **scripts**: some utility scripts
 
 ## How to contribute
 
-You can start by checking our [project backlog](https://github.com/orgs/flowershow/projects/1).
+You can start by checking open [issues in our repo](https://github.com/datopian/flowershow/issues).
 
-If you'd like to work on one of the issues in our backlog:
+If you'd like to work on one of them:
 
 1. Comment on the issue to let us know you'd like to work on, so that we can assist you and to make sure no one has started looking into it yet.
 2. If good to go, fork the main repository.
@@ -97,8 +101,8 @@ A task is a single target run on a given project.
 To run a single target on a given project run:
 
 ```sh
-npx nx <target> <project>
-# e.g. npx nx e2e cli
+pnpm nx <target> <project>
+# e.g. pnpm nx e2e cli
 ```
 
 #### Running multiple tasks
@@ -106,8 +110,8 @@ npx nx <target> <project>
 To run a given target on all projects that define it, run:
 
 ```sh
-npx nx run-many --target=<target>
-# e.g. npx nx run-many --target=e2e
+pnpm nx run-many --target=<target>
+# e.g. pnpm nx run-many --target=e2e
 ```
 
 #### Running tasks affected by your changes
@@ -115,12 +119,12 @@ npx nx run-many --target=<target>
 When you run `nx affected --target=<some-target>`, Nx looks at the files you changed (compares current HEAD vs base), and it uses this to figure out the list of projects in the workspace that may be affected by this change. It then runs the run-many command with that list.
 
 ```sh
-npx nx affected --target=<target>
-# e.g. npx nx affected --target=e2e
+pnpm nx affected --target=<target>
+# e.g. pnpm nx affected --target=e2e
 
 # or
-# npx nx affected:<target>
-# e.g. npx nx affected:e2e
+# pnpm nx affected:<target>
+# e.g. pnpm nx affected:e2e
 ```
 
 > To learn more about how Affected works, read [this Nx docs page](https://nx.dev/concepts/affected#how-affected-works).
@@ -132,44 +136,44 @@ Nx uses eslint for code linting and prettier for code formatting. There is a bas
 To lint the code in a single project:
 
 ```sh
-npx nx lint <project>
-# npx nx lint cli
+pnpm nx lint <project>
+# pnpm nx lint cli
 ```
 
 To lint all projects:
 
 ```
-npx nx run-many --target=lint
+pnpm nx run-many --target=lint
 ```
 
 To check code formatting in selected projects:
 
 ```sh
-npx nx format:check --projects=<array of projects>
-# npx nx format:check --projects=cli,template
+pnpm nx format:check --projects=<array of projects>
+# pnpm nx format:check --projects=cli,template
 ```
 
 To check code formatting in all projects:
 
 ```sh
-npx nx format:check --all
+pnpm nx format:check --all
 # or
-# npx nx format
+# pnpm nx format
 ```
 
 To fix code formatting in selected projects:
 
 ```sh
-npx nx format:write --projects=<array projects>
-# npx nx format:write --projects=cli,template
+pnpm nx format:write --projects=<array projects>
+# pnpm nx format:write --projects=cli,template
 ```
 
 To fix formatting in all projects:
 
 ```sh
-npx nx format --all
+pnpm nx format --all
 # or
-# npx nx format:write --all
+# pnpm nx format:write --all
 ```
 
 > To learn more about all the available options for the format command, see [format:check](https://nx.dev/nx/format-check) and [format:write](https://nx.dev/nx/format-write) docs pages.
@@ -179,7 +183,7 @@ npx nx format --all
 To create a new publishable js library:
 
 ```sh
-nx g @nrwl/node:lib --js --publishable --importPath @flowershow/<library-name>
+pnpm nx g @nrwl/node:lib --js --publishable --importPath @flowershow/<library-name>
 ```
 
 ### Dependency graph
@@ -187,7 +191,7 @@ nx g @nrwl/node:lib --js --publishable --importPath @flowershow/<library-name>
 To see the graph of dependencies between the projects within this repository, run:
 
 ```sh
-npx nx graph
+pnpm nx graph
 ```
 
 ### Caching
@@ -229,7 +233,7 @@ Changesets are files that describe the intention of a contributor to change a ve
 In the root directory of the repo, run:
 
 ```
-npx changeset
+pnpm changeset
 ```
 
 The description of the changes related to the changelog you're adding should be written with end users and other developers in mind. Please make sure to add the most accurate but also concise information.
@@ -244,7 +248,7 @@ To learn about semantic versioning standards see [this semver doc page](https://
 > This should only be done after all the files in the `.changeset` folder are reviewed by a designated person and at a pre-agreed time.
 
 ```
-npx changeset version
+pnpm changeset version
 ```
 
 This command will consume all the files in the `.changeset` folder, update packages to the most appropriate semver versions based on change types specified in their related changeset files (e.g. `"@flowershow/remark-embed": patch`) and will write changelog entries in their `CHANGELOG.md` files.
@@ -252,7 +256,7 @@ This command will consume all the files in the `.changeset` folder, update packa
 To ignore changeset files of some packages (e.g. we don't want to version bump them yet), you can run:
 
 ```
-npx changeset version --ignore @flowershow/template
+pnpm changeset version --ignore @flowershow/template
 ```
 
 After running version command, both all the version bumps and changelog entries of the changed packages should be reviewed before commiting changes made by the command. If needed, changelog entires should be manually adjusted to provide the most accurate description of the changes included in the new release. If everything is correct, packages can be published by running:
