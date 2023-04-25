@@ -5,7 +5,7 @@ import { KBarModal } from "./KBarModal";
 
 export const KBarSearchProvider = ({ config, children }) => {
   const defaultActions = config?.defaultActions;
-  const searchDocumentsPath = "search.json";
+  const searchDocumentsPath = "/search.json";
 
   let startingActions: Action[] = [
     {
