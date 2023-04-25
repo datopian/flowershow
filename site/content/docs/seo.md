@@ -98,7 +98,7 @@ image: /assets/images/your-image-path.jpg
 ```js
 // in config.js
 const config = {
-  authorUrl: "https://your-website.com",
+  domain: "https://your-website.com",
 };
 ```
 

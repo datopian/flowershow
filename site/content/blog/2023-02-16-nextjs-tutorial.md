@@ -122,7 +122,7 @@ const config = {
   // logo image
   authorLogo: "/images/logo.svg",
   // url to author website
-  authorUrl: "https://john.app/",
+  domain: "https://john.app/",
   // links to the pages you want to link to in the navbar
   navLinks: [{ href: "/about", name: "About" }],
 };
