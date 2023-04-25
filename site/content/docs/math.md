@@ -1,4 +1,6 @@
-# Math
+---
+title: Math
+---
 
 Flowershow supports math syntax where you can use LaTeX notations to denote formulas.
 
@@ -42,6 +44,6 @@ $$
 
 ## Developers
 
-Math syntax is supported by using the remark and rehype plugins - [remark-math](https://github.com/remarkjs/remark-math/tree/main/packages/remark-math) and [rehype-mathjax](https://github.com/remarkjs/remark-math/tree/main/packages/rehype-mathjax). which transforms to svg code.
+Math syntax is supported by using the remark and rehype plugins - [remark-math](https://github.com/remarkjs/remark-math/tree/main/packages/remark-math) and [rehype-katex](https://github.com/remarkjs/remark-math/tree/main/packages/rehype-katex).
 
-More documentation on math syntax usage can be found on [MathJax](https://docs.mathjax.org/en/latest/basic/mathjax.html).
+More documentation on math syntax usage can be found on [KaTeX](https://katex.org/).
