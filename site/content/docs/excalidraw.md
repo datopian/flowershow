@@ -4,23 +4,19 @@ Excalidraw is a virtual collaborative whiteboard tool that lets you easily sketc
 
 There is great integration of Excalidraw into many tools like Obsidian and LogSeq.
 
-Here we walk through how you can use Excalidraw in your Flowershow site.
+Here we walk through how you can display Excalidraw sketches on your Flowershow site.
 
 ## Plain Excalidraw
 
 If you are creating diagrams on https://excalidraw.com/ then using them in Flowershow is easy:
 
-- export the drawing as svg and png
-- add them to your assets folder
-- then link them like any other image
+- export the drawing as `.svg` and `.png`
+- add them to your [[embedding-files|assets folder]]
+- then embed them like any other image
 
 ## Obsidian support
 
 We can use the Excalidraw integration in [[notes/obsidian|Obsidian]] to create Excalidraw drawings locally and display them with Flowershow. There are three simple steps:
-
-- Install the Excalidraw plugin for Obsidian
-- Configure the plugin to generate rendered images (as well as Excalidraw source)
-- Link the images folder
 
 ### 1. Install the Excalidraw plugin
 
