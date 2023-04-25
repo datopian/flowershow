@@ -1,6 +1,5 @@
 ---
-title: "Edit this page" button
-editLink: true
+title: Edit this page button
 ---
 
 If you keep your content in a public GitHub repository, and would like to encourage other people to contribute to it, you can show "Edit this page" button at the bottom of the page. It will link to the source file in your repository.
