@@ -71,10 +71,10 @@ authors: [John Doe]
 
 ### Default author
 
-If most of the time the author of the blog is the same - for example it's you - you can configure the default author in your `config.js` file using `defaultAuthor` property. It's value should be the `id`, the slug or the `name`. For example:
+If most of the time the author of the blog is the same - for example it's you - you can configure the default author in your `config.mjs` file using `defaultAuthor` property. It's value should be the `id`, the slug or the `name`. For example:
 
 ```js
-// <your-content-folder>/config.js
+// <your-content-folder>/config.mjs
 ...
 defaultAuthor: "john-doe"
 ...

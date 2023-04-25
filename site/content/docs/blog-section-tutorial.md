@@ -61,7 +61,7 @@ my-digital-garden
 │   └── my-blog-post.md
 ├── getters
 │   └── blogs.js
-├── config.js
+├── config.mjs
 └── index.md
 ```
 

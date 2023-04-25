@@ -10,13 +10,13 @@ It is available in the navbar or can also be accessed by pressing the Ctrl+K (‚å
 
 ## Adding the search component
 
-There are two kinds of providers to choose from when setting up the search component on your flowershow site. These are 'kbar' and 'algolia' which can be configured in your `config.js` file.
+There are two kinds of providers to choose from when setting up the search component on your flowershow site. These are 'kbar' and 'algolia' which can be configured in your `config.mjs` file.
 
 The difference between the two is that algolia search allows for a full-text search with external indexing whereas in kbar you don't need an external provider but you can only do keyword searches.
 
 ### Kbar
 
-To add the keyword-only search feature, just setup the search config in your `config.js` file to the following.
+To add the keyword-only search feature, just setup the search config in your `config.mjs` file to the following.
 
 ```js
 const config = {
@@ -65,7 +65,7 @@ There are some required config values that should be included for the search to 
 
 These values will be available once you have followed the steps provided to apply for algolia docsearch and your request is granted.
 
-Once these are available, you can then setup the algolia search provider and fill in the provided values in your `config.js` file as shown below.
+Once these are available, you can then setup the algolia search provider and fill in the provided values in your `config.mjs` file as shown below.
 
 ```js
 const config = {

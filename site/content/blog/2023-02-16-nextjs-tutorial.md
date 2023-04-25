@@ -101,12 +101,12 @@ Your `index.md` file in the root of the `content` folder will be your home page.
 
 ### Basic configuration
 
-Flowershow supports setting common configuration values using a `config.js` file, which should be placed in the root of the `/content` folder. With it you can customize some things like website title, navigation links in the navbar, or set your google analytics key.
+Flowershow supports setting common configuration values using a `config.mjs` file, which should be placed in the root of the `/content` folder. With it you can customize some things like website title, navigation links in the navbar, or set your google analytics key.
 
 Let's create one:
 
 ```shell
-touch my-flowershow-app/content/config.js
+touch my-flowershow-app/content/config.mjs
 ```
 
 Then add some new configuration to your project eg.

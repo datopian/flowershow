@@ -14,7 +14,7 @@ First, let's create an example blog post file in our content folder - `my-blog-p
 
 ```sh
 my-digital-garden
-├── config.js
+├── config.mjs
 ├── index.md
 └── my-blog-post.md
 ```
@@ -37,7 +37,7 @@ Let's add a few more blog posts, so that we have something to display on our blo
 
 ```sh
 my-digital-garden
-├── config.js
+├── config.mjs
 ├── index.md
 ├── my-blog-post.md
 ├── my-blog-post2.md
@@ -50,7 +50,7 @@ Let's create a page which will display a list of all our blog posts. For now we'
 
 ```sh
 my-digital-garden
-├── config.js
+├── config.mjs
 ├── index.md
 ├── blogs.md   <---
 ├── my-blog-post.md
@@ -105,7 +105,7 @@ That's it! We can now see a list of all the blog posts we've just created when w
 In the above example we have manually marked some files as blog posts by using a frontmatter `type` field and setting it to `Blog`. However, by default, all files inside the `<your-content-folder>/blog` directory will be treated as blog posts by Flowershow.
 
 > [!note]
-> If you want, you can also use a different folder by setting `blogDir` in your `config.js` file. Read [[blog]] to learn more.
+> If you want, you can also use a different folder by setting `blogDir` in your `config.mjs` file. Read [[blog]] to learn more.
 
 So, let's create this folder and move all our blog posts there. Let's also move our `blogs.md` page there and rename it to `index.md` so that its available under `/blog`. Each blog post will be available under `/blog/my-blog-post*.md`.
 
@@ -118,6 +118,6 @@ my-digital-garden
 │   └── my-blog-post.md
 ├── getters
 │   └── blogs.js
-├── config.js
+├── config.mjs
 └── index.md
 ```

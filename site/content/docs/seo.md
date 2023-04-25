@@ -96,7 +96,7 @@ image: /assets/images/your-image-path.jpg
 > You should set your website's url in your config file so that the correct url path for the image is generated.
 
 ```js
-// in config.js
+// in config.mjs
 const config = {
   domain: "https://your-website.com",
 };

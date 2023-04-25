@@ -5,7 +5,7 @@ editLink: true
 
 If you keep your content in a public GitHub repository, and would like to encourage other people to contribute to it, you can show "Edit this page" button at the bottom of the page. It will link to the source file in your repository.
 
-In order to make it work, you first need to set the `repoEditPath` in your `config.js` file:
+In order to make it work, you first need to set the `repoEditPath` in your `config.mjs` file:
 
 ```js
 {
@@ -15,7 +15,7 @@ In order to make it work, you first need to set the `repoEditPath` in your `conf
 
 ## Default setting
 
-You can disable or enable showing the button for all your pages by setting this property in your `config.js` file. The button is disabled by default.
+You can disable or enable showing the button for all your pages by setting this property in your `config.mjs` file. The button is disabled by default.
 
 ```js
 {

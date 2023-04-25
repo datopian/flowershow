@@ -104,13 +104,13 @@ At the end you should see `.flowershow` folder created in the target directory. 
 some-parent-dir
 ├── my-digital-garden
 │   ├── assets
-│   ├── config.js
+│   ├── config.mjs
 │   └── index.md
 ├── .flowershow
 └── ...
 ```
 
-Note that `config.js` and `index.md` files will be created automatically if they didn't exsist in your digital garden folder yet. The config file will allow you to do some basic configurations of your Flowershow app. See [[config|this guide]] to learn more.
+Note that `config.mjs` and `index.md` files will be created automatically if they didn't exsist in your digital garden folder yet. The config file will allow you to do some basic configurations of your Flowershow app. See [[config|this guide]] to learn more.
 
 ## (Optional) customize your website
 

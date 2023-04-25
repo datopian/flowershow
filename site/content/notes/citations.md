@@ -79,7 +79,7 @@ We can ask the user to place the `bib` file in vault (content) root and set the 
 * avoid recognizing email addresses as citations ? (something to test)
 
 **Solutions**:
-* add property in user's `config.js` for example maybe `bibFile: "Custom Library.bib"` and use that in plugin's config, or
+* add property in user's `config.mjs` for example maybe `bibFile: "Custom Library.bib"` and use that in plugin's config, or
 * customize rehype plugin to search for a bib file in content's root ?
   * https://github.com/timlrx/rehype-citation#generating-your-own-remark-citation-plugins 
   * maybe could also solve email address issue, if needed ?

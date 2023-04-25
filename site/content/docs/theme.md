@@ -11,7 +11,7 @@ Flowershow supports switching themes of your website to dark or light, by clicki
 The theme by default is set to dark. To change it to light, add the theme object in your `config.mjs` file as shown below.
 
 ```js
-// config.js
+// config.mjs
 
 const config = {
   ...
@@ -29,7 +29,7 @@ The theme toggle button's icon in the navbar can be replaced by setting the path
 The icon can be a `.svg`, `.png`, `.jpg` or any other image formats appropriate for the web, although svg's are highly recommended due to smaller sizes.
 
 ```js
-// config.js
+// config.mjs
 
 const config = {
   ...
@@ -47,7 +47,7 @@ Note that in dark mode the color of the icon is set to grayscale and once toggle
 To disable any theme options and not have a theme toggle, set the `theme.default` option to an empty string. Doing this will force a light theme on the site.
 
 ```js
-// config.js
+// config.mjs
 
 const config = {
   theme: {
