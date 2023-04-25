@@ -1,11 +1,13 @@
 ---
-title: Link Preview Tooltips
+title: Link previews (tooltips)
 ---
 
-Flowershow supports showing tooltips with the page's preview content when hovering over links to other documents within your site.
+🚧 THIS FEATURE NEEDS TO BE RE-IMPLEMENTED AFTER SWITCH TO MARKDOWNDB
+
+You can enable tooltips with page preview content showing when hovering over wiki-links.
 
 > [!note]
-> Tooltips are only supported for internal links ie. links to other pages within your site and not for external links eg. `https://someOtherSite.com/`
+> Tooltips are only supported for internal links ie. links to other pages within your site and not for external links eg. `https://some-other-site.com/`
 
 After hovering over a link, the tooltip will be displayed as seen in the screenshot below:
 ![[link-preview.jpg]]
@@ -25,7 +27,7 @@ const config = {
 
 ### Disable/Enable link preview for page
 
-You can also add/remove link previews for specific pages by setting  `showLinkPreview` to **true** or **false** in the page's frontmatter like below.
+You can also add/remove link previews for specific pages by setting `showLinkPreview` to **true** or **false** in the page's frontmatter like below.
 
 ```md
 ---
