@@ -40,6 +40,7 @@ export default function Page({ source, meta }: SlugPageProps) {
     <>
       <NextSeo
         title={meta.title}
+        description={meta.description}
         openGraph={{
           title: meta.title,
           description: meta.description,
