@@ -72,7 +72,7 @@ export const getStaticProps: GetStaticProps = async ({
     source,
   });
 
-  const siteMap: Array<NavGroup> = [];
+  const siteMap: Array<NavGroup | NavItem> = [];
 
   if (frontMatterWithComputedFields?.showSidebar) {
     const allPages = await mddb.getFiles({ extensions: ["md", "mdx"] });
@@ -113,7 +113,7 @@ function capitalize(str: string) {
 }
 
 /* function addPageToGroup(page: MddbFile, sitemap: Array<NavGroup>) { */
-function addPageToSitemap(page: any, sitemap: Array<NavGroup>) {
+function addPageToSitemap(page: any, sitemap: Array<NavGroup | NavItem>) {
   const urlParts = page.url_path!.split("/").filter((part) => part);
   // don't add home page to the sitemap
   if (urlParts.length === 0) return;
@@ -146,10 +146,12 @@ function addPageToSitemap(page: any, sitemap: Array<NavGroup>) {
         continue;
       }
 
-      const matchingGroup = currArray.find(
-        (group) =>
-          group.path !== undefined && page.url_path.startsWith(group.path)
-      );
+      const matchingGroup = currArray
+        .filter(isNavGroup)
+        .find(
+          (group) =>
+            group.path !== undefined && page.url_path.startsWith(group.path)
+        );
       if (!matchingGroup) {
         const newGroup: NavGroup = {
           name: capitalize(urlParts[level]),
@@ -164,4 +166,8 @@ function addPageToSitemap(page: any, sitemap: Array<NavGroup>) {
       }
     }
   }
+}
+
+function isNavGroup(item: NavItem | NavGroup): item is NavGroup {
+  return (item as NavGroup).children !== undefined;
 }
