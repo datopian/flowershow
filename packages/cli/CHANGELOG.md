@@ -1,5 +1,11 @@
 # flowershow
 
+## 0.1.6
+
+### Patch Changes
+
+- f136048: Remove `pages/index.tsx` file from the copied Flowershow template, to allow users to set their own home page with MD file.
+
 ## 0.1.5
 
 ### Patch Changes

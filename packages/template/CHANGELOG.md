@@ -1,5 +1,11 @@
 # @flowershow/template
 
+## 2.0.1
+
+### Patch Changes
+
+- f136048: Temporarily force Next.js v 13.3.0, due to error `SyntaxError: Named export 'useRouter' not found` (https://github.com/vercel/next.js/issues/48801)
+
 ## 2.0.0
 
 ### Major Changes
