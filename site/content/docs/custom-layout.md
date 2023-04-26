@@ -10,7 +10,7 @@ You may have many different types of notes that you want to display in different
 
 ## Recipe page metadata
 
-Since we are making a `Recipe` type, we may want to display the following the following information about our recipes:
+Since we are making a `Recipe` type, we may want to display the following information about our recipes:
 
 - difficulty (Easy, Medium, Hard)
 - time (how much time it takes)
