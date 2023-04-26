@@ -1,5 +1,11 @@
 # flowershow
 
+## 0.1.7
+
+### Patch Changes
+
+- Rename [...slug].tsx to [[...slug]].tsx at installation, so that user can still define their own home pages using MD files.
+
 ## 0.1.6
 
 ### Patch Changes
