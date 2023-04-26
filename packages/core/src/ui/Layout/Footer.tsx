@@ -34,7 +34,7 @@ export const Footer: React.FC<Props> = ({ links, author }) => {
             <img
               src={author.logo}
               alt={author.name}
-              className="my-0 h-6 block"
+              className="my-0 mx-1 h-6 block"
             />
           )}
           {author.name}
@@ -51,7 +51,7 @@ export const Footer: React.FC<Props> = ({ links, author }) => {
           <img
             src="https://flowershow.app/assets/images/logo.svg"
             alt="Flowershow"
-            className="my-0 h-6 block"
+            className="my-0 mx-1 h-6 block"
           />
           Flowershow
         </a>

@@ -57,7 +57,7 @@ const MyApp = ({ Component, pageProps }: AppProps<CustomAppProps>) => {
     author: {
       name: siteConfig.author,
       url: siteConfig.domain,
-      logo: siteConfig.authorLogo,
+      logo: siteConfig.logo,
     },
     theme: {
       defaultTheme: siteConfig.theme.default,
