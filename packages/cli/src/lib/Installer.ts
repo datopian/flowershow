@@ -209,6 +209,9 @@ export default class Installer {
     fs.rmSync(`${flowershowDir}/.eslintrc.json`, { force: true });
     fs.rmSync(`${flowershowDir}/jest.config.js`, { force: true });
 
+    // TODO (temporary here) remove Flowershow app home page
+    fs.rmSync(`${flowershowDir}/pages/index.tsx`, { force: true });
+
     // update content and assets symlinks
     const contentSymlinkPath = path.relative(`${flowershowDir}`, contentDir);
     fs.symlinkSync(contentSymlinkPath, `${flowershowDir}/content`, "junction");
