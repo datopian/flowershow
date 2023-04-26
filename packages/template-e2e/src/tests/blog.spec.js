@@ -77,7 +77,7 @@ test.describe.parallel("blog page without authors", () => {
     await page.goto("/blogtest");
   });
 
-  test("displays a default author (set in config.js) on Blogs with no frontmatter `authors` field set", async ({
+  test("displays a default author (set in config.mjs) on Blogs with no frontmatter `authors` field set", async ({
     page,
   }) => {
     await page.locator("a", { hasText: "John the Great" }).click();

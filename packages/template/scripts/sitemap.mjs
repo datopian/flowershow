@@ -20,7 +20,7 @@ export default async function sitemap() {
     "!pages/**/\\[\\[*\\]\\].(js|tsx)", // pages/[[...slug]].tsx
   ]);
 
-  const siteUrl = config?.authorUrl?.replace(/\/$/, "");
+  const siteUrl = config?.domain?.replace(/\/$/, "");
 
   const sitemap = `
     <?xml version="1.0" encoding="UTF-8"?>

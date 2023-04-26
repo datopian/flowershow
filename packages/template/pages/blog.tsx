@@ -15,7 +15,6 @@ export default function Blog({
   blogs,
   meta: { title, description },
 }: BlogIndexPageProps) {
-  console.log(blogs);
   return (
     <SimpleLayout title={title} description={description}>
       <BlogsList blogs={blogs} />
@@ -43,8 +42,6 @@ export const getStaticProps: GetStaticProps = async (): Promise<
   });
 
   const blogsList = await Promise.all(blogsMetadataPromises);
-
-  console.log(blogsList[0]);
 
   return {
     props: {
