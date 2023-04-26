@@ -1,5 +1,14 @@
 # @flowershow/template
 
+## 2.0.2
+
+### Patch Changes
+
+- Fix author logo and add some spacing around it.
+- Updated dependencies
+- Updated dependencies [f3d3a60]
+  - @flowershow/core@0.4.11
+
 ## 2.0.1
 
 ### Patch Changes
