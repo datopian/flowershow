@@ -2,35 +2,12 @@
 title: Blog support
 ---
 
-Apart from the `Page` document type, which Flowershow uses for all your content files by default, you can also use the `Blog` type for your blog posts. This way you'll be able to fetch and display them on any of your pages by using our `BlogsList` component (or you can create a custom one).
-
-## Marking files as `Blog`
-
-### Marking all files in a given folder
-
-By default, all files inside the `<your-content-folder>/blog` will be treated as blog posts. If you have your blog posts in a different folder, you can configure it using a `blogDir` field in your `config.js` file. For example, if you have your blog articles in `<your-content-folder>/articles`:
-
-```json
-...
-"blogDir": "articles"
-...
-```
-
-### Marking single files
-
-You can also assign `Blog` type to selected documents, by specifying the type in their frontmatter:
-
-```md
----
-title: My first blog post
-type: Blog
----
-```
+All files inside the `<your-content-folder>/blog` will be treated as blog posts.
 
 ## Blog post frontmatter fields
 
-- `date` - date that will be displayed on the blog page and that will be used to sort blog search results
-- `authors` (optional)
+- `date` - date that will be displayed on the blog page and that will be used to sort blog search results at `<base-url>/blog` path
+- `authors` (optional) - blog authors that will be displayed on the blog page
 
 ```md
 ---
@@ -40,52 +17,11 @@ authors: [John Doe, Jan Kowalski]
 ---
 ```
 
-## `BlogsList` component
-
-In order to list all your blog posts on a given page, you can use our `BlogsList` component and pass it a list of your blog posts. It's globally available, so you don't need to import it in your mdx file.
-
-The `BlogsList` component requires a `simple` page layout, which you need to specify in the frontmatter of your blogs index page.
-
-```
----
-layout: simple
----
-
-<BlogsList blogs={[]}/>
-```
-
-In addition to that, you also need to create a getter function that will fetch all your blog posts, e.g.:
-
-```
-// <your-content-folder>/getters/blogs.js
-import { allBlogs } from "contentlayer/generated";
-
-export default function getBlogs() {
-  return allBlogs.sort((a, b) => new Date(b.date) - new Date(a.date));
-}
-```
-
-...which you can then pass to the `BlogsList` component:
-
-```
----
-layout: simple
-data:
-  - blogs
----
-
-<BlogsList blogs={blogs}/>
-```
-
 ## Blog authors
 
-Flowershow will display authors from the `authors` frontmatter list field below the blog title. It will also try to link each author to the corresponding author's page, if such a page exists.
+Flowershow will display authors from the `authors` frontmatter list field below the blog title. It will also try to link each author to the corresponding author's page, if such a page exists, so that a user can click on his/hers avatar and visit their "about" page.
 
-> [!note]
-> By default, Flowershow treats all pages in `<your-content-folder>/people` directory as author pages (as well as each page with `type: Person` in its frontmatter).
-> You can configure path to the folder with your authors pages by setting `peopleDir` property in your config.js file.
-
-Flowershow will look for an author page with the `id` or `name` frontmatter fields, or a slug (file-name) matching the value provided in the `authors` list. If no matching page have been found, the provided string will be used. If the page has been found, the author's name and avatar (if set) will be displayed and it will be linked to the author page.
+Flowershow will look for an author page in `<your-content-folder>/people` with the `id` or `name` frontmatter fields, or a slug matching the value provided in the `authors` list. If no matching page have been found, the provided string will be used. If the page has been found, the author's name and avatar (if set) will be displayed and it will be linked to the author page.
 
 ### Blog author frontmatter fields
 
@@ -135,10 +71,10 @@ authors: [John Doe]
 
 ### Default author
 
-If most of the time the author of the blog is the same - for example it's you - you can configure a default author in your `config.js` file using `defaultAuthor` property. It's value should be the `id`, the slug (file name) or the `name`. For example:
+If most of the time the author of the blog is the same - for example it's you - you can configure the default author in your `config.mjs` file using `defaultAuthor` property. It's value should be the `id`, the slug or the `name`. For example:
 
 ```js
-// <your-content-folder>/config.js
+// <your-content-folder>/config.mjs
 ...
 defaultAuthor: "john-doe"
 ...

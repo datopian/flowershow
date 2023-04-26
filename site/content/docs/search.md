@@ -4,25 +4,21 @@ title: Search Feature
 
 ![[search-component.jpg]]
 
-Flowershow supports search functionality on the website to deliver realtime results for content available on all your pages. Clicking the result will lead the user to the relevant page.
-
-It is available in the navbar or can also be accessed by pressing the Ctrl+K (⌘+K on macOS) keyboard shortcut to open the search modal.
-
 ## Adding the search component
 
-There are two kinds of providers to choose from when setting up the search component on your flowershow site. These are 'kbar' and 'algolia' which can be configured in your `config.js` file.
-
-The difference between the two is that algolia search allows for a full-text search with external indexing whereas in kbar you don't need an external provider but you can only do keyword searches.
+There are two kinds of providers to choose from when setting up search functionality on your flowershow site. These are [kbar](https://kbar.vercel.app/) and [algolia](https://www.algolia.com/). The difference between the two is that algolia search allows for a full-text search with external indexing whereas in kbar you don't need an external provider but you can only do keyword searches.
 
 ### Kbar
 
-To add the keyword-only search feature, just setup the search config in your `config.js` file to the following.
+To setup the keyword search feature, set the search provider in your `config.mjs` file to `"kbar"`, like so:
 
 ```js
 const config = {
+  ...
   search: {
     provider: "kbar",
   },
+  ...
 };
 ```
 
@@ -65,7 +61,7 @@ There are some required config values that should be included for the search to 
 
 These values will be available once you have followed the steps provided to apply for algolia docsearch and your request is granted.
 
-Once these are available, you can then setup the algolia search provider and fill in the provided values in your `config.js` file as shown below.
+Once these are available, you can then setup the algolia search provider and fill in the provided values in your `config.mjs` file as shown below.
 
 ```js
 const config = {
@@ -79,3 +75,7 @@ const config = {
   },
 };
 ```
+
+### Access
+
+No matter which provider you choose, the search functionality will be available as a search field in the navbar or can also be accessed by pressing the Ctrl+K (⌘+K on macOS) keyboard shortcut to open the search modal.

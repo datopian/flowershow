@@ -13,18 +13,19 @@ Let's see how you can set metadata of your website in Flowershow.
 
 ## How to configure your meta tags
 
-The most common meta tags you may want to add to your pages include page title and content description. Flowershow allows you to set these values both globally for all your pages as wellas per-page.
+The most common meta tags you may want to add to your pages include page title and content description. Flowershow allows you to set these values both globally for all your pages as well as per-page.
 
 ### Setting global meta-tags
 
-In order to set some meta tags for all your pages, all you need to do is copy the following code to your `config.js` file inside your `content` folder.
+In order to set some meta tags for all your pages, all you need to do is add the following properties to your `config.mjs` file inside your `content` folder.
 
 ```js
 const config = {
   ...
   nextSeo: {
     title: "MyBlog blog post",
-    description="This is a blog about data management",
+    description: "This is a blog about data management",
+  },
   ...
 }
 ```
@@ -95,9 +96,9 @@ image: /assets/images/your-image-path.jpg
 > You should set your website's url in your config file so that the correct url path for the image is generated.
 
 ```js
-// in config.js
+// in config.mjs
 const config = {
-  authorUrl: "https://your-website.com",
+  domain: "https://your-website.com",
 };
 ```
 

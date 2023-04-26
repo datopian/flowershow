@@ -8,14 +8,14 @@ Sitemaps are typically created in XML format, although there are other formats a
 
 ## Generating sitemaps in Flowershow
 
-In order to create a sitemap for your Flowershow website, add a domain on which your website will be hosted to `authorUrl` field in your `config.js` file, like so:
+In order to create a sitemap for your Flowershow website, add a domain on which your website will be hosted to `domain` field in your `config.mjs` file, like so:
 
 ```js
 // config.mjs
 
 const config = {
-  authorUrl: "https://flowershow.app" // replace with your website url here.
-}
+  domain: "https://flowershow.app", // replace with your website url here.
+};
 ```
 
 Thats it! Your XML sitemap will be auto generated in `public/sitemap.xml` and ready for search engines to crawl your content.

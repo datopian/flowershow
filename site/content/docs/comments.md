@@ -26,7 +26,7 @@ Each provider has it's own configuration options. It is highly recommended that 
 No matter which one you choose, in order to enable comments on your pages you need to add `showComments` property to your config file and set it to `true`.
 
 ```js
-// config.js
+// config.mjs
 ...
 showComments: true,
 ...
@@ -56,7 +56,7 @@ NEXT_PUBLIC_DISQUS_SHORTNAME=
 Then you can use environment variables in your config file with `process.env`. For example, you can see how we can use these in the code below.
 
 ```js
-// config.js
+// config.mjs
 
 const config = {
   comments: {
@@ -87,7 +87,7 @@ Once the above steps are completed, we will have to get our config values. Head 
 After filling out the fields, you will be provided with a script tag that contains your config values. Now you are ready to enable giscus comments by adding these values in your config file.
 
 ```js
-// config.js
+// config.mjs
 const config = {
   comments: {
     provider: "giscus",

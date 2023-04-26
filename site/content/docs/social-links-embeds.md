@@ -1,6 +1,6 @@
-# Social Previews
-
-The following socials will embed if you do the following:
+---
+title: Social links embeds
+---
 
 ## Youtube
 

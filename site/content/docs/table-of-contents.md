@@ -2,7 +2,9 @@
 title: Table of contents
 ---
 
-You can add a table of contents to your markdown pages by including a heading with `Table of contents` string in it (case insensitive).
+## Inline
+
+You can add an "inline" table of contents to your markdown pages by including a heading with `Table of contents` string in it (case insensitive).
 
 The table of contents will only include headings placed below the `Table of contents` heading.
 
@@ -34,30 +36,31 @@ The table of contents will only include headings placed below the `Table of cont
 
 ---
 
-## Right Hand Side (RHS)
+## Right hand side
 
-Flowershow supports adding a Table of Contents (ToC) sidebar (RHS) to your pages which can be easily setup in your config file.
+You can also enable a table of contents in form of a right hand side sidebar:
 
 ![[rhs-toc.jpg]]
 
-### ToC on all pages
-
-To enable ToC on all the markdown pages, simply set a `showToc` variable to true in your config file as shown below:
+To enable it on all your markdown pages, simply set a `showToc` variable to true in your config file as shown below:
 
 ```js
-// config.js
+// config.mjs
 
 const config = {
+  ...
   showToc: true,
+  ...
 };
 ```
 
-### Disabling / Enabling ToC for a single page
-
-You can also add/remove table of contents for specific pages by setting `showToc` to **true** or **false** in the page's frontmatter like below.
+You can also override the value set in the config file on per-page basis, by setting `showToc` to **true** or **false** in its frontmatter, like so:
 
 ```md
 ---
+title: Some page
 showToc: true
 ---
+
+Some content
 ```

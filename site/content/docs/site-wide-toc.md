@@ -8,14 +8,14 @@ Flowershow supports adding a site-wide table of contents in a LFH sidebar to all
 
 ## Enabling / disabling the sidebar
 
-The sidebar is disabled by default. You can enable it for all your pages in your `config.js` file, and then disable it for some of your pages, like e.g. your home page.
+The sidebar is disabled by default. You can enable it for all your pages in your `config.mjs` file, and then disable it for some of your pages, like e.g. your home page.
 
 ### For all pages
 
 To show the sidebar on all the pages, simply set `showSidebar` variable to `true` in your config file as shown below:
 
 ```js
-// config.js
+// config.mjs
 
 const config = {
   showSidebar: true,

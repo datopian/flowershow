@@ -1,4 +1,6 @@
-# Markdown syntax support
+---
+title: Markdown syntax support
+---
 
 Flowershow was designed with Obsidian users in mind, and so, it aims to fully support Obsidian syntax, including **CommonMark**, **GitHub Flavoured Markdown** and **Obsidian extensions**, like Wiki links.
 
@@ -58,7 +60,7 @@ Code blocks created with backtics will be parsed as `pre` tags with support for 
 
 **Javascript example:**
 
-```javascript
+```javascript {2}
 const ExampleCode = () => {
   return <div> .... </div>;
 };
@@ -66,7 +68,7 @@ const ExampleCode = () => {
 
 **Python example:**
 
-```python
+```python {3}
 class Example:
 	def code(self,test):
 		return 'Code highlighter'
@@ -150,19 +152,6 @@ Here is some code: `print("hello world!")`
 
 ![tulip](https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/abstract-flowers-rose-sciberras.jpg)
 
-### 🚧 Indented code blocks
-
-**Example:**
-
-```md
-    a simple
-    	indented code block
-```
-
-**Renders as:**  
- a simple
-indented code block
-
 > [!NOTE]
 > 🔍 To learn more about the Markdown syntax refer to the [CommonMark specification](https://spec.commonmark.org/0.30/).
 
@@ -233,13 +222,16 @@ Flowershow will convert internal links to HTML `a` tags, with their `href` attri
 
 **Internal link types**
 
-- Link to a page, e.g. `[[roadmap]]`, which renders as [[roadmap]]
-- Link to a page with a custom name, e.g. `[[roadmap|Our roadmap]]`, which renders as [[roadmap|Our roadmap]]
-- Link to a specific heading within a given page `[[roadmap#Planned features]]`, which renders as [[roadmap#Planned features]]
-- Link to a specific heading within a given page with a custom name, e.g. `[[roadmap#Planned features|🚧 working on...]]` which renders as [[roadmap#Planned features|🚧 working on...]]
-- 🚧 Link to a specific block (paragraph) within a given page, e.g. `[[roadmap#^f93ba0]]`
-- Link to an image file with supported image formats - png, jpg and jpeg, eg. `![[park.png]]` which renders as:
-  ![[park.png]]
+- Link to a page, e.g. `[[/docs/blog]]`, which renders as [[/docs/blog]]
+- Link to a page with a custom name, e.g. `[[/docs/blog|Blog support]]`, which renders as [[/docs/blog|Blog support]]
+- Link to a specific heading within a given page `[[/docs/blog#Blog author frontmatter fields]]`, which renders as [[/docs/blog#Blog author frontmatter fields]]
+- Link to a specific heading within a given page with a custom name, e.g. `[[/docs/blog#Blog author frontmatter fields|Some alias]]` which renders as [[/docs/blog#Blog author frontmatter fields|Some alias]]
+- Link to an image file with supported image formats - png, jpg and jpeg, eg. `![[/assets/images/park.png]]` which renders as:
+  ![[/assets/images/park.png]]
+- 🚧 Link to a specific block (paragraph) within a given page, e.g. `[[/docs/blog#f93ba0]]`
+
+> [!note]
+> Note, that Flowershow will also handle Obsidian wiki links with "shortest path when possible" setting.
 
 ### Footnotes
 
@@ -266,20 +258,6 @@ $$\begin{vmatrix}a & b\\ c & d \end{vmatrix}=ad-bc$$
 **Renders as:**
 
 $$\begin{vmatrix}a & b\\ c & d \end{vmatrix}=ad-bc$$
-
-### Frontmatter
-
-You can add metadata to your pages, by adding key-value pairs to frontmatter, e.g.:
-
-```md
----
-title: Flower Show
-description: A tool for publishing markdown notes.
-mymeta: Some info
----
-```
-
-The `title` and `description` fields are pulled from the MDX file and processed using `gray-matter`. Additionally, links are rendered using a custom component passed to `next-mdx-remote`.
 
 ### Dashes/Ellipse
 

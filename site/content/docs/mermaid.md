@@ -18,7 +18,7 @@ MERMAID DIAGRAM CODE GOES HERE
 ```
 ````
 
-### Examples
+## Examples
 
 ### Simple example
 

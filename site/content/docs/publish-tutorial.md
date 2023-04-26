@@ -12,10 +12,6 @@ https://www.youtube.com/watch?v=HxD6NWYCea0
 
 ## Prepare the content
 
-> [!warning] OS
-> Flowershow CLI has a basic support for Windows, but it hasn't been thoroughly tested on this OS yet. Please let us know of any unexpected issues.
-> Also, please note that on Windows you have to run Flowershow CLI in an admin console. You can open it by right-clicking on the Command Prompt (or e.g. PowerShell) and clicking on "Run as administrator".
-
 > [!note] Pre-requisites
 > [Node.js](https://nodejs.org/en/) installed
 
@@ -104,17 +100,17 @@ At the end you should see `.flowershow` folder created in the target directory. 
 some-parent-dir
 ├── my-digital-garden
 │   ├── assets
-│   ├── config.js
+│   ├── config.mjs
 │   └── index.md
 ├── .flowershow
 └── ...
 ```
 
-Note that `config.js` and `index.md` files will be created automatically if they didn't exsist in your digital garden folder yet. The config file will allow you to do some basic configurations of your Flowershow app. See [[config|this guide]] to learn more.
+Note that `config.mjs` and `index.md` files will be created automatically if they didn't exsist in your digital garden folder yet. The config file will allow you to do some basic configurations of your Flowershow app. See [[config|this guide]] to learn more.
 
 ## (Optional) customize your website
 
-You can now customize your website by wrapping your content in custom layouts, using custom components in you Markdown files, importing data from files and more. See [[guides|our guides]] to learn how to do it.
+You can now customize your website by wrapping your content in custom layouts and more. See [[docs|our docs]] to learn how to do it.
 
 ## Build your website
 
@@ -130,7 +126,10 @@ npx flowershow@latest preview
 npx flowershow@latest preview some-parent-dir
 ```
 
-After running this command, you will now be able to see your website on http://localhost:3000/ - it will reload every time you make some changes to your content.
+After running this command, you will now be able to see your website on http://localhost:3000/
+
+> [!note]
+> Note, that the site will auto reload each time you make some adjustments to files inside `.flowershow` folder. At the moment, your site will not hot reload upon changes to your content files though. This is something we may implement in the future, so if you'd like to see this feature, please let us know by starting a discussion or submitting an issue in our repo.
 
 If your ready to publish your site, you can now build it with the following command:
 
