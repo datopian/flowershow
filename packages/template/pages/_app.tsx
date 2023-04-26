@@ -31,7 +31,7 @@ export interface CustomAppProps {
     editUrl?: string;
     [key: string]: any;
   };
-  siteMap: Array<NavItem | NavGroup>;
+  siteMap?: Array<NavItem | NavGroup>;
   [key: string]: any;
 }
 
