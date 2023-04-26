@@ -8,7 +8,6 @@
       "executor": "nx:run-commands",
       "outputs": ["{options.outputPath}"],
       "inputs": ["production", "^production", "siteContent"],
-      "dependsOn": ["^build", { "target": "mddb", "projects": "self" }],
       "options": {
         "command": "npm run build",
         "cwd": "packages/template",
@@ -19,7 +18,6 @@
       "executor": "nx:run-commands",
       "outputs": ["{options.outputPath}"],
       "inputs": ["production", "^production", "siteContent"],
-      "dependsOn": ["^build", { "target": "mddb", "projects": "self" }],
       "options": {
         "command": "npm run export",
         "cwd": "packages/template",
