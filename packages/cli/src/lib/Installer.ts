@@ -211,6 +211,11 @@ export default class Installer {
 
     // TODO (temporary here) remove Flowershow app home page
     fs.rmSync(`${flowershowDir}/pages/index.tsx`, { force: true });
+    fs.rename(
+      `${flowershowDir}/pages/[...slug].tsx`,
+      `${flowershowDir}/pages/[[...slug]].tsx`,
+      () => {}
+    );
 
     // update content and assets symlinks
     const contentSymlinkPath = path.relative(`${flowershowDir}`, contentDir);
