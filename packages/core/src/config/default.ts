@@ -7,7 +7,7 @@ export const defaultConfig = {
   showLinkPreviews: true,
   author: "",
   authorLogo: "",
-  authorUrl: "",
+  domain: "",
   // Google analytics key e.g. G-XXXX
   analytics: "",
   // content source directory for markdown files
