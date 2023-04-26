@@ -1,5 +1,12 @@
 # @flowershow/core
 
+## 0.4.11
+
+### Patch Changes
+
+- Fix author logo and add some spacing around it.
+- f3d3a60: Fix path to JSON file with kbar search actions.
+
 ## 0.4.10
 
 ### Patch Changes
