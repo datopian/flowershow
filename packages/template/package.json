@@ -10,7 +10,7 @@
     "start": "next start",
     "export": "npm run build && next export",
     "mddb": "mddb ./content",
-    "generate": "npm run mddb && cross-env NODE_OPTIONS=\"--experimental-json-modules --experimental-modules\" node -r esbuild-register ./scripts/postbuild.mjs"
+    "generate": "cross-env NODE_OPTIONS=\"--experimental-json-modules --experimental-modules\" node -r esbuild-register ./scripts/postbuild.mjs"
   },
   "dependencies": {
     "@flowershow/core": "^0.4.11",
