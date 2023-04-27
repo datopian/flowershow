@@ -1,6 +1,11 @@
 import React from "react";
+import wikiLink from "@flowershow/remark-wiki-link";
+import callouts from "@flowershow/remark-callouts";
+import embeds from "@flowershow/remark-embed";
 import { MDXRemote } from "next-mdx-remote";
 import { Mermaid, Pre } from "@flowershow/core";
+
+console.log({ wikiLink, callouts, embeds });
 
 import layouts from "../layouts";
 
