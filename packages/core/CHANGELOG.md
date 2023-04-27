@@ -1,5 +1,11 @@
 # @flowershow/core
 
+## 0.4.12
+
+### Patch Changes
+
+- Remove next-contentlayer from peer dependencies.
+
 ## 0.4.11
 
 ### Patch Changes
