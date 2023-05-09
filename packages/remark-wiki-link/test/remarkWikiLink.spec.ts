@@ -257,6 +257,29 @@ describe("remark-wiki-link", () => {
       });
     });
 
+    test("Image embeds with obsidian default format", () => {
+      const processor = unified()
+        .use(markdown)
+        .use(wikiLinkPlugin, {
+          pathFormat: "obsidian-short",
+          permalinks: ["/assets/pasted image 20230509092216.png"],
+        });
+
+      let ast = processor.parse("![[pasted image 20230509092216.png]]");
+      ast = processor.runSync(ast);
+
+      expect(select("wikiLink", ast)).not.toEqual(null);
+
+      visit(ast, "wikiLink", (node: Node) => {
+        console.log(node.data)
+        expect(node.data?.exists).toEqual(true);
+        expect(node.data?.permalink).toEqual("/assets/pasted image 20230509092216.png");
+        expect(node.data?.alias).toEqual(null);
+        expect(node.data?.hName).toEqual("img");
+        expect((node.data?.hProperties as any).className).toEqual("internal");
+      });
+    });
+
     test("parses an image embed of unsupported file format", () => {
       const processor = unified().use(markdown).use(wikiLinkPlugin);
 
