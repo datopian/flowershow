@@ -72,7 +72,7 @@ function fromMarkdown(opts: FromMarkdownOptions = {}) {
     const pagePermalinks = pageResolver(target, isEmbed, prefix);
 
     // eslint-disable-next-line no-useless-escape
-    const pathWithOptionalHeadingPattern = /([a-z0-9\.\/_-]*)(#.*)?/;
+    const pathWithOptionalHeadingPattern = /([a-z0-9\.\/_\s-]*)(#.*)?/;
     let targetHeading = "";
 
     const matchingPermalink = permalinks.find((e) => {
