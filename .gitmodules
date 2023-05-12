@@ -7,3 +7,6 @@
 [submodule "packages/cli/src/e2e/test_helper/bats-assert"]
 	path = packages/cli/e2e/test_helper/bats-assert
 	url = https://github.com/bats-core/bats-assert.git
+[submodule "packages/template"]
+	path = packages/template
+	url = https://github.com/datopian/flowershow-template.git
