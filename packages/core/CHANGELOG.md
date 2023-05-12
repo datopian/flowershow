@@ -1,5 +1,11 @@
 # @flowershow/core
 
+## 0.4.13
+
+### Patch Changes
+
+- Fix url to Flowershow url in the footer.
+
 ## 0.4.12
 
 ### Patch Changes
