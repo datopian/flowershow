@@ -26,7 +26,18 @@ teardown() {
     rm -rf $E2E_TEMP_DIR || true
 }
 
+killport() {
+  if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    fuser -k 3000/tcp
+  elif [[ "$OSTYPE" == "darwin"* ]]; then
+      kill -9 $(lsof -ti:3000)
+  else
+    echo "Unknown OS"
+  fi
+}
+
 @test "Install Flowershow template and preview site" {
+    echo "test"
     run install.sh $CLI_EXE
     assert_success
     assert_output --partial "Successfully installed"
@@ -38,7 +49,7 @@ teardown() {
     # kill the process before testing the output
     # placing it after assert_output in case of test failure will leave the server process running
     # TODO move it to teardown? e.g. start server on random server (in case the user is using 3000) and then kill it
-    fuser -k "3000/tcp"
+    killport
     assert_output --partial "Hello world"
 }
 
@@ -59,7 +70,7 @@ teardown() {
     # wait for the server to start
     sleep 20
     run curl "http://localhost:3000"
-    fuser -k "3000/tcp"
+    killport
     assert_output --partial "Hello world"
 }
 
@@ -89,8 +100,8 @@ teardown() {
      --data-binary "@out.zip" \
      "https://api.netlify.com/api/v1/sites"
 
-    SITE_URL=$(echo $output | grep -oP '"url":"\K[^"]*')
-    SITE_ID=$(echo $output | grep -oP '"id":"\K[^"]*')
+    SITE_URL=$(echo $output | awk -F'"url":"' '{print $2}' | awk -F'"' '{print $1}')
+    SITE_ID=$(echo $output | awk -F'"id":"' '{print $2}' | awk -F'"' '{print $1}')
     assert [ -n $SITE_URL ]
 
     # test deployed site
