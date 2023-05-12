@@ -1,5 +1,9 @@
 #!/bin/sh
 
-ln -vfns ../../site/content ../template/content
-ln -vfns ../../../site/content/assets ../template/public/assets
-ln -vfns ../../../site/components ../template/components/custom
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    fuser -k 3030/tcp
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    kill -9 $(lsof -ti:3030)
+else
+    echo "Unknown OS"
+fi
