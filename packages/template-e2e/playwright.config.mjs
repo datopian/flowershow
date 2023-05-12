@@ -29,7 +29,8 @@ const config = {
     // TODO can port be forwarded to original serve target instead of creatinga new one only for this purpose?
     port: PORT,
     timeout: 60 * 1000,
-    reuseExistingServer: !process.env.CI,
+    // reuseExistingServer: !process.env.CI,
+    reuseExistingServer: false,
   },
 
   use: {
