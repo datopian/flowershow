@@ -1,9 +1,9 @@
 import { devices } from "@playwright/test";
-import path from "path";
-import { fileURLToPath } from "url";
+// import path from "path";
+// import { fileURLToPath } from "url";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
 // it seems, for github workflow to work, port needs to be different than 3000
 const PORT = 3030;
@@ -16,7 +16,8 @@ const config = {
   // Timeout per test
   timeout: 60 * 1000,
   // Test directory
-  testDir: path.join(__dirname, "src/tests"),
+  // testDir: path.join(__dirname, "src/tests"),
+  testDir: "src/tests",
   // If a test fails, retry it additional 2 times
   // retries: 2,
   // Artifacts folder where screenshots, videos, and traces are stored.
