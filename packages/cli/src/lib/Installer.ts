@@ -180,11 +180,10 @@ export default class Installer {
       msg: `Creating Flowershow template in ${chalk.magenta(flowershowDir)}`,
     });
 
-    if (existsAction === "overwrite") {
-      fs.rmSync(flowershowDir, { recursive: true, force: true });
-    }
-
     try {
+      if (existsAction === "overwrite") {
+        fs.rmSync(flowershowDir, { recursive: true, force: true });
+      }
       const emitter = degit(templateRepo);
       await emitter.clone(flowershowDir);
     } catch (err) {
@@ -195,33 +194,51 @@ export default class Installer {
       exit(1);
     }
 
-    // remove unneeded dev files
-    fs.rmSync(`${flowershowDir}/project.json`, { force: true });
-    fs.rmSync(`${flowershowDir}/.eslintrc.json`, { force: true });
-    fs.rmSync(`${flowershowDir}/jest.config.js`, { force: true });
-
-    // TODO (temporary here) remove Flowershow app home page
-    fs.rmSync(`${flowershowDir}/pages/index.tsx`, { force: true });
-    fs.rename(
-      `${flowershowDir}/pages/[...slug].tsx`,
-      `${flowershowDir}/pages/[[...slug]].tsx`,
-      () => {}
-    );
-
     // update content and assets symlinks
-    const contentSymlinkPath = path.relative(`${flowershowDir}`, contentDir);
-    fs.symlinkSync(contentSymlinkPath, `${flowershowDir}/content`, "junction");
+    try {
+      // flowershow template includes starter content folder, so we need
+      // to remove it before creating symlinks
+      if (fs.existsSync(`${flowershowDir}/content`)) {
+        fs.rmSync(`${flowershowDir}/content`, { recursive: true, force: true });
+      }
 
-    if (assetsFolder !== "none") {
-      const assetsSymlinkPath = path.relative(
-        `${flowershowDir}/public`,
-        `${contentDir}/${assetsFolder}`
-      );
+      const contentSymlinkPath = path.relative(`${flowershowDir}`, contentDir);
       fs.symlinkSync(
-        assetsSymlinkPath,
-        `${flowershowDir}/public/${assetsFolder}`,
+        contentSymlinkPath,
+        `${flowershowDir}/content`,
         "junction"
       );
+
+      if (assetsFolder !== "none") {
+        const assetsSymlinkPath = path.relative(
+          `${flowershowDir}/public`,
+          `${contentDir}/${assetsFolder}`
+        );
+        fs.symlinkSync(
+          assetsSymlinkPath,
+          `${flowershowDir}/public/${assetsFolder}`,
+          "junction"
+        );
+      }
+      stopSpinner();
+      log("Created symlinks:");
+      log(
+        `${chalk.cyan(`${flowershowDir}/content`)} -> ${chalk.magenta(
+          contentDir
+        )}`
+      );
+      if (assetsFolder !== "none") {
+        log(
+          `${chalk.cyan(
+            `${flowershowDir}/public/${assetsFolder}`
+          )} -> ${chalk.magenta(`${contentDir}/${assetsFolder}`)}`
+        );
+      }
+    } catch (err) {
+      error(
+        `Failed to create symlinks to content and assets folders: ${err.message}`
+      );
+      exit(err.exitCode);
     }
 
     // install flowershow dependencies
