@@ -9,7 +9,7 @@
       "inputs": ["default", "{workspaceRoot}/packages/template/**/*"],
       "options": {
         "commands": [
-          "./src/support/testsetup.sh",
+          "./src/support/testsetup.sh ./src/fixtures/content",
           "playwright test",
           "./src/support/testteardown.sh"
         ],
@@ -17,20 +17,6 @@
         "cwd": "packages/template-e2e"
       },
       "dependsOn": ["^build"]
-    },
-    "e2e:setup": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "src/support/testsetup.sh ../template \"$(pwd)\"/src/fixtures/content \"$(pwd)\"/src/fixtures/components",
-        "cwd": "packages/template-e2e"
-      }
-    },
-    "e2e:teardown": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "src/support/testteardown.sh ../template \"$(pwd)\"/../../site/content \"$(pwd)\"/../../site/components",
-        "cwd": "packages/template-e2e"
-      }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
@@ -40,10 +26,5 @@
       }
     }
   },
-  "tags": [],
-  "implicitDependencies": [
-    "remark-callouts",
-    "remark-wiki-link",
-    "remark-embed"
-  ]
+  "tags": []
 }
