@@ -22,22 +22,13 @@ import {
 import { FLOWERSHOW_FOLDER_NAME } from "./const.js";
 
 export default class Installer {
+  templateRepo = "https://github.com/datopian/flowershow-template";
   context: any;
   targetDir: string;
 
   constructor(context: any, targetDir: string) {
     this.context = context;
     this.targetDir = targetDir;
-  }
-
-  get templateRepo() {
-    // simplify importing data from package.json with this line after we no longer want to support node 16
-    // import packageJson from "#package.json" assert { type: "json" };
-    const flowershowRepo = require("../../package.json").repository.url.replace(
-      "git+",
-      ""
-    );
-    return `${flowershowRepo}/packages/template`;
   }
 
   async install() {
