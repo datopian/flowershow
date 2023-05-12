@@ -30,6 +30,7 @@ jobs:
       - run: pnpm install
       - run: sudo apt-get install -y expect
       - run: pnpm playwright install --with-deps
+      - run: pnpm add -g degit
       - name: Run E2E tests
         env:
           NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
