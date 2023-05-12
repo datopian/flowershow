@@ -49,7 +49,7 @@ export const Footer: React.FC<Props> = ({ links, author }) => {
           className="flex items-center no-underline"
         >
           <img
-            src="https://flowershow.app/assets/images/logo.svg"
+            src="https://flowershow.app/images/logo.svg"
             alt="Flowershow"
             className="my-0 mx-1 h-6 block"
           />
