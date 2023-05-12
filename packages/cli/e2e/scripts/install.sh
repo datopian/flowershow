@@ -1,17 +1,23 @@
 #!/usr/bin/expect -f
 
 set CLI_EXE [lindex $argv 0]
-set TEST_DIR [lindex $argv 1]
 
-spawn node "$CLI_EXE" install "$TEST_DIR"
+spawn node "$CLI_EXE" install
+
+expect {
+    -re "Create Flowershow project in current directory?" { send -- "\r" }
+}
 
 expect {
     -re "Flowershow template is already installed in directory" { send -- "\r" }
 }
+
 expect {
     -re "Path to the folder with your markdown files" { send -- "content\r" }
     timeout { send_error "Failed to get prompt for content folder \n"; exit 1 }
 }
+
+# content folder needs to have assets folder inside for this to work
 expect {
     -re "Select a folder with your assets" { send -- "\r" }
     timeout { send_error "Failed to get prompt for assets folder\n"; exit 1 }
