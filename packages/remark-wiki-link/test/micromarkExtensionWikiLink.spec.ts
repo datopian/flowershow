@@ -3,71 +3,83 @@ import { html } from "../src/lib/html";
 import { micromark } from "micromark";
 
 describe("micromark-extension-wiki-link", () => {
-  describe("pathFormat", () => {
-    test("parses a wiki link with 'raw' (default) pathFormat", () => {
-      const serialized = micromark("[[../some/folder/Wiki Link]]", {
+  describe("parses a wikilink", () => {
+    test("with 'raw' file format (default) that has no matching permalink", () => {
+      const serialized = micromark("[[Wiki Link]]", {
         extensions: [syntax()],
         htmlExtensions: [html()],
       });
+      // note: class="internal new"
       expect(serialized).toBe(
-        '<p><a href="../some/folder/wiki-link" class="internal new">../some/folder/Wiki Link</a></p>'
+        '<p><a href="Wiki Link" class="internal new">Wiki Link</a></p>'
       );
     });
 
-    test("parses a wiki link with 'obsidian-absolute' pathFormat", () => {
-      const serialized = micromark("[[some/folder/Wiki Link]]", {
-        extensions: [syntax()],
-        htmlExtensions: [html({ pathFormat: "obsidian-absolute" })],
-      });
-      expect(serialized).toBe(
-        '<p><a href="/some/folder/wiki-link" class="internal new">some/folder/Wiki Link</a></p>'
-      );
-    });
-
-    test("parses a wiki link with 'obsidian-short' pathFormat", () => {
+    test("with 'raw' file format (default) that has a matching permalink", () => {
       const serialized = micromark("[[Wiki Link]]", {
         extensions: [syntax()],
-        htmlExtensions: [html({ pathFormat: "obsidian-short" })],
+        htmlExtensions: [html({ permalinks: ["Wiki Link"] })],
       });
+      // note: class="internal"
       expect(serialized).toBe(
-        '<p><a href="wiki-link" class="internal new">Wiki Link</a></p>'
-      );
-    });
-  });
-
-  describe("finding matching permalinks", () => {
-    test("parses a wiki link that has a matching permalink", () => {
-      const serialized = micromark("[[Wiki Link]]", {
-        extensions: [syntax()],
-        htmlExtensions: [html({ permalinks: ["wiki-link"] })],
-      });
-      expect(serialized).toBe(
-        '<p><a href="wiki-link" class="internal">Wiki Link</a></p>'
+        '<p><a href="Wiki Link" class="internal">Wiki Link</a></p>'
       );
     });
 
-    test("parses a wiki link that has no matching permalink", () => {
-      const serialized = micromark("[[Wiki Link]]", {
-        extensions: [syntax()],
-        htmlExtensions: [html({ permalinks: [] })],
-      });
-      expect(serialized).toBe(
-        '<p><a href="wiki-link" class="internal new">Wiki Link</a></p>'
-      );
-    });
-
-    test("parses a shortened Obsidian wiki link that has a matching permalink", () => {
+    test("with shortened Obsidian-style path that has no matching permalink", () => {
       const serialized = micromark("[[Wiki Link]]", {
         extensions: [syntax()],
         htmlExtensions: [
           html({
-            permalinks: ["/some/folder/wiki-link"],
+            pathFormat: "obsidian-short",
+          }),
+        ],
+      });
+      // note: class="internal new"
+      expect(serialized).toBe(
+        '<p><a href="Wiki Link" class="internal new">Wiki Link</a></p>'
+      );
+    });
+
+    test("with shortened Obsidian-style path that has a matching permalink", () => {
+      const serialized = micromark("[[Wiki Link]]", {
+        extensions: [syntax()],
+        htmlExtensions: [
+          html({
+            permalinks: ["/some/folder/Wiki Link"],
             pathFormat: "obsidian-short",
           }),
         ],
       });
       expect(serialized).toBe(
-        '<p><a href="/some/folder/wiki-link" class="internal">Wiki Link</a></p>'
+        '<p><a href="/some/folder/Wiki Link" class="internal">Wiki Link</a></p>'
+      );
+    });
+
+    // Obsidian absolute path doesn't have a leading slash
+    test("with 'obsidian-absolute' path format that has no matching permalink", () => {
+      const serialized = micromark("[[some/folder/Wiki Link]]", {
+        extensions: [syntax()],
+        htmlExtensions: [html({ pathFormat: "obsidian-absolute" })],
+      });
+      expect(serialized).toBe(
+        '<p><a href="/some/folder/Wiki Link" class="internal new">some/folder/Wiki Link</a></p>'
+      );
+    });
+
+    // Obsidian absolute path doesn't have a leading slash
+    test("with 'obsidian-absolute' path format that has a matching permalink", () => {
+      const serialized = micromark("[[some/folder/Wiki Link]]", {
+        extensions: [syntax()],
+        htmlExtensions: [
+          html({
+            permalinks: ["/some/folder/Wiki Link"],
+            pathFormat: "obsidian-absolute",
+          }),
+        ],
+      });
+      expect(serialized).toBe(
+        '<p><a href="/some/folder/Wiki Link" class="internal">some/folder/Wiki Link</a></p>'
       );
     });
   });
@@ -78,8 +90,9 @@ describe("micromark-extension-wiki-link", () => {
         extensions: [syntax()],
         htmlExtensions: [html()],
       });
+      // note: lowercased and hyphenated heading
       expect(serialized).toBe(
-        '<p><a href="wiki-link#some-heading" class="internal new">Wiki Link#Some Heading</a></p>'
+        '<p><a href="Wiki Link#some-heading" class="internal new">Wiki Link#Some Heading</a></p>'
       );
     });
 
@@ -88,8 +101,9 @@ describe("micromark-extension-wiki-link", () => {
         extensions: [syntax()],
         htmlExtensions: [html()],
       });
+      // note: lowercased and hyphenated heading
       expect(serialized).toBe(
-        '<p><a href="wiki-link#some-heading" class="internal new">Alias</a></p>'
+        '<p><a href="Wiki Link#some-heading" class="internal new">Alias</a></p>'
       );
     });
 
@@ -99,7 +113,6 @@ describe("micromark-extension-wiki-link", () => {
         htmlExtensions: [html()],
       });
       expect(serialized).toBe(
-        // '<p><a href="#some-heading" class="internal new">Some Heading</a></p>' // TODO: should this have internal class only?
         '<p><a href="#some-heading" class="internal new">Some Heading</a></p>'
       );
     });
@@ -107,56 +120,65 @@ describe("micromark-extension-wiki-link", () => {
 
   describe("image embeds", () => {
     test("parses an image embed of supported file format", () => {
-      const serialized = micromark("![[../some/folder/My Image.jpg]]", {
+      const serialized = micromark("![[My Image.jpg]]", {
         extensions: [syntax()],
         htmlExtensions: [html()],
       });
       expect(serialized).toBe(
-        '<p><img src="../some/folder/My Image.jpg" alt="../some/folder/My Image.jpg" class="internal new" /></p>'
+        '<p><img src="My Image.jpg" alt="My Image.jpg" class="internal new" /></p>'
       );
     });
 
     test("parses an image embed of unsupported file format", () => {
-      const serialized = micromark("![[../some/folder/My Image.xyz]]", {
+      const serialized = micromark("![[My Image.xyz]]", {
         extensions: [syntax()],
         htmlExtensions: [html()],
       });
-      expect(serialized).toBe("<p>![[../some/folder/My Image.xyz]]</p>");
+      expect(serialized).toBe("<p>![[My Image.xyz]]</p>");
     });
 
-    test("parses an image embed with an alias", () => {
-      const serialized = micromark(
-        "![[../some/folder/My Image.jpg|My Image]]",
-        {
-          extensions: [syntax()],
-          htmlExtensions: [html()],
-        }
-      );
+    test("parses and image ambed with a matching permalink", () => {
+      const serialized = micromark("![[My Image.jpg]]", {
+        extensions: [syntax()],
+        htmlExtensions: [html({ permalinks: ["My Image.jpg"] })],
+      });
       expect(serialized).toBe(
-        '<p><img src="../some/folder/My Image.jpg" alt="My Image" class="internal new" /></p>'
+        '<p><img src="My Image.jpg" alt="My Image.jpg" class="internal" /></p>'
       );
     });
 
-    test("parses an image embed with alt text", () => {
-      const serialized = micromark(
-        "![[../some/folder/My Image.jpg|Alt Text]]",
-        {
-          extensions: [syntax()],
-          htmlExtensions: [html()],
-        }
-      );
+    test("parses an image embed with a matching permalink and Obsidian-style shortedned path", () => {
+      const serialized = micromark("![[My Image.jpg]]", {
+        extensions: [syntax()],
+        htmlExtensions: [
+          html({
+            permalinks: ["/assets/My Image.jpg"],
+            pathFormat: "obsidian-short",
+          }),
+        ],
+      });
       expect(serialized).toBe(
-        '<p><img src="../some/folder/My Image.jpg" alt="Alt Text" class="internal new" /></p>'
+        '<p><img src="/assets/My Image.jpg" alt="My Image.jpg" class="internal" /></p>'
+      );
+    });
+
+    test("parses an image embed with an alt text", () => {
+      const serialized = micromark("![[My Image.jpg|My Image Alt]]", {
+        extensions: [syntax()],
+        htmlExtensions: [html()],
+      });
+      expect(serialized).toBe(
+        '<p><img src="My Image.jpg" alt="My Image Alt" class="internal new" /></p>'
       );
     });
 
     test("parses a pdf embed", () => {
-      const serialized = micromark("![[../some/folder/My Document.pdf]]", {
+      const serialized = micromark("![[My Document.pdf]]", {
         extensions: [syntax()],
         htmlExtensions: [html()],
       });
       expect(serialized).toBe(
-        '<p><iframe width="100%" src="../some/folder/My Document.pdf#toolbar=0" class="internal new" /></p>'
+        '<p><iframe width="100%" src="My Document.pdf#toolbar=0" class="internal new" /></p>'
       );
     });
   });
@@ -207,7 +229,7 @@ describe("micromark-extension-wiki-link", () => {
         ],
       });
       expect(serialized).toBe(
-        '<p><a href="wiki-link" class="test-wiki-link test-new">Wiki Link</a></p>'
+        '<p><a href="Wiki Link" class="test-wiki-link test-new">Wiki Link</a></p>'
       );
     });
 
@@ -217,17 +239,23 @@ describe("micromark-extension-wiki-link", () => {
         htmlExtensions: [html()],
       });
       expect(serialized).toBe(
-        '<p><a href="wiki-link" class="internal new">Alias Name</a></p>'
+        '<p><a href="Wiki Link" class="internal new">Alias Name</a></p>'
       );
     });
 
-    test("parses a wiki link wit a custom page resolver", () => {
+    test("parses a wiki link with a custom page resolver", () => {
       const serialized = micromark("[[Wiki Link]]", {
         extensions: [syntax()],
-        htmlExtensions: [html({ pageResolver: (page) => [`/blog/${page}`] })],
+        htmlExtensions: [
+          html({
+            wikiLinkResolver: (page) => [
+              page.replace(/\s+/, "-").toLowerCase(),
+            ],
+          }),
+        ],
       });
       expect(serialized).toBe(
-        '<p><a href="/blog/Wiki Link" class="internal new">Wiki Link</a></p>'
+        '<p><a href="wiki-link" class="internal new">Wiki Link</a></p>'
       );
     });
   });
