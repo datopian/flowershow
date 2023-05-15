@@ -35,7 +35,7 @@ function fromMarkdown(opts: FromMarkdownOptions = {}) {
         type: "wikiLink",
         data: {
           isEmbed: token.isType === "embed",
-          target: null,
+          target: null, // the target of the link, e.g. "Foo Bar" in "[[Foo Bar]]"
           alias: null,
           permalink: null,
           exists: null,

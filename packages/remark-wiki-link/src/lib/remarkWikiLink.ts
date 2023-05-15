@@ -33,9 +33,9 @@ function remarkWikiLink(opts: RemarkWikiLinkOptions = {}) {
   // micromark extensions
   add("micromarkExtensions", syntax(opts));
   // mdast-util-from-markdown extensions
-  add("fromMarkdownExtensions", fromMarkdown(opts)); // TODO: not sure if this is needed
+  add("fromMarkdownExtensions", fromMarkdown(opts));
   // mdast-util-to-markdown extensions
-  add("toMarkdownExtensions", toMarkdown(opts)); // TODO: not sure if this is needed
+  add("toMarkdownExtensions", toMarkdown(opts));
 }
 
 export default remarkWikiLink;
