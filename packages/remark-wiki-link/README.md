@@ -69,14 +69,16 @@ Default: `[]`
 
 A list of permalinks you want to match your wiki link paths with. Wiki links with matched permalinks will have `node.data.exists` property set to `true`. Wiki links with no matching permalinks will also have additional class `new` set.
 
-### `pageResolver`
+### `wikiLinkResolver`
 
 Type: `(name: string) => Array<string>`
-Default: `(name: string) => name.replace(/ /g, "-").toLowerCase();` (simplified; see source code for full version)
+Default: `(name: string) => name.replace(/\/index$/, "")` (simplified; see source code for full version)
 
-A function that will take the wiki link target page (e.g. `"/some/folder/file"` for `[[/some/folder/file#Some Heading|Some Alias]]` wiki link) and return an array of possible permalinks, that should be matched against an array of permalinks passed in `permalinks` config option.
+A function that will take the wiki link target page (e.g. `"/some/folder/file"` in `[[/some/folder/file#Some Heading|Some Alias]]` wiki link) and return an array of pages to which the wiki link **can** be resolved (one of them will be used, depending on wheather `pemalinks` are passed, and if match is found).
 
-If no matching permalink is found, the first item from the array returned by this function will be used as a node's permalink.
+If `permalinks` are passed, the resulting array will be matched against these permalinks to find the match. The matching pemalink will be used as node's `href` (or `src` for images).
+
+If no matching permalink is found, the first item from the array returned by this function will be used as a node's `href` (or `src` for images). So, if you want to write a custom wiki link -> url
 
 ### `newClassName`
 

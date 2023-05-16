@@ -7,33 +7,102 @@ import { Node } from "unist";
 import wikiLinkPlugin from "../src/lib/remarkWikiLink";
 
 describe("remark-wiki-link", () => {
-  describe("pathFormat", () => {
-    test("parses a wiki link with 'raw' (default) pathFormat", () => {
+  describe("parses a wikilink", () => {
+    test("with 'raw' file format (default) that has no matching permalink", () => {
       const processor = unified().use(markdown).use(wikiLinkPlugin);
 
-      let ast = processor.parse("[[../some/folder/Wiki Link]]");
+      let ast = processor.parse("[[Wiki Link]]");
       ast = processor.runSync(ast);
 
       expect(select("wikiLink", ast)).not.toEqual(null);
 
       visit(ast, "wikiLink", (node: Node) => {
         expect(node.data?.exists).toEqual(false);
-        expect(node.data?.permalink).toEqual("../some/folder/wiki-link");
+        expect(node.data?.permalink).toEqual("Wiki Link");
         expect(node.data?.alias).toEqual(null);
         expect(node.data?.hName).toEqual("a");
         expect((node.data?.hProperties as any).className).toEqual(
           "internal new"
         );
-        expect((node.data?.hProperties as any).href).toEqual(
-          "../some/folder/wiki-link"
-        );
-        expect((node.data?.hChildren as any)[0].value).toEqual(
-          "../some/folder/Wiki Link"
-        );
+        expect((node.data?.hProperties as any).href).toEqual("Wiki Link");
+        expect((node.data?.hChildren as any)[0].value).toEqual("Wiki Link");
       });
     });
 
-    test("parses a wiki link with 'obsidian-absolute' pathFormat", () => {
+    test("with 'raw' file format (default) that has a matching permalink", () => {
+      const processor = unified()
+        .use(markdown)
+        .use(wikiLinkPlugin, {
+          permalinks: ["Wiki Link"],
+        });
+
+      let ast = processor.parse("[[Wiki Link]]");
+      ast = processor.runSync(ast);
+
+      expect(select("wikiLink", ast)).not.toEqual(null);
+
+      visit(ast, "wikiLink", (node: Node) => {
+        expect(node.data?.exists).toEqual(true);
+        expect(node.data?.permalink).toEqual("Wiki Link");
+        expect(node.data?.alias).toEqual(null);
+        expect(node.data?.hName).toEqual("a");
+        expect((node.data?.hProperties as any).className).toEqual("internal");
+        expect((node.data?.hProperties as any).href).toEqual("Wiki Link");
+        expect((node.data?.hChildren as any)[0].value).toEqual("Wiki Link");
+      });
+    });
+
+    test("with shortened Obsidian-style path that has no matching permalink", () => {
+      const processor = unified().use(markdown).use(wikiLinkPlugin, {
+        pathFormat: "obsidian-short",
+      });
+
+      let ast = processor.parse("[[Wiki Link]]");
+      ast = processor.runSync(ast);
+
+      expect(select("wikiLink", ast)).not.toEqual(null);
+
+      visit(ast, "wikiLink", (node: Node) => {
+        expect(node.data?.exists).toEqual(false);
+        expect(node.data?.permalink).toEqual("Wiki Link");
+        expect(node.data?.alias).toEqual(null);
+        expect(node.data?.hName).toEqual("a");
+        expect((node.data?.hProperties as any).className).toEqual(
+          "internal new"
+        );
+        expect((node.data?.hProperties as any).href).toEqual("Wiki Link");
+        expect((node.data?.hChildren as any)[0].value).toEqual("Wiki Link");
+      });
+    });
+
+    test("with shortened Obsidian-style path that has a matching permalink", () => {
+      const processor = unified()
+        .use(markdown)
+        .use(wikiLinkPlugin, {
+          permalinks: ["/some/folder/Wiki Link"],
+          pathFormat: "obsidian-short",
+        });
+
+      let ast = processor.parse("[[Wiki Link]]");
+      ast = processor.runSync(ast);
+
+      expect(select("wikiLink", ast)).not.toEqual(null);
+
+      visit(ast, "wikiLink", (node: Node) => {
+        expect(node.data?.exists).toEqual(true);
+        expect(node.data?.permalink).toEqual("/some/folder/Wiki Link");
+        expect(node.data?.alias).toEqual(null);
+        expect(node.data?.hName).toEqual("a");
+        expect((node.data?.hProperties as any).className).toEqual("internal");
+        expect((node.data?.hProperties as any).href).toEqual(
+          "/some/folder/Wiki Link"
+        );
+        expect((node.data?.hChildren as any)[0].value).toEqual("Wiki Link");
+      });
+    });
+
+    // Obsidian absolute path doesn't have a leading slash
+    test("with 'obsidian-absolute' path format that has no matching permalink", () => {
       const processor = unified()
         .use(markdown)
         .use(wikiLinkPlugin, { pathFormat: "obsidian-absolute" });
@@ -45,14 +114,14 @@ describe("remark-wiki-link", () => {
 
       visit(ast, "wikiLink", (node: Node) => {
         expect(node.data?.exists).toEqual(false);
-        expect(node.data?.permalink).toEqual("/some/folder/wiki-link");
+        expect(node.data?.permalink).toEqual("/some/folder/Wiki Link");
         expect(node.data?.alias).toEqual(null);
         expect(node.data?.hName).toEqual("a");
         expect((node.data?.hProperties as any).className).toEqual(
           "internal new"
         );
         expect((node.data?.hProperties as any).href).toEqual(
-          "/some/folder/wiki-link"
+          "/some/folder/Wiki Link"
         );
         expect((node.data?.hChildren as any)[0].value).toEqual(
           "some/folder/Wiki Link"
@@ -60,105 +129,32 @@ describe("remark-wiki-link", () => {
       });
     });
 
-    test("parses a wiki link with 'obsidian-short' pathFormat", () => {
+    // Obsidian absolute path doesn't have a leading slash
+    test("with 'obsidian-absolute' path format that has a matching permalink", () => {
       const processor = unified()
         .use(markdown)
         .use(wikiLinkPlugin, {
-          permalinks: ["/some/folder/wiki-link"],
-          pathFormat: "obsidian-short",
+          permalinks: ["/some/folder/Wiki Link"],
+          pathFormat: "obsidian-absolute",
         });
 
-      let ast = processor.parse("[[Wiki Link]]");
+      let ast = processor.parse("[[some/folder/Wiki Link]]");
       ast = processor.runSync(ast);
 
       expect(select("wikiLink", ast)).not.toEqual(null);
 
       visit(ast, "wikiLink", (node: Node) => {
         expect(node.data?.exists).toEqual(true);
-        expect(node.data?.permalink).toEqual("/some/folder/wiki-link");
+        expect(node.data?.permalink).toEqual("/some/folder/Wiki Link");
         expect(node.data?.alias).toEqual(null);
         expect(node.data?.hName).toEqual("a");
         expect((node.data?.hProperties as any).className).toEqual("internal");
         expect((node.data?.hProperties as any).href).toEqual(
-          "/some/folder/wiki-link"
+          "/some/folder/Wiki Link"
         );
-        expect((node.data?.hChildren as any)[0].value).toEqual("Wiki Link");
-      });
-    });
-  });
-
-  describe("finding matching permalinks", () => {
-    test("parses a wiki link that has a matching permalink", () => {
-      const processor = unified()
-        .use(markdown)
-        .use(wikiLinkPlugin, {
-          permalinks: ["wiki-link"],
-        });
-
-      let ast = processor.parse("[[Wiki Link]]");
-      ast = processor.runSync(ast);
-
-      expect(select("wikiLink", ast)).not.toEqual(null);
-
-      visit(ast, "wikiLink", (node: Node) => {
-        expect(node.data?.exists).toEqual(true);
-        expect(node.data?.permalink).toEqual("wiki-link");
-        expect(node.data?.alias).toEqual(null);
-        expect(node.data?.hName).toEqual("a");
-        expect((node.data?.hProperties as any).className).toEqual("internal");
-        expect((node.data?.hProperties as any).href).toEqual("wiki-link");
-        expect((node.data?.hChildren as any)[0].value).toEqual("Wiki Link");
-      });
-    });
-
-    test("parses a wiki link that has no matching permalink", () => {
-      const processor = unified()
-        .use(markdown)
-        .use(wikiLinkPlugin, {
-          permalinks: ["some-other-link"],
-        });
-
-      let ast = processor.parse("[[Wiki Link]]");
-      ast = processor.runSync(ast);
-
-      expect(select("wikiLink", ast)).not.toEqual(null);
-
-      visit(ast, "wikiLink", (node: Node) => {
-        expect(node.data?.exists).toEqual(false);
-        expect(node.data?.permalink).toEqual("wiki-link");
-        expect(node.data?.alias).toEqual(null);
-        expect(node.data?.hName).toEqual("a");
-        expect((node.data?.hProperties as any).className).toEqual(
-          "internal new"
+        expect((node.data?.hChildren as any)[0].value).toEqual(
+          "some/folder/Wiki Link"
         );
-        expect((node.data?.hProperties as any).href).toEqual("wiki-link");
-        expect((node.data?.hChildren as any)[0].value).toEqual("Wiki Link");
-      });
-    });
-
-    test("parses a shortened Obsidian wiki link that has a matching permalink", () => {
-      const processor = unified()
-        .use(markdown)
-        .use(wikiLinkPlugin, {
-          permalinks: ["/some/folder/wiki-link"],
-          pathFormat: "obsidian-short",
-        });
-
-      let ast = processor.parse("[[Wiki Link]]");
-      ast = processor.runSync(ast);
-
-      expect(select("wikiLink", ast)).not.toEqual(null);
-
-      visit(ast, "wikiLink", (node: Node) => {
-        expect(node.data?.exists).toEqual(true);
-        expect(node.data?.permalink).toEqual("/some/folder/wiki-link");
-        expect(node.data?.alias).toEqual(null);
-        expect(node.data?.hName).toEqual("a");
-        expect((node.data?.hProperties as any).className).toEqual("internal");
-        expect((node.data?.hProperties as any).href).toEqual(
-          "/some/folder/wiki-link"
-        );
-        expect((node.data?.hChildren as any)[0].value).toEqual("Wiki Link");
       });
     });
   });
@@ -174,14 +170,14 @@ describe("remark-wiki-link", () => {
 
       visit(ast, "wikiLink", (node: Node) => {
         expect(node.data?.exists).toEqual(false);
-        expect(node.data?.permalink).toEqual("wiki-link#some-heading"); // TODO should this be "wiki-link" only?
+        expect(node.data?.permalink).toEqual("Wiki Link");
         expect(node.data?.alias).toEqual(null);
         expect(node.data?.hName).toEqual("a");
         expect((node.data?.hProperties as any).className).toEqual(
           "internal new"
         );
         expect((node.data?.hProperties as any).href).toEqual(
-          "wiki-link#some-heading"
+          "Wiki Link#some-heading"
         );
         expect((node.data?.hChildren as any)[0].value).toEqual(
           "Wiki Link#Some Heading"
@@ -199,14 +195,14 @@ describe("remark-wiki-link", () => {
 
       visit(ast, "wikiLink", (node: Node) => {
         expect(node.data?.exists).toEqual(false);
-        expect(node.data?.permalink).toEqual("wiki-link#some-heading"); // TODO should this be "wiki-link" only?
+        expect(node.data?.permalink).toEqual("Wiki Link");
         expect(node.data?.alias).toEqual("Alias");
         expect(node.data?.hName).toEqual("a");
         expect((node.data?.hProperties as any).className).toEqual(
           "internal new"
         );
         expect((node.data?.hProperties as any).href).toEqual(
-          "wiki-link#some-heading"
+          "Wiki Link#some-heading"
         );
         expect((node.data?.hChildren as any)[0].value).toEqual("Alias");
       });
@@ -221,8 +217,8 @@ describe("remark-wiki-link", () => {
       expect(select("wikiLink", ast)).not.toEqual(null);
 
       visit(ast, "wikiLink", (node: Node) => {
-        // expect(node.data?.exists).toEqual(false); // TODO: should this be true?
-        // expect(node.data?.permalink).toEqual(""); // TODO: should this be null?
+        expect(node.data?.exists).toEqual(false);
+        expect(node.data?.permalink).toEqual(""); // TODO should this be null?
         expect(node.data?.alias).toEqual(null);
         expect(node.data?.hName).toEqual("a");
         expect((node.data?.hProperties as any).className).toEqual(
@@ -238,60 +234,109 @@ describe("remark-wiki-link", () => {
     test("parses an image embed of supported file format", () => {
       const processor = unified().use(markdown).use(wikiLinkPlugin);
 
-      let ast = processor.parse("![[../some/folder/My Image.png]]");
+      let ast = processor.parse("![[My Image.png]]");
       ast = processor.runSync(ast);
 
       expect(select("wikiLink", ast)).not.toEqual(null);
 
       visit(ast, "wikiLink", (node: Node) => {
         expect(node.data?.isEmbed).toEqual(true);
-        expect(node.data?.target).toEqual("../some/folder/My Image.png");
-        expect(node.data?.permalink).toEqual("../some/folder/My Image.png");
+        expect(node.data?.target).toEqual("My Image.png");
+        expect(node.data?.permalink).toEqual("My Image.png");
         expect(node.data?.hName).toEqual("img");
-        expect((node.data?.hProperties as any).src).toEqual(
-          "../some/folder/My Image.png"
-        );
-        expect((node.data?.hProperties as any).alt).toEqual(
-          "../some/folder/My Image.png"
-        );
+        expect((node.data?.hProperties as any).src).toEqual("My Image.png");
+        expect((node.data?.hProperties as any).alt).toEqual("My Image.png");
       });
     });
 
     test("parses an image embed of unsupported file format", () => {
       const processor = unified().use(markdown).use(wikiLinkPlugin);
 
-      let ast = processor.parse("![[../some/folder/My Image.xyz]]");
+      let ast = processor.parse("![[My Image.xyz]]");
       ast = processor.runSync(ast);
 
       expect(select("wikiLink", ast)).not.toEqual(null);
 
       visit(ast, "wikiLink", (node: Node) => {
         expect(node.data?.isEmbed).toEqual(true);
-        expect(node.data?.target).toEqual("../some/folder/My Image.xyz");
-        expect(node.data?.permalink).toEqual("../some/folder/My Image.xyz");
+        expect(node.data?.target).toEqual("My Image.xyz");
+        expect(node.data?.permalink).toEqual("My Image.xyz");
         expect(node.data?.hName).toEqual("p");
         expect((node.data?.hChildren as any)[0].value).toEqual(
-          "![[../some/folder/My Image.xyz]]"
+          "![[My Image.xyz]]"
         );
       });
     });
 
-    test("parses an image embed with alt text", () => {
-      const processor = unified().use(markdown).use(wikiLinkPlugin);
+    test("parses an image embed with a matching permalink", () => {
+      const processor = unified()
+        .use(markdown)
+        .use(wikiLinkPlugin, {
+          permalinks: ["Pasted Image 123.png"],
+        });
 
-      let ast = processor.parse("![[../some/folder/My Image.png|Alt Text]]");
+      let ast = processor.parse("![[Pasted Image 123.png]]");
       ast = processor.runSync(ast);
 
       expect(select("wikiLink", ast)).not.toEqual(null);
 
       visit(ast, "wikiLink", (node: Node) => {
         expect(node.data?.isEmbed).toEqual(true);
-        expect(node.data?.target).toEqual("../some/folder/My Image.png");
-        expect(node.data?.permalink).toEqual("../some/folder/My Image.png");
+        expect(node.data?.target).toEqual("Pasted Image 123.png");
+        expect(node.data?.exists).toEqual(true);
+        expect(node.data?.permalink).toEqual("Pasted Image 123.png");
         expect(node.data?.hName).toEqual("img");
         expect((node.data?.hProperties as any).src).toEqual(
-          "../some/folder/My Image.png"
+          "Pasted Image 123.png"
         );
+        expect((node.data?.hProperties as any).alt).toEqual(
+          "Pasted Image 123.png"
+        );
+      });
+    });
+
+    test("parses an image embed with a matching permalink and Obsidian-style shortedned path", () => {
+      const processor = unified()
+        .use(markdown)
+        .use(wikiLinkPlugin, {
+          pathFormat: "obsidian-short",
+          permalinks: ["/assets/Pasted Image 123.png"],
+        });
+
+      let ast = processor.parse("![[Pasted Image 123.png]]");
+      ast = processor.runSync(ast);
+
+      expect(select("wikiLink", ast)).not.toEqual(null);
+
+      visit(ast, "wikiLink", (node: Node) => {
+        expect(node.data?.isEmbed).toEqual(true);
+        expect(node.data?.target).toEqual("Pasted Image 123.png");
+        expect(node.data?.exists).toEqual(true);
+        expect(node.data?.permalink).toEqual("/assets/Pasted Image 123.png");
+        expect(node.data?.hName).toEqual("img");
+        expect((node.data?.hProperties as any).src).toEqual(
+          "/assets/Pasted Image 123.png"
+        );
+        expect((node.data?.hProperties as any).alt).toEqual(
+          "Pasted Image 123.png"
+        );
+      });
+    });
+
+    test("parses an image embed with an alt text", () => {
+      const processor = unified().use(markdown).use(wikiLinkPlugin);
+
+      let ast = processor.parse("![[My Image.png|Alt Text]]");
+      ast = processor.runSync(ast);
+
+      expect(select("wikiLink", ast)).not.toEqual(null);
+
+      visit(ast, "wikiLink", (node: Node) => {
+        expect(node.data?.isEmbed).toEqual(true);
+        expect(node.data?.target).toEqual("My Image.png");
+        expect(node.data?.permalink).toEqual("My Image.png");
+        expect(node.data?.hName).toEqual("img");
+        expect((node.data?.hProperties as any).src).toEqual("My Image.png");
         expect((node.data?.hProperties as any).alt).toEqual("Alt Text");
       });
     });
@@ -299,18 +344,18 @@ describe("remark-wiki-link", () => {
     test("parses a pdf embed", () => {
       const processor = unified().use(markdown).use(wikiLinkPlugin);
 
-      let ast = processor.parse("![[../some/folder/My Document.pdf]]");
+      let ast = processor.parse("![[My Document.pdf]]");
       ast = processor.runSync(ast);
 
       expect(select("wikiLink", ast)).not.toEqual(null);
 
       visit(ast, "wikiLink", (node: Node) => {
         expect(node.data?.isEmbed).toEqual(true);
-        expect(node.data?.target).toEqual("../some/folder/My Document.pdf");
-        expect(node.data?.permalink).toEqual("../some/folder/My Document.pdf");
+        expect(node.data?.target).toEqual("My Document.pdf");
+        expect(node.data?.permalink).toEqual("My Document.pdf");
         expect(node.data?.hName).toEqual("iframe");
         expect((node.data?.hProperties as any).src).toEqual(
-          "../some/folder/My Document.pdf#toolbar=0"
+          "My Document.pdf#toolbar=0"
         );
       });
     });
@@ -361,7 +406,7 @@ describe("remark-wiki-link", () => {
         aliasDivider: ":",
         pathFormat: "obsidian-short",
         permalinks: ["/some/folder/123/real-page"],
-        pageResolver: (pageName: string) => [
+        wikiLinkResolver: (pageName: string) => [
           `123/${pageName.replace(/ /g, "-").toLowerCase()}`,
         ],
         wikiLinkClassName: "my-wiki-link-class",
