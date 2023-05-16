@@ -1,5 +1,11 @@
 # @flowershow/remark-wiki-link
 
+## 1.2.0
+
+### Minor Changes
+
+- 5ef0262: Don't hyphentate or lowercase src/hrefs by default. Add ignore patterns option to `getPermalinks` util function and allow passing custom paths -> permalinks converter function.
+
 ## 1.1.2
 
 ### Patch Changes
