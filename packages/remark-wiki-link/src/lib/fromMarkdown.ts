@@ -80,7 +80,7 @@ function fromMarkdown(opts: FromMarkdownOptions = {}) {
     } = wikiLink;
     // eslint-disable-next-line no-useless-escape
     const wikiLinkWithHeadingPattern = /([\w\s\/\.-]*)(#.*)?/;
-    let [, path, heading = ""] = target.match(wikiLinkWithHeadingPattern);
+    const [, path, heading = ""] = target.match(wikiLinkWithHeadingPattern);
 
     const possibleWikiLinkPermalinks = wikiLinkResolver(path);
 
@@ -104,7 +104,7 @@ function fromMarkdown(opts: FromMarkdownOptions = {}) {
     });
 
     // TODO this is ugly
-    let link =
+    const link =
       matchingPermalink ||
       (pathFormat === "obsidian-absolute"
         ? "/" + possibleWikiLinkPermalinks[0]
@@ -116,7 +116,7 @@ function fromMarkdown(opts: FromMarkdownOptions = {}) {
 
     // remove leading # if the target is a heading on the same page
     const displayName = alias || target.replace(/^#/, "");
-    heading = heading.replace(/\s+/, "-").toLowerCase();
+    const headingId = heading.replace(/\s+/, "-").toLowerCase();
     let classNames = wikiLinkClassName;
     if (!matchingPermalink) {
       classNames += " " + newClassName;
@@ -151,7 +151,7 @@ function fromMarkdown(opts: FromMarkdownOptions = {}) {
       wikiLink.data.hName = "a";
       wikiLink.data.hProperties = {
         className: classNames,
-        href: hrefTemplate(link) + heading,
+        href: hrefTemplate(link) + headingId,
       };
       wikiLink.data.hChildren = [{ type: "text", value: displayName }];
     }

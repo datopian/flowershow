@@ -65,7 +65,7 @@ function html(opts: HtmlOptions = {}) {
     const isEmbed = token.isType === "embed";
     // eslint-disable-next-line no-useless-escape
     const wikiLinkWithHeadingPattern = /([\w\s\/\.-]*)(#.*)?/;
-    let [, path, heading = ""] = target.match(wikiLinkWithHeadingPattern);
+    const [, path, heading = ""] = target.match(wikiLinkWithHeadingPattern);
 
     const possibleWikiLinkPermalinks = wikiLinkResolver(path);
 
@@ -89,7 +89,7 @@ function html(opts: HtmlOptions = {}) {
     });
 
     // TODO this is ugly
-    let link =
+    const link =
       matchingPermalink ||
       (pathFormat === "obsidian-absolute"
         ? "/" + possibleWikiLinkPermalinks[0]
@@ -99,7 +99,7 @@ function html(opts: HtmlOptions = {}) {
     // remove leading # if the target is a heading on the same page
     const displayName = alias || target.replace(/^#/, "");
     // replace spaces with dashes and lowercase headings
-    heading = heading.replace(/\s+/, "-").toLowerCase();
+    const headingId = heading.replace(/\s+/, "-").toLowerCase();
     let classNames = wikiLinkClassName;
     if (!matchingPermalink) {
       classNames += " " + newClassName;
@@ -124,7 +124,7 @@ function html(opts: HtmlOptions = {}) {
       }
     } else {
       this.tag(
-        `<a href="${hrefTemplate(link + heading)}" class="${classNames}">`
+        `<a href="${hrefTemplate(link + headingId)}" class="${classNames}">`
       );
       this.raw(displayName);
       this.tag("</a>");
