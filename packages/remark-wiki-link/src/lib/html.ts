@@ -1,16 +1,28 @@
 import { isSupportedFileFormat } from "./isSupportedFileFormat";
-import { pageResolver as defaultPageResolver } from "./pageResolver";
+
+const defaultWikiLinkResolver = (target: string) => {
+  // for [[#heading]] links
+  if (!target) {
+    return [];
+  }
+  let permalink = target.replace(/\/index$/, "");
+  // TODO what to do with [[index]] link?
+  if (permalink.length === 0) {
+    permalink = "/";
+  }
+  return [permalink];
+};
 
 export interface HtmlOptions {
   pathFormat?:
     | "raw" // default; use for regular relative or absolute paths
-    | "obsidian-absolute" // use for Obsidian-style absolute paths, i.e. with no leading slash
-    | "obsidian-short"; // use for Obsidian-style shortened paths
-  permalinks?: string[];
-  pageResolver?: (name: string) => string[];
-  newClassName?: string;
-  wikiLinkClassName?: string;
-  hrefTemplate?: (permalink: string) => string;
+    | "obsidian-absolute" // use for Obsidian-style absolute paths (with no leading slash)
+    | "obsidian-short"; // use for Obsidian-style shortened paths (shortest path possible)
+  permalinks?: string[]; // list of permalinks to match possible permalinks of a wiki link against
+  wikiLinkResolver?: (name: string) => string[]; // function to resolve wiki links to an array of possible permalinks
+  newClassName?: string; // class name to add to links that don't have a matching permalink
+  wikiLinkClassName?: string; // class name to add to all wiki links
+  hrefTemplate?: (permalink: string) => string; // function to generate the href attribute of a link
 }
 
 // Micromark HtmlExtension
@@ -18,7 +30,7 @@ export interface HtmlOptions {
 function html(opts: HtmlOptions = {}) {
   const pathFormat = opts.pathFormat || "raw";
   const permalinks = opts.permalinks || [];
-  const pageResolver = opts.pageResolver || defaultPageResolver;
+  const wikiLinkResolver = opts.wikiLinkResolver || defaultWikiLinkResolver;
   const newClassName = opts.newClassName || "new";
   const wikiLinkClassName = opts.wikiLinkClassName || "internal";
   const defaultHrefTemplate = (permalink: string) => permalink;
@@ -51,42 +63,43 @@ function html(opts: HtmlOptions = {}) {
     const wikiLink = this.getData("wikiLinkStack").pop();
     const { target, alias } = wikiLink;
     const isEmbed = token.isType === "embed";
-
-    const resolveShortenedPaths = pathFormat === "obsidian-short";
-    const prefix = pathFormat === "obsidian-absolute" ? "/" : "";
-    const pagePermalinks = pageResolver(target, isEmbed, prefix);
-
     // eslint-disable-next-line no-useless-escape
-    const pathWithOptionalHeadingPattern = /([a-z0-9\.\/_-]*)(#.*)?/;
-    let targetHeading = "";
+    const wikiLinkWithHeadingPattern = /([\w\s\/\.-]*)(#.*)?/;
+    const [, path, heading = ""] = target.match(wikiLinkWithHeadingPattern);
+
+    const possibleWikiLinkPermalinks = wikiLinkResolver(path);
 
     const matchingPermalink = permalinks.find((e) => {
-      return pagePermalinks.find((p) => {
-        const [, pagePath, heading] = p.match(pathWithOptionalHeadingPattern);
-        if (!pagePath.length) {
-          return false;
-        }
-        if (resolveShortenedPaths) {
-          if (e === pagePath || e.endsWith(pagePath)) {
-            targetHeading = heading ?? "";
+      return possibleWikiLinkPermalinks.find((p) => {
+        if (pathFormat === "obsidian-short") {
+          if (e === p || e.endsWith(p)) {
             return true;
           }
-          return false;
+        } else if (pathFormat === "obsidian-absolute") {
+          if (e === "/" + p) {
+            return true;
+          }
         } else {
-          if (e === pagePath) {
-            targetHeading = heading ?? "";
+          if (e === p) {
             return true;
           }
-          return false;
         }
+        return false;
       });
     });
 
-    const permalink = matchingPermalink || pagePermalinks[0];
+    // TODO this is ugly
+    const link =
+      matchingPermalink ||
+      (pathFormat === "obsidian-absolute"
+        ? "/" + possibleWikiLinkPermalinks[0]
+        : possibleWikiLinkPermalinks[0]) ||
+      "";
 
     // remove leading # if the target is a heading on the same page
     const displayName = alias || target.replace(/^#/, "");
-
+    // replace spaces with dashes and lowercase headings
+    const headingId = heading.replace(/\s+/, "-").toLowerCase();
     let classNames = wikiLinkClassName;
     if (!matchingPermalink) {
       classNames += " " + newClassName;
@@ -99,21 +112,19 @@ function html(opts: HtmlOptions = {}) {
       } else if (format === "pdf") {
         this.tag(
           `<iframe width="100%" src="${hrefTemplate(
-            permalink
+            link
           )}#toolbar=0" class="${classNames}" />`
         );
       } else {
         this.tag(
           `<img src="${hrefTemplate(
-            permalink
+            link
           )}" alt="${displayName}" class="${classNames}" />`
         );
       }
     } else {
       this.tag(
-        `<a href="${hrefTemplate(
-          permalink + targetHeading
-        )}" class="${classNames}">`
+        `<a href="${hrefTemplate(link + headingId)}" class="${classNames}">`
       );
       this.raw(displayName);
       this.tag("</a>");

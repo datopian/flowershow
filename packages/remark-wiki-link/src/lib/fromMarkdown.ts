@@ -1,16 +1,28 @@
 import { isSupportedFileFormat } from "./isSupportedFileFormat";
-import { pageResolver as defaultPageResolver } from "./pageResolver";
+
+const defaultWikiLinkResolver = (target: string) => {
+  // for [[#heading]] links
+  if (!target) {
+    return [];
+  }
+  let permalink = target.replace(/\/index$/, "");
+  // TODO what to do with [[index]] link?
+  if (permalink.length === 0) {
+    permalink = "/";
+  }
+  return [permalink];
+};
 
 export interface FromMarkdownOptions {
   pathFormat?:
     | "raw" // default; use for regular relative or absolute paths
-    | "obsidian-absolute" // use for Obsidian-style absolute paths, i.e. with no leading slash
-    | "obsidian-short"; // use for Obsidian-style shortened paths
-  permalinks?: string[];
-  pageResolver?: (name: string) => string[];
-  newClassName?: string;
-  wikiLinkClassName?: string;
-  hrefTemplate?: (permalink: string) => string;
+    | "obsidian-absolute" // use for Obsidian-style absolute paths (with no leading slash)
+    | "obsidian-short"; // use for Obsidian-style shortened paths (shortest path possible)
+  permalinks?: string[]; // list of permalinks to match possible permalinks of a wiki link against
+  wikiLinkResolver?: (name: string) => string[]; // function to resolve wiki links to an array of possible permalinks
+  newClassName?: string; // class name to add to links that don't have a matching permalink
+  wikiLinkClassName?: string; // class name to add to all wiki links
+  hrefTemplate?: (permalink: string) => string; // function to generate the href attribute of a link
 }
 
 // mdas-util-from-markdown extension
@@ -18,7 +30,7 @@ export interface FromMarkdownOptions {
 function fromMarkdown(opts: FromMarkdownOptions = {}) {
   const pathFormat = opts.pathFormat || "raw";
   const permalinks = opts.permalinks || [];
-  const pageResolver = opts.pageResolver || defaultPageResolver;
+  const wikiLinkResolver = opts.wikiLinkResolver || defaultWikiLinkResolver;
   const newClassName = opts.newClassName || "new";
   const wikiLinkClassName = opts.wikiLinkClassName || "internal";
   const defaultHrefTemplate = (permalink: string) => permalink;
@@ -35,10 +47,10 @@ function fromMarkdown(opts: FromMarkdownOptions = {}) {
         type: "wikiLink",
         data: {
           isEmbed: token.isType === "embed",
-          target: null,
-          alias: null,
-          permalink: null,
-          exists: null,
+          target: null, // the target of the link, e.g. "Foo Bar#Heading" in "[[Foo Bar#Heading]]"
+          alias: null, // the alias of the link, e.g. "Foo" in "[[Foo Bar|Foo]]"
+          permalink: null, // TODO shouldn't this be named just "link"?
+          exists: null, // TODO is this even needed here?
           // fields for mdast-util-to-hast (used e.g. by remark-rehype)
           hName: null,
           hProperties: null,
@@ -66,46 +78,45 @@ function fromMarkdown(opts: FromMarkdownOptions = {}) {
     const {
       data: { isEmbed, target, alias },
     } = wikiLink;
-
-    const resolveShortenedPaths = pathFormat === "obsidian-short";
-    const prefix = pathFormat === "obsidian-absolute" ? "/" : "";
-    const pagePermalinks = pageResolver(target, isEmbed, prefix);
-
     // eslint-disable-next-line no-useless-escape
-    const pathWithOptionalHeadingPattern = /([a-z0-9\.\/_-]*)(#.*)?/;
-    let targetHeading = "";
+    const wikiLinkWithHeadingPattern = /([\w\s\/\.-]*)(#.*)?/;
+    const [, path, heading = ""] = target.match(wikiLinkWithHeadingPattern);
+
+    const possibleWikiLinkPermalinks = wikiLinkResolver(path);
 
     const matchingPermalink = permalinks.find((e) => {
-      return pagePermalinks.find((p) => {
-        const [, pagePath, heading] = p.match(pathWithOptionalHeadingPattern);
-        if (!pagePath.length) {
-          return false;
-        }
-        if (resolveShortenedPaths) {
-          if (e === pagePath || e.endsWith(pagePath)) {
-            targetHeading = heading ?? "";
+      return possibleWikiLinkPermalinks.find((p) => {
+        if (pathFormat === "obsidian-short") {
+          if (e === p || e.endsWith(p)) {
             return true;
           }
-          return false;
+        } else if (pathFormat === "obsidian-absolute") {
+          if (e === "/" + p) {
+            return true;
+          }
         } else {
-          if (e === pagePath) {
-            targetHeading = heading ?? "";
+          if (e === p) {
             return true;
           }
-          return false;
         }
+        return false;
       });
     });
 
+    // TODO this is ugly
+    const link =
+      matchingPermalink ||
+      (pathFormat === "obsidian-absolute"
+        ? "/" + possibleWikiLinkPermalinks[0]
+        : possibleWikiLinkPermalinks[0]) ||
+      "";
+
     wikiLink.data.exists = !!matchingPermalink;
-
-    const permalink = matchingPermalink || pagePermalinks[0];
-
-    wikiLink.data.permalink = permalink;
+    wikiLink.data.permalink = link;
 
     // remove leading # if the target is a heading on the same page
     const displayName = alias || target.replace(/^#/, "");
-
+    const headingId = heading.replace(/\s+/, "-").toLowerCase();
     let classNames = wikiLinkClassName;
     if (!matchingPermalink) {
       classNames += " " + newClassName;
@@ -126,13 +137,13 @@ function fromMarkdown(opts: FromMarkdownOptions = {}) {
         wikiLink.data.hProperties = {
           className: classNames,
           width: "100%",
-          src: `${hrefTemplate(permalink)}#toolbar=0`,
+          src: `${hrefTemplate(link)}#toolbar=0`,
         };
       } else {
         wikiLink.data.hName = "img";
         wikiLink.data.hProperties = {
           className: classNames,
-          src: hrefTemplate(permalink),
+          src: hrefTemplate(link),
           alt: displayName,
         };
       }
@@ -140,7 +151,7 @@ function fromMarkdown(opts: FromMarkdownOptions = {}) {
       wikiLink.data.hName = "a";
       wikiLink.data.hProperties = {
         className: classNames,
-        href: hrefTemplate(permalink) + targetHeading,
+        href: hrefTemplate(link) + headingId,
       };
       wikiLink.data.hChildren = [{ type: "text", value: displayName }];
     }
