@@ -1,5 +1,11 @@
 # flowershow
 
+## 0.1.9
+
+### Patch Changes
+
+- Kill subprocesses when parent process is terminated.
+
 ## 0.1.8
 
 ### Patch Changes
