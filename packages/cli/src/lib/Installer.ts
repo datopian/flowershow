@@ -244,9 +244,15 @@ export default class Installer {
     // install flowershow dependencies
     logWithSpinner({ symbol: "🌸", msg: `Installing Flowershow dependencies` });
     try {
-      const { stdout, stderr } = await execa("npm", ["install"], {
+      const subprocess = execa("npm", ["install"], {
         cwd: flowershowDir,
       });
+
+      process.on("SIGINT", () => {
+        subprocess.kill("SIGINT");
+      });
+
+      const { stdout, stderr } = await subprocess;
       log(stdout);
       log(stderr);
       stopSpinner();
