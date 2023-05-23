@@ -13,7 +13,7 @@ For full feature list see https://flowershow.app/#features
 
 ## [👉 See Flowershow in action on Flowershow.app](https://flowershow.app/)
 
-![obsidian-vs-flowershow](site/content/assets/images/obsidian_vs_flowershow.png)
+![obsidian-vs-flowershow](obsidian_vs_flowershow.png)
 
 ## Docs
 
