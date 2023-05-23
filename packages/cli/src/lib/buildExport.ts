@@ -9,4 +9,8 @@ export default async function buildExport(dir: string) {
   const subprocess = execa("npm", ["run", "export"], { cwd: flowershowDir });
 
   subprocess.stdout.pipe(process.stdout);
+
+  process.on("SIGINT", () => {
+    subprocess.kill("SIGINT");
+  });
 }
