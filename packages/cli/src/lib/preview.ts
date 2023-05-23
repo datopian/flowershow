@@ -17,4 +17,8 @@ export default async function preview(dir: string) {
   const subprocess = execa("npm", ["run", "dev"], { cwd: flowershowDir });
 
   subprocess.stdout.pipe(process.stdout);
+
+  process.on("SIGINT", () => {
+    subprocess.kill("SIGINT");
+  });
 }
