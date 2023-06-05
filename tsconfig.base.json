@@ -3,8 +3,7 @@
     "baseUrl": ".",
     "paths": {
       "@flowershow/core": ["packages/core/src/index.ts"],
-      "@flowershow/markdowndb": ["packages/markdowndb/src/index.ts"],
-      "@flowershow/remark-embed": ["packages/remark-embed/src/index.ts"]
+      "@flowershow/markdowndb": ["packages/markdowndb/src/index.ts"]
     }
   }
 }
