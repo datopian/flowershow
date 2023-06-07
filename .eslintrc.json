@@ -1,46 +1,22 @@
 {
-  "root": true,
-  "ignorePatterns": ["node_modules", "dist"],
-  "plugins": ["@nrwl/nx"],
+  "extends": ["next", "next/core-web-vitals", "../../.eslintrc.json"],
+  "ignorePatterns": [".obsidian/**/*", ".next/**/*", "out/**/*"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
-        "@nrwl/nx/enforce-module-boundaries": [
+        "@next/next/no-html-link-for-pages": [
           "error",
-          {
-            "enforceBuildableLibDependency": true,
-            "allow": [],
-            "depConstraints": [
-              {
-                "sourceTag": "*",
-                "onlyDependOnLibsWithTags": ["*"]
-              }
-            ]
-          }
-        ]
+          "packages/template/pages"
+        ],
+        "react/no-unescaped-entities": "warn"
       }
-    },
-    {
-      "files": ["*.ts", "*.tsx"],
-      "extends": ["plugin:@nrwl/nx/typescript"],
-      "rules": {}
-    },
-    {
-      "files": ["*.js", "*.jsx"],
-      "extends": ["plugin:@nrwl/nx/javascript"],
-      "rules": {
-        "no-unused-vars": "error",
-        "@typescript-eslint/no-unused-vars": "off",
-        "@typescript-eslint/no-empty-function": "off"
-      }
-    },
-    {
-      "files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],
-      "env": {
-        "jest": true
-      },
-      "rules": {}
     }
-  ]
+  ],
+  "rules": {
+    "@next/next/no-html-link-for-pages": "off"
+  },
+  "env": {
+    "jest": true
+  }
 }
