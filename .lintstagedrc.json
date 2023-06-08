@@ -1,3 +1,0 @@
-{
-  "*": ["nx lint --fix --files", "nx format:write --files"]
-}

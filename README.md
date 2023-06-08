@@ -1,4 +1,4 @@
-# Flowershow 🌷
+# 🌷 Flowershow template
 
 > Publish your Obsidian notes, beautifully. For free, no coding.
 
@@ -22,6 +22,17 @@ https://flowershow.app/docs/
 - [Overview](https://flowershow.app/#overview)
 - [QuickStart](https://flowershow.app/docs/publish-tutorial)
 - [Roadmap](https://flowershow.app/docs/roadmap)
+
+## Use with Obsidian Flowershow plugin
+
+You can use this template together with the [Flowershow Obsidian Plugin](https://github.com/datopian/obsidian-flowershow).
+See the README in the plugin repo for information on how to set it up.
+
+## Quick clone and deploy
+
+With Vercel:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/datopian/flowershow-template)
 
 ## Forum
 

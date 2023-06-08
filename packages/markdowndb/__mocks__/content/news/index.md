@@ -1,6 +1,0 @@
----
-type: news
----
-
-# Document Title
-
