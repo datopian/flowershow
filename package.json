@@ -1,6 +1,5 @@
 {
-  "name": "@flowershow/template",
-  "private": true,
+  "name": "flowershow",
   "version": "2.0.3",
   "scripts": {
     "dev": "next dev",
@@ -13,12 +12,12 @@
     "generate": "cross-env NODE_OPTIONS=\"--experimental-json-modules --experimental-modules\" node -r esbuild-register ./scripts/postbuild.mjs"
   },
   "dependencies": {
-    "@flowershow/core": "^0.4.13",
-    "@flowershow/markdowndb": "0.1.5",
-    "@flowershow/remark-callouts": "^1.0.0",
-    "@flowershow/remark-embed": "^1.0.0",
-    "@flowershow/remark-wiki-link": "^1.2.0",
+    "@flowershow/markdowndb": "^0.1.6",
     "@heroicons/react": "^1.0.6",
+    "@portaljs/remark-callouts": "^1.0.4",
+    "@portaljs/remark-embed": "^1.0.3",
+    "@portaljs/remark-wiki-link": "^1.0.3",
+    "@portaljs/core": "^1.0.3",
     "@silvenon/remark-smartypants": "^2.0.0",
     "@tailwindcss/typography": "^0.5.9",
     "@types/node": "18.14.2",

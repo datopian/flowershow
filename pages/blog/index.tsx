@@ -2,7 +2,7 @@ import fs from "fs";
 import React from "react";
 import { GetStaticProps, GetStaticPropsResult } from "next";
 
-import { BlogsList, SimpleLayout } from "@flowershow/core";
+import { BlogsList, SimpleLayout } from "@portaljs/core";
 import clientPromise from "../../lib/mddb.mjs";
 import computeFields from "../../lib/computeFields";
 import type { CustomAppProps } from "../_app";

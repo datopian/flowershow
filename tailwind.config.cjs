@@ -7,8 +7,8 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
     "./layouts/**/*.{js,ts,jsx,tsx}",
     "./content/**/*.{md,mdx}",
-    "./node_modules/@flowershow/core/dist/*.js",
-    "./node_modules/@flowershow/core/*.js",
+    "./node_modules/@portaljs/core/dist/*.js",
+    "./node_modules/@portaljs/core/*.js",
   ],
   darkMode: "class",
   theme: {

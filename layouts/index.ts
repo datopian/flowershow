@@ -3,7 +3,7 @@ import {
   DocsLayout,
   UnstyledLayout,
   BlogLayout,
-} from "@flowershow/core";
+} from "@portaljs/core";
 
 export default {
   simple: SimpleLayout,

@@ -2,7 +2,7 @@
 import React from "react";
 import { GetStaticProps, GetStaticPropsResult } from "next";
 
-import { SimpleLayout } from "@flowershow/core";
+import { SimpleLayout } from "@portaljs/core";
 import clientPromise from "../lib/mddb.mjs";
 import type { CustomAppProps } from "./_app";
 
