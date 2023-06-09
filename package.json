@@ -12,7 +12,7 @@
     "generate": "cross-env NODE_OPTIONS=\"--experimental-json-modules --experimental-modules\" node -r esbuild-register ./scripts/postbuild.mjs"
   },
   "dependencies": {
-    "@flowershow/markdowndb": "^0.1.6",
+    "@flowershow/markdowndb": "^0.1.8",
     "@heroicons/react": "^1.0.6",
     "@portaljs/remark-callouts": "^1.0.4",
     "@portaljs/remark-embed": "^1.0.3",
