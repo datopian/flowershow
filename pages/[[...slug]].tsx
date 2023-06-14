@@ -114,6 +114,8 @@ function capitalize(str: string) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+// TODO temporaty solution
+// we should generate a file with sitemap instead of computing it on the fly for each page
 /* function addPageToGroup(page: MddbFile, sitemap: Array<NavGroup>) { */
 function addPageToSitemap(page: any, sitemap: Array<NavGroup | NavItem>) {
     const urlParts = page.url_path!.split("/").filter((part) => part);
@@ -142,7 +144,7 @@ function addPageToSitemap(page: any, sitemap: Array<NavGroup | NavItem>) {
         for (let level = 0; level <= nestingLevel; level++) {
             if (level === nestingLevel) {
                 currArray.push({
-                    name: urlParts[level],
+                    name: page.metadata?.title || urlParts[level],
                     href: page.url_path,
                 });
                 continue;
