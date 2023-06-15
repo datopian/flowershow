@@ -42,7 +42,7 @@ jobs:
           rm -rf test-app/content
           cp -r fixtures/content test-app/content
 
-      - name: Build and start the app
+      - name: Build the app
         run: npm run export
         working-directory: test-app
 
