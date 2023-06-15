@@ -31,7 +31,7 @@ jobs:
       - name: Install dependencies for E2E tests
         run: |
           npm ci
-          npx playwright install
+          npx playwright install --with-deps
 
       - name: Install dependencies for template
         run: npm ci
