@@ -1,0 +1,48 @@
+name: Run E2E Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out E2E tests
+        uses: actions/checkout@v2
+        with:
+          repository: datopian/flowershow-template-e2e
+
+      - name: Check out Flowershow into test-app
+        uses: actions/checkout@v2
+        with:
+          path: test-app
+
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+
+      - name: Install dependencies for E2E tests
+        run: npm ci
+
+      - name: Install dependencies for template
+        run: npm ci
+        working-directory: test-app
+
+      - name: Replace template /content with fixture content
+        run: |
+          rm -rf test-app/content
+          cp -r fixtures/content test-app/content
+
+      - name: Build and start the app
+        run: npm run export
+        working-directory: test-app
+
+      - name: Run the tests
+        run: npm run test
