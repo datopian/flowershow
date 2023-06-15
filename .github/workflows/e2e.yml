@@ -29,7 +29,9 @@ jobs:
           node-version: '16.x'
 
       - name: Install dependencies for E2E tests
-        run: npm ci
+        run: |
+          npm ci
+          npx playwright install
 
       - name: Install dependencies for template
         run: npm ci
