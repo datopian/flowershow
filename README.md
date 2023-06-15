@@ -32,7 +32,7 @@ See the README in the plugin repo for information on how to set it up.
 
 With Vercel:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/datopian/flowershow-template)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/datopian/flowershow)
 
 ## Forum
 
