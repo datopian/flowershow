@@ -118,7 +118,8 @@ function capitalize(str: string) {
 // we should generate a file with sitemap instead of computing it on the fly for each page
 /* function addPageToGroup(page: MddbFile, sitemap: Array<NavGroup>) { */
 function addPageToSitemap(page: any, sitemap: Array<NavGroup | NavItem>) {
-    const urlParts = page.url_path!.split("/").filter((part) => part);
+    const urlDecoded = decodeURI(page.url_path);
+    const urlParts = urlDecoded!.split("/").filter((part) => part);
     // don't add home page to the sitemap
     if (urlParts.length === 0) return;
     // top level, root pages
@@ -154,7 +155,7 @@ function addPageToSitemap(page: any, sitemap: Array<NavGroup | NavItem>) {
                 .filter(isNavGroup)
                 .find(
                     (group) =>
-                        group.path !== undefined && page.url_path.startsWith(group.path)
+                        group.path !== undefined && decodeURI(page.url_path).startsWith(group.path)
                 );
             if (!matchingGroup) {
                 const newGroup: NavGroup = {
