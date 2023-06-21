@@ -47,7 +47,7 @@ jobs:
         working-directory: test-app
 
       - name: Run the tests
-        run: npm run test
+        run: npx playwright test
 
       - uses: actions/upload-artifact@v3
         if: always()
