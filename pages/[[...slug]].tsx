@@ -1,21 +1,17 @@
-import fs from "fs";
 import React from "react";
 import { NextSeo } from "next-seo";
-import { GetStaticProps, GetStaticPaths, GetStaticPropsResult } from "next";
+import { InferGetServerSidePropsType, GetServerSideProps } from "next";
+import { S3Client, GetObjectCommand, ListObjectsCommand, ListObjectsV2Command } from "@aws-sdk/client-s3";
+
 import { NavItem, NavGroup } from "@portaljs/core";
 
 import MdxPage from "../components/MdxPage";
-import clientPromise from "../lib/mddb.mjs";
 import computeFields from "../lib/computeFields";
 import parse from "../lib/markdown";
-import type { CustomAppProps } from "./_app";
 import siteConfig from "../config/siteConfig";
 
-interface SlugPageProps extends CustomAppProps {
-    source: any;
-}
 
-export default function Page({ source, meta }: SlugPageProps) {
+export default function Page({ source, meta }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     source = JSON.parse(source);
 
     const seoImages = (() => {
@@ -52,18 +48,28 @@ export default function Page({ source, meta }: SlugPageProps) {
     );
 }
 
-export const getStaticProps: GetStaticProps = async ({
-    params,
-}): Promise<GetStaticPropsResult<SlugPageProps>> => {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     const urlPath = params?.slug ? (params.slug as string[]).join("/") : "/";
 
-    const mddb = await clientPromise;
-    const dbFile = await mddb.getFileByUrl(urlPath);
-    const filePath = dbFile!.file_path;
-    const frontMatter = dbFile!.metadata ?? {};
+    const S3 = new S3Client({
+        region: "auto",
+        endpoint: `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
+        credentials: {
+            accessKeyId: process.env.R2_ACCESS_KEY_ID,
+            secretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
+        },
+    });
 
-    const source = fs.readFileSync(filePath, { encoding: "utf-8" });
-    const { mdxSource } = await parse(source, "mdx", {});
+    const filePath = urlPath === "/" ? "index.md" : urlPath + ".md";
+    const object = await S3.send(
+        new GetObjectCommand({
+            Bucket: process.env.R2_BUCKET_NAME,
+            Key: filePath,
+        })
+    )
+
+    const source = await object.Body.transformToString();
+    const { mdxSource, frontMatter } = await parse(source, "mdx", {});
 
     // TODO temporary replacement for contentlayer's computedFields
     const frontMatterWithComputedFields = await computeFields({
@@ -75,40 +81,31 @@ export const getStaticProps: GetStaticProps = async ({
 
     const siteMap: Array<NavGroup | NavItem> = [];
 
-    if (frontMatterWithComputedFields?.showSidebar) {
-        const allPages = await mddb.getFiles({ extensions: ["md", "mdx"] });
-        const pages = allPages.filter((p) => !p.metadata?.isDraft);
-        pages.forEach((page) => {
-            addPageToSitemap(page, siteMap);
-        });
-    }
+    // TODO
+    /* if (frontMatterWithComputedFields?.showSidebar) {
+*     // const allPages = await mddb.getFiles({ extensions: ["md", "mdx"] });
+*     // TODO this operation has a limit of 1000 objects
+*     // use delimiter somehow? https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html#API_ListObjectsV2_RequestSyntax
+*     const allPages = await S3.send(
+*         new ListObjectsV2Command({
+*             Bucket: process.env.R2_BUCKET_NAME,
+*             Delimiter: "/",
+*         })
+*     )
+*     const pages = allPages.Contents?.filter((p) => !p.metadata?.isDraft);
+*     pages.forEach((page) => {
+*         addPageToSitemap(page, siteMap);
+*     });
+* } */
 
     return {
         props: {
             source: JSON.stringify(mdxSource),
             meta: frontMatterWithComputedFields,
-            siteMap,
+            siteMap
         },
-    };
-};
-
-export const getStaticPaths: GetStaticPaths = async () => {
-    const mddb = await clientPromise;
-    const allDocuments = await mddb.getFiles({ extensions: ["md", "mdx"] });
-
-    const paths = allDocuments
-        .filter((page) => page.metadata?.isDraft !== true)
-        .map((page) => {
-            const url = decodeURI(page.url_path);
-            const parts = url.split("/");
-            return { params: { slug: parts } };
-        });
-
-    return {
-        paths,
-        fallback: false,
-    };
-};
+    }
+}
 
 function capitalize(str: string) {
     return str.charAt(0).toUpperCase() + str.slice(1);
