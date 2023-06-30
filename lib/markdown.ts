@@ -9,14 +9,14 @@ import remarkSmartypants from "remark-smartypants";
 import remarkToc from "remark-toc";
 // TODO adjust remark-wiki-link API to:
 // import remarkWikiLink, { getPermalinks } from "@portaljs/remark-wiki-link";
-import { remarkWikiLink, getPermalinks } from "@portaljs/remark-wiki-link";
+import { remarkWikiLink } from "@portaljs/remark-wiki-link";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
 import rehypePrismPlus from "rehype-prism-plus";
 import { serialize } from "next-mdx-remote/serialize";
 
-import siteConfig from "../config/siteConfig";
+// import siteConfig from "../config/siteConfig";
 
 /**
  * Parse a markdown or MDX file to an MDX source form + front matter data
@@ -27,7 +27,8 @@ import siteConfig from "../config/siteConfig";
  */
 const parse = async function (source, format, scope) {
   const { content, data } = matter(source);
-  const permalinks = await getPermalinks(siteConfig.content);
+  // TODO get permalinks from R2 bucket
+  // const permalinks = await getPermalinks(siteConfig.content);
 
   const mdxSource = await serialize(
     { value: content, path: format },
@@ -41,7 +42,8 @@ const parse = async function (source, format, scope) {
           [remarkSmartypants, { quotes: false, dashes: "oldschool" }],
           remarkMath,
           remarkCallouts,
-          [remarkWikiLink, { permalinks, pathFormat: "obsidian-short" }],
+          // [remarkWikiLink, { permalinks, pathFormat: "obsidian-short" }],
+          [remarkWikiLink],
           [
             remarkToc,
             {
