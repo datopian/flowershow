@@ -1,7 +1,7 @@
 import React from "react";
 import { NextSeo } from "next-seo";
 import { InferGetServerSidePropsType, GetServerSideProps } from "next";
-import { S3Client, GetObjectCommand, ListObjectsCommand, ListObjectsV2Command } from "@aws-sdk/client-s3";
+import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
 
 import { NavItem, NavGroup } from "@portaljs/core";
 
