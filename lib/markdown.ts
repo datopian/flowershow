@@ -34,6 +34,7 @@ const parse = async function (source, format, scope) {
     {
       // Optionally pass remark/rehype plugins
       mdxOptions: {
+        development: process.env.NODE_ENV === 'development',
         remarkPlugins: [
           remarkEmbed,
           remarkGfm,
