@@ -76,22 +76,22 @@ export const getStaticProps: GetStaticProps = async (): Promise<
             })
         )
         return {
-            file_path: o.Key,
-            metadata: object.Metadata,
+            filePath: o.Key,
+            urlPath: o.Key.replace(/\.mdx?$/, ""),
+            ...object.Metadata,
         }
     })
 
-    const allPages = await Promise.all(allPagesPromise || [])
+    const allPages: any = await Promise.all(allPagesPromise || [])
 
     const allPagesList = allPages
-        .filter((page) => page.file_path !== "index.md") // exclude homepage
+        .filter((page) => page.filePath !== "index.md") // exclude homepage
         .map((page) => {
-            const urlPath = page.file_path;
-            const displayName = urlPath
+            const urlPath = page.urlPath;
+            const displayName = page.title ?? decodeURI(urlPath)
                 .split("/")
                 .pop()
                 .replace(/-/g, " ")
-                .replace(/\.mdx?$/, "")
                 .replace(
                     /^(\w)(.+)/,
                     (match, p1, p2) => p1.toUpperCase() + p2.toLowerCase()
