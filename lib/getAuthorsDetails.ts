@@ -1,10 +1,42 @@
+import { S3Client, GetObjectCommand, ListObjectsV2Command } from "@aws-sdk/client-s3";
 import siteConfig from "../config/siteConfig";
-import clientPromise from "./mddb.mjs";
 import sluggify from "./sluggify";
 
 const getAuthorsDetails = async (authors?: string[]) => {
-  const mddb = await clientPromise;
-  const allPeople = await mddb.getFiles({ folder: "people" });
+  const S3 = new S3Client({
+    region: "auto",
+    endpoint: `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
+    credentials: {
+      accessKeyId: process.env.R2_ACCESS_KEY_ID,
+      secretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
+    },
+  });
+
+  // TODO this will return only up to 1000 objects
+  const allObjects = await S3.send(
+    new ListObjectsV2Command({
+      Bucket: process.env.R2_BUCKET_NAME,
+      Prefix: "people/",
+      /* Delimiter: "/", */
+    })
+  )
+
+  // TODO can we get this data in one request?
+  const allPeoplePromise = allObjects.Contents?.map(async (o) => {
+    const object = await S3.send(
+      new GetObjectCommand({
+        Bucket: process.env.R2_BUCKET_NAME,
+        Key: o.Key,
+      })
+    )
+    return {
+      urlPath: o.Key.replace(/\.mdx?$/, ""),
+      ...object.Metadata,
+    }
+  })
+
+  const allPeople = await Promise.all(allPeoplePromise || [])
+
   let blogAuthors: string[] = [];
 
   if (authors) {
@@ -16,27 +48,27 @@ const getAuthorsDetails = async (authors?: string[]) => {
   }
 
   return blogAuthors.map((author) => {
-    const matchedAuthor = allPeople.find((p) => {
+    const matchedAuthor: any = allPeople.find((p: any) => {
       // TODO: slug should probably be a separate column in the DB
-      const slug = sluggify(p.url_path!);
+      const slug = sluggify(p.urlPath);
       return (
-        p.metadata?.id === author ||
+        p.id === author ||
         slug === author ||
-        p.metadata?.name === author
+        p.name === author
       );
     });
     return matchedAuthor
       ? {
-          name: matchedAuthor.metadata?.name,
-          avatar:
-            matchedAuthor.metadata?.avatar ?? siteConfig.avatarPlaceholder,
-          // TODO find a better way
-          urlPath: !matchedAuthor.metadata?.isDraft && matchedAuthor.url_path,
-        }
+        name: matchedAuthor.name,
+        avatar:
+          matchedAuthor.avatar ?? siteConfig.avatarPlaceholder,
+        // TODO find a better way
+        urlPath: matchedAuthor.urlPath,
+      }
       : {
-          name: author,
-          avatar: siteConfig.avatarPlaceholder,
-        };
+        name: author,
+        avatar: siteConfig.avatarPlaceholder,
+      };
   });
 };
 
