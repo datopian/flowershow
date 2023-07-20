@@ -61,10 +61,12 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     });
 
     const filePath = urlPath === "/" ? "index.md" : urlPath + ".md";
+    const filePathEncoded = encodeURI(filePath);
+
     const object = await S3.send(
         new GetObjectCommand({
             Bucket: process.env.R2_BUCKET_NAME,
-            Key: filePath,
+            Key: filePathEncoded
         })
     )
 
