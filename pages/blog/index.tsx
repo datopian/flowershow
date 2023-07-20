@@ -58,8 +58,6 @@ export const getStaticProps: GetStaticProps = async (): Promise<
 
     const blogsList = await Promise.all(allBlogsPromise || [])
 
-    console.log(blogsList)
-
     /* const blogsMetadataPromises = blogFiles.map(async (b) => {
 *     const source = fs.readFileSync(b.file_path, { encoding: "utf-8" });
 
