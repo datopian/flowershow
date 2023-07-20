@@ -5,6 +5,8 @@ import { BlogsList, SimpleLayout } from "@portaljs/core";
 import { S3Client, GetObjectCommand, ListObjectsV2Command } from "@aws-sdk/client-s3";
 /* import computeFields from "../../lib/computeFields"; */
 import type { CustomAppProps } from "../_app";
+import siteConfig from "../../config/siteConfig";
+
 
 interface BlogIndexPageProps extends CustomAppProps {
     blogs: any[]; // TODO types
@@ -72,6 +74,8 @@ export const getStaticProps: GetStaticProps = async (): Promise<
 *     return frontMatterWithComputedFields;
 * }); */
 
+    const config = await siteConfig();
+
     return {
         props: {
             meta: {
@@ -83,6 +87,7 @@ export const getStaticProps: GetStaticProps = async (): Promise<
                 urlPath: "/blog",
             },
             blogs: blogsList,
+            siteConfig: config,
         },
     };
 };

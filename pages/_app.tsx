@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import type { AppProps } from "next/app";
 
-import siteConfig from "../config/siteConfig";
 import {
     Layout,
     SearchProvider,
@@ -37,7 +36,7 @@ export interface CustomAppProps {
 
 const MyApp = ({ Component, pageProps }: AppProps<CustomAppProps>) => {
     const router = useRouter();
-    const { meta, siteMap } = pageProps;
+    const { meta, siteMap, siteConfig } = pageProps;
 
     const layoutProps = {
         showToc: meta?.showToc,

@@ -1,8 +1,7 @@
 import { S3Client, GetObjectCommand, ListObjectsV2Command } from "@aws-sdk/client-s3";
-import siteConfig from "../config/siteConfig";
 import sluggify from "./sluggify";
 
-const getAuthorsDetails = async (authors?: string[]) => {
+const getAuthorsDetails = async (authors?: string[], defaultAuthor?: string, avatarPlaceholder?: string) => {
   const S3 = new S3Client({
     region: "auto",
     endpoint: `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
@@ -41,8 +40,8 @@ const getAuthorsDetails = async (authors?: string[]) => {
 
   if (authors) {
     blogAuthors = authors;
-  } else if (siteConfig.defaultAuthor) {
-    blogAuthors = [siteConfig.defaultAuthor];
+  } else if (defaultAuthor) {
+    blogAuthors = [defaultAuthor];
   } else {
     blogAuthors = [];
   }
@@ -61,13 +60,13 @@ const getAuthorsDetails = async (authors?: string[]) => {
       ? {
         name: matchedAuthor.name,
         avatar:
-          matchedAuthor.avatar ?? siteConfig.avatarPlaceholder,
+          matchedAuthor.avatar ?? avatarPlaceholder,
         // TODO find a better way
         urlPath: matchedAuthor.urlPath,
       }
       : {
         name: author,
-        avatar: siteConfig.avatarPlaceholder,
+        avatar: avatarPlaceholder,
       };
   });
 };

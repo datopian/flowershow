@@ -11,7 +11,7 @@ import parse from "../lib/markdown";
 import siteConfig from "../config/siteConfig";
 
 
-export default function Page({ source, meta }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Page({ source, meta, siteConfig }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     source = JSON.parse(source);
 
     const seoImages = (() => {
@@ -73,12 +73,15 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     const source = await object.Body.transformToString();
     const { mdxSource, frontMatter } = await parse(source, "mdx", {});
 
+    const config = await siteConfig();
+
     // TODO temporary replacement for contentlayer's computedFields
     const frontMatterWithComputedFields = await computeFields({
         frontMatter,
         urlPath,
         filePath,
         source,
+        siteConfig: config,
     });
 
     const siteMap: Array<NavGroup | NavItem> = [];
@@ -104,6 +107,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
         props: {
             source: JSON.stringify(mdxSource),
             meta: frontMatterWithComputedFields,
+            siteConfig: config,
             siteMap
         },
     }

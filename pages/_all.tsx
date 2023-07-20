@@ -5,6 +5,7 @@ import { S3Client, ListObjectsV2Command, GetObjectCommand } from "@aws-sdk/clien
 import { SimpleLayout } from "@portaljs/core";
 
 import type { CustomAppProps } from "./_app";
+import siteConfig from "../config/siteConfig";
 
 interface AllPageProps extends CustomAppProps {
     pages: Array<{ urlPath: string; displayName: string }>; // TODO types
@@ -85,7 +86,7 @@ export const getStaticProps: GetStaticProps = async (): Promise<
     const allPages: any = await Promise.all(allPagesPromise || [])
 
     const allPagesList = allPages
-        .filter((page) => page.filePath !== "index.md") // exclude homepage
+        .filter((page) => page.filePath !== "index.md" && page.filePath !== "config.json") // exclude homepage
         .map((page) => {
             const urlPath = page.urlPath;
             const displayName = page.title ?? decodeURI(urlPath)
@@ -101,6 +102,8 @@ export const getStaticProps: GetStaticProps = async (): Promise<
         })
         .sort((a, b) => a.displayName.localeCompare(b.displayName));
 
+    const config = await siteConfig();
+
     return {
         props: {
             meta: {
@@ -111,6 +114,7 @@ export const getStaticProps: GetStaticProps = async (): Promise<
                 showEditLink: false,
                 urlPath: "/_all",
             },
+            siteConfig: config,
             pages: allPagesList,
         },
     };

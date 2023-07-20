@@ -2,19 +2,20 @@
 import { remark } from "remark";
 import stripMarkdown, { Options } from "strip-markdown";
 
-import siteConfig from "../config/siteConfig";
 import getAuthorsDetails from "./getAuthorsDetails";
 import sluggify from "./sluggify";
 
 // TODO return type
 
 const computeFields = async ({
+  siteConfig,
   frontMatter,
   urlPath,
   filePath,
   source,
 }: {
   frontMatter: Record<string, any>;
+  siteConfig: Record<string, any>; // TODO types
   urlPath: string;
   filePath: string;
   source: string;
@@ -52,7 +53,7 @@ const computeFields = async ({
   const editUrl =
     (siteConfig.editLinkRoot && `${siteConfig.editLinkRoot}/${filePath}`) ||
     null;
-  const authors = await getAuthorsDetails(frontMatter.authors);
+  const authors = await getAuthorsDetails(frontMatter.authors, siteConfig.defaultAuthor, siteConfig.avatarPlaceholder);
 
   return {
     ...frontMatter,

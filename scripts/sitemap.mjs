@@ -1,9 +1,8 @@
 import { writeFileSync } from "fs";
 import { globby } from "globby";
 import prettier from "prettier";
-import { ListObjectsV2Command, S3Client } from "@aws-sdk/client-s3";
+import { GetObjectCommand, ListObjectsV2Command, S3Client } from "@aws-sdk/client-s3";
 
-import config from "../content/config.mjs";
 
 export default async function sitemap() {
   const prettierConfig = await prettier.resolveConfig("");
@@ -16,6 +15,16 @@ export default async function sitemap() {
       secretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
     },
   });
+
+  const userConfigObj = await S3.send(
+    new GetObjectCommand({
+      Bucket: process.env.R2_BUCKET_NAME,
+      Key: "config.json"
+    })
+  )
+
+  const userConfigJSON = await userConfigObj.Body.transformToString();
+  const userConfig = JSON.parse(userConfigJSON);
 
   // TODO this will only fetch up to 1000 objects !!
   const allR2Objects = await S3.send(
@@ -35,7 +44,7 @@ export default async function sitemap() {
     "!pages/**/\\[\\[*\\]\\].(js|tsx)", // pages/[[...slug]].tsx
   ]);
 
-  const siteUrl = config?.domain?.replace(/\/$/, "");
+  const siteUrl = userConfig?.domain?.replace(/\/$/, "");
 
   if (siteUrl) {
     const sitemap = `
