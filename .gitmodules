@@ -1,9 +1,0 @@
-[submodule "packages/cli/src/e2e/bats"]
-	path = packages/cli/e2e/bats
-	url = https://github.com/bats-core/bats-core.git
-[submodule "packages/cli/src/e2e/test_helper/bats-support"]
-	path = packages/cli/e2e/test_helper/bats-support
-	url = https://github.com/bats-core/bats-support.git
-[submodule "packages/cli/src/e2e/test_helper/bats-assert"]
-	path = packages/cli/e2e/test_helper/bats-assert
-	url = https://github.com/bats-core/bats-assert.git
