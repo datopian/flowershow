@@ -8,7 +8,7 @@
     "start": "next start",
     "export": "npm run build && next export",
     "mddb": "mddb ./content",
-    "generate": "cross-env NODE_OPTIONS=\"--experimental-json-modules --experimental-modules\" node -r esbuild-register ./scripts/postbuild.mjs"
+    "generate": "cross-env NODE_OPTIONS=\"--experimental-json-modules --experimental-modules\" node -r esbuild-register ./scripts/prebuild.mjs"
   },
   "dependencies": {
     "@heroicons/react": "^1.0.6",
