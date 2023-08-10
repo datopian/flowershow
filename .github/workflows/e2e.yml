@@ -10,6 +10,7 @@ on:
 
 jobs:
   test:
+    name: Run E2E Tests
     runs-on: ubuntu-latest
 
     steps:
