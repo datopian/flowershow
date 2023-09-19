@@ -85,7 +85,7 @@ const parse = async function (source, format, scope) {
               },
             },
           ],
-          [rehypeKatex, { output: "mathml" }],
+          [rehypeKatex, { output: "htmlAndMathml" }],
           [rehypePrismPlus, { ignoreMissing: true }],
         ],
         format,
