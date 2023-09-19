@@ -35,6 +35,10 @@ html {
   visibility: hidden;
 }
 
+#mdxpage{
+  min-height: 55vh;
+}
+
 #mdxpage iframe {
   height: 80vh;
 }
