@@ -1,5 +1,4 @@
 import React from "react";
-import Head from "next/head";
 
 import { MDXRemote } from "next-mdx-remote";
 import { Mermaid, Pre } from "@portaljs/core";
@@ -26,10 +25,6 @@ export default function MdxPage({ source, frontMatter }) {
 
     return (
         <main id="mdxpage" className="prose mx-auto">
-            <Head>
-                {/* KaTeX styles */}
-                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn" crossOrigin="anonymous" />
-            </Head>
             <Layout>
                 <MDXRemote {...source} components={components} />
             </Layout>
