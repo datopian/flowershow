@@ -4,5 +4,6 @@ node_modules/
 .next/
 out/
 .obsidian/
-.env*
+.env
+.env.local
 sitemap.xml
