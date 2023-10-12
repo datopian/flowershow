@@ -1,13 +1,13 @@
 import React from "react";
 import { NextSeo } from "next-seo";
 import { InferGetServerSidePropsType, GetServerSideProps } from "next";
-import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
 
-import { NavItem, NavGroup } from "@portaljs/core";
+/* import { NavItem, NavGroup } from "@portaljs/core"; */
 
 import MdxPage from "@/components/MdxPage";
-import computeFields from "@/lib/computeFields";
+/* import computeFields from "@/lib/computeFields"; */
 import parse from "@/lib/markdown";
+import { getRepoFile } from "@/lib/octokit";
 import siteConfig from "@/config/siteConfig";
 
 
@@ -49,66 +49,52 @@ export default function Page({ source, meta, siteConfig }: InferGetServerSidePro
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-    const urlPath = params?.slug ? (params.slug as string[]).join("/") : "/";
+    // TODO lookup org in the database, get the repo name, owner and branch
+    // mock for now
+    const project = projectsDB.find(p => p.org === params.org);
+    const { repo, owner, branch } = project.config;
 
-    const S3 = new S3Client({
-        region: "auto",
-        endpoint: `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
-        credentials: {
-            accessKeyId: process.env.R2_ACCESS_KEY_ID,
-            secretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
+    const file = await getRepoFile({
+        project: {
+            owner,
+            repo,
+            branch,
         },
+        path: params.path as string,
     });
 
-    const filePath = urlPath === "/" ? "index.md" : urlPath + ".md";
-    const filePathEncoded = encodeURI(filePath);
+    console.log(file);
 
-    const object = await S3.send(
-        new GetObjectCommand({
-            Bucket: process.env.R2_BUCKET_NAME,
-            Key: filePathEncoded
-        })
-    )
-
-    const source = await object.Body.transformToString();
-    const { mdxSource, frontMatter } = await parse(source, "mdx", {});
-
-    const config = await siteConfig();
+    const { mdxSource, frontMatter } = await parse(file, "mdx", {});
 
     // TODO temporary replacement for contentlayer's computedFields
-    const frontMatterWithComputedFields = await computeFields({
-        frontMatter,
-        urlPath,
-        filePath,
-        source,
-        siteConfig: config,
-    });
-
-    const siteMap: Array<NavGroup | NavItem> = [];
-
-    // TODO
-    /* if (frontMatterWithComputedFields?.showSidebar) {
-*     // const allPages = await mddb.getFiles({ extensions: ["md", "mdx"] });
-*     // TODO this operation has a limit of 1000 objects
-*     // use delimiter somehow? https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html#API_ListObjectsV2_RequestSyntax
-*     const allPages = await S3.send(
-*         new ListObjectsV2Command({
-*             Bucket: process.env.R2_BUCKET_NAME,
-*             Delimiter: "/",
-*         })
-*     )
-*     const pages = allPages.Contents?.filter((p) => !p.metadata?.isDraft);
-*     pages.forEach((page) => {
-*         addPageToSitemap(page, siteMap);
-*     });
-* } */
+    /* const frontMatterWithComputedFields = await computeFields({
+*     frontMatter,
+*     urlPath,
+*     filePath,
+*     source,
+*     siteConfig: config,
+* }); */
 
     return {
         props: {
             source: JSON.stringify(mdxSource),
-            meta: frontMatterWithComputedFields,
-            siteConfig: config,
-            siteMap
+            meta: frontMatter,
+            siteConfig
         },
     }
 }
+
+
+const projectsDB = [
+    {
+        id: 1,
+        org: "bulbasaur",
+        type: "github",
+        config: {
+            owner: "olayway",
+            repo: "digital-garden",
+            branch: "main"
+        }
+    }
+]
