@@ -9,7 +9,7 @@ import clientPromise from "../lib/mddb.mjs";
 import computeFields from "../lib/computeFields";
 import parse from "../lib/markdown";
 import type { CustomAppProps } from "./_app";
-import siteConfig from "../config/siteConfig";
+import siteConfig, { getPreProcessFunction } from "../config/siteConfig";
 
 interface SlugPageProps extends CustomAppProps {
     source: any;
@@ -63,7 +63,12 @@ export const getStaticProps: GetStaticProps = async ({
     const frontMatter = dbFile!.metadata ?? {};
 
     const source = fs.readFileSync(filePath, { encoding: "utf-8" });
-    const { mdxSource } = await parse(source, "mdx", {});
+    const preProcessFunction = await getPreProcessFunction(
+        siteConfig.preProcessFile
+    );
+    const processedSource = preProcessFunction(source)
+    
+    const { mdxSource } = await parse(processedSource, "mdx", {});
 
     // TODO temporary replacement for contentlayer's computedFields
     const frontMatterWithComputedFields = await computeFields({
