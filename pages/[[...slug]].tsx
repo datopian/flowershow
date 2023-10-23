@@ -113,6 +113,11 @@ function capitalize(str: string) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+// SUGGESTION: this is a NO-NO; the siteMap shouldnt' be computed on the fly and for each page
+// it's the same for the whole site, and so, it should be either:
+// 1) generated into JSON file at build time and imported in the root Layout component
+// 2) computed in the root Layout component itself if we upgarde to App Router
+
 // TODO temporaty solution
 // we should generate a file with sitemap instead of computing it on the fly for each page
 /* function addPageToGroup(page: MddbFile, sitemap: Array<NavGroup>) { */
