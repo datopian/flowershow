@@ -11,9 +11,9 @@ import {
     SearchProvider,
     pageview,
     ThemeProvider,
-    NavItem,
-    NavGroup,
 } from "@portaljs/core";
+
+import type { NavGroup, NavItem } from "@portaljs/core";
 
 import "tailwindcss/tailwind.css";
 import "../styles/docsearch.css";
