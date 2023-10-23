@@ -2,7 +2,7 @@
 import { remark } from "remark";
 import stripMarkdown, { Options } from "strip-markdown";
 
-import siteConfig from "../config/siteConfig";
+import siteConfig from "@/config/siteConfig";
 import getAuthorsDetails from "./getAuthorsDetails";
 import sluggify from "./sluggify";
 

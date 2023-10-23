@@ -1,5 +1,5 @@
 import { defaultConfig } from "@portaljs/core";
-import userConfig from "../content/config.mjs";
+import userConfig from "@/content/config.mjs";
 
 // TODO types
 const siteConfig: any = {

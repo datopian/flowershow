@@ -1,4 +1,4 @@
-import siteConfig from "../config/siteConfig";
+import siteConfig from "@/config/siteConfig";
 import clientPromise from "./mddb.mjs";
 import sluggify from "./sluggify";
 

@@ -3,8 +3,8 @@ import React from "react";
 import { GetStaticProps, GetStaticPropsResult } from "next";
 
 import { BlogsList, SimpleLayout } from "@portaljs/core";
-import clientPromise from "../../lib/mddb.mjs";
-import computeFields from "../../lib/computeFields";
+import clientPromise from "@/lib/mddb.mjs";
+import computeFields from "@/lib/computeFields";
 import type { CustomAppProps } from "../_app";
 
 interface BlogIndexPageProps extends CustomAppProps {
