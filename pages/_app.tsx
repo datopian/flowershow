@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import type { AppProps } from "next/app";
 
-import siteConfig from "../config/siteConfig";
+import siteConfig from "@/config/siteConfig";
 import {
     Layout,
     SearchProvider,
@@ -16,9 +16,9 @@ import {
 import type { NavGroup, NavItem } from "@portaljs/core";
 
 import "tailwindcss/tailwind.css";
-import "../styles/docsearch.css";
-import "../styles/global.css";
-import "../styles/prism.css";
+import "@/styles/docsearch.css";
+import "@/styles/global.css";
+import "@/styles/prism.css";
 
 export interface CustomAppProps {
     meta: {

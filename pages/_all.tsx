@@ -3,7 +3,7 @@ import React from "react";
 import { GetStaticProps, GetStaticPropsResult } from "next";
 
 import { SimpleLayout } from "@portaljs/core";
-import clientPromise from "../lib/mddb.mjs";
+import clientPromise from "@/lib/mddb.mjs";
 import type { CustomAppProps } from "./_app";
 
 interface AllPageProps extends CustomAppProps {

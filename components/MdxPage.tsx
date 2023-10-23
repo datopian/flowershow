@@ -3,7 +3,7 @@ import React from "react";
 import { MDXRemote } from "next-mdx-remote";
 import { Mermaid, Pre } from "@portaljs/core";
 
-import layouts from "../layouts";
+import layouts from "@/layouts";
 
 // Custom components/renderers to pass to MDX.
 // Since the MDX files aren't loaded by webpack, they have no knowledge of how
