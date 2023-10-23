@@ -1,9 +1,8 @@
-import React from "react";
 /* eslint import/no-default-export: off */
 import Script from "next/script";
 import { DefaultSeo } from "next-seo";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import type { AppProps } from "next/app";
 
 import siteConfig from "../config/siteConfig";
