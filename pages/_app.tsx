@@ -4,16 +4,15 @@ import { DefaultSeo } from "next-seo";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import type { AppProps } from "next/app";
-
-import siteConfig from "@/config/siteConfig";
 import {
     Layout,
     SearchProvider,
     pageview,
     ThemeProvider,
 } from "@portaljs/core";
-
 import type { NavGroup, NavItem } from "@portaljs/core";
+
+import siteConfig from "@/config/siteConfig";
 
 import "tailwindcss/tailwind.css";
 import "@/styles/docsearch.css";

@@ -1,14 +1,14 @@
 import fs from "fs";
 import { NextSeo } from "next-seo";
-import { GetStaticProps, GetStaticPaths, GetStaticPropsResult } from "next";
+import type { GetStaticProps, GetStaticPaths, GetStaticPropsResult } from "next";
 import type { NavItem, NavGroup } from "@portaljs/core";
 
 import MdxPage from "@/components/MdxPage";
 import clientPromise from "@/lib/mddb.mjs";
 import computeFields from "@/lib/computeFields";
 import parse from "@/lib/markdown";
-import type { CustomAppProps } from "./_app";
 import siteConfig from "@/config/siteConfig";
+import type { CustomAppProps } from "./_app";
 
 interface SlugPageProps extends CustomAppProps {
     source: any;
