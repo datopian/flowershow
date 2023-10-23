@@ -1,5 +1,4 @@
 import fs from "fs";
-import React from "react";
 import { NextSeo } from "next-seo";
 import { GetStaticProps, GetStaticPaths, GetStaticPropsResult } from "next";
 import type { NavItem, NavGroup } from "@portaljs/core";
