@@ -2,7 +2,7 @@
 import Script from "next/script";
 import { DefaultSeo } from "next-seo";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import type { AppProps } from "next/app";
 
 import siteConfig from "@/config/siteConfig";

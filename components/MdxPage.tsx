@@ -1,4 +1,3 @@
-import React from "react";
 
 import { MDXRemote } from "next-mdx-remote";
 import { Mermaid, Pre } from "@portaljs/core";
