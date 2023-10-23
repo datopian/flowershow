@@ -1,7 +1,7 @@
 /* eslint import/no-default-export: off */
-import { GetStaticProps, GetStaticPropsResult } from "next";
-
+import type { GetStaticProps, GetStaticPropsResult } from "next";
 import { SimpleLayout } from "@portaljs/core";
+
 import clientPromise from "@/lib/mddb.mjs";
 import type { CustomAppProps } from "./_app";
 

@@ -1,7 +1,7 @@
 import fs from "fs";
-import { GetStaticProps, GetStaticPropsResult } from "next";
-
+import type { GetStaticProps, GetStaticPropsResult } from "next";
 import { BlogsList, SimpleLayout } from "@portaljs/core";
+
 import clientPromise from "@/lib/mddb.mjs";
 import computeFields from "@/lib/computeFields";
 import type { CustomAppProps } from "../_app";
