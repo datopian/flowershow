@@ -24,6 +24,7 @@ export default function All({ pages, meta: { title } }: AllPageProps) {
 
     return (
         <SimpleLayout title={title}>
+            {/* SUGGESTION: remove any "prose" classes from any components other than a direct wrapper of the markdown content */}
             <div className="prose dark:prose-invert max-w-[100%] p-6">
                 {letters.map((letter) => (
                     <div key={letter} className="ml-2 pt-2">
@@ -54,6 +55,7 @@ export const getStaticProps: GetStaticProps = async (): Promise<
         .filter((page) => page.url_path !== "/") // exclude homepage
         .map((page) => {
             const urlPath = page.url_path;
+            // SUGGESTION: not sure but maybe this should default to the page title if it is set
             const displayName = urlPath
                 .split("/")
                 .pop()
