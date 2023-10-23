@@ -67,7 +67,12 @@ const MyApp = ({ Component, pageProps }: AppProps<CustomAppProps>) => {
             defaultTheme: siteConfig.theme.default,
             themeToggleIcon: siteConfig.theme.toggleIcon,
         },
-        siteMap, // SUGGESTION: again, this could be generated in the root Layout if we upgrade to App Router
+        // SUGGESTION: again, the siteMap for the sidebar could be generated in the root Layout if we upgrade to App Router
+        // if we don't upgrade:
+        // 1) either generate a JSON file with the siteMap at build time and import it here
+        // 2) or use getInitialProps but rather than using it, Next.js docs suggests... upgrading to App Router :)
+        // https://nextjs.org/docs/pages/building-your-application/routing/custom-app#getinitialprops-with-app
+        siteMap,
     };
 
     // SUGGESTION: move this to a separate component: GoogleAnalytics
