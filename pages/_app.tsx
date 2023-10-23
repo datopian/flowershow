@@ -1,4 +1,3 @@
-/* eslint import/no-default-export: off */
 import Script from "next/script";
 import { DefaultSeo } from "next-seo";
 import { useRouter } from "next/router";
