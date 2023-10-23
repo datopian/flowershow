@@ -1,4 +1,3 @@
-/* eslint import/no-default-export: off */
 import type { GetStaticProps, GetStaticPropsResult } from "next";
 import { SimpleLayout } from "@portaljs/core";
 
