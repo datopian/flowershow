@@ -10,6 +10,11 @@ import layouts from "@/layouts";
 const components = {
     mermaid: Mermaid,
     pre: Pre,
+    table: (props) => (
+        <div className="overflow-x-auto">
+            <table {...props} />
+        </div>
+    ),
 };
 
 export default function MdxPage({ source, frontMatter }) {
