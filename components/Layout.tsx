@@ -95,7 +95,7 @@ export const Layout: React.FC<Props> = ({
                             : "dark:bg-background-dark bg-background"
                     )}
                 >
-                    <div className="max-w-8xl mx-auto p-4 md:px-8">
+                    <div className="h-[4rem] flex flex-col justify-center max-w-8xl mx-auto p-4 md:px-8">
                         <Nav
                             title={nav.title}
                             logo={nav.logo}
@@ -112,19 +112,19 @@ export const Layout: React.FC<Props> = ({
                 </div>
                 {/* wrapper for sidebar, main content and ToC */}
                 <div
-                    className={clsx(
-                        "max-w-8xl mx-auto px-4 md:px-8",
-                        showSidebar && "lg:ml-[18rem]"
-                    )}
+                    className="max-w-8xl mx-auto px-4 md:px-8"
                 >
                     {/* SIDEBAR */}
                     {showSidebar && (
-                        <div className="hidden lg:block fixed z-20 w-[18rem] top-[4.6rem] right-auto bottom-0 left-[max(0px,calc(50%-44rem))] pt-8 pl-8 overflow-y-auto">
+                        <div className="hidden lg:block fixed z-20 w-[16rem] top-[4rem] right-auto bottom-0 left-[max(0px,calc(50%-44rem))] pt-8 pl-8 overflow-y-auto">
                             <SiteToc currentPath={urlPath} nav={siteMap} />
                         </div>
                     )}
                     {/* MAIN CONTENT & FOOTER */}
-                    <main className="mx-auto pt-8">
+                    <div className={clsx(
+                        "mx-auto lg:px-[16rem] pt-8",
+                        !showToc && !showSidebar && "lg:px-0",
+                    )}>
                         {children}
                         {/* EDIT THIS PAGE LINK */}
                         {showEditLink && editUrl && <EditThisPage url={editUrl} />}
@@ -137,17 +137,16 @@ export const Layout: React.FC<Props> = ({
                                 {<Comments commentsConfig={commentsConfig} slug={urlPath} />}
                             </div>
                         )}
-                    </main>
-                    <Footer links={nav.links} author={author} />
+                    </div>
                     {/** TABLE OF CONTENTS */}
                     {showToc && tableOfContents.length > 0 && (
-                        <div className="hidden xl:block fixed z-20 w-[18rem] top-[4.6rem] bottom-0 right-[max(0px,calc(50%-44rem))] left-auto pt-8 pr-8 overflow-y-auto">
-                            <TableOfContents
-                                tableOfContents={tableOfContents}
-                                currentSection={currentSection}
-                            />
+                        <div className="hidden xl:block fixed z-20 w-[16rem] top-[4rem] bottom-0 right-[max(0px,calc(50%-44rem))] left-auto pt-8 pr-8 overflow-y-auto">                            <TableOfContents
+                            tableOfContents={tableOfContents}
+                            currentSection={currentSection}
+                        />
                         </div>
                     )}
+                    <Footer links={nav.links} author={author} />
                 </div>
             </div>
         </>
