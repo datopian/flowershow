@@ -4,13 +4,13 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import type { AppProps } from "next/app";
 import {
-    Layout,
     SearchProvider,
     pageview,
     ThemeProvider,
 } from "@portaljs/core";
 import type { NavGroup, NavItem } from "@portaljs/core";
 
+import { Layout } from "@/components/Layout";
 import siteConfig from "@/config/siteConfig";
 
 import "tailwindcss/tailwind.css";
