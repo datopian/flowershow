@@ -4,3 +4,4 @@ node_modules/
 .next/
 out/
 .obsidian/
+.markdowndb/
