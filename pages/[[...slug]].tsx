@@ -11,7 +11,8 @@ import siteConfig from "@/config/siteConfig";
 import type { CustomAppProps } from "./_app";
 
 interface SlugPageProps extends CustomAppProps {
-    source: any;
+    type: "canvas" | "page";
+    source?: any;
 }
 
 export default function Page({ source, meta }: SlugPageProps) {
@@ -55,13 +56,30 @@ export const getStaticProps: GetStaticProps = async ({
     params,
 }): Promise<GetStaticPropsResult<SlugPageProps>> => {
     const urlPath = params?.slug ? (params.slug as string[]).join("/") : "/";
+    console.log(params.slug)
+    if (urlPath.endsWith(".canvas")) {
+        return {
+            props: {
+                type: "canvas",
+                meta: {},
+                siteMap,
+            }
+        }
+    }
 
     const mddb = await clientPromise;
     const dbFile = await mddb.getFileByUrl(urlPath);
     const filePath = dbFile!.file_path;
     const frontMatter = dbFile!.metadata ?? {};
 
-    const source = fs.readFileSync(filePath, { encoding: "utf-8" });
+    let source;
+    try {
+        source = fs.readFileSync(filePath, { encoding: "utf-8" }) || "";
+    } catch (error) {
+        console.error("Error reading file:", error.message);
+        source = ""; // Set a default value or handle the error as needed
+    }
+
     const { mdxSource } = await parse(source, "mdx", {});
 
     // TODO temporary replacement for contentlayer's computedFields
