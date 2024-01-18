@@ -3,11 +3,7 @@ import { DefaultSeo } from "next-seo";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import type { AppProps } from "next/app";
-import {
-    SearchProvider,
-    pageview,
-    ThemeProvider,
-} from "@portaljs/core";
+import { SearchProvider, pageview, ThemeProvider } from "@portaljs/core";
 import type { NavGroup, NavItem } from "@portaljs/core";
 
 import { Layout } from "@/components/Layout";
@@ -17,6 +13,7 @@ import "tailwindcss/tailwind.css";
 import "@/styles/docsearch.css";
 import "@/styles/global.css";
 import "@/styles/prism.css";
+import { Analytics } from "@portaljs/core";
 
 export interface CustomAppProps {
     meta: {
@@ -82,7 +79,14 @@ const MyApp = ({ Component, pageProps }: AppProps<CustomAppProps>) => {
             defaultTheme={siteConfig.theme.default}
             forcedTheme={siteConfig.theme.default ? null : "light"}
         >
-            <DefaultSeo defaultTitle={siteConfig.title} {...siteConfig.nextSeo} />
+            <DefaultSeo
+                defaultTitle={siteConfig.title}
+                {...siteConfig.nextSeo}
+            />
+            {siteConfig.analyticsConfig && (
+                <Analytics analyticsConfig={siteConfig.analyticsConfig} />
+            )}
+            {/*For compatibility, keep this.*/}
             {/* Global Site Tag (gtag.js) - Google Analytics */}
             {siteConfig.analytics && (
                 <>
