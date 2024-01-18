@@ -13,7 +13,7 @@ import "tailwindcss/tailwind.css";
 import "@/styles/docsearch.css";
 import "@/styles/global.css";
 import "@/styles/prism.css";
-import { Analytics } from "@/components/analytics";
+import { Analytics } from "@portaljs/core";
 
 export interface CustomAppProps {
     meta: {
