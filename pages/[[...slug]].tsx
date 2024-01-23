@@ -9,6 +9,7 @@ import computeFields from "@/lib/computeFields";
 import parse from "@/lib/markdown";
 import siteConfig from "@/config/siteConfig";
 import type { CustomAppProps } from "./_app";
+import { replaceMdImages } from "@/lib/replaceMdImages";
 
 interface SlugPageProps extends CustomAppProps {
     source: any;
@@ -62,7 +63,8 @@ export const getStaticProps: GetStaticProps = async ({
     const frontMatter = dbFile!.metadata ?? {};
 
     const source = fs.readFileSync(filePath, { encoding: "utf-8" });
-    const { mdxSource } = await parse(source, "mdx", {});
+    const newSource = replaceMdImages(source);
+    const { mdxSource } = await parse(newSource, "mdx", {});
 
     // TODO temporary replacement for contentlayer's computedFields
     const frontMatterWithComputedFields = await computeFields({
