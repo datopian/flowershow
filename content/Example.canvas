@@ -1,0 +1,16 @@
+{
+	"nodes":[
+		{"id":"7af03c59336d7e50","type":"file","file":"assets/Asset 21332.png","x":-650,"y":-174,"width":399,"height":206},
+		{"id":"c56951957feba5c0","type":"text","text":"Hello there welcome to my Blog ","x":-575,"y":-380,"width":250,"height":100},
+		{"id":"21212ab79f0be1a6","type":"text","text":"# I'm a card\n\n>[!info] Info\n> Very important!\n\nSome more content\n\n## Some subtitle\n\nLALALA","x":-120,"y":-584,"width":250,"height":409},
+		{"id":"0eaf1351bf30e4d9","type":"text","text":"GREEN TEXT BOX","x":40,"y":-8,"width":250,"height":80,"color":"5"},
+		{"id":"1a414e25a4598008","type":"file","file":"hello world.md","x":-120,"y":240,"width":400,"height":400},
+		{"id":"2508ee26155818c5","x":213,"y":144,"width":250,"height":60,"type":"text","text":""}
+	],
+	"edges":[
+		{"id":"c9a78200b99497ea","fromNode":"21212ab79f0be1a6","fromSide":"left","toNode":"c56951957feba5c0","toSide":"right","fromEnd":"arrow"},
+		{"id":"b28a187d6fae9315","fromNode":"21212ab79f0be1a6","fromSide":"bottom","toNode":"0eaf1351bf30e4d9","toSide":"top","color":"5","label":"Green label"},
+		{"id":"3dfab590c6fb36e6","fromNode":"c56951957feba5c0","fromSide":"bottom","toNode":"7af03c59336d7e50","toSide":"top"},
+		{"id":"b67215fa4fb833eb","fromNode":"0eaf1351bf30e4d9","fromSide":"bottom","toNode":"1a414e25a4598008","toSide":"top"}
+	]
+}
