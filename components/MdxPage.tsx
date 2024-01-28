@@ -2,6 +2,7 @@ import { MDXRemote } from "next-mdx-remote";
 import { Mermaid, Pre } from "@portaljs/core";
 
 import layouts from "@/layouts";
+import Link from "next/link";
 
 // Custom components/renderers to pass to MDX.
 // Since the MDX files aren't loaded by webpack, they have no knowledge of how
@@ -15,6 +16,7 @@ const components = {
             <table {...props} />
         </div>
     ),
+    a: (props) => <Link {...props} />,
 };
 
 export default function MdxPage({ source, frontMatter }) {
