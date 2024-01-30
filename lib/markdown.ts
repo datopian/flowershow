@@ -26,6 +26,9 @@ import siteConfig from "@/config/siteConfig";
  * @returns: { mdxSource: mdxSource, frontMatter: ...}
  */
 const parse = async function (source, format, scope) {
+  if (siteConfig.preProcess) {
+    source = siteConfig.preProcess(source);
+  }
   const { content, data } = matter(source);
   const permalinks = await getPermalinks(siteConfig.content);
 
