@@ -9,12 +9,14 @@ import computeFields from "@/lib/computeFields";
 import parse from "@/lib/markdown";
 import siteConfig from "@/config/siteConfig";
 import type { CustomAppProps } from "./_app";
+import CanvasElement from "@/components/ObsidianCanvas";
 
 interface SlugPageProps extends CustomAppProps {
   source: any;
+  type: 'md' | 'canvas';
 }
 
-export default function Page({ source, meta }: SlugPageProps) {
+export default function Page({ source, type, meta }: SlugPageProps) {
   source = JSON.parse(source);
 
   const seoImages = (() => {
@@ -46,7 +48,11 @@ export default function Page({ source, meta }: SlugPageProps) {
           images: seoImages,
         }}
       />
-      <MdxPage source={source} frontMatter={meta} />
+      {type === "md" ? (
+        <MdxPage source={source} frontMatter={meta} />
+      ) : (
+        <CanvasElement data={source} />
+      )}
     </>
   );
 }
@@ -61,30 +67,66 @@ export const getStaticProps: GetStaticProps = async ({
   const filePath = dbFile!.file_path;
   const frontMatter = dbFile!.metadata ?? {};
 
-  const source = fs.readFileSync(filePath, { encoding: "utf-8" });
-  const { mdxSource } = await parse(source, "mdx", {});
-
-  // TODO temporary replacement for contentlayer's computedFields
-  const frontMatterWithComputedFields = await computeFields({
-    frontMatter,
-    urlPath,
-    filePath,
-    source,
-  });
-
+  const type = dbFile!.extension === 'canvas' ? 'canvas' : 'md';
+  const rawFile = fs.readFileSync(filePath, { encoding: 'utf-8' });
+  let source;
+  let frontMatterWithComputedFields: any = {};
   const siteMap: Array<NavGroup | NavItem> = [];
-
-  if (frontMatterWithComputedFields?.showSidebar) {
-    const allPages = await mddb.getFiles({ extensions: ["md", "mdx"] });
-    const pages = allPages.filter((p) => !p.metadata?.isDraft);
-    pages.forEach((page) => {
-      addPageToSitemap(page, siteMap);
+  if (type === 'md') {
+    const { mdxSource } = await parse(rawFile, 'mdx', {});
+    source = mdxSource;
+    // TODO temporary replacement for contentlayer's computedFields
+    frontMatterWithComputedFields = await computeFields({
+      frontMatter,
+      urlPath,
+      filePath,
+      source: rawFile,
     });
+
+    if (frontMatterWithComputedFields?.showSidebar) {
+      const allPages = await mddb.getFiles({ extensions: ['md', 'mdx'] });
+      const pages = allPages.filter((p) => !p.metadata?.isDraft);
+      pages.forEach((page) => {
+        addPageToSitemap(page, siteMap);
+      });
+    }
+  }
+
+  if (type === 'canvas') {
+    const canvas = JSON.parse(rawFile);
+    const nodesPromises = canvas.nodes.map(async (node: any) => {
+      if (node.type === 'text') {
+        const { mdxSource } = await parse(node.text, 'mdx', {});
+        return {
+          ...node,
+          source: mdxSource,
+        };
+      }
+      if (node.type === 'file' && node.file.endsWith('.md')) {
+        const rawFile = fs.readFileSync('content/' + node.file, {
+          encoding: 'utf-8',
+        });
+        const { mdxSource } = await parse(rawFile, 'mdx', {});
+
+        return {
+          ...node,
+          source: mdxSource,
+        };
+      }
+      return node;
+    });
+    
+    const nodes = await Promise.all(nodesPromises);
+    source = {
+      ...canvas,
+      nodes,
+    };
   }
 
   return {
     props: {
-      source: JSON.stringify(mdxSource),
+      type,
+      source: JSON.stringify(source),
       meta: frontMatterWithComputedFields,
       siteMap,
     },
@@ -93,7 +135,7 @@ export const getStaticProps: GetStaticProps = async ({
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const mddb = await clientPromise;
-  const allDocuments = await mddb.getFiles({ extensions: ["md", "mdx"] });
+  const allDocuments = await mddb.getFiles({ extensions: ["md", "mdx", "canvas"] });
 
   const paths = allDocuments
     .filter((page) => page.metadata?.isDraft !== true)
