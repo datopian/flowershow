@@ -5,3 +5,5 @@ node_modules/
 out/
 .obsidian/
 .markdowndb/
+.vscode/
+.idea/
