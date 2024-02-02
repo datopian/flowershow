@@ -2,12 +2,12 @@
   "name": "flowershow",
   "version": "2.0.3",
   "scripts": {
-    "dev": "npm run generate && next dev",
+    "dev": "concurrently \"npm run mddb\" \"npm run generate && cross-env NODE_ENV=development next-remote-watch content\" ",
     "prebuild": "npm run generate",
     "build": "next build",
     "start": "next start",
     "export": "npm run build && next export",
-    "mddb": "mddb ./content",
+    "mddb": "mddb ./content --watch",
     "generate": "cross-env NODE_OPTIONS=\"--experimental-json-modules --experimental-modules\" node -r esbuild-register ./scripts/prebuild.mjs"
   },
   "dependencies": {
@@ -22,6 +22,7 @@
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
     "clsx": "^2.1.0",
+    "concurrently": "^8.2.2",
     "date-fns": "^2.29.3",
     "gray-matter": "^4.0.3",
     "hastscript": "^7.2.0",
@@ -29,6 +30,7 @@
     "mdx-mermaid": "2.0.0-rc7",
     "next": "13.3.0",
     "next-mdx-remote": "^4.4.1",
+    "next-remote-watch": "^2.0.0",
     "next-seo": "^5.15.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
