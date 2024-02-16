@@ -32,6 +32,7 @@ export type UserConfig = {
     logo?: NavConfig["logo"];
   };
   nextSeo?: Partial<DefaultSeoProps>;
+  preProcess: (source: any) => any;
   showComments?: boolean;
   search?: NavConfig["search"];
   social?: NavConfig["social"];
