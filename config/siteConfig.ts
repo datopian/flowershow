@@ -4,6 +4,7 @@ import {
   AuthorConfig,
   CommentsConfig,
   NavConfig,
+  ThemeConfig,
   defaultConfig,
 } from "@portaljs/core";
 import { DefaultSeoProps } from "next-seo";
@@ -32,10 +33,14 @@ export type UserConfig = {
     logo?: NavConfig["logo"];
   };
   nextSeo?: Partial<DefaultSeoProps>;
-  preProcess: (source: any) => any;
   showComments?: boolean;
   search?: NavConfig["search"];
   social?: NavConfig["social"];
+  theme?: ThemeConfig;
+  preProcess?: (source: string) => string;
+  title?: string;
+  author: string;
+  domain: string;
 } & Partial<typeof defaultConfig>;
 
 export type SiteConfig = typeof defaultConfig & typeof userConfig;

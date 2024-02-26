@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import type { AppProps } from "next/app";
 import { SearchProvider, pageview, ThemeProvider } from "@portaljs/core";
-import type { NavGroup, NavItem } from "@portaljs/core";
+import type { NavGroup, NavItem, ThemeConfig } from "@portaljs/core";
 
 import { Layout } from "@/components/Layout";
 import siteConfig from "@/config/siteConfig";
@@ -54,9 +54,9 @@ const MyApp = ({ Component, pageProps }: AppProps<CustomAppProps>) => {
             logo: siteConfig.logo,
         },
         theme: {
-            defaultTheme: siteConfig.theme.default as "light" | "dark",
+            defaultTheme: siteConfig.theme.default,
             themeToggleIcon: siteConfig.theme.toggleIcon,
-        },
+        } as ThemeConfig,
         siteMap,
     };
 
