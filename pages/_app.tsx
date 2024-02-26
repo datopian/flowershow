@@ -54,7 +54,7 @@ const MyApp = ({ Component, pageProps }: AppProps<CustomAppProps>) => {
             logo: siteConfig.logo,
         },
         theme: {
-            defaultTheme: siteConfig.theme.default,
+            defaultTheme: siteConfig.theme.default as "light" | "dark",
             themeToggleIcon: siteConfig.theme.toggleIcon,
         },
         siteMap,
