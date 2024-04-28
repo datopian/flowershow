@@ -18,6 +18,19 @@ import { serialize } from "next-mdx-remote/serialize";
 
 import siteConfig from "@/config/siteConfig";
 
+function sanitizeKeys(obj: Record<string, any>): Record<string, any> {
+  const sanitizedObj: Record<string, any> = {};
+
+  for (const key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      const sanitizedKey = key.replace(/[^a-zA-Z0-9_$]/g, '_'); // Removes characters that are not alphabets, numbers, underscore, or dollar sign
+      sanitizedObj[sanitizedKey] = obj[key];
+    }
+  }
+
+  return sanitizedObj;
+}
+
 /**
  * Parse a markdown or MDX file to an MDX source form + front matter data
  *
@@ -96,6 +109,7 @@ const parse = async function (source, format, scope) {
       scope: { ...scope, ...data },
     }
   );
+  mdxSource.scope = sanitizeKeys(mdxSource.scope);
 
   return {
     mdxSource: mdxSource,
