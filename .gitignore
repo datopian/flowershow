@@ -4,3 +4,7 @@ node_modules/
 .next/
 out/
 .obsidian/
+.markdowndb/
+tsconfig.tsbuildinfo
+.vscode/
+.idea/

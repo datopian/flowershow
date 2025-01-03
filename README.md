@@ -1,6 +1,6 @@
 # 🌷 Flowershow template
 
-> Publish your Obsidian notes, beautifully. For free, no coding.
+> Publish your Obsidian notes (or any markdown), beautifully. For free, no coding.
 
 Flowershow is an open-source tool for easily converting your markdown files into an elegant website. It's built on a standard, modern web stack – React, Next.js, and Tailwind and shipped with a basic default theme to get you started with just a few clicks.
 
