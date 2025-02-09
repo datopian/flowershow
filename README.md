@@ -20,7 +20,7 @@ For full feature list see https://flowershow.app/#features
 https://flowershow.app/docs/
 
 - [Overview](https://flowershow.app/#overview)
-- [QuickStart](https://flowershow.app/docs/publish-tutorial)
+- [QuickStart](https://flowershow.app/docs/publish-howto)
 - [Roadmap](https://flowershow.app/docs/roadmap)
 
 ## Use with Obsidian Flowershow plugin
